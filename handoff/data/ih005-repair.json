@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "packageId": "IH-005",
+  "parentPackageId": "IH-004",
+  "status": "READY FOR TARGETED RE-REVIEW",
+  "findings": [
+    {
+      "id": "IHR4-B01",
+      "classification": "accepted-substantive-blocker",
+      "changeId": "AC-IH005-01",
+      "resolution": "Exact grape.document 2.0 adaptation/loss/recovery wire semantics; explicit runtime mapping and exact-owner codec preservation. Format1.0 is read-only without converter.",
+      "contracts": [
+        "14_DOCUMENT_FORMAT.md",
+        "contracts/document-format.ts",
+        "13_PRODUCTION_CONTRACT_SURFACE.md",
+        "data/production-contract-ledger.json"
+      ],
+      "validationFiles": [
+        "contracts/document-format.test.ts",
+        "contracts/document-wire.test.ts",
+        "contracts/document-wire.qualification.ts"
+      ],
+      "directCases": "DF01..DF17; DW01..DW13",
+      "humanDecisionRequired": false
+    },
+    {
+      "id": "IHR4-M01",
+      "classification": "superseded-by-subsequent-human-product-decision",
+      "decisionId": "DEC-GRAPE-001",
+      "resolution": "Coordinated chronology deferred; accepted domain-separated behavior only. Legacy unified oracle retained, not PASS. No coordinator, toggle or hidden implementation.",
+      "contracts": [
+        "08_IMPLEMENTATION_PLAN.md",
+        "09_ACCEPTANCE_AND_CONFORMANCE.md",
+        "10_KNOWN_GATES.md",
+        "provenance/product-decisions/DEC-GRAPE-001.json",
+        "data/slices.json",
+        "data/gates.json",
+        "data/acceptance-index.json",
+        "data/capability-coverage.json"
+      ],
+      "validationFiles": [
+        "tools/ih005-decision-state.test.mjs",
+        "tools/implementation-state.test.mjs"
+      ],
+      "directCases": "PD01..PD09 scope/integrity checks; AT-DEC-GRAPE-001-01..10 remain REQUIRED_NOT_EXECUTED production acceptance",
+      "humanDecisionRequired": false
+    },
+    {
+      "id": "EDITABLE-PANEL-COMMAND-PATH",
+      "classification": "accepted-public-contract-gap",
+      "changeId": "AC-IH005-02",
+      "resolution": "Application grants command IDs; Workspace binds exact Panel/target lease; renderer adds current-event guard. Optional mount capability is not PanelServices raw mutation authority.",
+      "contracts": [
+        "17_PANEL_COMMAND_CONTRACT.md",
+        "contracts/panel-commands.ts",
+        "contracts/view-mount.ts",
+        "executable-reference/repair/PANEL_COMPOSITION_CONTRACT.md",
+        "16_VIEW_MOUNT_CONTRACT.md",
+        "examples/editable-panel/README.md"
+      ],
+      "validationFiles": [
+        "executable-reference/repair/panel-commands.test.ts",
+        "examples/editable-panel/panel.ts"
+      ],
+      "directCases": "PC01..PC13",
+      "humanDecisionRequired": false
+    },
+    {
+      "id": "IHR4-N01",
+      "classification": "documentation-consistency-repair",
+      "resolution": "Current entry/plan/template/validator/ledger all refer to IH-005; prior revisions and original decision registration remain explicitly historical.",
+      "contracts": [
+        "00_README.md",
+        "START_HERE_PROMPT.md",
+        "08_IMPLEMENTATION_PLAN.md",
+        "implementation-state.json"
+      ],
+      "validationFiles": [
+        "tools/implementation-state.test.mjs",
+        "tools/ih005-decision-state.test.mjs",
+        "tools/check-ih005.mjs"
+      ],
+      "humanDecisionRequired": false
+    }
+  ],
+  "architectureChanges": [
+    {
+      "id": "AC-IH005-01",
+      "kind": "canonical-technical-document-semantics",
+      "affectedInvariants": [
+        "INV-004",
+        "INV-010",
+        "INV-011",
+        "INV-015",
+        "INV-017",
+        "INV-021"
+      ],
+      "invariantMeaningChanged": false
+    },
+    {
+      "id": "AC-IH005-02",
+      "kind": "additive-panel-command-authority-and-cleanup-publication-order",
+      "affectedInvariants": [
+        "INV-001",
+        "INV-002",
+        "INV-003",
+        "INV-005",
+        "INV-007",
+        "INV-008",
+        "INV-009",
+        "INV-019",
+        "INV-020"
+      ],
+      "invariantMeaningChanged": false
+    }
+  ],
+  "validationCausedRepairs": [
+    {
+      "id": "VAL-IH005-01",
+      "counterexample": "Reference-only boundary flag absent after production wire hydration caused PROFILE_BOUNDARY in four initial bridge cases.",
+      "repair": "Explicit qualification adapter derives flag from exact fixture GraphKind declaration; no production wire or reference Graph weakening.",
+      "evidence": "14_DOCUMENT_FORMAT.md; contracts/document-wire.qualification.ts"
+    },
+    {
+      "id": "VAL-IH005-02",
+      "counterexample": "Recovery Node port.direction=['input'] decoded editable due String coercion, violating malformed-known-field rejection.",
+      "repair": "Strict string enum admission throughout structural snapshots; DW13 adversarial tests.",
+      "evidence": "contracts/document-wire.test.ts#DW13"
+    },
+    {
+      "id": "VAL-IH005-03",
+      "counterexample": "Hide cancelled a pointer Operation and advanced model revision but stranded workspace pending routing; old target lease stayed accepted.",
+      "repair": "Drain cleanup-induced model/target publications before workspace action returns; PC13 first failed then passed.",
+      "evidence": "17_PANEL_COMMAND_CONTRACT.md; executable-reference/repair/panel-commands.test.ts#PC13"
+    }
+  ],
+  "unchangedResponsibilities": [
+    "canonical Graph and History",
+    "Host authority and runtime observation",
+    "Generator read-only snapshots",
+    "scoped Parameter",
+    "localization ownership",
+    "Panel private viewState",
+    "renderer resource ownership",
+    "deployment profiles"
+  ],
+  "productionImplementationStarted": false,
+  "repositoryBundleProduced": false,
+  "s01ArchitectureDecisionsStillToInvent": [],
+  "s01BlockingExternalInformation": [],
+  "evidence": "audit/IH005_VALIDATION.json",
+  "limits": [
+    "No product acceptance, real TD/GPU or browser interaction qualification",
+    "Current schema support-duration commitment still needs its existing product Gate before public promise",
+    "Independent acceptance pending"
+  ]
+}

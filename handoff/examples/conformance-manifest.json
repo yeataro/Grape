@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "scope": "Sealed reference plus IH-002..IH-005 qualification and examples; not production permission matrix",
+  "base": "..",
+  "roots": [
+    {
+      "path": "executable-reference",
+      "recursive": false
+    },
+    {
+      "path": "executable-reference/repair",
+      "recursive": true
+    },
+    {
+      "path": "examples",
+      "recursive": true
+    },
+    {
+      "path": "contracts",
+      "recursive": true
+    },
+    {
+      "path": "qualification",
+      "recursive": true
+    }
+  ],
+  "ignoreDirectories": [
+    "node_modules",
+    ".git",
+    "evidence"
+  ],
+  "excludeBasenames": [
+    "test.ts",
+    "reconstruct.mjs",
+    "verify-reference.mjs",
+    "build-production-contract-ledger.cjs"
+  ],
+  "excludeSuffixes": [
+    ".test.ts"
+  ],
+  "files": {
+    "executable-reference/contracts.ts": "contracts",
+    "executable-reference/core.ts": "core",
+    "executable-reference/identity.ts": "core",
+    "executable-reference/nodes.ts": "module",
+    "executable-reference/generator.ts": "generator",
+    "executable-reference/generation-provenance.ts": "generator",
+    "executable-reference/qualification-compute.ts": "core",
+    "executable-reference/qualification-host.ts": "application",
+    "executable-reference/qualification-workspace.ts": "application",
+    "executable-reference/qualification-presentation.ts": "application",
+    "executable-reference/qualification-updates.ts": "application",
+    "executable-reference/qualification-actions.ts": "application",
+    "executable-reference/storage.ts": "adapter",
+    "executable-reference/scenario.ts": "harness",
+    "executable-reference/demo.ts": "harness",
+    "executable-reference/validate.ts": "harness",
+    "executable-reference/presentation-contract-probe.ts": "harness",
+    "executable-reference/repair/public-panel-workspace.ts": "application",
+    "executable-reference/repair/scoped-parameter.ts": "application",
+    "executable-reference/repair/scoped-fixtures.ts": "harness",
+    "examples/minimal-node/example.ts": "module",
+    "examples/dynamic-interface-node/example.ts": "module",
+    "examples/minimal-host-adapter/example.ts": "adapter",
+    "examples/minimal-panel/panel-template.ts": "ui",
+    "examples/parameter-widget-or-ui-contribution/contribution.ts": "ui",
+    "contracts/public-surface.ts": "contracts",
+    "contracts/document-format.ts": "contracts",
+    "contracts/localization.ts": "contracts",
+    "executable-reference/repair/localization.ts": "application",
+    "examples/module-localization/example.ts": "ui",
+    "qualification/public-surface-probe.ts": "harness",
+    "contracts/view-mount.ts": "contracts",
+    "executable-reference/repair/view-mount.ts": "ui",
+    "examples/view-contributions/headless-controls.ts": "ui",
+    "examples/view-contributions/help-panel.ts": "ui",
+    "examples/view-contributions/number-widget.ts": "ui",
+    "examples/view-contributions/registration.ts": "ui",
+    "examples/view-contributions/selection-summary.ts": "ui",
+    "examples/view-contributions/toggle-widget.ts": "ui",
+    "contracts/panel-commands.ts": "contracts",
+    "contracts/document-wire.qualification.ts": "harness",
+    "examples/editable-panel/panel.ts": "ui"
+  },
+  "externals": {
+    "node:*": {
+      "runtimeRoles": [
+        "adapter",
+        "harness"
+      ]
+    },
+    "typescript": {
+      "runtimeRoles": [
+        "harness"
+      ]
+    },
+    "electron": {
+      "runtimeRoles": [
+        "adapter"
+      ]
+    }
+  }
+}

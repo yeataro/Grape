@@ -1,0 +1,112 @@
+TAP version 13
+# Subtest: untouched not-started template preserves inherited unresolved Gates
+ok 1 - untouched not-started template preserves inherited unresolved Gates
+  ---
+  duration_ms: 1.0721
+  type: 'test'
+  ...
+# Subtest: frozen template rejects implementation progress
+ok 2 - frozen template rejects implementation progress
+  ---
+  duration_ms: 0.1488
+  type: 'test'
+  ...
+# Subtest: not-started cannot fabricate baseline or evidence
+ok 3 - not-started cannot fabricate baseline or evidence
+  ---
+  duration_ms: 0.0864
+  type: 'test'
+  ...
+# Subtest: current active state requires real identity and known slice IDs
+ok 4 - current active state requires real identity and known slice IDs
+  ---
+  duration_ms: 0.1516
+  type: 'test'
+  ...
+# Subtest: completion needs same-revision product and conformance accepted evidence
+ok 5 - completion needs same-revision product and conformance accepted evidence
+  ---
+  duration_ms: 0.8932
+  type: 'test'
+  ...
+# Subtest: Gate resolution needs addressed accepted evidence; baseline is never rewritten
+ok 6 - Gate resolution needs addressed accepted evidence; baseline is never rewritten
+  ---
+  duration_ms: 0.1764
+  type: 'test'
+  ...
+# Subtest: unknown Gate and unaddressed evidence are rejected
+ok 7 - unknown Gate and unaddressed evidence are rejected
+  ---
+  duration_ms: 0.1072
+  type: 'test'
+  ...
+# Subtest: missing or altered evidence bytes cannot pass digest validation
+ok 8 - missing or altered evidence bytes cannot pass digest validation
+  ---
+  duration_ms: 0.1217
+  type: 'test'
+  ...
+# Subtest: latest evidence must refer to newest acceptedAt, not stale success
+ok 9 - latest evidence must refer to newest acceptedAt, not stale success
+  ---
+  duration_ms: 0.0859
+  type: 'test'
+  ...
+# Subtest: malformed completion evidence is an invalid result rather than a crash
+ok 10 - malformed completion evidence is an invalid result rather than a crash
+  ---
+  duration_ms: 0.1048
+  type: 'test'
+  ...
+# Subtest: null or primitive evidence entries are rejected without a latest-date crash
+ok 11 - null or primitive evidence entries are rejected without a latest-date crash
+  ---
+  duration_ms: 0.1193
+  type: 'test'
+  ...
+# Subtest: M6 current baseline references an explicit accepted AC without overwriting sealed qualification
+ok 12 - M6 current baseline references an explicit accepted AC without overwriting sealed qualification
+  ---
+  duration_ms: 0.1205
+  type: 'test'
+  ...
+# Subtest: M6 proposed/missing AC cannot silently become baseline authority
+ok 13 - M6 proposed/missing AC cannot silently become baseline authority
+  ---
+  duration_ms: 0.0598
+  type: 'test'
+  ...
+# Subtest: M6 decision hashes, duplicates and malformed references fail
+ok 14 - M6 decision hashes, duplicates and malformed references fail
+  ---
+  duration_ms: 0.0963
+  type: 'test'
+  ...
+# Subtest: M6 IH002 schema is not silently adopted as IH003 progress
+ok 15 - M6 IH002 schema is not silently adopted as IH003 progress
+  ---
+  duration_ms: 0.0352
+  type: 'test'
+  ...
+# Subtest: IHR4-N01 only current IH-005 instructions/template may register this baseline
+ok 16 - IHR4-N01 only current IH-005 instructions/template may register this baseline
+  ---
+  duration_ms: 0.0621
+  type: 'test'
+  ...
+# Subtest: IH005 inherited product deferral is not PASS or an unresolved-coordinator implementation requirement
+ok 17 - IH005 inherited product deferral is not PASS or an unresolved-coordinator implementation requirement
+  ---
+  duration_ms: 0.0787
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 54.2177

@@ -1,0 +1,420 @@
+{
+  "schemaVersion": 1,
+  "packageId": "IH-003",
+  "reviewTarget": "IH-001",
+  "comparedBaseline": "IH-002",
+  "statusMeaning": "Status is finding validity against the incoming repaired IH-002. New repairs are in action, not relabelled ALREADY RESOLVED.",
+  "findings": [
+    {
+      "id": "B1",
+      "severity": "BLOCKER",
+      "status": "STILL VALID",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "architecture",
+      "currentEvidence": "IH-002: 04 §2 references prototype contracts while 02 permits names/algorithm changes; no exhaustive normative/bounded ledger.",
+      "affectedContracts": [
+        "13_PRODUCTION_CONTRACT_SURFACE.md"
+      ],
+      "blocksFreshImplementation": "Yes: public API implementation needs a fixed interpretation.",
+      "humanDecisionRequired": false,
+      "action": "AC-IH003-01: explicit contract ledger + open seam contracts; reference/API naming and shape boundaries classified.",
+      "remainingRisk": "Production must apply ledger to its own APIs and qualification tests; no arbitrary-language backend promise.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "B2",
+      "severity": "BLOCKER",
+      "status": "STILL VALID",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "architecture",
+      "currentEvidence": "IH-002 canonical examples only identify grape-core-experiment/td.top/td.mat; no production format/version/unknown field policy.",
+      "affectedContracts": [
+        "14_DOCUMENT_FORMAT.md"
+      ],
+      "blocksFreshImplementation": "Yes: first canonical save/reload.",
+      "humanDecisionRequired": true,
+      "action": "AC-IH003-02: production format, exact kind refs, version/forward/legacy policies and codec qualification; external stability milestone isolated as Gate.",
+      "remainingRisk": "G-DOCUMENT-STABILITY-COMMITMENT blocks external permanence promise, not technical schema or internal S01.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "M1",
+      "severity": "MAJOR",
+      "status": "ALREADY RESOLVED",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "architecture",
+      "currentEvidence": "IH-002 AC-IH002-01 and B01-CE/B01-01–17, HP01–04: shared PanelWorkspace register/open/resolve/route/restore/close/dispose; no central Panel type switch.",
+      "affectedContracts": [
+        "executable-reference/repair/PANEL_COMPOSITION_CONTRACT.md"
+      ],
+      "blocksFreshImplementation": "No current public composition blocker.",
+      "humanDecisionRequired": false,
+      "action": "No Panel architecture change; rerun existing direct regression.",
+      "remainingRisk": "DOM mounting/focus/device evidence remains gated. Do not follow review suggestion to narrow the Gate only to untrusted extensions; trusted modules are not sandboxed.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "M2",
+      "severity": "MAJOR",
+      "status": "STILL VALID",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "architecture",
+      "currentEvidence": "IH-002 Node/Panel semantic contracts and screenshot labels do not define module-owned label/category/help/i18n registration.",
+      "affectedContracts": [
+        "15_LOCALIZATION_CONTRACT.md"
+      ],
+      "blocksFreshImplementation": "Yes: ordinary visible Node/Panel extension would otherwise invent a central catalog.",
+      "humanDecisionRequired": false,
+      "action": "AC-IH003-03: feature-owned metadata and locale contributions, deterministic fallback, builtin uses same seam, UI preference separated from model.",
+      "remainingRisk": "Not a translated product corpus or guarantee of arbitrary plural/format engines; actual visual locales qualify in product slices.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "M3",
+      "severity": "MAJOR",
+      "status": "STILL VALID",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "architecture",
+      "currentEvidence": "IH-002 preserves fixed ServiceName, td.* GraphKind and vertex/pixel rendering bounds without public production counterpart.",
+      "affectedContracts": [
+        "13_PRODUCTION_CONTRACT_SURFACE.md"
+      ],
+      "blocksFreshImplementation": "Blocks new kind/capability/profile extension, not existing Graph ownership.",
+      "humanDecisionRequired": false,
+      "action": "Within AC-IH003-01: registered GraphKind/StageKind and namespaced typed Host capabilities; GLSL profile stage map, explicit unsupported results.",
+      "remainingRisk": "Opening a seam does not implement or qualify every topology/ISF/GPU profile. Passes remain kind/profile configuration.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "M4",
+      "severity": "MAJOR",
+      "status": "STILL VALID",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "tooling",
+      "currentEvidence": "IH-002 check-boundaries allows mutual pure-role imports; private subsystem and mutable-model dependencies are not rejected.",
+      "affectedContracts": [
+        "09_ACCEPTANCE_AND_CONFORMANCE.md"
+      ],
+      "blocksFreshImplementation": "Blocks automated production conformance claim.",
+      "humanDecisionRequired": false,
+      "action": "Add production-specific public-export/owner/rights dependency checker, changed-file restriction and negative fixtures; old reference policy remains historical.",
+      "remainingRisk": "Manifest truth, injected runtime services, callbacks/casts/reflection still require review and behavior tests.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "M5",
+      "severity": "MAJOR",
+      "status": "PARTIALLY RESOLVED",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "documentation",
+      "currentEvidence": "IH-002 README prohibits stacking product features in reference, but examples import qualification classes without a complete production-surface mapping.",
+      "affectedContracts": [
+        "13_PRODUCTION_CONTRACT_SURFACE.md"
+      ],
+      "blocksFreshImplementation": "Blocks unambiguous choice of production foundation.",
+      "humanDecisionRequired": false,
+      "action": "Explicit no copying qualification implementation/classes/bounds as production foundation; map each example to public contract.",
+      "remainingRisk": "Behavior tests may be ported only with production API and semantic evidence; prototype tests do not accept production.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "M6",
+      "severity": "MAJOR",
+      "status": "PARTIALLY RESOLVED",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "workflow",
+      "currentEvidence": "IH-002 N03 has external current locator with baseline/slices/Gates/accepted evidence; no structured Decision/AC references.",
+      "affectedContracts": [
+        "08_IMPLEMENTATION_PLAN.md"
+      ],
+      "blocksFreshImplementation": "No baseline-locator blocker; missing decision continuity before first changed baseline.",
+      "humanDecisionRequired": false,
+      "action": "Progress schema 2 adds decisionReferences and baseline accepted decision refs; hashed evidence, no update to frozen coverage.",
+      "remainingRisk": "No approval authentication or multiwriter PM service; single maintainer and reviewer validate accepted records.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "m1",
+      "severity": "MINOR",
+      "status": "STILL VALID",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "documentation",
+      "currentEvidence": "IH-002 07 ACK save vs 08/data download description is ambiguous although AT-S01-07 distinguishes ACK.",
+      "affectedContracts": [
+        "08_IMPLEMENTATION_PLAN.md"
+      ],
+      "blocksFreshImplementation": "Only exact S01 acceptance interpretation.",
+      "humanDecisionRequired": false,
+      "action": "Align 08/09/data S01 with ACK storage reopen AND independent download/file reopen; minimum saved-record selector clarified.",
+      "remainingRisk": "Browser storage persistence/per-device guarantees still need real runtime evidence.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "m2",
+      "severity": "MINOR",
+      "status": "PARTIALLY RESOLVED",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "tooling",
+      "currentEvidence": "IH-002 N01 adds README/SCREEN_INDEX links, 179-file index and screenshot hash guard; generic checker does not validate full file index membership automatically.",
+      "affectedContracts": [
+        "00_README.md"
+      ],
+      "blocksFreshImplementation": "No current screenshot discovery blocker.",
+      "humanDecisionRequired": false,
+      "action": "Keep all eight screenshot-evidence files unchanged; add full index membership/hash verification mode in check-second-review.",
+      "remainingRisk": "Index excludes locked node_modules and duplicate test staging, with exact exclusions recorded.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "m3",
+      "severity": "MINOR",
+      "status": "STILL VALID",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "documentation",
+      "currentEvidence": "IH-002 invariant index status applies to bounded mechanisms; 02 confirms higher principles but the distinction is not explicit in machine data.",
+      "affectedContracts": [
+        "02_ARCHITECTURE_SPEC.md"
+      ],
+      "blocksFreshImplementation": "No owner conflict; classification ambiguity.",
+      "humanDecisionRequired": false,
+      "action": "Retain 21 source statuses; add statusScope, four confirmed parent principles and explicit change rules.",
+      "remainingRisk": "Experimental does not mean optional; human product/ownership conflicts cannot be silently changed by D-log.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "m4",
+      "severity": "MINOR",
+      "status": "STILL VALID",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "documentation",
+      "currentEvidence": "Review gives concrete compact tokens/applicationcore and mixed-language text. No changed ownership is evidenced.",
+      "affectedContracts": [
+        "09_ACCEPTANCE_AND_CONFORMANCE.md"
+      ],
+      "blocksFreshImplementation": "No.",
+      "humanDecisionRequired": false,
+      "action": "Fix named ambiguous tokens in touched plan/acceptance docs; no broad editorial rewrite.",
+      "remainingRisk": "Some inherited bilingual wording remains; not treated as formal API or additional spec.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "m5",
+      "severity": "MINOR",
+      "status": "STILL VALID",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "documentation",
+      "currentEvidence": "IH-002 production TypeScript/toolchain role inferred from reference, not stated at start.",
+      "affectedContracts": [
+        "08_IMPLEMENTATION_PLAN.md"
+      ],
+      "blocksFreshImplementation": "Engineering ambiguity only.",
+      "humanDecisionRequired": false,
+      "action": "State TypeScript production, lock actual versions at implementation baseline; Node25 reference is not runtime requirement.",
+      "remainingRisk": "Framework/compiler/runtime versions are engineering choices recorded in current baseline.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "m6",
+      "severity": "MINOR (scope note; not a defect)",
+      "status": "INVALIDATED BY CURRENT DESIGN",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "workflow",
+      "currentEvidence": "IH-002 FCS explicitly says bounded self-check and independent acceptance pending; original reviewer also calls honest disclosure not a defect.",
+      "affectedContracts": [
+        "audit/previous-IH-002/FRESH_CONTEXT_SIMULATION.md"
+      ],
+      "blocksFreshImplementation": "No.",
+      "humanDecisionRequired": false,
+      "action": "No repair to make self-check independent; retain label and request fresh external re-review.",
+      "remainingRisk": "This reconciliation is author-side, not independent acceptance.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "POSITIONING",
+      "severity": "POSSIBLE DRIFT",
+      "status": "PARTIALLY RESOLVED",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "architecture",
+      "currentEvidence": "IH-002 ownership is explicit and HC-001 quarantined; persistent td.* experiment identity can still leak if copied.",
+      "affectedContracts": [
+        "14_DOCUMENT_FORMAT.md"
+      ],
+      "blocksFreshImplementation": "Only identity leakage risk, not an observed Host ownership regression.",
+      "humanDecisionRequired": false,
+      "action": "Product document identity separated from Host profile/target, copy ban and ledger; no owner moved.",
+      "remainingRisk": "HC-001 remains historical-source wording conflict; external Host runtime evidence unchanged.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "EXT-A",
+      "severity": "EXTENSION PARTIAL",
+      "status": "STILL VALID",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "architecture",
+      "currentEvidence": "Ordinary Node semantic path exists; B1/M2 metadata/normativity unresolved at IH-002.",
+      "affectedContracts": [
+        "04_EXTENSION_MODEL.md"
+      ],
+      "blocksFreshImplementation": "Visible extension composition depends on B1/M2.",
+      "humanDecisionRequired": false,
+      "action": "B1/M2 repair closes the remaining ordinary extension surface; no Node-specific core branch.",
+      "remainingRisk": "Complete formula catalog not qualified by sample.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "EXT-B",
+      "severity": "EXTENSION STRONG (no defect)",
+      "status": "ALREADY RESOLVED",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "architecture",
+      "currentEvidence": "Fixed/dynamic Node share NodeModule, ports/state codec/reconciliation and Undo; reviewer found no defect.",
+      "affectedContracts": [
+        "04_EXTENSION_MODEL.md"
+      ],
+      "blocksFreshImplementation": "No.",
+      "humanDecisionRequired": false,
+      "action": "Preserve existing tests and contracts; no redesign.",
+      "remainingRisk": "All product Node modes still need slice acceptance.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "EXT-C",
+      "severity": "EXTENSION WEAK",
+      "status": "ALREADY RESOLVED",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "architecture",
+      "currentEvidence": "IH-002 public Panel composition replaces the IH001 teaching host; same path used by minimal-panel.",
+      "affectedContracts": [
+        "executable-reference/repair/PANEL_COMPOSITION_CONTRACT.md"
+      ],
+      "blocksFreshImplementation": "No current architecture blocker.",
+      "humanDecisionRequired": false,
+      "action": "Same as M1; rerun direct regression only.",
+      "remainingRisk": "Runtime mount/device evidence remains Gate.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "EXT-D",
+      "severity": "EXTENSION GOOD / nested Gate",
+      "status": "ALREADY RESOLVED",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "architecture",
+      "currentEvidence": "IH-002 AC-IH002-02 scoped target capture contains spec/value/links/type/editToken; routed root/nested projection and commit share lease; M01/BM tests cover two occurrences, stale path/type/disposal.",
+      "affectedContracts": [
+        "executable-reference/repair/SCOPED_PARAMETER_CONTRACT.md"
+      ],
+      "blocksFreshImplementation": "No scoped read/write contract blocker.",
+      "humanDecisionRequired": false,
+      "action": "No new nested special case; rerun direct M01/widgets/BM regression.",
+      "remainingRisk": "Browser controls and field-specific runtime rendering remain product tests.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "EXT-E",
+      "severity": "EXTENSION PARTIAL",
+      "status": "PARTIALLY RESOLVED",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "architecture",
+      "currentEvidence": "IH-002 N02 already restricts backend to GLSL; stage/profile seam still bounded as M3.",
+      "affectedContracts": [
+        "13_PRODUCTION_CONTRACT_SURFACE.md"
+      ],
+      "blocksFreshImplementation": "New GLSL topology/profile scope only.",
+      "humanDecisionRequired": false,
+      "action": "Keep N02 boundary; add open GLSL profile descriptor/map with capability validation.",
+      "remainingRisk": "No arbitrary-language substitution, no invented per-pass network or universal stages.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "EXT-F",
+      "severity": "EXTENSION PARTIAL",
+      "status": "PARTIALLY RESOLVED",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "architecture",
+      "currentEvidence": "Existing adapter/fencing/lifecycle works in IH002 reference; adding a capability remains closed union.",
+      "affectedContracts": [
+        "13_PRODUCTION_CONTRACT_SURFACE.md"
+      ],
+      "blocksFreshImplementation": "New capability registration only.",
+      "humanDecisionRequired": false,
+      "action": "Typed namespaced capability contracts from AC-IH003-01; authority negotiation unchanged.",
+      "remainingRisk": "True TD/native providers still gated.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "AI-WORKFLOW",
+      "severity": "PARTIAL",
+      "status": "PARTIALLY RESOLVED",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "workflow",
+      "currentEvidence": "IH-002 external progress locator already exists; structured decisions missing, as M6.",
+      "affectedContracts": [
+        "08_IMPLEMENTATION_PLAN.md"
+      ],
+      "blocksFreshImplementation": "Decision continuity before first changed implementation baseline.",
+      "humanDecisionRequired": false,
+      "action": "One schema2 locator; new decision refs, no new PM hierarchy.",
+      "remainingRisk": "Progress truth still requires evidence acceptance and single-writer updates.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "FRESH-IMPLEMENTER",
+      "severity": "TWO ARCHITECTURE DECISIONS NEEDED",
+      "status": "STILL VALID",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "architecture",
+      "currentEvidence": "B1/B2 absent in IH002 despite sound established model semantics.",
+      "affectedContracts": [
+        "13_PRODUCTION_CONTRACT_SURFACE.md"
+      ],
+      "blocksFreshImplementation": "B1/B2 technical seams before S01.",
+      "humanDecisionRequired": false,
+      "action": "Resolve engineering decisions here, no delegation of schema/API invention to implementer.",
+      "remainingRisk": "No authorization to begin S01 in this task.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "UI-HANDOFF",
+      "severity": "PASS LIMITED TO S01",
+      "status": "ALREADY RESOLVED",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "documentation",
+      "currentEvidence": "IH002 UI spec + indexed five original screenshots sufficient bounded initial reference; missing advanced/mobile/error states already Gate.",
+      "affectedContracts": [
+        "ui-reference/SCREEN_INDEX.md"
+      ],
+      "blocksFreshImplementation": "No new initial UI reference blocker.",
+      "humanDecisionRequired": false,
+      "action": "No UI redesign and no screenshot rewrite.",
+      "remainingRisk": "Actual device/browser rendering is not proved by screenshots.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    },
+    {
+      "id": "HUMAN-STABILITY",
+      "severity": "HUMAN PRODUCT QUESTION",
+      "status": "STILL VALID",
+      "statusBaseline": "IH-002 before this repair",
+      "category": "workflow",
+      "currentEvidence": "Neither IH001 nor IH002 records when public long-term document compatibility promise starts.",
+      "affectedContracts": [
+        "14_DOCUMENT_FORMAT.md"
+      ],
+      "blocksFreshImplementation": "Only external compatibility promise/release affected.",
+      "humanDecisionRequired": true,
+      "action": "Record G-DOCUMENT-STABILITY-COMMITMENT with precise earliest decision; schema technical definition completed.",
+      "remainingRisk": "Owner still must choose S01 guarantee vs identified later milestone; no hidden default.",
+      "afterRepair": "No residual blocker/major identified in IH-003; see validation. RemainingRisk/Gate is not waived."
+    }
+  ],
+  "verdict": "READY FOR INDEPENDENT RE-REVIEW",
+  "validation": "audit/SECOND_REVIEW_VALIDATION.json",
+  "afterRepair": {
+    "blockers": [],
+    "majors": [],
+    "humanProductDecisions": [
+      "G-DOCUMENT-STABILITY-COMMITMENT"
+    ],
+    "newPositioningDrift": false,
+    "qualificationTests": 354
+  }
+}

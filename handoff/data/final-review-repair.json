@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "packageId": "IH-004",
+  "parent": "IH-003",
+  "status": "READY FOR FRESH RE-REVIEW",
+  "independentAcceptance": "pending",
+  "architectureChanges": [
+    {
+      "id": "AC-IH004-01",
+      "finding": "FIR-B01",
+      "reason": "Logical Panel composition and arbitrary Widget projection lack a public view handoff into an unaware renderer.",
+      "contract": "16_VIEW_MOUNT_CONTRACT.md",
+      "declarations": "contracts/view-mount.ts",
+      "before": "Panel factory/receive works; generic renderer has no public mountable feature view.",
+      "after": "Distinct Panel and Widget view contributions share controlled mount ownership/lifecycle/failure/fencing semantics.",
+      "unchanged": [
+        "Graph canonical ownership",
+        "Graph History",
+        "EditorContext",
+        "ScopedParameterTarget",
+        "routing/lease",
+        "field draft",
+        "localization",
+        "close guard",
+        "Host authority"
+      ],
+      "affectedInvariants": [
+        "INV-001",
+        "INV-006",
+        "INV-008",
+        "INV-009",
+        "INV-019",
+        "INV-020",
+        "CP-01",
+        "CP-02",
+        "CP-04"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "FIR-B01",
+      "severity": "BLOCKER",
+      "intakeStatus": "VALID",
+      "rootCause": "The public contract ended at logical data projection; no production-facing renderer contribution bridge.",
+      "contracts": [
+        "16_VIEW_MOUNT_CONTRACT.md",
+        "contracts/view-mount.ts",
+        "04_EXTENSION_MODEL.md",
+        "13_PRODUCTION_CONTRACT_SURFACE.md"
+      ],
+      "validationFiles": [
+        "executable-reference/repair/view-mount.test.ts",
+        "qualification/view-mount-adversarial.test.ts"
+      ],
+      "state": "qualified-pending-fresh-review"
+    },
+    {
+      "id": "FIR-N01",
+      "severity": "MINOR",
+      "intakeStatus": "VALID",
+      "rootCause": "The extension main table still taught superseded qualification names.",
+      "contracts": [
+        "04_EXTENSION_MODEL.md"
+      ],
+      "validationFiles": [
+        "tools/check-final-review-repair.mjs"
+      ],
+      "state": "consistency-verified-pending-fresh-review"
+    }
+  ],
+  "validation": "audit/FINAL_REVIEW_REPAIR_VALIDATION.json",
+  "runtimeLimits": [
+    "No production S01 started",
+    "Headless/fake surface only",
+    "No DOM/browser/IME/accessibility/device product evidence",
+    "No real TD/GPU claim"
+  ],
+  "humanDecisionRequiredForRepair": false,
+  "directCases": [
+    {
+      "id": "VM01",
+      "title": "VM01 two independent Panel packages mount through one public workspace and generic renderer",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM02",
+      "title": "VM02 help private expansion survives hide/move/remount; stale old controls revoked",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM03",
+      "title": "VM03 selection and locale updates render but do not mutate Graph/History",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM04",
+      "title": "VM04 mount failure cleans partial resources, placeholder retry preserves Panel state",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM05",
+      "title": "VM05 update failure revokes all mount resources before placeholder and retry",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM06",
+      "title": "VM06 dispose fences async work; cleanup registered after revoke executes immediately",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM07",
+      "title": "VM07 number field draft survives unmount/remount and commits through scoped target once",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM08",
+      "title": "VM08 toggle feature uses same registered mount path and retains bool semantics",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM09",
+      "title": "VM09 field draft rejects concurrent target change, retains text for user recovery",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM10",
+      "title": "VM10 mount/update cannot invoke widget model commands",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM11",
+      "title": "VM11 scoped target disposal invalidates widget display and fences pending actions",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM12",
+      "title": "VM12 inactive tab releases mount only, not private Panel state",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM13",
+      "title": "VM13 guarded workspace close/dispose preserves mount until guard allows",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM14",
+      "title": "VM14 missing Widget view is explicit placeholder and registry retry resolves it",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM15",
+      "title": "VM15 incompatible technology protocol yields controlled placeholder",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM16",
+      "title": "VM16 restored Help projection uses private viewState before initial mount",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM17",
+      "title": "VM17 generic renderer has no feature imports, class checks, or Graph/History mutation",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM18",
+      "title": "VM18 malformed feature viewState becomes opaque workspace placeholder before view creation",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VA01",
+      "title": "VA01 real workspace close/dispose veto preserves mounted resources; successful close retires view before model",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA02",
+      "title": "VA02 full workspace disposal emits teardown even without a final workspace notification",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA03",
+      "title": "VA03 surface acquisition failure during move revokes old callbacks and retry preserves contribution",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA04",
+      "title": "VA04 same-ID reopen never revives async ticket or event from the old instance",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA05",
+      "title": "VA05 partial mount failure releases all prior acquisitions even when one cleanup throws; retry keeps feature state",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA06",
+      "title": "VA06 custom projection matches custom view; mount/update cannot enter edit boundary",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA07",
+      "title": "VA07 nested draft survives unmount/show/locale and commits once to same scoped model",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA08",
+      "title": "VA08 retained old event cannot write after navigation invalidates scoped target",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA09",
+      "title": "VA09 pending UI draft can be cancelled by contribution cleanup without model edit authority",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA10",
+      "title": "VA10 retained mounted event is revoked by dynamic type and interface removal; restoring type cannot revive it",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA11",
+      "title": "VA11 cleanup inside a user event cannot inherit the previous mount edit authority",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    }
+  ]
+}

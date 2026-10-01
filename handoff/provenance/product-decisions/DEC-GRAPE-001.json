@@ -1,0 +1,589 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "product-decision-scope-overlay",
+  "id": "DEC-GRAPE-001",
+  "status": "accepted",
+  "disposition": "DEFER",
+  "title": "Defer coordinated cross-domain Mixed History; retain domain-separated Undo",
+  "recordedAt": "2026-10-01T22:03:26.000Z",
+  "acceptedAt": "2026-10-01T22:03:26.000Z",
+  "acceptedBy": "Product owner — explicit user decision in this conversation",
+  "acceptanceTimestampMeaning": "Time this already accepted instruction was registered; original user-message timestamp unavailable.",
+  "authorization": "Record product decision/scope/required acceptance only. No production implementation, coordinator, feature flag or hidden experimental path.",
+  "effectiveScope": "Initial product/current planned S08/S09 and release scope until explicitly superseded by a product decision. Does not authorize starting any slice.",
+  "sourceBaselines": {
+    "handoff": "IH-004",
+    "architecture": "AC-002",
+    "inventory": "IR-001",
+    "coverage": "CQ-001",
+    "readiness": "MRDP-001"
+  },
+  "sourceEvidence": [
+    {
+      "file": "implementation-handoff-r4/HANDOFF_REVISION.json",
+      "selector": "packageId=IH-004; productionImplementationStarted=false",
+      "sha256": "e2fbe7f80a434b6e5daff795514dbfe72ac97540be4ffce7afe7b13f312cf59d"
+    },
+    {
+      "file": "implementation-handoff-r4/data/slices.json",
+      "selector": "S08,S09",
+      "sha256": "1e6354e3d236d7e4fab885b6d705b5ea62d829a707bd1326cccb3e11cdfed2d1"
+    },
+    {
+      "file": "implementation-handoff-r4/data/gates.json",
+      "selector": "G-MIXED-HISTORY,G-LU-UI-008,G-LU-UI-009",
+      "sha256": "22b4a6cfff58783ac693da6e153e5506abd2ebcf8f1039c2b30363e0133fff3c"
+    },
+    {
+      "file": "implementation-handoff-r4/data/acceptance-index.json",
+      "selector": "LC-UI-100,LC-UI-101",
+      "sha256": "667327fb7b27fa6008e305c84bc429bc5fff1f3923bcc16d925781a16e8ea0b2"
+    },
+    {
+      "file": "implementation-handoff-r4/compatibility/behavior-contracts.md",
+      "selector": "LC-UI-100/B01..B04; LC-UI-101/B01..B04",
+      "sha256": "de484d93122f27de6a756e559d9338ac8737889c0654a631f4f2caafed553988"
+    },
+    {
+      "file": "implementation-handoff-r4/data/invariants.json",
+      "selector": "CP-01/02/04; INV-001/002/003/005/006/007/009/017/018/019/020; HG-02/04/05",
+      "sha256": "e3027b15ea840efc81147bfb9e319094034c3085be265e870c4cd136cbd8d73e"
+    },
+    {
+      "file": "implementation-handoff-r4/02_ARCHITECTURE_SPEC.md",
+      "selector": "sections 3,6,8",
+      "sha256": "2fa1dfdef872dca25320334b0f9d8cd375246fe6d6417b61c1c5ff45f31a6b09"
+    },
+    {
+      "file": "implementation-handoff-r4/03_RESPONSIBILITY_AND_DEPENDENCY.md",
+      "selector": "Graph/History/Binding/Host ownership",
+      "sha256": "2995d3db71a92c9ebebb0559d69fd0408fecf728725ddb3babedb8b96e924f6f"
+    },
+    {
+      "file": "implementation-handoff-r4/05_DATA_AND_LIFECYCLE.md",
+      "selector": "sections 1,2,4,5 and persistence identity",
+      "sha256": "fc19efd4737d3426e451e52e3517ac88a5a40adeead2c15e3f71a8063cd0a5b9"
+    },
+    {
+      "file": "implementation-handoff-r4/06_HOST_INTEGRATION.md",
+      "selector": "Target identity/BindingLease; live inputs/native operations; readback",
+      "sha256": "64b76acc5780d95f4587fb39740c9affba4e1d0897f866d74306bc312b706a47"
+    },
+    {
+      "file": "implementation-handoff-r4/executable-reference/HOST_QUALIFICATION_CONTRACTS.md",
+      "selector": "section3 publication preservation; section4 actual input CAS; section5 native definitions",
+      "sha256": "9bda8fc9edccd8716889e7928bb698024f00fa6ca621c9207e33f28bc5b9b098"
+    },
+    {
+      "file": "implementation-handoff-r4/08_IMPLEMENTATION_PLAN.md",
+      "selector": "implementation-state; S08/S09",
+      "sha256": "d56f0f749b45515edb67714484b4079c411c9096cd3aad492ea94e51e24eb881"
+    },
+    {
+      "file": "implementation-handoff-r4/09_ACCEPTANCE_AND_CONFORMANCE.md",
+      "selector": "AT-S08-01..04; AT-S09-01..03",
+      "sha256": "18eda60ea067b40cf1ca933d7c059bad0e721b464c2e8b05d6dc5853fc1d15a0"
+    },
+    {
+      "file": "implementation-handoff-r4/12_DECISION_LOG.md",
+      "selector": "D07,D11,D16,D-N03, ED-IH003-02",
+      "sha256": "012c04c65485f00497791844de932c8d1236d1791f2ae70ae9485c338a950791"
+    },
+    {
+      "file": "implementation-handoff-r4/tools/check-implementation-state.mjs",
+      "selector": "schema2 not-started and decisionReferences validation",
+      "sha256": "ef164e691e9f7189db2eecc2167fd00d534281ccd17904c4927c744af0f39490"
+    }
+  ],
+  "rationale": [
+    "External runtime drivers may produce tens/hundreds or more changes per second; runtime transitions are not automatically Grape editing intent.",
+    "A single chronological stream risks burying semantic document edits and increases memory, receipts, synchronization and conflict costs.",
+    "Do not merge independent authorities before defining which operations have user-intent-level Undo semantics."
+  ],
+  "rules": [
+    {
+      "id": "R01",
+      "text": "Graph History records semantic canonical document transactions; explicit command/editing domain determines Ctrl+Z. Canvas/committed model Inspector use Graph; Host/live controls use their own domain. No eligible/empty domain must not fall back globally. Panel has no History authority by virtue of presentation; draft/text editing is local until commit."
+    },
+    {
+      "id": "R02",
+      "text": "Successful Graph Undo restores canonical/default value. Active Binding attempts a new conditional live write of restored value after model commit; no second Graph History entry or cross-domain rewind. No active binding means model-only."
+    },
+    {
+      "id": "R03",
+      "text": "Verify Host authority, lease, load/epoch/incarnation, field identity/shape/driver and expected revision/basis at the existing write boundary. Missing/invalid basis or stale receipt conflicts; do not force-overwrite or silently rebase from external readback to make Undo succeed. Binding uses the applicable existing intent/receipt basis; a newer observation alone does not renew an Undo-derived write authority. This applies even when the external update and readback happened before Graph Undo began. Runtime credentials stay outside Graph History."
+    },
+    {
+      "id": "R04",
+      "text": "Live write conflict/divergence never rolls back completed Graph Undo or delays its cursor until Host confirmation. Canonical/default and actual value may differ; Binding exposes divergence."
+    },
+    {
+      "id": "R05",
+      "text": "Grape-originated Host/live Undo retains own-domain receipt/conditional-write/readback/conflict semantics. TD-originated Undo/external operations only affect runtime/readback; no Graph History entry or attempt to rewind TD History."
+    },
+    {
+      "id": "R06",
+      "text": "High-frequency runtime observation updates runtime/readback/basis only: no Graph History or implicit application Undo entry, canonical dirty/redo mutation or echo command, absent a future explicitly defined user-intent operation."
+    },
+    {
+      "id": "R07",
+      "text": "Keep LU-UI-009, stale receipt, load/epoch/Target lifetime fences, Host authority, receiving-side checks and CAS. Old reply cannot alter new document, dirty, render or History context."
+    },
+    {
+      "id": "R08",
+      "text": "Do not implement a cross-domain coordinator, partial coordinator, hidden mode, feature flag or experimental toggle."
+    },
+    {
+      "id": "R09",
+      "text": "Artifact publication still preserves compatible Host current values. The new trigger uses the existing conditional live-input path; resetSourceIds/default replay is not a substitute."
+    }
+  ],
+  "scopeChanges": [
+    {
+      "kind": "slice",
+      "id": "S08",
+      "before": "Planned publication/Reload Applied plus G-MIXED-HISTORY among scoped Gates.",
+      "after": "Remove only coordinated chronological History dependency. Publication, Reload Applied, lifetime, receipt and failure acceptance remain required.",
+      "currentDisposition": "SCOPE_ADJUSTED_NOT_STARTED",
+      "replacementAcceptanceIds": [
+        "AT-DEC-GRAPE-001-04",
+        "AT-DEC-GRAPE-001-05",
+        "AT-DEC-GRAPE-001-07",
+        "AT-DEC-GRAPE-001-08",
+        "AT-DEC-GRAPE-001-10"
+      ],
+      "retainedAcceptanceIds": [
+        "AT-S08-01",
+        "AT-S08-02",
+        "AT-S08-03",
+        "AT-S08-04"
+      ]
+    },
+    {
+      "kind": "slice",
+      "id": "S09",
+      "before": "Planned typed live/native operations and mixed order/dispatch/retry; mixed coordination must close at S.",
+      "after": "Deliver explicit domain-separated Undo, Graph Undo conditional propagation and independent completion/conflict. S08 dependency remains for binding-schema replacement/publication/reload receipt races, not mixed order.",
+      "currentDisposition": "SCOPE_ADJUSTED_NOT_STARTED",
+      "replacementAcceptanceIds": [
+        "AT-DEC-GRAPE-001-01",
+        "AT-DEC-GRAPE-001-02",
+        "AT-DEC-GRAPE-001-03",
+        "AT-DEC-GRAPE-001-04",
+        "AT-DEC-GRAPE-001-05",
+        "AT-DEC-GRAPE-001-06",
+        "AT-DEC-GRAPE-001-07",
+        "AT-DEC-GRAPE-001-08",
+        "AT-DEC-GRAPE-001-09",
+        "AT-DEC-GRAPE-001-10"
+      ],
+      "retainedAcceptanceIds": [
+        "AT-S09-01",
+        "AT-S09-02"
+      ]
+    },
+    {
+      "kind": "gate",
+      "id": "G-MIXED-HISTORY",
+      "before": "unresolved; LC-UI-100 and LC-UI-101; S08/S09; bundled chronology/receipt/load/reload composition.",
+      "after": "Coordination deferred, no longer blocks initial release/slice. Receipt/lifetime/Reload obligations retained under existing Gates and replacement acceptance.",
+      "currentDisposition": "DEFERRED_BY_PRODUCT_DECISION",
+      "gateDeltaDisposition": "deferred",
+      "resolved": false,
+      "passed": false,
+      "blocksCurrentScope": false,
+      "residualGateIds": [
+        "G-LU-UI-009",
+        "G-LU-UI-008"
+      ],
+      "replacementAcceptanceIds": [
+        "AT-DEC-GRAPE-001-07",
+        "AT-DEC-GRAPE-001-09",
+        "AT-DEC-GRAPE-001-10"
+      ]
+    },
+    {
+      "kind": "capability",
+      "id": "LC-UI-100",
+      "before": "Partial",
+      "after": "Unified chronology not in initial product scope; preserve full Legacy oracle for reconsideration.",
+      "currentDisposition": "DEFERRED_BY_PRODUCT_DECISION",
+      "qualificationDispositionUnchanged": "Partial",
+      "covered": false,
+      "replacementAcceptanceIds": [
+        "AT-DEC-GRAPE-001-01",
+        "AT-DEC-GRAPE-001-02",
+        "AT-DEC-GRAPE-001-03",
+        "AT-DEC-GRAPE-001-04",
+        "AT-DEC-GRAPE-001-05",
+        "AT-DEC-GRAPE-001-06",
+        "AT-DEC-GRAPE-001-07",
+        "AT-DEC-GRAPE-001-08",
+        "AT-DEC-GRAPE-001-09",
+        "AT-DEC-GRAPE-001-10"
+      ],
+      "replacementDoesNotClaimLegacyEquivalence": true
+    },
+    {
+      "kind": "acceptance",
+      "id": "AT-S09-03",
+      "before": "planned-not-executed-in-handoff; composite unified order, confirmed stack, idempotent receipt, late reply isolation.",
+      "after": "Original unified acceptance retained but deferred. Retained subclauses explicitly rehomed as own-domain receipt confirmation/idempotence and lifetime tests; successful Graph Undo does not await Host.",
+      "currentDisposition": "DEFERRED_BY_PRODUCT_DECISION",
+      "originalDeleted": false,
+      "passed": false,
+      "replacementAcceptanceIds": [
+        "AT-DEC-GRAPE-001-01",
+        "AT-DEC-GRAPE-001-02",
+        "AT-DEC-GRAPE-001-05",
+        "AT-DEC-GRAPE-001-06",
+        "AT-DEC-GRAPE-001-07",
+        "AT-DEC-GRAPE-001-09"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "id": "LU-UI-009",
+      "before": "unresolved architecture-significant late live-restore after load; represented by G-LU-UI-009.",
+      "after": "Retained for domain-separated async restores too. Decision defines required safe result but does not prove runtime implementation.",
+      "currentDisposition": "RETAINED_UNRESOLVED",
+      "gateId": "G-LU-UI-009",
+      "replacementAcceptanceIds": [
+        "AT-DEC-GRAPE-001-07"
+      ]
+    },
+    {
+      "kind": "gate",
+      "id": "G-LU-UI-009",
+      "before": "unresolved; S mixed dispatch/order, I load/restore race.",
+      "after": "Domain policy now decided, but lifecycle evidence obligation remains unresolved. Establish guard before relevant async integration; qualify all live/native restore paths before accepting that slice branch.",
+      "currentDisposition": "RETAINED_UNRESOLVED",
+      "resolved": false,
+      "passed": false,
+      "replacementAcceptanceIds": [
+        "AT-DEC-GRAPE-001-07"
+      ]
+    },
+    {
+      "kind": "capability",
+      "id": "LC-UI-101",
+      "before": "Partial",
+      "after": "Confirm/discard/Reload Applied intent unchanged; defer does not remove it.",
+      "currentDisposition": "RETAINED_PARTIAL",
+      "qualificationDispositionUnchanged": "Partial",
+      "covered": false,
+      "replacementAcceptanceIds": [
+        "AT-DEC-GRAPE-001-10"
+      ],
+      "retainedAcceptanceIds": [
+        "AT-S08-03"
+      ]
+    },
+    {
+      "kind": "gate",
+      "id": "G-LU-UI-008",
+      "before": "unresolved; Reload Applied draft/reset/partial-state evidence.",
+      "after": "Unchanged; no automatic resolution from removal of mixed coordination.",
+      "currentDisposition": "RETAINED_UNRESOLVED",
+      "resolved": false,
+      "passed": false,
+      "replacementAcceptanceIds": [
+        "AT-DEC-GRAPE-001-10"
+      ],
+      "retainedAcceptanceIds": [
+        "AT-S08-03"
+      ]
+    },
+    {
+      "kind": "acceptance",
+      "id": "AT-S09-01",
+      "before": "planned-not-executed-in-handoff",
+      "after": "Retain existing live CAS/native authority/typed Undo/external animation exclusion acceptance.",
+      "currentDisposition": "RETAINED_REQUIRED_NOT_EXECUTED",
+      "replacementAcceptanceIds": []
+    },
+    {
+      "kind": "acceptance",
+      "id": "AT-S09-02",
+      "before": "planned-not-executed-in-handoff",
+      "after": "Retain existing live CAS/native authority/typed Undo/external animation exclusion acceptance.",
+      "currentDisposition": "RETAINED_REQUIRED_NOT_EXECUTED",
+      "replacementAcceptanceIds": []
+    }
+  ],
+  "legacySubclauseDisposition": [
+    {
+      "id": "LC-UI-100/B01",
+      "disposition": "DEFERRED_BY_PRODUCT_DECISION",
+      "reason": "Unified chronology itself."
+    },
+    {
+      "id": "LC-UI-100/B02",
+      "disposition": "RETAINED_WITHIN_DOMAIN",
+      "replacementAcceptanceIds": [
+        "AT-DEC-GRAPE-001-03",
+        "AT-DEC-GRAPE-001-09"
+      ],
+      "reason": "No-op/cancel preserve own-domain Redo, no global timeline."
+    },
+    {
+      "id": "LC-UI-100/B03",
+      "disposition": "DOMAIN_SPLIT",
+      "replacementAcceptanceIds": [
+        "AT-DEC-GRAPE-001-05",
+        "AT-DEC-GRAPE-001-09"
+      ],
+      "reason": "Host/live awaits own confirmation; Graph Undo commits independently. Legacy combined waiting rule is deferred."
+    },
+    {
+      "id": "LC-UI-100/B04",
+      "disposition": "RETAINED_AND_EXTENDED_ACCEPTANCE",
+      "replacementAcceptanceIds": [
+        "AT-DEC-GRAPE-001-07"
+      ],
+      "reason": "Keep Apply/native stale guards and require live-restore guard; old gap is not declared passed."
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "AT-DEC-GRAPE-001-01",
+      "name": "Graph Undo is not TD history rewind",
+      "given": "Canonical model was edited; TD performed an external operation/Undo; Graph History has an eligible edit.",
+      "when": "Dispatch Graph Undo.",
+      "then": "Canonical model restores through Graph History. TD-originated history cursor and external animation are not rewound. Any active-binding propagation is a new conditional write.",
+      "sliceIds": [
+        "S09"
+      ],
+      "gateIds": [
+        "G-LU-HOST-007"
+      ],
+      "status": "REQUIRED_NOT_EXECUTED",
+      "evidence": [],
+      "validationMethod": "Production acceptance: controlled model/router/receiver fixtures; add isolated real TD/adapter evidence for each claimed native/runtime behavior. Fake or reference tests alone do not close native Gates."
+    },
+    {
+      "id": "AT-DEC-GRAPE-001-02",
+      "name": "Host/live Undo is not Graph Undo",
+      "given": "A Grape-originated Host/native/live operation has a valid receipt; canonical/default value and Graph history are captured.",
+      "when": "Undo only the explicit Host/live domain.",
+      "then": "Only owned eligible Host records change. Canonical/default value, Graph revision/dirty/history/redo stay unchanged.",
+      "sliceIds": [
+        "S09"
+      ],
+      "gateIds": [
+        "G-LU-HOST-007"
+      ],
+      "status": "REQUIRED_NOT_EXECUTED",
+      "evidence": [],
+      "validationMethod": "Production acceptance: controlled model/router/receiver fixtures; add isolated real TD/adapter evidence for each claimed native/runtime behavior. Fake or reference tests alone do not close native Gates."
+    },
+    {
+      "id": "AT-DEC-GRAPE-001-03",
+      "name": "High-frequency observations are not editing transactions",
+      "given": "Graph has a Redo branch and a known serialized snapshot; Host has external drivers.",
+      "when": "Feed at least 10000 observations including animation and TD Undo readback.",
+      "then": "Mirror/runtime basis updates correctly; no Graph or application Undo entries, Graph dirty/revision/redo changes, or echo writes. This bounded test is not a throughput claim.",
+      "sliceIds": [
+        "S09"
+      ],
+      "gateIds": [],
+      "status": "REQUIRED_NOT_EXECUTED",
+      "evidence": [],
+      "validationMethod": "Production acceptance: controlled model/router/receiver fixtures; add isolated real TD/adapter evidence for each claimed native/runtime behavior. Fake or reference tests alone do not close native Gates."
+    },
+    {
+      "id": "AT-DEC-GRAPE-001-04",
+      "name": "Stale basis cannot be forced by Undo",
+      "given": "An existing applicable Binding intent/receipt basis and canonical edit are available; Graph Undo would propagate a conditional live write.",
+      "when": "Exercise both orders: (1) capture write basis then external change before commit; (2) external animation/TD Undo and mirror readback happen before Graph Undo starts. Change value/driver/shape/revision; include A-to-B-to-A values.",
+      "then": "Invalidated applicable basis causes refusal/conflict; Graph Undo stays committed and Host external result remains. Latest mirror alone does not renew authority. No value-only equality shortcut, silent fresh-basis retry or force-write.",
+      "sliceIds": [
+        "S08",
+        "S09"
+      ],
+      "gateIds": [
+        "G-LU-HOST-007"
+      ],
+      "status": "REQUIRED_NOT_EXECUTED",
+      "evidence": [],
+      "validationMethod": "Production acceptance: controlled model/router/receiver fixtures; add isolated real TD/adapter evidence for each claimed native/runtime behavior. Fake or reference tests alone do not close native Gates."
+    },
+    {
+      "id": "AT-DEC-GRAPE-001-05",
+      "name": "Live conflict does not roll back Graph Undo",
+      "given": "Canonical 2-to-1 Undo commits; actual Host state has diverged.",
+      "when": "Deliver conflict for the new conditional live write.",
+      "then": "Canonical=1; Graph cursor already advanced and revision increased; no extra Graph entry/rollback. Host external actual value retained; Binding exposes divergence.",
+      "sliceIds": [
+        "S08",
+        "S09"
+      ],
+      "gateIds": [],
+      "status": "REQUIRED_NOT_EXECUTED",
+      "evidence": [],
+      "validationMethod": "Production acceptance: controlled model/router/receiver fixtures; add isolated real TD/adapter evidence for each claimed native/runtime behavior. Fake or reference tests alone do not close native Gates."
+    },
+    {
+      "id": "AT-DEC-GRAPE-001-06",
+      "name": "Ctrl+Z obeys command/editing domain",
+      "given": "Canvas, committed Inspector, uncommitted text/IME draft, Host/live control, and no eligible/empty history domain can have focus.",
+      "when": "Dispatch Ctrl+Z with newer edits available in a different domain.",
+      "then": "Only explicit domain/local-draft semantics apply. No global-most-recent fallback or Panel-owned History. Draft editing creates no Graph entry until commit.",
+      "sliceIds": [
+        "S09"
+      ],
+      "gateIds": [],
+      "status": "REQUIRED_NOT_EXECUTED",
+      "evidence": [],
+      "validationMethod": "Production acceptance: controlled model/router/receiver fixtures; add isolated real TD/adapter evidence for each claimed native/runtime behavior. Fake or reference tests alone do not close native Gates."
+    },
+    {
+      "id": "AT-DEC-GRAPE-001-07",
+      "name": "Old document/binding replies are inert",
+      "given": "Native/live restore, Undo propagation or publication receipt is pending.",
+      "when": "Load a new document via UI and non-UI entry, rebind to new epoch, or restart Target incarnation; then release each old response.",
+      "then": "Old response cannot mutate new document, dirty, render, or Graph/Host History context. No lease/token revival. Receiver fences remain required; client discard does not prove physical remote cancellation.",
+      "sliceIds": [
+        "S08",
+        "S09"
+      ],
+      "gateIds": [
+        "G-LU-UI-009"
+      ],
+      "status": "REQUIRED_NOT_EXECUTED",
+      "evidence": [],
+      "validationMethod": "Production acceptance: controlled model/router/receiver fixtures; add isolated real TD/adapter evidence for each claimed native/runtime behavior. Fake or reference tests alone do not close native Gates."
+    },
+    {
+      "id": "AT-DEC-GRAPE-001-08",
+      "name": "Successful propagation is a new conditional intent",
+      "given": "Active binding has valid expected basis and authority; model edit can Undo; repeat with no binding.",
+      "when": "Commit Graph Undo, then complete conditional live write; observe concurrent artifact publication separately.",
+      "then": "Graph restore completes first. Live path has new request/intent identity and does not append Graph History or replay old receipt. No binding yields zero Host calls. Publication preserves compatible actual values, never resets defaults to implement this propagation.",
+      "sliceIds": [
+        "S08",
+        "S09"
+      ],
+      "gateIds": [],
+      "status": "REQUIRED_NOT_EXECUTED",
+      "evidence": [],
+      "validationMethod": "Production acceptance: controlled model/router/receiver fixtures; add isolated real TD/adapter evidence for each claimed native/runtime behavior. Fake or reference tests alone do not close native Gates."
+    },
+    {
+      "id": "AT-DEC-GRAPE-001-09",
+      "name": "Own-domain confirmation/retry/no-op",
+      "given": "A Host-domain Undo has valid receipt; capture its stack and unrelated Graph state.",
+      "when": "Delay, reject, retry same payload, duplicate receipt, change reused payload, or make outcome indeterminate; exercise no-op/cancel/Redo.",
+      "then": "Only confirmed own-domain success advances that stack. Same request+payload has no repeated side effect; changed payload rejected. Unknown outcome blocks related Host writes for readback. Already committed Graph Undo stands. Own-domain no-op preserves Redo; no shared global Redo.",
+      "sliceIds": [
+        "S09"
+      ],
+      "gateIds": [
+        "G-LU-HOST-007"
+      ],
+      "status": "REQUIRED_NOT_EXECUTED",
+      "evidence": [],
+      "validationMethod": "Production acceptance: controlled model/router/receiver fixtures; add isolated real TD/adapter evidence for each claimed native/runtime behavior. Fake or reference tests alone do not close native Gates."
+    },
+    {
+      "id": "AT-DEC-GRAPE-001-10",
+      "name": "Reload/save boundaries survive deferral",
+      "given": "LC-UI-101 confirm/cancel/draft cases and restored canonical value exist; runtime differs.",
+      "when": "Exercise cancel, fetch failure, accepted replacement, stale replies, and canonical save/reload.",
+      "then": "Original reload confirmation/guard/failure requirements retained (G-LU-UI-008 not presumed solved). Successful load has new lifetime and reset session state; stale callbacks do not revive it. Save contains canonical value, not runtime mirror/leases/History/divergence; binding authority must be re-established.",
+      "sliceIds": [
+        "S08",
+        "S09"
+      ],
+      "gateIds": [
+        "G-LU-UI-008",
+        "G-LU-UI-009"
+      ],
+      "status": "REQUIRED_NOT_EXECUTED",
+      "evidence": [],
+      "validationMethod": "Production acceptance: controlled model/router/receiver fixtures; add isolated real TD/adapter evidence for each claimed native/runtime behavior. Fake or reference tests alone do not close native Gates."
+    }
+  ],
+  "protectedObligations": [
+    "LU-UI-009 lifetime protection",
+    "stale receipt protection",
+    "load / epoch fencing",
+    "Host authority",
+    "CAS / conditional-write semantics",
+    "Graph History canonical ownership",
+    "receiver-side authority/fencing",
+    "no-op preserves own-domain Redo",
+    "LC-UI-101 Reload Applied / G-LU-UI-008",
+    "indeterminate/readback recovery",
+    "snapshot persistence / no runtime History or lease serialization"
+  ],
+  "architectureCheck": {
+    "result": "NONE",
+    "architectureChangeRequired": false,
+    "invariantsChanged": [],
+    "preservedInvariantIds": [
+      "INV-001",
+      "INV-002",
+      "INV-003",
+      "INV-005",
+      "INV-006",
+      "INV-007",
+      "INV-009",
+      "INV-017",
+      "INV-018",
+      "INV-019",
+      "INV-020"
+    ],
+    "preservedPrincipleIds": [
+      "CP-01",
+      "CP-02",
+      "CP-04"
+    ],
+    "preservedMechanisms": [
+      "HG-02",
+      "HG-04",
+      "HG-05"
+    ],
+    "reasoning": "Existing Graph/Host/Binding authority, mutation, asynchronous lifecycle and persistence boundaries already separate. This Product Decision narrows scope and sets trigger policy; it does not merge or transfer authority.",
+    "explicitTextReconciliation": "HOST_QUALIFICATION_CONTRACTS section3 prohibition on publication restoring runtime defaults remains. Graph Undo propagation is a separate new section4 conditional live-input intent, not resetSourceIds or old receipt replay. Broad no-propagation interpretation and mixed combined-success product requirement are explicitly superseded only to that extent."
+  },
+  "registration": {
+    "effectiveNow": true,
+    "currentRecord": "implementation-state.json",
+    "currentRecordStatus": "NOT_REGISTERED",
+    "adoption": "Merge state-patch decisionReferences/gateDecisions and accepted ID into implementationBaseline.decisionReferenceIds upon genuinely authorized production registration; not a new acceptance request.",
+    "limitation": "IH-004 schema2 not-started rejects decisionReferences, Gate deltas and timestamps; active/paused requires real project/baseline. Do not fabricate progress or silently change schema.",
+    "patch": "implementation-decisions/DEC-GRAPE-001.state-patch.json",
+    "newHandoffRevisionRequired": false,
+    "reason": "External accepted decision files and post-start decisionReferences/scoped Gate deltas already express product scope changes. This before-start artifact records the accepted policy now without rewriting immutable baselines.",
+    "ifImmediatePreStartCurrentRequired": "Would require an explicit narrow progress-locator contract revision. No such silent revision made here."
+  },
+  "reconsiderationTriggers": [
+    "Repeated real user confusion with domain-focused Undo",
+    "Demonstrated workflow requiring unified Graph/Host chronological Undo",
+    "New product requirement for cross-domain transaction/history coordination"
+  ],
+  "reconsiderationRule": "Define user-intent-level undoable operations first; Legacy existence alone is insufficient; do not merge runtime observations by default.",
+  "excludedActions": [
+    "start S01",
+    "implement mixed coordinator",
+    "hidden mixed mode",
+    "rewrite frozen Handoff or IR/CQ",
+    "claim replacement acceptance executed",
+    "legacy implementation archaeology"
+  ],
+  "productAcceptance": {
+    "status": "NOT_EXECUTED",
+    "evidence": []
+  },
+  "humanReadableRecord": "implementation-decisions/DEC-GRAPE-001.md",
+  "humanReadableSha256": "91844cb2f82f351bc279d6568b75c8824ed8329cca33edb7f98ecf430fc36d1c",
+  "preservedOriginalAcceptance": {
+    "id": "AT-S09-03",
+    "given": "Graph、native定義、live值交錯操作",
+    "when": "依已定次序Undo/Redo、timeout重試、await期間load新圖",
+    "then": "只在確認結果後推stack；idempotentreceipt不重做；晚回覆不mark/render新Graph。",
+    "evidenceKind": "product-behavior",
+    "status": "planned-not-executed-in-handoff"
+  }
+}

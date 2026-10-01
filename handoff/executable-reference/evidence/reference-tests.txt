@@ -1,0 +1,1218 @@
+TAP version 13
+# Subtest: A01 callback failure publishes nothing, including prior successful draft commands
+ok 1 - A01 callback failure publishes nothing, including prior successful draft commands
+  ---
+  duration_ms: 9.962
+  type: 'test'
+  ...
+# Subtest: A02 dynamic schema duplicate rejects the entire change and preserves connected edge
+ok 2 - A02 dynamic schema duplicate rejects the entire change and preserves connected edge
+  ---
+  duration_ms: 4.0326
+  type: 'test'
+  ...
+# Subtest: A02 dynamic schema throw rejects the entire change and preserves connected edge
+ok 3 - A02 dynamic schema throw rejects the entire change and preserves connected edge
+  ---
+  duration_ms: 2.4491
+  type: 'test'
+  ...
+# Subtest: A03 initializer input and snapshot mutations cannot bypass the model boundary
+ok 4 - A03 initializer input and snapshot mutations cannot bypass the model boundary
+  ---
+  duration_ms: 1.7165
+  type: 'test'
+  ...
+# Subtest: A04 observer throw is isolated and reentrant writes cannot change a pending observation
+ok 5 - A04 observer throw is isolated and reentrant writes cannot change a pending observation
+  ---
+  duration_ms: 2.6449
+  type: 'test'
+  ...
+# Subtest: A05 async callback is rejected and its retained draft expires before continuation
+ok 6 - A05 async callback is rejected and its retained draft expires before continuation
+  ---
+  duration_ms: 7.0981
+  type: 'test'
+  ...
+# Subtest: A06 another writer cannot join an open operation; cancellation is observable but leaves no Undo entry
+ok 7 - A06 another writer cannot join an open operation; cancellation is observable but leaves no Undo entry
+  ---
+  duration_ms: 3.6466
+  type: 'test'
+  ...
+# Subtest: A07 dynamic port removed detaches invalid edge with loss and Undo restores exact structure
+ok 8 - A07 dynamic port removed detaches invalid edge with loss and Undo restores exact structure
+  ---
+  duration_ms: 4.4217
+  type: 'test'
+  ...
+# Subtest: A07 dynamic port int detaches invalid edge with loss and Undo restores exact structure
+ok 9 - A07 dynamic port int detaches invalid edge with loss and Undo restores exact structure
+  ---
+  duration_ms: 4.11
+  type: 'test'
+  ...
+# Subtest: A08 foreign-load port handle cannot address a reloaded copy even when all persistent IDs match
+ok 10 - A08 foreign-load port handle cannot address a reloaded copy even when all persistent IDs match
+  ---
+  duration_ms: 2.8475
+  type: 'test'
+  ...
+# Subtest: A08b logical port handle is absent while removed and resolves again after Undo restores its key
+ok 11 - A08b logical port handle is absent while removed and resolves again after Undo restores its key
+  ---
+  duration_ms: 3.7284
+  type: 'test'
+  ...
+# Subtest: A08c retaining a synchronous draft does not retain write access after publication
+ok 12 - A08c retaining a synchronous draft does not retain write access after publication
+  ---
+  duration_ms: 2.359
+  type: 'test'
+  ...
+# Subtest: A09 both contexts reconcile deleted selection before external publication and Undo does not restore selection
+ok 13 - A09 both contexts reconcile deleted selection before external publication and Undo does not restore selection
+  ---
+  duration_ms: 10.8168
+  type: 'test'
+  ...
+# Subtest: A10 missing module roundtrip preserves unknown data, core references, last ports and opaque state
+ok 14 - A10 missing module roundtrip preserves unknown data, core references, last ports and opaque state
+  ---
+  duration_ms: 5.3049
+  type: 'test'
+  ...
+# Subtest: A10b missing module state cannot be edited by bypassing the unavailable Parameter UI
+ok 15 - A10b missing module state cannot be edited by bypassing the unavailable Parameter UI
+  ---
+  duration_ms: 3.4959
+  type: 'test'
+  ...
+# Subtest: A11 occupied input and cycle reject without a hidden replacement or partial commit
+ok 16 - A11 occupied input and cycle reject without a hidden replacement or partial commit
+  ---
+  duration_ms: 14.807
+  type: 'test'
+  ...
+# Subtest: A11b catching a failed draft command cannot unpoison the failed batch
+ok 17 - A11b catching a failed draft command cannot unpoison the failed batch
+  ---
+  duration_ms: 0.9982
+  type: 'test'
+  ...
+# Subtest: A14 no-op edit after Undo preserves Redo and does not publish a revision
+ok 18 - A14 no-op edit after Undo preserves Redo and does not publish a revision
+  ---
+  duration_ms: 2.7826
+  type: 'test'
+  ...
+# Subtest: A15 modifying the caller-owned module after registration cannot alter pinned definitions
+ok 19 - A15 modifying the caller-owned module after registration cannot alter pinned definitions
+  ---
+  duration_ms: 0.6791
+  type: 'test'
+  ...
+# Subtest: A12 two imported cycles can be repaired incrementally without dropping the other cycle
+ok 20 - A12 two imported cycles can be repaired incrementally without dropping the other cycle
+  ---
+  duration_ms: 18.477
+  type: 'test'
+  ...
+# Subtest: A16 sparse arrays cannot silently change state to null entries during save and reload
+ok 21 - A16 sparse arrays cannot silently change state to null entries during save and reload
+  ---
+  duration_ms: 0.7532
+  type: 'test'
+  ...
+# Subtest: A17 stage-ineligible node cannot be newly inserted through the public command surface
+ok 22 - A17 stage-ineligible node cannot be newly inserted through the public command surface
+  ---
+  duration_ms: 0.5646
+  type: 'test'
+  ...
+# Subtest: A13 concurrent save is refused and a stale save completion cannot mark newer edits clean
+ok 23 - A13 concurrent save is refused and a stale save completion cannot mark newer edits clean
+  ---
+  duration_ms: 2.2987
+  type: 'test'
+  ...
+# Subtest: A18 Parameter implicit writes and explicit grouping share the same History boundary
+ok 24 - A18 Parameter implicit writes and explicit grouping share the same History boundary
+  ---
+  duration_ms: 4.0128
+  type: 'test'
+  ...
+# Subtest: A19 a protected profile boundary remains protected when its module is missing
+ok 25 - A19 a protected profile boundary remains protected when its module is missing
+  ---
+  duration_ms: 0.7886
+  type: 'test'
+  ...
+# Subtest: A20 rejecting one nested graph.change must not unlock a second nested change
+ok 26 - A20 rejecting one nested graph.change must not unlock a second nested change
+  ---
+  duration_ms: 1.4794
+  type: 'test'
+  ...
+# Subtest: A21 module validation cannot reenter the same Graph during change or history publication
+ok 27 - A21 module validation cannot reenter the same Graph during change or history publication
+  ---
+  duration_ms: 1.8471
+  type: 'test'
+  ...
+# Subtest: DEP01 application core modules have no Node or Electron imports
+ok 28 - DEP01 application core modules have no Node or Electron imports
+  ---
+  duration_ms: 94.1822
+  type: 'test'
+  ...
+# Subtest: DEP02 bootstrap can inject identity without changing persistent model shape
+ok 29 - DEP02 bootstrap can inject identity without changing persistent model shape
+  ---
+  duration_ms: 4.6774
+  type: 'test'
+  ...
+# Subtest: DEP03 reload preserves document IDs but allocates a fresh runtime identity
+ok 30 - DEP03 reload preserves document IDs but allocates a fresh runtime identity
+  ---
+  duration_ms: 0.9786
+  type: 'test'
+  ...
+# Subtest: DEP04 invalid identity providers cannot construct a graph with duplicate IDs
+ok 31 - DEP04 invalid identity providers cannot construct a graph with duplicate IDs
+  ---
+  duration_ms: 0.5349
+  type: 'test'
+  ...
+# Subtest: built-in fixed and dynamic contracts expose typed ports and matching Parameters
+ok 32 - built-in fixed and dynamic contracts expose typed ports and matching Parameters
+  ---
+  duration_ms: 1.7203
+  type: 'test'
+  ...
+# Subtest: minimal GLSL generation shares emitted node expressions and retains snapshot identity
+ok 33 - minimal GLSL generation shares emitted node expressions and retains snapshot identity
+  ---
+  duration_ms: 12.0287
+  type: 'test'
+  ...
+# Subtest: rename and position changes do not alter code; Unicode IDs have stable distinct symbols
+ok 34 - rename and position changes do not alter code; Unicode IDs have stable distinct symbols
+  ---
+  duration_ms: 4.3057
+  type: 'test'
+  ...
+# Subtest: uncached required input blocks generation
+ok 35 - uncached required input blocks generation
+  ---
+  duration_ms: 0.8081
+  type: 'test'
+  ...
+# Subtest: unreachable invalid node blocks generation without cached diagnostics
+ok 36 - unreachable invalid node blocks generation without cached diagnostics
+  ---
+  duration_ms: 0.7938
+  type: 'test'
+  ...
+# Subtest: JavaScript finite numbers that overflow shader float32 are rejected
+ok 37 - JavaScript finite numbers that overflow shader float32 are rejected
+  ---
+  duration_ms: 1.3074
+  type: 'test'
+  ...
+# Subtest: sparse local vectors cannot bypass element validation
+ok 38 - sparse local vectors cannot bypass element validation
+  ---
+  duration_ms: 3.9841
+  type: 'test'
+  ...
+# Subtest: unreachable cycle blocks generation
+ok 39 - unreachable cycle blocks generation
+  ---
+  duration_ms: 1.2842
+  type: 'test'
+  ...
+# Subtest: missing exact module fingerprint blocks even an unused pinned definition
+ok 40 - missing exact module fingerprint blocks even an unused pinned definition
+  ---
+  duration_ms: 0.8022
+  type: 'test'
+  ...
+# Subtest: dynamic state change cannot use stale cached ports or incompatible edge
+ok 41 - dynamic state change cannot use stale cached ports or incompatible edge
+  ---
+  duration_ms: 1.0754
+  type: 'test'
+  ...
+# Subtest: dynamic pair is valid when consumed through explicit saved take adaptation
+ok 42 - dynamic pair is valid when consumed through explicit saved take adaptation
+  ---
+  duration_ms: 1.4598
+  type: 'test'
+  ...
+# Subtest: scalar broadcast generates an explicit constructor
+ok 43 - scalar broadcast generates an explicit constructor
+  ---
+  duration_ms: 0.7339
+  type: 'test'
+  ...
+# Subtest: saved RGB to RGBA plan emits alpha one
+ok 44 - saved RGB to RGBA plan emits alpha one
+  ---
+  duration_ms: 1.7449
+  type: 'test'
+  ...
+# Subtest: cross-stage edge is rejected rather than silently traversed
+ok 45 - cross-stage edge is rejected rather than silently traversed
+  ---
+  duration_ms: 0.6784
+  type: 'test'
+  ...
+# Subtest: multiple incoming edges are rejected
+ok 46 - multiple incoming edges are rejected
+  ---
+  duration_ms: 0.6785
+  type: 'test'
+  ...
+# Subtest: cached errors remain blocking, while warnings do not
+ok 47 - cached errors remain blocking, while warnings do not
+  ---
+  duration_ms: 1.5401
+  type: 'test'
+  ...
+# Subtest: invalid emitter output type is a recoverable Result failure
+ok 48 - invalid emitter output type is a recoverable Result failure
+  ---
+  duration_ms: 0.9055
+  type: 'test'
+  ...
+# Subtest: emitter exception is contained without modifying the source snapshot
+ok 49 - emitter exception is contained without modifying the source snapshot
+  ---
+  duration_ms: 1.1514
+  type: 'test'
+  ...
+# Subtest: unreachable emitter is pruned only after full structural validation
+ok 50 - unreachable emitter is pruned only after full structural validation
+  ---
+  duration_ms: 1.2386
+  type: 'test'
+  ...
+# Subtest: vertex network implementation is explicitly unsupported, not falsely accepted
+ok 51 - vertex network implementation is explicitly unsupported, not falsely accepted
+  ---
+  duration_ms: 0.1601
+  type: 'test'
+  ...
+# Subtest: generated shaders compile, link and render through WebGL2; invalid GLSL is rejected
+ok 52 - generated shaders compile, link and render through WebGL2; invalid GLSL is rejected
+  ---
+  duration_ms: 1213.6749
+  type: 'test'
+  ...
+# {"browser":"154.0.4258.48","rendered":[[102,102,0,255],[102,102,102,102],[102,102,0,255],[51,51,51,255],[51,102,153,255]],"invalidRejected":true,"overflowProbe":{"input":1e+100,"compiled":true,"compilerLog":"WARNING: 0:4: '1e100' : Float overflow\\n"},"version":"WebGL 2.0 (OpenGL ES 3.0 Chromium)","renderer":"WebKit WebGL","backend":"ANGLE SwiftShader via headless Edge; not native TD"}
+# Subtest: the complete user-requested architecture path runs using public contracts only
+ok 53 - the complete user-requested architecture path runs using public contracts only
+  ---
+  duration_ms: 54.8416
+  type: 'test'
+  ...
+# Subtest: actual filesystem save and reload preserves the full document and generation
+ok 54 - actual filesystem save and reload preserves the full document and generation
+  ---
+  duration_ms: 51.6558
+  type: 'test'
+  ...
+# Isolated saved file: C:\\Users\\user\\AppData\\Local\\Temp\\grape-architecture-SpAL3I\\graph.json
+# Subtest: context close and navigation cannot abandon an open graph gesture
+ok 55 - context close and navigation cannot abandon an open graph gesture
+  ---
+  duration_ms: 0.8498
+  type: 'test'
+  ...
+# Subtest: old immutable generation snapshot survives a later schema change
+ok 56 - old immutable generation snapshot survives a later schema change
+  ---
+  duration_ms: 31.1952
+  type: 'test'
+  ...
+# Subtest: AQ01 pure layout handles SCC/unequal sizes/isolates/reverse and keeps edge directions unchanged
+ok 57 - AQ01 pure layout handles SCC/unequal sizes/isolates/reverse and keeps edge directions unchanged
+  ---
+  duration_ms: 2.802
+  type: 'test'
+  ...
+# Subtest: AQ02 layout proposes without mutation; one atomic commit/notification/history; Undo restores only positions
+ok 58 - AQ02 layout proposes without mutation; one atomic commit/notification/history; Undo restores only positions
+  ---
+  duration_ms: 23.7345
+  type: 'test'
+  ...
+# Subtest: AQ03 layout rejects changed geometry, stale graph and forged proposal without partial mutation
+ok 59 - AQ03 layout rejects changed geometry, stale graph and forged proposal without partial mutation
+  ---
+  duration_ms: 7.2155
+  type: 'test'
+  ...
+# Subtest: AQ04 token projection preserves hostile/unknown source as text, never returns HTML, validates custom tokenizers
+ok 60 - AQ04 token projection preserves hostile/unknown source as text, never returns HTML, validates custom tokenizers
+  ---
+  duration_ms: 1.157
+  type: 'test'
+  ...
+# Subtest: AQ05 Help resolves modular subject/context/locale, rejects reversed and selection-stale results, changes no graph history
+ok 61 - AQ05 Help resolves modular subject/context/locale, rejects reversed and selection-stale results, changes no graph history
+  ---
+  duration_ms: 3.0259
+  type: 'test'
+  ...
+# Subtest: AQ06 Download hands off captured complete bytes and filename while graph advances; completion never acknowledges save
+ok 62 - AQ06 Download hands off captured complete bytes and filename while graph advances; completion never acknowledges save
+  ---
+  duration_ms: 5.4219
+  type: 'test'
+  ...
+# Subtest: AQ07 Download cancel/failed provider leave dirty/history/bytes untouched; invalid draft is still exportable
+ok 63 - AQ07 Download cancel/failed provider leave dirty/history/bytes untouched; invalid draft is still exportable
+  ---
+  duration_ms: 5.6184
+  type: 'test'
+  ...
+# Subtest: AQ08 layout module consumes port order/card metrics without core type switches; malicious callback cannot mutate input
+ok 64 - AQ08 layout module consumes port order/card metrics without core type switches; malicious callback cannot mutate input
+  ---
+  duration_ms: 2.6201
+  type: 'test'
+  ...
+# Subtest: AQ09 DocumentOutput accepts a naming policy without core branching; naming failure never calls provider
+ok 65 - AQ09 DocumentOutput accepts a naming policy without core branching; naming failure never calls provider
+  ---
+  duration_ms: 2.8375
+  type: 'test'
+  ...
+# Subtest: AQ10 one nested geometry edit shares definition positions across occurrences, keeps contexts independent and undoes atomically
+ok 66 - AQ10 one nested geometry edit shares definition positions across occurrences, keeps contexts independent and undoes atomically
+  ---
+  duration_ms: 34.6196
+  type: 'test'
+  ...
+# Subtest: AQ11 nested proposal cannot survive semantic library fork, navigation away/back or deletion; new local proposal uses same Graph
+ok 67 - AQ11 nested proposal cannot survive semantic library fork, navigation away/back or deletion; new local proposal uses same Graph
+  ---
+  duration_ms: 37.8377
+  type: 'test'
+  ...
+# Subtest: AQ12 Help cannot reuse identical local node IDs after navigating between two occurrences
+ok 68 - AQ12 Help cannot reuse identical local node IDs after navigating between two occurrences
+  ---
+  duration_ms: 11.6132
+  type: 'test'
+  ...
+# Subtest: CQ01 integrated matrix + array ports survive edit/connect/generate/undo/reload
+ok 69 - CQ01 integrated matrix + array ports survive edit/connect/generate/undo/reload
+  ---
+  duration_ms: 24.1365
+  type: 'test'
+  ...
+# Subtest: CQ02 graph-owned nominal structures keep identity independent of label and generate nested declarations
+ok 70 - CQ02 graph-owned nominal structures keep identity independent of label and generate nested declarations
+  ---
+  duration_ms: 8.6076
+  type: 'test'
+  ...
+# Subtest: CQ03 malformed/cyclic types and invalid composite values cannot mutate the Graph
+ok 71 - CQ03 malformed/cyclic types and invalid composite values cannot mutate the Graph
+  ---
+  duration_ms: 4.8937
+  type: 'test'
+  ...
+# Subtest: CQ04 constant demand accepts proven constant but rejects a uniform from the same typed port
+ok 72 - CQ04 constant demand accepts proven constant but rejects a uniform from the same typed port
+  ---
+  duration_ms: 19.317
+  type: 'test'
+  ...
+# Subtest: CQ05 helper identity conflicts fail; out parameters have per-node symbols and statements
+ok 73 - CQ05 helper identity conflicts fail; out parameters have per-node symbols and statements
+  ---
+  duration_ms: 4.9941
+  type: 'test'
+  ...
+# Subtest: CQ06 outputless effects remain live, while duplicate depth writers block generation
+ok 74 - CQ06 outputless effects remain live, while duplicate depth writers block generation
+  ---
+  duration_ms: 13.4818
+  type: 'test'
+  ...
+# Subtest: CQ07 opaque texture resources alias uniforms and never generate local samplers
+ok 75 - CQ07 opaque texture resources alias uniforms and never generate local samplers
+  ---
+  duration_ms: 8.3813
+  type: 'test'
+  ...
+# Subtest: CQ08 backend support differs from editable data types and graph profile
+ok 76 - CQ08 backend support differs from editable data types and graph profile
+  ---
+  duration_ms: 10.7058
+  type: 'test'
+  ...
+# Subtest: CQ09 missing varying writer and missing resource remain saveable but cannot generate
+ok 77 - CQ09 missing varying writer and missing resource remain saveable but cannot generate
+  ---
+  duration_ms: 6.3484
+  type: 'test'
+  ...
+# Subtest: CQ10 shared resource context is immutable, and a resource mutation uses the same Undo boundary
+ok 78 - CQ10 shared resource context is immutable, and a resource mutation uses the same Undo boundary
+  ---
+  duration_ms: 2.3766
+  type: 'test'
+  ...
+# Subtest: CQ11 module-selected preserve policy retains invalid edges with diagnostics across reload and recovers them
+ok 79 - CQ11 module-selected preserve policy retains invalid edges with diagnostics across reload and recovers them
+  ---
+  duration_ms: 17.4542
+  type: 'test'
+  ...
+# Subtest: CQ13 symbolic array extents resolve by resource identity and change atomically with values
+ok 80 - CQ13 symbolic array extents resolve by resource identity and change atomically with values
+  ---
+  duration_ms: 12.1534
+  type: 'test'
+  ...
+# Subtest: CQ14 unused invalid resources block generation, resource kind conflicts reject registration atomically
+ok 81 - CQ14 unused invalid resources block generation, resource kind conflicts reject registration atomically
+  ---
+  duration_ms: 4.472
+  type: 'test'
+  ...
+# Subtest: CQ15 inference propagates through a reverse-created Router chain in one publication
+ok 82 - CQ15 inference propagates through a reverse-created Router chain in one publication
+  ---
+  duration_ms: 16.3499
+  type: 'test'
+  ...
+# Subtest: CQ16 resource-only modules pin exact identity and cannot borrow an installed replacement after reload
+ok 83 - CQ16 resource-only modules pin exact identity and cannot borrow an installed replacement after reload
+  ---
+  duration_ms: 6.9173
+  type: 'test'
+  ...
+# Subtest: CQ17 requireValid rejects final-candidate errors without publishing or creating an Undo entry
+ok 84 - CQ17 requireValid rejects final-candidate errors without publishing or creating an Undo entry
+  ---
+  duration_ms: 3.8418
+  type: 'test'
+  ...
+# Subtest: CQ18 unresolved host extent preserves graph type identity and requires an explicit backend resolution
+ok 85 - CQ18 unresolved host extent preserves graph type identity and requires an explicit backend resolution
+  ---
+  duration_ms: 5.6581
+  type: 'test'
+  ...
+# Subtest: CQ19 port-selected numeric/exact policies preserve ordinary casts without enabling vector truncation
+ok 86 - CQ19 port-selected numeric/exact policies preserve ordinary casts without enabling vector truncation
+  ---
+  duration_ms: 4.5158
+  type: 'test'
+  ...
+# Subtest: CQ20 different exact versions of one resource provider coexist without cross-Graph validator substitution
+ok 87 - CQ20 different exact versions of one resource provider coexist without cross-Graph validator substitution
+  ---
+  duration_ms: 7.6794
+  type: 'test'
+  ...
+# Subtest: CQ21 equal port types do not imply equal backend operation support; profile feature requirements gate static and dynamic lowering
+ok 88 - CQ21 equal port types do not imply equal backend operation support; profile feature requirements gate static and dynamic lowering
+  ---
+  duration_ms: 5.8047
+  type: 'test'
+  ...
+# Subtest: CQ22 generated physical lines and nested occurrence trails bind diagnostics to artifact plus delivery, including cached reapply
+ok 89 - CQ22 generated physical lines and nested occurrence trails bind diagnostics to artifact plus delivery, including cached reapply
+  ---
+  duration_ms: 6.72
+  type: 'test'
+  ...
+# Subtest: CQ23 reconciliation rechecks same-type policy changes and scoped loss publication shares Graph Undo
+ok 90 - CQ23 reconciliation rechecks same-type policy changes and scoped loss publication shares Graph Undo
+  ---
+  duration_ms: 7.9403
+  type: 'test'
+  ...
+# Subtest: CQ12 extended shaders compile, link and produce expected pixels in the available WebGL2 compiler
+ok 91 - CQ12 extended shaders compile, link and produce expected pixels in the available WebGL2 compiler
+  ---
+  duration_ms: 1167.6974
+  type: 'test'
+  ...
+# Subtest: HQ-01 bootstrap checks target incarnation, expiry and host identity; names/addresses are not identity
+ok 92 - HQ-01 bootstrap checks target incarnation, expiry and host identity; names/addresses are not identity
+  ---
+  duration_ms: 2.8373
+  type: 'test'
+  ...
+# Subtest: HQ-02 three deployment compositions share service contract but missing capabilities remain unavailable (all fake)
+ok 93 - HQ-02 three deployment compositions share service contract but missing capabilities remain unavailable (all fake)
+  ---
+  duration_ms: 0.3028
+  type: 'test'
+  ...
+# Subtest: HQ-03 late old compilation cannot publish after newer intent; disposed candidates do not leak
+ok 94 - HQ-03 late old compilation cannot publish after newer intent; disposed candidates do not leak
+  ---
+  duration_ms: 11.5464
+  type: 'test'
+  ...
+# Subtest: HQ-04 revoke or same-path reincarnation fences an in-flight commit
+ok 95 - HQ-04 revoke or same-path reincarnation fences an in-flight commit
+  ---
+  duration_ms: 0.6945
+  type: 'test'
+  ...
+# Subtest: HQ-05 request retry returns same receipt; changed payload under same request ID rejects
+ok 96 - HQ-05 request retry returns same receipt; changed payload under same request ID rejects
+  ---
+  duration_ms: 0.4831
+  type: 'test'
+  ...
+# Subtest: HQ-06 failed candidate retains last-good but commit uncertainty blocks further writes honestly
+ok 97 - HQ-06 failed candidate retains last-good but commit uncertainty blocks further writes honestly
+  ---
+  duration_ms: 0.6517
+  type: 'test'
+  ...
+# Subtest: HQ-07 layout-only delivery saves latest document without compiling; compatible schema keeps host values
+ok 98 - HQ-07 layout-only delivery saves latest document without compiling; compatible schema keeps host values
+  ---
+  duration_ms: 0.9807
+  type: 'test'
+  ...
+# Subtest: HQ-08 source type change rejects unless explicit reset; new sources initialize independently
+ok 99 - HQ-08 source type change rejects unless explicit reset; new sources initialize independently
+  ---
+  duration_ms: 1.3729
+  type: 'test'
+  ...
+# Subtest: HQ-09 Undo-to-A is a new intent even if host last observed A and B is compiling
+ok 100 - HQ-09 Undo-to-A is a new intent even if host last observed A and B is compiling
+  ---
+  duration_ms: 0.4077
+  type: 'test'
+  ...
+# Subtest: HQ-10 a group value write validates every member before mutation
+ok 101 - HQ-10 a group value write validates every member before mutation
+  ---
+  duration_ms: 0.5803
+  type: 'test'
+  ...
+# Subtest: HQ-11 continuous values form one receipt; same finish is idempotent and Undo excludes unrelated values
+ok 102 - HQ-11 continuous values form one receipt; same finish is idempotent and Undo excludes unrelated values
+  ---
+  duration_ms: 0.6588
+  type: 'test'
+  ...
+# Subtest: HQ-12 stale update / changed source shape / changed driver cannot be applied by old gesture or Undo
+ok 103 - HQ-12 stale update / changed source shape / changed driver cannot be applied by old gesture or Undo
+  ---
+  duration_ms: 0.3821
+  type: 'test'
+  ...
+# Subtest: HQ-13 cancel compensates only still-owned value; disconnect seals last accepted state
+ok 104 - HQ-13 cancel compensates only still-owned value; disconnect seals last accepted state
+  ---
+  duration_ms: 0.4106
+  type: 'test'
+  ...
+# Subtest: HQ-14 host live and layout histories do not mutate Graph defaults, revision, or Graph history
+ok 105 - HQ-14 host live and layout histories do not mutate Graph defaults, revision, or Graph history
+  ---
+  duration_ms: 5.3578
+  type: 'test'
+  ...
+# Subtest: HQ-15 mirror gaps request snapshot; snapshot may jump; stale epoch/schema never contaminates values
+ok 106 - HQ-15 mirror gaps request snapshot; snapshot may jump; stale epoch/schema never contaminates values
+  ---
+  duration_ms: 0.2775
+  type: 'test'
+  ...
+# Subtest: HQ-16 control removal and definition Undo preserve current live values; external references block removal
+ok 107 - HQ-16 control removal and definition Undo preserve current live values; external references block removal
+  ---
+  duration_ms: 0.5071
+  type: 'test'
+  ...
+# Subtest: HQ-17 preview input has a normalized origin; no isolated delta, stale lease, or unreleased pointer
+ok 108 - HQ-17 preview input has a normalized origin; no isolated delta, stale lease, or unreleased pointer
+  ---
+  duration_ms: 0.3737
+  type: 'test'
+  ...
+# Subtest: HQ-18 capture hold belongs to a target session and cannot freeze or revive a replacement session
+ok 109 - HQ-18 capture hold belongs to a target session and cannot freeze or revive a replacement session
+  ---
+  duration_ms: 0.2259
+  type: 'test'
+  ...
+# Subtest: HQ-19 host live values changed during compilation survive publication of a compatible shader
+ok 110 - HQ-19 host live values changed during compilation survive publication of a compatible shader
+  ---
+  duration_ms: 0.3804
+  type: 'test'
+  ...
+# Subtest: HQ-20 cleanup failure cannot erase a committed receipt or encourage replay
+ok 111 - HQ-20 cleanup failure cannot erase a committed receipt or encourage replay
+  ---
+  duration_ms: 2.0936
+  type: 'test'
+  ...
+# Subtest: HQ-21 identical cache keys cannot skip compilation of changed executable bytes
+ok 112 - HQ-21 identical cache keys cannot skip compilation of changed executable bytes
+  ---
+  duration_ms: 0.3054
+  type: 'test'
+  ...
+# Subtest: HQ-22 a client owns one gesture; writers exclude only the same components and release at seal
+ok 113 - HQ-22 a client owns one gesture; writers exclude only the same components and release at seal
+  ---
+  duration_ms: 0.5928
+  type: 'test'
+  ...
+# Subtest: HQ-23 optional credentials do not bypass origin/action/payload admission and policy can require them
+ok 114 - HQ-23 optional credentials do not bypass origin/action/payload admission and policy can require them
+  ---
+  duration_ms: 0.2252
+  type: 'test'
+  ...
+# Subtest: HQ-24 bounded host-affine dispatch rejects busy/expired/stopped jobs before any mutation
+ok 115 - HQ-24 bounded host-affine dispatch rejects busy/expired/stopped jobs before any mutation
+  ---
+  duration_ms: 0.3626
+  type: 'test'
+  ...
+# Subtest: HQ-25 page plans validate whole membership; protected page and stale reorder reject without partial mutation
+ok 116 - HQ-25 page plans validate whole membership; protected page and stale reorder reject without partial mutation
+  ---
+  duration_ms: 0.9687
+  type: 'test'
+  ...
+# Subtest: HQ-26 source promotion reuses existing control; texture source has exactly one picker
+ok 117 - HQ-26 source promotion reuses existing control; texture source has exactly one picker
+  ---
+  duration_ms: 0.5298
+  type: 'test'
+  ...
+# Subtest: HQ-27 shape transition must include dependent control and validates external references before changing any record
+ok 118 - HQ-27 shape transition must include dependent control and validates external references before changing any record
+  ---
+  duration_ms: 0.5785
+  type: 'test'
+  ...
+# Subtest: HQ-28 control rename preserves identity; external takeover rejects queued plans and subsequent managed edits
+ok 119 - HQ-28 control rename preserves identity; external takeover rejects queued plans and subsequent managed edits
+  ---
+  duration_ms: 0.4458
+  type: 'test'
+  ...
+# Subtest: HQ-29 definition remove/Undo keeps newest live input and external driver replacement rejects later restore
+ok 120 - HQ-29 definition remove/Undo keeps newest live input and external driver replacement rejects later restore
+  ---
+  duration_ms: 2.3008
+  type: 'test'
+  ...
+# Subtest: HQ-30 native checkpoint excludes animation but definition changes remain guarded
+ok 121 - HQ-30 native checkpoint excludes animation but definition changes remain guarded
+  ---
+  duration_ms: 0.7469
+  type: 'test'
+  ...
+# Subtest: HQ-31 native delta Undo touches only owned rows; unrelated neighboring edits and values survive
+ok 122 - HQ-31 native delta Undo touches only owned rows; unrelated neighboring edits and values survive
+  ---
+  duration_ms: 0.887
+  type: 'test'
+  ...
+# Subtest: HQ-32 source deletion keeps last-good tombstone; Undo restores draft source without publishing shader
+ok 123 - HQ-32 source deletion keeps last-good tombstone; Undo restores draft source without publishing shader
+  ---
+  duration_ms: 0.6319
+  type: 'test'
+  ...
+# Subtest: HQ-33 native patch replay returns receipt rather than rewriting newer external state; protected group is atomic
+ok 124 - HQ-33 native patch replay returns receipt rather than rewriting newer external state; protected group is atomic
+  ---
+  duration_ms: 0.5576
+  type: 'test'
+  ...
+# Subtest: HQ-34 inactive source retains control identity and matrix column metadata without forcing scalar representation
+ok 125 - HQ-34 inactive source retains control identity and matrix column metadata without forcing scalar representation
+  ---
+  duration_ms: 0.5189
+  type: 'test'
+  ...
+# Subtest: HQ-35 upgrade confirmation binds exact reviewed content, target incarnation and revision; successful ticket is single-use
+ok 126 - HQ-35 upgrade confirmation binds exact reviewed content, target incarnation and revision; successful ticket is single-use
+  ---
+  duration_ms: 0.3768
+  type: 'test'
+  ...
+# Subtest: HQ-36 queued native schema plan cannot commit to replacement target lifetime
+ok 127 - HQ-36 queued native schema plan cannot commit to replacement target lifetime
+  ---
+  duration_ms: 0.2669
+  type: 'test'
+  ...
+# Subtest: HQ-37 native history receipt cannot restore definitions into a replacement target with coincident revisions
+ok 128 - HQ-37 native history receipt cannot restore definitions into a replacement target with coincident revisions
+  ---
+  duration_ms: 0.397
+  type: 'test'
+  ...
+# Subtest: HQ-38 a definition edit cannot forge away host-observed ownership or external reference guards
+ok 129 - HQ-38 a definition edit cannot forge away host-observed ownership or external reference guards
+  ---
+  duration_ms: 0.7444
+  type: 'test'
+  ...
+# Subtest: HQ-39 target switch waits for the active operation, verifies keep-draft readback and supports cancel without origin inference
+ok 130 - HQ-39 target switch waits for the active operation, verifies keep-draft readback and supports cancel without origin inference
+  ---
+  duration_ms: 2.2296
+  type: 'test'
+  ...
+# Subtest: HQ-40 switch storage failure, apply rejection, concurrent edit and wrong incarnation retain the current target
+ok 131 - HQ-40 switch storage failure, apply rejection, concurrent edit and wrong incarnation retain the current target
+  ---
+  duration_ms: 6.251
+  type: 'test'
+  ...
+# Subtest: HQ-41 unsupported and corrupt target documents preserve raw and last-good output; only explicit fresh storage can initialize
+ok 132 - HQ-41 unsupported and corrupt target documents preserve raw and last-good output; only explicit fresh storage can initialize
+  ---
+  duration_ms: 1.395
+  type: 'test'
+  ...
+# Subtest: HQ-42 capture cancellation avoids GPU read; late result and replacement epoch cannot publish another image
+ok 133 - HQ-42 capture cancellation avoids GPU read; late result and replacement epoch cannot publish another image
+  ---
+  duration_ms: 0.5219
+  type: 'test'
+  ...
+# Subtest: HQ-43 capture handles no target, preparation identity errors and provider read failures with owned cleanup
+ok 134 - HQ-43 capture handles no target, preparation identity errors and provider read failures with owned cleanup
+  ---
+  duration_ms: 0.3361
+  type: 'test'
+  ...
+# Subtest: HQ-44 texture selection resolves only permitted external resources; empty uses fallback; identity guards native Undo
+ok 135 - HQ-44 texture selection resolves only permitted external resources; empty uses fallback; identity guards native Undo
+  ---
+  duration_ms: 1.3913
+  type: 'test'
+  ...
+# Subtest: HQ-45 late texture resolution cannot cross target/source epoch or accept a recreated same-path resource
+ok 136 - HQ-45 late texture resolution cannot cross target/source epoch or accept a recreated same-path resource
+  ---
+  duration_ms: 0.3682
+  type: 'test'
+  ...
+# Subtest: HQ-46 read-only inspection cannot be forged into writable authority, and preview cannot retarget an in-flight lease object
+ok 137 - HQ-46 read-only inspection cannot be forged into writable authority, and preview cannot retarget an in-flight lease object
+  ---
+  duration_ms: 0.3499
+  type: 'test'
+  ...
+# Subtest: HQ-47 target inspection composes with the real document loader rather than treating arbitrary JSON as editable Graph
+ok 138 - HQ-47 target inspection composes with the real document loader rather than treating arbitrary JSON as editable Graph
+  ---
+  duration_ms: 1.1565
+  type: 'test'
+  ...
+# Subtest: PQ01 interchangeable widget projection reads model/context but holds no editable graph copy
+ok 139 - PQ01 interchangeable widget projection reads model/context but holds no editable graph copy
+  ---
+  duration_ms: 49.3485
+  type: 'test'
+  ...
+# Subtest: PQ02 preferences validate atomically, preserve unknown extension data, and stay outside Graph history
+ok 140 - PQ02 preferences validate atomically, preserve unknown extension data, and stay outside Graph history
+  ---
+  duration_ms: 26.9885
+  type: 'test'
+  ...
+# Subtest: PQ03 menu, shortcut and button share guarded action without confusing IME/text focus/model transaction
+ok 141 - PQ03 menu, shortcut and button share guarded action without confusing IME/text focus/model transaction
+  ---
+  duration_ms: 33.0146
+  type: 'test'
+  ...
+# Subtest: PQ04 bool/color/matrix presentation is typed metadata; rendering and style overrides do not change GLSL or history
+ok 142 - PQ04 bool/color/matrix presentation is typed metadata; rendering and style overrides do not change GLSL or history
+  ---
+  duration_ms: 5.5893
+  type: 'test'
+  ...
+# Subtest: PQ05 missing/incompatible custom widgets use type-safe fallback without changing or dropping values
+ok 143 - PQ05 missing/incompatible custom widgets use type-safe fallback without changing or dropping values
+  ---
+  duration_ms: 2.6226
+  type: 'test'
+  ...
+# Subtest: PQ06 reusable custom widgets only receive frozen projections; failure falls back and cannot mutate Graph
+ok 144 - PQ06 reusable custom widgets only receive frozen projections; failure falls back and cannot mutate Graph
+  ---
+  duration_ms: 3.7562
+  type: 'test'
+  ...
+# Subtest: PQ07 edits remain Parameter/Graph operations: type rejection, matrix write/Undo, menu codec, stale dynamic handle
+ok 145 - PQ07 edits remain Parameter/Graph operations: type rejection, matrix write/Undo, menu codec, stale dynamic handle
+  ---
+  duration_ms: 7.0836
+  type: 'test'
+  ...
+# Subtest: PQ08 connected input and closed context cannot be presented as writable standalone controls
+ok 146 - PQ08 connected input and closed context cannot be presented as writable standalone controls
+  ---
+  duration_ms: 5.2615
+  type: 'test'
+  ...
+# Subtest: UQ01 fifteen published gesture batches create one automatic generation at operation end
+ok 147 - UQ01 fifteen published gesture batches create one automatic generation at operation end
+  ---
+  duration_ms: 88.7087
+  type: 'test'
+  ...
+# Subtest: UQ02 rename/move reuse shader; document export remains latest and each flush has a fresh intent
+ok 148 - UQ02 rename/move reuse shader; document export remains latest and each flush has a fresh intent
+  ---
+  duration_ms: 30.3924
+  type: 'test'
+  ...
+# Subtest: UQ07 deferred operation-end task cannot capture a later still-open gesture
+ok 149 - UQ07 deferred operation-end task cannot capture a later still-open gesture
+  ---
+  duration_ms: 27.4087
+  type: 'test'
+  ...
+# Subtest: UQ03 queue coalesces; stale generation cannot publish after later edit; profiles isolate jobs
+ok 150 - UQ03 queue coalesces; stale generation cannot publish after later edit; profiles isolate jobs
+  ---
+  duration_ms: 25.9891
+  type: 'test'
+  ...
+# Subtest: UQ04 cached content cannot override current errors; failed compiler does not poison retries
+ok 151 - UQ04 cached content cannot override current errors; failed compiler does not poison retries
+  ---
+  duration_ms: 26.279
+  type: 'test'
+  ...
+# Subtest: UQ05 disposing in-flight work rejects late success and pending demands; no graph mutation
+ok 152 - UQ05 disposing in-flight work rejects late success and pending demands; no graph mutation
+  ---
+  duration_ms: 25.4066
+  type: 'test'
+  ...
+# Subtest: UQ06 Graph→Updates→receiver: Undo A while B compiles requires fresh receiver intent even for cached A
+ok 153 - UQ06 Graph→Updates→receiver: Undo A while B compiles requires fresh receiver intent even for cached A
+  ---
+  duration_ms: 27.5223
+  type: 'test'
+  ...
+# Subtest: UQ08 receipt owns the same-demand document; later edits cannot pair new graph with old shader
+ok 154 - UQ08 receipt owns the same-demand document; later edits cannot pair new graph with old shader
+  ---
+  duration_ms: 24.3321
+  type: 'test'
+  ...
+# Subtest: UQ09 fresh compiler result from another revision/load cannot poison content cache
+ok 155 - UQ09 fresh compiler result from another revision/load cannot poison content cache
+  ---
+  duration_ms: 21.6292
+  type: 'test'
+  ...
+# Subtest: WS01 unplaced canvas/invalid primary cannot partially change selection or graph
+ok 156 - WS01 unplaced canvas/invalid primary cannot partially change selection or graph
+  ---
+  duration_ms: 13.1054
+  type: 'test'
+  ...
+# Subtest: WS02 linked inspectors follow activated context; two editors share model, not selection/camera
+ok 157 - WS02 linked inspectors follow activated context; two editors share model, not selection/camera
+  ---
+  duration_ms: 5.7875
+  type: 'test'
+  ...
+# Subtest: WS03 pinning and graph projection never expose deleted parameter targets; undo does not invent selection
+ok 158 - WS03 pinning and graph projection never expose deleted parameter targets; undo does not invent selection
+  ---
+  duration_ms: 5.1504
+  type: 'test'
+  ...
+# Subtest: WS04 layout validates unique placement/splits/float slots atomically and returns detached snapshots
+ok 159 - WS04 layout validates unique placement/splits/float slots atomically and returns detached snapshots
+  ---
+  duration_ms: 5.6572
+  type: 'test'
+  ...
+# Subtest: WS05 closing a canvas disposes only its context and collapses layout; open model operation prevents abandonment
+ok 160 - WS05 closing a canvas disposes only its context and collapses layout; open model operation prevents abandonment
+  ---
+  duration_ms: 3.3443
+  type: 'test'
+  ...
+# Subtest: WS06 group move creates one model history step; view/layout changes stay outside that step
+ok 161 - WS06 group move creates one model history step; view/layout changes stay outside that step
+  ---
+  duration_ms: 5.3332
+  type: 'test'
+  ...
+# Subtest: WS07 unfinished/IME/invalid text never enters save; unrelated move may coexist, stale value rejects commit
+ok 162 - WS07 unfinished/IME/invalid text never enters save; unrelated move may coexist, stale value rejects commit
+  ---
+  duration_ms: 7.7701
+  type: 'test'
+  ...
+# Subtest: WS08 dynamic schema removal invalidates a field handle without writing a neighboring input
+ok 163 - WS08 dynamic schema removal invalidates a field handle without writing a neighboring input
+  ---
+  duration_ms: 4.6428
+  type: 'test'
+  ...
+# Subtest: WS09 code view rejects reversed requests and changed stage/revision instead of painting obsolete code
+ok 164 - WS09 code view rejects reversed requests and changed stage/revision instead of painting obsolete code
+  ---
+  duration_ms: 7.257
+  type: 'test'
+  ...
+# Subtest: WS10 strict read-only intake rejects duplicate keys/oversize/nonfinite and preserves error documents without executing archive
+ok 165 - WS10 strict read-only intake rejects duplicate keys/oversize/nonfinite and preserves error documents without executing archive
+  ---
+  duration_ms: 5.454
+  type: 'test'
+  ...
+# Subtest: WS11 two source nodes share Graph resource; default/name changes neither overwrite host live values nor rewrite uniform symbols
+ok 166 - WS11 two source nodes share Graph resource; default/name changes neither overwrite host live values nor rewrite uniform symbols
+  ---
+  duration_ms: 9.0632
+  type: 'test'
+  ...
+# Subtest: WS12 source deletion leaves diagnostic reference, Undo recovers code, retarget is shared-history mutation
+ok 167 - WS12 source deletion leaves diagnostic reference, Undo recovers code, retarget is shared-history mutation
+  ---
+  duration_ms: 5.6328
+  type: 'test'
+  ...
+# Subtest: WS13 constant resource affects shader while uniform default does not; missing modules preserve payload and references
+ok 168 - WS13 constant resource affects shader while uniform default does not; missing modules preserve payload and references
+  ---
+  duration_ms: 3.5635
+  type: 'test'
+  ...
+# Subtest: WS14 subgraph shared edit and independent direct clone preserve nested dependency identity and one model history
+ok 169 - WS14 subgraph shared edit and independent direct clone preserve nested dependency identity and one model history
+  ---
+  duration_ms: 14.0655
+  type: 'test'
+  ...
+# Subtest: WS15 dependency cycle, unknown dependency and duplicate resource IDs fail before publishing or changing history
+ok 170 - WS15 dependency cycle, unknown dependency and duplicate resource IDs fail before publishing or changing history
+  ---
+  duration_ms: 1.5451
+  type: 'test'
+  ...
+# Subtest: WS16 read-only import review is stale guarded; acceptance replaces same Graph atomically and undo restores whole document
+ok 171 - WS16 read-only import review is stale guarded; acceptance replaces same Graph atomically and undo restores whole document
+  ---
+  duration_ms: 10.802
+  type: 'test'
+  ...
+# Subtest: WS17 import cancellation, pin mismatch and model error preserve current graph and history
+ok 172 - WS17 import cancellation, pin mismatch and model error preserve current graph and history
+  ---
+  duration_ms: 7.3606
+  type: 'test'
+  ...
+# Subtest: WS18 visual metadata is persistent and undoable without changing generated code; editor-only camera stays independent
+ok 173 - WS18 visual metadata is persistent and undoable without changing generated code; editor-only camera stays independent
+  ---
+  duration_ms: 7.557
+  type: 'test'
+  ...
+# Subtest: WS19 nested Network reuses pinned math/source modules, interface boundaries and distinct call-occurrence symbols
+ok 174 - WS19 nested Network reuses pinned math/source modules, interface boundaries and distinct call-occurrence symbols
+  ---
+  duration_ms: 41.1
+  type: 'test'
+  ...
+# Subtest: WS20 network rejects cycles/missing refs/unreachable invalid modules and duplicate wiring atomically
+ok 175 - WS20 network rejects cycles/missing refs/unreachable invalid modules and duplicate wiring atomically
+  ---
+  duration_ms: 2.402
+  type: 'test'
+  ...
+# Subtest: WS21 network interface changes update every caller by stable port key, retain loss evidence, undo restores exact edges
+ok 176 - WS21 network interface changes update every caller by stable port key, retain loss evidence, undo restores exact edges
+  ---
+  duration_ms: 10.4781
+  type: 'test'
+  ...
+# Subtest: WS22 independent nested network rewrites own boundary but shares nested dependency; library fork rewrites all affected callers atomically
+ok 177 - WS22 independent nested network rewrites own boundary but shares nested dependency; library fork rewrites all affected callers atomically
+  ---
+  duration_ms: 38.4059
+  type: 'test'
+  ...
+# Subtest: WS23 loaded invalid unused resource reports error and blocks generation without dropping opaque payload
+ok 178 - WS23 loaded invalid unused resource reports error and blocks generation without dropping opaque payload
+  ---
+  duration_ms: 1.112
+  type: 'test'
+  ...
+# Subtest: WS24 same-graph packet reuses existing resource without resetting latest defaults; cross-graph paste remaps nested closure and undo removes all copies
+ok 179 - WS24 same-graph packet reuses existing resource without resetting latest defaults; cross-graph paste remaps nested closure and undo removes all copies
+  ---
+  duration_ms: 29.2041
+  type: 'test'
+  ...
+# Subtest: WS25 paste late invalid edge rolls back inserted resource and nodes, opaque reference state and stale load are refused
+ok 180 - WS25 paste late invalid edge rolls back inserted resource and nodes, opaque reference state and stale load are refused
+  ---
+  duration_ms: 3.3428
+  type: 'test'
+  ...
+# Subtest: WS26 module state codec remaps nominal type and symbolic extent only; notes containing same text remain untouched
+ok 181 - WS26 module state codec remaps nominal type and symbolic extent only; notes containing same text remain untouched
+  ---
+  duration_ms: 3.3454
+  type: 'test'
+  ...
+# Subtest: WS27 malformed unused packet resource cannot publish an error graph; large integral float uses shared literal formatter
+ok 182 - WS27 malformed unused packet resource cannot publish an error graph; large integral float uses shared literal formatter
+  ---
+  duration_ms: 3.2083
+  type: 'test'
+  ...
+# Subtest: WS28 typed selection supports node/edge/frame/resource identities with independent contexts and legacy node projection
+ok 183 - WS28 typed selection supports node/edge/frame/resource identities with independent contexts and legacy node projection
+  ---
+  duration_ms: 7.4075
+  type: 'test'
+  ...
+# Subtest: WS29 typed selection invalidates synchronously before ordinary observers; Undo never resurrects UI selection and stage navigation clears refs
+ok 184 - WS29 typed selection invalidates synchronously before ordinary observers; Undo never resurrects UI selection and stage navigation clears refs
+  ---
+  duration_ms: 4.9463
+  type: 'test'
+  ...
+# Subtest: WS30 loaded duplicate source names are diagnosed even when neither source has a reference node
+ok 185 - WS30 loaded duplicate source names are diagnosed even when neither source has a reference node
+  ---
+  duration_ms: 4.3093
+  type: 'test'
+  ...
+# Subtest: WS31 nested occurrence navigation keeps two contexts independent and scoped parameters edit the single Graph with one library fork Undo
+ok 186 - WS31 nested occurrence navigation keeps two contexts independent and scoped parameters edit the single Graph with one library fork Undo
+  ---
+  duration_ms: 37.4296
+  type: 'test'
+  ...
+# Subtest: WS32 missing nested occurrence clears breadcrumb and scoped selection before notification; Undo restores model but not navigation
+ok 187 - WS32 missing nested occurrence clears breadcrumb and scoped selection before notification; Undo restores model but not navigation
+  ---
+  duration_ms: 15.882
+  type: 'test'
+  ...
+# Subtest: WS33 nested navigation rejects invalid and busy paths without losing selection; local scoped gestures share History and closed handles fail
+ok 188 - WS33 nested navigation rejects invalid and busy paths without losing selection; local scoped gestures share History and closed handles fail
+  ---
+  duration_ms: 38.7409
+  type: 'test'
+  ...
+# Subtest: WS34 asynchronous inspection cannot arrive in a different nested occurrence even with unchanged graph and stage
+ok 189 - WS34 asynchronous inspection cannot arrive in a different nested occurrence even with unchanged graph and stage
+  ---
+  duration_ms: 8.7124
+  type: 'test'
+  ...
+# Subtest: WS35 reusable definitions infer permitted stages; vertex-only content is valid unused or in Vertex but rejected in Pixel
+ok 190 - WS35 reusable definitions infer permitted stages; vertex-only content is valid unused or in Vertex but rejected in Pixel
+  ---
+  duration_ms: 12.4649
+  type: 'test'
+  ...
+# Subtest: WS36 actual repeated nested calls emit physical-line provenance for each occurrence and resolve native reports without confusing shared definition IDs
+ok 191 - WS36 actual repeated nested calls emit physical-line provenance for each occurrence and resolve native reports without confusing shared definition IDs
+  ---
+  duration_ms: 11.2111
+  type: 'test'
+  ...
+# Subtest: WS37 nested NodeTypes declare and dynamically require backend capabilities through the enclosing generation profile
+ok 192 - WS37 nested NodeTypes declare and dynamically require backend capabilities through the enclosing generation profile
+  ---
+  duration_ms: 6.1687
+  type: 'test'
+  ...
+# Subtest: WS38 nested dynamic state changes reconcile removed values and edges in one publication, permit error documents and undo exactly
+ok 193 - WS38 nested dynamic state changes reconcile removed values and edges in one publication, permit error documents and undo exactly
+  ---
+  duration_ms: 8.5559
+  type: 'test'
+  ...
+# Subtest: WS39 nested preserve policy retains invalid edge and restores it when the interface returns, without a second Graph or History
+ok 194 - WS39 nested preserve policy retains invalid edge and restores it when the interface returns, without a second Graph or History
+  ---
+  duration_ms: 8.8883
+  type: 'test'
+  ...
+# Subtest: WS40 first library dynamic edit can preserve an invalid authoring state while atomically forking, recording scoped loss, and protecting its boundary
+ok 195 - WS40 first library dynamic edit can preserve an invalid authoring state while atomically forking, recording scoped loss, and protecting its boundary
+  ---
+  duration_ms: 6.825
+  type: 'test'
+  ...
+# Subtest: WS41 type-lock and per-shape backup belong to shared serialized Node data, not either EditorContext
+ok 196 - WS41 type-lock and per-shape backup belong to shared serialized Node data, not either EditorContext
+  ---
+  duration_ms: 7.5795
+  type: 'test'
+  ...
+# Subtest: WS42 grouping creation policy rejects direct sources but atomically encapsulates an eligible closed selection
+ok 197 - WS42 grouping creation policy rejects direct sources but atomically encapsulates an eligible closed selection
+  ---
+  duration_ms: 6.9566
+  type: 'test'
+  ...
+# Subtest: WS43 load preserves a source inside existing nested definitions while personal policy rejects its declared closure without reading host values
+ok 198 - WS43 load preserves a source inside existing nested definitions while personal policy rejects its declared closure without reading host values
+  ---
+  duration_ms: 4.9417
+  type: 'test'
+  ...
+# Subtest: WS44 interface edits reconcile all nested callers and root callers in one publication, including unused/transitive definitions
+ok 199 - WS44 interface edits reconcile all nested callers and root callers in one publication, including unused/transitive definitions
+  ---
+  duration_ms: 93.2558
+  type: 'test'
+  ...
+# Subtest: WS45 library interface fork reconciles renamed ancestors and local callers before publishing scoped loss
+ok 200 - WS45 library interface fork reconciles renamed ancestors and local callers before publishing scoped loss
+  ---
+  duration_ms: 33.9246
+  type: 'test'
+  ...
+# Subtest: WS46 recursive interface replacement or fork rejects atomically and malformed saved recursion remains diagnosable
+ok 201 - WS46 recursive interface replacement or fork rejects atomically and malformed saved recursion remains diagnosable
+  ---
+  duration_ms: 9.3823
+  type: 'test'
+  ...
+1..201
+# tests 201
+# suites 0
+# pass 201
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1567.3812

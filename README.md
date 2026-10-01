@@ -1,0 +1,41 @@
+# Grape
+
+Grape is a shader graph authoring application. The product owns its documents, model values and editing History; hosts such as TouchDesigner are external execution/integration targets.
+
+This directory is the repository root. It is ready for Git initialization and GitHub publication; no directory restructuring is needed.
+
+- **Accepted architecture:** [handoff/00_README.md](handoff/00_README.md), revision **IH-005**.
+- **Writable document format:** **grape.document 2.0**. Version 1.0 is recovery-readonly unless processed by an explicit supported converter. See [document contract](handoff/14_DOCUMENT_FORMAT.md).
+- **Mutable project state:** [implementation-state.json](implementation-state.json). Bootstrap state is `not-started`, with no active/completed slices, implementation baseline, build or acceptance evidence. **S01 is not authorized.** Subsequent current status comes from this file.
+- **AI working instructions:** [AGENTS.md](AGENTS.md).
+- **Acceptance record:** [HANDOFF_ACCEPTANCE.json](HANDOFF_ACCEPTANCE.json) binds the owner's accepted targeted-review PASS to the exact frozen index. Frozen review-time `pending`/`READY FOR TARGETED RE-REVIEW` labels are historical; they do not override this acceptance. Acceptance does not pass runtime Gates or authorize production work.
+
+DEC-GRAPE-001 is already part of IH-005: G-MIXED-HISTORY and LC-UI-100 are `DEFERRED_BY_PRODUCT_DECISION`. Current behavior is domain-separated History, with runtime observations outside Graph History. No duplicate decision is added to current state. LU-UI-009, stale replies, CAS, conditional writes, receipts and divergence protections remain required.
+
+Read the relevant contracts and [implementation plan](handoff/08_IMPLEMENTATION_PLAN.md) when a slice is authorized. First implementation will be the host-free S01 document → graph → node → parameter → connection → generation → save/reload path. Architecture review is complete; real contract conflicts use the accepted change workflow. Framework, production folder layout and production package manager have not been selected by this bootstrap.
+
+## Verify
+
+Use **Node 25.5.0**, the version used for the accepted qualification. These commands are portable Node commands and do not need the original workspace or a TouchDesigner installation:
+
+```sh
+node tools/verify-bootstrap.mjs
+node handoff/tools/check-implementation-state.mjs --current
+node --test tools/verify-bootstrap.test.mjs
+```
+
+The first command is read-only: it verifies every indexed file, the accepted index digest, current-state rules and relocated Handoff integrity checks. It is **not** a full runtime qualification. [BOOTSTRAP_VALIDATION.json](BOOTSTRAP_VALIDATION.json) records the packaging checks actually performed.
+
+For a full qualification replay, use the staging wrapper:
+
+```sh
+node tools/verify-handoff.mjs --install-tools --install-browser
+```
+
+This opt-in command downloads the Handoff's locked test tools and Playwright **1.62.1**, and installs Chromium. It copies the frozen files into a unique OS temporary directory, runs the existing runner there, reports results and rechecks the original. New logs/dependencies stay in that disposable directory, **outside this repository**. Required browser system libraries must be available; missing dependencies or skipped browser tests are never a full PASS. Use `--package-only` to deliberately omit sealed reference/browser qualification; its result is labeled separately. These are qualification-tool choices, not production dependencies or a UI framework choice.
+
+Offline/existing tooling may instead be explicitly supplied through `GRAPE_QUALIFICATION_NODE_MODULES` (locked `executable-reference` development dependencies), `GRAPE_PLAYWRIGHT_PATH` (Playwright `index.mjs`) and `GRAPE_BROWSER_CHANNEL`. Otherwise the wrapper gives a prerequisite error; it does not use hidden machine-specific fallback paths. Historical browser evidence used Windows/Edge/SwiftShader; a Chromium/cloud replay must be judged on its own recorded environment, not assumed equivalent to physical GPU/TD integration.
+
+`handoff/` contains all accepted provenance/evidence needed for implementation. Historical external source paths describe origins; they are not setup dependencies. Do not run the frozen reconstruction or finalizer, and do not run its write-producing qualification runners directly inside `handoff/`. `.gitattributes` preserves exact frozen bytes across Git checkouts.
+
+The current-state field `currentRecord: "../implementation-state.json"` is the accepted **Handoff-relative locator**: resolved from `handoff/`, it names the root file. It is intentionally unchanged. `implementationBaseline: null` means production has not started; accepted Handoff identity is separately recorded in `handoffRevision` and the acceptance record. Once S01 is explicitly authorized, record real progress using the existing schema and validators; do not invent a baseline/build/evidence in advance.

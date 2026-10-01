@@ -1,0 +1,460 @@
+TAP version 13
+# Subtest: L10N-01 Node catalog/help/search/ports/parameters and Panel metadata are module-owned
+ok 1 - L10N-01 Node catalog/help/search/ports/parameters and Panel metadata are module-owned
+  ---
+  duration_ms: 1.4978
+  type: 'test'
+  ...
+# Subtest: L10N-02 adding a feature locale uses only contribution registration and updates existing views
+ok 2 - L10N-02 adding a feature locale uses only contribution registration and updates existing views
+  ---
+  duration_ms: 0.8341
+  type: 'test'
+  ...
+# Subtest: L10N-03 exact locale then parents then module default then inline fallback are deterministic
+ok 3 - L10N-03 exact locale then parents then module default then inline fallback are deterministic
+  ---
+  duration_ms: 7.4809
+  type: 'test'
+  ...
+# Subtest: L10N-04 exact module version/fingerprint/catalog identity isolates simultaneous versions
+ok 4 - L10N-04 exact module version/fingerprint/catalog identity isolates simultaneous versions
+  ---
+  duration_ms: 0.2335
+  type: 'test'
+  ...
+# Subtest: L10N-05 duplicate owner/locale and namespace spoof fail atomically
+ok 5 - L10N-05 duplicate owner/locale and namespace spoof fail atomically
+  ---
+  duration_ms: 0.2598
+  type: 'test'
+  ...
+# Subtest: L10N-06 malformed/duplicate messages cannot partially install a locale
+ok 6 - L10N-06 malformed/duplicate messages cannot partially install a locale
+  ---
+  duration_ms: 0.2719
+  type: 'test'
+  ...
+# Subtest: L10N-07 locale replacement is atomic expected-revision CAS, not implicit last-wins
+ok 7 - L10N-07 locale replacement is atomic expected-revision CAS, not implicit last-wins
+  ---
+  duration_ms: 0.274
+  type: 'test'
+  ...
+# Subtest: L10N-08 missing module/key uses reference fallback and never another owner or raw undefined
+ok 8 - L10N-08 missing module/key uses reference fallback and never another owner or raw undefined
+  ---
+  duration_ms: 0.2702
+  type: 'test'
+  ...
+# Subtest: L10N-09 shell common and feature namespaces coexist through the same contract
+ok 9 - L10N-09 shell common and feature namespaces coexist through the same contract
+  ---
+  duration_ms: 0.2343
+  type: 'test'
+  ...
+# Subtest: L10N-10 locale change does not mutate Graph/document/History/GLSL or user-authored names
+ok 10 - L10N-10 locale change does not mutate Graph/document/History/GLSL or user-authored names
+  ---
+  duration_ms: 10.4111
+  type: 'test'
+  ...
+# Subtest: L10N-11 params remain plain text; missing placeholders and invalid params are explicit
+ok 11 - L10N-11 params remain plain text; missing placeholders and invalid params are explicit
+  ---
+  duration_ms: 0.2584
+  type: 'test'
+  ...
+# Subtest: L10N-12 notifications follow atomic publication, isolate callback errors and reject own reentry
+ok 12 - L10N-12 notifications follow atomic publication, isolate callback errors and reject own reentry
+  ---
+  duration_ms: 0.2699
+  type: 'test'
+  ...
+# Subtest: L10N-13 subscription cleanup and service lifetime are explicit
+ok 13 - L10N-13 subscription cleanup and service lifetime are explicit
+  ---
+  duration_ms: 0.1928
+  type: 'test'
+  ...
+# Subtest: L10N-14 registrations clone contribution data and projections are immutable
+ok 14 - L10N-14 registrations clone contribution data and projections are immutable
+  ---
+  duration_ms: 0.1429
+  type: 'test'
+  ...
+# Subtest: L10N-15 cleanup during notification prevents a disposed consumer from receiving that event
+ok 15 - L10N-15 cleanup during notification prevents a disposed consumer from receiving that event
+  ---
+  duration_ms: 0.1312
+  type: 'test'
+  ...
+# Subtest: L10N-16 menu labels localize independently of their stable enum values and options data
+ok 16 - L10N-16 menu labels localize independently of their stable enum values and options data
+  ---
+  duration_ms: 0.3413
+  type: 'test'
+  ...
+# Subtest: L10N-17 missing menu text fallback preserves values; malformed value/schema is an explicit failure
+ok 17 - L10N-17 missing menu text fallback preserves values; malformed value/schema is an explicit failure
+  ---
+  duration_ms: 0.2089
+  type: 'test'
+  ...
+# Subtest: BM-01 one registered Panel reads/projects/writes root then nested target without renderer scope traversal
+ok 18 - BM-01 one registered Panel reads/projects/writes root then nested target without renderer scope traversal
+  ---
+  duration_ms: 85.3032
+  type: 'test'
+  ...
+# Subtest: BM-02 shared occurrences have separate routed leases; move preserves view and close invalidates late results
+ok 19 - BM-02 shared occurrences have separate routed leases; move preserves view and close invalidates late results
+  ---
+  duration_ms: 31.3988
+  type: 'test'
+  ...
+# Subtest: BM-03 pinned nested Inspector keeps same model scope when provider navigates and closes
+ok 20 - BM-03 pinned nested Inspector keeps same model scope when provider navigates and closes
+  ---
+  duration_ms: 36.3077
+  type: 'test'
+  ...
+# Subtest: BM-04 stale occurrence becomes missing projection; reconnect requires a fresh target and old handle stays dead
+ok 21 - BM-04 stale occurrence becomes missing projection; reconnect requires a fresh target and old handle stays dead
+  ---
+  duration_ms: 15.5605
+  type: 'test'
+  ...
+# Subtest: BM-05 actual Graph reload restores pinned nested Inspector only through explicit new-lifetime mapping
+ok 22 - BM-05 actual Graph reload restores pinned nested Inspector only through explicit new-lifetime mapping
+  ---
+  duration_ms: 60.5117
+  type: 'test'
+  ...
+# Subtest: B01-CE pre-repair public registration cannot express ordinary Panel routing
+ok 23 - B01-CE pre-repair public registration cannot express ordinary Panel routing
+  ---
+  duration_ms: 0.9968
+  type: 'test'
+  ...
+# Subtest: B01-01 registration, initial resolution and direct Context selection/navigation/model notifications
+ok 24 - B01-01 registration, initial resolution and direct Context selection/navigation/model notifications
+  ---
+  duration_ms: 10.8962
+  type: 'test'
+  ...
+# Subtest: B01-02 routing follows group0/groupN/followCanvas/pin, not Parameter focus
+ok 25 - B01-02 routing follows group0/groupN/followCanvas/pin, not Parameter focus
+  ---
+  duration_ms: 6.6295
+  type: 'test'
+  ...
+# Subtest: B01-03 move/hide preserve instance, private state, Context and model History
+ok 26 - B01-03 move/hide preserve instance, private state, Context and model History
+  ---
+  duration_ms: 2.8311
+  type: 'test'
+  ...
+# Subtest: B01-04 origin preflight blocks retarget/Canvas close/direct Context disposal before callbacks
+ok 27 - B01-04 origin preflight blocks retarget/Canvas close/direct Context disposal before callbacks
+  ---
+  duration_ms: 2.4029
+  type: 'test'
+  ...
+# Subtest: B01-05 late replies rejected after retarget, close, and reuse of same Panel ID
+ok 28 - B01-05 late replies rejected after retarget, close, and reuse of same Panel ID
+  ---
+  duration_ms: 0.9854
+  type: 'test'
+  ...
+# Subtest: B01-06 save to fresh workspace uses explicit restore resolver; unresolved references stay opaque
+ok 29 - B01-06 save to fresh workspace uses explicit restore resolver; unresolved references stay opaque
+  ---
+  duration_ms: 2.4213
+  type: 'test'
+  ...
+# Subtest: B01-07 missing type can be registered and explicitly retried through the same workspace
+ok 30 - B01-07 missing type can be registered and explicitly retried through the same workspace
+  ---
+  duration_ms: 0.7737
+  type: 'test'
+  ...
+# Subtest: B01-08 callback errors, reentrancy and dispose failure remain isolated
+ok 31 - B01-08 callback errors, reentrancy and dispose failure remain isolated
+  ---
+  duration_ms: 1.4856
+  type: 'test'
+  ...
+# Subtest: B01-09 direct Context selection callbacks cannot reenter selection; operation-end refresh is automatic
+ok 32 - B01-09 direct Context selection callbacks cannot reenter selection; operation-end refresh is automatic
+  ---
+  duration_ms: 1.7412
+  type: 'test'
+  ...
+# Subtest: B01-10 structural restore validation fails before creating any Tab or contribution
+ok 33 - B01-10 structural restore validation fails before creating any Tab or contribution
+  ---
+  duration_ms: 0.6205
+  type: 'test'
+  ...
+# Subtest: B01-11 pin owns a retained scope lease, survives source navigation/disposal, releases only its own Context
+ok 34 - B01-11 pin owns a retained scope lease, survives source navigation/disposal, releases only its own Context
+  ---
+  duration_ms: 3.5079
+  type: 'test'
+  ...
+# Subtest: B01-12 cross-Context reentry is rejected, not silently mutated with a dropped notification
+ok 35 - B01-12 cross-Context reentry is rejected, not silently mutated with a dropped notification
+  ---
+  duration_ms: 0.7154
+  type: 'test'
+  ...
+# Subtest: B01-13 pinned callback failure cleans retained Context after coherent publication
+ok 36 - B01-13 pinned callback failure cleans retained Context after coherent publication
+  ---
+  duration_ms: 2.0822
+  type: 'test'
+  ...
+# Subtest: B01-14 malformed pin input is rejected before mutating the live Tab or calling contribution
+ok 37 - B01-14 malformed pin input is rejected before mutating the live Tab or calling contribution
+  ---
+  duration_ms: 0.9436
+  type: 'test'
+  ...
+# Subtest: B01-15 canClose failure keeps Tab and Panel intact; dispose failure still completes allowed close
+ok 38 - B01-15 canClose failure keeps Tab and Panel intact; dispose failure still completes allowed close
+  ---
+  duration_ms: 0.7547
+  type: 'test'
+  ...
+# Subtest: B01-16 pin failure during its own Context notification drains cleanup after notification
+ok 39 - B01-16 pin failure during its own Context notification drains cleanup after notification
+  ---
+  duration_ms: 2.1259
+  type: 'test'
+  ...
+# Subtest: B01-17 disposed public objects reject new subscriptions rather than retaining unreachable callbacks
+ok 40 - B01-17 disposed public objects reject new subscriptions rather than retaining unreachable callbacks
+  ---
+  duration_ms: 0.7688
+  type: 'test'
+  ...
+# Subtest: M01-RED original root-only projection rejects nested Parameter although scoped write is available
+ok 41 - M01-RED original root-only projection rejects nested Parameter although scoped write is available
+  ---
+  duration_ms: 19.4144
+  type: 'test'
+  ...
+# Subtest: M01-01 root spec/value/link/projection/write are one target; one Undo; unchanged on projection
+ok 42 - M01-01 root spec/value/link/projection/write are one target; one Undo; unchanged on projection
+  ---
+  duration_ms: 20.8181
+  type: 'test'
+  ...
+# Subtest: M01-02 nested target resolves same specification, actual default and local link state
+ok 43 - M01-02 nested target resolves same specification, actual default and local link state
+  ---
+  duration_ms: 40.0909
+  type: 'test'
+  ...
+# Subtest: M01-03 shared definition occurrences have distinct scope but shared model and independent draft conflicts
+ok 44 - M01-03 shared definition occurrences have distinct scope but shared model and independent draft conflicts
+  ---
+  duration_ms: 38.774
+  type: 'test'
+  ...
+# Subtest: M01-04 root name/id collision cannot leak into nested projection or write
+ok 45 - M01-04 root name/id collision cannot leak into nested projection or write
+  ---
+  duration_ms: 22.3391
+  type: 'test'
+  ...
+# Subtest: M01-05 deleting occurrence invalidates once before later writes; Undo never resurrects old UI lease
+ok 46 - M01-05 deleting occurrence invalidates once before later writes; Undo never resurrects old UI lease
+  ---
+  duration_ms: 14.7281
+  type: 'test'
+  ...
+# Subtest: M01-06 stale path, graph-load identity and context disposal never silently retarget
+ok 47 - M01-06 stale path, graph-load identity and context disposal never silently retarget
+  ---
+  duration_ms: 10.3291
+  type: 'test'
+  ...
+# Subtest: M01-07 input interface removal invalidates old field; surviving mode target remains functional
+ok 48 - M01-07 input interface removal invalidates old field; surviving mode target remains functional
+  ---
+  duration_ms: 29.56
+  type: 'test'
+  ...
+# Subtest: M01-08 same spec/value with changed input GLSL type rejects old draft
+ok 49 - M01-08 same spec/value with changed input GLSL type rejects old draft
+  ---
+  duration_ms: 4.4956
+  type: 'test'
+  ...
+# Subtest: M01-09 connection established during draft rejects commit; unrelated position does not
+ok 50 - M01-09 connection established during draft rejects commit; unrelated position does not
+  ---
+  duration_ms: 19.5411
+  type: 'test'
+  ...
+# Subtest: M01-10 library copy-on-write commits once then invalidates both occurrence leases; fresh handles see the fork
+ok 51 - M01-10 library copy-on-write commits once then invalidates both occurrence leases; fresh handles see the fork
+  ---
+  duration_ms: 23.9403
+  type: 'test'
+  ...
+# Subtest: M01-11 generic widget fault fallback and immutable field cannot mutate model; dispose does not close context
+ok 52 - M01-11 generic widget fault fallback and immutable field cannot mutate model; dispose does not close context
+  ---
+  duration_ms: 7.896
+  type: 'test'
+  ...
+# Subtest: M01-12 invalid edge remains visible but cannot masquerade as a live connection
+ok 53 - M01-12 invalid edge remains visible but cannot masquerade as a live connection
+  ---
+  duration_ms: 11.6233
+  type: 'test'
+  ...
+# Subtest: M01-13 public Context navigation ABA and dispose automatically invalidate without renderer refresh
+ok 54 - M01-13 public Context navigation ABA and dispose automatically invalidate without renderer refresh
+  ---
+  duration_ms: 8.9939
+  type: 'test'
+  ...
+# Subtest: M01-14 changing an ancestor definition with same leaf definition invalidates old occurrence lease
+ok 55 - M01-14 changing an ancestor definition with same leaf definition invalidates old occurrence lease
+  ---
+  duration_ms: 28.7565
+  type: 'test'
+  ...
+# Subtest: M01-15 disposal inside update delivery is terminal for all remaining observers
+ok 56 - M01-15 disposal inside update delivery is terminal for all remaining observers
+  ---
+  duration_ms: 9.4143
+  type: 'test'
+  ...
+# Subtest: M01-16 value change and Undo do not resurrect a draft from before the change
+ok 57 - M01-16 value change and Undo do not resurrect a draft from before the change
+  ---
+  duration_ms: 11.8874
+  type: 'test'
+  ...
+# Subtest: VM01 two independent Panel packages mount through one public workspace and generic renderer
+ok 58 - VM01 two independent Panel packages mount through one public workspace and generic renderer
+  ---
+  duration_ms: 11.5846
+  type: 'test'
+  ...
+# Subtest: VM02 help private expansion survives hide/move/remount; stale old controls revoked
+ok 59 - VM02 help private expansion survives hide/move/remount; stale old controls revoked
+  ---
+  duration_ms: 2.1717
+  type: 'test'
+  ...
+# Subtest: VM03 selection and locale updates render but do not mutate Graph/History
+ok 60 - VM03 selection and locale updates render but do not mutate Graph/History
+  ---
+  duration_ms: 1.843
+  type: 'test'
+  ...
+# Subtest: VM04 mount failure cleans partial resources, placeholder retry preserves Panel state
+ok 61 - VM04 mount failure cleans partial resources, placeholder retry preserves Panel state
+  ---
+  duration_ms: 1.5903
+  type: 'test'
+  ...
+# Subtest: VM05 update failure revokes all mount resources before placeholder and retry
+ok 62 - VM05 update failure revokes all mount resources before placeholder and retry
+  ---
+  duration_ms: 1.4834
+  type: 'test'
+  ...
+# Subtest: VM06 dispose fences async work; cleanup registered after revoke executes immediately
+ok 63 - VM06 dispose fences async work; cleanup registered after revoke executes immediately
+  ---
+  duration_ms: 1.4809
+  type: 'test'
+  ...
+# Subtest: VM07 number field draft survives unmount/remount and commits through scoped target once
+ok 64 - VM07 number field draft survives unmount/remount and commits through scoped target once
+  ---
+  duration_ms: 11.6621
+  type: 'test'
+  ...
+# Subtest: VM08 toggle feature uses same registered mount path and retains bool semantics
+ok 65 - VM08 toggle feature uses same registered mount path and retains bool semantics
+  ---
+  duration_ms: 5.2639
+  type: 'test'
+  ...
+# Subtest: VM09 field draft rejects concurrent target change, retains text for user recovery
+ok 66 - VM09 field draft rejects concurrent target change, retains text for user recovery
+  ---
+  duration_ms: 6.9849
+  type: 'test'
+  ...
+# Subtest: VM10 mount/update cannot invoke widget model commands
+ok 67 - VM10 mount/update cannot invoke widget model commands
+  ---
+  duration_ms: 2.4735
+  type: 'test'
+  ...
+# Subtest: VM11 scoped target disposal invalidates widget display and fences pending actions
+ok 68 - VM11 scoped target disposal invalidates widget display and fences pending actions
+  ---
+  duration_ms: 2.7899
+  type: 'test'
+  ...
+# Subtest: VM12 inactive tab releases mount only, not private Panel state
+ok 69 - VM12 inactive tab releases mount only, not private Panel state
+  ---
+  duration_ms: 1.4522
+  type: 'test'
+  ...
+# Subtest: VM13 guarded workspace close/dispose preserves mount until guard allows
+ok 70 - VM13 guarded workspace close/dispose preserves mount until guard allows
+  ---
+  duration_ms: 2.1441
+  type: 'test'
+  ...
+# Subtest: VM14 missing Widget view is explicit placeholder and registry retry resolves it
+ok 71 - VM14 missing Widget view is explicit placeholder and registry retry resolves it
+  ---
+  duration_ms: 6.4365
+  type: 'test'
+  ...
+# Subtest: VM15 incompatible technology protocol yields controlled placeholder
+ok 72 - VM15 incompatible technology protocol yields controlled placeholder
+  ---
+  duration_ms: 1.2709
+  type: 'test'
+  ...
+# Subtest: VM16 restored Help projection uses private viewState before initial mount
+ok 73 - VM16 restored Help projection uses private viewState before initial mount
+  ---
+  duration_ms: 0.9855
+  type: 'test'
+  ...
+# Subtest: VM17 generic renderer has no feature imports, class checks, or Graph/History mutation
+ok 74 - VM17 generic renderer has no feature imports, class checks, or Graph/History mutation
+  ---
+  duration_ms: 0.9552
+  type: 'test'
+  ...
+# Subtest: VM18 malformed feature viewState becomes opaque workspace placeholder before view creation
+ok 75 - VM18 malformed feature viewState becomes opaque workspace placeholder before view creation
+  ---
+  duration_ms: 2.5754
+  type: 'test'
+  ...
+1..75
+# tests 75
+# suites 0
+# pass 75
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 495.7333

@@ -1,0 +1,85 @@
+TAP version 13
+# Subtest: PD01 accepted owner decision artifacts are copied byte-identically, not reauthorized
+ok 1 - PD01 accepted owner decision artifacts are copied byte-identically, not reauthorized
+  ---
+  duration_ms: 1.2185
+  type: 'test'
+  ...
+# Subtest: PD02 effective scope is deferred, frozen qualification remains Partial and not Covered
+not ok 2 - PD02 effective scope is deferred, frozen qualification remains Partial and not Covered
+  ---
+  duration_ms: 0.6076
+  type: 'test'
+  location: 'C:\\Users\\user\\Documents\\Codex\\2026-09-09\\td\\implementation-handoff-r5\\tools\\ih005-decision-state.test.mjs:29:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + undefined
+    - 'DEFERRED_BY_PRODUCT_DECISION'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'DEFERRED_BY_PRODUCT_DECISION'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Users/user/Documents/Codex/2026-09-09/td/implementation-handoff-r5/tools/ih005-decision-state.test.mjs:32:80)
+    Test.runInAsyncScope (node:async_hooks:212:14)
+    Test.run (node:internal/test_runner/test:1109:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+    Test.postRun (node:internal/test_runner/test:1238:19)
+    Test.run (node:internal/test_runner/test:1166:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3)
+  ...
+# Subtest: PD03 unified chronology oracle survives verbatim, unexecuted and deferred
+ok 3 - PD03 unified chronology oracle survives verbatim, unexecuted and deferred
+  ---
+  duration_ms: 0.4582
+  type: 'test'
+  ...
+# Subtest: PD04 all ten domain-separated replacements are required, never reported executed
+ok 4 - PD04 all ten domain-separated replacements are required, never reported executed
+  ---
+  duration_ms: 0.1775
+  type: 'test'
+  ...
+# Subtest: PD05 defer removes only coordinator prerequisite; async/load/native safety remains required
+ok 5 - PD05 defer removes only coordinator prerequisite; async/load/native safety remains required
+  ---
+  duration_ms: 0.1667
+  type: 'test'
+  ...
+# Subtest: PD06 canonical History/Host/CAS/snapshot and scoped parameter implementation are unchanged
+ok 6 - PD06 canonical History/Host/CAS/snapshot and scoped parameter implementation are unchanged
+  ---
+  duration_ms: 0.6896
+  type: 'test'
+  ...
+# Subtest: PD07 inherited decision is not fabricated implementation progress
+ok 7 - PD07 inherited decision is not fabricated implementation progress
+  ---
+  duration_ms: 0.2666
+  type: 'test'
+  ...
+# Subtest: PD08 production ledger retains inherited view seams and new exact wire/Panel seams
+ok 8 - PD08 production ledger retains inherited view seams and new exact wire/Panel seams
+  ---
+  duration_ms: 1.1259
+  type: 'test'
+  ...
+# Subtest: PD09 current instructions use IH-005 state and keep historical text clearly historical
+ok 9 - PD09 current instructions use IH-005 state and keep historical text clearly historical
+  ---
+  duration_ms: 0.517
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 8
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 79.3547

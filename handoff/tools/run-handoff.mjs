@@ -1,0 +1,47 @@
+// Validate the handoff, not the future production implementation.
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const out=path.join(root,'audit/evidence');fs.mkdirSync(out,{recursive:true});
+const packageOnly=process.argv.includes('--package-only');
+if(process.argv.slice(2).some(x=>x!=='--package-only'))throw new Error('Only --package-only is supported.');
+const results=[];
+function run(name,args){
+  const r=spawnSync(process.execPath,args,{cwd:root,env:process.env,encoding:'utf8',maxBuffer:32*1024*1024});
+  const output=(r.stdout??'')+(r.stderr??'')+(r.error?String(r.error):'');
+  const file='audit/evidence/'+name+'.txt';fs.writeFileSync(path.join(root,file),output);
+  const result={name,exitCode:r.status,log:file,sha256:createHash('sha256').update(output).digest('hex')};
+  if(args.includes('--test'))result.counts=Object.fromEntries(['tests','pass','fail','cancelled','skipped','todo'].map(k=>[k,Number(output.match(new RegExp('^# '+k+' (\\d+)','m'))?.[1]??-1)]));
+  results.push(result);console.log(name+': '+(r.status===0?'PASS':'FAIL'));
+}
+run('integrity',['tools/check-handoff.mjs']);
+run('boundaries',['tools/check-boundaries.mjs']);
+run('boundary-tests',['--test','--test-reporter=tap','tools/boundaries.test.mjs']);
+run('production-boundary-tests',['--test','--test-reporter=tap','tools/production-boundaries.test.mjs']);
+run('implementation-state',['tools/check-implementation-state.mjs']);
+run('implementation-state-tests',['--test','--test-reporter=tap','tools/implementation-state.test.mjs']);
+run('ih005-decision-tests',['--test','--test-reporter=tap','tools/ih005-decision-state.test.mjs']);
+const repairFiles=fs.readdirSync(path.join(root,'executable-reference/repair')).filter(x=>x.endsWith('.ts')).map(x=>'executable-reference/repair/'+x);
+run('repair-tests',['--test','--test-reporter=tap',...repairFiles.filter(x=>x.endsWith('.test.ts'))]);
+const viewExamples=fs.readdirSync(path.join(root,'examples/view-contributions')).filter(x=>x.endsWith('.ts')).map(x=>'examples/view-contributions/'+x);
+const uiFiles=[...viewExamples,'examples/minimal-panel/panel-template.ts','examples/minimal-panel/test.ts','examples/parameter-widget-or-ui-contribution/contribution.ts','examples/parameter-widget-or-ui-contribution/test.ts','examples/editable-panel/panel.ts'];
+run('ui-example-tests',['--test','--test-reporter=tap',...uiFiles.filter(x=>x.endsWith('/test.ts')||x.endsWith('.test.ts'))]);
+run('repair-and-ui-typecheck',['executable-reference/node_modules/typescript/bin/tsc','--noEmit','--strict','--target','ES2023','--module','NodeNext','--moduleResolution','NodeNext','--allowImportingTsExtensions','--skipLibCheck','--types','node','--typeRoots','executable-reference/node_modules/@types',...repairFiles,...uiFiles]);
+const contractFiles=fs.readdirSync(path.join(root,'contracts')).filter(x=>x.endsWith('.ts')).map(x=>'contracts/'+x);
+const publicQualification=fs.readdirSync(path.join(root,'qualification')).filter(x=>x.endsWith('.ts')).map(x=>'qualification/'+x);
+run('public-surface-tests',['--test','--test-reporter=tap',...publicQualification.filter(x=>x.endsWith('.test.ts'))]);
+run('production-contract-tests',['--test','--test-reporter=tap',...contractFiles.filter(x=>x.endsWith('.test.ts'))]);
+run('new-contract-typecheck',['executable-reference/node_modules/typescript/bin/tsc','--noEmit','--strict','--target','ES2023','--module','NodeNext','--moduleResolution','NodeNext','--allowImportingTsExtensions','--skipLibCheck','--types','node','--typeRoots','executable-reference/node_modules/@types',...contractFiles,...publicQualification,'examples/module-localization/example.ts']);
+run('repair-integrity',['tools/check-repair.mjs']);
+run('second-review-integrity',['tools/check-second-review.mjs']);
+run('final-review-integrity',['tools/check-final-review-repair.mjs']);
+run('ih005-integrity',['tools/check-ih005.mjs']);
+if(!packageOnly)run('reference',['executable-reference/verify-reference.mjs']);
+const success=results.every(r=>r.exitCode===0&&(!r.counts||(r.counts.pass>0&&r.counts.skipped===0&&r.counts.fail===0&&r.counts.cancelled===0&&r.counts.todo===0)));
+const reference=!packageOnly&&results.find(r=>r.name==='reference')?.exitCode===0?JSON.parse(fs.readFileSync(path.join(root,'executable-reference/evidence/PACKAGE_VALIDATION.json'),'utf8')):null;
+const report={packageId:'IH-005',completedAt:new Date().toISOString(),runtime:process.version,platform:process.platform,mode:packageOnly?'package-only':'full-reference-and-package',status:success?(packageOnly?'PACKAGE_ONLY_PASS':'PASS'):'FAIL',verdictScope:'Executed checks only; not HANDOFF PASS. Independent re-review required.',results,referenceCounts:reference?.referenceCounts??null,nodeAndHostExampleCounts:reference?.exampleCounts??null,limits:['No production slice acceptance test was executed.','No true TD/native provider or physical-GPU compatibility claim.','Package-only mode does not rerun the copied reference and cannot establish full handoff verification.','Semantic ownership, extension clarity and fresh-context sufficiency require the separate human/agent review.']};
+fs.writeFileSync(path.join(out,'RUN_HANDOFF.json'),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify(report,null,2));process.exitCode=success?0:1;

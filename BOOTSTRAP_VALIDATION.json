@@ -1,0 +1,394 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "repository-bootstrap-validation",
+  "status": "PASS",
+  "recordedAt": "2026-10-01T23:07:06.422Z",
+  "scope": "Repository packaging verification only. Not production implementation, new architecture qualification, runtime Gate clearance, or slice authorization.",
+  "acceptedHandoff": {
+    "revision": "IH-005",
+    "path": "handoff/",
+    "indexedFiles": 411,
+    "totalFrozenFiles": 412,
+    "indexSha256": "b66c46c4ad12f85d7b70b177c79d7db57a80a6d8892a9287cf04fe007a020bbd",
+    "sourceByteEquality": 412,
+    "canonicalFilesModified": false,
+    "newHandoffRevisionCreated": false
+  },
+  "canonicalWritableFormat": "grape.document 2.0",
+  "legacyFormatPolicy": "grape.document 1.0 is recovery-readonly unless passed through an explicit supported converter.",
+  "readOnlyChecks": {
+    "status": "PASS",
+    "scope": "Read-only bootstrap/integrity/navigation and state checks, not full qualification or S01 authorization",
+    "checks": 464,
+    "errors": [],
+    "indexedFiles": 411,
+    "frozenFiles": 412,
+    "acceptedRevision": "IH-005",
+    "canonicalFormat": "grape.document 2.0",
+    "currentState": "not-started",
+    "activeSlices": [],
+    "currentRecordValidation": "CURRENT_RECORD_VALID",
+    "commands": [
+      {
+        "command": "node handoff/tools/check-handoff.mjs",
+        "exitCode": 0,
+        "status": "PASS",
+        "checks": 9361,
+        "errors": []
+      },
+      {
+        "command": "node handoff/tools/check-ih005.mjs --verify-index",
+        "exitCode": 0,
+        "status": "PASS",
+        "checks": 469,
+        "errors": []
+      },
+      {
+        "command": "node handoff/tools/check-repair.mjs",
+        "exitCode": 0,
+        "status": "PASS",
+        "checks": 103,
+        "errors": []
+      },
+      {
+        "command": "node handoff/tools/check-second-review.mjs",
+        "exitCode": 0,
+        "status": "PASS",
+        "checks": 266,
+        "errors": []
+      },
+      {
+        "command": "node handoff/tools/check-final-review-repair.mjs",
+        "exitCode": 0,
+        "status": "PASS",
+        "checks": 36,
+        "errors": []
+      },
+      {
+        "command": "node handoff/tools/check-implementation-state.mjs",
+        "exitCode": 0,
+        "status": "TEMPLATE_VALID",
+        "errors": []
+      },
+      {
+        "command": "node handoff/tools/check-implementation-state.mjs --current",
+        "exitCode": 0,
+        "status": "CURRENT_RECORD_VALID",
+        "errors": []
+      }
+    ]
+  },
+  "qualificationReplay": {
+    "status": "PASS",
+    "command": "node tools/verify-handoff.mjs",
+    "isolation": "Fresh byte-copy in OS temporary storage outside repository; no hardlinks or writes to frozen baseline.",
+    "dependencyMode": "Explicit existing locked tooling copied into disposable staging; explicit Playwright/Edge provider.",
+    "counts": {
+      "tests": 420,
+      "pass": 420,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "steps": [
+      {
+        "name": "integrity",
+        "exitCode": 0
+      },
+      {
+        "name": "boundaries",
+        "exitCode": 0
+      },
+      {
+        "name": "boundary-tests",
+        "exitCode": 0,
+        "counts": {
+          "tests": 13,
+          "pass": 13,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      },
+      {
+        "name": "production-boundary-tests",
+        "exitCode": 0,
+        "counts": {
+          "tests": 19,
+          "pass": 19,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      },
+      {
+        "name": "implementation-state",
+        "exitCode": 0
+      },
+      {
+        "name": "implementation-state-tests",
+        "exitCode": 0,
+        "counts": {
+          "tests": 17,
+          "pass": 17,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      },
+      {
+        "name": "ih005-decision-tests",
+        "exitCode": 0,
+        "counts": {
+          "tests": 9,
+          "pass": 9,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      },
+      {
+        "name": "repair-tests",
+        "exitCode": 0,
+        "counts": {
+          "tests": 88,
+          "pass": 88,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      },
+      {
+        "name": "ui-example-tests",
+        "exitCode": 0,
+        "counts": {
+          "tests": 9,
+          "pass": 9,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      },
+      {
+        "name": "repair-and-ui-typecheck",
+        "exitCode": 0
+      },
+      {
+        "name": "public-surface-tests",
+        "exitCode": 0,
+        "counts": {
+          "tests": 26,
+          "pass": 26,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      },
+      {
+        "name": "production-contract-tests",
+        "exitCode": 0,
+        "counts": {
+          "tests": 30,
+          "pass": 30,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      },
+      {
+        "name": "new-contract-typecheck",
+        "exitCode": 0
+      },
+      {
+        "name": "repair-integrity",
+        "exitCode": 0
+      },
+      {
+        "name": "second-review-integrity",
+        "exitCode": 0
+      },
+      {
+        "name": "final-review-integrity",
+        "exitCode": 0
+      },
+      {
+        "name": "ih005-integrity",
+        "exitCode": 0
+      },
+      {
+        "name": "reference",
+        "exitCode": 0
+      }
+    ],
+    "referenceCounts": {
+      "tests": 201,
+      "pass": 201,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "nodeAndHostExampleCounts": {
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "runtime": "v25.5.0",
+    "platform": "win32",
+    "browser": {
+      "name": "playwright",
+      "version": "1.62.1",
+      "channel": "msedge",
+      "observed": [
+        {
+          "browser": "154.0.4258.48",
+          "rendered": [
+            [
+              102,
+              102,
+              0,
+              255
+            ],
+            [
+              102,
+              102,
+              102,
+              102
+            ],
+            [
+              102,
+              102,
+              0,
+              255
+            ],
+            [
+              51,
+              51,
+              51,
+              255
+            ],
+            [
+              51,
+              102,
+              153,
+              255
+            ]
+          ],
+          "invalidRejected": true,
+          "overflowProbe": {
+            "input": 1e+100,
+            "compiled": true,
+            "compilerLog": "WARNING: 0:4: '1e100' : Float overflow\\n"
+          },
+          "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "renderer": "WebKit WebGL",
+          "backend": "ANGLE SwiftShader via headless Edge; not native TD"
+        }
+      ]
+    },
+    "sourceAfterReplay": "PASS",
+    "installerBranchesExecuted": false,
+    "installerQualificationLimit": "--install-tools / --install-browser network acquisition branches were inspected, not executed in this packaging run. README provides their explicit fresh-environment invocation; missing tools/browser cannot produce full PASS.",
+    "rawReportHashes": {
+      "replaySummary": "bf78c0c1b6baca1a13b82f88e8cac880af9fe1c822a450ce5c53090d5c2b3099",
+      "runHandoff": "42fc9dda9a1b1a9f780870cc92a58154f2891dda225ecbffb583c68869677305",
+      "referenceValidation": "f85a2e7ed0c4c4a7b79f822fdb357af4678772aaa449a2af0a8420f0ffcae8cb"
+    }
+  },
+  "bootstrapNegativeTests": {
+    "command": "node --test tools/verify-bootstrap.test.mjs",
+    "tests": 9,
+    "pass": 9,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "todo": 0,
+    "cases": [
+      "BOOT01 valid baseline/current record",
+      "BOOT02 frozen-file tampering",
+      "BOOT03 unindexed files",
+      "BOOT04 wrong acceptance/index binding",
+      "BOOT05 wrong current role",
+      "BOOT06 invented progress",
+      "BOOT07 invalid started state",
+      "BOOT08 inherited decision duplication and lifetime Gate preservation",
+      "BOOT09 isolated staging byte copies"
+    ]
+  },
+  "gitCheckout": {
+    "status": "PASS",
+    "gitVersion": "git version 2.52.0.windows.1",
+    "coreAutocrlf": true,
+    "frozenTrackedFiles": 412,
+    "checkoutByteEquality": 412,
+    "ignoredFixturePaths": [
+      "node_modules/probe.js",
+      ".verification/work/probe.txt",
+      ".cache/probe",
+      ".env",
+      ".env.local",
+      "secrets/probe",
+      "credentials/probe"
+    ],
+    "repositoryInitializedInsideBundle": false,
+    "scope": "Temporary staging/index checkout only, no commit, remote or production implementation",
+    "rawReportSha256": "44806cb89d7d2dfaee128a7110ae2fde7e71ed9b2e166c374f5d92d11f8fd671"
+  },
+  "freshRootReview": {
+    "result": "PASS",
+    "method": "Read-only peer review restricted to the new repository and its verification commands.",
+    "findings": [],
+    "outsideRepositoryArchitectureInformationRequired": "NONE",
+    "requiredNavigation": [
+      "accepted baseline and current format",
+      "mutable state and slice authorization",
+      "inherited decisions and unresolved Gates",
+      "validation and immutable subtree",
+      "ordinary production paths and conflict escalation"
+    ]
+  },
+  "initialImplementationState": {
+    "status": "not-started",
+    "authorizedSlices": [],
+    "activeSlices": [],
+    "completedSlices": [],
+    "implementationBaseline": null,
+    "build": null,
+    "acceptedEvidence": [],
+    "newDecisionReferences": [],
+    "inheritedDecision": "DEC-GRAPE-001",
+    "mixedHistory": "DEFERRED_BY_PRODUCT_DECISION",
+    "s01Authorized": false,
+    "productionImplementationStarted": false
+  },
+  "preservation": {
+    "canonicalGraphOwnership": true,
+    "applicationPanelCommandAuthority": true,
+    "domainSeparatedHistory": true,
+    "runtimeObservationsDoNotPopulateGraphHistory": true,
+    "lifetimeAndEpochFencing": true,
+    "receiptsAndCAS": true,
+    "conditionalWriteAndDivergence": true,
+    "unresolvedRuntimeGatesRetained": true,
+    "rootAndToolMembershipChecked": true,
+    "noDependenciesCachesSecretsOrScratchBundled": true
+  },
+  "evidenceBoundary": [
+    "Independent targeted PASS is the Human Owner-reported accepted baseline, recorded separately in HANDOFF_ACCEPTANCE.json; no missing independent report or review timestamp was invented.",
+    "All original indexed Handoff evidence remains included unchanged. New local replay workspaces and raw scratch logs are intentionally not bundled; compact observed results are recorded here and the replay is reproducible.",
+    "This Windows/Edge/SwiftShader replay does not prove Linux/Chromium, native TouchDesigner, physical GPU, TOE/TOX, or cross-device compatibility. Existing Gates remain unchanged.",
+    "No production acceptance evidence has been inserted into mutable implementation-state.json. Packaging PASS does not authorize S01."
+  ]
+}

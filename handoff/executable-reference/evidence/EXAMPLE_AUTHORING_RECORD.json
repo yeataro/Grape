@@ -1,0 +1,11 @@
+{
+  "scope": "Handoff sample authoring, not an architecture change or legacy behavior finding",
+  "initialCommand": "node --test examples/minimal-node/example.test.ts examples/dynamic-interface-node/example.test.ts examples/minimal-host-adapter/example.test.ts",
+  "initialResult": { "tests": 7, "pass": 6, "fail": 1, "skipped": 0 },
+  "failedCase": "HANDOFF-DYNAMIC-01",
+  "observedFailure": "The example read node.output('out').type, yielding undefined instead of vec2.",
+  "cause": "Example used a property not present in the sealed Port API.",
+  "correction": "Read node.output('out').spec.type using the existing AC-002 interface.",
+  "referenceArchitectureChanged": false,
+  "verifiedFinalResult": "PACKAGE_VALIDATION.json: example tests 7/7 and strict example typecheck exit 0"
+}

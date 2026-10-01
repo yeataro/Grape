@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "recordRole": "adoption-fragment-not-current-state",
+  "destinationSchemaVersion": 2,
+  "destination": "implementation-state.json",
+  "sourceHandoffRevision": "IH-004",
+  "instruction": "At authorized production registration, merge by identity without replacing unrelated state. Add accepted ID to adopted baseline decisionReferenceIds. Do not invent project, implementation revision, evidence or started status. Product policy is already accepted/effective now.",
+  "decisionReferences": [
+    {
+      "id": "DEC-GRAPE-001",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "Initial product/current planned S08/S09 and release scope until explicitly superseded by a product decision. Does not authorize starting any slice.",
+      "reason": "Owner defers coordinated mixed History. Domain-separated Undo, CAS, authority, lifetime protections and explicit divergence remain required.",
+      "file": "implementation-decisions/DEC-GRAPE-001.json",
+      "sha256": "c16771a0d2451deb48d1920f4d9b75d0eb54bfdc8cba1f7c6b8d034da342ea02",
+      "sliceIds": [
+        "S08",
+        "S09"
+      ],
+      "gateIds": [
+        "G-MIXED-HISTORY"
+      ],
+      "evidenceIds": [],
+      "acceptedBy": "Product owner — explicit user decision in this conversation",
+      "acceptedAt": "2026-10-01T22:03:26.000Z"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gateId": "G-MIXED-HISTORY",
+      "scope": "Initial product/current S08/S09 and release scope: coordinated chronological Graph/native/live Undo only.",
+      "disposition": "deferred",
+      "reason": "DEC-GRAPE-001 — accepted product DEFER, not PASS/resolution. LC-UI-100 effective scope is DEFERRED_BY_PRODUCT_DECISION.",
+      "residualScope": "Retain legacy oracle and deferred AT-S09-03. Its receipt/lifetime/Reload subclauses remain required as AT-DEC-GRAPE-001-07/09/10, G-LU-UI-009, G-LU-UI-008, LC-UI-101 and AT-S08-03. Other Gates and native evidence remain. No coordination implementation/flag is authorized.",
+      "evidenceIds": []
+    }
+  ],
+  "addToImplementationBaselineDecisionReferenceIds": [
+    "DEC-GRAPE-001"
+  ],
+  "scopeOverlay": "implementation-decisions/DEC-GRAPE-001.json",
+  "acceptanceExecution": "NOT_EXECUTED; accepted owner policy is not accepted implementation evidence"
+}

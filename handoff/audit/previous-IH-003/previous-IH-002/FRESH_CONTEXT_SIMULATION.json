@@ -1,0 +1,497 @@
+{
+  "schemaVersion": 2,
+  "simulationId": "FCS-IH-002",
+  "packageId": "IH-002",
+  "status": "READY FOR INDEPENDENT RE-REVIEW",
+  "selfCheckResult": "ANSWERS_LOCATED_WITH_EXPLICIT_LIMITS",
+  "method": {
+    "type": "package-only-constrained-self-check",
+    "blind": false,
+    "independent": false,
+    "reviewerPriorInvolvement": "參與N01–N03、部分契約整理及限定adversarial review，不是未參與作者的驗收。",
+    "inputBoundary": "Only current implementation-handoff-r2 files used as answer evidence; no chat history or Legacy source required.",
+    "activity": "核對canonical specs、repair public contracts、canonical examples與machine locators；不重新執行或取代完整regression。",
+    "productionTestsExecuted": false,
+    "authorization": "No S01 or production implementation authorized."
+  },
+  "summary": {
+    "originalQuestions": 16,
+    "repairQuestions": 2,
+    "answersLocated": 18,
+    "answersRequiringChatOrLegacy": 0,
+    "unresolvedCanonicalContradictionsFoundInThisBoundedRead": 0,
+    "openQuarantinedSourceConflicts": [
+      "HC-001"
+    ],
+    "independentVerdict": "NOT_ISSUED",
+    "runtimeGatesClosedByThisSelfCheck": 0
+  },
+  "questions": [
+    {
+      "id": "FC-01",
+      "question": "產品是什麼？",
+      "result": "ANSWER_LOCATED",
+      "answer": "Grape 是以可保存 Shader Graph 作品為中心的節點編輯產品；建立來源／節點、連線、調參、查看 GLSL、保存／重載，並可選擇交付外部 Host。Graph 包含 Stage，不以每 Stage 建一份作品。",
+      "evidence": [
+        {
+          "path": "00_README.md",
+          "section": "產品定位"
+        },
+        {
+          "path": "01_PRODUCT_MODEL.md",
+          "section": "作品與編輯"
+        }
+      ]
+    },
+    {
+      "id": "FC-02",
+      "question": "為什麼重構？",
+      "result": "ANSWER_LOCATED",
+      "answer": "保留產品 observable intent，明確拆開作品、編輯狀態、UI、產碼與外部執行環境；普通擴充及三種部署不應迫使不相關 core 改動。Legacy 是行為 oracle，不是 ownership 或模組切分指令。",
+      "evidence": [
+        {
+          "path": "00_README.md",
+          "section": "重構目的"
+        },
+        {
+          "path": "11_LEGACY_COMPATIBILITY.md",
+          "section": "Legacy 的角色"
+        },
+        {
+          "path": "03_RESPONSIBILITY_AND_DEPENDENCY.md",
+          "section": "architecture violations"
+        }
+      ]
+    },
+    {
+      "id": "FC-03",
+      "question": "Canonical Graph 在哪？",
+      "result": "ANSWER_LOCATED",
+      "answer": "Application documents 持有開啟的 Graph；Graph 擁有 Node/Edge/resources、模型值及 Graph History。GraphDocument 是快照；Context、Panel、Host 不持第二份可寫真值。CQ 相反摘要隔離於 sourceSummary；HC-001仍未修訂來源，不能當作 Host ownership 例外。",
+      "evidence": [
+        {
+          "path": "02_ARCHITECTURE_SPEC.md",
+          "section": "§1"
+        },
+        {
+          "path": "03_RESPONSIBILITY_AND_DEPENDENCY.md",
+          "section": "Application documents／Graph rows"
+        },
+        {
+          "path": "audit/HANDOFF_CONFLICTS.md",
+          "section": "HC-001"
+        }
+      ]
+    },
+    {
+      "id": "FC-04",
+      "question": "Host 是什麼角色？",
+      "result": "ANSWER_LOCATED",
+      "answer": "Host/Target 是外部 execution/integration 領域，擁有 runtime artifact、actual values、native resources；Binding 持 identity/authority/session/receipt/mirror。回讀不直接改 Graph default；已交付文件副本不是工作中文件真值。",
+      "evidence": [
+        {
+          "path": "06_HOST_INTEGRATION.md",
+          "section": "Host 可以做什麼，不代表它擁有什麼"
+        },
+        {
+          "path": "01_PRODUCT_MODEL.md",
+          "section": "兩條參數路徑"
+        }
+      ]
+    },
+    {
+      "id": "FC-05",
+      "question": "Parameter 修改走哪條 responsibility path？",
+      "result": "ANSWER_LOCATED",
+      "answer": "Workspace 先給 effective Context/scope；欄位經 ScopedParameterTarget.openRouted，從同一 target 取得 spec/value/port/type/link。Widget 只持文字和 edit token；commit驗target/token，再委派 Parameter→Graph Draft→codec/schema/reconcile/diagnostics→原子發布，Context 投影先於外部通知；Operation 分組 History，Updates 另排產碼。Host live值使用独立service/CAS/receipt。",
+      "evidence": [
+        {
+          "path": "04_EXTENSION_MODEL.md",
+          "section": "§5"
+        },
+        {
+          "path": "05_DATA_AND_LIFECYCLE.md",
+          "section": "§1、§6"
+        },
+        {
+          "path": "executable-reference/repair/SCOPED_PARAMETER_CONTRACT.md",
+          "section": "Responsibilities and ordering"
+        },
+        {
+          "path": "examples/parameter-widget-or-ui-contribution/contribution.ts",
+          "section": "PercentFieldController"
+        }
+      ]
+    },
+    {
+      "id": "FC-06",
+      "question": "如何新增 Node？",
+      "result": "ANSWER_LOCATED",
+      "answer": "提供精確 NodeType ref、state codec、initialize/ports/parameters/validate/emit，收在 NodeModule；Registry.register 原子登記，pin 成 DefinitionSet，再由 Graph 建實例。state/值歸 Graph，模組只提供能力；沿 minimal-node 模板，不改 core node-name switch。",
+      "evidence": [
+        {
+          "path": "04_EXTENSION_MODEL.md",
+          "section": "§2"
+        },
+        {
+          "path": "executable-reference/contracts.ts",
+          "section": "NodeModule、NodeType"
+        },
+        {
+          "path": "examples/minimal-node/example.ts",
+          "section": "minimalNodeModule"
+        },
+        {
+          "path": "examples/minimal-node/example.test.ts",
+          "section": "直接案例"
+        }
+      ]
+    },
+    {
+      "id": "FC-07",
+      "question": "如何新增 Dynamic Node？",
+      "result": "ANSWER_LOCATED",
+      "answer": "同一 NodeType 契約，以可編碼 mode/state 決定完整 ports/parameters，stable key 維持身份。變更與 edges/losses/diagnostics 同批發布；合法不相容模式依 detach/preserve 政策，Undo精確恢復。範例 menu options 是明示 sample convention，不承諾完整 enum SDK。",
+      "evidence": [
+        {
+          "path": "04_EXTENSION_MODEL.md",
+          "section": "§3"
+        },
+        {
+          "path": "examples/dynamic-interface-node/README.md",
+          "section": "Explicit menu descriptor"
+        },
+        {
+          "path": "examples/dynamic-interface-node/example.ts",
+          "section": "pack"
+        },
+        {
+          "path": "02_ARCHITECTURE_SPEC.md",
+          "section": "§3、§4"
+        }
+      ]
+    },
+    {
+      "id": "FC-08",
+      "question": "如何新增 Panel？",
+      "result": "ANSWER_LOCATED",
+      "answer": "實作 Panel 私有 viewState、receive/setVisible/canClose/dispose，匯出 PanelType，再 workspace.register/open。共同 PanelWorkspace 負責 registry、targeting/routing、restore、placement、close preflight 和 placeholder；ordinary Panel 不另造 host/resolver/central kind branch。",
+      "evidence": [
+        {
+          "path": "04_EXTENSION_MODEL.md",
+          "section": "§4"
+        },
+        {
+          "path": "executable-reference/repair/PANEL_COMPOSITION_CONTRACT.md",
+          "section": "Public roles、register/open"
+        },
+        {
+          "path": "examples/minimal-panel/README.md",
+          "section": "共同公共契約"
+        },
+        {
+          "path": "examples/minimal-panel/panel-template.ts",
+          "section": "SelectionSummaryPanel／selectionSummaryType"
+        }
+      ]
+    },
+    {
+      "id": "FC-09",
+      "question": "UI contribution 怎麼加入？",
+      "result": "ANSWER_LOCATED",
+      "answer": "ScopedParameterWidgets.register 登記 identity、supported predicate與immutable projection，不把 Graph/變更函式交給Widget。controller借effective Context、持target lease與text draft，同lease投影/commit；一般UI沿WidgetRegistry/Actions。失敗fallback保留描述和值；root/nested用同一controller。",
+      "evidence": [
+        {
+          "path": "04_EXTENSION_MODEL.md",
+          "section": "§5"
+        },
+        {
+          "path": "examples/parameter-widget-or-ui-contribution/README.md",
+          "section": "scoped widget pattern"
+        },
+        {
+          "path": "examples/parameter-widget-or-ui-contribution/contribution.ts",
+          "section": "registerPercentWidget／PercentFieldController"
+        }
+      ]
+    },
+    {
+      "id": "FC-10",
+      "question": "Generator/backend 怎麼擴充？",
+      "result": "ANSWER_LOCATED",
+      "answer": "GenerationProfile 決定 GLSL shell/version/capabilities；NodeTypes 定操作語意。生成讀固定snapshot/definitions，回artifact/diagnostics/provenance。已驗GLSL seam，沒有 arbitrary-language replacement／語言中立IR承諾；TD/GPU真相容仍Gate，deployment不是shader語言選項。",
+      "evidence": [
+        {
+          "path": "04_EXTENSION_MODEL.md",
+          "section": "§6"
+        },
+        {
+          "path": "02_ARCHITECTURE_SPEC.md",
+          "section": "§5"
+        },
+        {
+          "path": "07_DEPLOYMENT_MODEL.md",
+          "section": "兩種profile不同軸"
+        },
+        {
+          "path": "12_DECISION_LOG.md",
+          "section": "D-N02"
+        }
+      ]
+    },
+    {
+      "id": "FC-11",
+      "question": "如何 save/reload？",
+      "result": "ANSWER_LOCATED",
+      "answer": "Save同步捕捉已發布完整document，再await storage；只ACK該snapshot，晚結果不清後續dirty。Error圖和missing module opaque records仍可保存；download不是durable ACK。Reload parse/pin/validate後新loadId、空History；import accept是保留runtime identity的可Undo replacement。Layout另存。",
+      "evidence": [
+        {
+          "path": "05_DATA_AND_LIFECYCLE.md",
+          "section": "§2"
+        },
+        {
+          "path": "02_ARCHITECTURE_SPEC.md",
+          "section": "§6"
+        },
+        {
+          "path": "executable-reference/CORE_API_CONTRACTS.md",
+          "section": "保存與生命期"
+        }
+      ]
+    },
+    {
+      "id": "FC-12",
+      "question": "如何 attach Host？",
+      "result": "ANSWER_LOCATED",
+      "answer": "Discovery給候選，驗Host/Target/incarnation/能力與authority後建Binding lease/session；publish/inputs/native/preview各走capability。receiver提交前重新fence；不確定commit進indeterminate，待readback/recovery。重連新epoch不盲重放side effects；既有Target的live/preview不要求先Apply新shader。",
+      "evidence": [
+        {
+          "path": "06_HOST_INTEGRATION.md",
+          "section": "身分與權限、Publication、Preview/reconnect/readback"
+        },
+        {
+          "path": "04_EXTENSION_MODEL.md",
+          "section": "§7"
+        },
+        {
+          "path": "examples/minimal-host-adapter/README.md",
+          "section": "adapter example"
+        }
+      ]
+    },
+    {
+      "id": "FC-13",
+      "question": "Static Web／Node／Electron 差在哪？",
+      "result": "ANSWER_LOCATED",
+      "answer": "共享application/core/modules契約；差bootstrap、storage、discovery/launch、transport/bridge、permission和作用設備。Static無任意目錄/LAN掃描假設；Node server不等於用戶TD所在機器；Electron增受限adapter/bridge，不把fs/IPC/isElectron塞進Graph/Parameter/Generator。",
+      "evidence": [
+        {
+          "path": "07_DEPLOYMENT_MODEL.md",
+          "section": "profiles表、Node→Electron"
+        },
+        {
+          "path": "03_RESPONSIBILITY_AND_DEPENDENCY.md",
+          "section": "dependency matrix"
+        }
+      ]
+    },
+    {
+      "id": "FC-14",
+      "question": "第一個 slice 是什麼？現在能開始嗎？",
+      "result": "ANSWER_LOCATED",
+      "answer": "S01是真UI的Host-free create Graph→Node→Parameter→Edge→GLSL→Undo/Redo→save/reload，含兩Context共用模型。本輪只Independent Re-review，未授權S01。未來授權後建production root；包內implementation-state.json是not-started範本，唯一mutable locator在包上一層同名檔，project.root指向checkout。",
+      "evidence": [
+        {
+          "path": "START_HERE_PROMPT.md",
+          "section": "目前任務與未來授權"
+        },
+        {
+          "path": "08_IMPLEMENTATION_PLAN.md",
+          "section": "Current implementation入口、S01"
+        },
+        {
+          "path": "09_ACCEPTANCE_AND_CONFORMANCE.md",
+          "section": "S01 planned acceptance"
+        },
+        {
+          "path": "implementation-state.json",
+          "section": "唯讀範本"
+        },
+        {
+          "path": "tools/check-implementation-state.mjs",
+          "section": "--current"
+        }
+      ]
+    },
+    {
+      "id": "FC-15",
+      "question": "哪些 Gate 現在不能跨過？",
+      "result": "ANSWER_LOCATED",
+      "answer": "依每Gate scope/earliestRequiredPhase，不以整slice一刀切。33原UNKNOWN、產品decisions、revision→pin、mixed History、真TD rollback/readback、GPU/browser/device、TOE/TOX與deployment證據不可假設。B01/M01為contract-qualified-runtime-unverified，不是production UI通過；HC-001源摘要隔離仍在。",
+      "evidence": [
+        {
+          "path": "10_KNOWN_GATES.md",
+          "section": "原UNKNOWN、產品decision、額外Gates"
+        },
+        {
+          "path": "data/gates.json",
+          "section": "45 Gate records"
+        },
+        {
+          "path": "08_IMPLEMENTATION_PLAN.md",
+          "section": "P/S/I/R停止線"
+        },
+        {
+          "path": "audit/HANDOFF_CONFLICTS.md",
+          "section": "HC-001"
+        }
+      ]
+    },
+    {
+      "id": "FC-16",
+      "question": "哪些 architecture violation 必須拒絕？",
+      "result": "ANSWER_LOCATED",
+      "answer": "第二份canonical parameter/Graph、Generator改模型、module改別人私有state、Host接管文件、Panel穿透workspace、core依type名硬分支、平台API污染core、普通extension需改不相關core、root projection配nested write、UI補resource lookup均拒絕。Owner-local guards不等於sandbox；可信callbacks的只讀義務須review。",
+      "evidence": [
+        {
+          "path": "03_RESPONSIBILITY_AND_DEPENDENCY.md",
+          "section": "architecture violations"
+        },
+        {
+          "path": "02_ARCHITECTURE_SPEC.md",
+          "section": "§9 guard scope"
+        },
+        {
+          "path": "09_ACCEPTANCE_AND_CONFORMANCE.md",
+          "section": "必守的組合反例"
+        },
+        {
+          "path": "data/invariants.json",
+          "section": "不變量"
+        }
+      ]
+    },
+    {
+      "id": "FC-17",
+      "question": "普通 Panel 的 route/restore/move/close 能否只靠 public contract 接起來？",
+      "result": "ANSWER_LOCATED",
+      "answer": "固定順序register→factory→identity check→restoreViewState→visibility→Tab attach→resolve→receive。ContextDirectory/targeting service處理follow/group/followCanvas/pin；pin由服務持獨立scope Context、同Graph，不受來源Canvas導航影響。move保instance/draft/context；retarget撤舊lease，accept擋過期async。restore先驗layout，缺module/version/ref保opaque placeholder可retry；跨reload由application RestoreResolver映射，普通Panel不自造。close先origin/gesture、再canClose，成功撤lease/Tab/provider後dispose，不銷毀借用Graph/Context。",
+      "evidence": [
+        {
+          "path": "executable-reference/repair/PANEL_COMPOSITION_CONTRACT.md",
+          "section": "register/open、routing/pin、move/close、save/restore/retry"
+        },
+        {
+          "path": "examples/minimal-panel/README.md",
+          "section": "ordinary workspace"
+        },
+        {
+          "path": "examples/minimal-panel/test.ts",
+          "section": "HP01–04"
+        },
+        {
+          "path": "executable-reference/repair/public-panel-workspace.test.ts",
+          "section": "B01 cases"
+        },
+        {
+          "path": "executable-reference/repair/panel-inspector.test.ts",
+          "section": "BM組合"
+        }
+      ]
+    },
+    {
+      "id": "FC-18",
+      "question": "root/nested Inspector 是否在同一 logical target 讀、投影和寫？",
+      "result": "ANSWER_LOCATED",
+      "answer": "Target綁Graph load、Context、Stage、完整occurrence path、Node/Parameter key，校驗definition chain；capture一次給spec/value/port/type/link，projectTarget/commit同lease。root/nested ID碰撞不回退；shared兩occurrence各有view lease而值共享。navigation ABA、stale path/load/ancestor替換、dispose使lease終止；type/interface/link/value變化讓舊token stale，Undo不復活。dispose後不再發舊updated；copy-on-write成功可使舊lease失效，不得重播已成功write。",
+      "evidence": [
+        {
+          "path": "executable-reference/repair/SCOPED_PARAMETER_CONTRACT.md",
+          "section": "Public surface、Responsibilities、Identity/sharing、Direct validation"
+        },
+        {
+          "path": "executable-reference/repair/scoped-parameter.test.ts",
+          "section": "M01-RED、M01-01–16"
+        },
+        {
+          "path": "examples/parameter-widget-or-ui-contribution/test.ts",
+          "section": "HW04/HW05"
+        },
+        {
+          "path": "executable-reference/repair/panel-inspector.test.ts",
+          "section": "BM組合"
+        },
+        {
+          "path": "04_EXTENSION_MODEL.md",
+          "section": "§5"
+        }
+      ]
+    }
+  ],
+  "remainingReviewBoundaries": [
+    {
+      "id": "FCS-L01",
+      "status": "OPEN_QUARANTINED",
+      "text": "HC-001來源摘要仍未正式修訂；本自查未關閉G-HANDOFF-CQ-OWNERSHIP。",
+      "paths": [
+        "audit/HANDOFF_CONFLICTS.md",
+        "data/handoff-conflicts.json"
+      ]
+    },
+    {
+      "id": "FCS-L02",
+      "status": "INDEPENDENT_REVIEW_REQUIRED",
+      "text": "B01/M01是本修訂public contracts及additive reference；定位答案不代替獨立review或把prototype認證為production。",
+      "paths": [
+        "executable-reference/repair/PANEL_COMPOSITION_CONTRACT.md",
+        "executable-reference/repair/SCOPED_PARAMETER_CONTRACT.md",
+        "audit/FINAL_HANDOFF_AUDIT.md"
+      ]
+    },
+    {
+      "id": "FCS-L03",
+      "status": "EXPLICIT_CONTRACT_LIMIT",
+      "text": "Graph守自身publication，Context/workspace守自身API reentry；獨立Context/dispose通知沒有全域Graph lock。可信callbacks須只讀，不是惡意plugin安全隔離。",
+      "paths": [
+        "02_ARCHITECTURE_SPEC.md",
+        "03_RESPONSIBILITY_AND_DEPENDENCY.md"
+      ]
+    },
+    {
+      "id": "FCS-L04",
+      "status": "GATED",
+      "text": "TD/實體GPU/browser/IME/focus/touch、TOE/TOX及production renderer證據不由本自查提供。UI_SPEC/schematics是設計參照，Legacy screenshots是現況補充，不證明互動。",
+      "paths": [
+        "10_KNOWN_GATES.md",
+        "ui-reference/UI_SPEC.md",
+        "ui-reference/SCREEN_INDEX.md",
+        "ui-reference/legacy-screenshots/README.md"
+      ]
+    },
+    {
+      "id": "FCS-L05",
+      "status": "EXPLICIT_CHECKER_LIMIT",
+      "text": "進度checker驗shape/引用/hash，不能認證acceptedBy真偽或Gate證據足夠；外部current未登錄不開始production，封存audit不等於產品進度。",
+      "paths": [
+        "08_IMPLEMENTATION_PLAN.md",
+        "tools/check-implementation-state.mjs",
+        "implementation-state.json"
+      ]
+    },
+    {
+      "id": "FCS-L06",
+      "status": "OUTSIDE_COMMITMENT",
+      "text": "GLSL profile seam不包含任意程式語言backend replacement，不得從backend名詞推論已解多語言產碼。",
+      "paths": [
+        "04_EXTENSION_MODEL.md",
+        "07_DEPLOYMENT_MODEL.md"
+      ]
+    }
+  ],
+  "regressionEvidence": "audit/FINAL_HANDOFF_AUDIT.md and audit/evidence/RUN_HANDOFF.json record separately executed checks; this self-check adds no regression claim.",
+  "priorEvidence": {
+    "markdown": "audit/previous-IH-001/FRESH_CONTEXT_SIMULATION.md",
+    "json": "audit/previous-IH-001/FRESH_CONTEXT_SIMULATION.json",
+    "meaning": "Historical IH-001 self-check PASS is not this revision's verdict."
+  }
+}

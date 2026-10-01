@@ -1,0 +1,74 @@
+Observed pre-fix execution, transcribed from tool output without re-running old code.
+Working directory: implementation-handoff-r4
+Command: node --test --test-name-pattern VA09 qualification/view-mount-adversarial.test.ts
+Exit code: 1
+
+✖ VA09 pending UI draft can be cancelled by contribution cleanup without model edit authority (18.2094ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 123.2521
+
+✖ failing tests:
+
+test at qualification\view-mount-adversarial.test.ts:138:1
+✖ VA09 pending UI draft can be cancelled by contribution cleanup without model edit authority (18.2094ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  '12' !== undefined
+
+      at TestContext.<anonymous> (file:///C:/Users/user/Documents/Codex/2026-09-09/td/implementation-handoff-r4/qualification/view-mount-adversarial.test.ts:140:74)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.start (node:internal/test_runner/test:1006:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '12',
+    expected: undefined,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+Failure mechanism: ViewSession's guarded WidgetDraft.cancel required a live user-event scope.
+Contribution disposal ran after session revocation, so normal cleanup threw VIEW_EDIT_AUTHORITY
+and did not clear the pending UI draft. The model remained unchanged. The subsequent repair
+permits UI-only cancel during lifecycle cleanup; model commit remains event/scoped-target guarded.
+
+Other first-attempt test harness issue (not an architecture failure): the initial authored
+test file had a missing object closing brace; Node rejected its syntax before any test ran.
+That fixture syntax was corrected before the eight original adversarial cases passed.
+
+The surface-acquisition/move callback hazard and mismatched widget projection were reported
+from inspection and fixed before their direct cases ran; no pre-fix failing execution is claimed.
+
+Second observed pre-fix failure:
+Command: node --test --test-name-pattern VA11 qualification/view-mount-adversarial.test.ts
+Exit code: 1
+
+✖ VA11 cleanup inside a user event cannot inherit the previous mount edit authority (16.0354ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 150.097
+
+test at qualification\view-mount-adversarial.test.ts:172:1
+  AssertionError [ERR_ASSERTION]: revocation occurs before cleanup even while caller event is active
+  1 !== 0
+  actual: 1
+  expected: 0
+  operator: strictEqual
+
+Failure mechanism: unmount called inside a live user-event callback revoked mountId before
+cleanup, but status stayed mounted and outer eventDepth stayed positive while cleanup ran.
+Widget command guard checked status/rendering/eventDepth without the revoked mount identity,
+so a cleanup callback reached the command. The counter records a command-authority probe,
+not a real TD or GPU side effect. Revocation must remove authority before any finalizer runs.

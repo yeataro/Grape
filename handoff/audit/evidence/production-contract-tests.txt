@@ -1,0 +1,190 @@
+TAP version 13
+# Subtest: DF01 production identity is product-owned, exact version and host-independent kind pin
+ok 1 - DF01 production identity is product-owned, exact version and host-independent kind pin
+  ---
+  duration_ms: 2.9814
+  type: 'test'
+  ...
+# Subtest: DF02 S01 detached snapshot save/reopen preserves IDs, values, dynamic state, port snapshots and ordered arrays
+ok 2 - DF02 S01 detached snapshot save/reopen preserves IDs, values, dynamic state, port snapshots and ordered arrays
+  ---
+  duration_ms: 1.018
+  type: 'test'
+  ...
+# Subtest: DF03 missing module payload roundtrips exactly and permits outer name/position edit without generation authority
+ok 3 - DF03 missing module payload roundtrips exactly and permits outer name/position edit without generation authority
+  ---
+  duration_ms: 1.0666
+  type: 'test'
+  ...
+# Subtest: DF04 unrecognized structural fields are never silently dropped by decode or encode
+ok 4 - DF04 unrecognized structural fields are never silently dropped by decode or encode
+  ---
+  duration_ms: 0.9504
+  type: 'test'
+  ...
+# Subtest: DF05 unknown future major/minor stay original readonly even if familiar-looking graph payload is invalid
+ok 5 - DF05 unknown future major/minor stay original readonly even if familiar-looking graph payload is invalid
+  ---
+  duration_ms: 0.1252
+  type: 'test'
+  ...
+# Subtest: DF06 legacy and experimental documents require explicit importer, never default canonical hydration
+ok 6 - DF06 legacy and experimental documents require explicit importer, never default canonical hydration
+  ---
+  duration_ms: 0.0799
+  type: 'test'
+  ...
+# Subtest: DF07 inert namespaced extensions preserve arbitrary JSON without executing it
+ok 7 - DF07 inert namespaced extensions preserve arbitrary JSON without executing it
+  ---
+  duration_ms: 0.8809
+  type: 'test'
+  ...
+# Subtest: DF08 duplicate JSON keys including escaped spelling are rejected with exact raw retained
+ok 8 - DF08 duplicate JSON keys including escaped spelling are rejected with exact raw retained
+  ---
+  duration_ms: 0.3843
+  type: 'test'
+  ...
+# Subtest: DF09 malformed identity, duplicate node/port IDs, and missing module exact pins reject instead of partial load
+ok 9 - DF09 malformed identity, duplicate node/port IDs, and missing module exact pins reject instead of partial load
+  ---
+  duration_ms: 0.7974
+  type: 'test'
+  ...
+# Subtest: DF10 model semantic errors remain preservable and are not claimed generation-valid by envelope parser
+ok 10 - DF10 model semantic errors remain preservable and are not claimed generation-valid by envelope parser
+  ---
+  duration_ms: 0.8174
+  type: 'test'
+  ...
+# Subtest: DF11 JSON shape safety: nonfinite/undefined/functions/cycles/custom prototypes are rejected on writing
+ok 11 - DF11 JSON shape safety: nonfinite/undefined/functions/cycles/custom prototypes are rejected on writing
+  ---
+  duration_ms: 0.9562
+  type: 'test'
+  ...
+# Subtest: DF12 parser limits are explicit per invocation, not silently truncated document-format ceilings
+ok 12 - DF12 parser limits are explicit per invocation, not silently truncated document-format ceilings
+  ---
+  duration_ms: 0.5013
+  type: 'test'
+  ...
+# Subtest: DF13 invalid version metadata rejects; decoder never rewrites version automatically
+ok 13 - DF13 invalid version metadata rejects; decoder never rewrites version automatically
+  ---
+  duration_ms: 0.6139
+  type: 'test'
+  ...
+# Subtest: DF14 unknown top-level/Stage/reference metadata fences editing, not just unknown Node fields
+ok 14 - DF14 unknown top-level/Stage/reference metadata fences editing, not just unknown Node fields
+  ---
+  duration_ms: 0.3312
+  type: 'test'
+  ...
+# Subtest: DF15 hidden hooks/accessors/custom arrays never execute or silently discard data
+ok 15 - DF15 hidden hooks/accessors/custom arrays never execute or silently discard data
+  ---
+  duration_ms: 0.21
+  type: 'test'
+  ...
+# Subtest: DF16 multiple exact module versions coexist; only duplicate exact pins reject
+ok 16 - DF16 multiple exact module versions coexist; only duplicate exact pins reject
+  ---
+  duration_ms: 0.6801
+  type: 'test'
+  ...
+# Subtest: DF17 authored resource metadata and complete port policy survive without abusing inert extensions
+ok 17 - DF17 authored resource metadata and complete port policy survive without abusing inert extensions
+  ---
+  duration_ms: 0.577
+  type: 'test'
+  ...
+# Subtest: DW01 connected nonidentity adaptation roundtrips through production wire then regenerates identically
+ok 18 - DW01 connected nonidentity adaptation roundtrips through production wire then regenerates identically
+  ---
+  duration_ms: 13.4555
+  type: 'test'
+  ...
+# Subtest: DW02 actual dynamic interface change creates typed detached Edge and removed-value losses; reload preserves inactive semantics
+ok 19 - DW02 actual dynamic interface change creates typed detached Edge and removed-value losses; reload preserves inactive semantics
+  ---
+  duration_ms: 6.6484
+  type: 'test'
+  ...
+# Subtest: DW03 repaired active path regenerates after reload while unresolved historical losses stay preserved
+ok 20 - DW03 repaired active path regenerates after reload while unresolved historical losses stay preserved
+  ---
+  duration_ms: 6.4843
+  type: 'test'
+  ...
+# Subtest: DW04 unknown adaptation subfield is recovery-readonly, never accepted as opaque JSON
+ok 21 - DW04 unknown adaptation subfield is recovery-readonly, never accepted as opaque JSON
+  ---
+  duration_ms: 1.7455
+  type: 'test'
+  ...
+# Subtest: DW05 unknown loss record and deeply nested detached Edge fields both fence editing
+ok 22 - DW05 unknown loss record and deeply nested detached Edge fields both fence editing
+  ---
+  duration_ms: 7.6704
+  type: 'test'
+  ...
+# Subtest: DW06 unknown recovery record/payload/port subfields fence editing and retain exact original text
+ok 23 - DW06 unknown recovery record/payload/port subfields fence editing and retain exact original text
+  ---
+  duration_ms: 10.9768
+  type: 'test'
+  ...
+# Subtest: DW07 known malformed adaptation/loss/recovery required shapes reject with untouched source
+ok 24 - DW07 known malformed adaptation/loss/recovery required shapes reject with untouched source
+  ---
+  duration_ms: 12.0789
+  type: 'test'
+  ...
+# Subtest: DW08 future wire schemas, codec versions, operations and payload discriminants are readonly, not guessed
+ok 25 - DW08 future wire schemas, codec versions, operations and payload discriminants are readonly, not guessed
+  ---
+  duration_ms: 10.0654
+  type: 'test'
+  ...
+# Subtest: DW09 opaque exact-owner recovery codec data and inert extensions preserve unknown data while envelope remains editable
+ok 26 - DW09 opaque exact-owner recovery codec data and inert extensions preserve unknown data while envelope remains editable
+  ---
+  duration_ms: 6.8033
+  type: 'test'
+  ...
+# Subtest: DW10 nested Node/Resource evidence reuses full structural validation and exact pins; duplicate evidence identities reject
+ok 27 - DW10 nested Node/Resource evidence reuses full structural validation and exact pins; duplicate evidence identities reject
+  ---
+  duration_ms: 8.2834
+  type: 'test'
+  ...
+# Subtest: DW11 unsupported grape.document 1.0 stays original readonly; no format-label rewrite migration
+ok 28 - DW11 unsupported grape.document 1.0 stays original readonly; no format-label rewrite migration
+  ---
+  duration_ms: 0.1243
+  type: 'test'
+  ...
+# Subtest: DW12 structural editable never grants generation authority to a semantically forged adaptation
+ok 29 - DW12 structural editable never grants generation authority to a semantically forged adaptation
+  ---
+  duration_ms: 1.8874
+  type: 'test'
+  ...
+# Subtest: DW13 coercible arrays are not string enums, including deeply preserved ports and references
+ok 30 - DW13 coercible arrays are not string enums, including deeply preserved ports and references
+  ---
+  duration_ms: 17.8935
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 220.0033

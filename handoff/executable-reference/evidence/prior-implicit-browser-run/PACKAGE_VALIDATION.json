@@ -1,0 +1,67 @@
+{
+  "warning": "THIS IS NOT THE PRODUCTION IMPLEMENTATION",
+  "scope": "Reconstructed AC-002 package validity and exact-interface handoff examples; no new architecture claim or product migration",
+  "completedAt": "2026-10-01T18:57:54.232Z",
+  "runtime": "v25.5.0",
+  "platform": "win32",
+  "status": "passed",
+  "referenceFilesVerified": 37,
+  "provenanceSha256": "625b89bb226bf389eca1ee27251a6d665a9928850fbb9b931a012c8ff4e33110",
+  "commands": [
+    {
+      "name": "reference-typecheck",
+      "exitCode": 0
+    },
+    {
+      "name": "reference-tests",
+      "exitCode": 0
+    },
+    {
+      "name": "reference-demo",
+      "exitCode": 0
+    },
+    {
+      "name": "reference-documentation",
+      "exitCode": 0
+    },
+    {
+      "name": "example-typecheck",
+      "exitCode": 0
+    },
+    {
+      "name": "example-tests",
+      "exitCode": 0
+    }
+  ],
+  "referenceCounts": {
+    "tests": 201,
+    "pass": 201,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "exampleCounts": {
+    "tests": 7,
+    "pass": 7,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "workspace": "evidence/runs/1790881070006",
+  "logHashes": {
+    "reference-typecheck.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reference-tests.txt": "56ddd95219872216cef5ca4c4fa6a92cb242560c4ff67a742a1d49302b23dc55",
+    "reference-demo.txt": "4613485fd1e5a0f1dfcbdb817662ea9dc1080e17051ae044a772a03e8690a9a4",
+    "reference-documentation.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "example-typecheck.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "example-tests.txt": "5da9219cb377264a54b64b66cff90967a75c366b0c9a23a7fae8a9c18103af1b"
+  },
+  "limitations": [
+    "Host tests use fake providers, not TD/native runtime.",
+    "WebGL tests depend on explicit external Playwright/browser prerequisites and only prove their recorded runtime.",
+    "Skipped optional environment tests prevent the full reference report from passing.",
+    "One initial handoff example mistakenly queried Port.type; corrected to the sealed Port.spec.type API without modifying the reference."
+  ]
+}

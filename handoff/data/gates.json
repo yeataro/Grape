@@ -1,0 +1,2997 @@
+{
+  "schemaVersion": 1,
+  "packageId": "IH-005",
+  "status": "scoped-contract-repair-source-unknowns-unresolved",
+  "baseline": {
+    "inventory": "IR-001",
+    "architecture": "AC-002",
+    "coverage": "CQ-001",
+    "readiness": "MRDP-001"
+  },
+  "counts": {
+    "unknowns": 33,
+    "architectureSignificantUnknowns": 13,
+    "productDecisionLeaves": 8,
+    "productDecisionViews": 5,
+    "additionalHandoffGates": 8,
+    "totalGateRecords": 46,
+    "deferredByProductDecision": 1
+  },
+  "countingRule": "Five G-PD records alias four existing UNKNOWNs; no new inventory UNKNOWN. Seven additional handoff gates comprise six scoped acceptance/contract risks and one quarantined source-wording conflict HC-001. Source disposition counts remain unchanged. IH-003 adds one external-document-stability product-policy Gate; not a new Legacy UNKNOWN or PDR leaf.",
+  "gates": [
+    {
+      "id": "G-LU-DATA-001",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-DATA-001",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-DATA-008",
+        "LC-DATA-009",
+        "LC-DATA-046"
+      ],
+      "sliceIds": [
+        "S02",
+        "S03"
+      ],
+      "unknownBehavior": "未修改的 JS fixture 缺 URLSearchParams，哪些完整交易斷言在真實瀏覽器仍成立？",
+      "architectureImpact": "Does not change owner or dependency boundary; exact environment/behavior evidence stays open and bounded qualification is separate.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "在完整browser globals的隔離瀏覽器執行同cases；保留本輪失敗，不能用讀碼冒充通過。",
+        "本輪test_import_ui.js/test_editor_edits.js在初始化即失敗，尚未到待驗斷言。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-DATA-001",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-DATA-002",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-DATA-002",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-DATA-006",
+        "LC-DATA-007"
+      ],
+      "sliceIds": [
+        "S02"
+      ],
+      "unknownBehavior": "各支援瀏覽器生成PNG影像與帶metadata檔案是否完整往返？",
+      "architectureImpact": "Does not change owner or dependency boundary; exact environment/behavior evidence stays open and bounded qualification is separate.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "各browser導出含大圖、多byte註解、嵌套子圖的PNG，重讀比較graph與CRC。",
+        "本輪未啟動實際Canvas/browser並產檔；browser腳本或來源僅支持預期。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-DATA-002",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-DATA-003",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-DATA-003",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-DATA-016",
+        "LC-DATA-018",
+        "LC-DATA-019",
+        "LC-DATA-021",
+        "LC-DATA-023",
+        "LC-DATA-039",
+        "LC-DATA-053",
+        "LC-DATA-055",
+        "LC-DATA-057"
+      ],
+      "sliceIds": [
+        "S04",
+        "S08",
+        "S09"
+      ],
+      "unknownBehavior": "TD各版本及macOS對原生來源與遷移的實際一致性？",
+      "architectureImpact": "Does not change owner or dependency boundary; exact environment/behavior evidence stays open and bounded qualification is separate.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "在已聲明TD版本逐項執行tests/td對應測試，記錄renderer/OS與實際bindings。",
+        "本輪沒有live TD；宿主腳本與Windows歷史測試不是跨平台實測。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-DATA-003",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-DATA-004",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-DATA-004",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-DATA-056"
+      ],
+      "sliceIds": [
+        "S02",
+        "S03"
+      ],
+      "unknownBehavior": "已重現Unicode轉義計量造成額外容量限制；host／paste各入口是否還有不同界線？",
+      "architectureImpact": "Does not change owner or dependency boundary; exact environment/behavior evidence stays open and bounded qualification is separate.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "构造ASCII、中文、非BMP接近限制的圖，对inspect、paste、host apply/export比對拒絕位置。",
+        "inspect→compile已實測ASCII／CJK／非BMP，限制差異確定存在；尚未覆蓋每個host、paste、export入口及完整邊界矩陣。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-DATA-004",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-DATA-005",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-DATA-005",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-DATA-028",
+        "LC-DATA-038",
+        "LC-DATA-039",
+        "LC-DATA-042"
+      ],
+      "sliceIds": [
+        "S04",
+        "S05"
+      ],
+      "unknownBehavior": "目前Fresnel/Facing/Mapping/Rim Light roundtrip tests的Stage目標不符是否僅限fixture建構？",
+      "architectureImpact": "Does not change owner or dependency boundary; exact environment/behavior evidence stays open and bounded qualification is separate.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "重現每個內建庫入口→放入→compile→personal save，保留具體error位置，不修改舊產品。",
+        "本輪Python測試的固定7項庫列表斷言已過時；四個roundtrip案例回stages mismatch。另以正確MAT兩Stage的獨立probe全部14子圖可inspect及personal往返；未驗各個實際wired caller/GPU。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-DATA-005",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-DATA-006",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-DATA-006",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-DATA-061"
+      ],
+      "sliceIds": [
+        "S08"
+      ],
+      "unknownBehavior": "Save在各TD原生專案設定下會使用哪個實際檔名、覆寫或編號策略？",
+      "architectureImpact": "Does not change owner or dependency boundary; exact environment/behavior evidence stays open and bounded qualification is separate.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "在拋棄式TOE以未命名／已命名／numbered-save等設定操作Save，檢查返回值、檔案與未套用draft是否仍保留。",
+        "已核對標題列Save及onclick，確認存在UI入口；未呼叫真實project.save以免改使用者檔案，原生API及磁碟結果未實測。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-DATA-006",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-DATA-007",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-DATA-007",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-DATA-028",
+        "LC-DATA-038",
+        "LC-DATA-042",
+        "LC-DATA-047"
+      ],
+      "sliceIds": [
+        "S04"
+      ],
+      "unknownBehavior": "Personal匯出／載入合法符號陣列子圖的已重現失敗，是刻意限制還是非預期缺陷；還影響哪些交換情境？",
+      "architectureImpact": "Typed symbolic scope remapping required; known legacy failure is not converted into an intentional feature limit.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: Personal symbolic-array admission before implementing that success/rejection policy",
+      "requiredEvidence": [
+        "以保留的最小反例及其他literal、source-bound、nested extent逐一往返；明確記錄成功或同樣拒絕。不得用JS重映射的成功推論Python Personal成功。",
+        "已證明build與entry重編function ID的兩個scope失敗案例；尚缺產品意圖與所有符號scope型態的邊界矩陣。"
+      ],
+      "disproofAction": "記錄產品決策及成功/拒絕範圍，不自動選擇；若必需行為不能在既有邊界表達，停止受影響分支並提交Architecture Change。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-DATA-007",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-NODE-001",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-NODE-001",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-NODE-034",
+        "LC-NODE-035",
+        "LC-NODE-036",
+        "LC-NODE-037",
+        "LC-NODE-038",
+        "LC-NODE-039",
+        "LC-NODE-040",
+        "LC-NODE-041",
+        "LC-NODE-042",
+        "LC-NODE-045",
+        "LC-NODE-053",
+        "LC-NODE-061",
+        "LC-NODE-062",
+        "LC-NODE-063",
+        "LC-NODE-066",
+        "LC-NODE-067",
+        "LC-NODE-068",
+        "LC-NODE-069",
+        "LC-NODE-087",
+        "LC-NODE-091",
+        "LC-NODE-092",
+        "LC-NODE-183",
+        "LC-NODE-184",
+        "LC-NODE-185",
+        "LC-NODE-186",
+        "LC-NODE-187",
+        "LC-NODE-188",
+        "LC-NODE-189",
+        "LC-NODE-190",
+        "LC-NODE-191",
+        "LC-NODE-192",
+        "LC-NODE-193",
+        "LC-NODE-194",
+        "LC-NODE-195",
+        "LC-NODE-196",
+        "LC-NODE-197",
+        "LC-NODE-198",
+        "LC-NODE-199",
+        "LC-NODE-200",
+        "LC-NODE-201",
+        "LC-NODE-202",
+        "LC-NODE-203",
+        "LC-NODE-204",
+        "LC-NODE-205",
+        "LC-NODE-206",
+        "LC-NODE-207",
+        "LC-NODE-208",
+        "LC-NODE-209",
+        "LC-NODE-210",
+        "LC-NODE-211",
+        "LC-NODE-212",
+        "LC-NODE-213",
+        "LC-NODE-214",
+        "LC-NODE-215",
+        "LC-NODE-216",
+        "LC-NODE-217",
+        "LC-NODE-218",
+        "LC-NODE-219",
+        "LC-NODE-220",
+        "LC-NODE-221",
+        "LC-NODE-222",
+        "LC-NODE-223",
+        "LC-NODE-224",
+        "LC-NODE-225",
+        "LC-NODE-226",
+        "LC-NODE-227",
+        "LC-NODE-228",
+        "LC-NODE-229",
+        "LC-NODE-230",
+        "LC-NODE-231",
+        "LC-NODE-232",
+        "LC-NODE-233",
+        "LC-NODE-234",
+        "LC-NODE-235",
+        "LC-NODE-236",
+        "LC-NODE-237",
+        "LC-NODE-238",
+        "LC-NODE-239",
+        "LC-NODE-240",
+        "LC-NODE-241",
+        "LC-NODE-242",
+        "LC-NODE-243",
+        "LC-NODE-244",
+        "LC-NODE-245",
+        "LC-NODE-246",
+        "LC-NODE-247",
+        "LC-NODE-248",
+        "LC-NODE-249",
+        "LC-NODE-250",
+        "LC-NODE-251",
+        "LC-NODE-252",
+        "LC-NODE-253",
+        "LC-NODE-254",
+        "LC-NODE-255",
+        "LC-NODE-256",
+        "LC-NODE-257",
+        "LC-NODE-258",
+        "LC-NODE-259",
+        "LC-NODE-328",
+        "LC-NODE-329",
+        "LC-NODE-330",
+        "LC-NODE-331",
+        "LC-NODE-332",
+        "LC-NODE-333",
+        "LC-NODE-334",
+        "LC-NODE-335",
+        "LC-NODE-336",
+        "LC-NODE-337",
+        "LC-NODE-338",
+        "LC-NODE-339",
+        "LC-NODE-340",
+        "LC-NODE-341",
+        "LC-NODE-342",
+        "LC-NODE-343",
+        "LC-NODE-359",
+        "LC-NODE-360",
+        "LC-NODE-371",
+        "LC-NODE-383",
+        "LC-NODE-384",
+        "LC-NODE-385",
+        "LC-NODE-388",
+        "LC-NODE-390",
+        "LC-NODE-391"
+      ],
+      "sliceIds": [
+        "S05",
+        "S08",
+        "S11"
+      ],
+      "unknownBehavior": "本次未啟動TD/真GPU，無法以新執行證據確認每個native helper、driver數值邊界與Windows/macOS當前build一致性。",
+      "architectureImpact": "Native helper/build/GPU support is a backend/environment evidence gate; typed lowering placement is provisional and does not certify native signatures/pixels.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "I: first native backend feasibility; R: promised operation/platform matrix",
+      "requiredEvidence": [
+        "在可控宿主fixture逐native節點/overload/stage編譯與像素檢查；需另外授權TD操作。",
+        "實際TD、GPU、平台/build矩陣及render像素；歷史docs/test腳本只證明當時記錄或測試意圖。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-NODE-001",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-NODE-002",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-NODE-002",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-NODE-001",
+        "LC-NODE-002",
+        "LC-NODE-003",
+        "LC-NODE-004",
+        "LC-NODE-005",
+        "LC-NODE-006",
+        "LC-NODE-007",
+        "LC-NODE-008",
+        "LC-NODE-009",
+        "LC-NODE-010",
+        "LC-NODE-011",
+        "LC-NODE-012",
+        "LC-NODE-013",
+        "LC-NODE-014",
+        "LC-NODE-015",
+        "LC-NODE-016",
+        "LC-NODE-017",
+        "LC-NODE-018",
+        "LC-NODE-019",
+        "LC-NODE-020",
+        "LC-NODE-021",
+        "LC-NODE-022",
+        "LC-NODE-023",
+        "LC-NODE-024",
+        "LC-NODE-025",
+        "LC-NODE-026",
+        "LC-NODE-027",
+        "LC-NODE-028",
+        "LC-NODE-029",
+        "LC-NODE-030",
+        "LC-NODE-031",
+        "LC-NODE-032",
+        "LC-NODE-033",
+        "LC-NODE-034",
+        "LC-NODE-035",
+        "LC-NODE-036",
+        "LC-NODE-037",
+        "LC-NODE-038",
+        "LC-NODE-039",
+        "LC-NODE-040",
+        "LC-NODE-041",
+        "LC-NODE-042",
+        "LC-NODE-043",
+        "LC-NODE-044",
+        "LC-NODE-045",
+        "LC-NODE-046",
+        "LC-NODE-047",
+        "LC-NODE-048",
+        "LC-NODE-049",
+        "LC-NODE-050",
+        "LC-NODE-051",
+        "LC-NODE-052",
+        "LC-NODE-053",
+        "LC-NODE-054",
+        "LC-NODE-055",
+        "LC-NODE-056",
+        "LC-NODE-057",
+        "LC-NODE-058",
+        "LC-NODE-059",
+        "LC-NODE-060",
+        "LC-NODE-061",
+        "LC-NODE-062",
+        "LC-NODE-063",
+        "LC-NODE-064",
+        "LC-NODE-065",
+        "LC-NODE-066",
+        "LC-NODE-067",
+        "LC-NODE-068",
+        "LC-NODE-069",
+        "LC-NODE-070",
+        "LC-NODE-071",
+        "LC-NODE-072",
+        "LC-NODE-073",
+        "LC-NODE-074",
+        "LC-NODE-075",
+        "LC-NODE-076",
+        "LC-NODE-077",
+        "LC-NODE-078",
+        "LC-NODE-079",
+        "LC-NODE-080",
+        "LC-NODE-081",
+        "LC-NODE-082",
+        "LC-NODE-083",
+        "LC-NODE-084",
+        "LC-NODE-085",
+        "LC-NODE-086",
+        "LC-NODE-087",
+        "LC-NODE-088",
+        "LC-NODE-089",
+        "LC-NODE-090",
+        "LC-NODE-091",
+        "LC-NODE-092",
+        "LC-NODE-093",
+        "LC-NODE-094",
+        "LC-NODE-095",
+        "LC-NODE-096",
+        "LC-NODE-097",
+        "LC-NODE-098",
+        "LC-NODE-099",
+        "LC-NODE-100",
+        "LC-NODE-101",
+        "LC-NODE-102",
+        "LC-NODE-103",
+        "LC-NODE-104",
+        "LC-NODE-105",
+        "LC-NODE-106",
+        "LC-NODE-107",
+        "LC-NODE-108",
+        "LC-NODE-109",
+        "LC-NODE-110",
+        "LC-NODE-111",
+        "LC-NODE-112",
+        "LC-NODE-113",
+        "LC-NODE-114",
+        "LC-NODE-115",
+        "LC-NODE-116",
+        "LC-NODE-117",
+        "LC-NODE-118",
+        "LC-NODE-119",
+        "LC-NODE-120",
+        "LC-NODE-121",
+        "LC-NODE-122",
+        "LC-NODE-123",
+        "LC-NODE-124",
+        "LC-NODE-125",
+        "LC-NODE-126",
+        "LC-NODE-127",
+        "LC-NODE-128",
+        "LC-NODE-129",
+        "LC-NODE-130",
+        "LC-NODE-131",
+        "LC-NODE-132",
+        "LC-NODE-133",
+        "LC-NODE-134",
+        "LC-NODE-135",
+        "LC-NODE-136",
+        "LC-NODE-137",
+        "LC-NODE-138",
+        "LC-NODE-139",
+        "LC-NODE-140",
+        "LC-NODE-141",
+        "LC-NODE-142",
+        "LC-NODE-143",
+        "LC-NODE-144",
+        "LC-NODE-145",
+        "LC-NODE-146",
+        "LC-NODE-147",
+        "LC-NODE-148",
+        "LC-NODE-149",
+        "LC-NODE-150",
+        "LC-NODE-151",
+        "LC-NODE-152",
+        "LC-NODE-153",
+        "LC-NODE-154",
+        "LC-NODE-155",
+        "LC-NODE-156",
+        "LC-NODE-157",
+        "LC-NODE-158",
+        "LC-NODE-159",
+        "LC-NODE-160",
+        "LC-NODE-161",
+        "LC-NODE-162",
+        "LC-NODE-163",
+        "LC-NODE-164",
+        "LC-NODE-165",
+        "LC-NODE-166",
+        "LC-NODE-167",
+        "LC-NODE-168",
+        "LC-NODE-169",
+        "LC-NODE-170",
+        "LC-NODE-171",
+        "LC-NODE-172",
+        "LC-NODE-173",
+        "LC-NODE-174",
+        "LC-NODE-175",
+        "LC-NODE-176",
+        "LC-NODE-177",
+        "LC-NODE-178",
+        "LC-NODE-179",
+        "LC-NODE-180",
+        "LC-NODE-181",
+        "LC-NODE-182",
+        "LC-NODE-183",
+        "LC-NODE-184",
+        "LC-NODE-185",
+        "LC-NODE-186",
+        "LC-NODE-187",
+        "LC-NODE-188",
+        "LC-NODE-189",
+        "LC-NODE-190",
+        "LC-NODE-191",
+        "LC-NODE-192",
+        "LC-NODE-193",
+        "LC-NODE-194",
+        "LC-NODE-195",
+        "LC-NODE-196",
+        "LC-NODE-197",
+        "LC-NODE-198",
+        "LC-NODE-199",
+        "LC-NODE-200",
+        "LC-NODE-201",
+        "LC-NODE-202",
+        "LC-NODE-203",
+        "LC-NODE-204",
+        "LC-NODE-205",
+        "LC-NODE-206",
+        "LC-NODE-207",
+        "LC-NODE-208",
+        "LC-NODE-209",
+        "LC-NODE-210",
+        "LC-NODE-211",
+        "LC-NODE-212",
+        "LC-NODE-213",
+        "LC-NODE-214",
+        "LC-NODE-215",
+        "LC-NODE-216",
+        "LC-NODE-217",
+        "LC-NODE-218",
+        "LC-NODE-219",
+        "LC-NODE-220",
+        "LC-NODE-221",
+        "LC-NODE-222",
+        "LC-NODE-223",
+        "LC-NODE-224",
+        "LC-NODE-225",
+        "LC-NODE-226",
+        "LC-NODE-227",
+        "LC-NODE-228",
+        "LC-NODE-229",
+        "LC-NODE-230",
+        "LC-NODE-231",
+        "LC-NODE-232",
+        "LC-NODE-233",
+        "LC-NODE-234",
+        "LC-NODE-235",
+        "LC-NODE-236",
+        "LC-NODE-237",
+        "LC-NODE-238",
+        "LC-NODE-239",
+        "LC-NODE-240",
+        "LC-NODE-241",
+        "LC-NODE-242",
+        "LC-NODE-243",
+        "LC-NODE-244",
+        "LC-NODE-245",
+        "LC-NODE-246",
+        "LC-NODE-247",
+        "LC-NODE-248",
+        "LC-NODE-249",
+        "LC-NODE-250",
+        "LC-NODE-251",
+        "LC-NODE-252",
+        "LC-NODE-253",
+        "LC-NODE-254",
+        "LC-NODE-255",
+        "LC-NODE-256",
+        "LC-NODE-257",
+        "LC-NODE-258",
+        "LC-NODE-259",
+        "LC-NODE-260",
+        "LC-NODE-261",
+        "LC-NODE-262",
+        "LC-NODE-263",
+        "LC-NODE-264",
+        "LC-NODE-265",
+        "LC-NODE-266",
+        "LC-NODE-267",
+        "LC-NODE-268",
+        "LC-NODE-269",
+        "LC-NODE-270",
+        "LC-NODE-271",
+        "LC-NODE-272",
+        "LC-NODE-273",
+        "LC-NODE-274",
+        "LC-NODE-275",
+        "LC-NODE-276",
+        "LC-NODE-277",
+        "LC-NODE-278",
+        "LC-NODE-279",
+        "LC-NODE-280",
+        "LC-NODE-281",
+        "LC-NODE-282",
+        "LC-NODE-283",
+        "LC-NODE-284",
+        "LC-NODE-285",
+        "LC-NODE-286",
+        "LC-NODE-287",
+        "LC-NODE-288",
+        "LC-NODE-289",
+        "LC-NODE-290",
+        "LC-NODE-291",
+        "LC-NODE-292",
+        "LC-NODE-293",
+        "LC-NODE-294",
+        "LC-NODE-295",
+        "LC-NODE-296",
+        "LC-NODE-297",
+        "LC-NODE-298",
+        "LC-NODE-299",
+        "LC-NODE-300",
+        "LC-NODE-301",
+        "LC-NODE-302",
+        "LC-NODE-303",
+        "LC-NODE-304",
+        "LC-NODE-305",
+        "LC-NODE-306",
+        "LC-NODE-307",
+        "LC-NODE-308",
+        "LC-NODE-309",
+        "LC-NODE-310",
+        "LC-NODE-311",
+        "LC-NODE-312",
+        "LC-NODE-313",
+        "LC-NODE-314",
+        "LC-NODE-315",
+        "LC-NODE-316",
+        "LC-NODE-317",
+        "LC-NODE-318",
+        "LC-NODE-319",
+        "LC-NODE-320",
+        "LC-NODE-321",
+        "LC-NODE-322",
+        "LC-NODE-323",
+        "LC-NODE-324",
+        "LC-NODE-325",
+        "LC-NODE-326",
+        "LC-NODE-327",
+        "LC-NODE-328",
+        "LC-NODE-329",
+        "LC-NODE-330",
+        "LC-NODE-331",
+        "LC-NODE-332",
+        "LC-NODE-333",
+        "LC-NODE-334",
+        "LC-NODE-335",
+        "LC-NODE-336",
+        "LC-NODE-337",
+        "LC-NODE-338",
+        "LC-NODE-339",
+        "LC-NODE-340",
+        "LC-NODE-341",
+        "LC-NODE-342",
+        "LC-NODE-343",
+        "LC-NODE-344",
+        "LC-NODE-345",
+        "LC-NODE-346",
+        "LC-NODE-347",
+        "LC-NODE-348",
+        "LC-NODE-349",
+        "LC-NODE-350",
+        "LC-NODE-351",
+        "LC-NODE-352",
+        "LC-NODE-353",
+        "LC-NODE-354",
+        "LC-NODE-355",
+        "LC-NODE-356",
+        "LC-NODE-357",
+        "LC-NODE-358",
+        "LC-NODE-359",
+        "LC-NODE-360",
+        "LC-NODE-378",
+        "LC-NODE-379",
+        "LC-NODE-380",
+        "LC-NODE-381",
+        "LC-NODE-382",
+        "LC-NODE-383",
+        "LC-NODE-384",
+        "LC-NODE-385",
+        "LC-NODE-386",
+        "LC-NODE-387",
+        "LC-NODE-388",
+        "LC-NODE-389",
+        "LC-NODE-390",
+        "LC-NODE-391"
+      ],
+      "sliceIds": [
+        "S05"
+      ],
+      "unknownBehavior": "所有360命名操作的每種UI編輯途徑，是否都以一致history分組保存並重載？",
+      "architectureImpact": "All UI edit routes have not been observed in legacy, but Graph Operation/History persistence ownership is independent of which route is used. Provisional mechanism coverage only.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "以根盤點UI/DATA記錄交叉參照；需時逐剩餘操作在隔離editor fixture做edit/export/import/undo，不能把corecompile單測等同UI存儲。",
+        "目前可證明params/inputValues為可序列資料、編譯不mutate；已測families可證部分roundtrip/undo，不能以共用code推定每個UI觸發。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-NODE-002",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-NODE-003",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-NODE-003",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-NODE-075",
+        "LC-NODE-076"
+      ],
+      "sliceIds": [
+        "S05"
+      ],
+      "unknownBehavior": "Matrix Get/Set越界時的GPU結果不是Array的安全clamp/忽略；是否為欲保留產品行為需另決定。",
+      "architectureImpact": "Raw matrix indexing is expressible without inventing clamp; preserve recorded unchecked behavior for qualification. Numerical out-of-bounds result remains unknown, no safety guarantee.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "單獨宿主fixture觀察；inventory只能確立目前code不保護。",
+        "各GPU/driver的越界實際反應；此盤點不將其改為安全行為。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-NODE-003",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-NODE-004",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-NODE-004",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-NODE-070"
+      ],
+      "sliceIds": [
+        "S05"
+      ],
+      "unknownBehavior": "有限Voronoi search stencil在全部輸入、特別Minkowski exponent<1的全域最近點/效能與macOS畫面尚無完整證明。",
+      "architectureImpact": "Voronoi finite-stencil accuracy/performance is module algorithm evidence; it does not select a different owner/state lifetime.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "離線擴大reference搜索半徑對照最壞座標，再另行宿主GPU比較；root可用已存在portabletest結果驗證目前取樣cases。",
+        "更廣數值空間reference、實GPU平台與frame成本；不是Blender逐像素一致承諾。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-NODE-004",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-NODE-005",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-NODE-005",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-NODE-369",
+        "LC-NODE-376",
+        "LC-NODE-377"
+      ],
+      "sliceIds": [
+        "S01",
+        "S05",
+        "S06"
+      ],
+      "unknownBehavior": "Auto/typed-value等Node VM編輯測試的實際重跑被fixture URLSearchParams缺失阻塞。",
+      "architectureImpact": "Legacy fixture initialization failed; new immutable/inference tests do not answer it, while edit/reconcile placement stays the same.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "另用不改snapshot source的fixture環境提供所需Web API，重跑相應測試；本次不修產品來遷就測試。",
+        "在等效隔離browser/VM環境完整執行編輯assertions；source顯示的行為不等於本次測試已通過。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-NODE-005",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-NODE-006",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-NODE-006",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-NODE-365",
+        "LC-NODE-370"
+      ],
+      "sliceIds": [
+        "S02",
+        "S05"
+      ],
+      "unknownBehavior": "舊baseline指紋/完整輸出不同，無法宣稱所有舊圖結果與早期golden逐字一致。",
+      "architectureImpact": "Old goldens differ. Exact pin/version/diagnostic paths are available; numerical/host binding equivalence remains externally unproved.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: legacy revision mapping; I/R: emitted semantics/bindings equivalence",
+      "requiredEvidence": [
+        "針對既有固定fixture對比code/bindings/hash差異，不改產品/重錄golden偽裝通過；真正GPU差異需另行宿主驗證。",
+        "baseline變動中何者只有新版shell/meta，何者可能改語意；像素等價尚未全部驗證。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-NODE-006",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-UI-001",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-UI-001",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-023",
+        "LC-UI-024",
+        "LC-UI-031",
+        "LC-UI-053",
+        "LC-UI-054",
+        "LC-UI-080",
+        "LC-UI-098"
+      ],
+      "sliceIds": [
+        "S01",
+        "S06",
+        "S10"
+      ],
+      "unknownBehavior": "目前snapshot在實體iPad/Safari、平台keyboard/Fullscreen/colorpicker及分数contentzoom下的最终操作一致性是否成立？",
+      "architectureImpact": "Does not change owner or dependency boundary; exact environment/behavior evidence stays open and bounded qualification is separate.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "隔離副本使用受控實機矩陣，驗PointerEvent/visualViewport/keyboard focus與cancel；保留裝置/版本/scale及可重現記錄。",
+        "本轮没有使用真實裝置或使用者瀏覽器，未新跑這些瀏覽器测试。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-UI-001",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-UI-002",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-UI-002",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-022",
+        "LC-UI-060",
+        "LC-UI-068"
+      ],
+      "sliceIds": [
+        "S06"
+      ],
+      "unknownBehavior": "歷史browser測試/文件與0.8.271最新UI defaults不一致时，是否需要更新舊測試？",
+      "architectureImpact": "Does not change owner or dependency boundary; exact environment/behavior evidence stays open and bounded qualification is separate.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "在隔離snapshot跑對應browsertests，分辨fixtureoverride與真實staleassertion。",
+        "本文不修產品/測試；尚未執行這些browser套件以確認其fixture是否另設定舊預設。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-UI-002",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-UI-003",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-UI-003",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-038",
+        "LC-UI-042",
+        "LC-UI-057",
+        "LC-UI-072"
+      ],
+      "sliceIds": [
+        "S01",
+        "S06"
+      ],
+      "unknownBehavior": "完整readonly/busy/IME cross-product是否每個input與globalshortcut都一致隔離？",
+      "architectureImpact": "Does not change owner or dependency boundary; exact environment/behavior evidence stays open and bounded qualification is separate.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "對每個publicaction在readonly/historyBusy/nativeBusy/IME/composition與pendingdraft執行負向矩陣；不得由幾個通過case推斷全部。",
+        "已讀共同guard和多個assertion，但未逐一實際跑所有分支／原生IME。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-UI-003",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-UI-004",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-UI-004",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-002"
+      ],
+      "sliceIds": [
+        "S06"
+      ],
+      "unknownBehavior": "桌面marquee pointercancel後，應保留最後preview選取還是還原按下前選取？",
+      "architectureImpact": "Does not change owner or dependency boundary; exact environment/behavior evidence stays open and bounded qualification is separate.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "隔離browser重現拖框後pointercancel並讀selection；向產品審查標示可能偶然行為，不偷改成交易式選取。",
+        "目前observablesource顯示可留下preview選取；未找到明確產品需求或測試將此定為intent。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-UI-004",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-UI-005",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-UI-005",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-063"
+      ],
+      "sliceIds": [
+        "S06"
+      ],
+      "unknownBehavior": "named layouts超100筆的保留上限是否為使用者可見限制？",
+      "architectureImpact": "Preset retention belongs PreferenceStore policy, not graph history; legacy truncation product intent unresolved.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: named preset limit/retention policy before writing production data",
+      "requiredEvidence": [
+        "隔離存儲建立101筆再reload，確認截斷及是否持久写回；保留其可能偶然性，不視為產品期待。",
+        "未執行101筆save/reload边界；未找到用途说明。"
+      ],
+      "disproofAction": "記錄產品決策及成功/拒絕範圍，不自動選擇；若必需行為不能在既有邊界表達，停止受影響分支並提交Architecture Change。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-UI-005",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-UI-006",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-UI-006",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-087"
+      ],
+      "sliceIds": [
+        "S05",
+        "S06"
+      ],
+      "unknownBehavior": "舊inline_vector_values測試是否已完全落後目前固定Vector/Replace拆分，哪些斷言仍適用？",
+      "architectureImpact": "Does not change owner or dependency boundary; exact environment/behavior evidence stays open and bounded qualification is separate.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "隔離載入0.8.271catalog重跑該測試，逐斷言對Vector/Replace/Split重新歸屬；禁止僅讀歷史check宣稱目前通過。",
+        "尚未實際跑該舊browserfixture判別測試基底的定義版本；目前capability按source固定Vector記錄，舊vector功能不自動算現有。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-UI-006",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-UI-007",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-UI-007",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-099"
+      ],
+      "sliceIds": [
+        "S06",
+        "S08"
+      ],
+      "unknownBehavior": "GLSL modal validate回應與換圖／快速再次請求競態，能否顯示前一次圖的code？",
+      "architectureImpact": "Does not change owner or dependency boundary; exact environment/behavior evidence stays open and bounded qualification is separate.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "對應slice的I/R；若觀察結果改變產品成功/拒絕範圍，需在S定案",
+      "requiredEvidence": [
+        "在隔離fixture延遲並逆序回validate，request後換graph，觀察modal的code標頭與內容；把差異當既有邊界報告，不在inventory任務修產品。",
+        "未實際跑延遲validate+切graph的modal場景；source指出未做相同guard，不能宣稱目前排除了stale。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-UI-007",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-UI-008",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-UI-008",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-101"
+      ],
+      "sliceIds": [
+        "S08"
+      ],
+      "unknownBehavior": "Reload Applied確認丟棄後的舊session draft是否會在下次整頁重載再提示restore；load取得state後的後續例外會否留下部分新state？",
+      "architectureImpact": "Explicit lifecycle replacement must own draft eviction/history reset and publish after successful validation; old accidental partial-load behavior not relied upon.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: discard/reload semantics; I: lifecycle/draft/history composition",
+      "requiredEvidence": [
+        "隔離fixture建立dirty+sessiondraft→確認Reload Applied→整頁reload，查是否再次restore提示；另在state成功後inject受控錯誤檢查部分state，保留真實結果與產品意圖差別。",
+        "未新增執行sessiondraft殘留/後段render例外測試，不能把fetch失敗保圖提升成所有reloadfailure都原子回復。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-UI-008",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ],
+      "retainedByProductDecision": {
+        "id": "DEC-GRAPE-001",
+        "file": "provenance/product-decisions/DEC-GRAPE-001.json",
+        "sha256": "c16771a0d2451deb48d1920f4d9b75d0eb54bfdc8cba1f7c6b8d034da342ea02",
+        "status": "accepted"
+      },
+      "requiredAcceptanceIds": [
+        "AT-S08-03",
+        "AT-DEC-GRAPE-001-10"
+      ]
+    },
+    {
+      "id": "G-LU-UI-009",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-UI-009",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-100"
+      ],
+      "sliceIds": [
+        "S08",
+        "S09"
+      ],
+      "unknownBehavior": "若非一般UI入口在live-restore await期間呼load，晚到回覆是否會對新圖呼mark/render？",
+      "architectureImpact": "Async native/live restores require same load/epoch guard; host qualification owns receipt handling.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: domain-separated async restore/propagation lifetime guard before implementation; I: load/epoch/incarnation race evidence before runtime acceptance.",
+      "requiredEvidence": [
+        "只在隔離fixture延遲live-restore，呼load成功再放回覆，觀察新graph dirty/history/render；若產品不提供該並發入口則記為實作邊界，不改能力意圖。",
+        "未新增執行延遲live-restore與外部load交錯；不能以native restore的generation測試代表全部restore分支。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-UI-009",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ],
+      "previousHandoffTiming": "S: mixed History dispatch/order; I: load/restore race",
+      "retainedByProductDecision": {
+        "id": "DEC-GRAPE-001",
+        "file": "provenance/product-decisions/DEC-GRAPE-001.json",
+        "sha256": "c16771a0d2451deb48d1920f4d9b75d0eb54bfdc8cba1f7c6b8d034da342ea02",
+        "status": "accepted"
+      },
+      "independentSafetyScope": "Retained unresolved even though LC-UI-100 unified chronology is deferred. Protect all asynchronous native/live restores, Undo propagation and publication receipts.",
+      "requiredAcceptanceIds": [
+        "AT-DEC-GRAPE-001-07",
+        "AT-DEC-GRAPE-001-10"
+      ]
+    },
+    {
+      "id": "G-LU-HOST-001",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-HOST-001",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-002",
+        "LC-HOST-004",
+        "LC-HOST-007",
+        "LC-HOST-017",
+        "LC-HOST-024"
+      ],
+      "sliceIds": [
+        "S07",
+        "S08",
+        "S10",
+        "S11"
+      ],
+      "unknownBehavior": "本次未連TD／GPU／實際瀏覽器與多平台：原生渲染、冷啟動、刪manager後獨立性、相容版本與遠端實機完整性尚未再證實。",
+      "architectureImpact": "契約可分離環境，但不證明TD/GPU/瀏覽器/多平台實作成立；保持未通過。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "I: artifact reload/native lifecycle; R: promised platforms",
+      "requiredEvidence": [
+        "另行授權後使用隔離fixture分別測實機渲染/TOX冷重載/manager移除／重新加入、appwindow與LAN裝置；保留TDbuild、OS、GPU與像素/identity結果。",
+        "当前TD/macOS/iPad/Windows實機回報及保存重載完整測試；歷史文件不是本次執行。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-001",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-HOST-002",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-HOST-002",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-001"
+      ],
+      "sliceIds": [
+        "S07"
+      ],
+      "unknownBehavior": "單一非同managerID fallback採用目前是刻意產品行為還是相容意外？",
+      "architectureImpact": "跨不同manager身份採用需要明確產品範圍；Identity fence禁止把此fallback一般化。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: cross-identity adoption policy before implementing fallback",
+      "requiredEvidence": [
+        "在隔離工程以舊Shader+同ID/異ID一個/兩個manager逐例記錄OpenEditor結果及原資料是否改變；在確認前保留現行行為但不作任意adoption承諾。",
+        "較新需求／跨管理身分恢復的實機驗證與限制。"
+      ],
+      "disproofAction": "記錄產品決策及成功/拒絕範圍，不自動選擇；若必需行為不能在既有邊界表達，停止受影響分支並提交Architecture Change。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-002",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-HOST-003",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-HOST-003",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-008",
+        "LC-HOST-039"
+      ],
+      "sliceIds": [
+        "S07",
+        "S09"
+      ],
+      "unknownBehavior": "舊連線／live文件與現行runtime不一致，文件不能用來縮限或加強實作規格。",
+      "architectureImpact": "目前行為已知：可選token default off、外部Bind終端Constant可寫；不需重新問架構。新契約明確保留。",
+      "blocks": [
+        "將舊文件的always-token／owned-Bind-only說法當作現行產品oracle；宣稱新手冊已與當前實作行為一致。"
+      ],
+      "doesNotBlock": [
+        "依IR已確認的可選token default off與外部Bind終端Constant可寫行為實作。",
+        "HostDirectory/NativeDefinitions邊界與無關slice；這不是連線或Bind的額外未知產品政策。"
+      ],
+      "earliestRequiredPhase": "R: publishing connection/live behavior documentation; current recorded runtime semantics already usable",
+      "requiredEvidence": [
+        "以目前程式及對應測試已列出的行為為inventory；未經產品決策不把歷史always-token／owned-Bind-only當要求。",
+        "對外手冊是否已在別處更新；不是現行程式分支未知。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-003",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-HOST-004",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-HOST-004",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-021",
+        "LC-HOST-022"
+      ],
+      "sliceIds": [
+        "S07"
+      ],
+      "unknownBehavior": "native-viewer按鈕現在隱藏但API保留，native-parameters又可遠端觸發本機視窗；何者是目前正式對外入口？",
+      "architectureImpact": "Window action可各自授權/顯示；不能由架構擅自統一兩API的remote規則。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: each native-window action visibility/access scope",
+      "requiredEvidence": [
+        "先由目前可觀察UI與API分别記錄；在真正產品決策前不把隱藏視為刪除能力，也不保證LAN開nativeparameters是預期。",
+        "按鈕隱藏與API授權scope的已確認產品意圖；不可自行補新授權設計。"
+      ],
+      "disproofAction": "記錄產品決策及成功/拒絕範圍，不自動選擇；若必需行為不能在既有邊界表達，停止受影響分支並提交Architecture Change。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-004",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-HOST-005",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-HOST-005",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-015"
+      ],
+      "sliceIds": [
+        "S08"
+      ],
+      "unknownBehavior": "Apply在宿主异常导致rollback本身也失败時，能否完全恢复原生資源尚缺實證。",
+      "architectureImpact": "補indeterminate/quarantine可誠實表達宿主故障；不將未證明的rollback承諾改稱保證。HQ-06僅模型。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "I: first native commit/failure/readback, before extending dependent publication work",
+      "requiredEvidence": [
+        "只在隔離TD fixture注入候選失败、正式configure後失败、restore本身失败，核對lastgood與明示錯誤；不把正常exception路徑證據外推到宿主全面失效。",
+        "configure／restore階段故障注入，以及原生Par/OP與state/codemetadata的對照。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-005",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-HOST-006",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-HOST-006",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-029"
+      ],
+      "sliceIds": [
+        "S10"
+      ],
+      "unknownBehavior": "Viewer參數直接寫入的nativeUndo與各camera參數在TOE重載後的保留範圍未由目前檢查確立。",
+      "architectureImpact": "Viewer input能宣告undo/persistence支持；實際支持範圍未知，不能繼承GraphHistory或CustomControlHistory。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "I: Viewer write/Undo/persistence",
+      "requiredEvidence": [
+        "隔離MAT/TOP viewer逐型別改值、TDUndo/Redo、保存重載並比較；只證實相應controls，不能概括所有viewer。",
+        "原生viewernavigation與parameters變更的實機Undo/保存重載結果。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-006",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-HOST-007",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-HOST-007",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-046",
+        "LC-HOST-051"
+      ],
+      "sliceIds": [
+        "S09"
+      ],
+      "unknownBehavior": "custom-control typed native Undo案例未完成：本次portable suite先因mock Par缺style出錯。",
+      "architectureImpact": "HQ-12證明新CAS機制，不修復也不替代legacy未到斷言的typed Undo測試與TD native證據。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "I: typed native Undo",
+      "requiredEvidence": [
+        "不改本次產品；记录evidence/portable-01.log67–82的AttributeError。未來在獨立驗證fixture補完整原生Par契約後重跑，另外做真TD型別切換Undo。",
+        "該測試修復fixture後callback對新type的斷言結果；以及實機原生行為。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-007",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-HOST-008",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-HOST-008",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-061"
+      ],
+      "sliceIds": [
+        "S12"
+      ],
+      "unknownBehavior": "沒有serviceworker/PWA執行證據；無宿主時前端首次／重新載入與編輯是否可用不能從離線提案推定。",
+      "architectureImpact": "內嵌assets與獨立PWA分開；不把manifest當offline implementation。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。",
+        "沒有新增PWA產品承諾時，不能以PWA缺證據阻止embedded-host入口或host-free有網路首次載入。"
+      ],
+      "earliestRequiredPhase": "I: embedded assets/bootstrap; independent PWA not automatically required",
+      "requiredEvidence": [
+        "檢查發佈包以及實際網路請求，分開阻外網、停TD、清browsercache首次載入三情境；目前只記已實作的內嵌資產服務，不承諾PWA。",
+        "真正發佈包可離線啟動的瀏覽器驗證；當前證據只涵蓋host存活且資產內嵌。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-008",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-AUDIT-001",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-AUDIT-001",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [],
+      "sliceIds": [
+        "S10",
+        "S11"
+      ],
+      "unknownBehavior": "binary TOE／TOX 內是否有與外部src不同、未映射出的現行行為？",
+      "architectureImpact": "二進位內容若另有行為會改coverage集合；此輪禁止重查legacy，不能聲稱已排除。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "宣稱Legacy已窮盡或對未解析內容作完整替代保證。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S/I: affected embedded scope; R: declared complete replacement/platform promise",
+      "requiredEvidence": [
+        "在隔離TD專案載入已捕捉二進位並唯讀列出DAT、參數、callback、storage與remote viewer網路，對source hash和行為比較。",
+        "本輪沒有把原生TD二進位網路／內嵌DAT逐一抽出比較，也未讀目前running TD。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-AUDIT-001",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-AUDIT-002",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-AUDIT-002",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [],
+      "sliceIds": [
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "unknownBehavior": "現行平台、TD版本、GPU與瀏覽器的完整適用範圍？",
+      "architectureImpact": "三profile只做抽象邊界模型測試，非多OS/GPU/觸控/網路真實驗收。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "宣稱Legacy已窮盡或對未解析內容作完整替代保證。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S/I: affected embedded scope; R: declared complete replacement/platform promise",
+      "requiredEvidence": [
+        "依每capability Environment Assumptions於矩陣環境跑對應驗收，記錄renderer、TD及browser build；歷史報告不能代替此版本結果。",
+        "只有本次Windows portable執行。macOS/Metal、iPad Safari、觸控筆、真實WebRTC、frame-time、native GPU行為未實測。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-AUDIT-002",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-AUDIT-003",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-AUDIT-003",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [],
+      "sliceIds": [
+        "S02",
+        "S05"
+      ],
+      "unknownBehavior": "剩餘歷史golden fingerprint差異是否全部是已知刻意變更？",
+      "architectureImpact": "既有golden差異未分類；不能以新core測試綠燈認定計算等價。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "宣稱Legacy已窮盡或對未解析內容作完整替代保證。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S/I: affected embedded scope; R: declared complete replacement/platform promise",
+      "requiredEvidence": [
+        "按portable-01.log逐案比較當前生成GLSL／bindings與fixture，分辨可讀符號、版本、真實計算或相容性變動，再由產品意圖判定。",
+        "未有逐差異核准產品決策；不能單由hash不同推論輸出錯，也不能忽略。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-AUDIT-003",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-PD-1",
+      "kind": "product-decision-view",
+      "sourceUnknownId": "LU-DATA-007",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-DATA-028",
+        "LC-DATA-038",
+        "LC-DATA-042",
+        "LC-DATA-047"
+      ],
+      "sliceIds": [
+        "S04"
+      ],
+      "unknownBehavior": "Personal匯出／載入合法符號陣列子圖的已重現失敗，是刻意限制還是非預期缺陷；還影響哪些交換情境？",
+      "architectureImpact": "Typed symbolic scope remapping required; known legacy failure is not converted into an intentional feature limit.",
+      "blocks": [
+        "Personal符號陣列的接受範圍的對應行為實作定案與相容承諾。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: Personal symbolic-array admission before implementing that success/rejection policy",
+      "requiredEvidence": [
+        "產品owner對MRDP alternatives作明確選擇，保存決策版本及受影響成功/拒絕範圍。",
+        "以保留的最小反例及其他literal、source-bound、nested extent逐一往返；明確記錄成功或同樣拒絕。不得用JS重映射的成功推論Python Personal成功。",
+        "已證明build與entry重編function ID的兩個scope失敗案例；尚缺產品意圖與所有符號scope型態的邊界矩陣。"
+      ],
+      "disproofAction": "記錄產品決策及成功/拒絕範圍，不自動選擇；若必需行為不能在既有邊界表達，停止受影響分支並提交Architecture Change。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-DATA-007",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7",
+        "MRDP-001:section4"
+      ],
+      "aliasOf": "G-LU-DATA-007",
+      "name": "Personal符號陣列的接受範圍"
+    },
+    {
+      "id": "G-PD-2",
+      "kind": "product-decision-view",
+      "sourceUnknownId": "LU-UI-005",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-063"
+      ],
+      "sliceIds": [
+        "S06"
+      ],
+      "unknownBehavior": "named layouts超100筆的保留上限是否為使用者可見限制？",
+      "architectureImpact": "Preset retention belongs PreferenceStore policy, not graph history; legacy truncation product intent unresolved.",
+      "blocks": [
+        "Named presets超100筆retention的對應行為實作定案與相容承諾。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: named preset limit/retention policy before writing production data",
+      "requiredEvidence": [
+        "產品owner對MRDP alternatives作明確選擇，保存決策版本及受影響成功/拒絕範圍。",
+        "隔離存儲建立101筆再reload，確認截斷及是否持久写回；保留其可能偶然性，不視為產品期待。",
+        "未執行101筆save/reload边界；未找到用途说明。"
+      ],
+      "disproofAction": "記錄產品決策及成功/拒絕範圍，不自動選擇；若必需行為不能在既有邊界表達，停止受影響分支並提交Architecture Change。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-UI-005",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7",
+        "MRDP-001:section4"
+      ],
+      "aliasOf": "G-LU-UI-005",
+      "name": "Named presets超100筆retention"
+    },
+    {
+      "id": "G-PD-3",
+      "kind": "product-decision-view",
+      "sourceUnknownId": "LU-HOST-002",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-001"
+      ],
+      "sliceIds": [
+        "S07"
+      ],
+      "unknownBehavior": "單一非同managerID fallback採用目前是刻意產品行為還是相容意外？",
+      "architectureImpact": "跨不同manager身份採用需要明確產品範圍；Identity fence禁止把此fallback一般化。",
+      "blocks": [
+        "唯一異ID manager adoption的對應行為實作定案與相容承諾。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: cross-identity adoption policy before implementing fallback",
+      "requiredEvidence": [
+        "產品owner對MRDP alternatives作明確選擇，保存決策版本及受影響成功/拒絕範圍。",
+        "在隔離工程以舊Shader+同ID/異ID一個/兩個manager逐例記錄OpenEditor結果及原資料是否改變；在確認前保留現行行為但不作任意adoption承諾。",
+        "較新需求／跨管理身分恢復的實機驗證與限制。"
+      ],
+      "disproofAction": "記錄產品決策及成功/拒絕範圍，不自動選擇；若必需行為不能在既有邊界表達，停止受影響分支並提交Architecture Change。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-002",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7",
+        "MRDP-001:section4"
+      ],
+      "aliasOf": "G-LU-HOST-002",
+      "name": "唯一異ID manager adoption"
+    },
+    {
+      "id": "G-PD-4A",
+      "kind": "product-decision-view",
+      "sourceUnknownId": "LU-HOST-004",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-021"
+      ],
+      "sliceIds": [
+        "S07"
+      ],
+      "unknownBehavior": "native-viewer按鈕現在隱藏但API保留，native-parameters又可遠端觸發本機視窗；何者是目前正式對外入口？",
+      "architectureImpact": "Window action可各自授權/顯示；不能由架構擅自統一兩API的remote規則。",
+      "blocks": [
+        "Native Viewer正式入口可見性的對應行為實作定案與相容承諾。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: each native-window action visibility/access scope",
+      "requiredEvidence": [
+        "產品owner對MRDP alternatives作明確選擇，保存決策版本及受影響成功/拒絕範圍。",
+        "先由目前可觀察UI與API分别記錄；在真正產品決策前不把隱藏視為刪除能力，也不保證LAN開nativeparameters是預期。",
+        "按鈕隱藏與API授權scope的已確認產品意圖；不可自行補新授權設計。"
+      ],
+      "disproofAction": "記錄產品決策及成功/拒絕範圍，不自動選擇；若必需行為不能在既有邊界表達，停止受影響分支並提交Architecture Change。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-004",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7",
+        "MRDP-001:section4"
+      ],
+      "aliasOf": "G-LU-HOST-004",
+      "name": "Native Viewer正式入口可見性"
+    },
+    {
+      "id": "G-PD-4B",
+      "kind": "product-decision-view",
+      "sourceUnknownId": "LU-HOST-004",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-022"
+      ],
+      "sliceIds": [
+        "S07"
+      ],
+      "unknownBehavior": "native-viewer按鈕現在隱藏但API保留，native-parameters又可遠端觸發本機視窗；何者是目前正式對外入口？",
+      "architectureImpact": "Window action可各自授權/顯示；不能由架構擅自統一兩API的remote規則。",
+      "blocks": [
+        "Native Parameters遠端開窗scope的對應行為實作定案與相容承諾。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: each native-window action visibility/access scope",
+      "requiredEvidence": [
+        "產品owner對MRDP alternatives作明確選擇，保存決策版本及受影響成功/拒絕範圍。",
+        "先由目前可觀察UI與API分别記錄；在真正產品決策前不把隱藏視為刪除能力，也不保證LAN開nativeparameters是預期。",
+        "按鈕隱藏與API授權scope的已確認產品意圖；不可自行補新授權設計。"
+      ],
+      "disproofAction": "記錄產品決策及成功/拒絕範圍，不自動選擇；若必需行為不能在既有邊界表達，停止受影響分支並提交Architecture Change。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-004",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7",
+        "MRDP-001:section4"
+      ],
+      "aliasOf": "G-LU-HOST-004",
+      "name": "Native Parameters遠端開窗scope"
+    },
+    {
+      "id": "G-VERSION-COMPAT",
+      "name": "Legacy revision→exact pin的compatibility policy",
+      "kind": "known-handoff-gate",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "D",
+        "C",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-NODE-370"
+      ],
+      "sliceIds": [
+        "S02"
+      ],
+      "blocks": [
+        "Legacy known UUID + unknown revision成功範圍，以及import轉換/拒絕的定案。"
+      ],
+      "doesNotBlock": [
+        "不依賴此契約的slice及有界planning。"
+      ],
+      "earliestRequiredPhase": "S: legacy-version import policy before dependent implementation",
+      "requiredEvidence": [
+        "依IR的已知行為給出逐case成功/拒絕oracle、轉換及provenance；取消成功行為需owner決策。"
+      ],
+      "disproofAction": "反例保留；若須改責任邊界/新增未封存契約則走Architecture Change，不由handoff實作者靜默決定。",
+      "architectureImpact": "Exact DefinitionSet不提供legacy current-emitter fallback；轉換尚未由封存機制證明，不代表一定要改core。",
+      "sourceRefs": [
+        "AC-002:sealed-contracts",
+        "MRDP-001:sections3,6,7"
+      ],
+      "unknownBehavior": "LC-NODE-370中已知UUID但未知revision的成功範圍，如何明示轉換至exact pin而保留Legacy observable行為，尚無完整轉換oracle。"
+    },
+    {
+      "id": "G-MIXED-HISTORY",
+      "name": "Graph/native/live混合Undo coordination",
+      "kind": "known-handoff-gate",
+      "status": "DEFERRED_BY_PRODUCT_DECISION",
+      "architectureSignificant": false,
+      "classification": [
+        "D",
+        "C",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-100"
+      ],
+      "sliceIds": [
+        "S08",
+        "S09"
+      ],
+      "blocks": [
+        "任何未經新產品決策授權的 coordinated Mixed History 實作／對外等價承諾；不得以domain-separated測試稱此Gate已resolved/PASS。"
+      ],
+      "doesNotBlock": [
+        "目前S08安全publication/Reload及S09分域Undo規劃與授權後實作；其他receipt/CAS/lifetime Gates照舊。"
+      ],
+      "earliestRequiredPhase": "Deferred current product scope; reconsider only after a new explicit product decision. Protected receipt/lifetime evidence remains required in corresponding S08/S09 integration.",
+      "requiredEvidence": [
+        "重新納入coordinated chronology前需要新的產品決策、user-intent-level oracle與完整composition evidence；現有獨立History測試不構成closure。"
+      ],
+      "disproofAction": "反例保留；若須改責任邊界/新增未封存契約則走Architecture Change，不由handoff實作者靜默決定。",
+      "architectureImpact": "No coordinator in current scope. Existing domain ownership/authority retained; Graph Undo and conditional Host propagation have distinct completion.",
+      "sourceRefs": [
+        "AC-002:sealed-contracts",
+        "MRDP-001:sections3,6,7"
+      ],
+      "unknownBehavior": "Unified chronology remains unqualified but is outside current product scope by DEC-GRAPE-001; this disposition does not waive load/restore or Reload Applied safety.",
+      "sourceGateSnapshot": {
+        "id": "G-MIXED-HISTORY",
+        "name": "Graph/native/live混合Undo coordination",
+        "kind": "known-handoff-gate",
+        "status": "unresolved",
+        "architectureSignificant": false,
+        "classification": [
+          "D",
+          "C",
+          "E"
+        ],
+        "capabilityIds": [
+          "LC-UI-100",
+          "LC-UI-101"
+        ],
+        "sliceIds": [
+          "S08",
+          "S09"
+        ],
+        "blocks": [
+          "混合stack推進、重試去重、load與restore交錯、Reload Applied完整composition。"
+        ],
+        "doesNotBlock": [
+          "不依賴此契約的slice及有界planning。"
+        ],
+        "earliestRequiredPhase": "S: order/dispatch/retry contract; I: receipt/load race",
+        "requiredEvidence": [
+          "Graph/native/live交錯操作的完整序列oracle、遺失回覆/late reply/外部動畫情境；真native收據證據。"
+        ],
+        "disproofAction": "反例保留；若須改責任邊界/新增未封存契約則走Architecture Change，不由handoff實作者靜默決定。",
+        "architectureImpact": "各History的authority已分域，不等於上層順序與完整composition已定義/驗收。",
+        "sourceRefs": [
+          "AC-002:sealed-contracts",
+          "MRDP-001:sections3,6,7"
+        ],
+        "unknownBehavior": "Graph/native定義/live值三種獨立History如何在同一操作入口排序、dispatch、重試去重，及load/restore交錯時如何確認stack推進，尚未完成composition。"
+      },
+      "productDecisionRef": {
+        "id": "DEC-GRAPE-001",
+        "file": "provenance/product-decisions/DEC-GRAPE-001.json",
+        "sha256": "c16771a0d2451deb48d1920f4d9b75d0eb54bfdc8cba1f7c6b8d034da342ea02",
+        "status": "accepted"
+      },
+      "retainedObligations": [
+        {
+          "gateId": "G-LU-UI-009",
+          "acceptanceIds": [
+            "AT-DEC-GRAPE-001-07"
+          ]
+        },
+        {
+          "gateId": "G-LU-UI-008",
+          "capabilityId": "LC-UI-101",
+          "acceptanceIds": [
+            "AT-S08-03",
+            "AT-DEC-GRAPE-001-10"
+          ]
+        },
+        {
+          "gateId": "G-LU-HOST-007",
+          "acceptanceIds": [
+            "AT-S09-01",
+            "AT-S09-02",
+            "AT-DEC-GRAPE-001-04",
+            "AT-DEC-GRAPE-001-09"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "G-UI-CONFORMANCE",
+      "name": "真UI操作與boundary conformance",
+      "kind": "known-handoff-gate",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "D",
+        "C",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-023",
+        "LC-UI-031",
+        "LC-UI-042",
+        "LC-UI-047",
+        "LC-UI-053",
+        "LC-UI-054",
+        "LC-UI-072",
+        "LC-UI-084",
+        "LC-UI-085",
+        "LC-UI-098"
+      ],
+      "sliceIds": [
+        "S01",
+        "S06",
+        "S10"
+      ],
+      "blocks": [
+        "把headlessmodel或原型demo等同於最小產品UI交付；未驗平台的interaction承諾。"
+      ],
+      "doesNotBlock": [
+        "不依賴此契約的slice及有界planning。"
+      ],
+      "earliestRequiredPhase": "I: minimum product UI; R: supported input/device matrix",
+      "requiredEvidence": [
+        "實際Canvas/Inspector/actions對同Graph操作、真browser/device/IME/focus/cancel/permission案例。"
+      ],
+      "disproofAction": "反例保留；若須改責任邊界/新增未封存契約則走Architecture Change，不由handoff實作者靜默決定。",
+      "architectureImpact": "沒有新增modelowner；UI必須遵守同一mutation/focus/selection契約。",
+      "sourceRefs": [
+        "AC-002:sealed-contracts",
+        "MRDP-001:sections3,6,7"
+      ],
+      "unknownBehavior": "headless已驗行為在真Canvas/Inspector、IME/focus/pointercancel與裝置上是否保持責任和結果，尚缺產品UI證據。"
+    },
+    {
+      "id": "G-DEPLOYMENT-CONFORMANCE",
+      "name": "Static Web / Node-hosted / Electron真部署",
+      "kind": "known-handoff-gate",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "D",
+        "C",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-002",
+        "LC-HOST-008",
+        "LC-HOST-009",
+        "LC-HOST-010",
+        "LC-HOST-061",
+        "LC-HOST-062"
+      ],
+      "sliceIds": [
+        "S07",
+        "S08",
+        "S12"
+      ],
+      "blocks": [
+        "宣稱三profile能力相同、所有runtime/permission/Host provider已通過。"
+      ],
+      "doesNotBlock": [
+        "不依賴此契約的slice及有界planning。"
+      ],
+      "earliestRequiredPhase": "I: first declared profile bootstrap; R: each promised package/profile",
+      "requiredEvidence": [
+        "每profile真package/provider/permission/locality矩陣；applicationcore import邊界靜態審查與真啟動互補。"
+      ],
+      "disproofAction": "反例保留；若須改責任邊界/新增未封存契約則走Architecture Change，不由handoff實作者靜默決定。",
+      "architectureImpact": "平台adapter/bridge可不同，不能靠改寫applicationcore取得平台能力。",
+      "sourceRefs": [
+        "AC-002:sealed-contracts",
+        "MRDP-001:sections3,6,7"
+      ],
+      "unknownBehavior": "同一core在三種實際package/provider/權限與locality環境的結果尚未全面實測；抽象adapter存在不能證明打包相容。"
+    },
+    {
+      "id": "G-EXTENSION-PANEL",
+      "name": "Panel composition + view/mount + edit command：headless contract / browser evidence 分離",
+      "kind": "known-handoff-gate",
+      "status": "contract-qualified-runtime-unverified",
+      "architectureSignificant": false,
+      "classification": [
+        "D",
+        "C",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-060",
+        "LC-UI-061",
+        "LC-UI-064"
+      ],
+      "sliceIds": [
+        "S01",
+        "S06"
+      ],
+      "blocks": [
+        "宣稱 production Panel extension、browser mount/focus/accessibility 或平台相容已交付。",
+        "在 Independent Re-review 接受前，將本修補自行宣稱 HANDOFF PASS；本輪不授權開始 S01。"
+      ],
+      "doesNotBlock": [
+        "Targeted independent re-review of IH-005 Panel command qualification and retained IH-002/IH-004 composition/mount contracts; no product UI is claimed.",
+        "After separate implementation authorization, implementation using the specified public seam; real runtime acceptance remains gated."
+      ],
+      "earliestRequiredPhase": "Public composition/view/edit contract: IH-005 targeted re-review before S01 foundation. Runtime: S01 actual initial Canvas/Inspector and S06 ordinary extension integration, each before its slice acceptance.",
+      "requiredEvidence": [
+        "IH-002 的 ordinary Panel registration→creation→initial target→routing→restore→retarget→move→canClose→dispose／placeholder 直接測試與完整 regression。",
+        "S06 實際 renderer 的 mount/unmount、focus、事件訂閱清理、非同步 stale 回覆、跨 pane/Tab 移動、保存/reload 及可及性 evidence。",
+        "IH-004 FIR-B01 direct two-Panel/two-Widget view/mount, move/hide/remount, failure cleanup and stale edit/reply tests, full regression, fresh independent re-review.",
+        "IH-005 editable Panel application-owned command/gesture authority, Panel instance and mount/lease fencing, origin spoof rejection, close/retarget guard, move/hide/failure cleanup through the same public seam; direct panel-commands.test.ts cases, full regression and targeted independent re-review. Current evidence: audit/IH005_VALIDATION.json; no production runtime claim."
+      ],
+      "disproofAction": "保留最小反例。若 public composition 仍需讀 private state／改 central type switch，B01 重開並修契約與 qualification；若只是 production renderer 問題，停止受影響 integration branch，不搬移 Graph/History ownership。",
+      "architectureImpact": "B01 的缺口是 public composition 尚未閉合。IH-002 以 additive application/UI contract 接合 registry、resolver、Context lifecycle、routing、restore、move、retarget、close/dispose，Graph/History ownership 不變；封存六種 PanelKind 不再作普通 extension 入口。 IH-004 AC-IH004-01 adds feature-owned view contributions and shared mount semantics without changing these responsibilities. IH-005 AC-IH005-02 closes editable Panel command authority through workspace-bound application commands without changing Graph/History ownership.",
+      "sourceRefs": [
+        "AC-002:sealed-contracts",
+        "MRDP-001:sections3,6,7",
+        "IH-002:Independent Review B01",
+        "04_EXTENSION_MODEL.md:Panel public composition",
+        "executable-reference/repair/public-panel-workspace.ts",
+        "executable-reference/repair/public-panel-workspace.test.ts",
+        "examples/minimal-panel",
+        "IH-004:16_VIEW_MOUNT_CONTRACT.md",
+        "IH-003 final independent review:FIR-B01",
+        "IH-005:17_PANEL_COMMAND_CONTRACT.md",
+        "contracts/panel-commands.ts",
+        "executable-reference/repair/panel-commands.test.ts",
+        "examples/editable-panel"
+      ],
+      "unknownBehavior": "IH-002 composition and IH-004 mount contracts remain; IH-005 adds explicit application-owned Panel edit/gesture commands. Existing qualification.handoffRevision=IH-004 is retained historical mount evidence, not proof of IH-005 command closure. Current direct/regression evidence is in audit/IH005_VALIDATION.json and awaits targeted independent re-review. Actual DOM/focus/IME/accessibility/device evidence is still required at the first applicable S01/S06 integration.",
+      "qualification": {
+        "handoffRevision": "IH-004",
+        "finding": "FIR-B01",
+        "contractState": "qualified-by-direct-cases",
+        "fullRegressionState": "passed",
+        "fullRegressionEvidence": "audit/FINAL_REVIEW_REPAIR_VALIDATION.json",
+        "independentReview": "pending",
+        "productionRuntime": "not-implemented-not-verified",
+        "scope": "Headless public renderer seam only; no DOM/browser/product UI claim.",
+        "fullRegressionSha256": "112107ace9239f745e920b2103f08e5cc6ed88fca77d8bdca844446ddd43d63c"
+      },
+      "qualificationHistory": [
+        {
+          "handoffRevision": "IH-002",
+          "finding": "B01",
+          "contractState": "qualified-by-direct-cases",
+          "fullRegressionState": "passed",
+          "fullRegressionEvidence": "audit/previous-IH-003/previous-IH-002/evidence/RUN_HANDOFF.json",
+          "independentReview": "pending",
+          "productionRuntime": "not-implemented-not-verified",
+          "scope": "Ordinary trusted Panel composition through public application/UI contract; not browser/DOM/platform product acceptance.",
+          "fullRegressionSha256": "4b517e65b114b2921f6d9d8de8bc609a927bf5ee034bbe3c04af60c5d44d1ad1"
+        }
+      ]
+    },
+    {
+      "id": "G-EXTENSION-WIDGET-SCOPE",
+      "name": "Nested Inspector scoped target：契約已驗，production UI 未驗",
+      "kind": "known-handoff-gate",
+      "status": "contract-qualified-runtime-unverified",
+      "architectureSignificant": false,
+      "classification": [
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-042",
+        "LC-UI-043",
+        "LC-UI-044",
+        "LC-UI-046"
+      ],
+      "sliceIds": [
+        "S03",
+        "S06"
+      ],
+      "blocks": [
+        "宣稱已完成 production nested Inspector／所有 compound widgets／browser event 與 accessibility 驗收。",
+        "繼續用 root-only sealed projection 當作 nested 能力，或以 UI-side resources traversal 補查詢。"
+      ],
+      "doesNotBlock": [
+        "Independent Re-review 可直接驗 root/nested 同一公開 target、兩 shared-definition occurrences、stale path、型別/接口/連線變更及 disposal。",
+        "未來另獲授權後，S03/S06 可沿 scoped target 契約接實際 Inspector，不再需要發明另一套 nested UI lookup。",
+        "S01 仍可限定 root-network 產品範圍；這是 slice scope，不是契約只能處理 root。"
+      ],
+      "earliestRequiredPhase": "Contract: IH-002 independent re-review. Runtime: first S03/S06 Inspector integration before nested product acceptance.",
+      "requiredEvidence": [
+        "IH-002 直接反例、root/nested read/write/projection、shared definition、path/load/type/interface/link invalidation、navigation ABA、observer disposal ordering 與完整 regression。",
+        "S03/S06 真實 UI 中 retarget/cancel/IME/focus/port mutation 後的可見狀態與 cleanup；不可用模型測試取代。"
+      ],
+      "disproofAction": "若 scoped spec/read/link/projection/write 指向不同 logical target，重開 M01，保留反例並最小修契約。若只在 browser integration 失敗，修其 renderer/事件 composition，不建立第二份 canonical value 或 nested-specific UI resolver。",
+      "architectureImpact": "M01 的 root-only ParameterWidgets.project 不能作 nested 入口。IH-002 additive ScopedParameterTarget/openRouted、ScopedParameterWidgets.projectTarget、ScopedFieldDraft 讓 application 解析 scope，renderer 不遍歷 Graph resources；原 Graph/resource/History ownership 不變。",
+      "sourceRefs": [
+        "AC-002:qualification-presentation project",
+        "AC-002:workspace parameterEditor/EditableParameter",
+        "MRDP-001:scoped UI integration risk",
+        "IH-002:Independent Review M01",
+        "04_EXTENSION_MODEL.md:Widget scoped target",
+        "executable-reference/repair/scoped-parameter.ts",
+        "executable-reference/repair/scoped-parameter.test.ts",
+        "examples/parameter-widget-or-ui-contribution"
+      ],
+      "unknownBehavior": "IH-002 以同一 ScopedParameterTarget 閉合 root/nested spec、value、resolved type、links、projection 與 write；尚未證明正式 browser Inspector 的 focus/IME/retarget/cancel 呈現與輸入相容。",
+      "qualification": {
+        "handoffRevision": "IH-002",
+        "finding": "M01",
+        "contractState": "qualified-by-direct-cases",
+        "fullRegressionState": "passed",
+        "fullRegressionEvidence": "audit/evidence/RUN_HANDOFF.json",
+        "independentReview": "pending",
+        "productionRuntime": "not-implemented-not-verified",
+        "scope": "Root/nested immutable projection and same logical-target write over Graph-owned data; not browser UI acceptance.",
+        "fullRegressionSha256": "4b517e65b114b2921f6d9d8de8bc609a927bf5ee034bbe3c04af60c5d44d1ad1"
+      }
+    },
+    {
+      "id": "G-HANDOFF-CQ-OWNERSHIP",
+      "name": "HC-001：CQ摘要的mutation/persistence ownership混寫",
+      "kind": "source-baseline-conflict",
+      "status": "unresolved-source-wording-quarantined",
+      "architectureSignificant": false,
+      "classification": [
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-DATA-001",
+        "LC-DATA-009",
+        "LC-DATA-010",
+        "LC-DATA-012",
+        "LC-DATA-013",
+        "LC-DATA-014",
+        "LC-DATA-015",
+        "LC-DATA-016",
+        "LC-DATA-017",
+        "LC-DATA-018",
+        "LC-DATA-019",
+        "LC-DATA-020",
+        "LC-DATA-021",
+        "LC-DATA-022",
+        "LC-DATA-023",
+        "LC-DATA-027",
+        "LC-DATA-028",
+        "LC-DATA-029",
+        "LC-DATA-030",
+        "LC-DATA-031",
+        "LC-DATA-032",
+        "LC-DATA-033",
+        "LC-DATA-034",
+        "LC-DATA-035",
+        "LC-DATA-037",
+        "LC-DATA-044",
+        "LC-DATA-045",
+        "LC-DATA-047",
+        "LC-DATA-048",
+        "LC-DATA-049",
+        "LC-DATA-050",
+        "LC-DATA-051",
+        "LC-DATA-052",
+        "LC-DATA-053",
+        "LC-DATA-054",
+        "LC-DATA-055",
+        "LC-DATA-057",
+        "LC-DATA-058",
+        "LC-DATA-059",
+        "LC-DATA-062",
+        "LC-DATA-063",
+        "LC-NODE-001",
+        "LC-NODE-002",
+        "LC-NODE-003",
+        "LC-NODE-004",
+        "LC-NODE-005",
+        "LC-NODE-006",
+        "LC-NODE-007",
+        "LC-NODE-008",
+        "LC-NODE-009",
+        "LC-NODE-010",
+        "LC-NODE-011",
+        "LC-NODE-012",
+        "LC-NODE-013",
+        "LC-NODE-014",
+        "LC-NODE-015",
+        "LC-NODE-016",
+        "LC-NODE-017",
+        "LC-NODE-018",
+        "LC-NODE-019",
+        "LC-NODE-020",
+        "LC-NODE-021",
+        "LC-NODE-022",
+        "LC-NODE-023",
+        "LC-NODE-024",
+        "LC-NODE-025",
+        "LC-NODE-026",
+        "LC-NODE-027",
+        "LC-NODE-028",
+        "LC-NODE-029",
+        "LC-NODE-030",
+        "LC-NODE-031",
+        "LC-NODE-032",
+        "LC-NODE-033",
+        "LC-NODE-034",
+        "LC-NODE-035",
+        "LC-NODE-036",
+        "LC-NODE-037",
+        "LC-NODE-038",
+        "LC-NODE-039",
+        "LC-NODE-040",
+        "LC-NODE-041",
+        "LC-NODE-042",
+        "LC-NODE-043",
+        "LC-NODE-044",
+        "LC-NODE-045",
+        "LC-NODE-046",
+        "LC-NODE-047",
+        "LC-NODE-048",
+        "LC-NODE-049",
+        "LC-NODE-050",
+        "LC-NODE-051",
+        "LC-NODE-052",
+        "LC-NODE-053",
+        "LC-NODE-054",
+        "LC-NODE-055",
+        "LC-NODE-056",
+        "LC-NODE-057",
+        "LC-NODE-058",
+        "LC-NODE-059",
+        "LC-NODE-060",
+        "LC-NODE-061",
+        "LC-NODE-062",
+        "LC-NODE-063",
+        "LC-NODE-064",
+        "LC-NODE-065",
+        "LC-NODE-066",
+        "LC-NODE-067",
+        "LC-NODE-068",
+        "LC-NODE-069",
+        "LC-NODE-070",
+        "LC-NODE-071",
+        "LC-NODE-072",
+        "LC-NODE-073",
+        "LC-NODE-074",
+        "LC-NODE-075",
+        "LC-NODE-076",
+        "LC-NODE-077",
+        "LC-NODE-078",
+        "LC-NODE-079",
+        "LC-NODE-080",
+        "LC-NODE-081",
+        "LC-NODE-082",
+        "LC-NODE-083",
+        "LC-NODE-084",
+        "LC-NODE-085",
+        "LC-NODE-086",
+        "LC-NODE-087",
+        "LC-NODE-088",
+        "LC-NODE-089",
+        "LC-NODE-090",
+        "LC-NODE-091",
+        "LC-NODE-092",
+        "LC-NODE-093",
+        "LC-NODE-094",
+        "LC-NODE-095",
+        "LC-NODE-096",
+        "LC-NODE-097",
+        "LC-NODE-098",
+        "LC-NODE-099",
+        "LC-NODE-100",
+        "LC-NODE-101",
+        "LC-NODE-102",
+        "LC-NODE-103",
+        "LC-NODE-104",
+        "LC-NODE-105",
+        "LC-NODE-106",
+        "LC-NODE-107",
+        "LC-NODE-108",
+        "LC-NODE-109",
+        "LC-NODE-110",
+        "LC-NODE-111",
+        "LC-NODE-112",
+        "LC-NODE-113",
+        "LC-NODE-114",
+        "LC-NODE-115",
+        "LC-NODE-116",
+        "LC-NODE-117",
+        "LC-NODE-118",
+        "LC-NODE-119",
+        "LC-NODE-120",
+        "LC-NODE-121",
+        "LC-NODE-122",
+        "LC-NODE-123",
+        "LC-NODE-124",
+        "LC-NODE-125",
+        "LC-NODE-126",
+        "LC-NODE-127",
+        "LC-NODE-128",
+        "LC-NODE-129",
+        "LC-NODE-130",
+        "LC-NODE-131",
+        "LC-NODE-132",
+        "LC-NODE-133",
+        "LC-NODE-134",
+        "LC-NODE-135",
+        "LC-NODE-136",
+        "LC-NODE-137",
+        "LC-NODE-138",
+        "LC-NODE-139",
+        "LC-NODE-140",
+        "LC-NODE-141",
+        "LC-NODE-142",
+        "LC-NODE-143",
+        "LC-NODE-144",
+        "LC-NODE-145",
+        "LC-NODE-146",
+        "LC-NODE-147",
+        "LC-NODE-148",
+        "LC-NODE-149",
+        "LC-NODE-150",
+        "LC-NODE-151",
+        "LC-NODE-152",
+        "LC-NODE-153",
+        "LC-NODE-154",
+        "LC-NODE-155",
+        "LC-NODE-156",
+        "LC-NODE-157",
+        "LC-NODE-158",
+        "LC-NODE-159",
+        "LC-NODE-160",
+        "LC-NODE-161",
+        "LC-NODE-162",
+        "LC-NODE-163",
+        "LC-NODE-164",
+        "LC-NODE-165",
+        "LC-NODE-166",
+        "LC-NODE-167",
+        "LC-NODE-168",
+        "LC-NODE-169",
+        "LC-NODE-170",
+        "LC-NODE-171",
+        "LC-NODE-172",
+        "LC-NODE-173",
+        "LC-NODE-174",
+        "LC-NODE-175",
+        "LC-NODE-176",
+        "LC-NODE-177",
+        "LC-NODE-178",
+        "LC-NODE-179",
+        "LC-NODE-180",
+        "LC-NODE-181",
+        "LC-NODE-182",
+        "LC-NODE-183",
+        "LC-NODE-184",
+        "LC-NODE-185",
+        "LC-NODE-186",
+        "LC-NODE-187",
+        "LC-NODE-188",
+        "LC-NODE-189",
+        "LC-NODE-190",
+        "LC-NODE-191",
+        "LC-NODE-192",
+        "LC-NODE-193",
+        "LC-NODE-194",
+        "LC-NODE-195",
+        "LC-NODE-196",
+        "LC-NODE-197",
+        "LC-NODE-198",
+        "LC-NODE-199",
+        "LC-NODE-200",
+        "LC-NODE-201",
+        "LC-NODE-202",
+        "LC-NODE-203",
+        "LC-NODE-204",
+        "LC-NODE-205",
+        "LC-NODE-206",
+        "LC-NODE-207",
+        "LC-NODE-208",
+        "LC-NODE-209",
+        "LC-NODE-210",
+        "LC-NODE-211",
+        "LC-NODE-212",
+        "LC-NODE-213",
+        "LC-NODE-214",
+        "LC-NODE-215",
+        "LC-NODE-216",
+        "LC-NODE-217",
+        "LC-NODE-218",
+        "LC-NODE-219",
+        "LC-NODE-220",
+        "LC-NODE-221",
+        "LC-NODE-222",
+        "LC-NODE-223",
+        "LC-NODE-224",
+        "LC-NODE-225",
+        "LC-NODE-226",
+        "LC-NODE-227",
+        "LC-NODE-228",
+        "LC-NODE-229",
+        "LC-NODE-230",
+        "LC-NODE-231",
+        "LC-NODE-232",
+        "LC-NODE-233",
+        "LC-NODE-234",
+        "LC-NODE-235",
+        "LC-NODE-236",
+        "LC-NODE-237",
+        "LC-NODE-238",
+        "LC-NODE-239",
+        "LC-NODE-240",
+        "LC-NODE-241",
+        "LC-NODE-242",
+        "LC-NODE-243",
+        "LC-NODE-244",
+        "LC-NODE-245",
+        "LC-NODE-246",
+        "LC-NODE-247",
+        "LC-NODE-248",
+        "LC-NODE-249",
+        "LC-NODE-250",
+        "LC-NODE-251",
+        "LC-NODE-252",
+        "LC-NODE-253",
+        "LC-NODE-254",
+        "LC-NODE-255",
+        "LC-NODE-256",
+        "LC-NODE-257",
+        "LC-NODE-258",
+        "LC-NODE-259",
+        "LC-NODE-260",
+        "LC-NODE-261",
+        "LC-NODE-262",
+        "LC-NODE-263",
+        "LC-NODE-264",
+        "LC-NODE-265",
+        "LC-NODE-266",
+        "LC-NODE-267",
+        "LC-NODE-268",
+        "LC-NODE-269",
+        "LC-NODE-270",
+        "LC-NODE-271",
+        "LC-NODE-272",
+        "LC-NODE-273",
+        "LC-NODE-274",
+        "LC-NODE-275",
+        "LC-NODE-276",
+        "LC-NODE-277",
+        "LC-NODE-278",
+        "LC-NODE-279",
+        "LC-NODE-280",
+        "LC-NODE-281",
+        "LC-NODE-282",
+        "LC-NODE-283",
+        "LC-NODE-284",
+        "LC-NODE-285",
+        "LC-NODE-286",
+        "LC-NODE-287",
+        "LC-NODE-288",
+        "LC-NODE-289",
+        "LC-NODE-290",
+        "LC-NODE-291",
+        "LC-NODE-292",
+        "LC-NODE-293",
+        "LC-NODE-294",
+        "LC-NODE-295",
+        "LC-NODE-296",
+        "LC-NODE-297",
+        "LC-NODE-298",
+        "LC-NODE-299",
+        "LC-NODE-300",
+        "LC-NODE-301",
+        "LC-NODE-302",
+        "LC-NODE-303",
+        "LC-NODE-304",
+        "LC-NODE-305",
+        "LC-NODE-306",
+        "LC-NODE-307",
+        "LC-NODE-308",
+        "LC-NODE-309",
+        "LC-NODE-310",
+        "LC-NODE-311",
+        "LC-NODE-312",
+        "LC-NODE-313",
+        "LC-NODE-314",
+        "LC-NODE-315",
+        "LC-NODE-316",
+        "LC-NODE-317",
+        "LC-NODE-318",
+        "LC-NODE-319",
+        "LC-NODE-320",
+        "LC-NODE-321",
+        "LC-NODE-322",
+        "LC-NODE-323",
+        "LC-NODE-324",
+        "LC-NODE-325",
+        "LC-NODE-326",
+        "LC-NODE-327",
+        "LC-NODE-328",
+        "LC-NODE-329",
+        "LC-NODE-330",
+        "LC-NODE-331",
+        "LC-NODE-332",
+        "LC-NODE-333",
+        "LC-NODE-334",
+        "LC-NODE-335",
+        "LC-NODE-336",
+        "LC-NODE-337",
+        "LC-NODE-338",
+        "LC-NODE-339",
+        "LC-NODE-340",
+        "LC-NODE-341",
+        "LC-NODE-342",
+        "LC-NODE-343",
+        "LC-NODE-344",
+        "LC-NODE-345",
+        "LC-NODE-346",
+        "LC-NODE-347",
+        "LC-NODE-348",
+        "LC-NODE-349",
+        "LC-NODE-350",
+        "LC-NODE-351",
+        "LC-NODE-352",
+        "LC-NODE-353",
+        "LC-NODE-354",
+        "LC-NODE-355",
+        "LC-NODE-356",
+        "LC-NODE-357",
+        "LC-NODE-358",
+        "LC-NODE-359",
+        "LC-NODE-360",
+        "LC-NODE-361",
+        "LC-NODE-362",
+        "LC-NODE-363",
+        "LC-NODE-364",
+        "LC-NODE-365",
+        "LC-NODE-366",
+        "LC-NODE-367",
+        "LC-NODE-368",
+        "LC-NODE-370",
+        "LC-NODE-371",
+        "LC-NODE-372",
+        "LC-NODE-373",
+        "LC-NODE-375",
+        "LC-NODE-377"
+      ],
+      "sliceIds": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S08",
+        "S09"
+      ],
+      "unknownBehavior": "CQ部分executionPath/newPersistence摘要把Graph修改寫在Generator，或把能力責任owner寫成Graph資料保存owner，並重用Legacy Apply後保存前提。這些不是可同時採用的canonical責任指令。",
+      "architectureImpact": "若照摘要字面實作會破壞只讀Generator與application canonical Graph。02/03/05的已明定契約及本次產品定位不變；封存摘要不得當作反向例外。原CQ文字修正/重新核准須另立來源revision，本輪沒有替來源做裁定。",
+      "blocks": [
+        "把CQ sourceSummary的混寫當成規範來產生API、mutation或儲存實作。",
+        "宣稱CQ來源已消除文字衝突或據此解除相關compatibility Gate。"
+      ],
+      "doesNotBlock": [
+        "按已明定的02/03/05/06契約實作S01及其他不採用衝突指令的分支。",
+        "使用IR行為oracle、CQ原disposition/caseIDs與本包compiled paths做相容追溯。"
+      ],
+      "earliestRequiredPhase": "Before importing any CQ summary wording into a production contract. Source correction may wait; quarantine must remain active from S01.",
+      "requiredEvidence": [
+        "來源負責者核對HC-001所列原文與AC責任，建立明示CQ修訂或解釋，不改IR/AC行為以遷就摘要。",
+        "每個受影響行為的實作證據確認Generator不改Graph、Graph保存不依Host Apply、schema owner不是instance state owner。"
+      ],
+      "disproofAction": "若後續證據顯示不只摘要錯置而是封存契約真衝突，停止受影響分支，提出architecture/source conflict；不可修改Graph ownership或默選一側。",
+      "sourceRefs": [
+        "CQ-001:entries executionPath/newPersistence",
+        "AC-002:CORE_API_CONTRACTS and Generator contracts",
+        "MRDP-001:canonical/legacy transformation boundaries",
+        "audit/HANDOFF_CONFLICTS.md#hc-001"
+      ]
+    },
+    {
+      "id": "G-DOCUMENT-STABILITY-COMMITMENT",
+      "kind": "product-policy",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [],
+      "sliceIds": [
+        "S01",
+        "S02"
+      ],
+      "unknownBehavior": "The product owner has not chosen the milestone, duration, or scope of the external stable-document compatibility/support commitment.",
+      "architectureImpact": "None: grape.document 1.0 identity, schema version policy, safe forward recovery, exact module pins, and ACK-backed save/reopen are technically defined in IH-003. This is a public support promise, not a choice of document owner or format.",
+      "blocks": [
+        "An external stable document compatibility guarantee or initial release statement claiming such a guarantee before owner decision."
+      ],
+      "doesNotBlock": [
+        "Internal S01 implementation once separately authorized.",
+        "Internal document codec fixtures and architecture qualification.",
+        "Slices independent of an external compatibility promise."
+      ],
+      "earliestRequiredPhase": "Before the first release or external statement that promises stable long-term document compatibility; earlier if migration acceptance expressly depends on that promise.",
+      "requiredEvidence": [
+        "An explicit product-owner decision naming commitment start milestone and intended support duration/scope.",
+        "At that milestone, retain the promised format fixtures and qualify all needed conversion paths before any incompatible release."
+      ],
+      "disproofAction": "If an earlier milestone is chosen, expand the retained compatibility corpus and qualify explicit migrations. A later milestone still does not authorize same-version schema reinterpretation or destructive loading. No default owner choice is inferred.",
+      "sourceRefs": [
+        "Independent review: B2 / human decision 2 / recommended S01 boundary",
+        "IH-003:14_DOCUMENT_FORMAT.md sections 4-6"
+      ]
+    }
+  ],
+  "significanceRule": "architectureSignificant preserves the classification of the 33 source UNKNOWNs (13 significant); false on a handoff-specific Gate does not assert zero architecture impact. Read architectureImpact, blocks and earliestRequiredPhase for actual dependency scope.",
+  "productDecisionRefs": [
+    {
+      "id": "DEC-GRAPE-001",
+      "file": "provenance/product-decisions/DEC-GRAPE-001.json",
+      "sha256": "c16771a0d2451deb48d1920f4d9b75d0eb54bfdc8cba1f7c6b8d034da342ea02",
+      "status": "accepted"
+    }
+  ]
+}

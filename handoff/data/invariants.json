@@ -1,0 +1,716 @@
+{
+  "schemaVersion": 1,
+  "source": "AC-002 inherited AB-001 INV-001..021",
+  "invariants": [
+    {
+      "id": "INV-001",
+      "statement": "公開資料／initializer 不能繞過唯一模型寫入邊界",
+      "sourceValidationLocator": "A03",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-002",
+      "statement": "一批修改全成或全敗；catch 失敗命令不能提交前半批",
+      "sourceValidationLocator": "A01、A02、A11b",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-003",
+      "statement": "Draft 是同步、短命能力；回呼後不能保留寫入權",
+      "sourceValidationLocator": "A05、A08c",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-004",
+      "statement": "Port 是 loadId＋Node ID＋方向/key 的邏輯引用",
+      "sourceValidationLocator": "A08、A08b",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-005",
+      "statement": "同 Graph 一次一個 Operation；取消發布補償但不留 Undo entry",
+      "sourceValidationLocator": "A06",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-006",
+      "statement": "History 恢復模型內容；no-op 不破壞 Redo；revision 不倒退",
+      "sourceValidationLocator": "A07、A14、整合流程",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-007",
+      "statement": "模組候選驗證也在 guard 內，Undo／cancel 不可重入",
+      "sourceValidationLocator": "A20、A21",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-008",
+      "statement": "observer 同批看同一完整狀態；個別 throw 不干擾其他 observer",
+      "sourceValidationLocator": "A04",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-009",
+      "statement": "先模型／診斷，再 Context projection，再外部通知",
+      "sourceValidationLocator": "A09",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-010",
+      "statement": "動態 state、ports、值、線損失與診斷一起發布",
+      "sourceValidationLocator": "A02、A07",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-011",
+      "statement": "接線檢查方向、所屬 Network、占用、型別與 cycle",
+      "sourceValidationLocator": "A11、generator invalid-edge cases",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-012",
+      "statement": "必要 Stage 邊界受 core 保護，模組缺失也不能刪除",
+      "sourceValidationLocator": "A19",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-013",
+      "statement": "新建節點遵守 Stage eligibility；匯入問題圖可診斷／分步修復",
+      "sourceValidationLocator": "A12、A17",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-014",
+      "statement": "外部可變定義不得修改已固定 DefinitionSet",
+      "sourceValidationLocator": "A15",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-015",
+      "statement": "Generator 只讀快照，檢查全圖錯誤後才剪去不使用的運算",
+      "sourceValidationLocator": "generator suite；整合 snapshot case",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-016",
+      "statement": "產碼身分不使用使用者名稱／畫布位置",
+      "sourceValidationLocator": "generator rename / Unicode symbols case",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-017",
+      "statement": "保存／reload 保留持久 ID 與未知內容，loadId 另立",
+      "sourceValidationLocator": "A08、A10、A10b",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-018",
+      "statement": "save ACK 只承認捕捉的內容；晚到成功不能清除較新 dirty",
+      "sourceValidationLocator": "A13；filesystem integration",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-019",
+      "statement": "多 Context 共用 model／History；UI state 獨立，只清失效引用",
+      "sourceValidationLocator": "A09；two-context integration",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-020",
+      "statement": "Parameter 與直接編輯共用 Operation 邊界",
+      "sourceValidationLocator": "A18",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    },
+    {
+      "id": "INV-021",
+      "statement": "Shader 值域比一般 JSON number 嚴格；不可保存稀疏 JSON 陣列",
+      "sourceValidationLocator": "A16；float32／sparse generator cases",
+      "status": "EXPERIMENTAL BUT CURRENTLY ACCEPTED",
+      "acceptance": "Must hold in production implementation; run matching behavior tests against production API. Reference test pass alone is not production evidence.",
+      "referenceTestDirectory": "executable-reference/tests",
+      "proofScope": "Bounded prototype invariant; not full product coverage",
+      "statusScope": "experimental-mechanism"
+    }
+  ],
+  "note": "Additional AC-002 contracts are indexed by responsibility below, not silently renumbered as original INV.",
+  "ac002Boundaries": [
+    {
+      "gapId": "CG-01",
+      "title": "六種 ValueType 不足以證明型別擴充",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "CQ01",
+        "CQ02",
+        "CQ03",
+        "CQ12",
+        "CQ13",
+        "CQ18"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "CG-02",
+      "title": "output expression 無法涵蓋所有 lowering 行為",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "CQ04",
+        "CQ05",
+        "CQ06",
+        "CQ07",
+        "CQ12"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "CG-03",
+      "title": "可保存 MAT 不代表具有 MAT 產碼路徑",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "CQ08",
+        "CQ09",
+        "CQ12"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "CG-04",
+      "title": "接口推導不能依節點建立順序；無效線政策不能只有一種",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "CQ11",
+        "CQ15"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "CG-05",
+      "title": "資源若只有 JSON 保存袋，沒有修改／上下文／驗證責任",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "CQ10",
+        "CQ14",
+        "WS11",
+        "WS19"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "CG-06",
+      "title": "AB 的 float/vec 自動轉型不是所有連線的共同政策",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "CQ19",
+        "CQ23"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "CG-07",
+      "title": "全域 kind 單一 entry 與每圖 exact provider pins 衝突",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "CQ20"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "CG-08",
+      "title": "Source 名稱唯一性不能只由 create/rename 驗證",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "WS30"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "CG-09",
+      "title": "同樣的 float ports，仍可能需要不同 GLSL 後端能力",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "CQ21",
+        "WS37"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "CG-10",
+      "title": "symbol map 不是精確 shader 行號／巢狀診斷，artifact origin 也不等於 delivery revision",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "CQ22",
+        "WS36"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "WG-01",
+      "title": "Layout 空間、Panel 實例、Tab 與 Graph 生命期不能混在一起",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "WS01",
+        "WS02",
+        "WS03",
+        "WS04"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "WG-02",
+      "title": "Widget 草稿與非同步檢視不能直接成為 Graph 狀態",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "WS09",
+        "WS10"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "WG-03",
+      "title": "scale 子圖只證明引用，不證明真正子網路",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "WS19",
+        "WS20",
+        "WS21",
+        "WS22"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "WG-04",
+      "title": "Clipboard hydration、資源 closure 與原子失敗需要明確契約",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "WS23",
+        "WS24",
+        "WS25",
+        "WS26"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "WG-05",
+      "title": "匯入接受不能偷偷換成另一個 Graph 實體",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "WS17",
+        "WS18"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "WG-06",
+      "title": "Node-only selection 不足以維持唯一 UI 選取真值",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "WS28",
+        "WS29"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "WG-07",
+      "title": "子圖已能生成，不代表 EditorContext 能進入其中編輯",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "WS31",
+        "WS32",
+        "WS33"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "WG-08",
+      "title": "Graph revision 不變，nested navigation 仍足以令非同步檢視過時",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "WS31",
+        "WS32",
+        "WS33",
+        "AQ12"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "WG-09",
+      "title": "未使用的 Vertex-only 子圖不該被預設 Pixel 驗證語境誤判",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "WS34",
+        "WS35"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "WG-10",
+      "title": "nested Parameter 不能以整網嚴格驗證取代 root 的 schema reconciliation",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "WS38",
+        "WS39",
+        "WS40",
+        "CQ23"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "WG-11",
+      "title": "接口變更只更新 Stage caller，會讓其他 definition 內的 caller 留在舊狀態",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "WS44",
+        "WS45",
+        "WS46"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "WG-12",
+      "title": "禁止建立、允許保存與自包含輸出必須有不同入口政策",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "WS42",
+        "WS43"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "PG-01",
+      "title": "Parameter presentation 的封閉 union 阻止模組 UI 擴充",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "PQ04",
+        "PQ05",
+        "PQ06",
+        "PQ07",
+        "PQ08"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "HG-01",
+      "title": "地址與顯示名稱不能充當 Target 身分；部署能力不能靠環境名稱推定",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "HQ01",
+        "HQ02",
+        "HQ23",
+        "HQ39",
+        "HQ40"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "HG-02",
+      "title": "只忽略舊回覆，擋不住舊 Shader 在宿主實際發布",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "HQ03",
+        "HQ04",
+        "HQ05",
+        "HQ06",
+        "HQ07",
+        "HQ20",
+        "HQ21"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "HG-03",
+      "title": "compatible live values 必須在 commit 時合併",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "HQ08",
+        "HQ09",
+        "HQ19"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "HG-04",
+      "title": "live value、Graph History、native definition History 各有 authority",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "HQ10",
+        "HQ11",
+        "HQ12",
+        "HQ13",
+        "HQ14",
+        "HQ15",
+        "HQ16",
+        "HQ44",
+        "HQ45"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "HG-05",
+      "title": "native plans/receipts 的生命期與 observed 權限不能由編輯器偽造",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "HQ25",
+        "HQ26",
+        "HQ27",
+        "HQ28",
+        "HQ29",
+        "HQ30",
+        "HQ31",
+        "HQ32",
+        "HQ33",
+        "HQ34",
+        "HQ37",
+        "HQ38"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "HG-06",
+      "title": "Preview pointer/capture hold 也有 session 生命期",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "HQ17",
+        "HQ18",
+        "HQ42",
+        "HQ43"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "HG-07",
+      "title": "審查確認、重試去重與宿主工作佇列不是同一種機制",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "HQ24",
+        "HQ35"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "HG-08",
+      "title": "唯讀檢查資料不能自行授予發布權",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "HQ41",
+        "HQ46",
+        "HQ47"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "UG-01",
+      "title": "Graph change 不會告訴你 explicit operation 已結束",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "UQ01"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "UG-02",
+      "title": "單一 last artifact cache 不等於已支援 Undo 重用",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "UQ02",
+        "UQ04",
+        "UQ06"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "UG-03",
+      "title": "排到微任務，不代表沒有下一個尚未完成手勢",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "UQ07"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "UG-04",
+      "title": "舊 Shader 不能配 await 後的新 GraphDocument 交付",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "UQ08"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "UG-05",
+      "title": "Compiler 成功回覆不代表它屬於這次 demand",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "UQ03",
+        "UQ05",
+        "UQ09"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "AG-01",
+      "title": "布局建議必須綁定真正的 Network 與選取範圍",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "AQ01",
+        "AQ02",
+        "AQ03",
+        "AQ08",
+        "AQ10",
+        "AQ11"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "AG-02",
+      "title": "Code／Help 投影不是任意字串渲染或 nodeId 比對",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "AQ04",
+        "AQ05",
+        "AQ12"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    },
+    {
+      "gapId": "AG-03",
+      "title": "下載與保存確認不能共用同一個完成語意",
+      "sourceStatus": "mechanism-validated",
+      "caseIds": [
+        "AQ06",
+        "AQ07",
+        "AQ09"
+      ],
+      "proofBoundary": "Only the stated mechanism/counterexample is closed. Whole leaf acceptance, unresolved legacy evidence and native/runtime limitations remain separate."
+    }
+  ],
+  "statusInterpretation": {
+    "statusField": "Bounded implementation mechanism adoption/evidence, inherited from AC-002; not the confirmation status of its parent principle.",
+    "changeRule": "Experimental mechanisms require recorded counterexample, AC, affected contracts and regression. Confirmed ownership/product intent cannot be silently changed by an engineering decision; a conflict must be escalated for owner approval."
+  },
+  "confirmedPrinciples": [
+    {
+      "id": "CP-01",
+      "statement": "One canonical application Graph; Host external",
+      "mechanisms": [
+        "INV-001",
+        "INV-017",
+        "INV-019"
+      ],
+      "source": "02_ARCHITECTURE_SPEC.md#1",
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "CP-02",
+      "statement": "Controlled model mutation; Parameter has no second canonical value",
+      "mechanisms": [
+        "INV-001",
+        "INV-002",
+        "INV-003",
+        "INV-010",
+        "INV-020"
+      ],
+      "source": "02_ARCHITECTURE_SPEC.md#3",
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "CP-03",
+      "statement": "Generator read only; all model errors block generation",
+      "mechanisms": [
+        "INV-015",
+        "INV-016"
+      ],
+      "source": "02_ARCHITECTURE_SPEC.md#5",
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "CP-04",
+      "statement": "Context UI state separate from shared model and History",
+      "mechanisms": [
+        "INV-009",
+        "INV-019"
+      ],
+      "source": "02_ARCHITECTURE_SPEC.md#2",
+      "status": "CONFIRMED"
+    }
+  ]
+}

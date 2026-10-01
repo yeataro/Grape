@@ -1,0 +1,1004 @@
+{
+  "schemaVersion": 1,
+  "simulationId": "FCS-001",
+  "method": "Bounded package-only self-sufficiency simulation by an agent that previously authored plan/gates; NOT a new stateless Context or independent blind review.",
+  "allowedInputs": "implementation-handoff only after simulation began; no external baseline, legacy source or conversation consulted as evidence.",
+  "status": "PASS",
+  "counts": {
+    "questions": 16,
+    "pass": 16,
+    "fail": 0
+  },
+  "productTestsExecuted": false,
+  "questions": [
+    {
+      "id": "FC-01",
+      "question": "這個產品是什麼？",
+      "status": "PASS",
+      "answer": "Grape是以Graph作品為中心的Shader節點編輯產品；來源、nodes、edges、parameters、GLSL、保存與可選Host交付構成使用流程。Graph內含Stages，不以每Stage建一份作品。",
+      "evidence": [
+        "00_README.md:opening product statement",
+        "01_PRODUCT_MODEL.md:作品與編輯"
+      ]
+    },
+    {
+      "id": "FC-02",
+      "question": "為什麼重構？",
+      "status": "PASS",
+      "answer": "保留產品能力但解除Host托管帶來的隱含依賴，維持可擴充的Node/UI/backend與清楚owner；同application可由Static/Node/Electron提供服務。沒有要求仿製Legacy module layout。",
+      "evidence": [
+        "00_README.md:product/refactor purpose",
+        "11_LEGACY_COMPATIBILITY.md:opening Architecture→Extension→Slice direction",
+        "12_DECISION_LOG.md:D01,D03,D14,D17"
+      ]
+    },
+    {
+      "id": "FC-03",
+      "question": "Canonical Graph由誰擁有？",
+      "status": "PASS",
+      "answer": "Application documents持有已載Graph；GraphDocument是快照，UI/Host都不另持canonical副本。Stage/Node/Edge/resources與GraphHistory由模型域持有；Context僅view/selection。 機器coverage現已將CQ原文隔離在non-normative sourceSummary，compiled fields明示Graph持有資料、Generator只讀、Context不是產碼前置；HC-001來源文字衝突仍open，不把隔離誤稱來源已修訂。",
+      "evidence": [
+        "01_PRODUCT_MODEL.md:作品與編輯",
+        "02_ARCHITECTURE_SPEC.md:§1,§2",
+        "03_RESPONSIBILITY_AND_DEPENDENCY.md:Application documents / Graph rows",
+        "data/capability-coverage.json:LC-NODE-370 executionPath/persistence/transformationChain",
+        "11_LEGACY_COMPATIBILITY.md:機器coverage資料定位",
+        "audit/HANDOFF_CONFLICTS.md:HC-001",
+        "data/gates.json:G-HANDOFF-CQ-OWNERSHIP"
+      ]
+    },
+    {
+      "id": "FC-04",
+      "question": "Host的角色是什麼？",
+      "status": "PASS",
+      "answer": "外部execution/integration target，擁有原生active artifact/current values/control authority；Binding持session/receipt/mirror。Host可保存已交付document副本，但不能接管工作中Graph。",
+      "evidence": [
+        "01_PRODUCT_MODEL.md:兩條參數路徑",
+        "06_HOST_INTEGRATION.md:Publication協定責任 / Live inputs與native operations",
+        "02_ARCHITECTURE_SPEC.md:§8"
+      ]
+    },
+    {
+      "id": "FC-05",
+      "question": "Parameter.write的完整資料路徑？",
+      "status": "PASS",
+      "answer": "Widget文字draft經guard/parse，再Parameter.write→Graph同步Draft→codec/schema/reconcile/diagnostics→原子發布、Context投影先、observer後；Operation commit形成History，Updates另排程。Host live值是另一條CAS/service路徑。 機器coverage現已將CQ原文隔離在non-normative sourceSummary，compiled fields明示Graph持有資料、Generator只讀、Context不是產碼前置；HC-001來源文字衝突仍open，不把隔離誤稱來源已修訂。",
+      "evidence": [
+        "05_DATA_AND_LIFECYCLE.md:§1 sequence and operation table",
+        "executable-reference/core.ts:Parameter.write / Graph.change / Operation",
+        "examples/parameter-widget-or-ui-contribution/contribution.ts:PercentFieldController.commit",
+        "data/capability-coverage.json:LC-NODE-370 executionPath/persistence/transformationChain",
+        "11_LEGACY_COMPATIBILITY.md:機器coverage資料定位",
+        "audit/HANDOFF_CONFLICTS.md:HC-001",
+        "data/gates.json:G-HANDOFF-CQ-OWNERSHIP"
+      ]
+    },
+    {
+      "id": "FC-06",
+      "question": "如何增加普通Node？",
+      "status": "PASS",
+      "answer": "實作exact NodeType ref、codec/initialize/ports/parameters/validate/emit，放NodeModule manifest/types；Registry.register→pin→Draft.createNode。minimal-node實例與測試給完整API順序，core不按名稱分支。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§2",
+        "examples/minimal-node/example.ts:minimalNodeModule / scale",
+        "examples/minimal-node/example.test.ts:HANDOFF-NODE-01"
+      ]
+    },
+    {
+      "id": "FC-07",
+      "question": "如何增加Dynamic Node？",
+      "status": "PASS",
+      "answer": "同NodeModule定義state codec與state→ports，stable keys和Parameter.write觸發同批reconcile。範例現已用既有presentation.options傳送handoff.menu-items.v1及有序value/label；generic renderer可直接列出pair/color再提交選值，不必猜typeId或codec。這是明示sample convention，沒有冒稱正式menu SDK或DOM已實作。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§3",
+        "examples/dynamic-interface-node/example.ts:pack.parameters",
+        "executable-reference/contracts.ts:ParameterPresentation/ParameterSpec",
+        "executable-reference/qualification-presentation.ts:ParameterWidgets core.menu",
+        "ui-reference/UI_SPEC.md:Inspector最小建構規則",
+        "examples/dynamic-interface-node/README.md:Explicit menu descriptor",
+        "examples/dynamic-interface-node/example.test.ts:HANDOFF-DYNAMIC-03"
+      ]
+    },
+    {
+      "id": "FC-08",
+      "question": "如何增加Panel？",
+      "status": "PASS",
+      "answer": "宣告PanelType typeId/viewStateVersion/create，依Panel canClose/export/restore/dispose契約實作，經PanelTemplateHost.register/open/save/close；template能登錄SelectionSummary而不改Graph。完整production mount/router/restore ABI尚在G-EXTENSION-PANEL，文件明說停止線，不需假裝現有bounded Workspace已實作。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§4",
+        "examples/minimal-panel/panel-template.ts:Panel / PanelType / PanelTemplateHost",
+        "examples/minimal-panel/README.md",
+        "10_KNOWN_GATES.md:G-EXTENSION-PANEL"
+      ]
+    },
+    {
+      "id": "FC-09",
+      "question": "如何增加Widget/UI Contribution？",
+      "status": "PASS",
+      "answer": "ParameterWidgets.register註冊immutable projection；presentation descriptor/options只決定樣貌，值提交仍經Parameter.write。Actions/FieldDraft示例提供lifecycle/guard/parse/fallback/Undo，nested projection缺口明列G-EXTENSION-WIDGET-SCOPE。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§5",
+        "examples/parameter-widget-or-ui-contribution/contribution.ts:registerPercentWidget / PercentFieldController",
+        "executable-reference/qualification-presentation.ts:ParameterWidgets / WidgetRegistry / Actions"
+      ]
+    },
+    {
+      "id": "FC-10",
+      "question": "如何增加backend/profile？",
+      "status": "PASS",
+      "answer": "實作GenerationProfile id/graphKinds/vertexNetwork/capabilities/type validation/render，注入generate(snapshot,profile)。NodeType定operation語意，Profile定shell和支持範圍，不寫Graph/Host；GLSL backend原型範圍與native/ISF未驗門檻清楚。 機器coverage現已將CQ原文隔離在non-normative sourceSummary，compiled fields明示Graph持有資料、Generator只讀、Context不是產碼前置；HC-001來源文字衝突仍open，不把隔離誤稱來源已修訂。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§6",
+        "executable-reference/generator.ts:GenerationProfile / ES300_PROFILE / generate",
+        "02_ARCHITECTURE_SPEC.md:§5",
+        "data/capability-coverage.json:LC-NODE-370 executionPath/persistence/transformationChain",
+        "11_LEGACY_COMPATIBILITY.md:機器coverage資料定位",
+        "audit/HANDOFF_CONFLICTS.md:HC-001",
+        "data/gates.json:G-HANDOFF-CQ-OWNERSHIP"
+      ]
+    },
+    {
+      "id": "FC-11",
+      "question": "如何保存／重新載入？",
+      "status": "PASS",
+      "answer": "export當下已發布document；save捕捉內容後await adapter，只ACK該內容；download不清dirty。load保持persistentIDs但新loadId、空History，missingmoduleopaque可存；import accept與reload是不同生命期。",
+      "evidence": [
+        "05_DATA_AND_LIFECYCLE.md:§2",
+        "02_ARCHITECTURE_SPEC.md:§6",
+        "executable-reference/core.ts:Graph.exportJSON / Graph.save / Graph.load",
+        "examples/minimal-node/example.test.ts:HANDOFF-NODE-02"
+      ]
+    },
+    {
+      "id": "FC-12",
+      "question": "如何接入Host，是否需要先Apply？",
+      "status": "PASS",
+      "answer": "以bootstrap身份查核、HostServices權限與對應provider建立Target能力；publication使用lease/fenced receiver和ArtifactExecutor。既有Target的live/native控制及preview不要求先Apply：S09基本前置只有S07，S08只在跨publication/Reload的mixedHistory、schema替換及receipt競態分支成為conditionalPrerequisite。memory adapter不能證明原生原子性。",
+      "evidence": [
+        "06_HOST_INTEGRATION.md:Preview、reconnect與readback",
+        "examples/minimal-host-adapter/example.ts:MemoryArtifactExecutor / makeMemoryHost",
+        "executable-reference/qualification-host.ts:verifyBootstrap / HostServices / FencedArtifactReceiver",
+        "08_IMPLEMENTATION_PLAN.md:S09",
+        "data/slices.json:S09 prerequisites/prerequisiteOutputs/conditionalPrerequisites"
+      ]
+    },
+    {
+      "id": "FC-13",
+      "question": "Static/Node/Electron的共同與不同？",
+      "status": "PASS",
+      "answer": "同Graph/Generator/application contracts；bootstrap/providers及可用權限不同。Static無任意fs/nativewindow，Node位置不等用戶machine，Electron只窄bridge而不改core；實際runtime各驗，PWA不自動承諾。",
+      "evidence": [
+        "07_DEPLOYMENT_MODEL.md:profile table / Node→Electron / 啟動與缺能力",
+        "03_RESPONSIBILITY_AND_DEPENDENCY.md:Bootstrap/deployment row",
+        "ui-reference/UI_SPEC.md:§9 Responsive/tablet/mobile boundary"
+      ]
+    },
+    {
+      "id": "FC-14",
+      "question": "第一個可實作slice是什麼？",
+      "status": "PASS",
+      "answer": "S01是最小真Canvas+Inspector+actions的host-free產品路徑；建立Graph/nodes、改parameter、connect、看GLSL、Undo、save/reload，兩Context模型共享。47AT是計畫而非已跑產品測試；不能只交headless新原型。",
+      "evidence": [
+        "00_README.md:first slice paragraph",
+        "08_IMPLEMENTATION_PLAN.md:S01",
+        "09_ACCEPTANCE_AND_CONFORMANCE.md:S01",
+        "ui-reference/UI_SPEC.md:首輪scope / 兩Canvas驗收序列",
+        "data/acceptance-index.json:618 leaf join; sharedPlannedTests and productionAcceptance"
+      ]
+    },
+    {
+      "id": "FC-15",
+      "question": "哪些Gate不能跨越？",
+      "status": "PASS",
+      "answer": "33UNKNOWN、13significant、8PDR葉、5決策view及7handoff風險合計45 gate記錄，逐項列blocks/doesNotBlock/earliest/evidence。Personal/retention/adoption/window要owner決策；revision/mixedHistory先定scope；native可行性不可拖到大量依賴之後；HC-001衝突原摘要不能當指令。這些不是全域停工，也未因handoff清晰而解除。",
+      "evidence": [
+        "10_KNOWN_GATES.md:門檻、33UNKNOWN、決策view、額外gates",
+        "data/gates.json",
+        "12_DECISION_LOG.md:unresolved product behavior"
+      ]
+    },
+    {
+      "id": "FC-16",
+      "question": "哪些作法違反架構？",
+      "status": "PASS",
+      "answer": "另一份canonical UI值、Generator寫Graph、module私改他人state、Host接管document、Panel穿透internals、Node名字switch、core平台API、slot-by-index identity、把readback當write、半批提交或silent latest均明列禁止；manifest檢查不代語意review。",
+      "evidence": [
+        "03_RESPONSIBILITY_AND_DEPENDENCY.md:必須拒絕的architecture violations",
+        "09_ACCEPTANCE_AND_CONFORMANCE.md:必守組合反例",
+        "examples/conformance-manifest.json"
+      ]
+    }
+  ],
+  "materialFindings": [
+    {
+      "id": "FCS-F01",
+      "questionId": "FC-07",
+      "status": "resolved-by-package-compilation",
+      "kind": "extension-contract ambiguity",
+      "summary": "Dynamic mode menu lacks an enumerable descriptor for a generic UI renderer; no core change is requested by this audit.",
+      "resolution": "既有presentation.options增加明示sample descriptor；04與example README同時區分template convention和未實作DOM。HANDOFF-DYNAMIC-03直接檢查projection的choices/labels及選值。"
+    },
+    {
+      "id": "FCS-F02",
+      "questionId": "FC-12",
+      "status": "resolved-by-package-compilation",
+      "kind": "canonical dependency contradiction",
+      "summary": "S09 requires S08 publication while Host contract forbids requiring Apply for existing-target value control.",
+      "resolution": "S09 prerequisites改為S07；conditionalPrerequisites僅在cross-publication/Reload分支依賴S08，08文字/圖與06一致。"
+    },
+    {
+      "id": "FCS-F03",
+      "questionIds": [
+        "FC-03",
+        "FC-05",
+        "FC-10"
+      ],
+      "status": "handoff-conflict-resolved-source-conflict-quarantined",
+      "kind": "canonical responsibility conflict in compiled coverage data",
+      "summary": "CQ mechanism summary appears as executable owner/path: Generator runs Graph mutation/history/storage; Registry owns persisted Graph data. Reader cannot safely resolve against the architecture prose.",
+      "classification": "Handoff compilation ambiguity requiring correction, not evidence that the sealed architecture itself changed.",
+      "example": {
+        "capabilityId": "LC-NODE-370",
+        "generatorAction": "使用 ModuleContext/TypeEnvironment 執行 Graph.change/reconcile/diagnose, DefinitionSet, validate-before-prune, History, load/save",
+        "persistenceOwner": "Registry"
+      },
+      "requiredResolution": "Keep original CQ text as explicitly non-normative historical source, and compile normative owners/paths/persistence according to local architecture contracts; uncertain branches must remain unresolved/gated. Do not overwrite sealed evidence or use a broad precedence disclaimer as the correction.",
+      "resolution": "618條sourceSummary明示historical-non-normative，compiled executionPath與三域stateOwnership/persistence依包內既有02/03/05/06分責。395個Generator路徑步驟明示只讀snapshot、不得mutateCanonicalModel；Graph保存不依Host Apply。11/00/HC-001/G-HANDOFF-CQ-OWNERSHIP都明示來源未修訂，禁止將隔離原文作實作指令。",
+      "sourceConflictStillOpen": "HC-001",
+      "dispositionScope": "The handoff answers are now coherent. This does not close the source baseline conflict, rewrite CQ disposition, or prove runtime/product behavior."
+    }
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "status": "FAIL",
+      "pass": 14,
+      "fail": 2,
+      "correctionsMadeByReviewer": false
+    },
+    {
+      "round": 2,
+      "status": "FAIL",
+      "pass": 13,
+      "fail": 3,
+      "correctionsMadeByReviewer": false,
+      "resolved": [
+        "FCS-F01",
+        "FCS-F02"
+      ],
+      "added": [
+        "FCS-F03"
+      ]
+    },
+    {
+      "round": 3,
+      "status": "PASS",
+      "pass": 16,
+      "fail": 0,
+      "correctionsMadeByReviewer": false,
+      "resolvedInHandoff": [
+        "FCS-F03"
+      ],
+      "sourceConflictRemainsOpen": [
+        "HC-001"
+      ]
+    }
+  ],
+  "initialQuestionResults": [
+    {
+      "id": "FC-01",
+      "question": "這個產品是什麼？",
+      "status": "PASS",
+      "answer": "Grape是以Graph作品為中心的Shader節點編輯產品；來源、nodes、edges、parameters、GLSL、保存與可選Host交付構成使用流程。Graph內含Stages，不以每Stage建一份作品。",
+      "evidence": [
+        "00_README.md:opening product statement",
+        "01_PRODUCT_MODEL.md:作品與編輯"
+      ]
+    },
+    {
+      "id": "FC-02",
+      "question": "為什麼重構？",
+      "status": "PASS",
+      "answer": "保留產品能力但解除Host托管帶來的隱含依賴，維持可擴充的Node/UI/backend與清楚owner；同application可由Static/Node/Electron提供服務。沒有要求仿製Legacy module layout。",
+      "evidence": [
+        "00_README.md:product/refactor purpose",
+        "11_LEGACY_COMPATIBILITY.md:opening Architecture→Extension→Slice direction",
+        "12_DECISION_LOG.md:D01,D03,D14,D17"
+      ]
+    },
+    {
+      "id": "FC-03",
+      "question": "Canonical Graph由誰擁有？",
+      "status": "PASS",
+      "answer": "Application documents持有已載Graph；GraphDocument是快照，UI/Host都不另持canonical副本。Stage/Node/Edge/resources與GraphHistory由模型域持有；Context僅view/selection。",
+      "evidence": [
+        "01_PRODUCT_MODEL.md:作品與編輯",
+        "02_ARCHITECTURE_SPEC.md:§1,§2",
+        "03_RESPONSIBILITY_AND_DEPENDENCY.md:Application documents / Graph rows"
+      ]
+    },
+    {
+      "id": "FC-04",
+      "question": "Host的角色是什麼？",
+      "status": "PASS",
+      "answer": "外部execution/integration target，擁有原生active artifact/current values/control authority；Binding持session/receipt/mirror。Host可保存已交付document副本，但不能接管工作中Graph。",
+      "evidence": [
+        "01_PRODUCT_MODEL.md:兩條參數路徑",
+        "06_HOST_INTEGRATION.md:Publication協定責任 / Live inputs與native operations",
+        "02_ARCHITECTURE_SPEC.md:§8"
+      ]
+    },
+    {
+      "id": "FC-05",
+      "question": "Parameter.write的完整資料路徑？",
+      "status": "PASS",
+      "answer": "Widget文字draft經guard/parse，再Parameter.write→Graph同步Draft→codec/schema/reconcile/diagnostics→原子發布、Context投影先、observer後；Operation commit形成History，Updates另排程。Host live值是另一條CAS/service路徑。",
+      "evidence": [
+        "05_DATA_AND_LIFECYCLE.md:§1 sequence and operation table",
+        "executable-reference/core.ts:Parameter.write / Graph.change / Operation",
+        "examples/parameter-widget-or-ui-contribution/contribution.ts:PercentFieldController.commit"
+      ]
+    },
+    {
+      "id": "FC-06",
+      "question": "如何增加普通Node？",
+      "status": "PASS",
+      "answer": "實作exact NodeType ref、codec/initialize/ports/parameters/validate/emit，放NodeModule manifest/types；Registry.register→pin→Draft.createNode。minimal-node實例與測試給完整API順序，core不按名稱分支。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§2",
+        "examples/minimal-node/example.ts:minimalNodeModule / scale",
+        "examples/minimal-node/example.test.ts:HANDOFF-NODE-01"
+      ]
+    },
+    {
+      "id": "FC-07",
+      "question": "如何增加Dynamic Node？",
+      "status": "FAIL",
+      "answer": "模型部分已清楚：同NodeModule，state→ports，stable keys和Parameter.write共同reconcile。然而初讀dynamic example mode只給presentation:menu，沒有可列舉choices；core.menu只轉送options。S01/UI_SPEC要求真dropdown，新UI無法不猜節點私有codec就列出pair/color。需補既有presentation.options的明示教學descriptor／renderer契約，或明列不交付該UI。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§3",
+        "examples/dynamic-interface-node/example.ts:pack.parameters",
+        "executable-reference/contracts.ts:ParameterPresentation/ParameterSpec",
+        "executable-reference/qualification-presentation.ts:ParameterWidgets core.menu",
+        "ui-reference/UI_SPEC.md:Inspector最小建構規則"
+      ]
+    },
+    {
+      "id": "FC-08",
+      "question": "如何增加Panel？",
+      "status": "PASS",
+      "answer": "宣告PanelType typeId/viewStateVersion/create，依Panel canClose/export/restore/dispose契約實作，經PanelTemplateHost.register/open/save/close；template能登錄SelectionSummary而不改Graph。完整production mount/router/restore ABI尚在G-EXTENSION-PANEL，文件明說停止線，不需假裝現有bounded Workspace已實作。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§4",
+        "examples/minimal-panel/panel-template.ts:Panel / PanelType / PanelTemplateHost",
+        "examples/minimal-panel/README.md",
+        "10_KNOWN_GATES.md:G-EXTENSION-PANEL"
+      ]
+    },
+    {
+      "id": "FC-09",
+      "question": "如何增加Widget/UI Contribution？",
+      "status": "PASS",
+      "answer": "ParameterWidgets.register註冊immutable projection；presentation descriptor/options只決定樣貌，值提交仍經Parameter.write。Actions/FieldDraft示例提供lifecycle/guard/parse/fallback/Undo，nested projection缺口明列G-EXTENSION-WIDGET-SCOPE。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§5",
+        "examples/parameter-widget-or-ui-contribution/contribution.ts:registerPercentWidget / PercentFieldController",
+        "executable-reference/qualification-presentation.ts:ParameterWidgets / WidgetRegistry / Actions"
+      ]
+    },
+    {
+      "id": "FC-10",
+      "question": "如何增加backend/profile？",
+      "status": "PASS",
+      "answer": "實作GenerationProfile id/graphKinds/vertexNetwork/capabilities/type validation/render，注入generate(snapshot,profile)。NodeType定operation語意，Profile定shell和支持範圍，不寫Graph/Host；GLSL backend原型範圍與native/ISF未驗門檻清楚。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§6",
+        "executable-reference/generator.ts:GenerationProfile / ES300_PROFILE / generate",
+        "02_ARCHITECTURE_SPEC.md:§5"
+      ]
+    },
+    {
+      "id": "FC-11",
+      "question": "如何保存／重新載入？",
+      "status": "PASS",
+      "answer": "export當下已發布document；save捕捉內容後await adapter，只ACK該內容；download不清dirty。load保持persistentIDs但新loadId、空History，missingmoduleopaque可存；import accept與reload是不同生命期。",
+      "evidence": [
+        "05_DATA_AND_LIFECYCLE.md:§2",
+        "02_ARCHITECTURE_SPEC.md:§6",
+        "executable-reference/core.ts:Graph.exportJSON / Graph.save / Graph.load",
+        "examples/minimal-node/example.test.ts:HANDOFF-NODE-02"
+      ]
+    },
+    {
+      "id": "FC-12",
+      "question": "如何接入Host，是否需要先Apply？",
+      "status": "FAIL",
+      "answer": "Host契約/API與memory adapter給明確identity→lease→fenced operations路径，而且06明說既有Target values/preview不要求先publication。但08與slices.json的S09 prerequisites包含S08首條publication，讓值控制可能必須先Apply；同包存在相反前置。需把S09基本能力依赖S07，僅cross-publication/mixedHistory分支依赖S08。",
+      "evidence": [
+        "06_HOST_INTEGRATION.md:Preview、reconnect與readback",
+        "examples/minimal-host-adapter/example.ts:MemoryArtifactExecutor / makeMemoryHost",
+        "executable-reference/qualification-host.ts:verifyBootstrap / HostServices / FencedArtifactReceiver",
+        "08_IMPLEMENTATION_PLAN.md:S09",
+        "data/slices.json:S09 prerequisites/prerequisiteOutputs"
+      ]
+    },
+    {
+      "id": "FC-13",
+      "question": "Static/Node/Electron的共同與不同？",
+      "status": "PASS",
+      "answer": "同Graph/Generator/application contracts；bootstrap/providers及可用權限不同。Static無任意fs/nativewindow，Node位置不等用戶machine，Electron只窄bridge而不改core；實際runtime各驗，PWA不自動承諾。",
+      "evidence": [
+        "07_DEPLOYMENT_MODEL.md:profile table / Node→Electron / 啟動與缺能力",
+        "03_RESPONSIBILITY_AND_DEPENDENCY.md:Bootstrap/deployment row"
+      ]
+    },
+    {
+      "id": "FC-14",
+      "question": "第一個可實作slice是什麼？",
+      "status": "PASS",
+      "answer": "S01是最小真Canvas+Inspector+actions的host-free產品路徑；建立Graph/nodes、改parameter、connect、看GLSL、Undo、save/reload，兩Context模型共享。47AT是計畫而非已跑產品測試；不能只交headless新原型。",
+      "evidence": [
+        "00_README.md:first slice paragraph",
+        "08_IMPLEMENTATION_PLAN.md:S01",
+        "09_ACCEPTANCE_AND_CONFORMANCE.md:S01",
+        "ui-reference/UI_SPEC.md:首輪scope / 兩Canvas驗收序列"
+      ]
+    },
+    {
+      "id": "FC-15",
+      "question": "哪些Gate不能跨越？",
+      "status": "PASS",
+      "answer": "33UNKNOWN、13significant、8PDR葉、5決策view及6handoff scope風險逐項列blocks/doesNotBlock/earliest/evidence。Personal/retention/adoption/window要owner決策；revision/mixedHistory先定scope；nativeI可行性不可拖到大量依賴之後；不是全域停工。",
+      "evidence": [
+        "10_KNOWN_GATES.md:門檻、33UNKNOWN、決策view、額外gates",
+        "data/gates.json",
+        "12_DECISION_LOG.md:unresolved product behavior"
+      ]
+    },
+    {
+      "id": "FC-16",
+      "question": "哪些作法違反架構？",
+      "status": "PASS",
+      "answer": "另一份canonical UI值、Generator寫Graph、module私改他人state、Host接管document、Panel穿透internals、Node名字switch、core平台API、slot-by-index identity、把readback當write、半批提交或silent latest均明列禁止；manifest檢查不代語意review。",
+      "evidence": [
+        "03_RESPONSIBILITY_AND_DEPENDENCY.md:必須拒絕的architecture violations",
+        "09_ACCEPTANCE_AND_CONFORMANCE.md:必守組合反例",
+        "examples/conformance-manifest.json"
+      ]
+    }
+  ],
+  "beforeThirdFindingQuestionResults": [
+    {
+      "id": "FC-01",
+      "question": "這個產品是什麼？",
+      "status": "PASS",
+      "answer": "Grape是以Graph作品為中心的Shader節點編輯產品；來源、nodes、edges、parameters、GLSL、保存與可選Host交付構成使用流程。Graph內含Stages，不以每Stage建一份作品。",
+      "evidence": [
+        "00_README.md:opening product statement",
+        "01_PRODUCT_MODEL.md:作品與編輯"
+      ]
+    },
+    {
+      "id": "FC-02",
+      "question": "為什麼重構？",
+      "status": "PASS",
+      "answer": "保留產品能力但解除Host托管帶來的隱含依賴，維持可擴充的Node/UI/backend與清楚owner；同application可由Static/Node/Electron提供服務。沒有要求仿製Legacy module layout。",
+      "evidence": [
+        "00_README.md:product/refactor purpose",
+        "11_LEGACY_COMPATIBILITY.md:opening Architecture→Extension→Slice direction",
+        "12_DECISION_LOG.md:D01,D03,D14,D17"
+      ]
+    },
+    {
+      "id": "FC-03",
+      "question": "Canonical Graph由誰擁有？",
+      "status": "PASS",
+      "answer": "Application documents持有已載Graph；GraphDocument是快照，UI/Host都不另持canonical副本。Stage/Node/Edge/resources與GraphHistory由模型域持有；Context僅view/selection。",
+      "evidence": [
+        "01_PRODUCT_MODEL.md:作品與編輯",
+        "02_ARCHITECTURE_SPEC.md:§1,§2",
+        "03_RESPONSIBILITY_AND_DEPENDENCY.md:Application documents / Graph rows"
+      ]
+    },
+    {
+      "id": "FC-04",
+      "question": "Host的角色是什麼？",
+      "status": "PASS",
+      "answer": "外部execution/integration target，擁有原生active artifact/current values/control authority；Binding持session/receipt/mirror。Host可保存已交付document副本，但不能接管工作中Graph。",
+      "evidence": [
+        "01_PRODUCT_MODEL.md:兩條參數路徑",
+        "06_HOST_INTEGRATION.md:Publication協定責任 / Live inputs與native operations",
+        "02_ARCHITECTURE_SPEC.md:§8"
+      ]
+    },
+    {
+      "id": "FC-05",
+      "question": "Parameter.write的完整資料路徑？",
+      "status": "PASS",
+      "answer": "Widget文字draft經guard/parse，再Parameter.write→Graph同步Draft→codec/schema/reconcile/diagnostics→原子發布、Context投影先、observer後；Operation commit形成History，Updates另排程。Host live值是另一條CAS/service路徑。",
+      "evidence": [
+        "05_DATA_AND_LIFECYCLE.md:§1 sequence and operation table",
+        "executable-reference/core.ts:Parameter.write / Graph.change / Operation",
+        "examples/parameter-widget-or-ui-contribution/contribution.ts:PercentFieldController.commit"
+      ]
+    },
+    {
+      "id": "FC-06",
+      "question": "如何增加普通Node？",
+      "status": "PASS",
+      "answer": "實作exact NodeType ref、codec/initialize/ports/parameters/validate/emit，放NodeModule manifest/types；Registry.register→pin→Draft.createNode。minimal-node實例與測試給完整API順序，core不按名稱分支。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§2",
+        "examples/minimal-node/example.ts:minimalNodeModule / scale",
+        "examples/minimal-node/example.test.ts:HANDOFF-NODE-01"
+      ]
+    },
+    {
+      "id": "FC-07",
+      "question": "如何增加Dynamic Node？",
+      "status": "PASS",
+      "answer": "同NodeModule定義state codec與state→ports，stable keys和Parameter.write觸發同批reconcile。範例現已用既有presentation.options傳送handoff.menu-items.v1及有序value/label；generic renderer可直接列出pair/color再提交選值，不必猜typeId或codec。這是明示sample convention，沒有冒稱正式menu SDK或DOM已實作。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§3",
+        "examples/dynamic-interface-node/example.ts:pack.parameters",
+        "executable-reference/contracts.ts:ParameterPresentation/ParameterSpec",
+        "executable-reference/qualification-presentation.ts:ParameterWidgets core.menu",
+        "ui-reference/UI_SPEC.md:Inspector最小建構規則",
+        "examples/dynamic-interface-node/README.md:Explicit menu descriptor",
+        "examples/dynamic-interface-node/example.test.ts:HANDOFF-DYNAMIC-03"
+      ]
+    },
+    {
+      "id": "FC-08",
+      "question": "如何增加Panel？",
+      "status": "PASS",
+      "answer": "宣告PanelType typeId/viewStateVersion/create，依Panel canClose/export/restore/dispose契約實作，經PanelTemplateHost.register/open/save/close；template能登錄SelectionSummary而不改Graph。完整production mount/router/restore ABI尚在G-EXTENSION-PANEL，文件明說停止線，不需假裝現有bounded Workspace已實作。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§4",
+        "examples/minimal-panel/panel-template.ts:Panel / PanelType / PanelTemplateHost",
+        "examples/minimal-panel/README.md",
+        "10_KNOWN_GATES.md:G-EXTENSION-PANEL"
+      ]
+    },
+    {
+      "id": "FC-09",
+      "question": "如何增加Widget/UI Contribution？",
+      "status": "PASS",
+      "answer": "ParameterWidgets.register註冊immutable projection；presentation descriptor/options只決定樣貌，值提交仍經Parameter.write。Actions/FieldDraft示例提供lifecycle/guard/parse/fallback/Undo，nested projection缺口明列G-EXTENSION-WIDGET-SCOPE。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§5",
+        "examples/parameter-widget-or-ui-contribution/contribution.ts:registerPercentWidget / PercentFieldController",
+        "executable-reference/qualification-presentation.ts:ParameterWidgets / WidgetRegistry / Actions"
+      ]
+    },
+    {
+      "id": "FC-10",
+      "question": "如何增加backend/profile？",
+      "status": "PASS",
+      "answer": "實作GenerationProfile id/graphKinds/vertexNetwork/capabilities/type validation/render，注入generate(snapshot,profile)。NodeType定operation語意，Profile定shell和支持範圍，不寫Graph/Host；GLSL backend原型範圍與native/ISF未驗門檻清楚。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§6",
+        "executable-reference/generator.ts:GenerationProfile / ES300_PROFILE / generate",
+        "02_ARCHITECTURE_SPEC.md:§5"
+      ]
+    },
+    {
+      "id": "FC-11",
+      "question": "如何保存／重新載入？",
+      "status": "PASS",
+      "answer": "export當下已發布document；save捕捉內容後await adapter，只ACK該內容；download不清dirty。load保持persistentIDs但新loadId、空History，missingmoduleopaque可存；import accept與reload是不同生命期。",
+      "evidence": [
+        "05_DATA_AND_LIFECYCLE.md:§2",
+        "02_ARCHITECTURE_SPEC.md:§6",
+        "executable-reference/core.ts:Graph.exportJSON / Graph.save / Graph.load",
+        "examples/minimal-node/example.test.ts:HANDOFF-NODE-02"
+      ]
+    },
+    {
+      "id": "FC-12",
+      "question": "如何接入Host，是否需要先Apply？",
+      "status": "PASS",
+      "answer": "以bootstrap身份查核、HostServices權限與對應provider建立Target能力；publication使用lease/fenced receiver和ArtifactExecutor。既有Target的live/native控制及preview不要求先Apply：S09基本前置只有S07，S08只在跨publication/Reload的mixedHistory、schema替換及receipt競態分支成為conditionalPrerequisite。memory adapter不能證明原生原子性。",
+      "evidence": [
+        "06_HOST_INTEGRATION.md:Preview、reconnect與readback",
+        "examples/minimal-host-adapter/example.ts:MemoryArtifactExecutor / makeMemoryHost",
+        "executable-reference/qualification-host.ts:verifyBootstrap / HostServices / FencedArtifactReceiver",
+        "08_IMPLEMENTATION_PLAN.md:S09",
+        "data/slices.json:S09 prerequisites/prerequisiteOutputs/conditionalPrerequisites"
+      ]
+    },
+    {
+      "id": "FC-13",
+      "question": "Static/Node/Electron的共同與不同？",
+      "status": "PASS",
+      "answer": "同Graph/Generator/application contracts；bootstrap/providers及可用權限不同。Static無任意fs/nativewindow，Node位置不等用戶machine，Electron只窄bridge而不改core；實際runtime各驗，PWA不自動承諾。",
+      "evidence": [
+        "07_DEPLOYMENT_MODEL.md:profile table / Node→Electron / 啟動與缺能力",
+        "03_RESPONSIBILITY_AND_DEPENDENCY.md:Bootstrap/deployment row"
+      ]
+    },
+    {
+      "id": "FC-14",
+      "question": "第一個可實作slice是什麼？",
+      "status": "PASS",
+      "answer": "S01是最小真Canvas+Inspector+actions的host-free產品路徑；建立Graph/nodes、改parameter、connect、看GLSL、Undo、save/reload，兩Context模型共享。47AT是計畫而非已跑產品測試；不能只交headless新原型。",
+      "evidence": [
+        "00_README.md:first slice paragraph",
+        "08_IMPLEMENTATION_PLAN.md:S01",
+        "09_ACCEPTANCE_AND_CONFORMANCE.md:S01",
+        "ui-reference/UI_SPEC.md:首輪scope / 兩Canvas驗收序列"
+      ]
+    },
+    {
+      "id": "FC-15",
+      "question": "哪些Gate不能跨越？",
+      "status": "PASS",
+      "answer": "33UNKNOWN、13significant、8PDR葉、5決策view及6handoff scope風險逐項列blocks/doesNotBlock/earliest/evidence。Personal/retention/adoption/window要owner決策；revision/mixedHistory先定scope；nativeI可行性不可拖到大量依賴之後；不是全域停工。",
+      "evidence": [
+        "10_KNOWN_GATES.md:門檻、33UNKNOWN、決策view、額外gates",
+        "data/gates.json",
+        "12_DECISION_LOG.md:unresolved product behavior"
+      ]
+    },
+    {
+      "id": "FC-16",
+      "question": "哪些作法違反架構？",
+      "status": "PASS",
+      "answer": "另一份canonical UI值、Generator寫Graph、module私改他人state、Host接管document、Panel穿透internals、Node名字switch、core平台API、slot-by-index identity、把readback當write、半批提交或silent latest均明列禁止；manifest檢查不代語意review。",
+      "evidence": [
+        "03_RESPONSIBILITY_AND_DEPENDENCY.md:必須拒絕的architecture violations",
+        "09_ACCEPTANCE_AND_CONFORMANCE.md:必守組合反例",
+        "examples/conformance-manifest.json"
+      ]
+    }
+  ],
+  "readReports": {
+    "executable-reference/evidence/PACKAGE_VALIDATION.json": {
+      "status": "passed",
+      "referenceTests": 201,
+      "exampleTests": 8,
+      "executedByThisReviewer": false,
+      "scope": "bounded reference plus exact-interface samples; no native TD or product UI claim"
+    },
+    "ui-reference/VISUAL_QA.md": {
+      "scope": "Two static handoff SVGs rendered to PNG in recorded Edge viewports and visually inspected by the artifact author. Not product UI validation.",
+      "executedByThisReviewer": false
+    }
+  },
+  "historicalSourceHashes": {
+    "00_README.md": "9c4340411b4ebd0a664dafedc279b204f4ea9fff09345eafa5d0f8da1fd7b63d",
+    "01_PRODUCT_MODEL.md": "c8cec4bb008099ab4a2d6e1717e8b31f9332fe8b774daaf96150cc6ffc30d88a",
+    "11_LEGACY_COMPATIBILITY.md": "9753e3c950d6b62e42141048c9477fbe94104cf9537b3d19da5f2db355edeabf",
+    "12_DECISION_LOG.md": "dc641e04eb9d1a8323ae9c90a808f06d83cecb5c4b734db23c58c10af6e7f96f",
+    "02_ARCHITECTURE_SPEC.md": "4a0d6fec33e586ed552613f98beca3a810ac294194beb10834cb78f051241d24",
+    "03_RESPONSIBILITY_AND_DEPENDENCY.md": "75296e22b7b2576c4defedc38ab650546ce6e87db62a1ae71aaf6b5e428ffb0a",
+    "06_HOST_INTEGRATION.md": "e68b66a5d69e68cc97d5d18860ade1e2ee42155d287cb7e4ddecf35908063c35",
+    "05_DATA_AND_LIFECYCLE.md": "faf4cbb6fc1c99b69285d9434b77ca3dca464c914f3472e5019b8957842dce4f",
+    "executable-reference/core.ts": "0388b9c166ae7198559d302cf31ae1eecf45d78998807d44088fe40b2da0159f",
+    "examples/parameter-widget-or-ui-contribution/contribution.ts": "a8d372b3c6cf54d253ed25928bc8adec393235c8a24a51962c6f83751276efd5",
+    "04_EXTENSION_MODEL.md": "901c09e34b23d045e315ce01f1211994625ef4babd6723f2f0ff8cbb61800909",
+    "examples/minimal-node/example.ts": "8fd53d0142d8387ca3f652797a008c3516851654af8eaccae8c378b1c1bd6998",
+    "examples/minimal-node/example.test.ts": "3f9a10aa7bee9474dea84fa69e30901dcb30f16cd49cb6186e94039036b979ac",
+    "examples/dynamic-interface-node/example.ts": "86c5dd94b8c459eada6a2257665e7d74602fb5a9b71d7c00c530cfe2cca795bf",
+    "executable-reference/contracts.ts": "418999c3042796133ddc35d88d427e99b22d744f5dfce317f538e74d53f739d5",
+    "executable-reference/qualification-presentation.ts": "a079aaeb8a8b5f4baa5fbe3be19e6195062817303ef6920cc8b608dafccf8fd2",
+    "ui-reference/UI_SPEC.md": "dc7f44aebc07766a1613a98eb6a12dbbcf5e6e23c3b52c59601fc1f599882824",
+    "examples/minimal-panel/panel-template.ts": "5183ed4b662165ccda07606d42f43d1fec50a96f6f9e5e4e18770939b19468c8",
+    "examples/minimal-panel/README.md": "120830cec3cd1752c4dc3dc29c69a2128523ba9465a6ebfefa244b1179cb2c3c",
+    "10_KNOWN_GATES.md": "9700f5c5b5ece31ec554f6e87c025c27d84504a2ea568f4771d103da4d8d230e",
+    "executable-reference/generator.ts": "82573e2b01a6e10b16129db281b9772143937dab527689aa10aff9bab13924e8",
+    "examples/minimal-host-adapter/example.ts": "e12a682eaa24f70aca3fe03c11b41e12096ec2261a92779c38fcec38f04410cf",
+    "executable-reference/qualification-host.ts": "c8d19d52e1321302083ba3905d2431d1a9a67bf13cf4f590003ccfd00ddf313c",
+    "08_IMPLEMENTATION_PLAN.md": "0aa7efd3a2c2b9bb6e113a5004588878977dad277af98728a07f4a55d066111e",
+    "data/slices.json": "be1d634a4dc676e87a73723819f0497c1ca7f4c164ae64b65d165c89474df8fb",
+    "07_DEPLOYMENT_MODEL.md": "a4959a1c61ca70efe760795e607979ca9aca7c3073729c6edba0acbdb0359986",
+    "09_ACCEPTANCE_AND_CONFORMANCE.md": "9c2aa886556abd3ae30daa4034eff5d7f38c3e8b7d184d71276a06c1eb9f8c97",
+    "data/gates.json": "078457aa2e007e87ef1b8ef3dbc3863e314015865fc15be266487f47817bfd25",
+    "examples/conformance-manifest.json": "d39aedfc194899f60afeda1db21a8228e8c1f6eacd5e3fe9e2b2f869fd5ee49a"
+  },
+  "sourceHashes": {
+    "00_README.md": "0898917d39a728b1bf74a8658d1098c46e62312cec6820e23f943f3b51520b41",
+    "01_PRODUCT_MODEL.md": "c8cec4bb008099ab4a2d6e1717e8b31f9332fe8b774daaf96150cc6ffc30d88a",
+    "02_ARCHITECTURE_SPEC.md": "0f7f5ab756bb9f01b690358f873a12fb3f04dd5e7507ffdb1aa7afb50cb6a392",
+    "03_RESPONSIBILITY_AND_DEPENDENCY.md": "75296e22b7b2576c4defedc38ab650546ce6e87db62a1ae71aaf6b5e428ffb0a",
+    "04_EXTENSION_MODEL.md": "a5e968e9eb8a24826ba016d48663379227562b2397674b90f4428548cb8ab8d1",
+    "05_DATA_AND_LIFECYCLE.md": "24d20586618acc37eddd1b4b11e11b0472d3898b5c789479391ac0846b596fc8",
+    "06_HOST_INTEGRATION.md": "e68b66a5d69e68cc97d5d18860ade1e2ee42155d287cb7e4ddecf35908063c35",
+    "07_DEPLOYMENT_MODEL.md": "a4959a1c61ca70efe760795e607979ca9aca7c3073729c6edba0acbdb0359986",
+    "08_IMPLEMENTATION_PLAN.md": "bc76ca10e574371084dbb197d48ed328a79d384c7e2d22d77c9dafba933db846",
+    "09_ACCEPTANCE_AND_CONFORMANCE.md": "9c2aa886556abd3ae30daa4034eff5d7f38c3e8b7d184d71276a06c1eb9f8c97",
+    "10_KNOWN_GATES.md": "e927aac52a2f08d0004635c7a96789c2ff2921dfb546e378a12032d6b8ba5513",
+    "11_LEGACY_COMPATIBILITY.md": "e352fdf5299902814cbd365e30621421a3113b89d011ff9dcf9e53279da4b411",
+    "12_DECISION_LOG.md": "9d9d352f3cce95c8e00fe6f12eed230f95a9e86312dca47d1b7afe8b02bcefcc",
+    "audit/HANDOFF_CONFLICTS.md": "58138c4fe846b2798abc44cff237ceffab07b4a21e985d7a13a2dd2c1a547b0d",
+    "compatibility/capabilities.json": "387fe3e5dc75f73dc711e867df18b292dcbf452569829767d1a2ccb835fa5a36",
+    "data/acceptance-index.json": "667327fb7b27fa6008e305c84bc429bc5fff1f3923bcc16d925781a16e8ea0b2",
+    "data/capability-coverage.json": "c0c57f09645ac8f2d37951ec996ce8f182070935475b06f0d634fe06e696179a",
+    "data/gates.json": "469cbc7860c907096a236bfca162d313b5eca63d4c81c79fc073abeeaf70260f",
+    "data/handoff-conflicts.json": "a47a01a1a835cb30b75ac004e54ccea664e9e5411b29f1ad07183d8bde139fc4",
+    "data/slices.json": "3ed9d8d16c92e1a71657192d648ce0fbeba6b691437436bfcfa8d384ffd8e0e6",
+    "examples/conformance-manifest.json": "d39aedfc194899f60afeda1db21a8228e8c1f6eacd5e3fe9e2b2f869fd5ee49a",
+    "examples/dynamic-interface-node/README.md": "ed01115848ca0c06949a2e15223fa3ef369cb52c611943325ade92787aa886f6",
+    "examples/dynamic-interface-node/example.test.ts": "6e96574046d6f91bf6bb2d7dbf89433d915dd3d52115a397777620a038acaca6",
+    "examples/dynamic-interface-node/example.ts": "86c5dd94b8c459eada6a2257665e7d74602fb5a9b71d7c00c530cfe2cca795bf",
+    "examples/minimal-host-adapter/example.ts": "e12a682eaa24f70aca3fe03c11b41e12096ec2261a92779c38fcec38f04410cf",
+    "examples/minimal-node/example.test.ts": "3f9a10aa7bee9474dea84fa69e30901dcb30f16cd49cb6186e94039036b979ac",
+    "examples/minimal-node/example.ts": "8fd53d0142d8387ca3f652797a008c3516851654af8eaccae8c378b1c1bd6998",
+    "examples/minimal-panel/README.md": "120830cec3cd1752c4dc3dc29c69a2128523ba9465a6ebfefa244b1179cb2c3c",
+    "examples/minimal-panel/panel-template.ts": "5183ed4b662165ccda07606d42f43d1fec50a96f6f9e5e4e18770939b19468c8",
+    "examples/parameter-widget-or-ui-contribution/contribution.ts": "a8d372b3c6cf54d253ed25928bc8adec393235c8a24a51962c6f83751276efd5",
+    "executable-reference/contracts.ts": "418999c3042796133ddc35d88d427e99b22d744f5dfce317f538e74d53f739d5",
+    "executable-reference/core.ts": "0388b9c166ae7198559d302cf31ae1eecf45d78998807d44088fe40b2da0159f",
+    "executable-reference/evidence/PACKAGE_VALIDATION.json": "8a5d83efac049c0243f867e4419cc61c0fa134e00c3eca5f83906d51e87da009",
+    "executable-reference/generator.ts": "82573e2b01a6e10b16129db281b9772143937dab527689aa10aff9bab13924e8",
+    "executable-reference/qualification-host.ts": "c8d19d52e1321302083ba3905d2431d1a9a67bf13cf4f590003ccfd00ddf313c",
+    "executable-reference/qualification-presentation.ts": "a079aaeb8a8b5f4baa5fbe3be19e6195062817303ef6920cc8b608dafccf8fd2",
+    "provenance/CQ-SUMMARY-HASHES.json": "0c1cd8982548c81d8fa0788659324e37a27815cfb21e5a45bb3d9458c12a2ad4",
+    "ui-reference/SCREEN_INDEX.md": "f29d54c1b44c320d1ef06cf3e1d0ef619adfb49218c510d5a90f74c6064d5fdc",
+    "ui-reference/UI_SPEC.md": "d762356bd8df70a378859400d2c9d4097ef729a2bd0dc617374b53d29753ac10",
+    "ui-reference/VISUAL_QA.md": "78fd771808ca0574a4da1caef0f5fcb7b593aca6bc998ba4e0eae84e3cda93de",
+    "ui-reference/rendered/RENDER_RECORD.json": "c575f573f86e0bd264f88908549a777b939003279f7c1783b6ed40d357a54bad"
+  },
+  "round2QuestionResults": [
+    {
+      "id": "FC-01",
+      "question": "這個產品是什麼？",
+      "status": "PASS",
+      "answer": "Grape是以Graph作品為中心的Shader節點編輯產品；來源、nodes、edges、parameters、GLSL、保存與可選Host交付構成使用流程。Graph內含Stages，不以每Stage建一份作品。",
+      "evidence": [
+        "00_README.md:opening product statement",
+        "01_PRODUCT_MODEL.md:作品與編輯"
+      ]
+    },
+    {
+      "id": "FC-02",
+      "question": "為什麼重構？",
+      "status": "PASS",
+      "answer": "保留產品能力但解除Host托管帶來的隱含依賴，維持可擴充的Node/UI/backend與清楚owner；同application可由Static/Node/Electron提供服務。沒有要求仿製Legacy module layout。",
+      "evidence": [
+        "00_README.md:product/refactor purpose",
+        "11_LEGACY_COMPATIBILITY.md:opening Architecture→Extension→Slice direction",
+        "12_DECISION_LOG.md:D01,D03,D14,D17"
+      ]
+    },
+    {
+      "id": "FC-03",
+      "question": "Canonical Graph由誰擁有？",
+      "status": "FAIL",
+      "answer": "Application documents持有已載Graph；GraphDocument是快照，UI/Host都不另持canonical副本。Stage/Node/Edge/resources與GraphHistory由模型域持有；Context僅view/selection。 但機器入口data/capability-coverage.json的LC-NODE-370把Graph.change/History/load/save列在Generator下，並把Graph資料持久化owner列Registry；11將其稱為編譯owner/path，未標歷史摘要。這與本包02/03的canonical責任矛盾，FCS-F03修正前不能判定答案一致。",
+      "evidence": [
+        "01_PRODUCT_MODEL.md:作品與編輯",
+        "02_ARCHITECTURE_SPEC.md:§1,§2",
+        "03_RESPONSIBILITY_AND_DEPENDENCY.md:Application documents / Graph rows",
+        "data/capability-coverage.json:LC-NODE-370 executionPath/persistence/transformationChain",
+        "11_LEGACY_COMPATIBILITY.md:機器coverage資料定位"
+      ]
+    },
+    {
+      "id": "FC-04",
+      "question": "Host的角色是什麼？",
+      "status": "PASS",
+      "answer": "外部execution/integration target，擁有原生active artifact/current values/control authority；Binding持session/receipt/mirror。Host可保存已交付document副本，但不能接管工作中Graph。",
+      "evidence": [
+        "01_PRODUCT_MODEL.md:兩條參數路徑",
+        "06_HOST_INTEGRATION.md:Publication協定責任 / Live inputs與native operations",
+        "02_ARCHITECTURE_SPEC.md:§8"
+      ]
+    },
+    {
+      "id": "FC-05",
+      "question": "Parameter.write的完整資料路徑？",
+      "status": "FAIL",
+      "answer": "Widget文字draft經guard/parse，再Parameter.write→Graph同步Draft→codec/schema/reconcile/diagnostics→原子發布、Context投影先、observer後；Operation commit形成History，Updates另排程。Host live值是另一條CAS/service路徑。 但機器入口data/capability-coverage.json的LC-NODE-370把Graph.change/History/load/save列在Generator下，並把Graph資料持久化owner列Registry；11將其稱為編譯owner/path，未標歷史摘要。這與本包02/03的canonical責任矛盾，FCS-F03修正前不能判定答案一致。",
+      "evidence": [
+        "05_DATA_AND_LIFECYCLE.md:§1 sequence and operation table",
+        "executable-reference/core.ts:Parameter.write / Graph.change / Operation",
+        "examples/parameter-widget-or-ui-contribution/contribution.ts:PercentFieldController.commit",
+        "data/capability-coverage.json:LC-NODE-370 executionPath/persistence/transformationChain",
+        "11_LEGACY_COMPATIBILITY.md:機器coverage資料定位"
+      ]
+    },
+    {
+      "id": "FC-06",
+      "question": "如何增加普通Node？",
+      "status": "PASS",
+      "answer": "實作exact NodeType ref、codec/initialize/ports/parameters/validate/emit，放NodeModule manifest/types；Registry.register→pin→Draft.createNode。minimal-node實例與測試給完整API順序，core不按名稱分支。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§2",
+        "examples/minimal-node/example.ts:minimalNodeModule / scale",
+        "examples/minimal-node/example.test.ts:HANDOFF-NODE-01"
+      ]
+    },
+    {
+      "id": "FC-07",
+      "question": "如何增加Dynamic Node？",
+      "status": "PASS",
+      "answer": "同NodeModule定義state codec與state→ports，stable keys和Parameter.write觸發同批reconcile。範例現已用既有presentation.options傳送handoff.menu-items.v1及有序value/label；generic renderer可直接列出pair/color再提交選值，不必猜typeId或codec。這是明示sample convention，沒有冒稱正式menu SDK或DOM已實作。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§3",
+        "examples/dynamic-interface-node/example.ts:pack.parameters",
+        "executable-reference/contracts.ts:ParameterPresentation/ParameterSpec",
+        "executable-reference/qualification-presentation.ts:ParameterWidgets core.menu",
+        "ui-reference/UI_SPEC.md:Inspector最小建構規則",
+        "examples/dynamic-interface-node/README.md:Explicit menu descriptor",
+        "examples/dynamic-interface-node/example.test.ts:HANDOFF-DYNAMIC-03"
+      ]
+    },
+    {
+      "id": "FC-08",
+      "question": "如何增加Panel？",
+      "status": "PASS",
+      "answer": "宣告PanelType typeId/viewStateVersion/create，依Panel canClose/export/restore/dispose契約實作，經PanelTemplateHost.register/open/save/close；template能登錄SelectionSummary而不改Graph。完整production mount/router/restore ABI尚在G-EXTENSION-PANEL，文件明說停止線，不需假裝現有bounded Workspace已實作。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§4",
+        "examples/minimal-panel/panel-template.ts:Panel / PanelType / PanelTemplateHost",
+        "examples/minimal-panel/README.md",
+        "10_KNOWN_GATES.md:G-EXTENSION-PANEL"
+      ]
+    },
+    {
+      "id": "FC-09",
+      "question": "如何增加Widget/UI Contribution？",
+      "status": "PASS",
+      "answer": "ParameterWidgets.register註冊immutable projection；presentation descriptor/options只決定樣貌，值提交仍經Parameter.write。Actions/FieldDraft示例提供lifecycle/guard/parse/fallback/Undo，nested projection缺口明列G-EXTENSION-WIDGET-SCOPE。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§5",
+        "examples/parameter-widget-or-ui-contribution/contribution.ts:registerPercentWidget / PercentFieldController",
+        "executable-reference/qualification-presentation.ts:ParameterWidgets / WidgetRegistry / Actions"
+      ]
+    },
+    {
+      "id": "FC-10",
+      "question": "如何增加backend/profile？",
+      "status": "FAIL",
+      "answer": "實作GenerationProfile id/graphKinds/vertexNetwork/capabilities/type validation/render，注入generate(snapshot,profile)。NodeType定operation語意，Profile定shell和支持範圍，不寫Graph/Host；GLSL backend原型範圍與native/ISF未驗門檻清楚。 但機器入口data/capability-coverage.json的LC-NODE-370把Graph.change/History/load/save列在Generator下，並把Graph資料持久化owner列Registry；11將其稱為編譯owner/path，未標歷史摘要。這與本包02/03的canonical責任矛盾，FCS-F03修正前不能判定答案一致。",
+      "evidence": [
+        "04_EXTENSION_MODEL.md:§6",
+        "executable-reference/generator.ts:GenerationProfile / ES300_PROFILE / generate",
+        "02_ARCHITECTURE_SPEC.md:§5",
+        "data/capability-coverage.json:LC-NODE-370 executionPath/persistence/transformationChain",
+        "11_LEGACY_COMPATIBILITY.md:機器coverage資料定位"
+      ]
+    },
+    {
+      "id": "FC-11",
+      "question": "如何保存／重新載入？",
+      "status": "PASS",
+      "answer": "export當下已發布document；save捕捉內容後await adapter，只ACK該內容；download不清dirty。load保持persistentIDs但新loadId、空History，missingmoduleopaque可存；import accept與reload是不同生命期。",
+      "evidence": [
+        "05_DATA_AND_LIFECYCLE.md:§2",
+        "02_ARCHITECTURE_SPEC.md:§6",
+        "executable-reference/core.ts:Graph.exportJSON / Graph.save / Graph.load",
+        "examples/minimal-node/example.test.ts:HANDOFF-NODE-02"
+      ]
+    },
+    {
+      "id": "FC-12",
+      "question": "如何接入Host，是否需要先Apply？",
+      "status": "PASS",
+      "answer": "以bootstrap身份查核、HostServices權限與對應provider建立Target能力；publication使用lease/fenced receiver和ArtifactExecutor。既有Target的live/native控制及preview不要求先Apply：S09基本前置只有S07，S08只在跨publication/Reload的mixedHistory、schema替換及receipt競態分支成為conditionalPrerequisite。memory adapter不能證明原生原子性。",
+      "evidence": [
+        "06_HOST_INTEGRATION.md:Preview、reconnect與readback",
+        "examples/minimal-host-adapter/example.ts:MemoryArtifactExecutor / makeMemoryHost",
+        "executable-reference/qualification-host.ts:verifyBootstrap / HostServices / FencedArtifactReceiver",
+        "08_IMPLEMENTATION_PLAN.md:S09",
+        "data/slices.json:S09 prerequisites/prerequisiteOutputs/conditionalPrerequisites"
+      ]
+    },
+    {
+      "id": "FC-13",
+      "question": "Static/Node/Electron的共同與不同？",
+      "status": "PASS",
+      "answer": "同Graph/Generator/application contracts；bootstrap/providers及可用權限不同。Static無任意fs/nativewindow，Node位置不等用戶machine，Electron只窄bridge而不改core；實際runtime各驗，PWA不自動承諾。",
+      "evidence": [
+        "07_DEPLOYMENT_MODEL.md:profile table / Node→Electron / 啟動與缺能力",
+        "03_RESPONSIBILITY_AND_DEPENDENCY.md:Bootstrap/deployment row"
+      ]
+    },
+    {
+      "id": "FC-14",
+      "question": "第一個可實作slice是什麼？",
+      "status": "PASS",
+      "answer": "S01是最小真Canvas+Inspector+actions的host-free產品路徑；建立Graph/nodes、改parameter、connect、看GLSL、Undo、save/reload，兩Context模型共享。47AT是計畫而非已跑產品測試；不能只交headless新原型。",
+      "evidence": [
+        "00_README.md:first slice paragraph",
+        "08_IMPLEMENTATION_PLAN.md:S01",
+        "09_ACCEPTANCE_AND_CONFORMANCE.md:S01",
+        "ui-reference/UI_SPEC.md:首輪scope / 兩Canvas驗收序列"
+      ]
+    },
+    {
+      "id": "FC-15",
+      "question": "哪些Gate不能跨越？",
+      "status": "PASS",
+      "answer": "33UNKNOWN、13significant、8PDR葉、5決策view及6handoff scope風險逐項列blocks/doesNotBlock/earliest/evidence。Personal/retention/adoption/window要owner決策；revision/mixedHistory先定scope；nativeI可行性不可拖到大量依賴之後；不是全域停工。",
+      "evidence": [
+        "10_KNOWN_GATES.md:門檻、33UNKNOWN、決策view、額外gates",
+        "data/gates.json",
+        "12_DECISION_LOG.md:unresolved product behavior"
+      ]
+    },
+    {
+      "id": "FC-16",
+      "question": "哪些作法違反架構？",
+      "status": "PASS",
+      "answer": "另一份canonical UI值、Generator寫Graph、module私改他人state、Host接管document、Panel穿透internals、Node名字switch、core平台API、slot-by-index identity、把readback當write、半批提交或silent latest均明列禁止；manifest檢查不代語意review。",
+      "evidence": [
+        "03_RESPONSIBILITY_AND_DEPENDENCY.md:必須拒絕的architecture violations",
+        "09_ACCEPTANCE_AND_CONFORMANCE.md:必守組合反例",
+        "examples/conformance-manifest.json"
+      ]
+    }
+  ],
+  "openSourceConflicts": [
+    "HC-001"
+  ],
+  "remainingCanonicalContradictionsInReviewedAnswers": 0,
+  "limits": [
+    "Not an independent stateless-context review; reviewer previously authored plan/gates.",
+    "Only the 16 package-answerability questions passed; no claim of all implementation or runtime conformance.",
+    "HC-001 source baseline wording remains open and quarantined; no frozen baseline revision was reviewed or altered by this simulation.",
+    "47 planned product acceptance cases remain unexecuted by this reviewer.",
+    "Panel production lifecycle, nested widget projection, real TD/GPU/browser/device/package compatibility remain gated.",
+    "Two handoff schematics have recorded PNG visual QA. Product UI implementation, interaction and actual product visual conformance remain unverified by this simulation."
+  ],
+  "historicalRound2SourceHashes": {
+    "00_README.md": "9c4340411b4ebd0a664dafedc279b204f4ea9fff09345eafa5d0f8da1fd7b63d",
+    "01_PRODUCT_MODEL.md": "c8cec4bb008099ab4a2d6e1717e8b31f9332fe8b774daaf96150cc6ffc30d88a",
+    "02_ARCHITECTURE_SPEC.md": "0f7f5ab756bb9f01b690358f873a12fb3f04dd5e7507ffdb1aa7afb50cb6a392",
+    "03_RESPONSIBILITY_AND_DEPENDENCY.md": "75296e22b7b2576c4defedc38ab650546ce6e87db62a1ae71aaf6b5e428ffb0a",
+    "04_EXTENSION_MODEL.md": "a5e968e9eb8a24826ba016d48663379227562b2397674b90f4428548cb8ab8d1",
+    "05_DATA_AND_LIFECYCLE.md": "24d20586618acc37eddd1b4b11e11b0472d3898b5c789479391ac0846b596fc8",
+    "06_HOST_INTEGRATION.md": "e68b66a5d69e68cc97d5d18860ade1e2ee42155d287cb7e4ddecf35908063c35",
+    "07_DEPLOYMENT_MODEL.md": "a4959a1c61ca70efe760795e607979ca9aca7c3073729c6edba0acbdb0359986",
+    "08_IMPLEMENTATION_PLAN.md": "0aa7efd3a2c2b9bb6e113a5004588878977dad277af98728a07f4a55d066111e",
+    "09_ACCEPTANCE_AND_CONFORMANCE.md": "9c2aa886556abd3ae30daa4034eff5d7f38c3e8b7d184d71276a06c1eb9f8c97",
+    "10_KNOWN_GATES.md": "9700f5c5b5ece31ec554f6e87c025c27d84504a2ea568f4771d103da4d8d230e",
+    "11_LEGACY_COMPATIBILITY.md": "9753e3c950d6b62e42141048c9477fbe94104cf9537b3d19da5f2db355edeabf",
+    "12_DECISION_LOG.md": "dc641e04eb9d1a8323ae9c90a808f06d83cecb5c4b734db23c58c10af6e7f96f",
+    "data/capability-coverage.json": "1f353dea9b4284afd4176bba22f918b670cd7746ca56c9b80a89b5436b3e0c94",
+    "data/gates.json": "beda5e088b030d8e010b4213a550b061d21adfb58bcac27b62feec4bc91ca9f4",
+    "data/slices.json": "be1d634a4dc676e87a73723819f0497c1ca7f4c164ae64b65d165c89474df8fb",
+    "examples/conformance-manifest.json": "d39aedfc194899f60afeda1db21a8228e8c1f6eacd5e3fe9e2b2f869fd5ee49a",
+    "examples/dynamic-interface-node/README.md": "ed01115848ca0c06949a2e15223fa3ef369cb52c611943325ade92787aa886f6",
+    "examples/dynamic-interface-node/example.test.ts": "6e96574046d6f91bf6bb2d7dbf89433d915dd3d52115a397777620a038acaca6",
+    "examples/dynamic-interface-node/example.ts": "86c5dd94b8c459eada6a2257665e7d74602fb5a9b71d7c00c530cfe2cca795bf",
+    "examples/minimal-host-adapter/example.ts": "e12a682eaa24f70aca3fe03c11b41e12096ec2261a92779c38fcec38f04410cf",
+    "examples/minimal-node/example.test.ts": "3f9a10aa7bee9474dea84fa69e30901dcb30f16cd49cb6186e94039036b979ac",
+    "examples/minimal-node/example.ts": "8fd53d0142d8387ca3f652797a008c3516851654af8eaccae8c378b1c1bd6998",
+    "examples/minimal-panel/README.md": "120830cec3cd1752c4dc3dc29c69a2128523ba9465a6ebfefa244b1179cb2c3c",
+    "examples/minimal-panel/panel-template.ts": "5183ed4b662165ccda07606d42f43d1fec50a96f6f9e5e4e18770939b19468c8",
+    "examples/parameter-widget-or-ui-contribution/contribution.ts": "a8d372b3c6cf54d253ed25928bc8adec393235c8a24a51962c6f83751276efd5",
+    "executable-reference/contracts.ts": "418999c3042796133ddc35d88d427e99b22d744f5dfce317f538e74d53f739d5",
+    "executable-reference/core.ts": "0388b9c166ae7198559d302cf31ae1eecf45d78998807d44088fe40b2da0159f",
+    "executable-reference/evidence/PACKAGE_VALIDATION.json": "8a5d83efac049c0243f867e4419cc61c0fa134e00c3eca5f83906d51e87da009",
+    "executable-reference/generator.ts": "82573e2b01a6e10b16129db281b9772143937dab527689aa10aff9bab13924e8",
+    "executable-reference/qualification-host.ts": "c8d19d52e1321302083ba3905d2431d1a9a67bf13cf4f590003ccfd00ddf313c",
+    "executable-reference/qualification-presentation.ts": "a079aaeb8a8b5f4baa5fbe3be19e6195062817303ef6920cc8b608dafccf8fd2",
+    "ui-reference/UI_SPEC.md": "ec5281f95bda081feb9705a3119777cbef7ad6c6770d12929d1ae8c4f5275522"
+  },
+  "reviewedAt": "2026-10-01T19:25:13.719723+00:00",
+  "followupReviews": [
+    {
+      "review": "final-incremental-consistency",
+      "result": "PASS-no-change-to-16-answers",
+      "scope": [
+        "data/acceptance-index.json",
+        "11_LEGACY_COMPATIBILITY.md",
+        "ui-reference/UI_SPEC.md §9",
+        "ui-reference/SCREEN_INDEX.md",
+        "12_DECISION_LOG.md D06",
+        "ui-reference/VISUAL_QA.md",
+        "ui-reference/rendered/RENDER_RECORD.json"
+      ],
+      "findings": [
+        "Acceptance index contains 618 unique leaf IDs and all productionAcceptance values remain not-executed; shared slice tests are explicitly insufficient for leaf completion.",
+        "Responsive boundary agrees with package-local LC-UI-066; Viewer touch summary agrees with LC-HOST-031 and is not made a Canvas gesture requirement.",
+        "D06 only excludes automatic reconnection of already-detached loss; it does not deny preserve-invalid recovery.",
+        "Two schematic PNG renders and visual inspection are recorded in VISUAL_QA; these do not prove product UI rendering, interaction or cross-platform behavior."
+      ],
+      "productTestsExecuted": false,
+      "architectureChanged": false
+    }
+  ]
+}

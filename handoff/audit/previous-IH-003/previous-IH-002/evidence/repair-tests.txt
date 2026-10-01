@@ -1,0 +1,250 @@
+TAP version 13
+# Subtest: BM-01 one registered Panel reads/projects/writes root then nested target without renderer scope traversal
+ok 1 - BM-01 one registered Panel reads/projects/writes root then nested target without renderer scope traversal
+  ---
+  duration_ms: 75.3381
+  type: 'test'
+  ...
+# Subtest: BM-02 shared occurrences have separate routed leases; move preserves view and close invalidates late results
+ok 2 - BM-02 shared occurrences have separate routed leases; move preserves view and close invalidates late results
+  ---
+  duration_ms: 29.607
+  type: 'test'
+  ...
+# Subtest: BM-03 pinned nested Inspector keeps same model scope when provider navigates and closes
+ok 3 - BM-03 pinned nested Inspector keeps same model scope when provider navigates and closes
+  ---
+  duration_ms: 27.9317
+  type: 'test'
+  ...
+# Subtest: BM-04 stale occurrence becomes missing projection; reconnect requires a fresh target and old handle stays dead
+ok 4 - BM-04 stale occurrence becomes missing projection; reconnect requires a fresh target and old handle stays dead
+  ---
+  duration_ms: 15.7967
+  type: 'test'
+  ...
+# Subtest: BM-05 actual Graph reload restores pinned nested Inspector only through explicit new-lifetime mapping
+ok 5 - BM-05 actual Graph reload restores pinned nested Inspector only through explicit new-lifetime mapping
+  ---
+  duration_ms: 64.1145
+  type: 'test'
+  ...
+# Subtest: B01-CE pre-repair public registration cannot express ordinary Panel routing
+ok 6 - B01-CE pre-repair public registration cannot express ordinary Panel routing
+  ---
+  duration_ms: 1.1748
+  type: 'test'
+  ...
+# Subtest: B01-01 registration, initial resolution and direct Context selection/navigation/model notifications
+ok 7 - B01-01 registration, initial resolution and direct Context selection/navigation/model notifications
+  ---
+  duration_ms: 9.906
+  type: 'test'
+  ...
+# Subtest: B01-02 routing follows group0/groupN/followCanvas/pin, not Parameter focus
+ok 8 - B01-02 routing follows group0/groupN/followCanvas/pin, not Parameter focus
+  ---
+  duration_ms: 7.41
+  type: 'test'
+  ...
+# Subtest: B01-03 move/hide preserve instance, private state, Context and model History
+ok 9 - B01-03 move/hide preserve instance, private state, Context and model History
+  ---
+  duration_ms: 1.6945
+  type: 'test'
+  ...
+# Subtest: B01-04 origin preflight blocks retarget/Canvas close/direct Context disposal before callbacks
+ok 10 - B01-04 origin preflight blocks retarget/Canvas close/direct Context disposal before callbacks
+  ---
+  duration_ms: 1.9147
+  type: 'test'
+  ...
+# Subtest: B01-05 late replies rejected after retarget, close, and reuse of same Panel ID
+ok 11 - B01-05 late replies rejected after retarget, close, and reuse of same Panel ID
+  ---
+  duration_ms: 0.9491
+  type: 'test'
+  ...
+# Subtest: B01-06 save to fresh workspace uses explicit restore resolver; unresolved references stay opaque
+ok 12 - B01-06 save to fresh workspace uses explicit restore resolver; unresolved references stay opaque
+  ---
+  duration_ms: 2.446
+  type: 'test'
+  ...
+# Subtest: B01-07 missing type can be registered and explicitly retried through the same workspace
+ok 13 - B01-07 missing type can be registered and explicitly retried through the same workspace
+  ---
+  duration_ms: 0.9794
+  type: 'test'
+  ...
+# Subtest: B01-08 callback errors, reentrancy and dispose failure remain isolated
+ok 14 - B01-08 callback errors, reentrancy and dispose failure remain isolated
+  ---
+  duration_ms: 1.0905
+  type: 'test'
+  ...
+# Subtest: B01-09 direct Context selection callbacks cannot reenter selection; operation-end refresh is automatic
+ok 15 - B01-09 direct Context selection callbacks cannot reenter selection; operation-end refresh is automatic
+  ---
+  duration_ms: 1.2698
+  type: 'test'
+  ...
+# Subtest: B01-10 structural restore validation fails before creating any Tab or contribution
+ok 16 - B01-10 structural restore validation fails before creating any Tab or contribution
+  ---
+  duration_ms: 1.4868
+  type: 'test'
+  ...
+# Subtest: B01-11 pin owns a retained scope lease, survives source navigation/disposal, releases only its own Context
+ok 17 - B01-11 pin owns a retained scope lease, survives source navigation/disposal, releases only its own Context
+  ---
+  duration_ms: 4.4207
+  type: 'test'
+  ...
+# Subtest: B01-12 cross-Context reentry is rejected, not silently mutated with a dropped notification
+ok 18 - B01-12 cross-Context reentry is rejected, not silently mutated with a dropped notification
+  ---
+  duration_ms: 0.6557
+  type: 'test'
+  ...
+# Subtest: B01-13 pinned callback failure cleans retained Context after coherent publication
+ok 19 - B01-13 pinned callback failure cleans retained Context after coherent publication
+  ---
+  duration_ms: 2.1201
+  type: 'test'
+  ...
+# Subtest: B01-14 malformed pin input is rejected before mutating the live Tab or calling contribution
+ok 20 - B01-14 malformed pin input is rejected before mutating the live Tab or calling contribution
+  ---
+  duration_ms: 0.9954
+  type: 'test'
+  ...
+# Subtest: B01-15 canClose failure keeps Tab and Panel intact; dispose failure still completes allowed close
+ok 21 - B01-15 canClose failure keeps Tab and Panel intact; dispose failure still completes allowed close
+  ---
+  duration_ms: 1.0459
+  type: 'test'
+  ...
+# Subtest: B01-16 pin failure during its own Context notification drains cleanup after notification
+ok 22 - B01-16 pin failure during its own Context notification drains cleanup after notification
+  ---
+  duration_ms: 2.4213
+  type: 'test'
+  ...
+# Subtest: B01-17 disposed public objects reject new subscriptions rather than retaining unreachable callbacks
+ok 23 - B01-17 disposed public objects reject new subscriptions rather than retaining unreachable callbacks
+  ---
+  duration_ms: 0.6649
+  type: 'test'
+  ...
+# Subtest: M01-RED original root-only projection rejects nested Parameter although scoped write is available
+ok 24 - M01-RED original root-only projection rejects nested Parameter although scoped write is available
+  ---
+  duration_ms: 22.2489
+  type: 'test'
+  ...
+# Subtest: M01-01 root spec/value/link/projection/write are one target; one Undo; unchanged on projection
+ok 25 - M01-01 root spec/value/link/projection/write are one target; one Undo; unchanged on projection
+  ---
+  duration_ms: 24.5364
+  type: 'test'
+  ...
+# Subtest: M01-02 nested target resolves same specification, actual default and local link state
+ok 26 - M01-02 nested target resolves same specification, actual default and local link state
+  ---
+  duration_ms: 38.78
+  type: 'test'
+  ...
+# Subtest: M01-03 shared definition occurrences have distinct scope but shared model and independent draft conflicts
+ok 27 - M01-03 shared definition occurrences have distinct scope but shared model and independent draft conflicts
+  ---
+  duration_ms: 32.4176
+  type: 'test'
+  ...
+# Subtest: M01-04 root name/id collision cannot leak into nested projection or write
+ok 28 - M01-04 root name/id collision cannot leak into nested projection or write
+  ---
+  duration_ms: 21.2415
+  type: 'test'
+  ...
+# Subtest: M01-05 deleting occurrence invalidates once before later writes; Undo never resurrects old UI lease
+ok 29 - M01-05 deleting occurrence invalidates once before later writes; Undo never resurrects old UI lease
+  ---
+  duration_ms: 15.2824
+  type: 'test'
+  ...
+# Subtest: M01-06 stale path, graph-load identity and context disposal never silently retarget
+ok 30 - M01-06 stale path, graph-load identity and context disposal never silently retarget
+  ---
+  duration_ms: 10.1055
+  type: 'test'
+  ...
+# Subtest: M01-07 input interface removal invalidates old field; surviving mode target remains functional
+ok 31 - M01-07 input interface removal invalidates old field; surviving mode target remains functional
+  ---
+  duration_ms: 33.724
+  type: 'test'
+  ...
+# Subtest: M01-08 same spec/value with changed input GLSL type rejects old draft
+ok 32 - M01-08 same spec/value with changed input GLSL type rejects old draft
+  ---
+  duration_ms: 5.5301
+  type: 'test'
+  ...
+# Subtest: M01-09 connection established during draft rejects commit; unrelated position does not
+ok 33 - M01-09 connection established during draft rejects commit; unrelated position does not
+  ---
+  duration_ms: 20.7197
+  type: 'test'
+  ...
+# Subtest: M01-10 library copy-on-write commits once then invalidates both occurrence leases; fresh handles see the fork
+ok 34 - M01-10 library copy-on-write commits once then invalidates both occurrence leases; fresh handles see the fork
+  ---
+  duration_ms: 24.486
+  type: 'test'
+  ...
+# Subtest: M01-11 generic widget fault fallback and immutable field cannot mutate model; dispose does not close context
+ok 35 - M01-11 generic widget fault fallback and immutable field cannot mutate model; dispose does not close context
+  ---
+  duration_ms: 8.3998
+  type: 'test'
+  ...
+# Subtest: M01-12 invalid edge remains visible but cannot masquerade as a live connection
+ok 36 - M01-12 invalid edge remains visible but cannot masquerade as a live connection
+  ---
+  duration_ms: 12.3797
+  type: 'test'
+  ...
+# Subtest: M01-13 public Context navigation ABA and dispose automatically invalidate without renderer refresh
+ok 37 - M01-13 public Context navigation ABA and dispose automatically invalidate without renderer refresh
+  ---
+  duration_ms: 8.923
+  type: 'test'
+  ...
+# Subtest: M01-14 changing an ancestor definition with same leaf definition invalidates old occurrence lease
+ok 38 - M01-14 changing an ancestor definition with same leaf definition invalidates old occurrence lease
+  ---
+  duration_ms: 28.1494
+  type: 'test'
+  ...
+# Subtest: M01-15 disposal inside update delivery is terminal for all remaining observers
+ok 39 - M01-15 disposal inside update delivery is terminal for all remaining observers
+  ---
+  duration_ms: 9.5034
+  type: 'test'
+  ...
+# Subtest: M01-16 value change and Undo do not resurrect a draft from before the change
+ok 40 - M01-16 value change and Undo do not resurrect a draft from before the change
+  ---
+  duration_ms: 11.6471
+  type: 'test'
+  ...
+1..40
+# tests 40
+# suites 0
+# pass 40
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 458.4283

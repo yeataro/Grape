@@ -1,0 +1,106 @@
+TAP version 13
+# Subtest: BOUNDARY-01 default handoff ownership manifest passes
+not ok 1 - BOUNDARY-01 default handoff ownership manifest passes
+  ---
+  duration_ms: 162.8066
+  type: 'test'
+  location: 'C:\\Users\\user\\Documents\\Codex\\2026-09-09\\td\\implementation-handoff-r2\\tools\\boundaries.test.mjs:9:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    25 !== 22
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 22
+  actual: 25
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Users/user/Documents/Codex/2026-09-09/td/implementation-handoff-r2/tools/boundaries.test.mjs:11:78)
+    Test.runInAsyncScope (node:async_hooks:212:14)
+    Test.run (node:internal/test_runner/test:1109:25)
+    Test.start (node:internal/test_runner/test:1006:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17)
+  ...
+# Subtest: BOUNDARY-02 pure core cannot import UI runtime through a renamed folder
+ok 2 - BOUNDARY-02 pure core cannot import UI runtime through a renamed folder
+  ---
+  duration_ms: 1.2893
+  type: 'test'
+  ...
+# Subtest: BOUNDARY-03 direct Node and Electron imports cannot leak into application
+ok 3 - BOUNDARY-03 direct Node and Electron imports cannot leak into application
+  ---
+  duration_ms: 2.0223
+  type: 'test'
+  ...
+# Subtest: BOUNDARY-04 core DOM/network/process globals fail, local document data remains valid
+ok 4 - BOUNDARY-04 core DOM/network/process globals fail, local document data remains valid
+  ---
+  duration_ms: 3.4257
+  type: 'test'
+  ...
+# Subtest: BOUNDARY-05 type-only imports are erased runtime dependencies and not rejected as native calls
+ok 5 - BOUNDARY-05 type-only imports are erased runtime dependencies and not rejected as native calls
+  ---
+  duration_ms: 3.4617
+  type: 'test'
+  ...
+# Subtest: BOUNDARY-06 mixed import with an actual value keeps runtime direction checks
+ok 6 - BOUNDARY-06 mixed import with an actual value keeps runtime direction checks
+  ---
+  duration_ms: 0.5284
+  type: 'test'
+  ...
+# Subtest: BOUNDARY-07 new unclassified source or external dependency fails closed
+ok 7 - BOUNDARY-07 new unclassified source or external dependency fails closed
+  ---
+  duration_ms: 0.6231
+  type: 'test'
+  ...
+# Subtest: BOUNDARY-08 unresolved computed imports and source outside declared roots fail
+ok 8 - BOUNDARY-08 unresolved computed imports and source outside declared roots fail
+  ---
+  duration_ms: 0.9012
+  type: 'test'
+  ...
+# Subtest: BOUNDARY-09 independent extension can use public pure contracts without core edits
+ok 9 - BOUNDARY-09 independent extension can use public pure contracts without core edits
+  ---
+  duration_ms: 0.4387
+  type: 'test'
+  ...
+# Subtest: BOUNDARY-10 UI may use DOM; adapter may use native APIs without polluting the core
+ok 10 - BOUNDARY-10 UI may use DOM; adapter may use native APIs without polluting the core
+  ---
+  duration_ms: 0.4627
+  type: 'test'
+  ...
+# Subtest: BOUNDARY-11 export type and inline all-type imports remain type-only
+ok 11 - BOUNDARY-11 export type and inline all-type imports remain type-only
+  ---
+  duration_ms: 0.5459
+  type: 'test'
+  ...
+# Subtest: BOUNDARY-12 Web Crypto bootstrap remains portable while computed environment lookup fails
+ok 12 - BOUNDARY-12 Web Crypto bootstrap remains portable while computed environment lookup fails
+  ---
+  duration_ms: 0.5593
+  type: 'test'
+  ...
+# Subtest: BOUNDARY-13 import types in erased aliases still require classified resolvable sources
+ok 13 - BOUNDARY-13 import types in erased aliases still require classified resolvable sources
+  ---
+  duration_ms: 0.6551
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 12
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 414.0265

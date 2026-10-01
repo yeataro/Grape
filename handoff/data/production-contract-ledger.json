@@ -1,0 +1,1494 @@
+{
+  "schemaVersion": 1,
+  "revision": "IH-005",
+  "changeId": "AC-IH005-01",
+  "status": "EXPERIMENTAL_BUT_CURRENTLY_ACCEPTED",
+  "scope": "Production contract interpretation and open seams; no production implementation and no new ownership.",
+  "source": {
+    "path": "executable-reference/contracts.ts",
+    "sha256": "418999c3042796133ddc35d88d427e99b22d744f5dfce317f538e74d53f739d5"
+  },
+  "precedence": [
+    "02..06 responsibility/lifecycle semantics",
+    "13 plus this field disposition ledger",
+    "contracts/public-surface.ts",
+    "14/contracts/document-format.ts",
+    "15/contracts/localization.ts",
+    "16/contracts/view-mount.ts (additive renderer contribution surface)",
+    "17/contracts/panel-commands.ts (additive scoped editing authority)",
+    "IH-005 document 2.0 wire definitions in14 replace historical untyped adaptation/loss/recovery"
+  ],
+  "classificationMeaning": {
+    "EXACT_IDENTITY": "Persistent/protocol identity or exact pin: change requires migration/compatibility decision.",
+    "NORMATIVE_SHAPE_RENAMEABLE": "Normative information/effects/authority, coherently renameable SDK symbols; not permission to weaken semantics.",
+    "QUALIFICATION_ONLY": "Reference-only shape/implementation. Preserve behavioral assertion using listed production replacement, never source-copy."
+  },
+  "nonRenamableDomains": [
+    "document format/field keys",
+    "exact definition refs",
+    "Node/Resource/Network persistent IDs",
+    "port and parameter stable keys",
+    "GraphKind/StageKind IDs",
+    "capability ID and contract version",
+    "catalog owner/key identity"
+  ],
+  "records": [
+    {
+      "sourceSymbol": "Json",
+      "sourceLine": 2,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "contracts/public-surface.ts#Json",
+      "reason": "JSON-safe module-owned data; graph edits remain behind the operation boundary.",
+      "fields": []
+    },
+    {
+      "sourceSymbol": "Scalar",
+      "sourceLine": 9,
+      "classification": "QUALIFICATION_ONLY",
+      "productionContract": "13_PRODUCTION_CONTRACT_SURFACE.md#1",
+      "reason": "Fixed scalar list is a qualifier convenience; TypeEnvironment resolves supported shader types.",
+      "fields": []
+    },
+    {
+      "sourceSymbol": "ValueType",
+      "sourceLine": 12,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "02_ARCHITECTURE_SPEC.md",
+      "reason": "Type token resolves through shared TypeEnvironment; arbitrary strings are invalid.",
+      "fields": []
+    },
+    {
+      "sourceSymbol": "Value",
+      "sourceLine": 13,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "02_ARCHITECTURE_SPEC.md",
+      "reason": "Typed shader input data, narrower than arbitrary JSON; validate with resolved type.",
+      "fields": []
+    },
+    {
+      "sourceSymbol": "TypeRef",
+      "sourceLine": 14,
+      "classification": "EXACT_IDENTITY",
+      "productionContract": "contracts/public-surface.ts#NodeTypeRef",
+      "reason": "Exact module/type/version/fingerprint identity; no fallback to similar name.",
+      "fields": [
+        {
+          "field": "moduleId",
+          "classification": "EXACT_IDENTITY",
+          "productionContract": "contracts/public-surface.ts#NodeTypeRef",
+          "reason": "Exact module/type/version/fingerprint identity; no fallback to similar name."
+        },
+        {
+          "field": "typeId",
+          "classification": "EXACT_IDENTITY",
+          "productionContract": "contracts/public-surface.ts#NodeTypeRef",
+          "reason": "Exact module/type/version/fingerprint identity; no fallback to similar name."
+        },
+        {
+          "field": "version",
+          "classification": "EXACT_IDENTITY",
+          "productionContract": "contracts/public-surface.ts#NodeTypeRef",
+          "reason": "Exact module/type/version/fingerprint identity; no fallback to similar name."
+        },
+        {
+          "field": "fingerprint",
+          "classification": "EXACT_IDENTITY",
+          "productionContract": "contracts/public-surface.ts#NodeTypeRef",
+          "reason": "Exact module/type/version/fingerprint identity; no fallback to similar name."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "ModuleRef",
+      "sourceLine": 20,
+      "classification": "EXACT_IDENTITY",
+      "productionContract": "contracts/public-surface.ts#ModuleRef",
+      "reason": "Exact module pin; manifest spelling id is mapped to moduleId at the document boundary.",
+      "fields": []
+    },
+    {
+      "sourceSymbol": "Reference",
+      "sourceLine": 21,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "contracts/document-format.ts#DocumentReference",
+      "reason": "Explicit reference semantics preserved; canonical serialized shape is slot/kind/targetId/networkId, not a map of hidden strings.",
+      "fields": [
+        {
+          "field": "kind",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#DocumentReference",
+          "reason": "Explicit reference semantics preserved; canonical serialized shape is slot/kind/targetId/networkId, not a map of hidden strings."
+        },
+        {
+          "field": "targetId",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#DocumentReference",
+          "reason": "Explicit reference semantics preserved; canonical serialized shape is slot/kind/targetId/networkId, not a map of hidden strings."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "PortSpec",
+      "sourceLine": 25,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "04_EXTENSION_MODEL.md",
+      "reason": "Module-owned derived schema; stable keys and shared type semantics; no UI value owner.",
+      "fields": [
+        {
+          "field": "key",
+          "classification": "EXACT_IDENTITY",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Stable port key scoped by direction/Node; renaming a visible label never changes connectivity."
+        },
+        {
+          "field": "direction",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Module-owned derived schema; stable keys and shared type semantics; no UI value owner."
+        },
+        {
+          "field": "type",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Module-owned derived schema; stable keys and shared type semantics; no UI value owner."
+        },
+        {
+          "field": "semantic",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#PortSnapshot",
+          "reason": "Semantic/style identifiers can be registered; finite qualifier literals are not the whole product style domain."
+        },
+        {
+          "field": "supply",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Module-owned derived schema; stable keys and shared type semantics; no UI value owner."
+        },
+        {
+          "field": "default",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Module-owned derived schema; stable keys and shared type semantics; no UI value owner."
+        },
+        {
+          "field": "requireConstant",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Module-owned derived schema; stable keys and shared type semantics; no UI value owner."
+        },
+        {
+          "field": "connectionPolicy",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Module-owned derived schema; stable keys and shared type semantics; no UI value owner."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "Endpoint",
+      "sourceLine": 35,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "contracts/document-format.ts#EdgeDocument",
+      "reason": "Logical Node+port endpoint in one Network; runtime lease additionally requires load/scope validation.",
+      "fields": [
+        {
+          "field": "nodeId",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#EdgeDocument",
+          "reason": "Logical Node+port endpoint in one Network; runtime lease additionally requires load/scope validation."
+        },
+        {
+          "field": "key",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#EdgeDocument",
+          "reason": "Serialized production spelling is portKey; preserve endpoint identity semantics."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "Adaptation",
+      "sourceLine": 39,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "contracts/document-format.ts#EdgeAdaptationDocument",
+      "reason": "Runtime conversion semantics are retained; exact wire uses schema/version/sourceType/targetType/operation/extensions with explicit mapping in14, never serialize from/to/op unchanged.",
+      "fields": [
+        {
+          "field": "from",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#EdgeAdaptationDocument",
+          "reason": "Runtime conversion semantics are retained; exact wire uses schema/version/sourceType/targetType/operation/extensions with explicit mapping in14, never serialize from/to/op unchanged."
+        },
+        {
+          "field": "to",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#EdgeAdaptationDocument",
+          "reason": "Runtime conversion semantics are retained; exact wire uses schema/version/sourceType/targetType/operation/extensions with explicit mapping in14, never serialize from/to/op unchanged."
+        },
+        {
+          "field": "op",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#EdgeAdaptationDocument",
+          "reason": "Runtime conversion semantics are retained; exact wire uses schema/version/sourceType/targetType/operation/extensions with explicit mapping in14, never serialize from/to/op unchanged."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "NodeRecord",
+      "sourceLine": 44,
+      "classification": "QUALIFICATION_ONLY",
+      "productionContract": "contracts/document-format.ts#NodeDocument",
+      "reason": "Reference mutable record layout is not production format; persistent identity/state/reference behavior remains normative.",
+      "fields": [
+        {
+          "field": "id",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#NodeDocument",
+          "reason": "Reference mutable record layout is not production format; persistent identity/state/reference behavior remains normative."
+        },
+        {
+          "field": "name",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#NodeDocument",
+          "reason": "Reference mutable record layout is not production format; persistent identity/state/reference behavior remains normative."
+        },
+        {
+          "field": "typeRef",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#NodeDocument",
+          "reason": "Reference mutable record layout is not production format; persistent identity/state/reference behavior remains normative."
+        },
+        {
+          "field": "state",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#NodeDocument",
+          "reason": "Reference mutable record layout is not production format; persistent identity/state/reference behavior remains normative."
+        },
+        {
+          "field": "position",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#NodeDocument",
+          "reason": "Reference mutable record layout is not production format; persistent identity/state/reference behavior remains normative."
+        },
+        {
+          "field": "ports",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#NodeDocument",
+          "reason": "Reference mutable record layout is not production format; persistent identity/state/reference behavior remains normative."
+        },
+        {
+          "field": "values",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#NodeDocument",
+          "reason": "Reference mutable record layout is not production format; persistent identity/state/reference behavior remains normative."
+        },
+        {
+          "field": "references",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#NodeDocument",
+          "reason": "Reference mutable record layout is not production format; persistent identity/state/reference behavior remains normative."
+        },
+        {
+          "field": "referencesComplete",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#NodeDocument",
+          "reason": "Reference mutable record layout is not production format; persistent identity/state/reference behavior remains normative."
+        },
+        {
+          "field": "[extension]",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#NodeDocument",
+          "reason": "Reference mutable record layout is not production format; persistent identity/state/reference behavior remains normative."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "EdgeRecord",
+      "sourceLine": 56,
+      "classification": "QUALIFICATION_ONLY",
+      "productionContract": "contracts/document-format.ts#EdgeDocument",
+      "reason": "Use canonical Edge DTO and immutable public projection; qualifier record is not a live mutable API.",
+      "fields": [
+        {
+          "field": "id",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#EdgeDocument",
+          "reason": "Use canonical Edge DTO and immutable public projection; qualifier record is not a live mutable API."
+        },
+        {
+          "field": "from",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#EdgeDocument",
+          "reason": "Use canonical Edge DTO and immutable public projection; qualifier record is not a live mutable API."
+        },
+        {
+          "field": "to",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#EdgeDocument",
+          "reason": "Use canonical Edge DTO and immutable public projection; qualifier record is not a live mutable API."
+        },
+        {
+          "field": "adaptation",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#EdgeDocument",
+          "reason": "Use canonical Edge DTO and immutable public projection; qualifier record is not a live mutable API."
+        },
+        {
+          "field": "invalid",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#EdgeDocument",
+          "reason": "Use canonical Edge DTO and immutable public projection; qualifier record is not a live mutable API."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "LossRecord",
+      "sourceLine": 63,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "contracts/document-format.ts#LossDocument",
+      "reason": "Runtime loss semantics are model state in the same atomic operation; exact wire is a versioned grape.loss envelope with discriminated evidence payload. See14 for mapping; broad runtime fields are not canonical wire.",
+      "fields": [
+        {
+          "field": "id",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#LossDocument",
+          "reason": "Runtime loss semantics are model state in the same atomic operation; exact wire is a versioned grape.loss envelope with discriminated evidence payload. See14 for mapping; broad runtime fields are not canonical wire."
+        },
+        {
+          "field": "reason",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#LossDocument",
+          "reason": "Runtime loss semantics are model state in the same atomic operation; exact wire is a versioned grape.loss envelope with discriminated evidence payload. See14 for mapping; broad runtime fields are not canonical wire."
+        },
+        {
+          "field": "nodeId",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#LossDocument",
+          "reason": "Runtime loss semantics are model state in the same atomic operation; exact wire is a versioned grape.loss envelope with discriminated evidence payload. See14 for mapping; broad runtime fields are not canonical wire."
+        },
+        {
+          "field": "resourceId",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#LossDocument",
+          "reason": "Runtime loss semantics are model state in the same atomic operation; exact wire is a versioned grape.loss envelope with discriminated evidence payload. See14 for mapping; broad runtime fields are not canonical wire."
+        },
+        {
+          "field": "edge",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#LossDocument",
+          "reason": "Runtime loss semantics are model state in the same atomic operation; exact wire is a versioned grape.loss envelope with discriminated evidence payload. See14 for mapping; broad runtime fields are not canonical wire."
+        },
+        {
+          "field": "inputKey",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#LossDocument",
+          "reason": "Runtime loss semantics are model state in the same atomic operation; exact wire is a versioned grape.loss envelope with discriminated evidence payload. See14 for mapping; broad runtime fields are not canonical wire."
+        },
+        {
+          "field": "value",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#LossDocument",
+          "reason": "Runtime loss semantics are model state in the same atomic operation; exact wire is a versioned grape.loss envelope with discriminated evidence payload. See14 for mapping; broad runtime fields are not canonical wire."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "StageRecord",
+      "sourceLine": 72,
+      "classification": "QUALIFICATION_ONLY",
+      "productionContract": "contracts/document-format.ts#StageDocument",
+      "reason": "Production Stage separates id/key/stageKindId and owns Network; never adopt closed fixture union.",
+      "fields": [
+        {
+          "field": "id",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#StageDocument",
+          "reason": "Production Stage separates id/key/stageKindId and owns Network; never adopt closed fixture union."
+        },
+        {
+          "field": "kind",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#StageDocument",
+          "reason": "Production Stage separates id/key/stageKindId and owns Network; never adopt closed fixture union."
+        },
+        {
+          "field": "implementation",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#StageDocument",
+          "reason": "Production Stage separates id/key/stageKindId and owns Network; never adopt closed fixture union."
+        },
+        {
+          "field": "nodes",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#StageDocument",
+          "reason": "Production Stage separates id/key/stageKindId and owns Network; never adopt closed fixture union."
+        },
+        {
+          "field": "edges",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#StageDocument",
+          "reason": "Production Stage separates id/key/stageKindId and owns Network; never adopt closed fixture union."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "GraphDocument",
+      "sourceLine": 79,
+      "classification": "QUALIFICATION_ONLY",
+      "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+      "reason": "Production document is grape.document 2.0; experimental envelope and TD kind literals are not a product format.",
+      "fields": [
+        {
+          "field": "format",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+          "reason": "Production document is grape.document 2.0; experimental envelope and TD kind literals are not a product format."
+        },
+        {
+          "field": "formatVersion",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+          "reason": "Production document is grape.document 2.0; experimental envelope and TD kind literals are not a product format."
+        },
+        {
+          "field": "id",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+          "reason": "Production document is grape.document 2.0; experimental envelope and TD kind literals are not a product format."
+        },
+        {
+          "field": "name",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+          "reason": "Production document is grape.document 2.0; experimental envelope and TD kind literals are not a product format."
+        },
+        {
+          "field": "kind",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+          "reason": "Production document is grape.document 2.0; experimental envelope and TD kind literals are not a product format."
+        },
+        {
+          "field": "outputType",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+          "reason": "Production document is grape.document 2.0; experimental envelope and TD kind literals are not a product format."
+        },
+        {
+          "field": "definitions",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+          "reason": "Production document is grape.document 2.0; experimental envelope and TD kind literals are not a product format."
+        },
+        {
+          "field": "modules",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+          "reason": "Production document is grape.document 2.0; experimental envelope and TD kind literals are not a product format."
+        },
+        {
+          "field": "stages",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+          "reason": "Production document is grape.document 2.0; experimental envelope and TD kind literals are not a product format."
+        },
+        {
+          "field": "losses",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+          "reason": "Production document is grape.document 2.0; experimental envelope and TD kind literals are not a product format."
+        },
+        {
+          "field": "resources",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+          "reason": "Production document is grape.document 2.0; experimental envelope and TD kind literals are not a product format."
+        },
+        {
+          "field": "recovery",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+          "reason": "Production document is grape.document 2.0; experimental envelope and TD kind literals are not a product format."
+        },
+        {
+          "field": "[extension]",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+          "reason": "Production document is grape.document 2.0; experimental envelope and TD kind literals are not a product format."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "Issue",
+      "sourceLine": 94,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "contracts/public-surface.ts#ContractIssue",
+      "reason": "Stable code/severity/subject; feature-owned text uses LocalizableIssue, external raw diagnostics preserve origin.",
+      "fields": [
+        {
+          "field": "code",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/public-surface.ts#ContractIssue",
+          "reason": "Stable code/severity/subject; feature-owned text uses LocalizableIssue, external raw diagnostics preserve origin."
+        },
+        {
+          "field": "severity",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/public-surface.ts#ContractIssue",
+          "reason": "Stable code/severity/subject; feature-owned text uses LocalizableIssue, external raw diagnostics preserve origin."
+        },
+        {
+          "field": "message",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/public-surface.ts#LocalizableIssue",
+          "reason": "Raw English string alone is not feature diagnostic identity; use code and TextRef, retain message only as default/external fallback."
+        },
+        {
+          "field": "subject",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/public-surface.ts#ContractIssue",
+          "reason": "Include Graph/Stage/networkPath and object keys as relevant; nested subject cannot silently resolve to root."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "Failure",
+      "sourceLine": 100,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "05_DATA_AND_LIFECYCLE.md",
+      "reason": "Failure preserves machine code and atomic/no-partial-commit semantics; feature text must be localizable.",
+      "fields": [
+        {
+          "field": "code",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "05_DATA_AND_LIFECYCLE.md",
+          "reason": "Failure preserves machine code and atomic/no-partial-commit semantics; feature text must be localizable."
+        },
+        {
+          "field": "message",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/public-surface.ts#LocalizableIssue",
+          "reason": "Localizable production diagnostic at feature boundary; raw external text stays raw."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "Result",
+      "sourceLine": 104,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "05_DATA_AND_LIFECYCLE.md",
+      "reason": "Success/failure must be explicit; exact TypeScript discriminant spelling is engineering-owned.",
+      "fields": []
+    },
+    {
+      "sourceSymbol": "ParameterPresentation",
+      "sourceLine": 105,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "contracts/public-surface.ts#ParameterPresentation",
+      "reason": "Widget identity/options/fallback only; not translated content and not canonical Parameter value.",
+      "fields": [
+        {
+          "field": "widget",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/public-surface.ts#ParameterPresentation",
+          "reason": "Widget identity/options/fallback only; not translated content and not canonical Parameter value."
+        },
+        {
+          "field": "options",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/localization.ts#MenuPresentationOptions",
+          "reason": "Widget-owned JSON options; menu choices use grape.ui.menu-items.v1 TextRef labels, never translated semantic values. Old handoff.menu-items.v1 literal-label examples are qualification-only."
+        },
+        {
+          "field": "fallback",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/public-surface.ts#ParameterPresentation",
+          "reason": "Widget identity/options/fallback only; not translated content and not canonical Parameter value."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "ParameterSpec",
+      "sourceLine": 111,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "04_EXTENSION_MODEL.md",
+      "reason": "Editing entry maps to one state/input target with typed validation; local min/max/clamp does not change GLSL type.",
+      "fields": [
+        {
+          "field": "key",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Editing entry maps to one state/input target with typed validation; local min/max/clamp does not change GLSL type."
+        },
+        {
+          "field": "target",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Editing entry maps to one state/input target with typed validation; local min/max/clamp does not change GLSL type."
+        },
+        {
+          "field": "presentation",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/public-surface.ts#ParameterPresentation",
+          "reason": "number/menu literal shortcuts are fixture-only; production uses registered widget descriptor."
+        },
+        {
+          "field": "min",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Editing entry maps to one state/input target with typed validation; local min/max/clamp does not change GLSL type."
+        },
+        {
+          "field": "max",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Editing entry maps to one state/input target with typed validation; local min/max/clamp does not change GLSL type."
+        },
+        {
+          "field": "clamp",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Editing entry maps to one state/input target with typed validation; local min/max/clamp does not change GLSL type."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "NodeInit",
+      "sourceLine": 120,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "04_EXTENSION_MODEL.md",
+      "reason": "Candidate initialization produces owned data, not a live mutable Node; validate before atomic insertion.",
+      "fields": [
+        {
+          "field": "state",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Candidate initialization produces owned data, not a live mutable Node; validate before atomic insertion."
+        },
+        {
+          "field": "references",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Candidate initialization produces owned data, not a live mutable Node; validate before atomic insertion."
+        },
+        {
+          "field": "referencesComplete",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Candidate initialization produces owned data, not a live mutable Node; validate before atomic insertion."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "TypedExpression",
+      "sourceLine": 125,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "contracts/public-surface.ts#GLSLExpression",
+      "reason": "Typed GLSL expression; constant is an explicit proof claim validated by compiler contract.",
+      "fields": [
+        {
+          "field": "type",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/public-surface.ts#GLSLExpression",
+          "reason": "Typed GLSL expression; constant is an explicit proof claim validated by compiler contract."
+        },
+        {
+          "field": "code",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/public-surface.ts#GLSLExpression",
+          "reason": "Typed GLSL expression; constant is an explicit proof claim validated by compiler contract."
+        },
+        {
+          "field": "constant",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/public-surface.ts#GLSLExpression",
+          "reason": "Typed GLSL expression; constant is an explicit proof claim validated by compiler contract."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "ModuleContext",
+      "sourceLine": 131,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "04_EXTENSION_MODEL.md",
+      "reason": "Read-only scoped queries; no Graph mutation, no private state authority and no dependency on UI.",
+      "fields": [
+        {
+          "field": "graphKind",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/public-surface.ts#GraphKindRef",
+          "reason": "Read exact registered kind reference, not td.top/td.mat union."
+        },
+        {
+          "field": "stageKind",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/public-surface.ts#StageKindId",
+          "reason": "Read registered StageKindId, not closed vertex/pixel union."
+        },
+        {
+          "field": "nodeId",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Read-only scoped queries; no Graph mutation, no private state authority and no dependency on UI."
+        },
+        {
+          "field": "resource",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Read-only scoped queries; no Graph mutation, no private state authority and no dependency on UI."
+        },
+        {
+          "field": "resources",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Read-only scoped queries; no Graph mutation, no private state authority and no dependency on UI."
+        },
+        {
+          "field": "referenceId",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Read-only scoped queries; no Graph mutation, no private state authority and no dependency on UI."
+        },
+        {
+          "field": "resolveType",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Read-only scoped queries; no Graph mutation, no private state authority and no dependency on UI."
+        },
+        {
+          "field": "inputSource",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Read-only scoped queries; no Graph mutation, no private state authority and no dependency on UI."
+        },
+        {
+          "field": "reference",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Read-only scoped queries; no Graph mutation, no private state authority and no dependency on UI."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "EmitContext",
+      "sourceLine": 142,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "04_EXTENSION_MODEL.md",
+      "reason": "Compilation-owned naming/helper/input/provenance capabilities for one immutable snapshot.",
+      "fields": [
+        {
+          "field": "requireCapability",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Compilation-owned naming/helper/input/provenance capabilities for one immutable snapshot."
+        },
+        {
+          "field": "trace",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Compilation-owned naming/helper/input/provenance capabilities for one immutable snapshot."
+        },
+        {
+          "field": "input",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Compilation-owned naming/helper/input/provenance capabilities for one immutable snapshot."
+        },
+        {
+          "field": "local",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Compilation-owned naming/helper/input/provenance capabilities for one immutable snapshot."
+        },
+        {
+          "field": "helper",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Compilation-owned naming/helper/input/provenance capabilities for one immutable snapshot."
+        },
+        {
+          "field": "uniform",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Compilation-owned naming/helper/input/provenance capabilities for one immutable snapshot."
+        },
+        {
+          "field": "varying",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Compilation-owned naming/helper/input/provenance capabilities for one immutable snapshot."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "NodeEmission",
+      "sourceLine": 151,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "13_PRODUCTION_CONTRACT_SURFACE.md#4",
+      "reason": "Typed GLSL output/statements/effects; boundary result aliases normalized as declared stable output map.",
+      "fields": [
+        {
+          "field": "outputs",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "13_PRODUCTION_CONTRACT_SURFACE.md#4",
+          "reason": "Typed GLSL output/statements/effects; boundary result aliases normalized as declared stable output map."
+        },
+        {
+          "field": "color",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/public-surface.ts#NodeEmission",
+          "reason": "Convenience output alias replaced by boundaryOutputs, separate from normal port outputs; validated against NodeTypeBoundaryMetadata."
+        },
+        {
+          "field": "position",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/public-surface.ts#NodeEmission",
+          "reason": "Convenience output alias replaced by boundaryOutputs, separate from normal port outputs; validated against NodeTypeBoundaryMetadata."
+        },
+        {
+          "field": "statements",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "13_PRODUCTION_CONTRACT_SURFACE.md#4",
+          "reason": "Typed GLSL output/statements/effects; boundary result aliases normalized as declared stable output map."
+        },
+        {
+          "field": "effects",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "13_PRODUCTION_CONTRACT_SURFACE.md#4",
+          "reason": "Typed GLSL output/statements/effects; boundary result aliases normalized as declared stable output map."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "NodeType",
+      "sourceLine": 158,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "04_EXTENSION_MODEL.md",
+      "reason": "Definition-owned callbacks construct and validate candidate schema/emission; dynamic edits remain Graph operations.",
+      "fields": [
+        {
+          "field": "ref",
+          "classification": "EXACT_IDENTITY",
+          "productionContract": "contracts/public-surface.ts#NodeTypeRef",
+          "reason": "Exact definition identity survives storage and missing module restoration."
+        },
+        {
+          "field": "role",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Definition-owned callbacks construct and validate candidate schema/emission; dynamic edits remain Graph operations."
+        },
+        {
+          "field": "stages",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/public-surface.ts#NodeEligibility",
+          "reason": "Production stageKindIds references open registered IDs."
+        },
+        {
+          "field": "targets",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/public-surface.ts#NodeEligibility",
+          "reason": "Production graphKindIds restriction is independent of Host target identity."
+        },
+        {
+          "field": "requiredCapabilities",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/public-surface.ts#NodeEligibility",
+          "reason": "Generator requirements, never Host service availability."
+        },
+        {
+          "field": "effectRoot",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Definition-owned callbacks construct and validate candidate schema/emission; dynamic edits remain Graph operations."
+        },
+        {
+          "field": "stageOutput",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/public-surface.ts#NodeTypeBoundaryMetadata",
+          "reason": "boundaryOutputs(state,resolvedPorts) declares stable keys/types/required; NodeEmission.boundaryOutputs supplies results; no positional special case."
+        },
+        {
+          "field": "invalidEdgePolicy",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Definition-owned callbacks construct and validate candidate schema/emission; dynamic edits remain Graph operations."
+        },
+        {
+          "field": "connectionTypePolicy",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Definition-owned callbacks construct and validate candidate schema/emission; dynamic edits remain Graph operations."
+        },
+        {
+          "field": "stateReferences",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Definition-owned callbacks construct and validate candidate schema/emission; dynamic edits remain Graph operations."
+        },
+        {
+          "field": "stateCodec",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/public-surface.ts#LocalizableIssue",
+          "reason": "Same module-owned codec lifecycle; production validate returns LocalizableIssue[], not string[]."
+        },
+        {
+          "field": "initialize",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Definition-owned callbacks construct and validate candidate schema/emission; dynamic edits remain Graph operations."
+        },
+        {
+          "field": "ports",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Definition-owned callbacks construct and validate candidate schema/emission; dynamic edits remain Graph operations."
+        },
+        {
+          "field": "parameters",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Definition-owned callbacks construct and validate candidate schema/emission; dynamic edits remain Graph operations."
+        },
+        {
+          "field": "validate",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/public-surface.ts#LocalizableIssue",
+          "reason": "Production returns structured LocalizableIssue[]; caller supplies scoped subject; Generator does not localize."
+        },
+        {
+          "field": "emit",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Definition-owned callbacks construct and validate candidate schema/emission; dynamic edits remain Graph operations."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "ModuleManifest",
+      "sourceLine": 180,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "04_EXTENSION_MODEL.md",
+      "reason": "Exact provenance/dependencies/license plus declared SDK compatibility. Fixture coreApiVersion literal is not release policy.",
+      "fields": [
+        {
+          "field": "id",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Exact provenance/dependencies/license plus declared SDK compatibility. Fixture coreApiVersion literal is not release policy."
+        },
+        {
+          "field": "version",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Exact provenance/dependencies/license plus declared SDK compatibility. Fixture coreApiVersion literal is not release policy."
+        },
+        {
+          "field": "fingerprint",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Exact provenance/dependencies/license plus declared SDK compatibility. Fixture coreApiVersion literal is not release policy."
+        },
+        {
+          "field": "coreApiVersion",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Literal 1 is qualifier compatibility only; production SDK has an explicit version/compatibility policy."
+        },
+        {
+          "field": "dependencies",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Exact provenance/dependencies/license plus declared SDK compatibility. Fixture coreApiVersion literal is not release policy."
+        },
+        {
+          "field": "source",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Exact provenance/dependencies/license plus declared SDK compatibility. Fixture coreApiVersion literal is not release policy."
+        },
+        {
+          "field": "license",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Exact provenance/dependencies/license plus declared SDK compatibility. Fixture coreApiVersion literal is not release policy."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "NodeModule",
+      "sourceLine": 189,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "04_EXTENSION_MODEL.md",
+      "reason": "Contributes definitions/resource validation; module-local implementation permitted, cross-module private mutation forbidden.",
+      "fields": [
+        {
+          "field": "manifest",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Contributes definitions/resource validation; module-local implementation permitted, cross-module private mutation forbidden."
+        },
+        {
+          "field": "types",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "04_EXTENSION_MODEL.md",
+          "reason": "Contributes definitions/resource validation; module-local implementation permitted, cross-module private mutation forbidden."
+        },
+        {
+          "field": "resourceValidators",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/public-surface.ts#LocalizableIssue",
+          "reason": "Production resource validation returns structured LocalizableIssue[] with same owner/mutation guard."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "DefinitionResolver",
+      "sourceLine": 194,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "02_ARCHITECTURE_SPEC.md",
+      "reason": "Exact fixed DefinitionSet resolution; missing module remains preservable; no silent latest-version substitution.",
+      "fields": [
+        {
+          "field": "resolve",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "02_ARCHITECTURE_SPEC.md",
+          "reason": "Exact fixed DefinitionSet resolution; missing module remains preservable; no silent latest-version substitution."
+        },
+        {
+          "field": "validateResources",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "02_ARCHITECTURE_SPEC.md",
+          "reason": "Exact fixed DefinitionSet resolution; missing module remains preservable; no silent latest-version substitution."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "Snapshot",
+      "sourceLine": 198,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "05_DATA_AND_LIFECYCLE.md",
+      "reason": "Immutable document/revision/load/diagnostics plus pinned definitions; generation never observes live changing state.",
+      "fields": [
+        {
+          "field": "document",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "contracts/document-format.ts#CanonicalGraphDocument",
+          "reason": "Immutable snapshot wraps production DTO; experimental envelope is not retained."
+        },
+        {
+          "field": "revision",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "05_DATA_AND_LIFECYCLE.md",
+          "reason": "Immutable document/revision/load/diagnostics plus pinned definitions; generation never observes live changing state."
+        },
+        {
+          "field": "loadId",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "05_DATA_AND_LIFECYCLE.md",
+          "reason": "Immutable document/revision/load/diagnostics plus pinned definitions; generation never observes live changing state."
+        },
+        {
+          "field": "diagnostics",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "05_DATA_AND_LIFECYCLE.md",
+          "reason": "Immutable document/revision/load/diagnostics plus pinned definitions; generation never observes live changing state."
+        },
+        {
+          "field": "definitions",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "05_DATA_AND_LIFECYCLE.md",
+          "reason": "Immutable document/revision/load/diagnostics plus pinned definitions; generation never observes live changing state."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "GenerationResult",
+      "sourceLine": 205,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "13_PRODUCTION_CONTRACT_SURFACE.md#4",
+      "reason": "Artifacts plus provenance and snapshot identity; replaces fixed vertex/pixel pair without losing source mapping.",
+      "fields": [
+        {
+          "field": "vertex",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/public-surface.ts#GeneratedArtifact",
+          "reason": "Artifact entry keyed by stable artifact key and Stage ID, not universal fixed return field."
+        },
+        {
+          "field": "pixel",
+          "classification": "QUALIFICATION_ONLY",
+          "productionContract": "contracts/public-surface.ts#GeneratedArtifact",
+          "reason": "Artifact entry keyed by stable artifact key and Stage ID, not universal fixed return field."
+        },
+        {
+          "field": "revision",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "13_PRODUCTION_CONTRACT_SURFACE.md#4",
+          "reason": "Artifacts plus provenance and snapshot identity; replaces fixed vertex/pixel pair without losing source mapping."
+        },
+        {
+          "field": "loadId",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "13_PRODUCTION_CONTRACT_SURFACE.md#4",
+          "reason": "Artifacts plus provenance and snapshot identity; replaces fixed vertex/pixel pair without losing source mapping."
+        },
+        {
+          "field": "sourceMap",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "13_PRODUCTION_CONTRACT_SURFACE.md#4",
+          "reason": "Artifacts plus provenance and snapshot identity; replaces fixed vertex/pixel pair without losing source mapping."
+        },
+        {
+          "field": "diagnosticMap",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "13_PRODUCTION_CONTRACT_SURFACE.md#4",
+          "reason": "Keep artifact/profile/path/line provenance; stage identifier uses registered Stage identity, not literal union."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "ChangeEvent",
+      "sourceLine": 217,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "05_DATA_AND_LIFECYCLE.md",
+      "reason": "Publish coherent state after model/diagnostic/context projection; observer failures isolated; owner-local no reentry.",
+      "fields": [
+        {
+          "field": "kind",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "05_DATA_AND_LIFECYCLE.md",
+          "reason": "Publish coherent state after model/diagnostic/context projection; observer failures isolated; owner-local no reentry."
+        },
+        {
+          "field": "revision",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "05_DATA_AND_LIFECYCLE.md",
+          "reason": "Publish coherent state after model/diagnostic/context projection; observer failures isolated; owner-local no reentry."
+        },
+        {
+          "field": "operationId",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "05_DATA_AND_LIFECYCLE.md",
+          "reason": "Publish coherent state after model/diagnostic/context projection; observer failures isolated; owner-local no reentry."
+        },
+        {
+          "field": "snapshot",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "05_DATA_AND_LIFECYCLE.md",
+          "reason": "Publish coherent state after model/diagnostic/context projection; observer failures isolated; owner-local no reentry."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "OperationEndEvent",
+      "sourceLine": 223,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "05_DATA_AND_LIFECYCLE.md",
+      "reason": "End/cancel boundary drives history/update policy; not an instruction to regenerate or publish every event.",
+      "fields": [
+        {
+          "field": "operationId",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "05_DATA_AND_LIFECYCLE.md",
+          "reason": "End/cancel boundary drives history/update policy; not an instruction to regenerate or publish every event."
+        },
+        {
+          "field": "cancelled",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "05_DATA_AND_LIFECYCLE.md",
+          "reason": "End/cancel boundary drives history/update policy; not an instruction to regenerate or publish every event."
+        },
+        {
+          "field": "snapshot",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "05_DATA_AND_LIFECYCLE.md",
+          "reason": "End/cancel boundary drives history/update policy; not an instruction to regenerate or publish every event."
+        }
+      ]
+    },
+    {
+      "sourceSymbol": "StorageAdapter",
+      "sourceLine": 228,
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "productionContract": "05_DATA_AND_LIFECYCLE.md",
+      "reason": "Storage capability returns read/write outcome; save receipt applies only to captured state, not later edits.",
+      "fields": [
+        {
+          "field": "write",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "05_DATA_AND_LIFECYCLE.md",
+          "reason": "Storage capability returns read/write outcome; save receipt applies only to captured state, not later edits."
+        },
+        {
+          "field": "read",
+          "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+          "productionContract": "05_DATA_AND_LIFECYCLE.md",
+          "reason": "Storage capability returns read/write outcome; save receipt applies only to captured state, not later edits."
+        }
+      ]
+    }
+  ],
+  "additions": [
+    {
+      "id": "PC-GRAPH-KIND",
+      "contract": "contracts/public-surface.ts#GraphKindDefinition",
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "replaces": [
+        "GraphDocument.kind",
+        "StageRecord.kind",
+        "NodeType.stages",
+        "NodeType.targets"
+      ],
+      "invariants": [
+        "INV-012",
+        "INV-013",
+        "INV-014",
+        "INV-017",
+        "CP-01"
+      ],
+      "status": "EXPERIMENTAL_BUT_CURRENTLY_ACCEPTED"
+    },
+    {
+      "id": "PC-GLSL-PROFILE",
+      "contract": "contracts/public-surface.ts#GLSLProfile",
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "replaces": [
+        "generator.ts:GenerationProfile",
+        "generator.ts:GeneratedStageProgram",
+        "GenerationResult.vertex",
+        "GenerationResult.pixel"
+      ],
+      "invariants": [
+        "INV-015",
+        "INV-016",
+        "CP-03"
+      ],
+      "status": "EXPERIMENTAL_BUT_CURRENTLY_ACCEPTED"
+    },
+    {
+      "id": "PC-BOUNDARY-OUTPUTS",
+      "contract": "contracts/public-surface.ts#NodeTypeBoundaryMetadata",
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "replaces": [
+        "NodeType.stageOutput",
+        "NodeEmission.color",
+        "NodeEmission.position"
+      ],
+      "invariants": [
+        "INV-012",
+        "INV-015",
+        "CP-03"
+      ],
+      "status": "EXPERIMENTAL_BUT_CURRENTLY_ACCEPTED"
+    },
+    {
+      "id": "PC-CAPABILITY",
+      "contract": "contracts/public-surface.ts#CapabilityDirectory",
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "replaces": [
+        "qualification-host.ts:ServiceName closed union"
+      ],
+      "invariants": [
+        "CP-01",
+        "CP-02"
+      ],
+      "status": "EXPERIMENTAL_BUT_CURRENTLY_ACCEPTED"
+    },
+    {
+      "id": "PC-NODE-METADATA",
+      "contract": "contracts/public-surface.ts#PresentedNodeType",
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "replaces": [],
+      "invariants": [
+        "CP-02",
+        "CP-03"
+      ],
+      "status": "EXPERIMENTAL_BUT_CURRENTLY_ACCEPTED"
+    },
+    {
+      "id": "PC-MODULE-METADATA",
+      "contract": "contracts/public-surface.ts#PresentedNodeModule",
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "replaces": [],
+      "invariants": [
+        "CP-02"
+      ],
+      "status": "EXPERIMENTAL_BUT_CURRENTLY_ACCEPTED"
+    },
+    {
+      "id": "PC-PANEL-METADATA",
+      "contract": "contracts/public-surface.ts#PresentedPanelType",
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "replaces": [],
+      "invariants": [
+        "CP-04"
+      ],
+      "status": "EXPERIMENTAL_BUT_CURRENTLY_ACCEPTED"
+    },
+    {
+      "id": "PC-PANEL-COMPOSITION",
+      "contract": "executable-reference/repair/PANEL_COMPOSITION_CONTRACT.md",
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "replaces": [
+        "qualification-workspace.ts:PanelKind closed union",
+        "toy PanelTemplateHost"
+      ],
+      "invariants": [
+        "INV-009",
+        "INV-019",
+        "CP-04"
+      ],
+      "status": "INHERITED_IH002_SEMANTICS_IMPLEMENTATION_NOT_REUSABLE"
+    },
+    {
+      "id": "PC-DOCUMENT",
+      "contract": "contracts/document-format.ts#CanonicalGraphDocument",
+      "classification": "EXACT_IDENTITY",
+      "replaces": [
+        "GraphDocument"
+      ],
+      "invariants": [
+        "INV-017",
+        "INV-018",
+        "CP-01"
+      ],
+      "status": "EXPERIMENTAL_BUT_CURRENTLY_ACCEPTED"
+    },
+    {
+      "id": "PC-VIEW-MOUNT",
+      "contract": "contracts/view-mount.ts",
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "replaces": [
+        "Panel projection-only renderer gap",
+        "Widget arbitrary body without mount contribution"
+      ],
+      "status": "EXPERIMENTAL_BUT_CURRENTLY_ACCEPTED",
+      "changeId": "AC-IH004-01",
+      "semantics": "Distinct contributions, shared mount lifetime/resource/cleanup/fencing; no new edit authority.",
+      "spec": "16_VIEW_MOUNT_CONTRACT.md"
+    },
+    {
+      "id": "PC-WIRE-EVIDENCE",
+      "contract": "contracts/document-format.ts#EdgeAdaptationDocument",
+      "classification": "EXACT_IDENTITY",
+      "changeId": "AC-IH005-01",
+      "spec": "14_DOCUMENT_FORMAT.md",
+      "semantics": "Document2.0 exact core schema/version; loss/recovery tagged evidence, nested fencing and owner codec identity. No implicit restore or reference runtime shape adoption."
+    },
+    {
+      "id": "PC-PRESERVATION-CODECS",
+      "contract": "contracts/document-format.ts#PreservationCodecResolver",
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "changeId": "AC-IH005-01",
+      "spec": "14_DOCUMENT_FORMAT.md",
+      "semantics": "Exact owner pin plus codecId/version; optional module-owned codecs validate opaque evidence without Graph handle. Core tagged envelopes retain exact wire identity."
+    },
+    {
+      "id": "PC-PANEL-COMMANDS",
+      "contract": "contracts/panel-commands.ts#PanelCommands",
+      "classification": "NORMATIVE_SHAPE_RENAMEABLE",
+      "changeId": "AC-IH005-02",
+      "spec": "17_PANEL_COMMAND_CONTRACT.md",
+      "semantics": "Application-authorized Panel instance + target lease + live user-event capability; readonly Panels receive no mutation grant."
+    }
+  ],
+  "implementationBan": {
+    "paths": [
+      "executable-reference/**",
+      "qualification/**"
+    ],
+    "rule": "Production code cannot import/copy/rename-and-extend reference implementations. Port behavior assertions to production SDK harness; class/file/method names engineering-owned while semantic contract retained.",
+    "allowed": "Type/contract reading and mapping; production uses its own SDK. contracts/public-surface.ts/localization.ts declarations may seed that SDK. document-format.ts DTO declarations may seed schema; codec qualification is not a production storage service. contracts/view-mount.ts declarations may seed the public SDK; headless protocols and mounting implementation remain qualification-only. contracts/panel-commands.ts declarations may seed the SDK; application command adapters and gesture fixtures are qualification-only."
+  },
+  "examples": [
+    {
+      "path": "examples/minimal-node",
+      "production": [
+        "DefinitionRegistry",
+        "PresentedNodeModule",
+        "PresentedNodeType",
+        "Graph operation",
+        "TypeEnvironment"
+      ],
+      "notProduction": "reference Graph/fixture implementation"
+    },
+    {
+      "path": "examples/dynamic-interface-node",
+      "production": [
+        "PresentedNodeType",
+        "atomic schema reconciliation",
+        "stable port identity"
+      ],
+      "notProduction": "type-name special cases or bounded schema algorithm"
+    },
+    {
+      "path": "examples/minimal-panel",
+      "production": [
+        "PresentedPanelType",
+        "public Workspace composition",
+        "PanelServices",
+        "scoped TargetResolver",
+        "16 public view/mount contribution"
+      ],
+      "notProduction": "PanelTemplateHost alternative or reference workspace implementation"
+    },
+    {
+      "path": "examples/parameter-widget-or-ui-contribution",
+      "production": [
+        "Widget registry",
+        "ParameterPresentation",
+        "scoped Parameter target/draft",
+        "16 public view/mount contribution"
+      ],
+      "notProduction": "root-only lookup or private Panel access"
+    },
+    {
+      "path": "examples/minimal-host-adapter",
+      "production": [
+        "CapabilityDirectory",
+        "publication executor",
+        "fenced target lifecycle",
+        "receipts"
+      ],
+      "notProduction": "receiver double or fixture transport as TD integration"
+    },
+    {
+      "path": "examples/view-contributions",
+      "production": [
+        "Panel.createView",
+        "PanelViewContribution",
+        "ParameterWidgetViewType",
+        "MountScope",
+        "ScopedParameterTarget",
+        "shared renderer lifecycle"
+      ],
+      "notProduction": "headless-controls protocol, fake surface, ViewSession/PanelRenderer/WidgetRenderer qualification classes"
+    },
+    {
+      "path": "examples/editable-panel",
+      "production": [
+        "PanelType.commandIds",
+        "ApplicationPanelCommandAuthority",
+        "PanelMountContext.commands",
+        "PanelCommandLease",
+        "application-owned Operation"
+      ],
+      "notProduction": "example command executor, fake mounting controls or reference Graph as product foundation"
+    }
+  ],
+  "validation": {
+    "direct": "qualification/public-surface.test.ts",
+    "ledger": "qualification/production-contract-ledger.test.ts",
+    "limits": [
+      "No GPU/TD compile",
+      "No arbitrary shader-language IR",
+      "No DOM renderer qualification",
+      "No product external format support-duration commitment"
+    ]
+  },
+  "additiveChangeIds": [
+    "AC-IH004-01",
+    "AC-IH005-01",
+    "AC-IH005-02"
+  ]
+}

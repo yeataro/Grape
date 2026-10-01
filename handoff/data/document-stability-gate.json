@@ -1,0 +1,17 @@
+{
+  "id": "G-DOCUMENT-STABILITY-COMMITMENT",
+  "kind": "product-policy",
+  "status": "unresolved",
+  "architectureSignificant": false,
+  "classification": ["B", "E"],
+  "capabilityIds": [],
+  "sliceIds": ["S01", "S02"],
+  "unknownBehavior": "The product owner has not chosen the milestone, duration, or scope of the external stable-document compatibility/support commitment.",
+  "architectureImpact": "None: grape.document 1.0 identity, schema version policy, safe forward recovery, exact module pins, and ACK-backed save/reopen are technically defined in IH-003. This is a public support promise, not a choice of document owner or format.",
+  "blocks": ["An external stable document compatibility guarantee or initial release statement claiming such a guarantee before owner decision."],
+  "doesNotBlock": ["Internal S01 implementation once separately authorized.", "Internal document codec fixtures and architecture qualification.", "Slices independent of an external compatibility promise."],
+  "earliestRequiredPhase": "Before the first release or external statement that promises stable long-term document compatibility; earlier if migration acceptance expressly depends on that promise.",
+  "requiredEvidence": ["An explicit product-owner decision naming commitment start milestone and intended support duration/scope.", "At that milestone, retain the promised format fixtures and qualify all needed conversion paths before any incompatible release."],
+  "disproofAction": "If an earlier milestone is chosen, expand the retained compatibility corpus and qualify explicit migrations. A later milestone still does not authorize same-version schema reinterpretation or destructive loading. No default owner choice is inferred.",
+  "sourceRefs": ["Independent review: B2 / human decision 2 / recommended S01 boundary", "IH-003:14_DOCUMENT_FORMAT.md sections 4-6"]
+}

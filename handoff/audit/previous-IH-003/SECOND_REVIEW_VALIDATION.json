@@ -1,0 +1,142 @@
+{
+  "packageId": "IH-003",
+  "status": "EXECUTED_QUALIFICATION_PASS",
+  "disposition": "READY FOR INDEPENDENT RE-REVIEW",
+  "completedAt": "2026-10-01T21:11:14.325Z",
+  "runtime": "v25.5.0",
+  "platform": "win32",
+  "totalTests": 354,
+  "passed": 354,
+  "failed": 0,
+  "skipped": 0,
+  "groups": [
+    {
+      "name": "boundary-tests",
+      "tests": 13,
+      "pass": 13,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "log": "audit/evidence/boundary-tests.txt"
+    },
+    {
+      "name": "production-boundary-tests",
+      "tests": 19,
+      "pass": 19,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "log": "audit/evidence/production-boundary-tests.txt"
+    },
+    {
+      "name": "implementation-state-tests",
+      "tests": 15,
+      "pass": 15,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "log": "audit/evidence/implementation-state-tests.txt"
+    },
+    {
+      "name": "repair-tests",
+      "tests": 57,
+      "pass": 57,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "log": "audit/evidence/repair-tests.txt"
+    },
+    {
+      "name": "ui-example-tests",
+      "tests": 9,
+      "pass": 9,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "log": "audit/evidence/ui-example-tests.txt"
+    },
+    {
+      "name": "public-surface-tests",
+      "tests": 15,
+      "pass": 15,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "log": "audit/evidence/public-surface-tests.txt"
+    },
+    {
+      "name": "production-contract-tests",
+      "tests": 17,
+      "pass": 17,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "log": "audit/evidence/production-contract-tests.txt"
+    },
+    {
+      "name": "sealed-reference",
+      "tests": 201,
+      "pass": 201,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "log": "audit/evidence/reference.txt"
+    },
+    {
+      "name": "node-host-examples",
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "log": "audit/evidence/reference.txt"
+    }
+  ],
+  "runner": "audit/evidence/RUN_HANDOFF.json",
+  "typecheck": "All three strict TS scopes (sealed reference; repair/UI; new contracts/public seams) passed.",
+  "integrity": {
+    "sourceBaselinesPreserved": true,
+    "ih002IndexedParentFilesVerified": 179,
+    "ih001IndexedParentFilesVerified": 143,
+    "sealedReferenceFilesVerified": 37,
+    "legacyScreenshotFilesUnchanged": 8,
+    "referenceBoundaryClassifiedFiles": 31,
+    "capabilityCount": 618,
+    "coverageGroupCount": 345,
+    "legacyUnknowns": 33,
+    "significantUnknowns": 13,
+    "productDecisionLeaves": 8,
+    "currentGateRecords": 46
+  },
+  "directNewCases": {
+    "productionSurfaceAndLedger": 15,
+    "documentFormat": 17,
+    "localization": 17,
+    "productionBoundaries": 19,
+    "decisionReferenceProgress": 4
+  },
+  "failedValidationRecord": "audit/evidence/second-review-first-regression",
+  "independentAcceptance": "pending",
+  "humanDecisionGate": "G-DOCUMENT-STABILITY-COMMITMENT",
+  "productionImplementationStarted": false,
+  "remainingBlockers": [],
+  "remainingMajors": [],
+  "limits": [
+    "No production slice acceptance test was executed.",
+    "No true TD/native provider or physical-GPU compatibility claim.",
+    "Package-only mode does not rerun the copied reference and cannot establish full handoff verification.",
+    "Semantic ownership, extension clarity and fresh-context sufficiency require the separate human/agent review.",
+    "No external long-term format support promise was selected.",
+    "Static checker cannot prove manifest truth, callback purity or runtime authority by itself.",
+    "IR-001 completeness limitations, native/GPU/browser/runtime Gates and HC-001 remain."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "packageId": "IH-002",
+  "purpose": "Accepted independent findings, additive contracts and direct qualification locators; not a new IR/CQ disposition",
+  "architectureChanges": [
+    {"id":"AC-IH002-01","finding":"B01","record":"audit/REPAIR_CHANGELOG.md","contract":"executable-reference/repair/PANEL_COMPOSITION_CONTRACT.md","affectedInvariants":["INV-005","INV-008","INV-009","INV-017","INV-019"],"waivedInvariants":[]},
+    {"id":"AC-IH002-02","finding":"M01","record":"audit/REPAIR_CHANGELOG.md","contract":"executable-reference/repair/SCOPED_PARAMETER_CONTRACT.md","affectedInvariants":["INV-004","INV-010","INV-011","INV-017","INV-019","INV-020"],"waivedInvariants":[]}
+  ],
+  "findings": [
+    {"id":"B01","accepted":true,"contracts":["04_EXTENSION_MODEL.md","executable-reference/repair/PANEL_COMPOSITION_CONTRACT.md","examples/minimal-panel/README.md"],"validationFiles":["executable-reference/repair/public-panel-workspace.test.ts","executable-reference/repair/panel-inspector.test.ts","examples/minimal-panel/test.ts","tools/check-repair.mjs"]},
+    {"id":"M01","accepted":true,"contracts":["04_EXTENSION_MODEL.md","executable-reference/repair/SCOPED_PARAMETER_CONTRACT.md","examples/parameter-widget-or-ui-contribution/README.md"],"validationFiles":["executable-reference/repair/scoped-parameter.test.ts","executable-reference/repair/panel-inspector.test.ts","examples/parameter-widget-or-ui-contribution/test.ts"]},
+    {"id":"N01","accepted":true,"contracts":["00_README.md","ui-reference/SCREEN_INDEX.md","ui-reference/legacy-screenshots/README.md"],"validationFiles":["tools/check-repair.mjs"]},
+    {"id":"N02","accepted":true,"contracts":["04_EXTENSION_MODEL.md","02_ARCHITECTURE_SPEC.md","12_DECISION_LOG.md"],"validationFiles":["audit/FRESH_CONTEXT_SIMULATION.md"]},
+    {"id":"N03","accepted":true,"contracts":["08_IMPLEMENTATION_PLAN.md","implementation-state.json"],"validationFiles":["tools/check-implementation-state.mjs","tools/implementation-state.test.mjs"]}
+  ],
+  "productionImplementationStarted": false,
+  "qualificationEvidence": "audit/evidence/RUN_HANDOFF.json",
+  "independentAcceptance": "pending-re-review"
+}

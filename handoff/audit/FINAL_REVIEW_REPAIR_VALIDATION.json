@@ -1,0 +1,249 @@
+{
+  "packageId": "IH-004",
+  "status": "PASS",
+  "disposition": "READY FOR FRESH RE-REVIEW",
+  "independentAcceptance": "pending",
+  "completedAt": "2026-10-01T21:52:19.812Z",
+  "runtime": "v25.5.0",
+  "platform": "win32",
+  "claim": "Executed headless contract qualification and inherited full regression only; not HANDOFF PASS or production UI acceptance.",
+  "directCaseCount": 29,
+  "directCases": [
+    {
+      "id": "VM01",
+      "title": "VM01 two independent Panel packages mount through one public workspace and generic renderer",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM02",
+      "title": "VM02 help private expansion survives hide/move/remount; stale old controls revoked",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM03",
+      "title": "VM03 selection and locale updates render but do not mutate Graph/History",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM04",
+      "title": "VM04 mount failure cleans partial resources, placeholder retry preserves Panel state",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM05",
+      "title": "VM05 update failure revokes all mount resources before placeholder and retry",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM06",
+      "title": "VM06 dispose fences async work; cleanup registered after revoke executes immediately",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM07",
+      "title": "VM07 number field draft survives unmount/remount and commits through scoped target once",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM08",
+      "title": "VM08 toggle feature uses same registered mount path and retains bool semantics",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM09",
+      "title": "VM09 field draft rejects concurrent target change, retains text for user recovery",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM10",
+      "title": "VM10 mount/update cannot invoke widget model commands",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM11",
+      "title": "VM11 scoped target disposal invalidates widget display and fences pending actions",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM12",
+      "title": "VM12 inactive tab releases mount only, not private Panel state",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM13",
+      "title": "VM13 guarded workspace close/dispose preserves mount until guard allows",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM14",
+      "title": "VM14 missing Widget view is explicit placeholder and registry retry resolves it",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM15",
+      "title": "VM15 incompatible technology protocol yields controlled placeholder",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM16",
+      "title": "VM16 restored Help projection uses private viewState before initial mount",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM17",
+      "title": "VM17 generic renderer has no feature imports, class checks, or Graph/History mutation",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VM18",
+      "title": "VM18 malformed feature viewState becomes opaque workspace placeholder before view creation",
+      "file": "executable-reference/repair/view-mount.test.ts"
+    },
+    {
+      "id": "VA01",
+      "title": "VA01 real workspace close/dispose veto preserves mounted resources; successful close retires view before model",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA02",
+      "title": "VA02 full workspace disposal emits teardown even without a final workspace notification",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA03",
+      "title": "VA03 surface acquisition failure during move revokes old callbacks and retry preserves contribution",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA04",
+      "title": "VA04 same-ID reopen never revives async ticket or event from the old instance",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA05",
+      "title": "VA05 partial mount failure releases all prior acquisitions even when one cleanup throws; retry keeps feature state",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA06",
+      "title": "VA06 custom projection matches custom view; mount/update cannot enter edit boundary",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA07",
+      "title": "VA07 nested draft survives unmount/show/locale and commits once to same scoped model",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA08",
+      "title": "VA08 retained old event cannot write after navigation invalidates scoped target",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA09",
+      "title": "VA09 pending UI draft can be cancelled by contribution cleanup without model edit authority",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA10",
+      "title": "VA10 retained mounted event is revoked by dynamic type and interface removal; restoring type cannot revive it",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    },
+    {
+      "id": "VA11",
+      "title": "VA11 cleanup inside a user event cannot inherit the previous mount edit authority",
+      "file": "qualification/view-mount-adversarial.test.ts"
+    }
+  ],
+  "fullRegression": {
+    "evidence": "audit/evidence/RUN_HANDOFF.json",
+    "sha256": "9fb69d521db78de7861444f796ac712952672066654cbdb3ffe1d0ff34a633d9",
+    "counts": {
+      "tests": 383,
+      "pass": 383,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "typecheck": "PASS: repair/UI, new contracts/qualification and sealed reference scopes"
+  },
+  "failedValidationsAndInspectionCounterexamples": [
+    {
+      "id": "VA09",
+      "kind": "executed-counterexample",
+      "counterexample": "Contribution.dispose cancels an uncommitted local draft after mount revocation, but cancel incorrectly demanded event write authority.",
+      "repair": "Allow UI-only cancel during cleanup; keep setText/composition/commit event-scoped and model writes token-checked.",
+      "evidence": "audit/evidence/fir-adversarial-first-run.txt",
+      "evidenceCaveat": "Transcription of observed tool output, explicitly labeled by testing agent; not a retained checkout rerun.",
+      "regression": "VA09"
+    },
+    {
+      "id": "VA11",
+      "kind": "executed-counterexample",
+      "counterexample": "Unmount invoked inside a user event ran cleanup while outer eventDepth remained positive; cleanup could call a retained command.",
+      "repair": "Revoke live mount identity before any cleanup; command guard requires live mount as well as event phase.",
+      "evidence": "audit/evidence/fir-adversarial-first-run.txt",
+      "evidenceCaveat": "Transcription of observed tool output, explicitly labeled by testing agent; not a retained checkout rerun.",
+      "regression": "VA11"
+    },
+    {
+      "id": "SURFACE-MOVE",
+      "kind": "inspection-counterexample",
+      "counterexample": "Surface acquisition throws during move while old mount can remain live.",
+      "repair": "Unmount/revoke old surface before acquisition; retry retains contribution.",
+      "regression": "VA03"
+    },
+    {
+      "id": "RESTORE-EXACT",
+      "kind": "inspection-counterexample",
+      "counterexample": "Help sample silently accepted malformed restore state and discarded it.",
+      "repair": "Exact empty/default or expanded:boolean state; reject bad/unknown shape into existing opaque workspace placeholder.",
+      "regression": "VM18"
+    },
+    {
+      "id": "VM08/VM14-SETUP",
+      "kind": "executed-fixture-error-agent-reported",
+      "counterexample": "Test fixture used unsupported legacy shorthand boolean.",
+      "repair": "Use already-canonical presentation descriptor {widget:core.boolean}; no model contract relaxation.",
+      "regression": "VM08, VM14",
+      "evidenceCaveat": "Agent execution report; raw initial output not retained. Final executed cases logged."
+    },
+    {
+      "id": "FULL-RUN-1",
+      "kind": "executed-package-integration-failure",
+      "counterexample": "Progress validator still required IH-003 after package template adopted IH-004.",
+      "repair": "Update this revision validator and fixture to IH-004; retain exact revision check.",
+      "evidence": "audit/evidence/fir-first-full-run/RUN_HANDOFF.json",
+      "detail": "audit/evidence/fir-first-full-run/implementation-state.txt",
+      "regression": "Final full run implementation-state and 15 progress tests"
+    }
+  ],
+  "affectedInvariants": [
+    "INV-001",
+    "INV-006",
+    "INV-008",
+    "INV-009",
+    "INV-019",
+    "INV-020",
+    "CP-01",
+    "CP-02",
+    "CP-04"
+  ],
+  "protectedOwners": [
+    "Graph",
+    "History",
+    "EditorContext",
+    "ScopedParameterTarget",
+    "Localization",
+    "Host"
+  ],
+  "remainingLimits": [
+    "Independent acceptance pending",
+    "Only fake/headless mounting surface for FIR-B01",
+    "No production S01 or other slice started",
+    "True DOM/focus/IME/accessibility/browser/device integration remains existing Gates",
+    "Inherited browser probe does not qualify the new mounting surface or physical GPU/TD"
+  ],
+  "unresolvedArchitectureChoiceForFIRRepair": null
+}

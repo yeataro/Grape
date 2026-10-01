@@ -1,0 +1,673 @@
+{
+  "status": "passed",
+  "scope": "AC-002 exact reference, IH-002 additive repair and handoff examples only; not production certification",
+  "checkedFiles": 25,
+  "errors": [],
+  "imports": [
+    {
+      "file": "executable-reference/core.ts",
+      "role": "core",
+      "specifier": "./qualification-compute.ts",
+      "kind": "runtime",
+      "target": "executable-reference/qualification-compute.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/core.ts",
+      "role": "core",
+      "specifier": "./identity.ts",
+      "kind": "runtime",
+      "target": "executable-reference/identity.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/core.ts",
+      "role": "core",
+      "specifier": "./identity.ts",
+      "kind": "type",
+      "target": "executable-reference/identity.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/core.ts",
+      "role": "core",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/demo.ts",
+      "role": "harness",
+      "specifier": "node:fs/promises",
+      "kind": "runtime"
+    },
+    {
+      "file": "executable-reference/demo.ts",
+      "role": "harness",
+      "specifier": "node:url",
+      "kind": "runtime"
+    },
+    {
+      "file": "executable-reference/demo.ts",
+      "role": "harness",
+      "specifier": "./scenario.ts",
+      "kind": "runtime",
+      "target": "executable-reference/scenario.ts",
+      "targetRole": "harness"
+    },
+    {
+      "file": "executable-reference/demo.ts",
+      "role": "harness",
+      "specifier": "./storage.ts",
+      "kind": "runtime",
+      "target": "executable-reference/storage.ts",
+      "targetRole": "adapter"
+    },
+    {
+      "file": "executable-reference/generation-provenance.ts",
+      "role": "generator",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/generation-provenance.ts",
+      "role": "generator",
+      "specifier": "./qualification-compute.ts",
+      "kind": "runtime",
+      "target": "executable-reference/qualification-compute.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/generator.ts",
+      "role": "generator",
+      "specifier": "./qualification-compute.ts",
+      "kind": "runtime",
+      "target": "executable-reference/qualification-compute.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/generator.ts",
+      "role": "generator",
+      "specifier": "./generation-provenance.ts",
+      "kind": "runtime",
+      "target": "executable-reference/generation-provenance.ts",
+      "targetRole": "generator"
+    },
+    {
+      "file": "executable-reference/generator.ts",
+      "role": "generator",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/nodes.ts",
+      "role": "module",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/presentation-contract-probe.ts",
+      "role": "harness",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/qualification-actions.ts",
+      "role": "application",
+      "specifier": "./core.ts",
+      "kind": "runtime",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/qualification-actions.ts",
+      "role": "application",
+      "specifier": "./core.ts",
+      "kind": "type",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/qualification-actions.ts",
+      "role": "application",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/qualification-actions.ts",
+      "role": "application",
+      "specifier": "./qualification-workspace.ts",
+      "kind": "runtime",
+      "target": "executable-reference/qualification-workspace.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "executable-reference/qualification-compute.ts",
+      "role": "core",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/qualification-compute.ts",
+      "role": "core",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/qualification-host.ts",
+      "role": "application",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/qualification-host.ts",
+      "role": "application",
+      "specifier": "./core.ts",
+      "kind": "type",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/qualification-host.ts",
+      "role": "application",
+      "specifier": "./core.ts",
+      "kind": "type",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/qualification-host.ts",
+      "role": "application",
+      "specifier": "./core.ts",
+      "kind": "type",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/qualification-host.ts",
+      "role": "application",
+      "specifier": "./core.ts",
+      "kind": "type",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/qualification-host.ts",
+      "role": "application",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/qualification-presentation.ts",
+      "role": "application",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/qualification-presentation.ts",
+      "role": "application",
+      "specifier": "./core.ts",
+      "kind": "type",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/qualification-presentation.ts",
+      "role": "application",
+      "specifier": "./core.ts",
+      "kind": "runtime",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/qualification-presentation.ts",
+      "role": "application",
+      "specifier": "./qualification-compute.ts",
+      "kind": "runtime",
+      "target": "executable-reference/qualification-compute.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/qualification-presentation.ts",
+      "role": "application",
+      "specifier": "./qualification-compute.ts",
+      "kind": "type",
+      "target": "executable-reference/qualification-compute.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/qualification-updates.ts",
+      "role": "application",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/qualification-updates.ts",
+      "role": "application",
+      "specifier": "./core.ts",
+      "kind": "runtime",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/qualification-updates.ts",
+      "role": "application",
+      "specifier": "./generator.ts",
+      "kind": "runtime",
+      "target": "executable-reference/generator.ts",
+      "targetRole": "generator"
+    },
+    {
+      "file": "executable-reference/qualification-workspace.ts",
+      "role": "application",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/qualification-workspace.ts",
+      "role": "application",
+      "specifier": "./core.ts",
+      "kind": "runtime",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/qualification-workspace.ts",
+      "role": "application",
+      "specifier": "./qualification-compute.ts",
+      "kind": "runtime",
+      "target": "executable-reference/qualification-compute.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/qualification-workspace.ts",
+      "role": "application",
+      "specifier": "./core.ts",
+      "kind": "type",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/qualification-workspace.ts",
+      "role": "application",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/scenario.ts",
+      "role": "harness",
+      "specifier": "node:assert/strict",
+      "kind": "runtime"
+    },
+    {
+      "file": "executable-reference/scenario.ts",
+      "role": "harness",
+      "specifier": "./core.ts",
+      "kind": "runtime",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/scenario.ts",
+      "role": "harness",
+      "specifier": "./nodes.ts",
+      "kind": "runtime",
+      "target": "executable-reference/nodes.ts",
+      "targetRole": "module"
+    },
+    {
+      "file": "executable-reference/scenario.ts",
+      "role": "harness",
+      "specifier": "./generator.ts",
+      "kind": "runtime",
+      "target": "executable-reference/generator.ts",
+      "targetRole": "generator"
+    },
+    {
+      "file": "executable-reference/scenario.ts",
+      "role": "harness",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/storage.ts",
+      "role": "adapter",
+      "specifier": "node:fs/promises",
+      "kind": "runtime"
+    },
+    {
+      "file": "executable-reference/storage.ts",
+      "role": "adapter",
+      "specifier": "node:path",
+      "kind": "runtime"
+    },
+    {
+      "file": "executable-reference/storage.ts",
+      "role": "adapter",
+      "specifier": "node:crypto",
+      "kind": "runtime"
+    },
+    {
+      "file": "executable-reference/storage.ts",
+      "role": "adapter",
+      "specifier": "./contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/validate.ts",
+      "role": "harness",
+      "specifier": "node:child_process",
+      "kind": "runtime"
+    },
+    {
+      "file": "executable-reference/validate.ts",
+      "role": "harness",
+      "specifier": "node:fs",
+      "kind": "runtime"
+    },
+    {
+      "file": "executable-reference/validate.ts",
+      "role": "harness",
+      "specifier": "node:crypto",
+      "kind": "runtime"
+    },
+    {
+      "file": "executable-reference/validate.ts",
+      "role": "harness",
+      "specifier": "node:path",
+      "kind": "runtime"
+    },
+    {
+      "file": "executable-reference/validate.ts",
+      "role": "harness",
+      "specifier": "node:url",
+      "kind": "runtime"
+    },
+    {
+      "file": "executable-reference/repair/public-panel-workspace.ts",
+      "role": "application",
+      "specifier": "../core.ts",
+      "kind": "runtime",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/repair/public-panel-workspace.ts",
+      "role": "application",
+      "specifier": "../contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/repair/public-panel-workspace.ts",
+      "role": "application",
+      "specifier": "./scoped-parameter.ts",
+      "kind": "type",
+      "target": "executable-reference/repair/scoped-parameter.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "executable-reference/repair/public-panel-workspace.ts",
+      "role": "application",
+      "specifier": "./scoped-parameter.ts",
+      "kind": "runtime",
+      "target": "executable-reference/repair/scoped-parameter.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "executable-reference/repair/public-panel-workspace.ts",
+      "role": "application",
+      "specifier": "../qualification-workspace.ts",
+      "kind": "runtime",
+      "target": "executable-reference/qualification-workspace.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "executable-reference/repair/scoped-fixtures.ts",
+      "role": "harness",
+      "specifier": "../core.ts",
+      "kind": "runtime",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/repair/scoped-fixtures.ts",
+      "role": "harness",
+      "specifier": "../contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/repair/scoped-fixtures.ts",
+      "role": "harness",
+      "specifier": "../nodes.ts",
+      "kind": "runtime",
+      "target": "executable-reference/nodes.ts",
+      "targetRole": "module"
+    },
+    {
+      "file": "executable-reference/repair/scoped-fixtures.ts",
+      "role": "harness",
+      "specifier": "../qualification-workspace.ts",
+      "kind": "runtime",
+      "target": "executable-reference/qualification-workspace.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "executable-reference/repair/scoped-fixtures.ts",
+      "role": "harness",
+      "specifier": "../qualification-workspace.ts",
+      "kind": "type",
+      "target": "executable-reference/qualification-workspace.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "executable-reference/repair/scoped-parameter.ts",
+      "role": "application",
+      "specifier": "../core.ts",
+      "kind": "runtime",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/repair/scoped-parameter.ts",
+      "role": "application",
+      "specifier": "../core.ts",
+      "kind": "type",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/repair/scoped-parameter.ts",
+      "role": "application",
+      "specifier": "../contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "executable-reference/repair/scoped-parameter.ts",
+      "role": "application",
+      "specifier": "../qualification-workspace.ts",
+      "kind": "runtime",
+      "target": "executable-reference/qualification-workspace.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "executable-reference/repair/scoped-parameter.ts",
+      "role": "application",
+      "specifier": "../qualification-workspace.ts",
+      "kind": "type",
+      "target": "executable-reference/qualification-workspace.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "executable-reference/repair/scoped-parameter.ts",
+      "role": "application",
+      "specifier": "../qualification-compute.ts",
+      "kind": "runtime",
+      "target": "executable-reference/qualification-compute.ts",
+      "targetRole": "core"
+    },
+    {
+      "file": "executable-reference/repair/scoped-parameter.ts",
+      "role": "application",
+      "specifier": "../qualification-presentation.ts",
+      "kind": "type",
+      "target": "executable-reference/qualification-presentation.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "examples/dynamic-interface-node/example.ts",
+      "role": "module",
+      "specifier": "../../executable-reference/contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "examples/minimal-host-adapter/example.ts",
+      "role": "adapter",
+      "specifier": "../../executable-reference/contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "examples/minimal-host-adapter/example.ts",
+      "role": "adapter",
+      "specifier": "../../executable-reference/qualification-host.ts",
+      "kind": "runtime",
+      "target": "executable-reference/qualification-host.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "examples/minimal-host-adapter/example.ts",
+      "role": "adapter",
+      "specifier": "../../executable-reference/qualification-host.ts",
+      "kind": "type",
+      "target": "executable-reference/qualification-host.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "examples/minimal-node/example.ts",
+      "role": "module",
+      "specifier": "../../executable-reference/contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "examples/minimal-panel/panel-template.ts",
+      "role": "ui",
+      "specifier": "../../executable-reference/contracts.ts",
+      "kind": "type",
+      "target": "executable-reference/contracts.ts",
+      "targetRole": "contracts"
+    },
+    {
+      "file": "examples/minimal-panel/panel-template.ts",
+      "role": "ui",
+      "specifier": "../../executable-reference/repair/public-panel-workspace.ts",
+      "kind": "type",
+      "target": "executable-reference/repair/public-panel-workspace.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "examples/parameter-widget-or-ui-contribution/contribution.ts",
+      "role": "ui",
+      "specifier": "../../executable-reference/qualification-presentation.ts",
+      "kind": "runtime",
+      "target": "executable-reference/qualification-presentation.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "examples/parameter-widget-or-ui-contribution/contribution.ts",
+      "role": "ui",
+      "specifier": "../../executable-reference/qualification-presentation.ts",
+      "kind": "type",
+      "target": "executable-reference/qualification-presentation.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "examples/parameter-widget-or-ui-contribution/contribution.ts",
+      "role": "ui",
+      "specifier": "../../executable-reference/repair/scoped-parameter.ts",
+      "kind": "runtime",
+      "target": "executable-reference/repair/scoped-parameter.ts",
+      "targetRole": "application"
+    },
+    {
+      "file": "examples/parameter-widget-or-ui-contribution/contribution.ts",
+      "role": "ui",
+      "specifier": "../../executable-reference/core.ts",
+      "kind": "runtime",
+      "target": "executable-reference/core.ts",
+      "targetRole": "core"
+    }
+  ],
+  "environmentChecks": [],
+  "claim": "Checks declared runtime dependency direction and common environment leakage only; not behavioral compatibility, transaction correctness, security isolation or production readiness.",
+  "manifest": "C:\\Users\\user\\Documents\\Codex\\2026-09-09\\td\\implementation-handoff-r2\\examples\\conformance-manifest.json",
+  "manifestSha256": "754eac5dd843ac69144f2e9af44f2d4c01fd63c1537926067eadc3ff1f72738b",
+  "sourceHashes": {
+    "executable-reference/contracts.ts": "418999c3042796133ddc35d88d427e99b22d744f5dfce317f538e74d53f739d5",
+    "executable-reference/core.ts": "0388b9c166ae7198559d302cf31ae1eecf45d78998807d44088fe40b2da0159f",
+    "executable-reference/demo.ts": "bccb51e9a32c072509c796bd2bc175cdc83e1ffdb579283f6eea6df38138b24b",
+    "executable-reference/generation-provenance.ts": "51d981c6c986fa4d44cd007e167d4ec2cfdd034e86e1bd9884a5a3a1e0af7c3a",
+    "executable-reference/generator.ts": "82573e2b01a6e10b16129db281b9772143937dab527689aa10aff9bab13924e8",
+    "executable-reference/identity.ts": "c901ec3820d44c1f9d7a5e5f4709caf162a85f3254d08d1537ea0401adfc067f",
+    "executable-reference/nodes.ts": "01effdda171ec3d9550e6808da3ea4811cf6b31c67e312e80519d6ba42708500",
+    "executable-reference/presentation-contract-probe.ts": "514f5a009d218308f938d5e0cd305c8088fd98b8db6baf22c1455f0d7c82dec0",
+    "executable-reference/qualification-actions.ts": "5a50c52a7619152247b3d097c729e532ba44c3eba400941ede436c694c2771b9",
+    "executable-reference/qualification-compute.ts": "ac0827e5d05c2e6948730b41228e618f8b152fc52e4701233c3f6b98b6ae584f",
+    "executable-reference/qualification-host.ts": "c8d19d52e1321302083ba3905d2431d1a9a67bf13cf4f590003ccfd00ddf313c",
+    "executable-reference/qualification-presentation.ts": "a079aaeb8a8b5f4baa5fbe3be19e6195062817303ef6920cc8b608dafccf8fd2",
+    "executable-reference/qualification-updates.ts": "077fc951aeb537a9e7adc37b7003d3f3eb38df212f2485313424fed00d1b39b3",
+    "executable-reference/qualification-workspace.ts": "f97abcab36c5f9baf2387f58cf0a11cd8a02bb1be6c57cdb48351b843604bce9",
+    "executable-reference/scenario.ts": "12db92e47431d277999f8a4fe6ad4691f28035f5af619dd8753cb36b8f85974b",
+    "executable-reference/storage.ts": "5340fbcce6cec84c1e7d18b102316628512f2859760ee2d050f3d09ba97f4bc5",
+    "executable-reference/validate.ts": "c93e167eb4422aab2ad14bcb7ce02728640082e211302d62546a598465823b5f",
+    "executable-reference/repair/public-panel-workspace.ts": "0ad77f291e974e261f46a3cc6764419f982e06f8a7b97a14660e9f61f00c81be",
+    "executable-reference/repair/scoped-fixtures.ts": "2a7e10ff1599f9cd95fbc9e21cfd29df5ceb5cb273bd26016c35dccd42ae700b",
+    "executable-reference/repair/scoped-parameter.ts": "0ae6bba013ec8cff558bb9dfb8ebfa00d2dae84e4fb424b44db3cfa7c9918adb",
+    "examples/dynamic-interface-node/example.ts": "86c5dd94b8c459eada6a2257665e7d74602fb5a9b71d7c00c530cfe2cca795bf",
+    "examples/minimal-host-adapter/example.ts": "e12a682eaa24f70aca3fe03c11b41e12096ec2261a92779c38fcec38f04410cf",
+    "examples/minimal-node/example.ts": "8fd53d0142d8387ca3f652797a008c3516851654af8eaccae8c378b1c1bd6998",
+    "examples/minimal-panel/panel-template.ts": "afe6a648d8fb3aa3f668bf64edc680ac5def691b938b4dd3d9cc4820101ec97e",
+    "examples/parameter-widget-or-ui-contribution/contribution.ts": "d4fc3556f5d3207cbee5d5d529501f33e1b9f52359a17a8a7de547502313a431"
+  }
+}

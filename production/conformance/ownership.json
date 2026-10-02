@@ -1,0 +1,391 @@
+{
+  "version": 1,
+  "scope": "production",
+  "base": "..",
+  "roots": ["src", "apps"],
+  "files": {
+    "src/adapters/browser/presentation.ts": {
+      "owner": "browser-adapters",
+      "role": "adapter",
+      "exports": {
+        "browserFeedback": "environment"
+      }
+    },
+    "src/adapters/browser/storage.ts": {
+      "owner": "browser-adapters",
+      "role": "adapter",
+      "exports": {
+        "BrowserStorage": "environment",
+        "downloadBytes": "environment",
+        "browserOutput": "environment"
+      }
+    },
+    "src/application/editor.ts": {
+      "owner": "application",
+      "role": "application",
+      "exports": {
+        "EditorContext": "command",
+        "EditorApplication": "command",
+        "FieldDraft": "command"
+      }
+    },
+    "src/definitions/registry.ts": {
+      "owner": "definitions",
+      "role": "definitions",
+      "exports": {
+        "Definitions": "service"
+      }
+    },
+    "src/definitions/types.ts": {
+      "owner": "definitions",
+      "role": "definitions",
+      "exports": {
+        "width": "contract",
+        "TypeEnvironment": "service",
+        "glslType": "contract"
+      }
+    },
+    "src/features/actions.ts": {
+      "owner": "feature-actions",
+      "role": "ui",
+      "exports": {
+        "actionsType": "command",
+        "actionsText": "contract"
+      }
+    },
+    "src/features/canvas.ts": {
+      "owner": "feature-canvas",
+      "role": "ui",
+      "exports": {
+        "canvasCommands": "contract",
+        "canvasType": "command",
+        "canvasText": "contract"
+      }
+    },
+    "src/features/code.ts": {
+      "owner": "feature-code",
+      "role": "ui",
+      "exports": {
+        "codeType": "command",
+        "codeText": "contract"
+      }
+    },
+    "src/features/controls.ts": {
+      "owner": "feature-controls",
+      "role": "ui",
+      "exports": {
+        "numberWidget": "command",
+        "choiceWidget": "command",
+        "controlsText": "contract"
+      }
+    },
+    "src/features/inspector.ts": {
+      "owner": "feature-inspector",
+      "role": "ui",
+      "exports": {
+        "inspectorType": "command",
+        "inspectorText": "contract"
+      }
+    },
+    "src/generation/compiler.ts": {
+      "owner": "generation",
+      "role": "generator",
+      "exports": {
+        "compile": "service"
+      }
+    },
+    "src/localization/service.ts": {
+      "owner": "localization",
+      "role": "application",
+      "exports": {
+        "Localization": "command"
+      }
+    },
+    "src/model/graph.ts": {
+      "owner": "model",
+      "role": "model",
+      "exports": {
+        "Operation": "contract",
+        "Graph": "service",
+        "Draft": "mutation"
+      }
+    },
+    "src/modules/image.ts": {
+      "owner": "basic-modules",
+      "role": "module",
+      "exports": {
+        "KIND_PIN": "contract",
+        "graphKinds": "contract",
+        "stages": "contract",
+        "imageKind": "contract",
+        "esProfile": "contract",
+        "PROFILE_PIN": "contract"
+      }
+    },
+    "src/modules/nodes.ts": {
+      "owner": "basic-modules",
+      "role": "module",
+      "exports": {
+        "NODE_PIN": "contract",
+        "owner": "contract",
+        "text": "contract",
+        "nodeRef": "contract",
+        "floatNode": "contract",
+        "multiplyNode": "contract",
+        "composeNode": "contract",
+        "outputNode": "contract",
+        "vertexOutputNode": "contract",
+        "basicNodes": "contract",
+        "nodeText": "contract"
+      }
+    },
+    "src/persistence/codec.ts": {
+      "owner": "persistence",
+      "role": "persistence",
+      "exports": {
+        "parseJSON": "service",
+        "readDocument": "service",
+        "writeDocument": "service"
+      }
+    },
+    "src/sdk/document.ts": {
+      "owner": "sdk",
+      "role": "contracts",
+      "exports": {
+        "DOCUMENT_FORMAT": "contract",
+        "DOCUMENT_VERSION": "contract",
+        "ModulePin": "contract",
+        "DocumentReference": "contract",
+        "PortSnapshot": "contract",
+        "NodeDocument": "contract",
+        "EdgeDocument": "contract",
+        "EdgeAdaptationDocument": "contract",
+        "NetworkDocument": "contract",
+        "StageDocument": "contract",
+        "ResourceDocument": "contract",
+        "PreservedPayload": "contract",
+        "LossDocument": "contract",
+        "RecoveryDocument": "contract",
+        "ModulePreservationContribution": "contract",
+        "PreservationCodecResolver": "contract",
+        "CanonicalGraphDocument": "contract",
+        "DocumentRead": "contract",
+        "ReadOptions": "contract"
+      }
+    },
+    "src/sdk/editing.ts": {
+      "owner": "sdk",
+      "role": "contracts",
+      "exports": {
+        "ParameterSpec": "contract",
+        "NodeDefinition": "contract",
+        "ResourceDefinition": "contract",
+        "ModuleContribution": "contract",
+        "ShaderTypeDefinition": "contract",
+        "TypeSystem": "contract",
+        "DefinitionSet": "contract",
+        "GraphSnapshot": "contract",
+        "Compilation": "contract",
+        "ScopeRef": "contract",
+        "ParameterProjection": "contract",
+        "StorageAdapter": "contract",
+        "DocumentOutput": "contract",
+        "FieldTarget": "contract",
+        "ContextSnapshot": "contract"
+      }
+    },
+    "src/sdk/kernel.ts": {
+      "owner": "sdk",
+      "role": "contracts",
+      "exports": {
+        "Fault": "contract",
+        "demand": "contract",
+        "plain": "contract",
+        "detached": "contract",
+        "equal": "contract",
+        "pinKey": "contract",
+        "exact": "contract",
+        "Signal": "contract",
+        "IdentitySource": "contract",
+        "issue": "contract"
+      }
+    },
+    "src/sdk/localization.ts": {
+      "owner": "sdk",
+      "role": "contracts",
+      "exports": {
+        "TextOwnerRef": "contract",
+        "TextRef": "contract",
+        "FeaturePresentation": "contract",
+        "NodePresentation": "contract",
+        "PanelPresentation": "contract",
+        "ModulePresentation": "contract",
+        "MenuPresentationOptions": "contract",
+        "LocaleContribution": "contract",
+        "LocalizationResolution": "contract",
+        "LocalizationChange": "contract",
+        "LocalizationService": "contract"
+      }
+    },
+    "src/sdk/panel-commands.ts": {
+      "owner": "sdk",
+      "role": "contracts",
+      "exports": {
+        "PanelCommandLease": "contract",
+        "PanelCommandIntent": "contract",
+        "PanelGestureCommands": "contract",
+        "PanelCommands": "contract",
+        "PanelCommandTarget": "contract",
+        "PanelCommandOrigin": "contract",
+        "ApplicationPanelCommandAuthority": "contract",
+        "PanelCommandMountAuthority": "contract"
+      }
+    },
+    "src/sdk/public-surface.ts": {
+      "owner": "sdk",
+      "role": "contracts",
+      "exports": {
+        "Json": "contract",
+        "ModuleRef": "contract",
+        "NodeTypeRef": "contract",
+        "GraphKindRef": "contract",
+        "ProfileRef": "contract",
+        "NamespacedId": "contract",
+        "StageKindId": "contract",
+        "GraphKindId": "contract",
+        "WidgetId": "contract",
+        "CapabilityId": "contract",
+        "ContractIssue": "contract",
+        "LocalizableIssue": "contract",
+        "DataCodec": "contract",
+        "StageKindDefinition": "contract",
+        "BoundaryDeclaration": "contract",
+        "StageSlotDefinition": "contract",
+        "GraphKindDefinition": "contract",
+        "GraphKindRegistry": "contract",
+        "PRODUCT_GRAPH_KIND_IDS": "contract",
+        "PRODUCT_STAGE_KIND_IDS": "contract",
+        "NodeEligibility": "contract",
+        "ParameterPresentation": "contract",
+        "TextOwnerRef": "contract",
+        "TextRef": "contract",
+        "FeaturePresentation": "contract",
+        "NodePresentation": "contract",
+        "PanelPresentation": "contract",
+        "ModulePresentation": "contract",
+        "LocaleContribution": "contract",
+        "LocalizationService": "contract",
+        "LocalizationResolution": "contract",
+        "LocalizationChange": "contract",
+        "MenuPresentationOptions": "contract",
+        "NodeModuleMetadata": "contract",
+        "NodeTypeMetadata": "contract",
+        "PanelTypeMetadata": "contract",
+        "PresentedNodeType": "contract",
+        "PresentedNodeModule": "contract",
+        "PresentedPanelType": "contract",
+        "GLSLExpression": "contract",
+        "BoundaryOutputSpec": "contract",
+        "NodeTypeBoundaryMetadata": "contract",
+        "NodeEmission": "contract",
+        "GLSLStageProgram": "contract",
+        "GeneratedArtifact": "contract",
+        "GLSLProfile": "contract",
+        "CapabilityRef": "contract",
+        "HostIdentity": "contract",
+        "CapabilityScope": "contract",
+        "OperationContract": "contract",
+        "CapabilityDefinition": "contract",
+        "CapabilityResolution": "contract",
+        "CapabilityDirectory": "contract",
+        "INITIAL_CAPABILITY_IDS": "contract"
+      }
+    },
+    "src/sdk/ui.ts": {
+      "owner": "sdk",
+      "role": "contracts",
+      "exports": {
+        "PanelUpdate": "contract",
+        "ContextQuery": "contract",
+        "PanelServices": "contract",
+        "Panel": "contract",
+        "PanelType": "contract",
+        "SavedPanel": "contract",
+        "WidgetFieldSlot": "contract",
+        "ParameterWidgets": "contract",
+        "PresentationFeedback": "contract"
+      }
+    },
+    "src/sdk/view-mount.ts": {
+      "owner": "sdk",
+      "role": "contracts",
+      "exports": {
+        "MountSurface": "contract",
+        "MountTicket": "contract",
+        "MountScope": "contract",
+        "ViewFrame": "contract",
+        "MountContext": "contract",
+        "PanelMountContext": "contract",
+        "MountedView": "contract",
+        "PanelViewProvider": "contract",
+        "PanelViewContribution": "contract",
+        "WidgetSnapshot": "contract",
+        "WidgetReadBinding": "contract",
+        "WidgetDraft": "contract",
+        "WidgetCommands": "contract",
+        "WidgetMountContext": "contract",
+        "ParameterWidgetViewContribution": "contract",
+        "ParameterWidgetViewType": "contract",
+        "ViewStatus": "contract",
+        "ViewIssue": "contract"
+      }
+    },
+    "src/ui/mount.ts": {
+      "owner": "presentation",
+      "role": "ui",
+      "exports": {
+        "PresentationSession": "command",
+        "PanelRenderer": "command"
+      }
+    },
+    "src/ui/widgets.ts": {
+      "owner": "presentation",
+      "role": "ui",
+      "exports": {
+        "WidgetSlot": "command",
+        "WidgetRegistry": "command"
+      }
+    },
+    "src/ui/workspace.ts": {
+      "owner": "presentation",
+      "role": "ui",
+      "exports": {
+        "PanelRecord": "contract",
+        "Workspace": "command"
+      }
+    },
+    "apps/web/main.ts": {
+      "owner": "web-bootstrap",
+      "role": "bootstrap",
+      "exports": {}
+    },
+    "apps/web/shell-copy.ts": {
+      "owner": "web-bootstrap",
+      "role": "bootstrap",
+      "exports": {
+        "shellPresentation": "contract",
+        "shellDefaults": "contract",
+        "shellText": "contract"
+      }
+    },
+    "src/sdk/glsl.ts": {
+      "owner": "sdk",
+      "role": "contracts",
+      "exports": {
+        "glslFloatLiteral": "contract"
+      }
+    }
+  },
+  "externals": {},
+  "registrationFiles": ["apps/web/main.ts"]
+}

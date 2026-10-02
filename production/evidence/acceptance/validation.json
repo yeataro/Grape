@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "s01-acceptance-bookkeeping-validation",
+  "recordedAt": "2026-10-02T01:34:25.338369Z",
+  "status": "PASS",
+  "node": "v25.5.0",
+  "acceptedImplementationRevision": "c1ecb3cd1a4cd1685e3fb1d9ba2a17b4108e68c3",
+  "reviewedPrHead": "ab0216436d66ab1282758d51dceb38d0283c1965",
+  "checks": [
+    {
+      "command": "node handoff/tools/check-implementation-state.mjs --current",
+      "result": "CURRENT_RECORD_VALID",
+      "log": "current-state.log"
+    },
+    {
+      "command": "node tools/verify-bootstrap.mjs",
+      "result": "PASS",
+      "log": "bootstrap.log"
+    },
+    {
+      "command": "node --test --test-isolation=none tools/verify-bootstrap.test.mjs",
+      "result": "9 passed; zero failures/skips",
+      "log": "bootstrap-tests.log"
+    },
+    {
+      "check": "Accepted evidence digests, both revision bindings, reported verdict/closures, owner acceptance and unchanged authorization limits",
+      "result": "PASS"
+    },
+    {
+      "check": "Reviewed source SHA-256 matched against implementation commit, reviewed PR HEAD and working copy",
+      "result": "PASS",
+      "files": 51,
+      "sourceSetSha256": "26915918e18e8fdbd473bd607e150df7cc6beff23330692de35e08b51bf08c76"
+    },
+    {
+      "check": "All reviewed evidence file hashes and verification record unchanged from reviewed PR HEAD",
+      "result": "PASS",
+      "hashedEvidenceFiles": 18
+    },
+    {
+      "check": "Packaged web artifact SHA-256 and archived dist file hashes",
+      "result": "PASS",
+      "sha256": "63fb2e2628c8029854947252efb51fab460cd09f4498f9f5df6ed02fb40d17ee"
+    },
+    {
+      "check": "Frozen Handoff diff against bootstrap base; only acceptance bookkeeping changed since reviewed HEAD",
+      "result": "PASS"
+    }
+  ],
+  "currentStateSha256": "78bde097a6850600c4c4bfd870b3b14e3c4ec135947e86b91cd52cb3f1471742",
+  "artifactHashes": [
+    {
+      "file": "production/evidence/acceptance/README.md",
+      "sha256": "6ebd89e6696b566212bf258637462ef2b7fd09723ca4c674601013bfeaf7495f"
+    },
+    {
+      "file": "production/evidence/acceptance/S01-human-owner-acceptance.json",
+      "sha256": "530c35c9d23859189359e49d1eb9ed190c0dc0e81dac8ce30a10316c116afcc3"
+    },
+    {
+      "file": "production/evidence/acceptance/S01-independent-review.json",
+      "sha256": "22c9df33c3d851e15fc4e3c24b73529b92c22963d3630d9d766d189f82a5afbc"
+    },
+    {
+      "file": "production/evidence/acceptance/bootstrap-tests.log",
+      "sha256": "3d8dbd5bbaeb1883587636799fc932483990110bad8617cfb14e41488fe0f225"
+    },
+    {
+      "file": "production/evidence/acceptance/bootstrap.log",
+      "sha256": "55ad1c0632ca34898c6e09052e093c5101d2160f2e841bb5d5c78be448e3c0ac"
+    },
+    {
+      "file": "production/evidence/acceptance/current-state.log",
+      "sha256": "c0dc87d1f23f1dbe23e245abf0dc34a0e70a610069109b9e46fda85cce820c8a"
+    }
+  ],
+  "scope": "Bookkeeping and integrity validation only. Product suites were not rerun or relabeled; accepted execution evidence remains bound to the reviewed implementation."
+}

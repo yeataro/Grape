@@ -6,7 +6,7 @@ This directory is the repository root. It is ready for Git initialization and Gi
 
 - **Accepted architecture:** [handoff/00_README.md](handoff/00_README.md), revision **IH-005**.
 - **Writable document format:** **grape.document 2.0**. Version 1.0 is recovery-readonly unless processed by an explicit supported converter. See [document contract](handoff/14_DOCUMENT_FORMAT.md).
-- **Mutable project state:** [implementation-state.json](implementation-state.json). Bootstrap state is `not-started`, with no active/completed slices, implementation baseline, build or acceptance evidence. **S01 is not authorized.** Subsequent current status comes from this file.
+- **Mutable project state:** [implementation-state.json](implementation-state.json). **S01 is completed and Human Owner accepted** at implementation `c1ecb3cd1a4cd1685e3fb1d9ba2a17b4108e68c3`, reviewed PR HEAD `ab0216436d66ab1282758d51dceb38d0283c1965`. Current state references the separate independent review and Human Owner acceptance records with their hashes. No slice is active; **S02+ remains unauthorized**. `complete` describes only this accepted S01 scope, not the entire product or all Gates.
 - **AI working instructions:** [AGENTS.md](AGENTS.md).
 - **Acceptance record:** [HANDOFF_ACCEPTANCE.json](HANDOFF_ACCEPTANCE.json) binds the owner's accepted targeted-review PASS to the exact frozen index. Frozen review-time `pending`/`READY FOR TARGETED RE-REVIEW` labels are historical; they do not override this acceptance. Acceptance does not pass runtime Gates or authorize production work.
 

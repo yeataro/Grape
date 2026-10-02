@@ -1,0 +1,24 @@
+{
+  "name": "grape-s01",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "25.5.0"
+  },
+  "scripts": {
+    "preinstall": "node tools/runtime.mjs",
+    "dev": "node tools/runtime.mjs && vite --host 0.0.0.0",
+    "build": "node tools/runtime.mjs && tsc --noEmit && vite build",
+    "typecheck": "node tools/runtime.mjs && tsc --noEmit",
+    "test": "node tools/runtime.mjs && node --experimental-transform-types --test --test-isolation=none tests/unit/*.test.ts tests/conformance/*.test.ts",
+    "test:browser": "node tools/runtime.mjs && playwright test",
+    "conformance": "node tools/runtime.mjs && node tools/module-pins.mjs && node tools/boundaries.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "prettier": "3.8.1",
+    "typescript": "5.9.3",
+    "vite": "7.3.1"
+  }
+}

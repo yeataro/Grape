@@ -224,7 +224,7 @@ test("S03 same-load clipboard reuses current source; cross-graph remaps resource
     "\u540c\u540d\ud83c\udf47",
   );
 });
-test("S03 clipboard typed nominal and symbolic array closure remaps only semantic references", () => {
+test("S03 clipboard typed native symbolic array closure remaps only semantic references", () => {
   const s = flow();
   let extent = "",
     source = "",
@@ -234,8 +234,9 @@ test("S03 clipboard typed nominal and symbolic array closure remaps only semanti
     source = d.createSource(
       "Array",
       "array@" + JSON.stringify(["glsl.float", { sourceId: extent }]),
-      [1, 2],
+      null,
       true,
+      { kind: "native-array", path: "/symbolic-array" },
     );
     n = d.addReferenceNode(s.network, "source", source);
   });
@@ -1319,7 +1320,7 @@ test("S03 disconnected output boundary follows shared output defaults", () => {
 });
 
 // LC-DATA-062's 2048 bound is a native source path bound, not inline array extent.
-test("S03 inline numeric source arrays do not inherit native path-length limits", () => {
+test("S03 inline array construction and same-load reuse allow2049 elements; cross-Graph clipboard rejects composites", () => {
   const s = flow();
   let node = "";
   s.graph.change("Inline array", (d) => {
@@ -1339,11 +1340,18 @@ test("S03 inline numeric source arrays do not inherit native path-length limits"
   const graph = new Graph(doc, other.fixed, {
     next: () => "array-paste-" + ++seq,
   });
-  graph.change("Paste", (d) => d.paste(other.network, packet));
+  s.graph.change("Reuse", (d) => d.paste(s.network, packet));
   assert.equal(
-    (graph.capture().document.graph.resources[0].data as any).value.length,
+    (s.graph.capture().document.graph.resources[0].data as any).value.length,
     2049,
   );
+  assert.equal(s.graph.capture().document.graph.resources.length, 1);
+  const before = graph.capture();
+  assert.throws(
+    () => graph.change("Paste", (d) => d.paste(other.network, packet)),
+    /SOURCE_CLIPBOARD_DENIED/,
+  );
+  assert.deepEqual(graph.capture(), before);
 });
 test("S03 nested input link ABA invalidates old edit tokens without changing History on rejection", () => {
   const a = application();

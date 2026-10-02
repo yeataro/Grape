@@ -21,7 +21,7 @@ export const NETWORK_PIN = {
   moduleId: "grape.nodes.networks",
   version: "0.1.0",
   fingerprint:
-    "sha256:ffef7a0c0ede8a579b799ff657a7371bcacfee75eb096a97e75f8aecb3172e30",
+    "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
 };
 const owner = {
   ...NETWORK_PIN,
@@ -324,14 +324,10 @@ function validateSource(raw: Json, context: SourcePolicyContext) {
       demand(context.types.validValue(d.type, d.value), "SOURCE_VALUE");
       if (context.phase === "clipboard")
         demand(
-          (token.kind === "scalar" &&
+          token.kind === "scalar" &&
             /^glsl\.(float|int|uint|vec[234]|mat[234](x[234])?)$/.test(
               token.id,
-            )) ||
-            (kind === "constant" &&
-              token.kind === "array" &&
-              token.element.kind === "scalar" &&
-              /^glsl\.(float|vec[234])$/.test(token.element.id)),
+            ),
           "SOURCE_CLIPBOARD_DENIED",
         );
       if (binding?.kind === "specialization")

@@ -1,0 +1,792 @@
+{
+  "recordKind": "offline-workflow-policy-model-execution",
+  "policyRevision": "0826de5a9cca7cf200d843435985a7dc624634a2",
+  "baseline": "ba39de6992827514bbd74368f67e406ec2eef06a",
+  "historicalRefs": {
+    "19124c1": "19124c11799362bec41f7f0791c7e5dbc963de4f",
+    "05d152d": "05d152d46570bc4e4ebe2af3412be3e153e31a20",
+    "e6dfecf": "e6dfecf407ca37fa58725bf21ec344d00074a04d"
+  },
+  "acceptedEvidenceHashes": {
+    "production/evidence/acceptance/S01-independent-review.json": "22c9df33c3d851e15fc4e3c24b73529b92c22963d3630d9d766d189f82a5afbc",
+    "production/evidence/acceptance/S01-human-owner-acceptance.json": "530c35c9d23859189359e49d1eb9ed190c0dc0e81dac8ce30a10316c116afcc3",
+    "production/evidence/acceptance/s02/S02-independent-review.json": "a35053bdb7fc5e70583dde209ca5e0f8a0f62a505d216239affcb7e629cafde9",
+    "production/evidence/acceptance/s02/S02-human-owner-acceptance.json": "5c5c86e79a0bd4941f367dd88c2b1df04fa420e84af6889c33d01881ffe0e47b"
+  },
+  "casesExecuted": [
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "C06",
+    "C07",
+    "C08",
+    "C09"
+  ],
+  "variantsExecuted": 20,
+  "results": [
+    {
+      "case": "C01",
+      "variant": "historical behind work",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "needsSync": true
+      },
+      "historicalProof": {
+        "work": "bfbba1d3199ddd2d4a6cf8b7d00085810b92b863",
+        "main": "ba39de6992827514bbd74368f67e406ec2eef06a",
+        "workOnlyCommits": 0
+      },
+      "expected": {
+        "phase": "SYNC_REQUIRED",
+        "singleNextAction": "propose safe fast-forward"
+      },
+      "observed": {
+        "phase": "SYNC_REQUIRED",
+        "singleNextAction": "propose safe fast-forward"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C01",
+      "variant": "synchronized without authorization",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {},
+      "historicalProof": {
+        "state": "ba39de6992827514bbd74368f67e406ec2eef06a",
+        "activeSlices": []
+      },
+      "expected": {
+        "phase": "WAITING_AUTHORIZATION",
+        "singleNextAction": "wait for Human Slice authorization"
+      },
+      "observed": {
+        "phase": "WAITING_AUTHORIZATION",
+        "singleNextAction": "wait for Human Slice authorization"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C02",
+      "variant": "M1/N1 FAIL",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "technicalFail": true,
+        "findings": [
+          "M1",
+          "N1"
+        ],
+        "round": 0
+      },
+      "historicalProof": {
+        "preRepair": "19124c11799362bec41f7f0791c7e5dbc963de4f",
+        "repair": "c1ecb3cd1a4cd1685e3fb1d9ba2a17b4108e68c3",
+        "reviewSubmission": "ab0216436d66ab1282758d51dceb38d0283c1965",
+        "counterexampleLogSha256": "f17156e38cc09839cb14aa014e335bfafc80b0f75c89a34189e2727fd3d7e31a"
+      },
+      "expected": {
+        "phase": "REPAIR_REQUIRED",
+        "singleNextAction": "dispatch bounded repair"
+      },
+      "observed": {
+        "phase": "REPAIR_REQUIRED",
+        "singleNextAction": "dispatch bounded repair"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C02",
+      "variant": "repair submitted",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "repairedSubmission": true,
+        "candidate": "ab0216436d66ab1282758d51dceb38d0283c1965"
+      },
+      "historicalProof": {
+        "preRepair": "19124c11799362bec41f7f0791c7e5dbc963de4f",
+        "repair": "c1ecb3cd1a4cd1685e3fb1d9ba2a17b4108e68c3",
+        "reviewSubmission": "ab0216436d66ab1282758d51dceb38d0283c1965",
+        "counterexampleLogSha256": "f17156e38cc09839cb14aa014e335bfafc80b0f75c89a34189e2727fd3d7e31a"
+      },
+      "expected": {
+        "phase": "REVIEW_PENDING",
+        "singleNextAction": "dispatch targeted Fresh Review"
+      },
+      "observed": {
+        "phase": "REVIEW_PENDING",
+        "singleNextAction": "dispatch targeted Fresh Review"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C02",
+      "variant": "three unsuccessful rounds",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "technicalFail": true,
+        "round": 3
+      },
+      "historicalProof": {
+        "preRepair": "19124c11799362bec41f7f0791c7e5dbc963de4f",
+        "repair": "c1ecb3cd1a4cd1685e3fb1d9ba2a17b4108e68c3",
+        "reviewSubmission": "ab0216436d66ab1282758d51dceb38d0283c1965",
+        "counterexampleLogSha256": "f17156e38cc09839cb14aa014e335bfafc80b0f75c89a34189e2727fd3d7e31a"
+      },
+      "expected": {
+        "phase": "WF_RETRY_BUDGET",
+        "singleNextAction": "technical diagnosis"
+      },
+      "observed": {
+        "phase": "WF_RETRY_BUDGET",
+        "singleNextAction": "technical diagnosis"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C03",
+      "variant": "stale publisher",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "expectedHead": "19124c11799362bec41f7f0791c7e5dbc963de4f",
+        "actualHead": "05d152d46570bc4e4ebe2af3412be3e153e31a20"
+      },
+      "historicalProof": {
+        "preservedHumanCommit": "05d152d46570bc4e4ebe2af3412be3e153e31a20"
+      },
+      "expected": {
+        "phase": "WF_INTEGRITY",
+        "singleNextAction": "reread and reconcile preserved Human commit"
+      },
+      "observed": {
+        "phase": "WF_INTEGRITY",
+        "singleNextAction": "reread and reconcile preserved Human commit"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C03",
+      "variant": "synthetic divergence",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "divergent": true
+      },
+      "historicalProof": {
+        "fixture": "divergence event only; no branch changed"
+      },
+      "expected": {
+        "phase": "WF_BRANCH_DIVERGENCE",
+        "singleNextAction": "stop mutation and diagnose preserved work"
+      },
+      "observed": {
+        "phase": "WF_BRANCH_DIVERGENCE",
+        "singleNextAction": "stop mutation and diagnose preserved work"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C04",
+      "variant": "PASS before acceptance",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "passValid": true
+      },
+      "historicalProof": {
+        "I": "e23a997f53a17f3e00bf7f83de489cfaeb367251",
+        "R": "45c08a5b27beb9c57797975cea8007c35640e16c",
+        "legacy": {
+          "classification": "A",
+          "acceptanceFamily": "AT-S02-03",
+          "status": "NOT DELIVERED / BLOCKED",
+          "gateId": "G-VERSION-COMPAT",
+          "gateStatus": "unresolved for the legacy compatibility branch",
+          "boundedAcceptancePermitted": true,
+          "humanGateRequiredForScopeQuestion": false,
+          "inventedMappingsConvertersOrFallback": false
+        }
+      },
+      "expected": {
+        "phase": "AWAITING_HUMAN_ACCEPTANCE",
+        "singleNextAction": "present bounded acceptance control"
+      },
+      "observed": {
+        "phase": "AWAITING_HUMAN_ACCEPTANCE",
+        "singleNextAction": "present bounded acceptance control"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C04",
+      "variant": "existing historical Human receipt",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "passValid": true,
+        "humanAcceptance": true
+      },
+      "historicalProof": {
+        "receipt": "production/evidence/acceptance/s02/S02-human-owner-acceptance.json",
+        "syntheticNewAcceptance": false
+      },
+      "expected": {
+        "phase": "HUMAN_ACCEPTED",
+        "singleNextAction": "validate bounded bookkeeping"
+      },
+      "observed": {
+        "phase": "HUMAN_ACCEPTED",
+        "singleNextAction": "validate bounded bookkeeping"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C05",
+      "variant": "S01 metadata descendant",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "bookkeepingValid": true
+      },
+      "historicalProof": {
+        "I": "c1ecb3cd1a4cd1685e3fb1d9ba2a17b4108e68c3",
+        "R": "ab0216436d66ab1282758d51dceb38d0283c1965",
+        "B": "d44cb8ebc1d00d4a46bb4b08b93b00a6b455e83f",
+        "changedPaths": [
+          "README.md",
+          "implementation-state.json",
+          "production/README.md",
+          "production/evidence/acceptance/README.md",
+          "production/evidence/acceptance/S01-human-owner-acceptance.json",
+          "production/evidence/acceptance/S01-independent-review.json",
+          "production/evidence/acceptance/bootstrap-tests.log",
+          "production/evidence/acceptance/bootstrap.log",
+          "production/evidence/acceptance/current-state.log",
+          "production/evidence/acceptance/validation.json"
+        ]
+      },
+      "expected": {
+        "phase": "COMPLETION_RECORDED",
+        "singleNextAction": "wait for separate merge control"
+      },
+      "observed": {
+        "phase": "COMPLETION_RECORDED",
+        "singleNextAction": "wait for separate merge control"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C05",
+      "variant": "S02 metadata descendant",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "bookkeepingValid": true
+      },
+      "historicalProof": {
+        "I": "e23a997f53a17f3e00bf7f83de489cfaeb367251",
+        "R": "45c08a5b27beb9c57797975cea8007c35640e16c",
+        "B": "bfbba1d3199ddd2d4a6cf8b7d00085810b92b863",
+        "changedPaths": [
+          "README.md",
+          "implementation-state.json",
+          "production/README.md",
+          "production/evidence/acceptance/s02/README.md",
+          "production/evidence/acceptance/s02/S02-human-owner-acceptance.json",
+          "production/evidence/acceptance/s02/S02-independent-review.json",
+          "production/evidence/acceptance/s02/bootstrap-tests.log",
+          "production/evidence/acceptance/s02/bootstrap.log",
+          "production/evidence/acceptance/s02/current-state.log",
+          "production/evidence/acceptance/s02/validation.json"
+        ]
+      },
+      "expected": {
+        "phase": "COMPLETION_RECORDED",
+        "singleNextAction": "wait for separate merge control"
+      },
+      "observed": {
+        "phase": "COMPLETION_RECORDED",
+        "singleNextAction": "wait for separate merge control"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C06",
+      "variant": "PR 1 lost response",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "merged": true
+      },
+      "historicalProof": {
+        "number": 1,
+        "url": "https://github.com/yeataro/Grape/pull/1",
+        "merged": true,
+        "state": "closed",
+        "mergeCommit": "365eef3e3240a25b18eb46cb637774596336228d",
+        "head": "d44cb8ebc1d00d4a46bb4b08b93b00a6b455e83f",
+        "historicalBodySaysNoMerge": true,
+        "source": "https://api.github.com/repos/yeataro/Grape/pulls/1"
+      },
+      "expected": {
+        "phase": "MERGED_VERIFIED",
+        "singleNextAction": "reconcile accepted baseline and work"
+      },
+      "observed": {
+        "phase": "MERGED_VERIFIED",
+        "singleNextAction": "reconcile accepted baseline and work"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C06",
+      "variant": "PR 2 lost response",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "merged": true
+      },
+      "historicalProof": {
+        "number": 2,
+        "url": "https://github.com/yeataro/Grape/pull/2",
+        "merged": true,
+        "state": "closed",
+        "mergeCommit": "ba39de6992827514bbd74368f67e406ec2eef06a",
+        "head": "bfbba1d3199ddd2d4a6cf8b7d00085810b92b863",
+        "historicalBodySaysNoMerge": true,
+        "source": "https://api.github.com/repos/yeataro/Grape/pulls/2"
+      },
+      "expected": {
+        "phase": "MERGED_VERIFIED",
+        "singleNextAction": "reconcile accepted baseline and work"
+      },
+      "observed": {
+        "phase": "MERGED_VERIFIED",
+        "singleNextAction": "reconcile accepted baseline and work"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C07",
+      "variant": "old report new product candidate",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "reviewHead": "ab0216436d66ab1282758d51dceb38d0283c1965",
+        "candidate": "e23a997f53a17f3e00bf7f83de489cfaeb367251"
+      },
+      "historicalProof": {
+        "provenance": "historical owner-reported; null identities preserved"
+      },
+      "expected": {
+        "phase": "REVIEW_PENDING",
+        "singleNextAction": "obtain valid exact-candidate review"
+      },
+      "observed": {
+        "phase": "REVIEW_PENDING",
+        "singleNextAction": "obtain valid exact-candidate review"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C07",
+      "variant": "malformed or missing review",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "reviewMissing": true
+      },
+      "historicalProof": {
+        "fixture": "synthetic missing report; no PASS fabricated"
+      },
+      "expected": {
+        "phase": "REVIEW_PENDING",
+        "singleNextAction": "obtain valid exact-candidate review"
+      },
+      "observed": {
+        "phase": "REVIEW_PENDING",
+        "singleNextAction": "obtain valid exact-candidate review"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C08",
+      "variant": "packaging defect",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "technicalFail": true
+      },
+      "historicalProof": {
+        "packagingRepair": "e6dfecf407ca37fa58725bf21ec344d00074a04d"
+      },
+      "expected": {
+        "phase": "REPAIR_REQUIRED",
+        "singleNextAction": "dispatch bounded repair"
+      },
+      "observed": {
+        "phase": "REPAIR_REQUIRED",
+        "singleNextAction": "dispatch bounded repair"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C08",
+      "variant": "wrong runtime or unavailable artifact",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "environmentFailure": true,
+        "retries": 0
+      },
+      "historicalProof": {
+        "fixture": "synthetic runtime/access failure"
+      },
+      "expected": {
+        "phase": "WF_ENVIRONMENT",
+        "singleNextAction": "restore and verify declared environment"
+      },
+      "observed": {
+        "phase": "WF_ENVIRONMENT",
+        "singleNextAction": "restore and verify declared environment"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C08",
+      "variant": "two unsuccessful transient retries",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "environmentFailure": true,
+        "retries": 2
+      },
+      "historicalProof": {
+        "fixture": "initial attempt plus two retries; no product Gate"
+      },
+      "expected": {
+        "phase": "WF_RETRY_BUDGET",
+        "singleNextAction": "workflow diagnosis"
+      },
+      "observed": {
+        "phase": "WF_RETRY_BUDGET",
+        "singleNextAction": "workflow diagnosis"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C09",
+      "variant": "unpromoted discussion",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {},
+      "historicalProof": {
+        "deferredObservationCount": 6,
+        "textForwarded": false
+      },
+      "expected": {
+        "phase": "WAITING_AUTHORIZATION",
+        "singleNextAction": "wait for Human Slice authorization"
+      },
+      "observed": {
+        "phase": "WAITING_AUTHORIZATION",
+        "singleNextAction": "wait for Human Slice authorization"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    },
+    {
+      "case": "C09",
+      "variant": "synthetic impossible-contract dependency",
+      "eventKind": "synthetic read-only replay",
+      "inputs": {
+        "contractCounterexample": true
+      },
+      "historicalProof": {
+        "fixture": "synthetic requirement simultaneously demands publish and no publish of the same mutation; no actual Grape conflict asserted",
+        "scope": "simulated authorized dependency only; unaffected work preserved"
+      },
+      "expected": {
+        "phase": "HUMAN_GATE_WAIT",
+        "singleNextAction": "prepare scoped HG_ARCHITECTURE packet"
+      },
+      "observed": {
+        "phase": "HUMAN_GATE_WAIT",
+        "singleNextAction": "prepare scoped HG_ARCHITECTURE packet"
+      },
+      "result": "PASS",
+      "replay": {
+        "duplicateBefore": "same outstanding action",
+        "restartBefore": "same derived phase/action",
+        "duplicateAfter": "matching receipt suppresses publication",
+        "restartAfter": "receipt survives fixture serialization; no duplicate",
+        "simulatedRoutePublications": 1
+      },
+      "invariants": {
+        "noLostCommits": true,
+        "noInventedAcceptance": true,
+        "noExtraActiveSlice": true,
+        "frozenHandoffUnchanged": true,
+        "speculativeContextExcluded": true
+      }
+    }
+  ],
+  "capabilityLimits": [
+    "PASS means historical-fact and in-memory policy-model assertions executed successfully.",
+    "Restart uses JSON serialization and replay of synthetic receipts, not a killed live service.",
+    "No real isolated Implementer/Reviewer dispatch, external retry or concurrent publisher tested.",
+    "No adapter or production behavior is qualified; no product Slice authorized."
+  ]
+}

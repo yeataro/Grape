@@ -11,11 +11,12 @@ import type {
 } from "../sdk/public-surface.ts";
 import type { PortSnapshot } from "../sdk/document.ts";
 import type { TextRef } from "../sdk/localization.ts";
+import { glslFloatLiteral } from "../sdk/glsl.ts";
 export const NODE_PIN = Object.freeze({
   moduleId: "grape.nodes.basic",
   version: "0.1.0",
   fingerprint:
-    "sha256:5c078a0ecc5247017c8a5e018a78ac737ec10bda1feeb4237a8a960ce39ce30b",
+    "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
 });
 export const owner = Object.freeze({
   ...NODE_PIN,
@@ -47,9 +48,6 @@ function scalar(v: Json): boolean {
     Number.isFinite(v) &&
     Number.isFinite(Math.fround(v))
   );
-}
-function number(code: number): string {
-  return Number.isInteger(code) ? `${code}.0` : String(code);
 }
 const pixel = ["grape.stage.pixel"];
 const port = (
@@ -136,7 +134,7 @@ export const floatNode = definition(
       outputs: {
         value: {
           type: "glsl.float",
-          code: number(record(s).value as number),
+          code: glslFloatLiteral(record(s).value),
           constant: true,
         },
       },

@@ -484,3 +484,76 @@ test("error-bearing dynamic document saves and reopens with loss evidence and ge
     JSON.parse(await fs.readFile((await (await again).path())!, "utf8")),
   ).toEqual(doc);
 });
+
+for (const source of ["Float", "Multiply"] as const) {
+  test(`M1 browser: ${source} 1e21 commits and generates a valid exponent literal`, async ({
+    page,
+  }) => {
+    await fullFlow(page);
+    await page
+      .locator(".node h3")
+      .filter({ hasText: new RegExp("^" + source + "$") })
+      .click();
+    const field = page.getByRole("textbox", {
+      name: source === "Float" ? "Value" : "B",
+      exact: true,
+    });
+    await field.fill("1e21");
+    await field.press("Enter");
+    await expect(field).toHaveValue("1e+21");
+    await page
+      .getByRole("button", { name: "Generate GLSL", exact: true })
+      .click();
+    await expect(
+      page.getByText("Generated successfully · Host-free GLSL"),
+    ).toBeVisible();
+    const code = page.getByLabel("Generated GLSL");
+    await expect(code).toContainText(
+      source === "Float"
+        ? "float n_1_p0 = 1.0e+21;"
+        : "float n_2_p2 = (n_1_p0 * 1.0e+21);",
+    );
+    await expect(code).not.toContainText("1e+21.0");
+    await page.screenshot({
+      path: `evidence/m1-${source.toLowerCase()}.png`,
+      fullPage: true,
+    });
+  });
+}
+
+test("N1 browser: middle/right movement cannot edit nodes; primary drag still groups into one Undo", async ({
+  page,
+}) => {
+  await page.getByRole("button", { name: "Add Float", exact: true }).click();
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await expect(page.locator("#save-state")).toHaveText("Saved");
+  const card = page
+    .locator(".node")
+    .filter({ has: page.locator("h3", { hasText: /^Float$/ }) });
+  const position = await card.getAttribute("style"),
+    revision = await page.locator(".canvas").getAttribute("data-revision");
+  for (const button of ["middle", "right"] as const) {
+    const box = (await card.locator("h3").boundingBox())!;
+    await page.mouse.move(box.x + 50, box.y + 15);
+    await page.mouse.down({ button });
+    await page.mouse.move(box.x + 100, box.y + 50, { steps: 5 });
+    await page.mouse.up({ button });
+    await page.keyboard.press("Escape");
+    await expect(card).toHaveAttribute("style", position!);
+    await expect(page.locator(".canvas")).toHaveAttribute(
+      "data-revision",
+      revision!,
+    );
+    await expect(page.locator("#save-state")).toHaveText("Saved");
+  }
+  const box = (await card.locator("h3").boundingBox())!;
+  await page.mouse.move(box.x + 50, box.y + 15);
+  await page.mouse.down({ button: "left" });
+  await page.mouse.move(box.x + 100, box.y + 50, { steps: 5 });
+  await page.mouse.up({ button: "left" });
+  await expect(card).not.toHaveAttribute("style", position!);
+  await expect(page.locator("#save-state")).toHaveText("Unsaved changes");
+  await page.getByRole("button", { name: "Undo", exact: true }).click();
+  await expect(card).toHaveAttribute("style", position!);
+  await expect(page.locator("#save-state")).toHaveText("Saved");
+});

@@ -157,6 +157,7 @@ function mountCanvas(
   listen(root, "pointerdown", (event) =>
     run(() => {
       const e = event as PointerEvent;
+      if (e.button !== 0) return;
       if ((e.target as HTMLElement).closest("button,input,select")) return;
       services.activate();
       root.focus();

@@ -12,6 +12,7 @@ import type {
 import type { EdgeAdaptationDocument } from "../sdk/document.ts";
 import { detached, demand, issue } from "../sdk/kernel.ts";
 import { glslType, width } from "../definitions/types.ts";
+import { glslFloatLiteral } from "../sdk/glsl.ts";
 function adapt(
   input: GLSLExpression,
   plan: EdgeAdaptationDocument,
@@ -111,13 +112,11 @@ export function compile(
           } else {
             const value = node.inputValues[p.key];
             demand(value !== undefined, "INPUT_REQUIRED");
-            const literal = (n: unknown) =>
-              Number.isInteger(n) ? `${n}.0` : String(n);
             inputs[p.key] = {
               type: p.type,
               code: Array.isArray(value)
-                ? `${glslType(p.type)}(${value.map(literal).join(", ")})`
-                : literal(value),
+                ? `${glslType(p.type)}(${value.map(glslFloatLiteral).join(", ")})`
+                : glslFloatLiteral(value),
               constant: true,
             };
           }

@@ -283,3 +283,88 @@ test("AT-S02-01 browser: cancel during delayed file read fences the late review"
   await expect(page.locator("#recovery")).not.toBeVisible();
   await expect(page.locator(".node")).toHaveCount(1);
 });
+
+test("M1 browser: boundary missing-module rename rejects save, retains prior ACK, then saves and reopens without opaque loss", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  const doc = fixture(),
+    node = doc.graph.stages[1].network.nodes[1];
+  node.type.fingerprint = "missing-boundary";
+  doc.graph.modules.push({
+    moduleId: node.type.moduleId,
+    version: node.type.version,
+    fingerprint: node.type.fingerprint,
+  });
+  node.state = { privateData: "", unicode: "中文🍇" };
+  node.state.privateData = "x".repeat(
+    512000 - Buffer.byteLength(JSON.stringify(doc)),
+  );
+  expect(Buffer.byteLength(JSON.stringify(doc))).toBe(512000);
+  await choose(page, doc);
+  page.once("dialog", (dialog) => dialog.accept());
+  await page.getByRole("button", { name: "Open in new session" }).click();
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await expect(page.locator("#save-state")).toHaveText("Saved");
+  async function stored() {
+    return page.evaluate(async (key) => {
+      const db = await new Promise<IDBDatabase>((resolve, reject) => {
+        const request = indexedDB.open("grape-documents-v2", 1);
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      });
+      try {
+        return await new Promise<string>((resolve, reject) => {
+          const request = db
+            .transaction("documents")
+            .objectStore("documents")
+            .get(key);
+          request.onsuccess = () => resolve(request.result.text);
+          request.onerror = () => reject(request.error);
+        });
+      } finally {
+        db.close();
+      }
+    }, doc.graph.id);
+  }
+  const prior = await stored();
+  expect(JSON.parse(prior)).toEqual(doc);
+  await page
+    .locator(".node h3")
+    .filter({ hasText: /^Float$/ })
+    .click();
+  page.once("dialog", (dialog) => dialog.accept("Boundary renamed longer"));
+  await page.getByRole("button", { name: "Rename node" }).click();
+  const revision = await page.locator(".canvas").getAttribute("data-revision");
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await expect(page.locator("#message")).toContainText("DOCUMENT_SIZE");
+  await expect(page.locator("#save-state")).toHaveText("Unsaved changes");
+  expect(await stored()).toBe(prior);
+  expect(await page.locator(".canvas").getAttribute("data-revision")).toBe(
+    revision,
+  );
+  await expect(
+    page.locator(".node h3").filter({ hasText: /^Boundary renamed longer$/ }),
+  ).toBeVisible();
+  await page.screenshot({
+    path: `${process.env.GRAPE_EVIDENCE_DIR ?? "evidence/s02"}/save-limit-rejected.png`,
+    fullPage: true,
+  });
+  page.once("dialog", (dialog) => dialog.accept("X"));
+  await page.getByRole("button", { name: "Rename node" }).click();
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await expect(page.locator("#save-state")).toHaveText("Saved");
+  const saved = await stored();
+  expect(Buffer.byteLength(saved)).toBeLessThanOrEqual(512000);
+  await page.getByRole("button", { name: "Open saved", exact: true }).click();
+  await page.locator("#saved-list button").click();
+  const reopened = JSON.parse((await exported(page)).toString());
+  expect(reopened).toEqual(JSON.parse(saved));
+  expect(reopened.graph.stages[1].network.nodes[1]).toEqual({
+    ...node,
+    name: "X",
+  });
+  await expect(page.locator("#save-state")).toHaveText("Saved");
+  expect(errors).toEqual([]);
+});

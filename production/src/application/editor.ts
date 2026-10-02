@@ -137,7 +137,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
   #graph: Graph | null = null;
   #contexts = new Map<string, EditorContext>();
   #signal = new Signal<void>();
-  #saved: string | null = null;
+  #saved: CanonicalGraphDocument | null = null;
   #saving = false;
   #compile: Compilation | null = null;
   #readonly = false;
@@ -161,9 +161,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     return this.#graph.capture();
   }
   get dirty(): boolean {
-    return (
-      !!this.#graph && writeDocument(this.snapshot.document) !== this.#saved
-    );
+    return !!this.#graph && !equal(this.snapshot.document, this.#saved);
   }
   get saving(): boolean {
     return this.#saving;
@@ -194,7 +192,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
       .filter((n) => n.role === "operation")
       .map((n) => ({ ref: n.ref, presentation: n.presentation }));
   }
-  private install(graph: Graph, saved: string | null): void {
+  private install(graph: Graph, saved: CanonicalGraphDocument | null): void {
     demand(!this.busy, "HISTORY_BUSY");
     for (const c of this.#contexts.values()) c.dispose();
     this.#contexts.clear();
@@ -229,7 +227,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
         this.definitions.pin(parsed.document.graph.modules),
         this.identity,
       );
-      this.install(graph, saved ? writeDocument(parsed.document) : null);
+      this.install(graph, saved ? parsed.document : null);
     }
     return parsed;
   }
@@ -328,7 +326,8 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     this.#signal.emit();
     try {
       await this.storage.write(snapshot.document.graph.id, text);
-      if (this.#graph?.loadId === snapshot.loadId) this.#saved = text;
+      if (this.#graph?.loadId === snapshot.loadId)
+        this.#saved = snapshot.document;
     } finally {
       this.#saving = false;
       this.#signal.emit();

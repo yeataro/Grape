@@ -366,6 +366,14 @@ function pins(document: CanonicalGraphDocument): void {
     if (p.kind === "resource") ref(p.resource.type);
   }
 }
+function networkLimits(document: CanonicalGraphDocument): void {
+  demand(
+    document.graph.stages.every(
+      (s) => s.network.nodes.length <= 256 && s.network.edges.length <= 1024,
+    ),
+    "NETWORK_SIZE",
+  );
+}
 export function readDocument(
   raw: string,
   available: (pin: ModulePin) => boolean = () => true,
@@ -398,12 +406,7 @@ export function readDocument(
     envelope(parsed, "$", unknowns);
     const document = parsed as unknown as CanonicalGraphDocument;
     pins(document);
-    demand(
-      document.graph.stages.every(
-        (s) => s.network.nodes.length <= 256 && s.network.edges.length <= 1024,
-      ),
-      "NETWORK_SIZE",
-    );
+    networkLimits(document);
     if (unknowns.length)
       return {
         status: "recovery-readonly",
@@ -440,8 +443,15 @@ export function writeDocument(document: CanonicalGraphDocument): string {
   );
   pins(document);
   demand(!unknowns.length, "UNKNOWN_STRUCTURE");
+  networkLimits(document);
   const formatted = JSON.stringify(document, null, 2);
-  return new TextEncoder().encode(formatted).length <= DOCUMENT_MAX_BYTES
-    ? formatted
-    : JSON.stringify(document);
+  const emitted =
+    new TextEncoder().encode(formatted).length <= DOCUMENT_MAX_BYTES
+      ? formatted
+      : JSON.stringify(document);
+  demand(
+    new TextEncoder().encode(emitted).length <= DOCUMENT_MAX_BYTES,
+    "DOCUMENT_SIZE",
+  );
+  return emitted;
 }

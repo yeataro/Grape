@@ -21,7 +21,7 @@ export async function checker() {
   fs.symlinkSync(
     path.join(root, "node_modules/typescript"),
     path.join(temporary, "executable-reference/node_modules/typescript"),
-    "dir",
+    process.platform === "win32" ? "junction" : "dir",
   );
   const { checkProduction } = await import(
     pathToFileURL(path.join(temporary, "tools/check-production-boundaries.mjs"))
@@ -40,7 +40,8 @@ export function sources(manifest) {
       if (entry.isSymbolicLink()) throw Error("Unreviewed source symlink");
       if (entry.isDirectory()) walk(full);
       else if (/\.[cm]?[jt]sx?$/.test(entry.name))
-        files[path.relative(root, full)] = fs.readFileSync(full, "utf8");
+        files[path.relative(root, full).split(path.sep).join("/")] =
+          fs.readFileSync(full, "utf8");
     }
   };
   manifest.roots.forEach((r) => walk(path.join(root, r)));

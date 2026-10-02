@@ -10,7 +10,7 @@ export const KIND_PIN = {
   moduleId: "grape.graph-kinds",
   version: "0.1.0",
   fingerprint:
-    "sha256:d08c6602eb9874e9306202223961d04de5ae84f2e384428a1215fe6e4a93226c",
+    "sha256:03885a6c2dfddf7c376509678c3402cc1f0b8ea4cdc6417d168e1d54abc09119",
 };
 const owner = { ...KIND_PIN, namespace: KIND_PIN.moduleId, catalogVersion: 1 };
 export const graphKinds: ModuleContribution = {
@@ -86,7 +86,7 @@ export const PROFILE_PIN = {
   profileId: "es300",
   version: "0.1.0",
   fingerprint:
-    "sha256:d08c6602eb9874e9306202223961d04de5ae84f2e384428a1215fe6e4a93226c",
+    "sha256:03885a6c2dfddf7c376509678c3402cc1f0b8ea4cdc6417d168e1d54abc09119",
 };
 export const esProfile: GLSLProfile = {
   ref: PROFILE_PIN,
@@ -95,7 +95,7 @@ export const esProfile: GLSLProfile = {
   stageKindIds: stages.map((x) => x.id),
   capabilities: ["grape.glsl.numeric"],
   validateType: (type) =>
-    /^glsl\.(float|vec[234])$/.test(type)
+    /^glsl\.(float|int|uint|vec[234]|mat[234](x[234])?)$/.test(type)
       ? []
       : [
           {
@@ -138,7 +138,7 @@ export const esProfile: GLSLProfile = {
         key: stage.slotKey,
         stageId: stage.stageId,
         mediaType: "text/x-glsl",
-        text: `#version 300 es\nprecision highp float;\n${vertex ? "" : "out vec4 fragColor;\n"}void main() {\n${stage.body.map((line) => "  " + line).join("\n")}\n  ${vertex ? "gl_Position" : "fragColor"} = ${output.code};\n}\n`,
+        text: `#version 300 es\nprecision highp float;\n${vertex ? "" : "out vec4 fragColor;\n"}${stage.globals.join("\n")}\nvoid main() {\n${stage.body.map((line) => "  " + line).join("\n")}\n  ${vertex ? "gl_Position" : "fragColor"} = ${output.code};\n}\n`,
       };
     }),
   }),

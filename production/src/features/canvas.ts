@@ -5,6 +5,7 @@ import type {
   ViewFrame,
 } from "../sdk/view-mount.ts";
 import type { Json } from "../sdk/public-surface.ts";
+import { parseType, formatType } from "../sdk/type-tokens.ts";
 import type { ContextSnapshot } from "../sdk/editing.ts";
 import type { PanelGestureCommands } from "../sdk/panel-commands.ts";
 import { Signal, detached, demand } from "../sdk/kernel.ts";
@@ -16,6 +17,22 @@ const owner = {
   catalogVersion: 1,
 };
 export const canvasCommands = [
+  "grape.network.frame",
+  "grape.network.layout",
+  "grape.network.spare",
+  "grape.clipboard.copy",
+  "grape.clipboard.paste",
+  "grape.structure.apply",
+  "grape.structure.delete",
+  "grape.structure.instance",
+  "grape.structure.field",
+  "grape.network.create",
+  "grape.network.encapsulate",
+  "grape.network.independent",
+  "grape.network.enter",
+  "grape.network.up",
+  "grape.network.navigate",
+  "grape.network.interface",
   "grape.node.add",
   "grape.node.delete",
   "grape.node.move",
@@ -110,6 +127,7 @@ function mountCanvas(
   mount.scope.own(() => root.remove());
   const viewport = document.createElement("div"),
     nodes = document.createElement("div"),
+    frameLayer = document.createElement("div"),
     wires = document.createElementNS("http://www.w3.org/2000/svg", "svg"),
     notice = document.createElement("div"),
     breadcrumb = document.createElement("div");
@@ -119,9 +137,509 @@ function mountCanvas(
   notice.className = "canvas-notice";
   notice.setAttribute("role", "status");
   breadcrumb.className = "canvas-breadcrumb";
-  viewport.append(wires, nodes);
+  frameLayer.className = "canvas-frames";
+  viewport.append(frameLayer, wires, nodes);
   root.append(viewport, breadcrumb, notice);
-  let connectionHint = "";
+  const toolbar = document.createElement("div");
+  toolbar.className = "network-toolbar";
+  root.append(toolbar);
+  toolbar.addEventListener("click", (event) => event.stopPropagation());
+  breadcrumb.addEventListener("click", (event) => event.stopPropagation());
+  const execute = (commandId: string, args: Json = {}) =>
+    run(() => {
+      services.activate();
+      mount.commands?.execute(lease().lease, { commandId, args });
+    });
+  for (const [name, command, args] of [
+    ["New subgraph", "grape.network.create", {}],
+    ["Library subgraph", "grape.network.create", { library: true }],
+    ["Encapsulate", "grape.network.encapsulate", {}],
+    ["Make independent", "grape.network.independent", {}],
+    ["Enter subgraph", "grape.network.enter", null],
+    ["Up", "grape.network.up", {}],
+  ] as const) {
+    const b = document.createElement("button");
+    b.textContent = name;
+    b.type = "button";
+    b.onclick = mount.scope.event(() =>
+      execute(
+        command,
+        args ?? { id: services.context(lease().lease).capture().primary ?? "" },
+      ),
+    );
+    toolbar.append(b);
+  }
+  const arrange = document.createElement("button");
+  arrange.textContent = "Arrange nodes";
+  arrange.onclick = mount.scope.event(() =>
+    execute("grape.network.layout", services.layout?.(lease().lease) ?? {}),
+  );
+  toolbar.append(arrange);
+  const frameButton = document.createElement("button");
+  frameButton.textContent = "Frame selection";
+  frameButton.onclick = mount.scope.event(() => execute("grape.network.frame"));
+  toolbar.append(frameButton);
+  const editor = document.createElement("details"),
+    summary = document.createElement("summary"),
+    rows = document.createElement("div"),
+    add = document.createElement("button"),
+    apply = document.createElement("button"),
+    cancel = document.createElement("button");
+  summary.textContent = "Subgraph interface";
+  add.textContent = "Add interface port";
+  apply.textContent = "Apply interface";
+  cancel.textContent = "Cancel interface";
+  const definitionName = document.createElement("input"),
+    addDirection = document.createElement("select");
+  definitionName.ariaLabel = "Subgraph name";
+  addDirection.ariaLabel = "New port direction";
+  for (const d of ["input", "output"]) {
+    const o = document.createElement("option");
+    o.value = d;
+    o.textContent = d;
+    addDirection.append(o);
+  }
+  editor.append(
+    summary,
+    definitionName,
+    rows,
+    addDirection,
+    add,
+    apply,
+    cancel,
+  );
+  toolbar.append(editor);
+  let interfaceDraft:
+      | import("../sdk/networks.ts").NetworkData["interface"]
+      | null = null,
+    draftRevision = -1,
+    draftScope = "";
+  const typeChoices = () => [
+    "glsl.float",
+    "glsl.vec2",
+    "glsl.vec3",
+    "glsl.vec4",
+    ...[2, 3, 4].flatMap((c) =>
+      [2, 3, 4].map((r) => "glsl.mat" + c + (c === r ? "" : "x" + r)),
+    ),
+    ...services
+      .context(lease().lease)
+      .capture()
+      .structures.map((s) => "struct@" + s.id),
+  ];
+  const portLimit = () => {
+    add.disabled =
+      (interfaceDraft ?? []).filter((p) => p.direction === addDirection.value)
+        .length >= 16;
+  };
+  addDirection.onchange = portLimit;
+  const drawPorts = () => {
+    rows.replaceChildren();
+    for (const [i, p] of (interfaceDraft ?? []).entries()) {
+      const row = document.createElement("div"),
+        name = document.createElement("input"),
+        type = document.createElement("select"),
+        direction = document.createElement("select"),
+        remove = document.createElement("button"),
+        up = document.createElement("button");
+      name.value = p.name;
+      name.ariaLabel = "Port name " + (i + 1);
+      name.oninput = () => (p.name = name.value);
+      for (const t of new Set([...typeChoices(), p.type])) {
+        const option = document.createElement("option");
+        option.value = t;
+        option.textContent = t;
+        type.append(option);
+      }
+      type.value = p.type;
+      type.ariaLabel = "Port type " + (i + 1);
+      const value = document.createElement("input");
+      value.className = "port-default";
+      value.ariaLabel = "Port default " + (i + 1);
+      value.value =
+        p.defaultValue === undefined ? "" : JSON.stringify(p.defaultValue);
+      const defaultPolicy = () => {
+        value.readOnly =
+          !/^glsl\.(float|int|uint|vec[234]|mat[234](x[234])?)$/.test(p.type);
+        value.title = value.readOnly ? p.type : "";
+      };
+      defaultPolicy();
+      type.onchange = () => {
+        if (
+          !run(() => {
+            demand(services.reshape, "TYPE_SERVICE");
+            const next = services.reshape(
+              lease().lease,
+              type.value,
+              JSON.parse(value.value || "null"),
+            );
+            p.type = type.value;
+            p.defaultValue = next;
+            value.value = JSON.stringify(next);
+            defaultPolicy();
+          })
+        ) {
+          type.value = p.type;
+        }
+      };
+      for (const d of ["input", "output"]) {
+        const option = document.createElement("option");
+        option.value = d;
+        option.textContent = d;
+        direction.append(option);
+      }
+      direction.value = p.direction;
+      direction.ariaLabel = "Port direction " + (i + 1);
+      direction.onchange = () => {
+        if (
+          !run(() => {
+            demand(
+              interfaceDraft!.filter(
+                (x) => x !== p && x.direction === direction.value,
+              ).length < 16,
+              "INTERFACE_PORT_LIMIT",
+            );
+            p.direction = direction.value as "input" | "output";
+            portLimit();
+          })
+        )
+          direction.value = p.direction;
+      };
+      remove.textContent = "Remove port " + (i + 1);
+      remove.onclick = () => {
+        interfaceDraft!.splice(i, 1);
+        drawPorts();
+      };
+      up.textContent = "Move port up " + (i + 1);
+      up.onclick = () => {
+        if (i) {
+          [interfaceDraft![i - 1], interfaceDraft![i]] = [
+            interfaceDraft![i],
+            interfaceDraft![i - 1],
+          ];
+          drawPorts();
+        }
+      };
+      up.disabled = i === 0;
+      row.append(name, type, value, direction, up, remove);
+      rows.append(row);
+    }
+    portLimit();
+  };
+  const beginInterface = () => {
+    const c = services.context(lease().lease).capture();
+    demand(c.definition, "DEFINITION_MISSING");
+    interfaceDraft = structuredClone(c.definition.data.interface);
+    definitionName.value = c.definition.data.name;
+    draftRevision = c.graph.revision;
+    draftScope = JSON.stringify(c.scope);
+    drawPorts();
+  };
+  summary.onclick = mount.scope.event(() =>
+    run(() => {
+      if (!editor.open) beginInterface();
+    }),
+  );
+  add.onclick = mount.scope.event(() =>
+    run(() => {
+      if (!interfaceDraft) beginInterface();
+      demand(
+        interfaceDraft!.filter((p) => p.direction === addDirection.value)
+          .length < 16,
+        "INTERFACE_PORT_LIMIT",
+      );
+      interfaceDraft!.push({
+        key: "port-" + crypto.randomUUID(),
+        name: "Port " + (interfaceDraft!.length + 1),
+        direction: addDirection.value as "input" | "output",
+        type: "glsl.float",
+        supply: "local",
+        defaultValue: 0,
+      });
+      drawPorts();
+    }),
+  );
+  apply.onclick = mount.scope.event(() =>
+    run(() => {
+      demand(
+        draftScope ===
+          JSON.stringify(services.context(lease().lease).capture().scope),
+        "STALE_SCOPE",
+      );
+      const defaults = [
+        ...rows.querySelectorAll<HTMLInputElement>(".port-default"),
+      ].map((input) =>
+        input.value.trim() ? (JSON.parse(input.value) as Json) : undefined,
+      );
+      interfaceDraft!.forEach((p, i) => {
+        if (defaults[i] === undefined) delete p.defaultValue;
+        else p.defaultValue = defaults[i];
+      });
+      if (
+        execute("grape.network.interface", {
+          ports: interfaceDraft as unknown as Json,
+          name: definitionName.value,
+          revision: draftRevision,
+        })
+      ) {
+        interfaceDraft = null;
+        editor.open = false;
+      }
+    }),
+  );
+  cancel.onclick = mount.scope.event(() => {
+    interfaceDraft = null;
+    editor.open = false;
+  });
+  definitionName.addEventListener(
+    "keydown",
+    mount.scope.event((event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        interfaceDraft = null;
+        editor.open = false;
+      }
+    }),
+  );
+  const clip = document.createElement("details"),
+    clipSummary = document.createElement("summary"),
+    clipText = document.createElement("textarea"),
+    copy = document.createElement("button"),
+    paste = document.createElement("button");
+  clipSummary.textContent = "Local clipboard";
+  clipText.ariaLabel = "Local clipboard text";
+  copy.textContent = "Copy selection";
+  paste.textContent = "Paste selection";
+  clip.append(clipSummary, clipText, copy, paste);
+  toolbar.append(clip);
+  copy.onclick = mount.scope.event(() => {
+    execute("grape.clipboard.copy");
+    clipText.value = services.clipboard?.() ?? "";
+  });
+  paste.onclick = mount.scope.event(() =>
+    execute("grape.clipboard.paste", { text: clipText.value }),
+  );
+  const structs = document.createElement("details"),
+    structSummary = document.createElement("summary"),
+    choose = document.createElement("select"),
+    structName = document.createElement("input"),
+    structDescription = document.createElement("textarea"),
+    fields = document.createElement("div"),
+    addField = document.createElement("button"),
+    saveStruct = document.createElement("button"),
+    cancelStruct = document.createElement("button"),
+    deleteStruct = document.createElement("button"),
+    instance = document.createElement("button"),
+    fieldChoice = document.createElement("select"),
+    fieldInstance = document.createElement("button");
+  structSummary.textContent = "Structures";
+  choose.ariaLabel = "Structure definition";
+  structName.ariaLabel = "Structure name";
+  structDescription.ariaLabel = "Structure description";
+  addField.textContent = "Add structure field";
+  saveStruct.textContent = "Apply structure";
+  cancelStruct.textContent = "Cancel structure";
+  deleteStruct.textContent = "Delete structure";
+  instance.textContent = "Add structure node";
+  fieldChoice.ariaLabel = "Structure field";
+  fieldInstance.textContent = "Add field node";
+  structs.append(
+    structSummary,
+    choose,
+    structName,
+    structDescription,
+    fields,
+    addField,
+    saveStruct,
+    cancelStruct,
+    deleteStruct,
+    instance,
+    fieldChoice,
+    fieldInstance,
+  );
+  toolbar.append(structs);
+  const help = document.createElement("button"),
+    helpText = document.createElement("pre");
+  help.textContent = "Structure Help";
+  helpText.className = "structure-help";
+  helpText.hidden = true;
+  structs.append(help, helpText);
+  help.onclick = mount.scope.event(() => {
+    const selected = services
+      .context(lease().lease)
+      .capture()
+      .structures.find((s) => s.id === choose.value);
+    helpText.textContent = selected
+      ? `${selected.data.name}\n${selected.data.description ?? ""}\nFields: ${selected.data.fields.map((f) => f.name + ": " + f.type).join(", ")}\nUses (${selected.uses.length}): ${selected.uses.join(", ") || "None"}`
+      : "Select a saved structure.";
+    helpText.hidden = false;
+  });
+  let structureDraft: import("../sdk/networks.ts").StructureData | null = null,
+    structureRevision = -1,
+    structureId = "";
+  const drawFields = () => {
+    fields.replaceChildren();
+    for (const [i, f] of (structureDraft?.fields ?? []).entries()) {
+      const row = document.createElement("div"),
+        name = document.createElement("input"),
+        type = document.createElement("select"),
+        remove = document.createElement("button"),
+        up = document.createElement("button");
+      name.value = f.name;
+      name.ariaLabel = "Field name " + (i + 1);
+      const token = parseType(f.type),
+        array = token.kind === "array",
+        base = array ? formatType(token.element) : f.type;
+      for (const t of new Set([...typeChoices(), base])) {
+        const o = document.createElement("option");
+        o.value = t;
+        o.textContent = t;
+        type.append(o);
+      }
+      type.value = base;
+      type.ariaLabel = "Field type " + (i + 1);
+      const arrayToggle = document.createElement("input"),
+        length = document.createElement("input");
+      arrayToggle.type = "checkbox";
+      arrayToggle.ariaLabel = "Field array " + (i + 1);
+      arrayToggle.checked = array;
+      length.type = "number";
+      length.min = "1";
+      length.max = "1024";
+      length.ariaLabel = "Field array length " + (i + 1);
+      length.value = String(
+        array && typeof token.extent === "number" ? token.extent : 1,
+      );
+      length.hidden = !array;
+      const updateType = () => {
+        length.hidden = !arrayToggle.checked;
+        f.type = arrayToggle.checked
+          ? "array@" + JSON.stringify([type.value, Number(length.value)])
+          : type.value;
+      };
+      type.onchange = updateType;
+      arrayToggle.onchange = updateType;
+      length.oninput = updateType;
+      name.oninput = () => (f.name = name.value);
+
+      remove.textContent = "Remove field " + (i + 1);
+      remove.onclick = () => {
+        structureDraft!.fields.splice(i, 1);
+        drawFields();
+      };
+      up.textContent = "Move field up " + (i + 1);
+      up.onclick = () => {
+        if (i) {
+          [structureDraft!.fields[i - 1], structureDraft!.fields[i]] = [
+            structureDraft!.fields[i],
+            structureDraft!.fields[i - 1],
+          ];
+          drawFields();
+        }
+      };
+      up.disabled = i === 0;
+      row.append(name, type, arrayToggle, length, up, remove);
+      fields.append(row);
+    }
+    addField.disabled = (structureDraft?.fields.length ?? 0) >= 64;
+  };
+  const beginStructure = () => {
+    const c = services.context(lease().lease).capture();
+    structureId = choose.value;
+    structureDraft = structuredClone(
+      c.structures.find((s) => s.id === structureId)?.data ?? {
+        name: "Structure",
+        fields: [
+          {
+            id: "field-" + crypto.randomUUID(),
+            name: "value",
+            type: "glsl.float",
+          },
+        ],
+      },
+    );
+    structureRevision = c.graph.revision;
+    fieldChoice.replaceChildren(
+      ...structureDraft.fields.map((f) => {
+        const option = document.createElement("option");
+        option.value = f.id;
+        option.textContent = f.name;
+        return option;
+      }),
+    );
+    structName.value = structureDraft.name;
+    structDescription.value = structureDraft.description ?? "";
+    drawFields();
+  };
+  structSummary.onclick = mount.scope.event(() => {
+    if (!structs.open) beginStructure();
+  });
+  choose.onchange = mount.scope.event(beginStructure);
+  structName.oninput = () => {
+    if (structureDraft) structureDraft.name = structName.value;
+  };
+  structDescription.oninput = () => {
+    if (structureDraft) structureDraft.description = structDescription.value;
+  };
+  addField.onclick = mount.scope.event(() => {
+    if (!structureDraft) beginStructure();
+    if (structureDraft!.fields.length >= 64) return;
+    structureDraft!.fields.push({
+      id: "field-" + crypto.randomUUID(),
+      name: "field" + (structureDraft!.fields.length + 1),
+      type: "glsl.float",
+    });
+    drawFields();
+  });
+  saveStruct.onclick = mount.scope.event(() => {
+    if (
+      execute("grape.structure.apply", {
+        id: structureId,
+        data: structureDraft as unknown as Json,
+        revision: structureRevision,
+      })
+    ) {
+      structs.open = false;
+      structureDraft = null;
+    }
+  });
+  cancelStruct.onclick = mount.scope.event(() => {
+    structs.open = false;
+    structureDraft = null;
+  });
+  deleteStruct.onclick = mount.scope.event(() =>
+    execute("grape.structure.delete", {
+      id: structureId,
+      revision: structureRevision,
+    }),
+  );
+  instance.onclick = mount.scope.event(() =>
+    execute("grape.structure.instance", {
+      id: choose.value,
+      revision: services.context(lease().lease).capture().graph.revision,
+    }),
+  );
+  fieldInstance.onclick = mount.scope.event(() =>
+    execute("grape.structure.field", {
+      id: choose.value,
+      field: fieldChoice.value,
+      revision: services.context(lease().lease).capture().graph.revision,
+    }),
+  );
+  let connectionHint = "",
+    renderedScope = "";
+  let portDrag: {
+      id: number;
+      x: number;
+      y: number;
+      nodeId: string;
+      portKey: string;
+      direction: string;
+      scope: string;
+      revision: number;
+    } | null = null,
+    suppressPortClick = false;
   let selectedPort: {
       nodeId: string;
       portKey: string;
@@ -140,8 +658,10 @@ function mountCanvas(
     try {
       notice.textContent = "";
       fn();
+      return true;
     } catch (error) {
       notice.textContent = String(error);
+      return false;
     }
   };
   const listen = (
@@ -158,7 +678,29 @@ function mountCanvas(
     run(() => {
       const e = event as PointerEvent;
       if (e.button !== 0) return;
-      if ((e.target as HTMLElement).closest("button,input,select")) return;
+      const socket = (e.target as HTMLElement).closest<HTMLElement>(
+        "[data-port]",
+      );
+      if (socket) {
+        const c = services.context(lease().lease).capture();
+        portDrag = {
+          id: e.pointerId,
+          x: e.clientX,
+          y: e.clientY,
+          nodeId: socket.dataset.nodeId!,
+          portKey: socket.dataset.port!,
+          direction: socket.dataset.direction!,
+          scope: JSON.stringify(c.scope),
+          revision: c.graph.revision,
+        };
+        return;
+      }
+      if (
+        (e.target as HTMLElement).closest(
+          "button,input,select,textarea,summary,.network-toolbar",
+        )
+      )
+        return;
       services.activate();
       root.focus();
       const context = services.context(lease().lease),
@@ -209,6 +751,14 @@ function mountCanvas(
   listen(root, "pointermove", (event) =>
     run(() => {
       const e = event as PointerEvent;
+      if (
+        portDrag?.id === e.pointerId &&
+        Math.hypot(e.clientX - portDrag.x, e.clientY - portDrag.y) > 4
+      ) {
+        if (!root.hasPointerCapture(e.pointerId))
+          root.setPointerCapture(e.pointerId);
+        return;
+      }
       if (!drag || drag.id !== e.pointerId) return;
       const dx = e.clientX - drag.startX,
         dy = e.clientY - drag.startY;
@@ -246,13 +796,65 @@ function mountCanvas(
         root.releasePointerCapture(drag.id);
       drag = null;
     });
-  listen(root, "pointerup", () => end(false));
-  listen(root, "pointercancel", () => end(true));
+  listen(root, "pointerup", (event) => {
+    const e = event as PointerEvent,
+      pending = portDrag;
+    portDrag = null;
+    if (pending) {
+      if (root.hasPointerCapture(pending.id))
+        root.releasePointerCapture(pending.id);
+      if (Math.hypot(e.clientX - pending.x, e.clientY - pending.y) > 4) {
+        suppressPortClick = true;
+        run(() => {
+          const c = services.context(lease().lease).capture();
+          demand(
+            pending.scope === JSON.stringify(c.scope) &&
+              pending.revision === c.graph.revision,
+            "STALE_SCOPE",
+          );
+          const target = document
+            .elementFromPoint(e.clientX, e.clientY)
+            ?.closest<HTMLElement>("[data-spare],[data-port]");
+          demand(target && root.contains(target), "PORT_TARGET");
+          if (target.dataset.spare) {
+            execute("grape.network.spare", {
+              boundary: target.dataset.spare,
+              endpoint: { nodeId: pending.nodeId, portKey: pending.portKey },
+            });
+          } else {
+            demand(
+              pending.direction !== target.dataset.direction,
+              "PORT_DIRECTION",
+            );
+            const a = { nodeId: pending.nodeId, portKey: pending.portKey },
+              b = {
+                nodeId: target.dataset.nodeId!,
+                portKey: target.dataset.port!,
+              };
+            execute("grape.edge.connect", {
+              from: pending.direction === "output" ? a : b,
+              to: pending.direction === "input" ? a : b,
+            });
+          }
+          selectedPort = null;
+        });
+      }
+    }
+    if (!pending) end(false);
+  });
+  listen(root, "pointercancel", () => {
+    portDrag = null;
+    end(true);
+  });
   listen(root, "click", (event) =>
     run(() => {
       const button = (event.target as HTMLElement).closest<HTMLElement>(
         "[data-port]",
       );
+      if (suppressPortClick) {
+        suppressPortClick = false;
+        return;
+      }
       if (!button) return;
       services.activate();
       const port = {
@@ -293,6 +895,7 @@ function mountCanvas(
         return;
       if (e.key === "Escape") {
         selectedPort = null;
+        portDrag = null;
         end(true);
         return;
       }
@@ -395,13 +998,95 @@ function mountCanvas(
         wires.replaceChildren();
         return;
       }
-      const network = c.graph.document.graph.stages.find(
-        (s) => s.id === c.scope.stageId,
-      )!.network;
-      const stage = c.graph.document.graph.stages.find(
-        (s) => s.id === c.scope.stageId,
-      )!;
-      breadcrumb.textContent = c.graph.document.graph.name + " / " + stage.key;
+      const scopeKey = JSON.stringify(c.scope);
+      if (renderedScope && renderedScope !== scopeKey) {
+        selectedPort = null;
+        suppressPortClick = false;
+        interfaceDraft = null;
+        structureDraft = null;
+        editor.open = false;
+        structs.open = false;
+        notice.textContent = "";
+        if (drag && root.hasPointerCapture(drag.id))
+          root.releasePointerCapture(drag.id);
+        drag = null;
+      }
+      renderedScope = scopeKey;
+      const network = c.network;
+      if (
+        portDrag &&
+        (portDrag.scope !== JSON.stringify(c.scope) ||
+          portDrag.revision !== c.graph.revision)
+      ) {
+        if (root.hasPointerCapture(portDrag.id))
+          root.releasePointerCapture(portDrag.id);
+        portDrag = null;
+      }
+      frameLayer.replaceChildren(
+        ...c.frames.map((f) => {
+          const members = network.nodes.filter((n) => f.nodeIds.includes(n.id)),
+            box = document.createElement("div");
+          box.className = "canvas-frame";
+          box.dataset.frame = f.id;
+          box.textContent = f.name;
+          if (members.length) {
+            const x = Math.min(...members.map((n) => n.position[0])) - 18,
+              y = Math.min(...members.map((n) => n.position[1])) - 30;
+            Object.assign(box.style, {
+              left: x + "px",
+              top: y + "px",
+              width:
+                Math.max(...members.map((n) => n.position[0] + 200)) -
+                x +
+                18 +
+                "px",
+              height:
+                Math.max(
+                  ...members.map(
+                    (n) => n.position[1] + 60 + n.ports.length * 31,
+                  ),
+                ) -
+                y +
+                18 +
+                "px",
+            });
+          }
+          return box;
+        }),
+      );
+      editor.hidden = !c.definition;
+      const selectedStructure = choose.value;
+      choose.replaceChildren();
+      for (const item of [
+        { id: "", data: { name: "New structure" } },
+        ...c.structures,
+      ]) {
+        const option = document.createElement("option");
+        option.value = item.id;
+        option.textContent = item.data.name;
+        choose.append(option);
+      }
+      choose.value = selectedStructure;
+      breadcrumb.replaceChildren(
+        ...c.breadcrumbs.map((item) => {
+          const button = document.createElement("button");
+          button.textContent = item.name;
+          button.dataset.depth = String(item.depth);
+          button.disabled = item.depth === c.scope.networkPath.length;
+          button.onclick = mount.scope.event(() =>
+            execute("grape.network.navigate", { depth: item.depth }),
+          );
+          return button;
+        }),
+      );
+      root.dataset.network = network.id;
+      root.dataset.definition = c.definition?.id ?? "";
+      root.dataset.definitionKind = c.definition
+        ? c.definition.data.local
+          ? "local"
+          : "library"
+        : "root";
+      root.dataset.path = c.scope.networkPath.join("/");
       const focused =
         document.activeElement instanceof HTMLElement &&
         nodes.contains(document.activeElement)
@@ -433,8 +1118,36 @@ function mountCanvas(
           card.style.left = n.position[0] + "px";
           card.style.top = n.position[1] + "px";
           const title = document.createElement("h3");
-          title.textContent = n.name;
+          title.textContent = c.definitionNames[n.id] ?? n.name;
           card.append(title);
+          if (c.definitionNames[n.id] && c.definitionNames[n.id] !== n.name) {
+            const label = document.createElement("small");
+            label.className = "instance-name";
+            label.textContent = n.name;
+            card.append(label);
+          }
+          if (["network-input", "network-output"].includes(c.nodeRoles[n.id])) {
+            const spare = document.createElement("button");
+            spare.dataset.spare = n.id;
+            spare.textContent =
+              c.nodeRoles[n.id] === "network-input"
+                ? "Create input port from selection"
+                : "Create output port from selection";
+            spare.onclick = mount.scope.event(() =>
+              run(() => {
+                demand(selectedPort, "SELECT_PORT");
+                execute("grape.network.spare", {
+                  boundary: n.id,
+                  endpoint: {
+                    nodeId: selectedPort.nodeId,
+                    portKey: selectedPort.portKey,
+                  },
+                });
+                selectedPort = null;
+              }),
+            );
+            card.append(spare);
+          }
           for (const p of n.ports) {
             const row = document.createElement("div"),
               button = document.createElement("button");
@@ -446,13 +1159,13 @@ function mountCanvas(
             button.dataset.direction = p.direction;
             button.setAttribute(
               "aria-label",
-              `${n.name} ${p.direction} ${p.key}`,
+              `${n.name} ${p.direction} ${c.portLabels[n.id]?.[p.key] ?? p.key}`,
             );
             const socket = document.createElement("span");
             socket.className = "socket";
             socket.textContent = "●";
             const caption = document.createElement("span");
-            caption.textContent = p.key;
+            caption.textContent = c.portLabels[n.id]?.[p.key] ?? p.key;
             if (p.direction === "output") button.append(caption, socket);
             else button.append(socket, caption);
             const type = document.createElement("small");

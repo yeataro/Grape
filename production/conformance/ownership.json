@@ -76,7 +76,8 @@
       "exports": {
         "numberWidget": "command",
         "choiceWidget": "command",
-        "controlsText": "contract"
+        "controlsText": "command",
+        "jsonWidget": "command"
       }
     },
     "src/features/inspector.ts": {
@@ -192,7 +193,10 @@
         "StorageAdapter": "contract",
         "DocumentOutput": "contract",
         "FieldTarget": "contract",
-        "ContextSnapshot": "contract"
+        "ContextSnapshot": "contract",
+        "ModelContext": "contract",
+        "StateReferences": "contract",
+        "TypeResource": "contract"
       }
     },
     "src/sdk/kernel.ts": {
@@ -418,7 +422,61 @@
       "role": "contracts",
       "exports": {
         "inspectDocumentStructure": "contract",
-        "validateDocumentStructure": "contract"
+        "validateDocumentStructure": "contract",
+        "validateNetworkStructure": "contract",
+        "validateResourceStructure": "contract"
+      }
+    },
+    "src/sdk/networks.ts": {
+      "owner": "sdk",
+      "role": "contracts",
+      "exports": {
+        "NetworkData": "contract",
+        "StructureData": "contract",
+        "SourceData": "contract",
+        "asNetwork": "contract",
+        "networks": "contract",
+        "networkAt": "contract",
+        "callResource": "contract",
+        "resolveOccurrence": "contract",
+        "modelContext": "contract",
+        "resourceReferences": "contract",
+        "typeSystem": "contract",
+        "FrameData": "contract",
+        "frames": "contract",
+        "definitionStages": "contract"
+      }
+    },
+    "src/sdk/type-tokens.ts": {
+      "owner": "sdk",
+      "role": "contracts",
+      "exports": {
+        "TypeToken": "contract",
+        "parseType": "contract",
+        "formatType": "contract",
+        "typeReferences": "contract",
+        "remapType": "contract"
+      }
+    },
+    "src/modules/networks.ts": {
+      "owner": "basic-modules",
+      "role": "module",
+      "exports": {
+        "NETWORK_PIN": "contract",
+        "networkRef": "contract",
+        "networkModule": "contract"
+      }
+    },
+    "src/model/transfer.ts": {
+      "owner": "model",
+      "role": "model",
+      "exports": {
+        "ClipboardPacket": "service",
+        "nodeReferences": "service",
+        "dependencies": "service",
+        "closure": "service",
+        "copySelection": "service",
+        "pastePacket": "service"
       }
     }
   },

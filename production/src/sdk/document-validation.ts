@@ -318,3 +318,21 @@ export function validateDocumentStructure(
   );
   demand(!unknowns.length, "UNKNOWN_STRUCTURE");
 }
+
+export function validateNetworkStructure(value: unknown, limits = false): void {
+  plain(value);
+  const unknowns: string[] = [];
+  network(value, "network", unknowns);
+  demand(!unknowns.length, "UNKNOWN_STRUCTURE");
+  if (limits) {
+    const n = value as unknown as import("./document.ts").NetworkDocument;
+    demand(n.nodes.length <= 256 && n.edges.length <= 1024, "NETWORK_SIZE");
+  }
+}
+
+export function validateResourceStructure(value: unknown): void {
+  plain(value);
+  const unknowns: string[] = [];
+  resource(value, "resource", unknowns);
+  demand(!unknowns.length, "UNKNOWN_STRUCTURE");
+}

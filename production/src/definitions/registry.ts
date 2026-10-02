@@ -143,6 +143,14 @@ export class Definitions {
     const stages = new Map(this.#stages);
     const resources = new Map(this.#resources);
     return Object.freeze({
+      nodeByRole: (role: NonNullable<NodeDefinition["modelRole"]>) =>
+        [...nodes.values()].find(
+          (n) => n.modelRole === role && modules.get(pinKey(n.ref)),
+        ),
+      resourceByModel: (model: NonNullable<ResourceDefinition["model"]>) =>
+        [...resources.values()].find(
+          (r) => r.model === model && modules.get(pinKey(r.ref)),
+        ),
       pins: Object.freeze(pins.map((p) => Object.freeze({ ...p }))),
       types: new TypeEnvironment(
         [...modules.values()].flatMap((m) => m?.types ?? []),

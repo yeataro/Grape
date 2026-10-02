@@ -18,7 +18,7 @@ export function inspectorType(
     typeId: "grape.panel.inspector",
     viewStateVersion: 1,
     presentation: { label: { owner, key: "title", fallback: "Inspector" } },
-    commandIds: ["grape.edge.disconnect"],
+    commandIds: ["grape.edge.disconnect", "grape.node.rename"],
     create: (_id, services) => {
       let update: PanelUpdate = {
           lease: { panelId: _id, generation: 0 },
@@ -103,11 +103,24 @@ export function inspectorType(
               const root = document.createElement("div"),
                 title = document.createElement("h2"),
                 subtitle = document.createElement("p"),
+                rename = document.createElement("button"),
                 body = document.createElement("div"),
                 connections = document.createElement("div");
               root.className = "inspector";
 
-              root.append(title, subtitle, body, connections);
+              root.append(title, subtitle, rename, body, connections);
+              rename.addEventListener(
+                "click",
+                scope.event(() => {
+                  if (!update.target?.object) return;
+                  const next = prompt(rename.textContent ?? "", name);
+                  if (next !== null)
+                    commands?.execute(update.lease, {
+                      commandId: "grape.node.rename",
+                      args: { id: update.target.object.id, name: next },
+                    });
+                }),
+              );
               (surface.target as HTMLElement).append(root);
               scope.own(() => root.remove());
               const mounted = new Map<
@@ -133,6 +146,12 @@ export function inspectorType(
                     key: "title",
                     fallback: "Inspector",
                   });
+                  rename.textContent = frame.text({
+                    owner,
+                    key: "rename",
+                    fallback: "Rename node",
+                  });
+                  rename.hidden = !p.identity;
                   subtitle.textContent =
                     p.name ||
                     frame.text({
@@ -212,6 +231,7 @@ export const inspectorText = {
       { key: "empty", text: "Select a node to inspect its parameters." },
       { key: "source", text: "From {name}" },
       { key: "disconnect", text: "Disconnect" },
+      { key: "rename", text: "Rename node" },
     ],
   },
 };

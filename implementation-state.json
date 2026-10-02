@@ -9,15 +9,15 @@
     "root": "production"
   },
   "implementationBaseline": {
-    "id": "S01-IH-005",
-    "revision": "c1ecb3cd1a4cd1685e3fb1d9ba2a17b4108e68c3",
+    "id": "S02-IH-005",
+    "revision": "e23a997f53a17f3e00bf7f83de489cfaeb367251",
     "decisionReferenceIds": []
   },
   "build": {
-    "id": "S01-web-c1ecb3c",
-    "revision": "c1ecb3cd1a4cd1685e3fb1d9ba2a17b4108e68c3",
-    "profile": "static-web/chromium-151.0.7922.34/desktop-root-inspector",
-    "artifact": "production/evidence/s01-web.tar.gz"
+    "id": "S02-repair-web-e23a997",
+    "revision": "e23a997f53a17f3e00bf7f83de489cfaeb367251",
+    "profile": "static-web/chromium-151.0.7922.34/desktop-root-document-review",
+    "artifact": "production/evidence/s02-repair/s02-web.tar.gz"
   },
   "activeSlices": [],
   "completedSlices": [
@@ -28,6 +28,15 @@
       "evidenceIds": [
         "S01-ARCHITECTURE-c1ecb3c",
         "S01-PRODUCT-c1ecb3c"
+      ]
+    },
+    {
+      "sliceId": "S02",
+      "scope": "S02 bounded current-format document inspection/review/cancel and explicit atomic replacement; missing exact-module opaque preservation, save/reopen and exact-codec restoration; deterministic format/resource validation and PNG roundtrip. AT-S02-01, AT-S02-02 and AT-S02-04 within the declared Linux x64 desktop Chromium 151.0.7922.34 / Playwright 1.62.1 / 1440x1000 scope. AT-S02-03 legacy compatibility NOT DELIVERED / BLOCKED (Classification A); G-VERSION-COMPAT unresolved for that branch. All previously declared environment/platform limitations retained.",
+      "implementationRevision": "e23a997f53a17f3e00bf7f83de489cfaeb367251",
+      "evidenceIds": [
+        "S02-ARCHITECTURE-e23a997",
+        "S02-PRODUCT-e23a997"
       ]
     }
   ],
@@ -89,9 +98,37 @@
         "G-UI-CONFORMANCE",
         "G-EXTENSION-PANEL"
       ]
+    },
+    {
+      "id": "S02-ARCHITECTURE-e23a997",
+      "kind": "architecture-conformance",
+      "scope": "S02 bounded current-format document inspection/review/cancel and explicit atomic replacement; missing exact-module opaque preservation, save/reopen and exact-codec restoration; deterministic format/resource validation and PNG roundtrip. AT-S02-01, AT-S02-02 and AT-S02-04 within the declared Linux x64 desktop Chromium 151.0.7922.34 / Playwright 1.62.1 / 1440x1000 scope. AT-S02-03 legacy compatibility NOT DELIVERED / BLOCKED (Classification A); G-VERSION-COMPAT unresolved for that branch. All previously declared environment/platform limitations retained.",
+      "file": "production/evidence/acceptance/s02/S02-independent-review.json",
+      "sha256": "a35053bdb7fc5e70583dde209ca5e0f8a0f62a505d216239affcb7e629cafde9",
+      "implementationRevision": "e23a997f53a17f3e00bf7f83de489cfaeb367251",
+      "acceptedBy": "Human Owner (explicit bounded acceptance following owner-reported targeted independent re-review PASS)",
+      "acceptedAt": "2026-10-02T07:20:02.945516+00:00",
+      "sliceIds": [
+        "S02"
+      ],
+      "gateIds": []
+    },
+    {
+      "id": "S02-PRODUCT-e23a997",
+      "kind": "product-behavior",
+      "scope": "S02 bounded current-format document inspection/review/cancel and explicit atomic replacement; missing exact-module opaque preservation, save/reopen and exact-codec restoration; deterministic format/resource validation and PNG roundtrip. AT-S02-01, AT-S02-02 and AT-S02-04 within the declared Linux x64 desktop Chromium 151.0.7922.34 / Playwright 1.62.1 / 1440x1000 scope. AT-S02-03 legacy compatibility NOT DELIVERED / BLOCKED (Classification A); G-VERSION-COMPAT unresolved for that branch. All previously declared environment/platform limitations retained.",
+      "file": "production/evidence/acceptance/s02/S02-human-owner-acceptance.json",
+      "sha256": "5c5c86e79a0bd4941f367dd88c2b1df04fa420e84af6889c33d01881ffe0e47b",
+      "implementationRevision": "e23a997f53a17f3e00bf7f83de489cfaeb367251",
+      "acceptedBy": "Human Owner (explicit bounded acceptance following owner-reported targeted independent re-review PASS)",
+      "acceptedAt": "2026-10-02T07:20:02.945516+00:00",
+      "sliceIds": [
+        "S02"
+      ],
+      "gateIds": []
     }
   ],
-  "latestAcceptedEvidenceId": "S01-PRODUCT-c1ecb3c",
-  "updatedAt": "2026-10-02T01:33:01.949755Z",
+  "latestAcceptedEvidenceId": "S02-PRODUCT-e23a997",
+  "updatedAt": "2026-10-02T07:20:02.945516+00:00",
   "decisionReferences": []
 }

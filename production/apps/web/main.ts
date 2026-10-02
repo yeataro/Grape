@@ -8,6 +8,9 @@ import {
   esProfile,
 } from "../../src/modules/image.ts";
 import { EditorApplication } from "../../src/application/editor.ts";
+import type { DocumentInspection } from "../../src/application/inspection.ts";
+import { decodeInput } from "../../src/persistence/png.ts";
+import { renderDocumentPNG } from "../../src/adapters/browser/png.ts";
 import {
   BrowserStorage,
   browserOutput,
@@ -204,7 +207,10 @@ application.grant("grape.panel.actions", [
   "grape.undo",
   "grape.redo",
 ]);
-application.grant("grape.panel.inspector", ["grape.edge.disconnect"]);
+application.grant("grape.panel.inspector", [
+  "grape.edge.disconnect",
+  "grape.node.rename",
+]);
 const replacing = () => {
   if (application.busy) throw Error(text("gestureBusy"));
   if (workspace?.records().some((r) => r.instance && !r.instance.canClose()))
@@ -254,36 +260,144 @@ action("export", async () => {
   await application.download();
   message.textContent = text("exported");
 });
+const pngDialog = document.createElement("dialog");
+const pngTitle = document.createElement("h2"),
+  pngImage = document.createElement("img"),
+  pngDownload = document.createElement("button"),
+  pngClose = document.createElement("button");
+pngTitle.textContent = text("pngTitle");
+pngDownload.textContent = text("pngDownload");
+pngClose.textContent = text("cancel");
+pngDialog.style.width = "min(1100px, 90vw)";
+pngImage.alt = text("pngTitle");
+pngImage.style.maxWidth = "100%";
+pngImage.style.maxHeight = "65vh";
+pngImage.style.display = "block";
+pngImage.style.margin = "0 auto 16px";
+pngDialog.append(pngTitle, pngImage, pngDownload, pngClose);
+app.append(pngDialog);
+let pngTicket = 0,
+  pngURL = "",
+  pngBytes: Uint8Array | null = null,
+  pngName = "";
+const cancelPNG = () => {
+  pngTicket++;
+  pngBytes = null;
+  if (pngURL) URL.revokeObjectURL(pngURL);
+  pngURL = "";
+  pngImage.removeAttribute("src");
+  pngDialog.close();
+};
+pngClose.onclick = cancelPNG;
+pngDialog.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  cancelPNG();
+});
+pngDownload.onclick = () => {
+  if (pngBytes)
+    void downloadBytes(pngName, pngBytes.slice().buffer).catch(report);
+};
+action("png", async () => {
+  cancelPNG();
+  const ticket = pngTicket,
+    snapshot = application.snapshot;
+  const pane = document.querySelector(".canvas-pane");
+  const layout = new Map<string, { width: number; height: number }>();
+  pane?.querySelectorAll<HTMLElement>(".node[data-node]").forEach((node) =>
+    layout.set(node.dataset.node!, {
+      width: node.offsetWidth,
+      height: node.offsetHeight,
+    }),
+  );
+  const stage = snapshot.document.graph.stages.find((s) =>
+    s.network.nodes.some((n) => layout.has(n.id)),
+  );
+  if (!stage) throw Error("PNG_LAYOUT_MISSING");
+  pngDownload.disabled = true;
+  pngDialog.showModal();
+  try {
+    const bytes = await renderDocumentPNG(snapshot.document, stage.id, layout);
+    if (ticket !== pngTicket) return;
+    pngBytes = bytes;
+    pngName = `${snapshot.document.graph.name}-${snapshot.document.graph.kind.kindId}-${stage.key}.png`;
+    pngURL = URL.createObjectURL(
+      new Blob([bytes.slice().buffer], { type: "image/png" }),
+    );
+    pngImage.src = pngURL;
+    pngDownload.disabled = false;
+  } catch (error) {
+    if (ticket === pngTicket) {
+      cancelPNG();
+      throw error;
+    }
+  }
+});
 const input = document.createElement("input");
 input.type = "file";
-input.accept = ".json,.grape.json,application/json";
+input.accept = ".json,.grape.json,.png,application/json,image/png";
 input.hidden = true;
 app.append(input);
 action("file", () => {
-  if (replacing()) input.click();
+  input.click();
 });
 input.addEventListener("change", () => {
   void (async () => {
     const file = input.files?.[0];
     if (!file) return;
+    closeReview();
+    const ticket = reviewTicket;
     const base = application.snapshot;
-    const bytes = await file.arrayBuffer();
-    if (
-      base.loadId !== application.snapshot.loadId ||
-      base.revision !== application.snapshot.revision
-    )
-      throw Error("OPEN_SUPERSEDED");
-    let raw: string;
+    recovery(file, "READING_INPUT");
+    let bytes: ArrayBuffer;
     try {
-      raw = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+      bytes = await file.arrayBuffer();
     } catch {
-      recovery(bytes, "INVALID_UTF8");
+      if (ticket === reviewTicket) recovery(file, "FILE_READ_FAILED");
       input.value = "";
       return;
     }
-    const result = application.openText(raw);
-    if (result.status === "editable") buildWorkspace();
-    else recovery(raw, result.reason);
+    if (ticket !== reviewTicket) return;
+    if (
+      base.loadId !== application.snapshot.loadId ||
+      base.revision !== application.snapshot.revision
+    ) {
+      recovery(bytes, "OPEN_SUPERSEDED");
+      input.value = "";
+      return;
+    }
+    let raw: string;
+    try {
+      raw = decodeInput(new Uint8Array(bytes), file.name);
+    } catch (error) {
+      recovery(bytes, error instanceof Error ? error.message : String(error));
+      input.value = "";
+      return;
+    }
+    currentReview = application.inspectText(raw);
+    document.querySelector("#recovery h2")!.textContent = text("reviewTitle");
+    recovery(bytes, currentReview.status + ": " + currentReview.reason);
+    reviewDetails.textContent = JSON.stringify(
+      {
+        diagnostics: currentReview.diagnostics,
+        repairs: currentReview.repairs,
+        provenance: currentReview.provenance,
+        unknownPaths:
+          currentReview.read.status === "recovery-readonly"
+            ? currentReview.read.unknownPaths
+            : [],
+        candidate: currentReview.candidate,
+      },
+      null,
+      2,
+    );
+    rawPreview.textContent = raw.slice(0, 12000);
+    acceptButton.hidden = !currentReview.candidate;
+    acceptButton.disabled = application.readonly;
+    loadButton.hidden =
+      currentReview.read.status !== "editable" ||
+      !currentReview.document ||
+      currentReview.reason === "NETWORK_SIZE";
+    loadButton.disabled = application.readonly;
     input.value = "";
   })().catch(report);
 });
@@ -297,13 +411,73 @@ const lockButton = action("lock", () =>
   application.setReadonly(!application.readonly),
 );
 lockButton.setAttribute("aria-pressed", "false");
-let original: string | ArrayBuffer = "";
-function recovery(raw: string | ArrayBuffer, reason: string) {
+let original: string | ArrayBuffer | Blob = "";
+let currentReview: DocumentInspection | null = null,
+  reviewTicket = 0;
+const reviewDialog = document.querySelector<HTMLDialogElement>("#recovery")!;
+reviewDialog.style.width = "min(900px, 90vw)";
+const reviewDetails = document.createElement("pre"),
+  rawPreview = document.createElement("pre"),
+  explanation = document.createElement("p"),
+  acceptButton = document.createElement("button"),
+  loadButton = document.createElement("button");
+reviewDetails.setAttribute("aria-label", text("reviewDetails"));
+rawPreview.setAttribute("aria-label", text("originalPreview"));
+reviewDetails.style.maxHeight = "30vh";
+rawPreview.style.maxHeight = "15vh";
+reviewDetails.style.overflow = rawPreview.style.overflow = "auto";
+explanation.textContent = text("loadExplanation");
+acceptButton.textContent = text("acceptImport");
+loadButton.textContent = text("openPreserved");
+acceptButton.hidden = loadButton.hidden = true;
+reviewDialog.append(
+  explanation,
+  reviewDetails,
+  rawPreview,
+  acceptButton,
+  loadButton,
+);
+function closeReview() {
+  reviewTicket++;
+  if (currentReview) application.cancelReview(currentReview);
+  currentReview = null;
+  reviewDetails.textContent = rawPreview.textContent = "";
+  acceptButton.hidden = loadButton.hidden = true;
+  reviewDialog.close();
+  input.value = "";
+}
+reviewDialog.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  closeReview();
+});
+acceptButton.onclick = () => {
+  try {
+    if (workspace?.records().some((r) => r.instance && !r.instance.canClose()))
+      throw Error(text("draftBusy"));
+    if (currentReview) application.acceptReview(currentReview);
+    closeReview();
+  } catch (error) {
+    document.querySelector("#recovery-message")!.textContent =
+      error instanceof Error ? error.message : String(error);
+  }
+};
+loadButton.onclick = () => {
+  try {
+    if (!currentReview || !replacing()) return;
+    application.openReviewed(currentReview);
+    buildWorkspace();
+    closeReview();
+  } catch (error) {
+    document.querySelector("#recovery-message")!.textContent =
+      error instanceof Error ? error.message : String(error);
+  }
+};
+function recovery(raw: string | ArrayBuffer | Blob, reason: string) {
   original = raw;
   document.querySelector("#recovery-message")!.textContent = text("recovery", {
     reason,
   });
-  (document.querySelector("#recovery") as HTMLDialogElement).showModal();
+  if (!reviewDialog.open) reviewDialog.showModal();
 }
 document
   .querySelector("#export-original")!
@@ -313,9 +487,7 @@ document
   );
 document
   .querySelector("#close-recovery")!
-  .addEventListener("click", () =>
-    (document.querySelector("#recovery") as HTMLDialogElement).close(),
-  );
+  .addEventListener("click", closeReview);
 document
   .querySelector("#cancel-open")!
   .addEventListener("click", () =>

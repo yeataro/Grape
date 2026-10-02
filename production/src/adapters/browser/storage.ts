@@ -70,7 +70,7 @@ export class BrowserStorage implements StorageAdapter {
 }
 export async function downloadBytes(
   name: string,
-  data: string | ArrayBuffer,
+  data: string | ArrayBuffer | Blob,
 ): Promise<void> {
   const url = URL.createObjectURL(
     new Blob([data], {

@@ -1,0 +1,64 @@
+{
+  "status": "PASS",
+  "scope": "Read-only bootstrap/integrity/navigation and state checks, not full qualification or S01 authorization",
+  "checks": 463,
+  "errors": [],
+  "indexedFiles": 411,
+  "frozenFiles": 412,
+  "acceptedRevision": "IH-005",
+  "canonicalFormat": "grape.document 2.0",
+  "currentState": "active",
+  "activeSlices": [
+    "S02"
+  ],
+  "currentRecordValidation": "CURRENT_RECORD_VALID",
+  "commands": [
+    {
+      "command": "node handoff/tools/check-handoff.mjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "checks": 9361,
+      "errors": []
+    },
+    {
+      "command": "node handoff/tools/check-ih005.mjs --verify-index",
+      "exitCode": 0,
+      "status": "PASS",
+      "checks": 469,
+      "errors": []
+    },
+    {
+      "command": "node handoff/tools/check-repair.mjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "checks": 103,
+      "errors": []
+    },
+    {
+      "command": "node handoff/tools/check-second-review.mjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "checks": 266,
+      "errors": []
+    },
+    {
+      "command": "node handoff/tools/check-final-review-repair.mjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "checks": 36,
+      "errors": []
+    },
+    {
+      "command": "node handoff/tools/check-implementation-state.mjs",
+      "exitCode": 0,
+      "status": "TEMPLATE_VALID",
+      "errors": []
+    },
+    {
+      "command": "node handoff/tools/check-implementation-state.mjs --current",
+      "exitCode": 0,
+      "status": "CURRENT_RECORD_VALID",
+      "errors": []
+    }
+  ]
+}

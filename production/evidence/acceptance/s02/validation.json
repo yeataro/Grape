@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "s02-acceptance-bookkeeping-validation",
+  "recordedAt": "2026-10-02T07:22:30.592492+00:00",
+  "status": "PASS",
+  "node": "v25.5.0",
+  "acceptedImplementationRevision": "e23a997f53a17f3e00bf7f83de489cfaeb367251",
+  "reviewedPrHead": "45c08a5b27beb9c57797975cea8007c35640e16c",
+  "checks": [
+    {
+      "command": "node handoff/tools/check-implementation-state.mjs --current",
+      "result": "CURRENT_RECORD_VALID",
+      "log": "current-state.log"
+    },
+    {
+      "command": "node tools/verify-bootstrap.mjs",
+      "result": "PASS",
+      "checks": 463,
+      "indexedFiles": 411,
+      "frozenFiles": 412,
+      "log": "bootstrap.log"
+    },
+    {
+      "command": "node --test --test-isolation=none tools/verify-bootstrap.test.mjs",
+      "result": "9 passed; zero failures/skips",
+      "log": "bootstrap-tests.log"
+    },
+    {
+      "check": "Accepted evidence digests, exact implementation/PR bindings, M1/M2 closures, bounded acceptance, unchanged S01 state/evidence and authorization limits",
+      "result": "PASS"
+    },
+    {
+      "check": "Reviewed source hashes match implementation commit, reviewed PR HEAD and working tree",
+      "result": "PASS",
+      "files": 60,
+      "sourceSetSha256": "0045d63675ba28869ed3ba025bff9be7b469b906698de46f957fca9e6c0dd68f"
+    },
+    {
+      "check": "Reviewed evidence, checkpoint original-state binding, packaged artifact hash and archived dist content",
+      "result": "PASS",
+      "hashedEvidenceFiles": 22,
+      "buildSha256": "9bf70c2e82f6664a980b4dc0fb155f2e62164b8b63ebb87e8afa01d6182b0510"
+    },
+    {
+      "check": "Gate dispositions unchanged; G-VERSION-COMPAT inherited unresolved; AT-S02-03 explicitly NOT DELIVERED / BLOCKED; no active or later Slice",
+      "result": "PASS"
+    },
+    {
+      "check": "Frozen handoff unchanged against accepted main; no product source, test, tool, contract-map or historical evidence change from reviewed PR HEAD",
+      "result": "PASS"
+    }
+  ],
+  "currentStateSha256": "664d3b12e2395906a2df259eba41775ecc4ab6ff3f84ed34c5d2c6d778379661",
+  "artifactHashes": [
+    {
+      "file": "production/evidence/acceptance/s02/README.md",
+      "sha256": "b075d4b23a13c2232c4a10735daf957a8bc0749cea8452642b68953827d91113"
+    },
+    {
+      "file": "production/evidence/acceptance/s02/S02-human-owner-acceptance.json",
+      "sha256": "5c5c86e79a0bd4941f367dd88c2b1df04fa420e84af6889c33d01881ffe0e47b"
+    },
+    {
+      "file": "production/evidence/acceptance/s02/S02-independent-review.json",
+      "sha256": "a35053bdb7fc5e70583dde209ca5e0f8a0f62a505d216239affcb7e629cafde9"
+    },
+    {
+      "file": "production/evidence/acceptance/s02/bootstrap-tests.log",
+      "sha256": "df3c6c83ded0df23bb5eb681a40b597d106c4467226fec38919251babb6aafbe"
+    },
+    {
+      "file": "production/evidence/acceptance/s02/bootstrap.log",
+      "sha256": "d5ead41707bd1e699ab5dec2a7e22fa500c992050ca4af3f54db4fe136621207"
+    },
+    {
+      "file": "production/evidence/acceptance/s02/current-state.log",
+      "sha256": "c0dc87d1f23f1dbe23e245abf0dc34a0e70a610069109b9e46fda85cce820c8a"
+    }
+  ],
+  "scope": "Acceptance bookkeeping and integrity only. Existing implementation evidence and its execution counts remain bound to the reviewed revision; no new product-suite execution or independent-review transcript is claimed."
+}

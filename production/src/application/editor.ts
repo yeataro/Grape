@@ -29,6 +29,8 @@ import { Signal, detached, equal, demand, plain } from "../sdk/kernel.ts";
 import type { IdentitySource } from "../sdk/kernel.ts";
 import { compile } from "../generation/compiler.ts";
 import { readDocument, writeDocument } from "../persistence/codec.ts";
+import { inspectDocument } from "./inspection.ts";
+import type { DocumentInspection } from "./inspection.ts";
 
 export class EditorContext {
   #selection: string[] = [];
@@ -36,6 +38,7 @@ export class EditorContext {
   #navigation = 0;
   #live = true;
   #stage: string;
+  #stageKey: string;
   #signal = new Signal<void>();
   #unsubscribe: () => void;
   constructor(
@@ -44,7 +47,19 @@ export class EditorContext {
     stageId: string,
   ) {
     this.#stage = stageId;
+    this.#stageKey = graph
+      .capture()
+      .document.graph.stages.find((s) => s.id === stageId)!.key;
     this.#unsubscribe = graph.subscribeProjection(() => {
+      const stages = graph.capture().document.graph.stages;
+      if (!stages.some((s) => s.id === this.#stage)) {
+        this.#stage = (
+          stages.find((s) => s.key === this.#stageKey) ?? stages[0]
+        ).id;
+        this.#navigation++;
+        this.#selection = [];
+        this.#primary = null;
+      }
       const ids = this.network().nodes.map((n) => n.id);
       this.#selection = this.#selection.filter((id) => ids.includes(id));
       if (!this.#selection.includes(this.#primary!))
@@ -98,6 +113,9 @@ export class EditorContext {
       "STAGE_MISSING",
     );
     this.#stage = stageId;
+    this.#stageKey = this.graph
+      .capture()
+      .document.graph.stages.find((s) => s.id === stageId)!.key;
     this.#navigation++;
     this.#selection = [];
     this.#primary = null;
@@ -119,13 +137,14 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
   #graph: Graph | null = null;
   #contexts = new Map<string, EditorContext>();
   #signal = new Signal<void>();
-  #saved: string | null = null;
+  #saved: CanonicalGraphDocument | null = null;
   #saving = false;
   #compile: Compilation | null = null;
   #readonly = false;
   #origins = new Map<string, { contextId: string; cancel: () => void }>();
   #grants = new Map<string, Set<string>>();
   #unsubscribers: (() => void)[] = [];
+  #reviews = new WeakMap<DocumentInspection, GraphSnapshot>();
   constructor(
     private readonly definitions: Definitions,
     private readonly identity: IdentitySource,
@@ -142,9 +161,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     return this.#graph.capture();
   }
   get dirty(): boolean {
-    return (
-      !!this.#graph && writeDocument(this.snapshot.document) !== this.#saved
-    );
+    return !!this.#graph && !equal(this.snapshot.document, this.#saved);
   }
   get saving(): boolean {
     return this.#saving;
@@ -175,7 +192,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
       .filter((n) => n.role === "operation")
       .map((n) => ({ ref: n.ref, presentation: n.presentation }));
   }
-  private install(graph: Graph, saved: string | null): void {
+  private install(graph: Graph, saved: CanonicalGraphDocument | null): void {
     demand(!this.busy, "HISTORY_BUSY");
     for (const c of this.#contexts.values()) c.dispose();
     this.#contexts.clear();
@@ -210,9 +227,59 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
         this.definitions.pin(parsed.document.graph.modules),
         this.identity,
       );
-      this.install(graph, saved ? writeDocument(parsed.document) : null);
+      this.install(graph, saved ? parsed.document : null);
     }
     return parsed;
+  }
+  inspectText(raw: string): DocumentInspection {
+    const base = this.snapshot;
+    const review = inspectDocument(raw, this.definitions);
+    this.#reviews.set(review, base);
+    return review;
+  }
+  cancelReview(review: DocumentInspection): void {
+    this.#reviews.delete(review);
+  }
+  private checkReview(review: DocumentInspection): void {
+    const base = this.#reviews.get(review);
+    demand(base, "REVIEW_CLOSED");
+    demand(!this.#readonly, "IMPORT_READONLY");
+    demand(!this.busy, "HISTORY_BUSY");
+    const now = this.snapshot;
+    demand(
+      now.loadId === base.loadId &&
+        now.revision === base.revision &&
+        equal(now.document, base.document),
+      "IMPORT_STALE",
+    );
+  }
+  acceptReview(review: DocumentInspection): void {
+    this.checkReview(review);
+    demand(review.candidate, "IMPORT_ERRORS");
+    this.#graph!.change("Accept graph import", (draft) =>
+      draft.replaceDocument(review.candidate!),
+    );
+    this.#reviews.delete(review);
+  }
+  /** Explicit load is a new lifetime. Unlike import acceptance, it can preserve
+   * representable model errors, including missing definitions, for later re-save. */
+  openReviewed(review: DocumentInspection): void {
+    this.checkReview(review);
+    demand(
+      review.read.status === "editable" &&
+        review.document &&
+        review.reason !== "NETWORK_SIZE",
+      "IMPORT_NOT_LOADABLE",
+    );
+    const doc = review.document;
+    demand(doc.graph.stages.length > 0, "OPEN_NO_STAGE");
+    const graph = new Graph(
+      doc,
+      this.definitions.pin(doc.graph.modules),
+      this.identity,
+    );
+    this.install(graph, null);
+    this.#reviews.delete(review);
   }
   context(id?: string): EditorContext {
     if (id) {
@@ -259,7 +326,8 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     this.#signal.emit();
     try {
       await this.storage.write(snapshot.document.graph.id, text);
-      if (this.#graph?.loadId === snapshot.loadId) this.#saved = text;
+      if (this.#graph?.loadId === snapshot.loadId)
+        this.#saved = snapshot.document;
     } finally {
       this.#saving = false;
       this.#signal.emit();

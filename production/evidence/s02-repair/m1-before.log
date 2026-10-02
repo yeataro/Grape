@@ -1,0 +1,129 @@
+✖ M1: missing-module boundary x rename rejects save before ACK without data loss (56.652794ms)
+✖ M1: missing-module boundary 中 rename rejects save before ACK without data loss (27.253693ms)
+✖ M1: missing-module boundary 🍇 rename rejects save before ACK without data loss (33.510713ms)
+✖ M1: compact fallback validates actual emitted bytes at and beyond the budget (9.80404ms)
+✖ M1: nodes at/beyond network limit obey save/reopen invariant (36.811763ms)
+✖ M1: edges at/beyond network limit obey save/reopen invariant (42.914179ms)
+✖ M1: editing beyond network capacity cannot acknowledge a save or erase the previous saved document (59.659831ms)
+(node:6758) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 0
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 375.424188
+
+✖ failing tests:
+
+test at production/tests/unit/save-limits.test.ts:21:3
+✖ M1: missing-module boundary x rename rejects save before ACK without data loss (56.652794ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (/workspace/Grape/production/tests/unit/save-limits.test.ts:36:5)
+      at async Test.run (node:internal/test_runner/test:1116:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Object],
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at production/tests/unit/save-limits.test.ts:21:3
+✖ M1: missing-module boundary 中 rename rejects save before ACK without data loss (27.253693ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (/workspace/Grape/production/tests/unit/save-limits.test.ts:36:5)
+      at async Test.run (node:internal/test_runner/test:1116:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Object],
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at production/tests/unit/save-limits.test.ts:21:3
+✖ M1: missing-module boundary 🍇 rename rejects save before ACK without data loss (33.510713ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (/workspace/Grape/production/tests/unit/save-limits.test.ts:36:5)
+      at async Test.run (node:internal/test_runner/test:1116:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Object],
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at production/tests/unit/save-limits.test.ts:46:1
+✖ M1: compact fallback validates actual emitted bytes at and beyond the budget (9.80404ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/Grape/production/tests/unit/save-limits.test.ts:53:10)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Object],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at production/tests/unit/save-limits.test.ts:57:3
+✖ M1: nodes at/beyond network limit obey save/reopen invariant (36.811763ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/Grape/production/tests/unit/save-limits.test.ts:72:12)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Object],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at production/tests/unit/save-limits.test.ts:57:3
+✖ M1: edges at/beyond network limit obey save/reopen invariant (42.914179ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/Grape/production/tests/unit/save-limits.test.ts:72:12)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Object],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at production/tests/unit/save-limits.test.ts:78:1
+✖ M1: editing beyond network capacity cannot acknowledge a save or erase the previous saved document (59.659831ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (/workspace/Grape/production/tests/unit/save-limits.test.ts:93:3)
+      at async Test.run (node:internal/test_runner/test:1116:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Object],
+    operator: 'rejects',
+    diff: 'simple'
+  }

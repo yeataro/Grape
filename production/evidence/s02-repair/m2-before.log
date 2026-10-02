@@ -1,0 +1,148 @@
+✔ S02 conformance: replacement uses one public Graph batch, isolates observers and retains two Context identities (15.735156ms)
+✔ S02 conformance: direct replacement rejects model Error without modifying document/history (3.002728ms)
+✖ M2: direct replacement atomically rejects malformed position component before publication (3.167787ms)
+✖ M2: direct replacement atomically rejects malformed position length before publication (2.600993ms)
+✖ M2: direct replacement atomically rejects duplicate recovery IDs before publication (2.4458ms)
+✖ M2: direct replacement atomically rejects unknown envelope field before publication (2.051196ms)
+✖ M2: direct replacement atomically rejects unknown node field before publication (2.546922ms)
+✖ M2: direct replacement atomically rejects unknown endpoint field before publication (1.898566ms)
+✖ M2: catching invalid replacement cannot publish earlier edits in the same batch (2.293751ms)
+✔ M2: valid detached replacement publishes once and retains exact Undo/Redo content (3.578214ms)
+(node:10076) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 3
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 157.15628
+
+✖ failing tests:
+
+test at production/tests/conformance/import.test.ts:61:3
+✖ M2: direct replacement atomically rejects malformed position component before publication (3.167787ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/Grape/production/tests/conformance/import.test.ts:69:12)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Object],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at production/tests/conformance/import.test.ts:61:3
+✖ M2: direct replacement atomically rejects malformed position length before publication (2.600993ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/Grape/production/tests/conformance/import.test.ts:69:12)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Object],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at production/tests/conformance/import.test.ts:61:3
+✖ M2: direct replacement atomically rejects duplicate recovery IDs before publication (2.4458ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/Grape/production/tests/conformance/import.test.ts:69:12)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Object],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at production/tests/conformance/import.test.ts:61:3
+✖ M2: direct replacement atomically rejects unknown envelope field before publication (2.051196ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/Grape/production/tests/conformance/import.test.ts:69:12)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Object],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at production/tests/conformance/import.test.ts:61:3
+✖ M2: direct replacement atomically rejects unknown node field before publication (2.546922ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/Grape/production/tests/conformance/import.test.ts:69:12)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Object],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at production/tests/conformance/import.test.ts:61:3
+✖ M2: direct replacement atomically rejects unknown endpoint field before publication (1.898566ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/Grape/production/tests/conformance/import.test.ts:69:12)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Object],
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at production/tests/conformance/import.test.ts:81:1
+✖ M2: catching invalid replacement cannot publish earlier edits in the same batch (2.293751ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/workspace/Grape/production/tests/conformance/import.test.ts:85:10)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [Object],
+    operator: 'throws',
+    diff: 'simple'
+  }

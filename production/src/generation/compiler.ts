@@ -147,7 +147,7 @@ export function compile(
     const checkType = (type: string) => {
       demand(types.resolve(type), "TYPE_UNKNOWN");
       const t = parseType(type);
-      if (t.kind === "scalar") diagnostics.push(...profile.validateType(type));
+      diagnostics.push(...profile.validateType(type));
       if (t.kind === "array") checkType(formatType(t.element));
       if (t.kind === "structure" && !declared.has(t.id)) {
         declared.add(t.id);

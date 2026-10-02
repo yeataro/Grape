@@ -1,10 +1,12 @@
 import { nodeRef } from "./nodes.ts";
+import { imageKind } from "./image.ts";
 import { validateNetworkStructure } from "../sdk/document-validation.ts";
 import type {
   ModuleContribution,
   NodeDefinition,
   ModelContext,
   StateReferences,
+  SourcePolicyContext,
 } from "../sdk/editing.ts";
 import type { Json } from "../sdk/public-surface.ts";
 import type { DocumentReference, PortSnapshot } from "../sdk/document.ts";
@@ -13,12 +15,13 @@ import type {
   StructureData,
   SourceData,
 } from "../sdk/networks.ts";
-import { demand, issue } from "../sdk/kernel.ts";
+import { demand, issue, equal } from "../sdk/kernel.ts";
+import { parseType } from "../sdk/type-tokens.ts";
 export const NETWORK_PIN = {
   moduleId: "grape.nodes.networks",
   version: "0.1.0",
   fingerprint:
-    "sha256:5c433bd8844fd2329e2fd0a90a55acb09d0b7093b974448c8cdf26a98dcf6786",
+    "sha256:ffef7a0c0ede8a579b799ff657a7371bcacfee75eb096a97e75f8aecb3172e30",
 };
 const owner = {
   ...NETWORK_PIN,
@@ -223,6 +226,10 @@ field.validate = (n, context) => {
 source.emit = (state, _inputs, context) => {
   const data = resource(context, obj(state).source)
     .data as unknown as SourceData;
+  demand(
+    !data.binding || data.binding.kind === "constant",
+    "SOURCE_RUNTIME_UNAVAILABLE",
+  );
   return {
     outputs: {
       value: {
@@ -290,10 +297,156 @@ const validate = (f: (data: Record<string, Json>) => void) => (data: Json) => {
     return [issue("RESOURCE_STATE", String(e))];
   }
 };
+function validateSource(raw: Json, context: SourcePolicyContext) {
+  try {
+    const d = raw as unknown as SourceData,
+      binding = d.binding;
+    const token = parseType(d.type),
+      kind = binding?.kind ?? "constant";
+    demand(
+      [
+        "constant",
+        "uniform",
+        "native-array",
+        "sampler",
+        "top",
+        "specialization",
+      ].includes(kind),
+      "SOURCE_KIND",
+    );
+    if (context.phase === "clipboard")
+      demand(d.clipboard, "SOURCE_CLIPBOARD_DENIED");
+    if (
+      kind === "constant" ||
+      kind === "uniform" ||
+      kind === "specialization"
+    ) {
+      demand(context.types.validValue(d.type, d.value), "SOURCE_VALUE");
+      if (context.phase === "clipboard")
+        demand(
+          (token.kind === "scalar" &&
+            /^glsl\.(float|int|uint|vec[234]|mat[234](x[234])?)$/.test(
+              token.id,
+            )) ||
+            (kind === "constant" &&
+              token.kind === "array" &&
+              token.element.kind === "scalar" &&
+              /^glsl\.(float|vec[234])$/.test(token.element.id)),
+          "SOURCE_CLIPBOARD_DENIED",
+        );
+      if (binding?.kind === "specialization")
+        demand(
+          Number.isSafeInteger(binding.constantId) &&
+            binding.constantId >= 0 &&
+            token.kind === "scalar" &&
+            /^glsl\.(int|uint|float)$/.test(token.id),
+          "SOURCE_SPECIALIZATION",
+        );
+    } else {
+      demand(
+        binding &&
+          "path" in binding &&
+          typeof binding.path === "string" &&
+          binding.path.length > 0 &&
+          binding.path.length <= (context.phase === "clipboard" ? 2048 : 4096),
+        "SOURCE_PATH",
+      );
+      demand(d.value === null, "SOURCE_NATIVE_VALUE");
+      // This owner supports authored image descriptors. Live resolution remains a provider operation.
+      demand(
+        equal(context.graphKind, imageKind.ref),
+        "SOURCE_TARGET_UNSUPPORTED",
+      );
+      if (kind === "native-array")
+        demand(
+          token.kind === "array" &&
+            token.element.kind === "scalar" &&
+            /^glsl\.(float|vec[234])$/.test(token.element.id) &&
+            !!context.types.resolve(d.type),
+          "SOURCE_NATIVE_ARRAY_TYPE",
+        );
+      else demand(d.type === "glsl.sampler2D", "SOURCE_SAMPLER_TYPE");
+      if (binding?.kind === "top")
+        demand(
+          typeof binding.source === "string" &&
+            binding.source.length > 0 &&
+            typeof binding.origin === "string" &&
+            binding.origin.length > 0 &&
+            Number.isSafeInteger(binding.slot) &&
+            binding.slot >= 0,
+          "SOURCE_SLOT",
+        );
+    }
+    return [];
+  } catch (e) {
+    return [issue(e instanceof Error ? e.name : "SOURCE_INVALID", String(e))];
+  }
+}
+function prepareSource(raw: Json, context: SourcePolicyContext): Json {
+  const d = structuredClone(raw) as unknown as SourceData;
+  const existing = context.resources
+    .filter(
+      (r) =>
+        r.type.moduleId === NETWORK_PIN.moduleId &&
+        r.type.version === NETWORK_PIN.version &&
+        r.type.fingerprint === NETWORK_PIN.fingerprint &&
+        r.type.typeId === "source-definition",
+    )
+    .map((r) => r.data as unknown as SourceData);
+  const vacant = (values: number[]) => {
+    const taken = new Set(values);
+    let id = 0;
+    while (taken.has(id)) id++;
+    return id;
+  };
+  if (d.binding?.kind === "top") {
+    const incoming = d.binding;
+    const match = existing.find(
+      (r) =>
+        r.binding?.kind === "top" &&
+        r.binding.source === incoming.source &&
+        r.binding.origin === incoming.origin,
+    );
+    if (match?.binding?.kind === "top") {
+      d.binding = structuredClone(match.binding);
+      d.value = structuredClone(match.value);
+    } else
+      d.binding.slot = vacant(
+        existing.flatMap((r) =>
+          r.binding?.kind === "top" ? [r.binding.slot] : [],
+        ),
+      );
+  }
+  if (d.binding?.kind === "specialization")
+    d.binding.constantId = vacant(
+      existing.flatMap((r) =>
+        r.binding?.kind === "specialization" ? [r.binding.constantId] : [],
+      ),
+    );
+  return d as unknown as Json;
+}
 export const networkModule: ModuleContribution = {
   manifest: NETWORK_PIN,
   presentation: { owner, defaultLocale: "en", label: label("Networks") },
   nodes: [call, inputsBoundary, outputsBoundary, source, structure, field],
+  types: [
+    {
+      id: "glsl.sampler2D",
+      structureField: false,
+      valueCodec: {
+        schemaVersion: 1,
+        validate: (value) =>
+          value === null
+            ? []
+            : [
+                issue(
+                  "SAMPLER_VALUE",
+                  "Sampler values use a null authored default.",
+                ),
+              ],
+      },
+    },
+  ],
   resources: [
     {
       ref: networkRef("frame"),
@@ -448,6 +601,10 @@ export const networkModule: ModuleContribution = {
     {
       ref: networkRef("source-definition"),
       model: "source",
+      sourcePolicy: {
+        validate: validateSource,
+        prepareTransfer: prepareSource,
+      },
       codec: {
         schemaVersion: 1,
         validate: validate((d) => {

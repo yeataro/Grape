@@ -102,6 +102,18 @@ export interface ResourceDefinition {
     }[];
   };
   readonly stateReferences?: StateReferences;
+  /** Pure owner admission and preparation; never resolves live native resources. */
+  readonly sourcePolicy?: {
+    validate(
+      data: Json,
+      context: SourcePolicyContext,
+    ): readonly ContractIssue[];
+    prepareTransfer?(data: Json, context: SourcePolicyContext): Json;
+  };
+}
+export interface SourcePolicyContext extends ModelContext {
+  readonly phase: "construction" | "clipboard" | "document";
+  readonly graphKind: CanonicalGraphDocument["graph"]["kind"];
 }
 export interface ModuleContribution {
   readonly manifest: ModulePin;
@@ -116,6 +128,7 @@ export interface ModuleContribution {
 }
 export interface ShaderTypeDefinition {
   readonly id: string;
+  readonly structureField?: false;
   readonly valueCodec: DataCodec;
   /** Numeric shape participates in the shared adaptation policy; nominal types use exact identity. */
   readonly numeric?: { readonly scalar: "float"; readonly width: number };

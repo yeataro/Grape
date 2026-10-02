@@ -26,6 +26,17 @@ export interface SourceData {
   type: string;
   value: Json;
   clipboard: boolean;
+  binding?:
+    | { kind: "constant" | "uniform" }
+    | { kind: "native-array" | "sampler"; path: string }
+    | {
+        kind: "top";
+        path: string;
+        source: string;
+        origin: string;
+        slot: number;
+      }
+    | { kind: "specialization"; constantId: number };
 }
 export function asNetwork(
   resource: ResourceDocument,

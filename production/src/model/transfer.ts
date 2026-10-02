@@ -13,9 +13,9 @@ import type { DefinitionSet, GraphSnapshot } from "../sdk/editing.ts";
 import type { Json } from "../sdk/public-surface.ts";
 import type { IdentitySource } from "../sdk/kernel.ts";
 import type { StructureData, SourceData } from "../sdk/networks.ts";
-import { asNetwork, networkAt, frames } from "../sdk/networks.ts";
+import { asNetwork, networkAt, frames, typeSystem } from "../sdk/networks.ts";
 import { demand, detached, plain, equal } from "../sdk/kernel.ts";
-import { typeReferences, remapType, parseType } from "../sdk/type-tokens.ts";
+import { typeReferences, remapType } from "../sdk/type-tokens.ts";
 export interface ClipboardPacket {
   format: "grape.clipboard";
   version: 1;
@@ -407,19 +407,28 @@ export function pastePacket(
       def = defs.resource(r.type)!;
     r.id = map.get(original.id)!;
     if (def.model === "source") {
+      demand(def.sourcePolicy, "SOURCE_PROVIDER_UNAVAILABLE");
+      const context = Object.freeze({
+        phase: "clipboard" as const,
+        graphKind: detached(document.graph.kind),
+        resources: detached([...document.graph.resources, ...imported]),
+        types: typeSystem(
+          {
+            ...document,
+            graph: { ...document.graph, resources: packet.resources },
+          },
+          defs,
+        ),
+      });
+      const problem = def.sourcePolicy
+        .validate(detached(r.data), context)
+        .find((p) => p.severity === "error");
+      demand(!problem, problem?.code ?? "SOURCE_CLIPBOARD_DENIED");
+      if (def.sourcePolicy.prepareTransfer)
+        r.data = structuredClone(
+          def.sourcePolicy.prepareTransfer(detached(r.data), context),
+        );
       const data = r.data as unknown as SourceData;
-      const token = parseType(data.type);
-      const scalar = (id: string) =>
-        /^glsl.(float|int|uint|vec[234]|mat[234](x[234])?)$/.test(id);
-      demand(
-        data.clipboard &&
-          ((token.kind === "scalar" && scalar(token.id)) ||
-            (token.kind === "array" &&
-              token.element.kind === "scalar" &&
-              /^glsl.(float|vec[234])$/.test(token.element.id))),
-        "SOURCE_CLIPBOARD_DENIED",
-      );
-      // Native-source path budgets are distinct from this inline numeric array value.
       let base = data.name,
         i = 2;
       while (

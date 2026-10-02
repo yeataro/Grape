@@ -942,14 +942,25 @@ export class Graph {
             );
       }
       if (def?.model === "source") {
-        const data = resource.data as unknown as SourceData;
-        if (
-          !typeSystem(document, this.definitions).validValue(
-            data.type,
-            data.value,
-          )
-        )
-          out.push(issue("SOURCE_VALUE", "Invalid source value."));
+        if (!def.sourcePolicy)
+          out.push(
+            issue(
+              "SOURCE_PROVIDER_UNAVAILABLE",
+              "Exact source admission provider is unavailable.",
+            ),
+          );
+        else
+          out.push(
+            ...def.sourcePolicy.validate(
+              detached(resource.data),
+              Object.freeze({
+                phase: "document",
+                graphKind: detached(document.graph.kind),
+                resources: detached(document.graph.resources),
+                types: typeSystem(document, this.definitions),
+              }),
+            ),
+          );
       }
       if (!def)
         out.push(
@@ -1368,10 +1379,17 @@ export class Draft {
         return n;
       }
       demand(
-        typeSystem(this.document, this.definitions).resolve(type),
+        typeSystem(this.document, this.definitions).resolve(type) &&
+          typeSystem(this.document, this.definitions).resolve(type)!
+            .structureField !== false,
         "STRUCTURE_TYPE",
       );
-      return 1;
+      const matrix = /^glsl.mat([234])(?:x([234]))?$/.exec(type);
+      return matrix
+        ? Number(matrix[1]) * Number(matrix[2] ?? matrix[1])
+        : /^glsl.vec[234]$/.test(type)
+          ? Number(type.at(-1))
+          : 1;
     };
     const importType = (t: ReturnType<typeof parseType>): string =>
       t.kind === "scalar"
@@ -1380,6 +1398,17 @@ export class Draft {
           ? "struct@" + t.id
           : "array@" + JSON.stringify([importType(t.element), t.extent]);
     count("struct@" + id, [], 0);
+    // A shape edit can increase the depth or expansion of every transitive user.
+    for (const definition of definitions)
+      if (
+        definition.id !== id &&
+        closure(
+          this.document.graph.resources,
+          [definition.id],
+          this.definitions,
+        ).some((r) => r.id === id)
+      )
+        count("struct@" + definition.id, [], 0);
     closure(this.document.graph.resources, [id], this.definitions);
   }
   editStructure(id: string, data: StructureData): void {
@@ -1430,12 +1459,9 @@ export class Draft {
     type: string,
     value: Json,
     clipboard = true,
+    binding?: SourceData["binding"],
   ): string {
     return this.run(() => {
-      demand(
-        typeSystem(this.document, this.definitions).validValue(type, value),
-        "SOURCE_VALUE",
-      );
       demand(
         !this.document.graph.resources.some(
           (r) =>
@@ -1446,11 +1472,30 @@ export class Draft {
       );
       const def = this.definitions.resourceByModel("source");
       demand(def, "SOURCE_MODULE");
+      const data = {
+        name,
+        type,
+        value,
+        clipboard,
+        ...(binding ? { binding } : {}),
+      } as Json;
+      demand(def.sourcePolicy, "SOURCE_PROVIDER_UNAVAILABLE");
+      const problems = def.sourcePolicy.validate(
+        detached(data),
+        Object.freeze({
+          phase: "construction",
+          graphKind: detached(this.document.graph.kind),
+          resources: detached(this.document.graph.resources),
+          types: typeSystem(this.document, this.definitions),
+        }),
+      );
+      const problem = problems.find((p) => p.severity === "error");
+      demand(!problem, problem?.code ?? "SOURCE_VALUE");
       const id = this.ids.next();
       this.document.graph.resources.push({
         id,
         type: { ...def.ref },
-        data: { name, type, value, clipboard },
+        data,
         references: [],
         referencesComplete: true,
         extensions: {},
@@ -1948,7 +1993,41 @@ export class Draft {
             changed = true;
           }
       }
-      const remap = (ref: import("../sdk/document.ts").DocumentReference) => {
+      const networkMap = new Map([[oldNetworkId, data.network.id]]),
+        nodeMaps = new Map([[oldNetworkId, ids]]);
+      for (const resource of reachable) {
+        const nested = asNetwork(resource, this.definitions);
+        if (!nested) continue;
+        const cloned = clonedIds.has(resource.id);
+        networkMap.set(
+          nested.network.id,
+          cloned ? this.ids.next() : nested.network.id,
+        );
+        nodeMaps.set(
+          nested.network.id,
+          new Map(
+            nested.network.nodes.map((n) => [
+              n.id,
+              cloned ? this.ids.next() : n.id,
+            ]),
+          ),
+        );
+      }
+      demand(
+        this.document.graph.resources.filter((x) =>
+          asNetwork(x, this.definitions),
+        ).length +
+          1 +
+          reachable.filter(
+            (x) => clonedIds.has(x.id) && asNetwork(x, this.definitions),
+          ).length <=
+          64,
+        "DEFINITION_LIMIT",
+      );
+      const remap = (
+        ref: import("../sdk/document.ts").DocumentReference,
+        current = oldNetworkId,
+      ) => {
         if (ref.kind === "resource")
           return {
             ...ref,
@@ -1957,43 +2036,60 @@ export class Draft {
                 ? copy.id
                 : (clonedIds.get(ref.targetId) ?? ref.targetId),
           };
-        demand(
-          (!ref.networkId || ref.networkId === oldNetworkId) &&
-            ids.has(ref.targetId),
-          "REFERENCE_ESCAPE",
-        );
+        const network = ref.networkId ?? current,
+          targetId = nodeMaps.get(network)?.get(ref.targetId);
+        demand(targetId, "REFERENCE_ESCAPE");
         return {
           ...ref,
-          targetId: ids.get(ref.targetId)!,
-          ...(ref.networkId ? { networkId: data.network.id } : {}),
+          targetId,
+          ...(ref.networkId ? { networkId: networkMap.get(network)! } : {}),
         };
       };
-      for (const n of data.network.nodes) {
-        n.id = ids.get(n.id)!;
-        n.references = n.references.map(remap);
-        const codec = this.definitions.node(n.type)?.stateReferences;
-        if (codec)
-          n.state = structuredClone(codec.remap(detached(n.state), remap));
-      }
-      for (const e of data.network.edges) {
-        e.id = this.ids.next();
-        e.from.nodeId = ids.get(e.from.nodeId)!;
-        e.to.nodeId = ids.get(e.to.nodeId)!;
-      }
+      const remapNetwork = (
+        network: import("../sdk/document.ts").NetworkDocument,
+        old: string,
+      ) => {
+        const nodes = nodeMaps.get(old)!;
+        network.id = networkMap.get(old)!;
+        for (const n of network.nodes) {
+          n.id = nodes.get(n.id)!;
+          n.references = n.references.map((ref) => remap(ref, old));
+          const codec = this.definitions.node(n.type)?.stateReferences;
+          if (codec)
+            n.state = structuredClone(
+              codec.remap(detached(n.state), (ref) => remap(ref, old)),
+            );
+        }
+        for (const e of network.edges) {
+          e.id = this.ids.next();
+          e.from.nodeId = nodes.get(e.from.nodeId)!;
+          e.to.nodeId = nodes.get(e.to.nodeId)!;
+        }
+      };
+      remapNetwork(data.network, oldNetworkId);
       for (const original of reachable.filter((resource) =>
         clonedIds.has(resource.id),
       )) {
         const cloned = structuredClone(original),
           codec = this.definitions.resource(original.type)!.stateReferences;
         cloned.id = clonedIds.get(original.id)!;
-        if (codec) cloned.data = codec.remap(detached(cloned.data), remap);
-        cloned.references = cloned.references.map(remap);
+        if (codec)
+          cloned.data = structuredClone(
+            codec.remap(detached(cloned.data), (ref) => remap(ref)),
+          );
+        cloned.references = cloned.references.map((ref) => remap(ref));
+        const nested = asNetwork(cloned, this.definitions);
+        if (nested) {
+          nested.local = true;
+          nested.origin ??= original.id;
+          remapNetwork(nested.network, nested.network.id);
+        }
         this.document.graph.resources.push(cloned);
       }
       data.dependencies = data.dependencies.map(
         (id) => clonedIds.get(id) ?? id,
       );
-      copy.references = copy.references.map(remap);
+      copy.references = copy.references.map((ref) => remap(ref));
       this.document.graph.resources.push(copy);
       const retarget = (ref: import("../sdk/document.ts").DocumentReference) =>
         ref.kind === "resource" && ref.targetId === r.id

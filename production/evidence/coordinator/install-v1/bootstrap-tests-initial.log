@@ -1,0 +1,53 @@
+✖ BOOT01 accepted baseline and materialized current record remain valid and not-started (115.36617ms)
+✔ BOOT02 changing one frozen file is detected without executing changed checkers (105.559812ms)
+✔ BOOT03 unindexed files including dependency/scratch files are rejected (100.9063ms)
+✔ BOOT04 owner acceptance must bind the exact frozen index digest (92.2923ms)
+✔ BOOT05 external current locator cannot masquerade as the frozen template (94.086811ms)
+✔ BOOT06 not-started state cannot contain invented slice progress (91.24756ms)
+✔ BOOT07 changing status alone cannot invent a valid started project (93.324792ms)
+✔ BOOT08 inherited DEC-GRAPE-001 remains single and is not fabricated as implementation progress (99.005418ms)
+✖ BOOT09 staged qualification is an isolated byte copy; edits cannot alter accepted handoff or current state (160.19547ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 7
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 972.24915
+
+✖ failing tests:
+
+test at tools/verify-bootstrap.test.mjs:40:1
+✖ BOOT01 accepted baseline and materialized current record remain valid and not-started (115.36617ms)
+  AssertionError [ERR_ASSERTION]: ["AGENTS.md broken/outside navigation workflow/COORDINATOR.md"]
+  
+  'FAIL' !== 'PASS'
+  
+      at TestContext.<anonymous> (file:///workspace/Grape/tools/verify-bootstrap.test.mjs:43:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'FAIL',
+    expected: 'PASS',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tools/verify-bootstrap.test.mjs:105:1
+✖ BOOT09 staged qualification is an isolated byte copy; edits cannot alter accepted handoff or current state (160.19547ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'FAIL' !== 'PASS'
+  
+      at TestContext.<anonymous> (file:///workspace/Grape/tools/verify-bootstrap.test.mjs:119:82)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'FAIL',
+    expected: 'PASS',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

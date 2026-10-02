@@ -1,0 +1,159 @@
+{
+  "recordKind": "immutable-M1-workflow-repair-evidence",
+  "recordedAt": "2026-10-02T10:43:37.086536+00:00",
+  "acceptedMain": "ba39de6992827514bbd74368f67e406ec2eef06a",
+  "priorReviewedHead": "5d8d15bbfea440cb626fc40a31df63a2e9ca1ba8",
+  "reviewerFinding": {
+    "id": "M1",
+    "severity": "MAJOR",
+    "title": "Retry-reset exception permits exceeding approved limits",
+    "priorTechnicalCheckpoint": "FAIL",
+    "priorWorkflowAcceptanceEligibility": "NOT_ELIGIBLE",
+    "provenance": "Human supplied Fresh Independent Workflow Review result in this chat; no direct reviewer report/identity invented.",
+    "blockerCount": 0,
+    "majorCount": 1
+  },
+  "repairImplementationCommit": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+  "newCandidateHeadAtValidation": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+  "evidencePublication": "The commit first adding this checkpoint is the evidence-only descendant and submitted PR head; resolve with git log -1 --format=%H -- production/evidence/coordinator/install-v1-repair-m1/checkpoint.json. No self-referential commit hash fabricated.",
+  "exactPolicyDiff": "diff --git a/workflow/CONFORMANCE.md b/workflow/CONFORMANCE.md\nindex de38575..1e4ab26 100644\n--- a/workflow/CONFORMANCE.md\n+++ b/workflow/CONFORMANCE.md\n@@ -64,6 +64,17 @@ Inputs: S02 packaging-navigation repair `e6dfecf`; synthetic wrong Node/browser/\n \n Inputs: repository-recorded deferred S01 observations used only as excluded-context markers, an explicitly synthetic unpromoted idea, and a separate synthetic minimal impossible-contract counterexample with no real product decision. Discussion alone leaves `WAITING_AUTHORIZATION`, single next action **wait**, with the idea absent from role packets. A demonstrated invariant conflict in an already-authorized simulated dependency yields `HUMAN_GATE_WAIT`, single next action **prepare scoped HG_ARCHITECTURE decision packet via IH-005**, preserving unaffected authorized work. Forbidden: making brainstorming a requirement or a Gate, creating an actual Gate record, reinterpreting DEC-GRAPE-001, or forwarding speculative text. Duplicate and both restarts must produce no duplicate Gate packet or new scope; apply all common invariants.\n \n+## M1 \u2014 accumulated retry budgets (targeted C02/C08 regressions)\n+\n+Use explicitly synthetic operation/finding identities and receipts in the new `production/evidence/coordinator/install-v1-repair-m1/` fixture. Keep the original install-v1 checkpoint and replay immutable; their results describe the prior policy revision. Apply the common no-write, context-exclusion and replay/restart invariants to these targeted cases as well.\n+\n+- **M1-A / C02:** one finding group reaches two unsuccessful repair/re-review rounds. New diagnostics, changed symptoms, additional logs, changed error messages and new evidence leave its count at two. The next unsuccessful round reaches three and yields `WF_RETRY_BUDGET`; the single next action is technical diagnosis. Further rounds are refused, not reset.\n+- **M1-B / C08:** one transient operation completes its initial attempt and first retry. Changed error details/new diagnostics leave the retry count at one and attached to the same operation/actionKey. The second retry reaches two and yields `WF_RETRY_BUDGET`; the single next action is workflow diagnosis. Further retries are refused, not reset.\n+- **M1-C-operation / M1-C-group:** after the Coordinator has established a genuinely different operation/actionKey or independent finding group, that identity starts its own counter. The prior exhausted identity and count remain intact; the new identity must not be a continuation intended to evade exhaustion.\n+- **M1-C-renamed-operation / M1-C-renamed-group:** changed names, wording, actionKey spelling, attempt identifiers or reframing of the same unresolved work do not create an independent identity. Preserve accumulated counts and diagnosis pauses. Unestablished identity claims cannot obtain a fresh budget.\n+\n+For each trace, replay duplicate events and serialize/recover the ledger before/after every simulated receipt publication. Counts and phase must be identical after replay/restart; diagnostic events must not change counts. Include negative controls demonstrating that the prior reset-on-new-evidence behavior violates M1-A/M1-B. These are implementer-run policy-model checks, not independent review or live dispatch qualification. No real Human Gate or product acceptance is created.\n+\n ## Limits and reporting\n \n Record a case as PASS only for the read-only procedure/model actually executed. A specification without execution is NOT RUN. Adapter isolation, real dispatch, retries against services, crash recovery across machines and durable concurrent publication need separate authorized tests; this installation does not claim them. Never register synthetic observations as accepted product evidence. Preserve installation checkpoints immutably; corrections use new evidence/commits, not rewritten historical acceptance.\ndiff --git a/workflow/RUNBOOK.md b/workflow/RUNBOOK.md\nindex 34e26c3..3a8a7ae 100644\n--- a/workflow/RUNBOOK.md\n+++ b/workflow/RUNBOOK.md\n@@ -49,7 +49,9 @@ Separate merge control must bind PR, expected main, B/current work head and acce\n | Crash during bookkeeping/push | Reread local candidate, remote head, state and receipt hashes; validate existing publication or retry only missing authorized action | Regenerate accepted evidence or duplicate acceptance; infer push success |\n | True contract/product decision conflict | `HUMAN_GATE_WAIT`: preserve minimal counterexample and request scoped decision through IH-005 | Rewrite product contract/tests to pass or block unrelated authorized dependencies |\n \n-Allow **up to 2 retries** after the initial attempt for the same transient dispatch/environment operation. Reconcile any ambiguous side effect before each retry. Authentication requiring reconnection pauses for mechanical assistance; retry is not a substitute for access. Allow **up to 3 unsuccessful repair/re-review rounds per finding group**, then pause for technical diagnosis with findings, attempted repairs and observations. Record counts in immutable per-run receipts so a restart cannot reset the budget. A changed error or genuinely new evidence may justify a documented reset. Exhaustion remains `WF_RETRY_BUDGET`, never automatically a Human product/architecture Gate, acceptance or finding closure.\n+Allow **up to 2 retries** after the initial attempt for the same transient dispatch/environment operation. Reconcile any ambiguous side effect before each retry. Authentication requiring reconnection pauses for mechanical assistance; retry is not a substitute for access. Allow **up to 3 unsuccessful repair/re-review rounds per finding group**, then pause for technical diagnosis with findings, attempted repairs and observations. Record accumulated counts in immutable per-run receipts so a restart cannot reset the budget. New diagnostics, changed symptoms, additional logs, changed error messages or new evidence about the **same underlying operation or finding group MUST NOT reset its accumulated count**. After the second retry or third unsuccessful round, stop further attempts for that identity and enter `WF_RETRY_BUDGET` for workflow or technical diagnosis respectively.\n+\n+A fresh counter is permitted only after the Coordinator establishes a genuinely different transient operation/actionKey or a genuinely new independent finding group. Another attempt, a renamed/reframed unresolved group, or changed wording, label, packet or actionKey spelling alone does not establish a new identity. Attempt-specific dispatch identifiers remain attached to the same underlying operation's accumulated budget. Record the identity distinction and its basis; retain the exhausted prior identity and count. New-identity classification MUST NOT be used to evade exhaustion. Exhaustion remains a workflow/technical diagnosis pause, never automatically a Human product/architecture Gate, acceptance or finding closure.\n \n ## Transport recovery\n \n",
+  "correctedSemantics": {
+    "operation": "Initial attempt plus at most two retries for the same underlying operation; diagnostics/wording/attempt identifiers cannot reset accumulated retries.",
+    "findingGroup": "At most three unsuccessful repair/re-review rounds for the same group; new evidence and reframing cannot reset accumulated rounds.",
+    "newIdentity": "Only an established genuinely different operation/actionKey or independent finding group gets its own counter; exhausted prior identity/count retained. This cannot evade exhaustion.",
+    "exhaustion": "WF_RETRY_BUDGET / workflow or technical diagnosis; never automatic Human product/architecture Gate."
+  },
+  "targetedRegression": {
+    "command": "python3 production/evidence/coordinator/install-v1-repair-m1/regression.py",
+    "cases": [
+      "M1-A",
+      "M1-B",
+      "M1-C-operation",
+      "M1-C-group",
+      "M1-C-renamed-operation",
+      "M1-C-renamed-group"
+    ],
+    "assertionsSatisfied": 6,
+    "legacyResetNegativeControlsDetected": 2,
+    "replayRestart": "Duplicate events and JSON serialization before/after every simulated receipt publication preserve counts and phase.",
+    "resultsFile": "results.json",
+    "independentReviewVerdict": "NOT CLAIMED; targeted Fresh Independent Workflow Re-review required"
+  },
+  "originalReplayRerun": {
+    "command": "python3 production/evidence/coordinator/install-v1/replay.py",
+    "executionRevision": "5d8d15bbfea440cb626fc40a31df63a2e9ca1ba8",
+    "when": "Immediately before repair edits, in the unchanged prior reviewed checkout",
+    "exitCode": 0,
+    "cases": 9,
+    "variants": 20,
+    "stdoutSha256": "cf98aef0b259107ca62fe298fb326135d739a06a118d4f0dede6bbc044718818",
+    "identicalToStoredOriginalResults": true,
+    "scope": "Reproduction of historical model only; not M1 coverage.",
+    "currentTreeRerun": "Also executed after repair; exit 1 at original verify_protected policy-byte assertion. Expected pinned-revision mismatch is recorded in commands; original evidence and script were not changed."
+  },
+  "actualCommands": {
+    "executedAt": "2026-10-02T10:41:48.571598+00:00",
+    "node": "v24.19.0",
+    "commands": [
+      {
+        "name": "m1-regressions",
+        "command": "python3 production/evidence/coordinator/install-v1-repair-m1/regression.py",
+        "cwd": "/workspace/Grape",
+        "exitCode": 0,
+        "stdoutSha256": "2dfda4a3abcc6a54ba1ac16192bc36d1d6b69579dacb09c3a3b0dc6ba9df9fce",
+        "stderr": "",
+        "summary": {
+          "cases": 6,
+          "allAssertionsSatisfied": true,
+          "negativeControlsDetected": 2
+        }
+      },
+      {
+        "name": "original-replay-current-tree",
+        "command": "python3 production/evidence/coordinator/install-v1/replay.py",
+        "cwd": "/workspace/Grape",
+        "exitCode": 1,
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "Traceback (most recent call last):\n  File \"/workspace/Grape/production/evidence/coordinator/install-v1/replay.py\", line 156, in <module>\n    exercise('C01', 'historical behind work', {'needsSync': True},\n  File \"/workspace/Grape/production/evidence/coordinator/install-v1/replay.py\", line 139, in exercise\n    verify_protected()\n  File \"/workspace/Grape/production/evidence/coordinator/install-v1/replay.py\", line 70, in verify_protected\n    assert (ROOT / 'workflow' / path).read_bytes() == obj(POLICY, 'workflow/' + path)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+        "classification": "Expected immutable historical policy-byte guard rejection on changed policy; original script preserved. Pre-edit rerun at prior reviewed HEAD reproduced all 20 variants exactly."
+      },
+      {
+        "name": "bootstrap",
+        "command": "node tools/verify-bootstrap.mjs",
+        "cwd": "/workspace/Grape",
+        "exitCode": 0,
+        "stdoutSha256": "55ad1c0632ca34898c6e09052e093c5101d2160f2e841bb5d5c78be448e3c0ac",
+        "stderr": "",
+        "summary": {
+          "status": "PASS",
+          "checks": 463,
+          "errors": [],
+          "indexedFiles": 411,
+          "frozenFiles": 412
+        }
+      },
+      {
+        "name": "current-state",
+        "command": "node handoff/tools/check-implementation-state.mjs --current",
+        "cwd": "/workspace/Grape",
+        "exitCode": 0,
+        "stdoutSha256": "c0dc87d1f23f1dbe23e245abf0dc34a0e70a610069109b9e46fda85cce820c8a",
+        "stderr": "",
+        "summary": {
+          "status": "CURRENT_RECORD_VALID",
+          "errors": []
+        }
+      },
+      {
+        "name": "bootstrap-tests",
+        "command": "node --test --test-isolation=none tools/verify-bootstrap.test.mjs",
+        "cwd": "/workspace/Grape",
+        "exitCode": 0,
+        "stdoutSha256": "b469519fc6c1a58d5850255e532ba50007d03fee133871e0c65d880a7e41b710",
+        "stderr": "",
+        "stdout": "\u2714 BOOT01 accepted baseline and materialized current record remain valid and not-started (160.428997ms)\n\u2714 BOOT02 changing one frozen file is detected without executing changed checkers (96.882093ms)\n\u2714 BOOT03 unindexed files including dependency/scratch files are rejected (90.000782ms)\n\u2714 BOOT04 owner acceptance must bind the exact frozen index digest (85.101021ms)\n\u2714 BOOT05 external current locator cannot masquerade as the frozen template (83.594157ms)\n\u2714 BOOT06 not-started state cannot contain invented slice progress (83.085532ms)\n\u2714 BOOT07 changing status alone cannot invent a valid started project (91.661258ms)\n\u2714 BOOT08 inherited DEC-GRAPE-001 remains single and is not fabricated as implementation progress (89.75214ms)\n\u2714 BOOT09 staged qualification is an isolated byte copy; edits cannot alter accepted handoff or current state (152.16496ms)\n\u2139 tests 9\n\u2139 suites 0\n\u2139 pass 9\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 955.18234\n"
+      }
+    ]
+  },
+  "protectedBoundaryVerification": {
+    "priorReviewedHead": "5d8d15bbfea440cb626fc40a31df63a2e9ca1ba8",
+    "changedExistingFiles": [
+      "workflow/CONFORMANCE.md",
+      "workflow/RUNBOOK.md"
+    ],
+    "protectedFilesVerified": 575,
+    "protectedManifestSha256": "e085ad83ca205e84b559d430e180d1da0118080be4e8d11e9ffeb06e6aaec871",
+    "handoffFileCount": 412,
+    "originalInstallEvidenceUnchanged": true,
+    "implementationStateUnchanged": true,
+    "productionSourceTestsToolsAndAcceptedEvidenceUnchanged": true,
+    "existingAutomationUnchangedNoRuntimeAdded": true,
+    "activeSlices": [],
+    "S03AndLaterUnauthorized": true,
+    "unrelatedPolicyUnchanged": true,
+    "stateSha256": "664d3b12e2395906a2df259eba41775ecc4ab6ff3f84ed34c5d2c6d778379661",
+    "protectedTreeIdentities": {
+      "handoff": "9b242c6d720e4540435ee102bc53fd54fbe4aeac",
+      "production/src": "0d3ebb976e0cd910711d7e8ae76406affa1e29e9",
+      "production/tests": "9b1732b918d25788c2c76aca8237e33b8f78a889",
+      "production/tools": "9ba49926d685bbf37184acfb3a07b91f947a0544",
+      "production/evidence/acceptance": "d19b032296d0fdb9043f5f61a2dcccdf83a515d9",
+      "production/evidence/coordinator/install-v1": "d7634af1372337a9ec6e562be8441f390a0ec3e8",
+      ".github": "2e31ee48418bb4e6897b58909b077502cb8f2188"
+    }
+  },
+  "limitations": [
+    "Implementer regression assertions are not independent review, technical checkpoint PASS or workflow acceptance.",
+    "Original replay pins prior policy bytes; current-tree revision-guard rejection is not suppressed or mislabeled as a successful current-policy validation.",
+    "Synthetic offline identity ledger, no dispatch/runtime automation, real service retries, concurrent publishers or semantic identity classifier qualified.",
+    "Node v24.19.0 used; no equivalence to accepted Node 25.5.0 product qualification claimed.",
+    "No product tests/builds or accepted evidence rewritten; no product Slice or Gate action authorized.",
+    "Git shell transport remains unavailable at proxy; verified GitHub Git-data objects and non-force ref publication used."
+  ],
+  "artifactSha256": {
+    "workflow/RUNBOOK.md": "9eb480a3c45de5e90257dbd52d74c8e278ba5d12efb131597ecfb94762436f3d",
+    "workflow/CONFORMANCE.md": "36b858cccd73f7a5aaab12cda18a8f156d6b1f058319cd4c769ea9e5f7cb677c",
+    "production/evidence/coordinator/install-v1-repair-m1/regression.py": "15a67190560d3aac949120684159305437601b5ffa317bce54036af27e313550",
+    "production/evidence/coordinator/install-v1-repair-m1/results.json": "2dfda4a3abcc6a54ba1ac16192bc36d1d6b69579dacb09c3a3b0dc6ba9df9fce"
+  }
+}

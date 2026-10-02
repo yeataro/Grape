@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/yeataro/Grape",
+  "pullRequest": "https://github.com/yeataro/Grape/pull/3",
+  "acceptedMainBaseline": "ba39de6992827514bbd74368f67e406ec2eef06a",
+  "workflowPolicyImplementationRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+  "reviewedPrHead": "560b542c106eb5234bf8deabcea7bdc47888a4a4",
+  "registeredAt": "2026-10-02T19:22:13.904977+08:00",
+  "timestampMeaning": "Actual bookkeeping registration time, not the unknown review completion or earlier Human decision time.",
+  "recordKind": "owner-transmitted-independent-workflow-targeted-re-review",
+  "id": "COORDINATOR-V1-INDEPENDENT-REVIEW-560b542",
+  "priorReviewedHead": "5d8d15bbfea440cb626fc40a31df63a2e9ca1ba8",
+  "scope": "Coordinator v1 workflow-only installation, including narrow M1 retry-budget repair; no Grape product Slice acceptance.",
+  "provenance": {
+    "source": "Human Owner transmitted the Fresh Independent Workflow Re-review result in this chat and reiterated it in the explicit workflow acceptance instruction.",
+    "reviewerRole": "Fresh Independent Workflow Reviewer",
+    "reviewerIdentity": null,
+    "reviewerRunId": null,
+    "reviewCompletedAt": null,
+    "originalReviewerCommandTranscript": null,
+    "recordedBy": "Implementer, workflow acceptance bookkeeping only; not the reviewer",
+    "independentReviewPerformedByRecorder": false,
+    "limits": "Only the supplied Owner-transmitted verdict, summary and reported counts are recorded. No reviewer identity, run ID, independent command transcript or review timestamp was supplied; none is invented."
+  },
+  "verdict": "PASS",
+  "workflowAcceptanceEligibility": "ELIGIBLE_FOR_HUMAN_ACCEPTANCE",
+  "findings": {
+    "M1": {
+      "status": "CLOSED",
+      "summary": "Retry-reset exception removed. Same-operation and same-finding-group accumulated counts cannot reset through diagnostics/evidence, renaming, reframing or attempt identifiers; independent identity cannot be used to evade exhaustion."
+    }
+  },
+  "remainingFindings": {
+    "BLOCKER": [],
+    "MAJOR": [],
+    "MINOR": []
+  },
+  "ownerTransmittedReviewResults": {
+    "repairDeltaBoundary": "PASS; exactly the expected six files, no unrelated drift; reviewed policy equals repair implementation revision.",
+    "retrySemantics": "PASS; initial attempt plus at most two retries for the same operation; at most three unsuccessful rounds for the same finding group; exhausted identities retain counts and refuse further attempts; established documented independent identities alone have separate budgets; exhaustion is workflow/technical diagnosis, not automatic Human Gate.",
+    "targetedRegression": {
+      "result": "PASS",
+      "reportedTraces": 6,
+      "reportedOutput": "Independent regression output byte-identical to committed results.json; duplicate delivery and serialized restart assertions passed at every recorded event boundary."
+    },
+    "negativeControls": {
+      "result": "PASS",
+      "reportedControls": 2,
+      "detectedAt": [
+        "group-diag-0",
+        "op-diag-0"
+      ]
+    },
+    "historicalReplay": {
+      "result": "PASS",
+      "reportedCases": 9,
+      "reportedVariants": 20,
+      "reportedOutput": "Original revision-pinned replay at prior reviewed head reproduced byte-identical output; repaired-tree policy-byte guard incompatibility is not a defect."
+    },
+    "protectedBoundary": {
+      "result": "PASS",
+      "reportedPriorTrackedFilesUnchangedOutsidePolicyDelta": 575,
+      "reportedArtifactHashesMatched": 4,
+      "reportedProtectedGitTreeIdentitiesMatched": 7,
+      "summary": "Frozen handoff, product/state/evidence and existing automation unchanged; original install-v1 evidence preserved; no active Slice; S03+ unauthorized."
+    },
+    "reportedIntegrityChecks": {
+      "bootstrapChecks": 463,
+      "state": "CURRENT_RECORD_VALID",
+      "bootstrapTests": 9,
+      "failures": 0,
+      "skips": 0
+    },
+    "reportedEnvironment": {
+      "node": "24.19.0",
+      "python": "3.12.14"
+    },
+    "countsProvenance": "Counts above were supplied in the owner-transmitted review report; not new executions or inferred independent counts."
+  },
+  "reviewedPolicyBindings": [
+    {
+      "file": "AGENTS.md",
+      "sha256": "b89e79c79ed602dc063d15fe48d0e5031b591f3655e6e7fa4b1801e00435bb00",
+      "implementationRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+      "reviewedRevision": "560b542c106eb5234bf8deabcea7bdc47888a4a4"
+    },
+    {
+      "file": "workflow/COORDINATOR.md",
+      "sha256": "1846976cd142d4a43365210fb5d05a80e9aefc8738e29be43f91137dfc1fa88c",
+      "implementationRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+      "reviewedRevision": "560b542c106eb5234bf8deabcea7bdc47888a4a4"
+    },
+    {
+      "file": "workflow/RUNBOOK.md",
+      "sha256": "9eb480a3c45de5e90257dbd52d74c8e278ba5d12efb131597ecfb94762436f3d",
+      "implementationRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+      "reviewedRevision": "560b542c106eb5234bf8deabcea7bdc47888a4a4"
+    },
+    {
+      "file": "workflow/PACKETS.md",
+      "sha256": "01a0c4abc87bed12ecf172aadafbd01cf9736557e56733e986ccc9688af30e48",
+      "implementationRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+      "reviewedRevision": "560b542c106eb5234bf8deabcea7bdc47888a4a4"
+    },
+    {
+      "file": "workflow/CONFORMANCE.md",
+      "sha256": "36b858cccd73f7a5aaab12cda18a8f156d6b1f058319cd4c769ea9e5f7cb677c",
+      "implementationRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+      "reviewedRevision": "560b542c106eb5234bf8deabcea7bdc47888a4a4"
+    }
+  ],
+  "remainingDocumentedLimitations": [
+    "live dispatch automation remains unverified",
+    "Work -> Codex dispatch remains unverified",
+    "distributed concurrency remains unverified",
+    "process-crash recovery remains unverified",
+    "repair/conformance evidence is offline/synthetic where documented",
+    "Node 24.19.0 / Python 3.12.14 workflow checks do not imply product qualification or Node 25.5.0 equivalence"
+  ],
+  "additionalReviewerLimitations": [
+    "Automated identity classifier is not verified.",
+    "No product qualification was rerun or implied."
+  ],
+  "authority": "Technical eligibility only; separate Human acceptance record below. No merge or next-Slice authorization."
+}

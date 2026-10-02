@@ -8,7 +8,7 @@ import "./runtime.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 process.chdir(root);
-const directory = "evidence/s02";
+const directory = process.env.GRAPE_EVIDENCE_DIR ?? "evidence/s02-repair";
 fs.mkdirSync(directory, { recursive: true });
 const git = (...args) => {
   const r = spawnSync("git", args, { encoding: "utf8" });
@@ -42,6 +42,14 @@ const record = {
   schemaVersion: 1,
   recordKind: "unreviewed-s02-implementation-evidence",
   status: "running",
+  previousReview: {
+    pullRequest: 2,
+    head: "922af510c808a1874958b19df65d73240eaf742e",
+    verdict: "FAIL / NOT_ELIGIBLE_FOR_HUMAN_ACCEPTANCE",
+    source: "Human Owner supplied Fresh Independent Review findings",
+    repairedFindings: ["M1", "M2"],
+    legacyClassification: "A: AT-S02-03 legacy branch may remain NOT DELIVERED for bounded S02 acceptance; no Human Gate required for this scope question",
+  },
   accepted: false,
   humanAccepted: false,
   reviewedBy: null,
@@ -59,7 +67,7 @@ const record = {
     "AT-S02-02":
       "browser preservation and portable exact restoration tests; awaiting independent review",
     "AT-S02-03":
-      "BLOCKED: no approved legacy revision-to-pin mappings; boundary tests are not compatibility acceptance",
+      "NOT DELIVERED / BLOCKED: legacy compatibility; Classification A permits bounded S02 acceptance; boundary tests are not compatibility acceptance",
     "AT-S02-04":
       "portable budgets/PNG and real Chromium PNG tests; awaiting independent review",
   },
@@ -172,7 +180,7 @@ record.artifacts = fs
     sha256: hash(fs.readFileSync(`${directory}/${file}`)),
   }));
 record.status =
-  "declared-checks-passed-unreviewed-legacy-compatibility-blocked";
+  "repair-checks-passed-unreviewed-legacy-not-delivered";
 save();
 console.log(
   JSON.stringify(

@@ -1,3 +1,4 @@
+import { validateDocumentStructure } from "../sdk/document-validation.ts";
 import type {
   CanonicalGraphDocument,
   NodeDocument,
@@ -362,7 +363,8 @@ export class Graph {
       );
       draft.finish();
       plain(candidate);
-      if (!draft.replacing) this.reconcile(before, candidate);
+      if (draft.replacing) validateDocumentStructure(candidate);
+      else this.reconcile(before, candidate);
       diagnostics = this.validate(candidate);
       if (draft.replacing)
         demand(
@@ -804,13 +806,7 @@ export class Draft {
   }
   replaceDocument(candidate: CanonicalGraphDocument): void {
     this.run(() => {
-      plain(candidate);
-      demand(
-        candidate.format === "grape.document" &&
-          candidate.formatVersion.major === 2 &&
-          candidate.formatVersion.minor === 0,
-        "FORMAT_VERSION",
-      );
+      validateDocumentStructure(candidate);
       demand(
         equal(candidate.graph.modules, this.document.graph.modules) &&
           equal(candidate.graph.kind, this.document.graph.kind),

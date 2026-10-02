@@ -3,7 +3,7 @@
   "recordRole": "current",
   "handoffRevision": "IH-005",
   "currentRecord": "../implementation-state.json",
-  "status": "active",
+  "status": "complete",
   "project": {
     "id": "grape",
     "root": "production"
@@ -19,13 +19,79 @@
     "profile": "static-web/chromium-151.0.7922.34/desktop-root-inspector",
     "artifact": "production/evidence/s01-web.tar.gz"
   },
-  "activeSlices": [
-    "S01"
+  "activeSlices": [],
+  "completedSlices": [
+    {
+      "sliceId": "S01",
+      "scope": "S01 Host-free editor; Linux x64 desktop Chromium 151.0.7922.34, Playwright 1.62.1, 1440x1000; root Inspector; Float/Multiply/Compose; Graph-domain History; GLSL text; grape.document 2.0 ACK-backed save/reopen and JSON file roundtrip; two Contexts. No GPU/Host qualification.",
+      "implementationRevision": "c1ecb3cd1a4cd1685e3fb1d9ba2a17b4108e68c3",
+      "evidenceIds": [
+        "S01-ARCHITECTURE-c1ecb3c",
+        "S01-PRODUCT-c1ecb3c"
+      ]
+    }
   ],
-  "completedSlices": [],
-  "gateDecisions": [],
-  "acceptedEvidence": [],
-  "latestAcceptedEvidenceId": null,
-  "updatedAt": "2026-10-02T01:17:30.736301Z",
+  "gateDecisions": [
+    {
+      "gateId": "G-UI-CONFORMANCE",
+      "scope": "S01 Host-free editor; Linux x64 desktop Chromium 151.0.7922.34, Playwright 1.62.1, 1440x1000; root Inspector; Float/Multiply/Compose; Graph-domain History; GLSL text; grape.document 2.0 ACK-backed save/reopen and JSON file roundtrip; two Contexts. No GPU/Host qualification.",
+      "disposition": "resolved-for-scope",
+      "reason": "Human Owner accepted the declared S01 product behavior and architecture/conformance evidence after independent targeted re-review PASS. Real Chromium Canvas/Inspector and public composition/command/lifetime evidence cover this S01 scope only.",
+      "residualScope": "S06 ordinary-extension/full workspace/nested Inspector; S10; physical touch/iPad/Safari/native OS IME; broader accessibility/platform/action matrices and all other unqualified scopes remain inherited.",
+      "evidenceIds": [
+        "S01-ARCHITECTURE-c1ecb3c",
+        "S01-PRODUCT-c1ecb3c"
+      ]
+    },
+    {
+      "gateId": "G-EXTENSION-PANEL",
+      "scope": "S01 Host-free editor; Linux x64 desktop Chromium 151.0.7922.34, Playwright 1.62.1, 1440x1000; root Inspector; Float/Multiply/Compose; Graph-domain History; GLSL text; grape.document 2.0 ACK-backed save/reopen and JSON file roundtrip; two Contexts. No GPU/Host qualification.",
+      "disposition": "resolved-for-scope",
+      "reason": "Human Owner accepted the declared S01 product behavior and architecture/conformance evidence after independent targeted re-review PASS. Real Chromium Canvas/Inspector and public composition/command/lifetime evidence cover this S01 scope only.",
+      "residualScope": "S06 ordinary-extension/full workspace/nested Inspector; S10; physical touch/iPad/Safari/native OS IME; broader accessibility/platform/action matrices and all other unqualified scopes remain inherited.",
+      "evidenceIds": [
+        "S01-ARCHITECTURE-c1ecb3c",
+        "S01-PRODUCT-c1ecb3c"
+      ]
+    }
+  ],
+  "acceptedEvidence": [
+    {
+      "id": "S01-ARCHITECTURE-c1ecb3c",
+      "kind": "architecture-conformance",
+      "scope": "S01 Host-free editor; Linux x64 desktop Chromium 151.0.7922.34, Playwright 1.62.1, 1440x1000; root Inspector; Float/Multiply/Compose; Graph-domain History; GLSL text; grape.document 2.0 ACK-backed save/reopen and JSON file roundtrip; two Contexts. No GPU/Host qualification.",
+      "file": "production/evidence/acceptance/S01-independent-review.json",
+      "sha256": "22c9df33c3d851e15fc4e3c24b73529b92c22963d3630d9d766d189f82a5afbc",
+      "implementationRevision": "c1ecb3cd1a4cd1685e3fb1d9ba2a17b4108e68c3",
+      "acceptedBy": "Human Owner (explicit acceptance following owner-reported independent targeted re-review PASS)",
+      "acceptedAt": "2026-10-02T01:33:01.949755Z",
+      "sliceIds": [
+        "S01"
+      ],
+      "gateIds": [
+        "G-UI-CONFORMANCE",
+        "G-EXTENSION-PANEL"
+      ]
+    },
+    {
+      "id": "S01-PRODUCT-c1ecb3c",
+      "kind": "product-behavior",
+      "scope": "S01 Host-free editor; Linux x64 desktop Chromium 151.0.7922.34, Playwright 1.62.1, 1440x1000; root Inspector; Float/Multiply/Compose; Graph-domain History; GLSL text; grape.document 2.0 ACK-backed save/reopen and JSON file roundtrip; two Contexts. No GPU/Host qualification.",
+      "file": "production/evidence/acceptance/S01-human-owner-acceptance.json",
+      "sha256": "530c35c9d23859189359e49d1eb9ed190c0dc0e81dac8ce30a10316c116afcc3",
+      "implementationRevision": "c1ecb3cd1a4cd1685e3fb1d9ba2a17b4108e68c3",
+      "acceptedBy": "Human Owner (explicit acceptance following owner-reported independent targeted re-review PASS)",
+      "acceptedAt": "2026-10-02T01:33:01.949755Z",
+      "sliceIds": [
+        "S01"
+      ],
+      "gateIds": [
+        "G-UI-CONFORMANCE",
+        "G-EXTENSION-PANEL"
+      ]
+    }
+  ],
+  "latestAcceptedEvidenceId": "S01-PRODUCT-c1ecb3c",
+  "updatedAt": "2026-10-02T01:33:01.949755Z",
   "decisionReferences": []
 }

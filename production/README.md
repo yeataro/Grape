@@ -1,6 +1,6 @@
 # Grape S01 production editor
 
-A Host-free TypeScript browser editor built independently against accepted IH-005. S01 remains **active and pending review**. Test results here are implementation evidence, not Human Owner acceptance, Gate closure, or authorization for another slice.
+A Host-free TypeScript browser editor built independently against accepted IH-005. The declared S01 scope is **independently reviewed PASS, Human Owner accepted, and completed** at implementation `c1ecb3cd1a4cd1685e3fb1d9ba2a17b4108e68c3`, reviewed PR HEAD `ab0216436d66ab1282758d51dceb38d0283c1965`. See the separate [acceptance records](evidence/acceptance/README.md). No next slice is active or authorized; broader Gate scopes remain unchanged. Historical test evidence remains preserved as originally submitted.
 
 ## Run
 

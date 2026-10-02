@@ -1,0 +1,1411 @@
+{
+  "kind": "implementer-executed-offline-M1-regressions",
+  "priorReviewedHead": "5d8d15bbfea440cb626fc40a31df63a2e9ca1ba8",
+  "runbookSha256": "9eb480a3c45de5e90257dbd52d74c8e278ba5d12efb131597ecfb94762436f3d",
+  "fixtureIdentities": {
+    "dispatch-A": [
+      "operation-A",
+      "operation",
+      "collect submission A"
+    ],
+    "dispatch-A-renamed": [
+      "operation-A",
+      "operation",
+      "collect submission A"
+    ],
+    "dispatch-B": [
+      "operation-B",
+      "operation",
+      "fetch unrelated artifact B"
+    ],
+    "finding-A": [
+      "group-A",
+      "group",
+      "counterexample at boundary A"
+    ],
+    "finding-A-reframed": [
+      "group-A",
+      "group",
+      "counterexample at boundary A"
+    ],
+    "finding-B": [
+      "group-B",
+      "group",
+      "independent counterexample at boundary B"
+    ]
+  },
+  "cases": [
+    {
+      "case": "M1-A",
+      "assertionsSatisfied": true,
+      "events": [
+        {
+          "input": {
+            "id": "round-1",
+            "identity": "finding-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "round-2",
+            "identity": "finding-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-0",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new diagnostics"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-1",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed symptoms"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-2",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "additional logs"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-3",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed error message"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-4",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new evidence"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "round-3",
+            "identity": "finding-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 3
+        },
+        {
+          "input": {
+            "id": "group-diag-after-exhaustion",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new evidence"
+          },
+          "expectedCount": 3
+        },
+        {
+          "input": {
+            "id": "round-4-refused",
+            "identity": "finding-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 3
+        }
+      ],
+      "observed": {
+        "seen": [
+          "round-1",
+          "round-2",
+          "group-diag-0",
+          "group-diag-1",
+          "group-diag-2",
+          "group-diag-3",
+          "group-diag-4",
+          "round-3",
+          "group-diag-after-exhaustion",
+          "round-4-refused"
+        ],
+        "budgets": {
+          "group-A": {
+            "kind": "group",
+            "basis": "counterexample at boundary A",
+            "count": 3,
+            "initialAttempt": false,
+            "phase": "WF_RETRY_BUDGET",
+            "nextAction": "technical diagnosis"
+          }
+        },
+        "observations": [
+          {
+            "event": "round-1",
+            "identity": "group-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "unsuccessful round"
+          },
+          {
+            "event": "round-2",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "unsuccessful round"
+          },
+          {
+            "event": "group-diag-0",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "group-diag-1",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "group-diag-2",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "group-diag-3",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "group-diag-4",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "round-3",
+            "identity": "group-A",
+            "count": 3,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "unsuccessful round"
+          },
+          {
+            "event": "group-diag-after-exhaustion",
+            "identity": "group-A",
+            "count": 3,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "count retained"
+          },
+          {
+            "event": "round-4-refused",
+            "identity": "group-A",
+            "count": 3,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "attempt refused; budget exhausted"
+          }
+        ]
+      },
+      "duplicateAndRestartAssertions": "satisfied at every event boundary"
+    },
+    {
+      "case": "M1-B",
+      "assertionsSatisfied": true,
+      "events": [
+        {
+          "input": {
+            "id": "initial-attempt",
+            "identity": "dispatch-A",
+            "type": "initial",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 0
+        },
+        {
+          "input": {
+            "id": "retry-1",
+            "identity": "dispatch-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-0",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new diagnostics"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-1",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed symptoms"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-2",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "additional logs"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-3",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed error message"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-4",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new evidence"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "retry-2",
+            "identity": "dispatch-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "op-diag-after-exhaustion",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed error"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "retry-3-refused",
+            "identity": "dispatch-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 2
+        }
+      ],
+      "observed": {
+        "seen": [
+          "initial-attempt",
+          "retry-1",
+          "op-diag-0",
+          "op-diag-1",
+          "op-diag-2",
+          "op-diag-3",
+          "op-diag-4",
+          "retry-2",
+          "op-diag-after-exhaustion",
+          "retry-3-refused"
+        ],
+        "budgets": {
+          "operation-A": {
+            "kind": "operation",
+            "basis": "collect submission A",
+            "count": 2,
+            "initialAttempt": true,
+            "phase": "WF_RETRY_BUDGET",
+            "nextAction": "workflow diagnosis"
+          }
+        },
+        "observations": [
+          {
+            "event": "initial-attempt",
+            "identity": "operation-A",
+            "count": 0,
+            "phase": "OPEN",
+            "outcome": "initial attempt; no retry consumed"
+          },
+          {
+            "event": "retry-1",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "retry consumed"
+          },
+          {
+            "event": "op-diag-0",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "op-diag-1",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "op-diag-2",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "op-diag-3",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "op-diag-4",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "retry-2",
+            "identity": "operation-A",
+            "count": 2,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "retry consumed"
+          },
+          {
+            "event": "op-diag-after-exhaustion",
+            "identity": "operation-A",
+            "count": 2,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "count retained"
+          },
+          {
+            "event": "retry-3-refused",
+            "identity": "operation-A",
+            "count": 2,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "attempt refused; budget exhausted"
+          }
+        ]
+      },
+      "duplicateAndRestartAssertions": "satisfied at every event boundary"
+    },
+    {
+      "case": "M1-C-operation",
+      "assertionsSatisfied": true,
+      "events": [
+        {
+          "input": {
+            "id": "initial-attempt",
+            "identity": "dispatch-A",
+            "type": "initial",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 0
+        },
+        {
+          "input": {
+            "id": "retry-1",
+            "identity": "dispatch-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-0",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new diagnostics"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-1",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed symptoms"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-2",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "additional logs"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-3",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed error message"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-4",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new evidence"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "retry-2",
+            "identity": "dispatch-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "op-diag-after-exhaustion",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed error"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "retry-3-refused",
+            "identity": "dispatch-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "independent-op",
+            "identity": "dispatch-B",
+            "type": "identity-check",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 0
+        },
+        {
+          "input": {
+            "id": "independent-initial",
+            "identity": "dispatch-B",
+            "type": "initial",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 0
+        },
+        {
+          "input": {
+            "id": "independent-retry-1",
+            "identity": "dispatch-B",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 1
+        }
+      ],
+      "observed": {
+        "seen": [
+          "initial-attempt",
+          "retry-1",
+          "op-diag-0",
+          "op-diag-1",
+          "op-diag-2",
+          "op-diag-3",
+          "op-diag-4",
+          "retry-2",
+          "op-diag-after-exhaustion",
+          "retry-3-refused",
+          "independent-op",
+          "independent-initial",
+          "independent-retry-1"
+        ],
+        "budgets": {
+          "operation-A": {
+            "kind": "operation",
+            "basis": "collect submission A",
+            "count": 2,
+            "initialAttempt": true,
+            "phase": "WF_RETRY_BUDGET",
+            "nextAction": "workflow diagnosis"
+          },
+          "operation-B": {
+            "kind": "operation",
+            "basis": "fetch unrelated artifact B",
+            "count": 1,
+            "initialAttempt": true,
+            "phase": "OPEN",
+            "nextAction": "bounded continuation"
+          }
+        },
+        "observations": [
+          {
+            "event": "initial-attempt",
+            "identity": "operation-A",
+            "count": 0,
+            "phase": "OPEN",
+            "outcome": "initial attempt; no retry consumed"
+          },
+          {
+            "event": "retry-1",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "retry consumed"
+          },
+          {
+            "event": "op-diag-0",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "op-diag-1",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "op-diag-2",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "op-diag-3",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "op-diag-4",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "retry-2",
+            "identity": "operation-A",
+            "count": 2,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "retry consumed"
+          },
+          {
+            "event": "op-diag-after-exhaustion",
+            "identity": "operation-A",
+            "count": 2,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "count retained"
+          },
+          {
+            "event": "retry-3-refused",
+            "identity": "operation-A",
+            "count": 2,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "attempt refused; budget exhausted"
+          },
+          {
+            "event": "independent-op",
+            "identity": "operation-B",
+            "count": 0,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "independent-initial",
+            "identity": "operation-B",
+            "count": 0,
+            "phase": "OPEN",
+            "outcome": "initial attempt; no retry consumed"
+          },
+          {
+            "event": "independent-retry-1",
+            "identity": "operation-B",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "retry consumed"
+          }
+        ]
+      },
+      "duplicateAndRestartAssertions": "satisfied at every event boundary"
+    },
+    {
+      "case": "M1-C-group",
+      "assertionsSatisfied": true,
+      "events": [
+        {
+          "input": {
+            "id": "round-1",
+            "identity": "finding-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "round-2",
+            "identity": "finding-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-0",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new diagnostics"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-1",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed symptoms"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-2",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "additional logs"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-3",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed error message"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-4",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new evidence"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "round-3",
+            "identity": "finding-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 3
+        },
+        {
+          "input": {
+            "id": "group-diag-after-exhaustion",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new evidence"
+          },
+          "expectedCount": 3
+        },
+        {
+          "input": {
+            "id": "round-4-refused",
+            "identity": "finding-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 3
+        },
+        {
+          "input": {
+            "id": "independent-group",
+            "identity": "finding-B",
+            "type": "identity-check",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 0
+        },
+        {
+          "input": {
+            "id": "independent-round-1",
+            "identity": "finding-B",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 1
+        }
+      ],
+      "observed": {
+        "seen": [
+          "round-1",
+          "round-2",
+          "group-diag-0",
+          "group-diag-1",
+          "group-diag-2",
+          "group-diag-3",
+          "group-diag-4",
+          "round-3",
+          "group-diag-after-exhaustion",
+          "round-4-refused",
+          "independent-group",
+          "independent-round-1"
+        ],
+        "budgets": {
+          "group-A": {
+            "kind": "group",
+            "basis": "counterexample at boundary A",
+            "count": 3,
+            "initialAttempt": false,
+            "phase": "WF_RETRY_BUDGET",
+            "nextAction": "technical diagnosis"
+          },
+          "group-B": {
+            "kind": "group",
+            "basis": "independent counterexample at boundary B",
+            "count": 1,
+            "initialAttempt": false,
+            "phase": "OPEN",
+            "nextAction": "bounded continuation"
+          }
+        },
+        "observations": [
+          {
+            "event": "round-1",
+            "identity": "group-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "unsuccessful round"
+          },
+          {
+            "event": "round-2",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "unsuccessful round"
+          },
+          {
+            "event": "group-diag-0",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "group-diag-1",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "group-diag-2",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "group-diag-3",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "group-diag-4",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "round-3",
+            "identity": "group-A",
+            "count": 3,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "unsuccessful round"
+          },
+          {
+            "event": "group-diag-after-exhaustion",
+            "identity": "group-A",
+            "count": 3,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "count retained"
+          },
+          {
+            "event": "round-4-refused",
+            "identity": "group-A",
+            "count": 3,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "attempt refused; budget exhausted"
+          },
+          {
+            "event": "independent-group",
+            "identity": "group-B",
+            "count": 0,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "independent-round-1",
+            "identity": "group-B",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "unsuccessful round"
+          }
+        ]
+      },
+      "duplicateAndRestartAssertions": "satisfied at every event boundary"
+    },
+    {
+      "case": "M1-C-renamed-operation",
+      "assertionsSatisfied": true,
+      "events": [
+        {
+          "input": {
+            "id": "initial-attempt",
+            "identity": "dispatch-A",
+            "type": "initial",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 0
+        },
+        {
+          "input": {
+            "id": "retry-1",
+            "identity": "dispatch-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-0",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new diagnostics"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-1",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed symptoms"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-2",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "additional logs"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-3",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed error message"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "op-diag-4",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new evidence"
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "retry-2",
+            "identity": "dispatch-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "op-diag-after-exhaustion",
+            "identity": "dispatch-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed error"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "retry-3-refused",
+            "identity": "dispatch-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "rename-op",
+            "identity": "dispatch-A-renamed",
+            "type": "identity-check",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "renamed-retry-refused",
+            "identity": "dispatch-A-renamed",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "unestablished-op",
+            "identity": "another-spelling",
+            "type": "identity-check",
+            "diagnosticDetail": null
+          },
+          "expectedCount": null
+        }
+      ],
+      "observed": {
+        "seen": [
+          "initial-attempt",
+          "retry-1",
+          "op-diag-0",
+          "op-diag-1",
+          "op-diag-2",
+          "op-diag-3",
+          "op-diag-4",
+          "retry-2",
+          "op-diag-after-exhaustion",
+          "retry-3-refused",
+          "rename-op",
+          "renamed-retry-refused",
+          "unestablished-op"
+        ],
+        "budgets": {
+          "operation-A": {
+            "kind": "operation",
+            "basis": "collect submission A",
+            "count": 2,
+            "initialAttempt": true,
+            "phase": "WF_RETRY_BUDGET",
+            "nextAction": "workflow diagnosis"
+          }
+        },
+        "observations": [
+          {
+            "event": "initial-attempt",
+            "identity": "operation-A",
+            "count": 0,
+            "phase": "OPEN",
+            "outcome": "initial attempt; no retry consumed"
+          },
+          {
+            "event": "retry-1",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "retry consumed"
+          },
+          {
+            "event": "op-diag-0",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "op-diag-1",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "op-diag-2",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "op-diag-3",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "op-diag-4",
+            "identity": "operation-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "retry-2",
+            "identity": "operation-A",
+            "count": 2,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "retry consumed"
+          },
+          {
+            "event": "op-diag-after-exhaustion",
+            "identity": "operation-A",
+            "count": 2,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "count retained"
+          },
+          {
+            "event": "retry-3-refused",
+            "identity": "operation-A",
+            "count": 2,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "attempt refused; budget exhausted"
+          },
+          {
+            "event": "rename-op",
+            "identity": "operation-A",
+            "count": 2,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "count retained"
+          },
+          {
+            "event": "renamed-retry-refused",
+            "identity": "operation-A",
+            "count": 2,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "attempt refused; budget exhausted"
+          },
+          {
+            "event": "unestablished-op",
+            "outcome": "identity not established; no fresh counter"
+          }
+        ]
+      },
+      "duplicateAndRestartAssertions": "satisfied at every event boundary"
+    },
+    {
+      "case": "M1-C-renamed-group",
+      "assertionsSatisfied": true,
+      "events": [
+        {
+          "input": {
+            "id": "round-1",
+            "identity": "finding-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 1
+        },
+        {
+          "input": {
+            "id": "round-2",
+            "identity": "finding-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-0",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new diagnostics"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-1",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed symptoms"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-2",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "additional logs"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-3",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "changed error message"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "group-diag-4",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new evidence"
+          },
+          "expectedCount": 2
+        },
+        {
+          "input": {
+            "id": "round-3",
+            "identity": "finding-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 3
+        },
+        {
+          "input": {
+            "id": "group-diag-after-exhaustion",
+            "identity": "finding-A",
+            "type": "diagnostic",
+            "diagnosticDetail": "new evidence"
+          },
+          "expectedCount": 3
+        },
+        {
+          "input": {
+            "id": "round-4-refused",
+            "identity": "finding-A",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 3
+        },
+        {
+          "input": {
+            "id": "reframe-group",
+            "identity": "finding-A-reframed",
+            "type": "identity-check",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 3
+        },
+        {
+          "input": {
+            "id": "reframed-round-refused",
+            "identity": "finding-A-reframed",
+            "type": "unsuccessful",
+            "diagnosticDetail": null
+          },
+          "expectedCount": 3
+        },
+        {
+          "input": {
+            "id": "unestablished-group",
+            "identity": "another-description",
+            "type": "identity-check",
+            "diagnosticDetail": null
+          },
+          "expectedCount": null
+        }
+      ],
+      "observed": {
+        "seen": [
+          "round-1",
+          "round-2",
+          "group-diag-0",
+          "group-diag-1",
+          "group-diag-2",
+          "group-diag-3",
+          "group-diag-4",
+          "round-3",
+          "group-diag-after-exhaustion",
+          "round-4-refused",
+          "reframe-group",
+          "reframed-round-refused",
+          "unestablished-group"
+        ],
+        "budgets": {
+          "group-A": {
+            "kind": "group",
+            "basis": "counterexample at boundary A",
+            "count": 3,
+            "initialAttempt": false,
+            "phase": "WF_RETRY_BUDGET",
+            "nextAction": "technical diagnosis"
+          }
+        },
+        "observations": [
+          {
+            "event": "round-1",
+            "identity": "group-A",
+            "count": 1,
+            "phase": "OPEN",
+            "outcome": "unsuccessful round"
+          },
+          {
+            "event": "round-2",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "unsuccessful round"
+          },
+          {
+            "event": "group-diag-0",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "group-diag-1",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "group-diag-2",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "group-diag-3",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "group-diag-4",
+            "identity": "group-A",
+            "count": 2,
+            "phase": "OPEN",
+            "outcome": "count retained"
+          },
+          {
+            "event": "round-3",
+            "identity": "group-A",
+            "count": 3,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "unsuccessful round"
+          },
+          {
+            "event": "group-diag-after-exhaustion",
+            "identity": "group-A",
+            "count": 3,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "count retained"
+          },
+          {
+            "event": "round-4-refused",
+            "identity": "group-A",
+            "count": 3,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "attempt refused; budget exhausted"
+          },
+          {
+            "event": "reframe-group",
+            "identity": "group-A",
+            "count": 3,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "count retained"
+          },
+          {
+            "event": "reframed-round-refused",
+            "identity": "group-A",
+            "count": 3,
+            "phase": "WF_RETRY_BUDGET",
+            "outcome": "attempt refused; budget exhausted"
+          },
+          {
+            "event": "unestablished-group",
+            "outcome": "identity not established; no fresh counter"
+          }
+        ]
+      },
+      "duplicateAndRestartAssertions": "satisfied at every event boundary"
+    }
+  ],
+  "negativeControls": [
+    {
+      "case": "M1-A",
+      "legacyResetDetected": true,
+      "rejectedAt": "group-diag-0"
+    },
+    {
+      "case": "M1-B",
+      "legacyResetDetected": true,
+      "rejectedAt": "op-diag-0"
+    }
+  ],
+  "limitations": [
+    "Synthetic ledger; no runtime adapter, external service or concurrent writer qualified.",
+    "Identity distinctions are explicit fixture facts, not an automated semantic classifier.",
+    "These assertions do not constitute independent review, technical PASS or acceptance."
+  ]
+}

@@ -362,8 +362,13 @@ export class Graph {
       );
       draft.finish();
       plain(candidate);
-      this.reconcile(before, candidate);
+      if (!draft.replacing) this.reconcile(before, candidate);
       diagnostics = this.validate(candidate);
+      if (draft.replacing)
+        demand(
+          !diagnostics.some((d) => d.severity === "error"),
+          "IMPORT_ERRORS",
+        );
     } finally {
       draft.revoke();
       this.#writing = false;
@@ -489,6 +494,30 @@ export class Graph {
   private validate(document: CanonicalGraphDocument): readonly ContractIssue[] {
     const out: ContractIssue[] = [];
     const g = document.graph;
+    const checkReferences = (
+      references: import("../sdk/document.ts").DocumentReference[],
+      networkId?: string,
+    ) => {
+      for (const ref of references) {
+        const present =
+          ref.kind === "resource"
+            ? g.resources.some((r) => r.id === ref.targetId)
+            : g.stages
+                .find((s) => s.network.id === (ref.networkId ?? networkId))
+                ?.network.nodes.some((n) => n.id === ref.targetId);
+        if (!present)
+          out.push(
+            issue(
+              "REFERENCE_MISSING",
+              "Declared reference cannot be resolved: " + ref.slot,
+            ),
+          );
+      }
+    };
+    for (const stage of g.stages)
+      for (const node of stage.network.nodes)
+        checkReferences(node.references, stage.network.id);
+    for (const resource of g.resources) checkReferences(resource.references);
     const kind = this.definitions.kind(g.kind);
     for (const pin of g.modules)
       if (!this.definitions.module(pin))
@@ -743,6 +772,10 @@ export class Graph {
 export class Draft {
   #live = true;
   #poison = false;
+  #replacing = false;
+  get replacing(): boolean {
+    return this.#replacing;
+  }
   constructor(
     private readonly document: CanonicalGraphDocument,
     private readonly definitions: DefinitionSet,
@@ -768,6 +801,26 @@ export class Draft {
   }
   revoke(): void {
     this.#live = false;
+  }
+  replaceDocument(candidate: CanonicalGraphDocument): void {
+    this.run(() => {
+      plain(candidate);
+      demand(
+        candidate.format === "grape.document" &&
+          candidate.formatVersion.major === 2 &&
+          candidate.formatVersion.minor === 0,
+        "FORMAT_VERSION",
+      );
+      demand(
+        equal(candidate.graph.modules, this.document.graph.modules) &&
+          equal(candidate.graph.kind, this.document.graph.kind),
+        "IMPORT_DEFINITIONS",
+      );
+      const replacement = structuredClone(candidate);
+      replacement.graph.id = this.document.graph.id;
+      this.document.graph = replacement.graph;
+      this.#replacing = true;
+    });
   }
   add(networkId: string, ref: NodeTypeRef, position: [number, number]): string {
     return this.run(() => {

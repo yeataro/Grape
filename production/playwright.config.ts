@@ -7,7 +7,12 @@ export default defineConfig({
   retries: 0,
   reporter: [
     ["list"],
-    ["json", { outputFile: "evidence/browser-results.json" }],
+    [
+      "json",
+      {
+        outputFile: `${process.env.GRAPE_EVIDENCE_DIR ?? "evidence/s02"}/browser-results.json`,
+      },
+    ],
   ],
   use: {
     baseURL: "http://127.0.0.1:4173",

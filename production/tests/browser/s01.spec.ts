@@ -46,7 +46,10 @@ test("AT-S01-01 browser: user creates connected shader, edits and sees generated
   await expect(input).toHaveValue("0.5");
   await expect(page.locator("#save-state")).toHaveText("Unsaved changes");
   expect(errors).toEqual([]);
-  await page.screenshot({ path: "evidence/s01-workspace.png", fullPage: true });
+  await page.screenshot({
+    path: `${process.env.GRAPE_EVIDENCE_DIR ?? "evidence/s02"}/s01-workspace.png`,
+    fullPage: true,
+  });
 });
 test("AT-S01-03 browser: dynamic shape errors are visible, Undo restores and Redo repeats", async ({
   page,
@@ -100,6 +103,9 @@ test("AT-S01-05 browser: IndexedDB ACK save/reopen and independent JSON download
     page.getByRole("button", { name: "Undo", exact: true }),
   ).toBeDisabled();
   await page.locator("input[type=file]").setInputFiles(file!);
+  await page
+    .getByRole("button", { name: "Open in new session", exact: true })
+    .click();
   await expect(page.locator(".node")).toHaveCount(4);
   await expect(page.locator("#save-state")).toHaveText("Unsaved changes");
 });
@@ -515,7 +521,7 @@ for (const source of ["Float", "Multiply"] as const) {
     );
     await expect(code).not.toContainText("1e+21.0");
     await page.screenshot({
-      path: `evidence/m1-${source.toLowerCase()}.png`,
+      path: `${process.env.GRAPE_EVIDENCE_DIR ?? "evidence/s02"}/m1-${source.toLowerCase()}.png`,
       fullPage: true,
     });
   });

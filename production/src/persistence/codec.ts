@@ -4,7 +4,8 @@ import type {
   ModulePin,
 } from "../sdk/document.ts";
 import type { Json } from "../sdk/public-surface.ts";
-import { demand, plain, detached, pinKey } from "../sdk/kernel.ts";
+import { demand, plain, detached, pinKey, Fault } from "../sdk/kernel.ts";
+export const DOCUMENT_MAX_BYTES = 512000;
 /** Independent JSON parser: object keys are checked before assigning any parsed member. */
 export function parseJSON(source: string, maxDepth = 128): Json {
   let offset = 0;
@@ -277,7 +278,9 @@ const payloads: Record<string, Check> = {
 const payload: Check = (v, p, u) => {
   const r = record(v, p);
   nonempty(r.kind, p + ".kind", u);
-  const check = payloads[String(r.kind)];
+  const check = Object.hasOwn(payloads, String(r.kind))
+    ? payloads[String(r.kind)]
+    : undefined;
   if (check) check(v, p, u);
   else u.push(p + ".kind");
 };
@@ -369,7 +372,7 @@ export function readDocument(
 ): DocumentRead {
   try {
     demand(
-      new TextEncoder().encode(raw).byteLength <= 16 * 1024 * 1024,
+      new TextEncoder().encode(raw).byteLength <= DOCUMENT_MAX_BYTES,
       "DOCUMENT_SIZE",
     );
     const parsed = parseJSON(raw),
@@ -395,6 +398,12 @@ export function readDocument(
     envelope(parsed, "$", unknowns);
     const document = parsed as unknown as CanonicalGraphDocument;
     pins(document);
+    demand(
+      document.graph.stages.every(
+        (s) => s.network.nodes.length <= 256 && s.network.edges.length <= 1024,
+      ),
+      "NETWORK_SIZE",
+    );
     if (unknowns.length)
       return {
         status: "recovery-readonly",
@@ -415,10 +424,7 @@ export function readDocument(
     return {
       status: "rejected",
       raw,
-      reason:
-        error instanceof Error
-          ? error.name + ": " + error.message
-          : String(error),
+      reason: error instanceof Fault ? error.code : "INVALID_JSON",
     };
   }
 }
@@ -434,5 +440,8 @@ export function writeDocument(document: CanonicalGraphDocument): string {
   );
   pins(document);
   demand(!unknowns.length, "UNKNOWN_STRUCTURE");
-  return JSON.stringify(document, null, 2);
+  const formatted = JSON.stringify(document, null, 2);
+  return new TextEncoder().encode(formatted).length <= DOCUMENT_MAX_BYTES
+    ? formatted
+    : JSON.stringify(document);
 }

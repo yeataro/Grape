@@ -145,7 +145,8 @@
       "exports": {
         "parseJSON": "service",
         "readDocument": "service",
-        "writeDocument": "service"
+        "writeDocument": "service",
+        "DOCUMENT_MAX_BYTES": "contract"
       }
     },
     "src/sdk/document.ts": {
@@ -383,6 +384,33 @@
       "role": "contracts",
       "exports": {
         "glslFloatLiteral": "contract"
+      }
+    },
+    "src/application/inspection.ts": {
+      "owner": "application",
+      "role": "application",
+      "exports": {
+        "DocumentInspection": "contract",
+        "inspectDocument": "service"
+      }
+    },
+    "src/persistence/png.ts": {
+      "owner": "persistence",
+      "role": "persistence",
+      "exports": {
+        "PNG_MAX_BYTES": "service",
+        "isPNG": "service",
+        "crc32": "service",
+        "unwrapPNG": "service",
+        "wrapPNG": "service",
+        "decodeInput": "service"
+      }
+    },
+    "src/adapters/browser/png.ts": {
+      "owner": "browser-adapters",
+      "role": "adapter",
+      "exports": {
+        "renderDocumentPNG": "environment"
       }
     }
   },

@@ -1,0 +1,189 @@
+{
+  "time": "2026-10-02T18:22:31.046Z",
+  "phase": "after",
+  "root": "C:/Users/user/source/Grape/.verification/s03-review-01",
+  "head": "c209bba451149b9d54a6a54c3b35dd28f39225f3",
+  "gitDirectory": "C:/Users/user/source/Grape/.verification/s03-review-01/.git",
+  "gitStatus": "",
+  "implementationAncestor": true,
+  "sourceImplementationDiff": "",
+  "implementationToSubmissionDiff": ".../s03/repair-round-02-launch-ack.json            |   13 +\n .../coordinator/s03/repair-round-02-packet.json    |  321 ++\n .../evidence/s03/repair-02/HUMAN-WALKTHROUGH-01.md |   13 +\n .../evidence/s03/repair-02/bootstrap-final-01.log  |   64 +\n .../s03/repair-02/bootstrap-tests-final-01.log     |   17 +\n .../browser-final-01/browser-results.json          | 1868 ++++++++++\n .../s03/repair-02/browser-final-01/console.log     |   57 +\n .../s03/repair-02/browser-final-01/m1-float.png    |  Bin 0 -> 96999 bytes\n .../s03/repair-02/browser-final-01/m1-multiply.png |  Bin 0 -> 102484 bytes\n .../s03/repair-02/browser-final-01/png-preview.png |  Bin 0 -> 85614 bytes\n .../browser-final-01/repair-source-clipboard.png   |  Bin 0 -> 87995 bytes\n .../repair-02/browser-final-01/repair-webgl2.json  |   82 +\n .../browser-final-01/repair2-inline-glsl.float.png |  Bin 0 -> 82842 bytes\n .../browser-final-01/repair2-inline-glsl.vec2.png  |  Bin 0 -> 82842 bytes\n .../repair-02/browser-final-01/review-accepted.png |  Bin 0 -> 101782 bytes\n .../repair-02/browser-final-01/s01-workspace.png   |  Bin 0 -> 97988 bytes\n .../repair-02/browser-final-01/s03-breadcrumb.png  |  Bin 0 -> 75157 bytes\n .../browser-final-01/s03-clipboard-rollback.png    |  Bin 0 -> 90823 bytes\n .../s03/repair-02/browser-final-01/s03-frame.png   |  Bin 0 -> 85157 bytes\n .../browser-final-01/s03-help-composite.png        |  Bin 0 -> 83715 bytes\n .../browser-final-01/s03-independent-removal.png   |  Bin 0 -> 92127 bytes\n .../browser-final-01/s03-inspector-lifetime.png    |  Bin 0 -> 82148 bytes\n .../s03/repair-02/browser-final-01/s03-library.png |  Bin 0 -> 84182 bytes\n .../s03/repair-02/browser-final-01/s03-nested.png  |  Bin 0 -> 97610 bytes\n .../browser-final-01/s03-port-mutation.png         |  Bin 0 -> 104161 bytes\n .../browser-final-01/s03-shared-matrix.png         |  Bin 0 -> 93613 bytes\n .../browser-final-01/s03-structure-arrays.png      |  Bin 0 -> 74354 bytes\n .../repair-02/browser-final-01/s03-structure.png   |  Bin 0 -> 94431 bytes\n .../browser-final-01/s03-transaction-negatives.png |  Bin 0 -> 95315 bytes\n .../browser-final-01/s03-two-occurrences.png       |  Bin 0 -> 132577 bytes\n .../browser-final-01/save-limit-rejected.png       |  Bin 0 -> 94823 bytes\n .../browser-final-01/test-results/.last-run.json   |    4 +\n .../evidence/s03/repair-02/build-final-01.log      |   18 +\n .../evidence/s03/repair-02/build-manifest-01.json  |   42 +\n .../evidence/s03/repair-02/candidate-state-01.json |   22 +\n .../evidence/s03/repair-02/candidate-web-01.tar.gz |  Bin 0 -> 54179 bytes\n .../s03/repair-02/conformance-final-01.log         |   37 +\n production/evidence/s03/repair-02/coverage-01.json | 1952 ++++++++++\n .../s03/repair-02/evidence-manifest-01.json        |  567 +++\n .../evidence/s03/repair-02/execution-01.json       |   93 +\n .../evidence/s03/repair-02/findings-map-01.json    |  100 +\n .../s03/repair-02/human-inline.document.json       |  345 ++\n .../s03/repair-02/human-inline.packet.json         |   87 +\n .../s03/repair-02/human-native.packet.json         |   88 +\n .../s03/repair-02/materialize-samples-01.mjs       |    9 +\n .../evidence/s03/repair-02/package-evidence-01.cjs |   29 +\n .../s03/repair-02/performance-final-01.log         |   16 +\n .../prior-rereview/INDEPENDENT_REVIEW_RESULT.json  | 2001 +++++++++++\n .../repair-02/prior-rereview/bootstrap-tests.log   |   17 +\n .../s03/repair-02/prior-rereview/bootstrap.log     |   64 +\n .../s03/repair-02/prior-rereview/browser.log       |   59 +\n .../prior-rereview/browser/browser-results.json    | 1792 ++++++++++\n .../repair-02/prior-rereview/browser/m1-float.png  |  Bin 0 -> 96999 bytes\n .../prior-rereview/browser/m1-multiply.png         |  Bin 0 -> 102484 bytes\n .../prior-rereview/browser/png-preview.png         |  Bin 0 -> 85614 bytes\n .../browser/repair-source-clipboard.png            |  Bin 0 -> 87995 bytes\n .../prior-rereview/browser/repair-webgl2.json      |   82 +\n .../prior-rereview/browser/review-accepted.png     |  Bin 0 -> 101782 bytes\n .../prior-rereview/browser/s01-workspace.png       |  Bin 0 -> 97988 bytes\n .../prior-rereview/browser/s03-breadcrumb.png      |  Bin 0 -> 75157 bytes\n .../browser/s03-clipboard-rollback.png             |  Bin 0 -> 90823 bytes\n .../repair-02/prior-rereview/browser/s03-frame.png |  Bin 0 -> 85157 bytes\n .../prior-rereview/browser/s03-help-composite.png  |  Bin 0 -> 83715 bytes\n .../browser/s03-independent-removal.png            |  Bin 0 -> 92127 bytes\n .../browser/s03-inspector-lifetime.png             |  Bin 0 -> 82196 bytes\n .../prior-rereview/browser/s03-library.png         |  Bin 0 -> 84182 bytes\n .../prior-rereview/browser/s03-nested.png          |  Bin 0 -> 97610 bytes\n .../prior-rereview/browser/s03-port-mutation.png   |  Bin 0 -> 103816 bytes\n .../prior-rereview/browser/s03-shared-matrix.png   |  Bin 0 -> 93613 bytes\n .../browser/s03-structure-arrays.png               |  Bin 0 -> 74354 bytes\n .../prior-rereview/browser/s03-structure.png       |  Bin 0 -> 94905 bytes\n .../browser/s03-transaction-negatives.png          |  Bin 0 -> 95315 bytes\n .../prior-rereview/browser/s03-two-occurrences.png |  Bin 0 -> 132577 bytes\n .../prior-rereview/browser/save-limit-rejected.png |  Bin 0 -> 94823 bytes\n .../prior-rereview/build-relocation-coverage.json  | 2113 +++++++++++\n .../s03/repair-02/prior-rereview/build.log         |   22 +\n .../prior-rereview/build/assets/index-BdaXQCVs.css |    1 +\n .../prior-rereview/build/assets/index-CCqUvlFX.js  |   19 +\n .../s03/repair-02/prior-rereview/build/index.html  |   13 +\n .../s03/repair-02/prior-rereview/conformance.log   |   37 +\n .../prior-rereview/counterexamples-results.json    |  892 +++++\n .../repair-02/prior-rereview/counterexamples.log   |   60 +\n .../repair-02/prior-rereview/counterexamples.ts    |   42 +\n .../s03/repair-02/prior-rereview/current-state.log |  265 ++\n .../s03/repair-02/prior-rereview/dependencies.log  |    6 +\n .../s03/repair-02/prior-rereview/derive-probes.mjs |   12 +\n .../repair-02/prior-rereview/dispatch-packet.json  |  117 +\n .../repair-02/prior-rereview/identities-after.json |  203 ++\n .../prior-rereview/identities-before.json          |  203 ++\n .../prior-rereview/independent-probe-results.json  |  174 +\n .../prior-rereview/independent-probes.log          |  176 +\n .../repair-02/prior-rereview/independent-probes.ts |   56 +\n .../prior-rereview/nested-array-compilation.json   |  524 +++\n .../s03/repair-02/prior-rereview/performance.log   |   16 +\n .../playwright-output/.last-run.json               |    4 +\n .../prior-rereview/probe-derivations.json          |   16 +\n .../prior-rereview/review-evidence-manifest.json   |  310 ++\n .../prior-rereview/static-portable-audit.json      |   25 +\n .../prior-rereview/structure-depth-results.json    |  690 ++++\n .../repair-02/prior-rereview/structure-depth.log   |   11 +\n .../repair-02/prior-rereview/structure-depth.ts    |   14 +\n .../submitted-artifact/assets/index-BdaXQCVs.css   |    1 +\n .../submitted-artifact/assets/index-CCqUvlFX.js    |   19 +\n .../prior-rereview/submitted-artifact/index.html   |   13 +\n .../evidence/s03/repair-02/prior-rereview/unit.log |  168 +\n .../prior-rereview/verify-build-coverage.mjs       |   13 +\n .../repair-02/prior-rereview/verify-identities.mjs |   22 +\n .../s03/repair-02/prior-rereview/write-report.mjs  |   16 +\n .../s03/repair-02/protected-identities-01.json     | 3731 ++++++++++++++++++++\n .../s03/repair-02/review-relocation-01.json        |  372 ++\n .../s03/repair-02/source-config-manifest-01.json   |  397 +++\n .../evidence/s03/repair-02/state-final-01.log      |  265 ++\n .../evidence/s03/repair-02/submission-01.json      |   89 +\n .../evidence/s03/repair-02/unit-final-01.log       |  175 +\n 114 files changed, 21161 insertions(+)",
+  "objects": [
+    {
+      "key": "originalReview",
+      "file": "production/evidence/s03/repair-02/prior-rereview/INDEPENDENT_REVIEW_RESULT.json",
+      "sha256": "dc5cef57b813217225306ecad65cedd5bef6286cb49224a816ca5735f97e62e7",
+      "bytes": 88469,
+      "matches": true
+    },
+    {
+      "key": "repairSubmission",
+      "file": "production/evidence/s03/repair-02/submission-01.json",
+      "sha256": "8340c08f0edd112b72beaa38bfc91edb77b53263bb91269a532352be3278be01",
+      "bytes": 4810,
+      "matches": true
+    },
+    {
+      "key": "sourceManifest",
+      "file": "production/evidence/s03/repair-02/source-config-manifest-01.json",
+      "sha256": "4c736d46bf6267b0d1401945f155afcc0423dffb9c950a72eb80aa7f3bbc78d6",
+      "bytes": 13594,
+      "matches": true
+    },
+    {
+      "key": "evidenceManifest",
+      "file": "production/evidence/s03/repair-02/evidence-manifest-01.json",
+      "sha256": "0f012337ecca2dff2ac1bda3e4deef0738de2577fffcb86d9ebde8b7951addaa",
+      "bytes": 23306,
+      "matches": true
+    },
+    {
+      "key": "buildManifest",
+      "file": "production/evidence/s03/repair-02/build-manifest-01.json",
+      "sha256": "e377e79b223260f916501746899c44d8375cc6a1ec45fdc9c5f3ab2cc33cb32a",
+      "bytes": 1583,
+      "matches": true
+    },
+    {
+      "key": "buildArtifact",
+      "file": "production/evidence/s03/repair-02/candidate-web-01.tar.gz",
+      "sha256": "46cd7c70aba4139416173495453486a0d0ff8da41c2d10d7bd06a88329b4dc79",
+      "bytes": 54179,
+      "matches": true
+    },
+    {
+      "key": "findingsMap",
+      "file": "production/evidence/s03/repair-02/findings-map-01.json",
+      "sha256": "152752b21037781861408afd2bd60d60c6092f147c8b6db63ce379073b2c2155",
+      "bytes": 4983,
+      "matches": true
+    },
+    {
+      "key": "coverage",
+      "file": "production/evidence/s03/repair-02/coverage-01.json",
+      "sha256": "2f258613b067f641cca56a667249bd60b63dd6814e8e48798412cda792dbb367",
+      "bytes": 95029,
+      "matches": true
+    },
+    {
+      "key": "sourceManifest",
+      "file": "production/evidence/s03/repair-02/source-config-manifest-01.json",
+      "sha256": "4c736d46bf6267b0d1401945f155afcc0423dffb9c950a72eb80aa7f3bbc78d6",
+      "bytes": 13594,
+      "matches": true
+    },
+    {
+      "key": "buildManifest",
+      "file": "production/evidence/s03/repair-02/build-manifest-01.json",
+      "sha256": "e377e79b223260f916501746899c44d8375cc6a1ec45fdc9c5f3ab2cc33cb32a",
+      "bytes": 1583,
+      "matches": true
+    },
+    {
+      "key": "buildArtifact",
+      "file": "production/evidence/s03/repair-02/candidate-web-01.tar.gz",
+      "sha256": "46cd7c70aba4139416173495453486a0d0ff8da41c2d10d7bd06a88329b4dc79",
+      "bytes": 54179,
+      "matches": true
+    },
+    {
+      "key": "evidenceManifest",
+      "file": "production/evidence/s03/repair-02/evidence-manifest-01.json",
+      "sha256": "0f012337ecca2dff2ac1bda3e4deef0738de2577fffcb86d9ebde8b7951addaa",
+      "bytes": 23306,
+      "matches": true
+    },
+    {
+      "key": "coverage",
+      "file": "production/evidence/s03/repair-02/coverage-01.json",
+      "sha256": "2f258613b067f641cca56a667249bd60b63dd6814e8e48798412cda792dbb367",
+      "bytes": 95029,
+      "matches": true
+    },
+    {
+      "key": "findingsMap",
+      "file": "production/evidence/s03/repair-02/findings-map-01.json",
+      "sha256": "152752b21037781861408afd2bd60d60c6092f147c8b6db63ce379073b2c2155",
+      "bytes": 4983,
+      "matches": true
+    },
+    {
+      "key": "execution",
+      "file": "production/evidence/s03/repair-02/execution-01.json",
+      "sha256": "e5f89a49b7946b1080abda8a23c8179a2ced64654fa8f42f5e820b7ecbfc2924",
+      "bytes": 3493,
+      "matches": true
+    },
+    {
+      "key": "protectedIdentities",
+      "file": "production/evidence/s03/repair-02/protected-identities-01.json",
+      "sha256": "344d3092d1ec5341a91d70dee29ceac16d076a32359c820c0447786cd1386b6d",
+      "bytes": 150170,
+      "matches": true
+    },
+    {
+      "key": "humanWalkthrough",
+      "file": "production/evidence/s03/repair-02/HUMAN-WALKTHROUGH-01.md",
+      "sha256": "06ea7a74e9632af0b91e228ac5c5980b7359577b3ec6f0608e805b04c6264378",
+      "bytes": 2904,
+      "matches": true
+    },
+    {
+      "key": "originalReview",
+      "file": "production/evidence/s03/repair-02/prior-rereview/INDEPENDENT_REVIEW_RESULT.json",
+      "sha256": "dc5cef57b813217225306ecad65cedd5bef6286cb49224a816ca5735f97e62e7",
+      "bytes": 88469,
+      "matches": true
+    }
+  ],
+  "manifests": [
+    {
+      "file": "production/evidence/s03/repair-02/source-config-manifest-01.json",
+      "sha256": "4c736d46bf6267b0d1401945f155afcc0423dffb9c950a72eb80aa7f3bbc78d6",
+      "bytes": 13594,
+      "count": 78,
+      "failures": []
+    },
+    {
+      "file": "production/evidence/s03/repair-02/evidence-manifest-01.json",
+      "sha256": "0f012337ecca2dff2ac1bda3e4deef0738de2577fffcb86d9ebde8b7951addaa",
+      "bytes": 23306,
+      "count": 112,
+      "failures": []
+    },
+    {
+      "file": "production/evidence/s03/repair-02/protected-identities-01.json",
+      "sha256": "344d3092d1ec5341a91d70dee29ceac16d076a32359c820c0447786cd1386b6d",
+      "bytes": 150170,
+      "count": 743,
+      "failures": []
+    }
+  ],
+  "environment": {
+    "node": "v25.5.0",
+    "platform": "win32",
+    "arch": "x64",
+    "osRelease": "10.0.26200",
+    "playwright": "1.62.1",
+    "gitAlternatesPresent": false,
+    "dependencyCount": 19,
+    "dependencyLockMismatches": [],
+    "paths": [
+      {
+        "path": "README.md",
+        "real": "C:\\Users\\user\\source\\Grape\\.verification\\s03-review-01\\README.md",
+        "nlink": 1
+      },
+      {
+        "path": "production/src/model/graph.ts",
+        "real": "C:\\Users\\user\\source\\Grape\\.verification\\s03-review-01\\production\\src\\model\\graph.ts",
+        "nlink": 1
+      },
+      {
+        "path": "production/node_modules/playwright/package.json",
+        "real": "C:\\Users\\user\\source\\Grape\\.verification\\s03-review-01\\production\\node_modules\\playwright\\package.json",
+        "nlink": 1
+      }
+    ]
+  }
+}

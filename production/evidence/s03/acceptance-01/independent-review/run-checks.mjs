@@ -1,0 +1,12 @@
+import fs from 'node:fs';import path from 'node:path';import cp from 'node:child_process';
+const root='C:/Users/user/source/Grape/.verification/s03-review-01',out='C:/Users/user/source/Grape/.verification/s03-independent-rereview-02';
+const job=process.argv[2];
+const jobs={
+ unit:[['unit',root+'/production',['--experimental-transform-types','--test','--test-isolation=none',...fs.readdirSync(root+'/production/tests/unit').filter(x=>x.endsWith('.test.ts')).map(x=>'tests/unit/'+x),...fs.readdirSync(root+'/production/tests/conformance').filter(x=>x.endsWith('.test.ts')).map(x=>'tests/conformance/'+x)]]],
+ build:[['runtime',root+'/production',['tools/runtime.mjs']],['typecheck',root+'/production',['node_modules/typescript/bin/tsc','--noEmit']],['build',root+'/production',['node_modules/vite/bin/vite.js','build','--outDir',out+'/build']]],
+ root:[['bootstrap',root,['tools/verify-bootstrap.mjs']],['current-state',root,['handoff/tools/check-implementation-state.mjs','--current']],['bootstrap-tests',root,['--test','--test-isolation=none','tools/verify-bootstrap.test.mjs']],['module-pins',root+'/production',['tools/module-pins.mjs']],['boundaries',root+'/production',['tools/boundaries.mjs']]],
+ probes:[['independent-probes',root,['--experimental-transform-types',out+'/independent-probes.ts']],['counterexamples',root,['--experimental-transform-types',out+'/counterexamples.ts']],['structure-depth',root,['--experimental-transform-types',out+'/structure-depth.ts']]],
+ browser:[['browser',root+'/production',['node_modules/@playwright/test/cli.js','test','--output',out+'/playwright-output']]]
+};
+fs.mkdirSync(out+'/browser',{recursive:true});const records=[];
+for(const [name,cwd,args] of jobs[job]){const start=new Date().toISOString(); const r=cp.spawnSync(process.execPath,args,{cwd,encoding:'utf8',maxBuffer:32*1024*1024,env:{...process.env,GRAPE_EVIDENCE_DIR:out+'/browser'}}); const log=(r.stdout||'')+(r.stderr||''); fs.writeFileSync(out+'/'+name+'.log',log);records.push({name,command:[process.execPath,...args],cwd,environmentOverrides:{GRAPE_EVIDENCE_DIR:out+'/browser'},startedAt:start,endedAt:new Date().toISOString(),status:r.status,signal:r.signal,error:r.error?String(r.error):null,log:name+'.log'});fs.writeFileSync(out+'/execution-'+job+'.json',JSON.stringify(records,null,2)+'\n'); console.log(name+': exit '+r.status+'\n'+log.slice(-1900));if(r.status!==0){process.exitCode=1;break}}

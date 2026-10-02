@@ -1,0 +1,49 @@
+{
+  "recordedAt": "2026-10-02T18:24:51.133Z",
+  "provenance": "Observed executions by this reviewer through exec_command; all returned exit0.",
+  "commands": [
+    {
+      "command": "node --experimental-transform-types C:/Users/user/source/Grape/.verification/s03-independent-rereview-02/eg01-atomic.ts",
+      "result": "30 PASS:12 rejected,18 accepted",
+      "log": "eg01-atomic.log",
+      "output": "eg01-atomic-results.json"
+    },
+    {
+      "command": "node --experimental-transform-types production/tools/s03-performance.ts",
+      "cwd": "C:/Users/user/source/Grape/.verification/s03-review-01",
+      "result": "Single 200-node model sample, no performance threshold claim",
+      "log": "performance.log"
+    },
+    {
+      "command": "npm ls --prefix production --depth=0",
+      "cwd": "C:/Users/user/source/Grape/.verification/s03-review-01",
+      "result": "@playwright/test1.62.1, prettier3.8.1, typescript5.9.3, vite7.3.1; successful exit0"
+    },
+    {
+      "command": "node C:/Users/user/source/Grape/.verification/s03-independent-rereview-02/verify-build-coverage.mjs",
+      "result": "3 build files match;61 relocated files;24 capabilities;338 mapped evidence entries; no mismatches",
+      "output": "build-relocation-coverage.json"
+    },
+    {
+      "command": "node C:/Users/user/source/Grape/.verification/s03-independent-rereview-02/verify-identities.mjs after",
+      "result": "Exact clean R;18 objects,78 source/config,112 evidence,743 protected files match; source/test/config unchanged I->R",
+      "output": "identities-after.json"
+    }
+  ],
+  "git": {
+    "detachedHead": true,
+    "protectedDiffFromAcceptedMain": "",
+    "finalStatus": ""
+  },
+  "visualInspection": {
+    "files": [
+      "browser/repair2-inline-glsl.float.png",
+      "browser/s03-two-occurrences.png"
+    ],
+    "observation": "Inspected actual fresh screenshots as supporting evidence; behavioral pass comes from executed assertions. No independent accessibility or device qualification."
+  },
+  "permission": {
+    "browser": "Normal Windows child-process permissions via legitimately require_escalated on first run; completed successfully without sandbox teardown hang.",
+    "git": "Exact-clone command-scoped safe.directory only; no global Git settings changed; read-only host global ignore permission warning observed."
+  }
+}

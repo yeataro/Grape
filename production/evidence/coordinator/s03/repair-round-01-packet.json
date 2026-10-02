@@ -1,0 +1,211 @@
+{
+  "packetVersion": 1,
+  "packetType": "TARGETED_REPAIR_OR_REREVIEW",
+  "mode": "REPAIR",
+  "packetId": "S03-REPAIR-FR01-GROUP-ROUND1",
+  "actionKey": "yeataro/Grape:S03:repair:7c6c6ce4e037651054e2203745ef9a4abe19b02e:FR01-group:round1",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+  "acceptedMain": "3a59aeeeddb71a06a1172c85016ad06aeb59f34f",
+  "expectedWorkHead": "7c6c6ce4e037651054e2203745ef9a4abe19b02e",
+  "PR": "Not created; remote publication permission pending",
+  "authorizationRef": "S03-AUTH-3a59aee-01 and current Human explicit S03 continuation including bounded repairs",
+  "sliceId": "S03",
+  "writer": "/root/s03_implementer_resume resumes exclusive product/state/evidence ownership after terminal Fresh Reviewer result",
+  "originalReview": {
+    "file": ".verification/s03-independent-review-01/INDEPENDENT_REVIEW_RESULT.json",
+    "sha256": "493ebd1254a359524ea0b89b3526ea3e1ce001ce4306005a0a6f5b6a9d52abfb",
+    "reviewId": "S03-FR-7c6c6ce-01",
+    "evidenceManifest": {
+      "file": ".verification/s03-independent-review-01/review-evidence-manifest.json",
+      "sha256": "5994b2a7c06875d8e4663ce512bd931eb59bf40375fa610404bec0ec52161121",
+      "verifiedFiles": 51
+    }
+  },
+  "findingGroup": "S03-FR-7c6c6ce-01:FR01-FR03-EG01",
+  "findingIds": [
+    "S03-FR-01",
+    "S03-FR-02",
+    "S03-FR-03",
+    "S03-EG-01"
+  ],
+  "round": 1,
+  "unsuccessfulRepairRereviewRoundsBefore": 0,
+  "retryBudget": "Retain this finding group; at most3 unsuccessful repair/re-review rounds; no reset by renaming or new evidence.",
+  "priorI": "5a2dec1772735ce259912a0c26a9e3dc8fd2a20a",
+  "priorR": "7c6c6ce4e037651054e2203745ef9a4abe19b02e",
+  "currentExpectedHead": "7c6c6ce4e037651054e2203745ef9a4abe19b02e",
+  "counterexamples": [
+    {
+      "id": "S03-FR-01",
+      "severity": "P2",
+      "title": "Nested Structure arrays report successful generation of invalid ES300 GLSL",
+      "affectedScope": [
+        "LC-DATA-048",
+        "LC-NODE-368",
+        "LC-NODE-374"
+      ],
+      "source": [
+        {
+          "file": "production/src/generation/compiler.ts",
+          "line": 103
+        },
+        {
+          "file": "production/src/generation/compiler.ts",
+          "line": 148
+        }
+      ],
+      "counterexample": {
+        "script": "counterexamples.ts (nested-array-shader)",
+        "steps": [
+          "Create Structure with a field of outer length3 array whose element is a length2 float array, plus scalar field b.",
+          "Create its constructor and field b accessor; connect b into the working Compose flow.",
+          "Compile the admitted graph using the shipped es300 profile.",
+          "Compile returned shaders independently in Chromium151 WebGL2."
+        ],
+        "actual": "Graph diagnostics=[], compile status=success, but fragment source contains float[2][3] for 3 arrays of 2 and an array constructor with three float[2] arguments. WebGL2 rejects arrays-of-arrays for ES300 and constructor arity. Candidate vertex and independent control fragment both compile.",
+        "evidence": [
+          "nested-array-compilation.json",
+          "browser-shader-probe/shader-probe.json",
+          "shader-browser-probe.log"
+        ]
+      },
+      "contract": [
+        "handoff/04_EXTENSION_MODEL.md:113-115: profile target support validation; unsupported capability returns generation failure, not partial shader",
+        "handoff/data/capability-coverage.json:96332: LC-NODE-368 nested arrays up to8 dimensions and fixed field arrays",
+        "production/evidence/s03/coverage-01.json:725: implemented S03 nominal Structure/fixed/nested array claim"
+      ],
+      "expectedBehavior": "The declared profile must either produce valid supported lowering with correct dimension order, or explicitly fail generation for unsupported array shape without successful artifacts. Do not silently accept invalid ES300 code or move the implemented Structure branch into the S05 residual.",
+      "status": "OPEN",
+      "classification": "Ordinary implementation correctness defect; bounded repair, no demonstrated architecture conflict"
+    },
+    {
+      "id": "S03-FR-02",
+      "severity": "P2",
+      "title": "Make Independent rejects a complete owner resource with references to parent and shared child nodes",
+      "affectedScope": [
+        "LC-DATA-030",
+        "AT-S03-03",
+        "custom declared/state owner reference transfer"
+      ],
+      "source": [
+        {
+          "file": "production/src/model/graph.ts",
+          "line": 1960
+        }
+      ],
+      "counterexample": {
+        "script": "counterexamples.ts (mixed-network-owner-reference-independence)",
+        "steps": [
+          "Use exact registered custom declared/state resource fixture and add one ordinary child subgraph.",
+          "Give custom resource b complete explicit references to the selected Float, the child definition, and its input boundary node with the child network ID.",
+          "Encapsulate the custom owner, Float, and child call together. Grouping and copySelection accept complete closure with no diagnostics.",
+          "Make the resulting parent caller independent."
+        ],
+        "actual": "Throws REFERENCE_ESCAPE because the remapper requires every node reference in a cloned resource to belong to oldNetworkId. A valid reference to an included shared child network fails. Snapshot is unchanged on rejection; atomic rollback is retained.",
+        "evidence": [
+          "counterexamples-results.json",
+          "counterexamples.log"
+        ]
+      },
+      "contract": [
+        "handoff/08_IMPLEMENTATION_PLAN.md:169-185: S03 Make Independent and complete dependency closure/typed remap algorithm",
+        "handoff/09_ACCEPTANCE_AND_CONFORMANCE.md:103: legal operations remap complete closure, forbidden reference rejects atomically",
+        "handoff/14_DOCUMENT_FORMAT.md:50,59: explicit node references carry networkId; authoring resource codec validates/remaps identities",
+        "production/evidence/s03/coverage-01.json LC-DATA-030: own network/node-bound closure cloned, ordinary dependencies shared"
+      ],
+      "expectedBehavior": "Clone the parent network and resources that refer to its nodes, remap those parent references, and preserve valid references to the shared child dependency (or consistently remap it if actually cloned). Do not reject a complete included dependency reference as an escape. Preserve one-operation Undo/Redo and rejection rollback.",
+      "status": "OPEN",
+      "classification": "Ordinary incomplete remap algorithm; bounded repair, not new custom-owner scope"
+    },
+    {
+      "id": "S03-FR-03",
+      "severity": "P2",
+      "title": "Editing an inner Structure bypasses the maximum depth for existing dependents",
+      "affectedScope": [
+        "LC-DATA-048",
+        "LC-NODE-368",
+        "Structure dependency reconciliation"
+      ],
+      "source": [
+        {
+          "file": "production/src/model/graph.ts",
+          "line": 1382
+        },
+        {
+          "file": "production/src/model/graph.ts",
+          "line": 1397
+        }
+      ],
+      "counterexample": {
+        "script": "structure-depth.ts",
+        "steps": [
+          "Create16 Structures D0..D15 where D0 contains float and each later Structure contains the previous one.",
+          "Create an independent Leaf containing float.",
+          "Edit D0 to contain Leaf. D15 now has nesting depth17."
+        ],
+        "actual": "Edit accepted; revision18 becomes19, diagnostics=[], generation status=success. A direct outer Structure creation rejects STRUCTURE_DEPTH, confirming the bound is applied locally but not propagated to existing dependents.",
+        "evidence": [
+          "structure-depth-results.json",
+          "structure-depth.log"
+        ]
+      },
+      "contract": [
+        "handoff/data/capability-coverage.json:8944: LC-DATA-048 rejects recursive types and depth>16",
+        "handoff/data/capability-coverage.json:96338: LC-NODE-368 rejects nesting>16",
+        "production/evidence/s03/coverage-01.json LC-DATA-048: claimed depth/expansion validation"
+      ],
+      "expectedBehavior": "Validate the affected dependent Structure closure before committing shape edits. Reject an edit that makes any existing dependent exceed depth16, leaving graph/History/Redo/publication unchanged. Verify analogous closure-bound constraints when repairing; do not weaken the admitted bound.",
+      "status": "OPEN",
+      "classification": "Ordinary validation defect; bounded repair, no product decision required"
+    }
+  ],
+  "requiredEvidenceGaps": [
+    {
+      "id": "S03-EG-01",
+      "severity": "required-scope-evidence-gap",
+      "affectedScope": [
+        "LC-DATA-045",
+        "LC-DATA-062"
+      ],
+      "status": "OPEN",
+      "observation": "Submission labels TOP/sampler slot reuse and native source path2048/constructor4096 branches as native integration residual. Both capability entries are Portable and map only to S03; source path admission and slot identity/reuse are model/clipboard rules, independent of executing a real TD resource. Existing numeric inline-array2049 evidence cannot establish the native path acceptance boundary.",
+      "contract": [
+        "handoff/data/capability-coverage.json:8363-8369: TOP source/origin slot reuse and unsupported source rejection",
+        "handoff/data/capability-coverage.json:11509-11556: LC-DATA-062 host-independent source validation and path bounds",
+        "handoff/data/slices.json S03 capabilityIds",
+        "production/evidence/coordinator/s03/authorization.json: full accepted S03, no shrink"
+      ],
+      "requiredResolution": "Provide exact accepted-contract/decision mapping supporting the residual, or deliver and test the remaining portable transfer/admission branches through the appropriate owner/provider boundary. An unsupported provider may have an explicit tested unavailable/rejection result, but blanket native labels do not prove the required model behavior. Do not infer a requirement for real TD integration or automatically raise a Human Gate."
+    }
+  ],
+  "allowedRepairScope": "Fix listed generation, custom owner independence transfer, dependent Structure closure validation, and full portable DATA045/062 evidence/admission through owner/provider boundaries. Validate analogous affected closure constraints and required regressions. No unsolicited redesign or scope shrink.",
+  "exclusions": [
+    "No S04 Personal or S05 catalog expansion",
+    "No actual TD runtime integration required by EG01",
+    "No weakening of admission or scope to hide defects",
+    "No accepted evidence/policy/handoff mutations",
+    "No acceptance, merge, later Slice or GitHub publication pending permission"
+  ],
+  "inputRefs": [
+    "Original normalized S03 implementer packet and accepted contracts",
+    "Exact report/counterexamples/logs in .verification/s03-independent-review-01",
+    "Current source at R"
+  ],
+  "requestedAction": "Implement bounded repair, preserve reviewer report/evidence authorship in immutable new repo evidence folder with relocation/hash map, add meaningful counterexample regressions, run affected+required checks into fresh S03 evidence dirs, commit new I/R and repair submission with finding-to-fix/evidence mapping, then freeze for Fresh targeted re-review.",
+  "reviewMetadata": "Reviewer is providing new immutable capabilityId/disposition supplement correcting report row metadata; original FAIL findings valid and not altered. Persist supplement once delivered; never fill reviewer fields yourself.",
+  "environment": "151.0.7922.34 Chromium / Node25.5.0 / Windows x64; use legitimately escalated browser to avoid known resolved teardown issue",
+  "verification": "Reproduce FR01..03; resolve EG01 with exact contract justification or required portable behavior; build, unit/conformance, full browser, root checks, source/build/protected/evidence hashes. Every browser run explicit new GRAPE_EVIDENCE_DIR and output.",
+  "repairSubmission": "New exact I/R, source/build/evidence/coverage hashes, findings mapping and self-check execution; no independent PASS claim",
+  "reReviewCoverage": "Exact original counterexamples, analogously affected regressions, portable scope gap and new source/evidence binding",
+  "outputLocation": "production/evidence/s03/repair-01 and new coordinator receipts; preserve all existing artifacts",
+  "stopConditions": [
+    "Actual authority/contract conflict",
+    "Unexpected branch/head divergence",
+    "Required runtime unresolved within retained budget",
+    "Ready repaired submission; freeze product writes"
+  ],
+  "provenance": "Direct independent reviewer result validated for identity, exact I/R and51 evidence hashes; no Human Gate inferred",
+  "limitations": "Technical FAIL is not acceptance; current state remains active S03",
+  "recordedAt": "2026-10-02T17:38:13.479Z"
+}

@@ -1,0 +1,245 @@
+{
+  "implementation": "572e89d41586c85287f45e3122f1cd989b2370d2",
+  "priorR": "7c6c6ce4e037651054e2203745ef9a4abe19b02e",
+  "reviewId": "S03-FR-7c6c6ce-01",
+  "findingGroup": "S03-FR-7c6c6ce-01:FR01-FR03-EG01",
+  "round": 1,
+  "unsuccessfulRepairRereviewRoundsBefore": 0,
+  "originalReport": {
+    "file": "production/evidence/s03/repair-01/original-review/INDEPENDENT_REVIEW_RESULT.json",
+    "sha256": "493ebd1254a359524ea0b89b3526ea3e1ce001ce4306005a0a6f5b6a9d52abfb",
+    "bytes": 37114
+  },
+  "reviewerSupplement": {
+    "file": "production/evidence/s03/repair-01/original-review/CAPABILITY_MAPPING_SUPPLEMENT-01.json",
+    "sha256": "f07df2eb1ae7b37fe8ea1d29a29b76bf1b857afa479c04a04c23924cb88a3f0c",
+    "bytes": 10227
+  },
+  "relocation": {
+    "file": "production/evidence/s03/repair-01/review-relocation-01.json",
+    "sha256": "fadd47e778488361c8bf94be84dade0328ada9c7a8d9190666012ddd8034794c",
+    "bytes": 16073
+  },
+  "findings": [
+    {
+      "id": "S03-FR-01",
+      "scope": [
+        "LC-DATA-048",
+        "LC-NODE-368",
+        "LC-NODE-374"
+      ],
+      "fix": "Compiler submits complete type shapes to selected profile. ES300 explicitly rejects nested arrays without artifacts; authoring remains admitted. Real WebGL2 compiles supported one-dimensional Structure variant.",
+      "source": [
+        {
+          "file": "production/src/generation/compiler.ts",
+          "sha256": "f115cacb079b90165cd1fd70e105725e8d3cc418052a903abf96c8f4f7637907",
+          "bytes": 13618
+        },
+        {
+          "file": "production/src/modules/image.ts",
+          "sha256": "958d925b8acf175150e4cfb9089f7f426b495c328d8258b523f36d0222fe4e32",
+          "bytes": 4738
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 FR01 admitted nested Structure arrays fail ES300 profile without artifacts; one dimension succeeds",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 FR01 real WebGL2 compiles supported Structure arrays and ES300 explicitly rejects admitted nested arrays",
+          "log": "production/evidence/s03/repair-01/browser-final-01/browser-results.json"
+        }
+      ],
+      "shaderEvidence": {
+        "file": "production/evidence/s03/repair-01/browser-final-01/repair-webgl2.json",
+        "sha256": "c88bc056d88fb2784b2f9e304335b4088e26c6107c927afb62ed096a08935f42",
+        "bytes": 2612
+      },
+      "status": "IMPLEMENTER_REPAIR_CHECKS_PASS_PENDING_FRESH_TARGETED_REREVIEW"
+    },
+    {
+      "id": "S03-FR-02",
+      "scope": [
+        "LC-DATA-030",
+        "AT-S03-03"
+      ],
+      "fix": "Map parent plus complete included child networks. Preserve ordinary shared-child node addresses; transitively cloned children receive fresh network/node IDs, owner reference remaps and one Undo operation. Unavailable addresses reject.",
+      "source": [
+        {
+          "file": "production/src/model/graph.ts",
+          "sha256": "fa963d873b196c15c7e6cc940c3737790956d5cbfd93b175b465992cfb2fba6b",
+          "bytes": 74459
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 FR02 independence remaps mixed parent and shared child owner references with Undo/Redo",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 FR02 independence remaps mixed parent and cloned child owner references with Undo/Redo",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 FR02 incomplete shared-child node address rejects independence atomically",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        }
+      ],
+      "status": "IMPLEMENTER_REPAIR_CHECKS_PASS_PENDING_FRESH_TARGETED_REREVIEW"
+    },
+    {
+      "id": "S03-FR-03",
+      "scope": [
+        "LC-DATA-048",
+        "LC-NODE-368"
+      ],
+      "fix": "Validate edited Structure and every transitive dependent against depth16 and component expansion65536; reject resource-only registered fields. Metadata-only external large-array preservation retained.",
+      "source": [
+        {
+          "file": "production/src/model/graph.ts",
+          "sha256": "fa963d873b196c15c7e6cc940c3737790956d5cbfd93b175b465992cfb2fba6b",
+          "bytes": 74459
+        },
+        {
+          "file": "production/src/sdk/editing.ts",
+          "sha256": "a93fc481e19d3fc9f9187beccae3de6ec8edade9dc04e44a7a1eed017164a2fe",
+          "bytes": 8221
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 FR03 editing inner Structure validates dependent depth16 and preserves Redo on depth17 rejection",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 FR03 affected dependent expansion and vector component budgets reject atomically",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 FR03 registered resource types cannot become Structure fields",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        }
+      ],
+      "status": "IMPLEMENTER_REPAIR_CHECKS_PASS_PENDING_FRESH_TARGETED_REREVIEW"
+    },
+    {
+      "id": "S03-EG-01",
+      "scope": [
+        "LC-DATA-045",
+        "LC-DATA-062"
+      ],
+      "fix": "Pure exact-owner policy validates detached source descriptors with target GraphKind and canonical TypeSystem. Numeric constant/uniform transfer, native path construction4096/clipboard2048, sampler clipboard2048, typed length closure, TOP source+origin slot reuse with independent declaration IDs, specialization minimal vacancy, exact unavailable owner/target and callback rollback all exercised. No real TD runtime required.",
+      "source": [
+        {
+          "file": "production/src/model/transfer.ts",
+          "sha256": "2d3ee154f47fbe698566debdd45b27789d3f24cd600e768e59fba3d40e2171db",
+          "bytes": 15364
+        },
+        {
+          "file": "production/src/model/graph.ts",
+          "sha256": "fa963d873b196c15c7e6cc940c3737790956d5cbfd93b175b465992cfb2fba6b",
+          "bytes": 74459
+        },
+        {
+          "file": "production/src/modules/networks.ts",
+          "sha256": "408cb0c10bc577ba8483684f8c04eb6213e0c5f1cdff7c4e86f889e4068a5247",
+          "bytes": 19292
+        },
+        {
+          "file": "production/src/sdk/editing.ts",
+          "sha256": "a93fc481e19d3fc9f9187beccae3de6ec8edade9dc04e44a7a1eed017164a2fe",
+          "bytes": 8221
+        },
+        {
+          "file": "production/src/sdk/networks.ts",
+          "sha256": "000816ac34181f0fd09d1007b3c26f8e5a2a24aa3177e514f2fcc91012ead60b",
+          "bytes": 5301
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 EG01 native array constructor2048, clipboard2048 boundary and same-load reuse",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 EG01 native array constructor2049, clipboard2048 boundary and same-load reuse",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 EG01 native array constructor4096, clipboard2048 boundary and same-load reuse",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 EG01 native array constructor4097 rejects atomically",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 EG01 sampler clipboard path2048 admission",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 EG01 sampler clipboard path2049 admission",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 EG01 native arrays admit float/vec2/vec3/vec4 and remap symbolic length closure",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 EG01 native arrays reject matrix/nested/expressions and invalid length owner types",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 EG01 TOP declarations clone while source+origin slots reuse, defaults persist, and Undo/Redo/save preserve identity",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 EG01 specialization import allocates minimal vacant ID0,2 ->1",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 EG01 unsupported target, unavailable owner and throwing owner reject without publication",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 EG01 numeric uniform scalar/vector/matrix transfer remains independent and generation is explicit unavailable",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 EG01 exact provider/target ownership and imported descriptor failures stay atomic",
+          "log": "production/evidence/s03/repair-01/unit-final-01.log"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 EG01 browser clipboard imports TOP declarations with one slot and shows atomic native path rejection",
+          "log": "production/evidence/s03/repair-01/browser-final-01/browser-results.json"
+        }
+      ],
+      "correction": "Previous blanket native-integration residual for portable DATA045/062 is withdrawn. Only live external-resource resolution/emission remains unprovided and explicitly unavailable; the portable descriptor rules are delivered/tested.",
+      "status": "IMPLEMENTER_REPAIR_CHECKS_PASS_PENDING_FRESH_TARGETED_REREVIEW"
+    }
+  ],
+  "independentVerdict": "No repaired verdict supplied by implementer"
+}

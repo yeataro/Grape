@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "workflow-acceptance-bookkeeping-validation",
+  "validatedAt": "2026-10-02T19:22:57.089388+08:00",
+  "acceptedMainBaseline": "ba39de6992827514bbd74368f67e406ec2eef06a",
+  "workflowPolicyImplementationRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+  "reviewedPrHead": "560b542c106eb5234bf8deabcea7bdc47888a4a4",
+  "reviewedTree": "b49985e8f00033afaa985ec7ca55a76d4b88e147",
+  "localHeadAtValidation": "560b542c106eb5234bf8deabcea7bdc47888a4a4",
+  "bookkeepingCommitBinding": "The one descendant commit adding exactly these four files carries their Git content identities. Its SHA is recorded in PR #3; this record does not fabricate a self-referential commit hash.",
+  "provenance": "Actual Implementer integrity/state checks for acceptance bookkeeping; not another independent workflow review.",
+  "runtime": {
+    "node": "v24.19.0",
+    "python": "3.12.14",
+    "qualificationLimit": "Workflow checks only; no product qualification or Node 25.5.0 equivalence."
+  },
+  "commands": [
+    {
+      "command": "node tools/verify-bootstrap.mjs",
+      "exitCode": 0,
+      "stdoutSha256": "55ad1c0632ca34898c6e09052e093c5101d2160f2e841bb5d5c78be448e3c0ac",
+      "stderr": "",
+      "executionRole": "Implementer bookkeeping validation, not independent review",
+      "result": {
+        "status": "PASS",
+        "errors": [],
+        "checks": 463,
+        "indexedFiles": 411,
+        "frozenFiles": 412
+      }
+    },
+    {
+      "command": "node handoff/tools/check-implementation-state.mjs --current",
+      "exitCode": 0,
+      "stdoutSha256": "c0dc87d1f23f1dbe23e245abf0dc34a0e70a610069109b9e46fda85cce820c8a",
+      "stderr": "",
+      "executionRole": "Implementer bookkeeping validation, not independent review",
+      "result": {
+        "status": "CURRENT_RECORD_VALID",
+        "errors": []
+      }
+    },
+    {
+      "command": "node --test --test-isolation=none tools/verify-bootstrap.test.mjs",
+      "exitCode": 0,
+      "stdoutSha256": "24aa44143897e07fe1340d880c8fcaf7768097f2797f36a7ee3f09406137ba35",
+      "stderr": "",
+      "executionRole": "Implementer bookkeeping validation, not independent review",
+      "result": {
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0
+      },
+      "stdout": "✔ BOOT01 accepted baseline and materialized current record remain valid and not-started (182.721238ms)\n✔ BOOT02 changing one frozen file is detected without executing changed checkers (188.447088ms)\n✔ BOOT03 unindexed files including dependency/scratch files are rejected (192.592063ms)\n✔ BOOT04 owner acceptance must bind the exact frozen index digest (99.97382ms)\n✔ BOOT05 external current locator cannot masquerade as the frozen template (107.710596ms)\n✔ BOOT06 not-started state cannot contain invented slice progress (119.973263ms)\n✔ BOOT07 changing status alone cannot invent a valid started project (107.067054ms)\n✔ BOOT08 inherited DEC-GRAPE-001 remains single and is not fabricated as implementation progress (102.564457ms)\n✔ BOOT09 staged qualification is an isolated byte copy; edits cannot alter accepted handoff or current state (175.947503ms)\nℹ tests 9\nℹ suites 0\nℹ pass 9\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1295.934356\n"
+    }
+  ],
+  "protectedBoundary": {
+    "allReviewedTrackedFilesByteIdentical": true,
+    "reviewedTrackedFilesCompared": 581,
+    "reviewedFileManifestSha256": "bc3c2d243c6e1ceaf7a7b6ca477ec31b0b16337e3a7d417a250a038de0804c17",
+    "handoffFilesCompared": 412,
+    "existingTrackedChanges": [],
+    "newFilesOnly": [
+      "production/evidence/coordinator/install-v1-acceptance/README.md",
+      "production/evidence/coordinator/install-v1-acceptance/independent-review.json",
+      "production/evidence/coordinator/install-v1-acceptance/human-owner-acceptance.json",
+      "production/evidence/coordinator/install-v1-acceptance/validation.json"
+    ],
+    "protectedGitTreeBindings": {
+      "workflow": "470e0f77545020fe0ca159c682d2f36d399fedbd",
+      "handoff": "9b242c6d720e4540435ee102bc53fd54fbe4aeac",
+      "production/src": "0d3ebb976e0cd910711d7e8ae76406affa1e29e9",
+      "production/tests": "9b1732b918d25788c2c76aca8237e33b8f78a889",
+      "production/tools": "9ba49926d685bbf37184acfb3a07b91f947a0544",
+      "production/evidence/acceptance": "d19b032296d0fdb9043f5f61a2dcccdf83a515d9",
+      "production/evidence/coordinator/install-v1": "d7634af1372337a9ec6e562be8441f390a0ec3e8",
+      "production/evidence/coordinator/install-v1-repair-m1": "c0989cc0b3af9e5c925e0a6881ee1caf3300bba6",
+      ".github": "2e31ee48418bb4e6897b58909b077502cb8f2188"
+    },
+    "protectedFileSha256": {
+      "AGENTS.md": "b89e79c79ed602dc063d15fe48d0e5031b591f3655e6e7fa4b1801e00435bb00",
+      "implementation-state.json": "664d3b12e2395906a2df259eba41775ecc4ab6ff3f84ed34c5d2c6d778379661",
+      "HANDOFF_ACCEPTANCE.json": "5ff88ef9e913f58d45599ab0a47a2d015714d6700d11032fc480a0c1b234336b",
+      "production/evidence/coordinator/install-v1/checkpoint.json": "12091de5008e5d23872f0f9a6dc6a70c65334c3370d2b7ff2ac696a0e847f828",
+      "production/evidence/coordinator/install-v1-repair-m1/checkpoint.json": "1800c910bcd34ccd495ecc3c613948eed3bfa582d498d756cf07f718bff6ce75",
+      "production/evidence/coordinator/install-v1-repair-m1/results.json": "2dfda4a3abcc6a54ba1ac16192bc36d1d6b69579dacb09c3a3b0dc6ba9df9fce"
+    },
+    "policyMatchesImplementationAndReviewedHead": true,
+    "policyBindings": [
+      {
+        "file": "AGENTS.md",
+        "sha256": "b89e79c79ed602dc063d15fe48d0e5031b591f3655e6e7fa4b1801e00435bb00",
+        "implementationRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+        "reviewedRevision": "560b542c106eb5234bf8deabcea7bdc47888a4a4"
+      },
+      {
+        "file": "workflow/COORDINATOR.md",
+        "sha256": "1846976cd142d4a43365210fb5d05a80e9aefc8738e29be43f91137dfc1fa88c",
+        "implementationRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+        "reviewedRevision": "560b542c106eb5234bf8deabcea7bdc47888a4a4"
+      },
+      {
+        "file": "workflow/RUNBOOK.md",
+        "sha256": "9eb480a3c45de5e90257dbd52d74c8e278ba5d12efb131597ecfb94762436f3d",
+        "implementationRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+        "reviewedRevision": "560b542c106eb5234bf8deabcea7bdc47888a4a4"
+      },
+      {
+        "file": "workflow/PACKETS.md",
+        "sha256": "01a0c4abc87bed12ecf172aadafbd01cf9736557e56733e986ccc9688af30e48",
+        "implementationRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+        "reviewedRevision": "560b542c106eb5234bf8deabcea7bdc47888a4a4"
+      },
+      {
+        "file": "workflow/CONFORMANCE.md",
+        "sha256": "36b858cccd73f7a5aaab12cda18a8f156d6b1f058319cd4c769ea9e5f7cb677c",
+        "implementationRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+        "reviewedRevision": "560b542c106eb5234bf8deabcea7bdc47888a4a4"
+      }
+    ],
+    "acceptedS01S02EvidenceHashesVerified": true,
+    "priorCheckpointBindingsVerifiedAgainstOwnHistoricalRevisions": true
+  },
+  "acceptancePackageBindings": {
+    "production/evidence/coordinator/install-v1-acceptance/README.md": "45e84897ffc9158a6081c4677ce6eb732f4ef67e6c63b8ebd15aa00d74584c23",
+    "production/evidence/coordinator/install-v1-acceptance/independent-review.json": "13564eb96fdb8561da24d9ff4c91fb44cbe10fc1c33b787fbebdd8b1e1c152e2",
+    "production/evidence/coordinator/install-v1-acceptance/human-owner-acceptance.json": "5612f99d97114c12bfbc812428fa562d3f93c0a41695be920441894bcb596e37"
+  },
+  "confirmations": {
+    "reviewedPolicyAndAGENTSUnchanged": true,
+    "originalInstallationAndM1EvidenceUnchanged": true,
+    "implementationStateUnchanged": true,
+    "handoffUnchanged": true,
+    "productSourceTestsToolsAndAcceptedEvidenceUnchanged": true,
+    "existingAutomationUnchanged": true,
+    "runtimeAutomationAdded": false,
+    "activeSlices": [],
+    "S03AndLaterUnauthorized": true,
+    "productSliceAcceptance": false,
+    "gateChange": false,
+    "productOrArchitectureDecision": false,
+    "mergeAuthorized": false,
+    "mergePerformed": false,
+    "bookkeepingDescendantIndependentlyReviewed": false
+  },
+  "notRerun": "No product suites/builds, historical conformance writers, or independent workflow re-review were run. Existing evidence remains bound to its own revisions."
+}

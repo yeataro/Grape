@@ -1,0 +1,944 @@
+{
+  "implementation": "5a2dec1772735ce259912a0c26a9e3dc8fd2a20a",
+  "acceptanceFamilies": [
+    {
+      "id": "AT-S03-01",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 library position keeps identity, semantic edit forks target and library ancestors and local refs atomically",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 contexts distinguish occurrences; nested scoped targets never revive after navigation and Undo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "AT-S03-01 two Canvas occurrences share parameters and keep independent navigation",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "AT-S03-01/04 real library first edit, position-only layout, spare output and nested deletion",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ]
+    },
+    {
+      "id": "AT-S03-02",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 interface rename/reorder/type/removal reconciles every caller once and Undo restores values/invalid edges/loss",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 nested resource callers including unused ancestors reconcile child interface",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 Make independent and nested interface removal preserve other callers and Undo",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 shared name and matrix defaults update both callers with one Undo",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ]
+    },
+    {
+      "id": "AT-S03-03",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 custom declared/state closure same-Graph remaps identities only and Undo/Redo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 custom declared/state closure cross-Graph remaps identities only and Undo/Redo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 owner collect/remap throws and escaping/incomplete references reject atomically with Redo preserved",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 encapsulation deduplicates crossing interfaces, shared generation is pure, Undo restores all references",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 whole frames travel through grouping and cross-Graph clipboard with fresh identities",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 accepted paste requires a valid destination and direct whole frames survive clipboard",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "G-LU-DATA-001 browser bad edge, capacity, stage and source rejection rolls back the complete transaction",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 browser cross-Graph paste imports independent closure and Undo removes it",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ]
+    },
+    {
+      "id": "AT-S03-04",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 layout proposal rejects navigation ABA, semantic fork and Undo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 scoped parameters and proposals from identical persistent IDs expire across a new load",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 nested input link ABA invalidates old edit tokens without changing History on rejection",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 shared same-key type changes reject stale caller tokens and removed handles never revive",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "AT-S03-04 nested IME/cancel/focus and navigation cleanup use the real Inspector",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "AT-S03-04 nested Inspector field removal cancels a focused draft and Undo mounts fresh controls",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ]
+    }
+  ],
+  "capabilities": [
+    {
+      "capabilityId": "LC-DATA-027",
+      "scope": "New local Value vec4 definition and caller; protected boundaries; oversized draft preserved until generation/save admission",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 New may retain a 257-node draft; generation and save reject it without losing the draft",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 nested delete and required boundary protection use the canonical Graph",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 New creates Value vec4 passthrough; shared rename retains instance names and no-op keeps library identity",
+          "log": "candidate-checks-01/unit.log"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-029",
+      "scope": "Position-only library edits preserve origin; semantic target and affected ancestor forks occur atomically",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 library position keeps identity, semantic edit forks target and library ancestors and local refs atomically",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 library snapshot position edit retains origin, first semantic edit forks and old source remains immutable",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 library ancestor traversal crosses local parents",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 local child semantic edit forks its library ancestor",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "AT-S03-01/04 real library first edit, position-only layout, spare output and nested deletion",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-030",
+      "scope": "Direct independence clones own network and node-bound authoring resource closure; ordinary dependencies stay shared",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 64-definition destination rejects independence and imported 65th atomically",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 custom resources follow encapsulation and direct independence, ordinary dependencies remain shared",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 direct make independent clones direct definition, shares dependencies and remaps own boundary",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 direct independence preserves nonowned state, declared references and typed frame resources",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 Make independent and nested interface removal preserve other callers and Undo",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-031",
+      "scope": "Encapsulation deduplicates crossing interfaces, protects source/boundary admission and moves whole frames/references; Group17 draft remains editable but unexecutable",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 Group17 retains a draft, compilation rejects per-direction limit, Undo restores original",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 grouping an existing caller preserves child-owned frame node addresses",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 custom resources follow encapsulation and direct independence, ordinary dependencies remain shared",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 encapsulation deduplicates crossing interfaces, shared generation is pure, Undo restores all references",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 source selection stays outside encapsulation; boundary-only grouping is no-op and preserves redo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 whole frames travel through grouping and cross-Graph clipboard with fresh identities",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 accepted paste requires a valid destination and direct whole frames survive clipboard",
+          "log": "candidate-checks-01/unit.log"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-032",
+      "scope": "Stable-key names/defaults update callers and disconnected outputs; overrides remain independent; composites have read-only default display",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 explicit override equal to default survives interface defaults and save/reload",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 disconnected output boundary follows shared output defaults",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 Structure Help is read-only and composite defaults and Escape retain saved values",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 shared name and matrix defaults update both callers with one Undo",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-033",
+      "scope": "Type changes reshape values, retain diagnostics/loss, and expire old edit tokens",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 interface rename/reorder/type/removal reconciles every caller once and Undo restores values/invalid edges/loss",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 nested resource callers including unused ancestors reconcile child interface",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 vector/matrix reshape retains override components and defaults follow interface defaults",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 shared same-key type changes reject stale caller tokens and removed handles never revive",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 shared name and matrix defaults update both callers with one Undo",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-034",
+      "scope": "Stable-key reorder/removal updates all callers and Undo restores them; Add is bounded per direction",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 interface rename/reorder/type/removal reconciles every caller once and Undo restores values/invalid edges/loss",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 explicit interface Add stops at16 per direction without erasing preserved oversized draft",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 Make independent and nested interface removal preserve other callers and Undo",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 direction-specific Add16 controls preserve draft and allow output creation",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-035",
+      "scope": "Boundary spare socket creates port and first edge in one Graph Undo entry under normal endpoint/type/capacity validation",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 spare-port creation and first edge are one Undo entry with stable keys",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "AT-S03-01/04 real library first edit, position-only layout, spare output and nested deletion",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-036",
+      "scope": "Occurrence-aware nested navigation, clickable breadcrumbs, independent Context selection/camera and stale lifetime cleanup",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 contexts distinguish occurrences; nested scoped targets never revive after navigation and Undo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 reusable definition cycles reject atomically including unused dependencies",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "AT-S03-01 two Canvas occurrences share parameters and keep independent navigation",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 clickable breadcrumbs discard stale interface drafts and selected ports",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-037",
+      "scope": "Shared validated name is distinct from instance name; no-op and Escape/cancel preserve canonical content",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 New creates Value vec4 passthrough; shared rename retains instance names and no-op keeps library identity",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 Structure Help is read-only and composite defaults and Escape retain saved values",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 shared name and matrix defaults update both callers with one Undo",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-043",
+      "scope": "Selected node/internal-edge clipboard with reachable typed closure and whole-frame policy",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 partial frames stay outside clipboard; pasted relative positions retain a common offset",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 custom declared/state closure same-Graph remaps identities only and Undo/Redo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 custom declared/state closure cross-Graph remaps identities only and Undo/Redo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 clipboard typed nominal and symbolic array closure remaps only semantic references",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 whole frames travel through grouping and cross-Graph clipboard with fresh identities",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 accepted paste requires a valid destination and direct whole frames survive clipboard",
+          "log": "candidate-checks-01/unit.log"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-044",
+      "scope": "Same-load paste reuses current ordinary resources, clones node-bound authoring closure, and preserves relative placement",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 partial frames stay outside clipboard; pasted relative positions retain a common offset",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 custom declared/state closure same-Graph remaps identities only and Undo/Redo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 same-load clipboard reuses current source; cross-graph remaps resources and preserves text",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 empty library paste preserves origin, selection-independent History and Redo",
+          "log": "candidate-checks-01/unit.log"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-045",
+      "scope": "Cross-Graph closure receives independent IDs; nested nominal types remap; identity/content conflicts reject",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 64-definition destination rejects independence and imported 65th atomically",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 custom declared/state closure cross-Graph remaps identities only and Undo/Redo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 same-load clipboard reuses current source; cross-graph remaps resources and preserves text",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 malformed resource envelopes, missing boundaries and nominal conflicts reject atomically",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 cross-Graph nominal closure remaps nested structures and Undo removes the full insertion",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 browser cross-Graph paste imports independent closure and Undo removes it",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-046",
+      "scope": "Full transaction rollback on malformed/capacity/stage/source/dependency/codec failures; preserves resources, History, Redo and notifications",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 nested nodes overflow rejects before paste publication",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 nested edges overflow rejects before paste publication",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 owner collect/remap throws and escaping/incomplete references reject atomically with Redo preserved",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 late bad edge, escaping refs, forbidden source and missing closure reject without nodes/resources/history/notifications",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 clipboard rejects forged hydrated plans and invalid edge evidence",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 packet-wide network identity collisions and malformed reused resource envelopes reject",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "G-LU-DATA-001 browser bad edge, capacity, stage and source rejection rolls back the complete transaction",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-047",
+      "scope": "Local symbolic array/nominal type closure remaps declared semantics only",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 symbolic extents require int/uint sources, only outer dimension and pure compilation",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 custom declared/state closure same-Graph remaps identities only and Undo/Redo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 custom declared/state closure cross-Graph remaps identities only and Undo/Redo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 clipboard typed nominal and symbolic array closure remaps only semantic references",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 cross-Graph nominal closure remaps nested structures and Undo removes the full insertion",
+          "log": "candidate-checks-01/unit.log"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-048",
+      "scope": "Graph-owned generated Structures with stable fields and name/description/count/fixed-array/depth/expansion validation",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 structure authoring validates count, names, description, nested fixed arrays, recursion/depth and expansion",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 large external array declarations survive metadata edits; materialization remains bounded",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 Structure description and fixed array controls keep field identity across cancel/reorder",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-049",
+      "scope": "Detached Structure drafts cancel or fail stale confirmation without publication; reorder retains field IDs",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 structure drafts retain stable fields, reject recursion and block deletion while referenced",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 structure authoring draft cancel, reorder and stale confirmation",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 Structure description and fixed array controls keep field identity across cancel/reorder",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-050",
+      "scope": "Shape changes preserve invalid-field/edge evidence and block generation; Undo restores the prior shape",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 structure emission is read-only, nominally declared once, field deletion preserves invalid edges and Undo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "AT-S03-04 nested Inspector field removal cancels a focused draft and Undo mounts fresh controls",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-051",
+      "scope": "Structure references, read-only Help fields/description/usage, deletion usage guard and stale confirmation",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 structure drafts retain stable fields, reject recursion and block deletion while referenced",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 structure authoring draft cancel, reorder and stale confirmation",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 Structure Help is read-only and composite defaults and Escape retain saved values",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-058",
+      "scope": "Direct source nodes stay outside grouping; new nested add/paste admission rejects; serialized nested source is preserved",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 persisted nested source is preserved while new nested source admission remains rejected",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 source selection stays outside encapsulation; boundary-only grouping is no-op and preserves redo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 source admission cannot be bypassed by nested add, grouping or pasted nodes",
+          "log": "candidate-checks-01/unit.log"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-DATA-062",
+      "scope": "Portable scalar/vector/matrix and numeric array transfer; composite same-lifetime reuse; cross-load source admission and complete typed closure",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 scalar/vector/matrix sources transfer; composite source reuses only within its source lifetime",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 same-load clipboard reuses current source; cross-graph remaps resources and preserves text",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 source transfer uses actual load identity and reopened documents cannot forge same-load reuse",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 inline numeric source arrays do not inherit native path-length limits",
+          "log": "candidate-checks-01/unit.log"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-NODE-368",
+      "scope": "Nominal Structure declaration and fixed/nested array validation; outer-only int/uint symbolic extents",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 symbolic extents require int/uint sources, only outer dimension and pure compilation",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 structure emission is read-only, nominally declared once, field deletion preserves invalid edges and Undo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 structure authoring validates count, names, description, nested fixed arrays, recursion/depth and expansion",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 large external array declarations survive metadata edits; materialization remains bounded",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 type tokens retain eight dimensions and reject extra tuple fields",
+          "log": "candidate-checks-01/unit.log"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-NODE-369",
+      "scope": "Subgraph/Structure dynamic schemas reconcile stable keys, values, diagnostics and scoped controls",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 interface rename/reorder/type/removal reconciles every caller once and Undo restores values/invalid edges/loss",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 structure emission is read-only, nominally declared once, field deletion preserves invalid edges and Undo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 shared same-key type changes reject stale caller tokens and removed handles never revive",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "AT-S03-04 nested Inspector field removal cancels a focused draft and Undo mounts fresh controls",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    },
+    {
+      "capabilityId": "LC-NODE-374",
+      "scope": "Read-only nested/nominal generation; invalid field or symbolic length prevents generation without mutating source",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 symbolic extents require int/uint sources, only outer dimension and pure compilation",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 encapsulation deduplicates crossing interfaces, shared generation is pure, Undo restores all references",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 structure emission is read-only, nominally declared once, field deletion preserves invalid edges and Undo",
+          "log": "candidate-checks-01/unit.log"
+        }
+      ],
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_INDEPENDENT_REVIEW_AND_HUMAN_ACCEPTANCE"
+    }
+  ],
+  "gates": [
+    {
+      "id": "G-LU-DATA-001",
+      "scope": "Real-browser local clipboard transaction/admission; complete rollback on malformed edge, capacity, stage/source and missing-dependency failures",
+      "evidence": [
+        {
+          "kind": "browser",
+          "title": "AT-S03-03 browser clipboard success, injected late rejection and Unicode text preserved",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "G-LU-DATA-001 browser bad edge, capacity, stage and source rejection rolls back the complete transaction",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "S03 browser cross-Graph paste imports independent closure and Undo removes it",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "residual": "Other/native transaction branches inherited",
+      "disposition": "SCOPED_IMPLEMENTER_EVIDENCE_AVAILABLE; NOT_RESOLVED_WITHOUT_HUMAN_ACCEPTANCE"
+    },
+    {
+      "id": "G-LU-DATA-004",
+      "scope": "Local clipboard encoded UTF-8 512000 accepted /512001 rejected for ASCII, CJK and non-BMP",
+      "evidence": [
+        {
+          "kind": "browser",
+          "title": "G-LU-DATA-004 browser local clipboard UTF-8 budget x",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "G-LU-DATA-004 browser local clipboard UTF-8 budget 中",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "G-LU-DATA-004 browser local clipboard UTF-8 budget 🍇",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "residual": "Other/Host ingress budgets inherited",
+      "disposition": "SCOPED_IMPLEMENTER_EVIDENCE_AVAILABLE; NOT_RESOLVED_WITHOUT_HUMAN_ACCEPTANCE"
+    },
+    {
+      "id": "G-EXTENSION-WIDGET-SCOPE",
+      "scope": "Nested Inspector via same public target; retarget, cancel, synthetic composition, focus, port mutation, lifetime and disposal",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "S03 layout proposal rejects navigation ABA, semantic fork and Undo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 scoped parameters and proposals from identical persistent IDs expire across a new load",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 nested input link ABA invalidates old edit tokens without changing History on rejection",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 shared same-key type changes reject stale caller tokens and removed handles never revive",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "browser",
+          "title": "AT-S03-04 nested IME/cancel/focus and navigation cleanup use the real Inspector",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "AT-S03-01 two Canvas occurrences share parameters and keep independent navigation",
+          "log": "candidate-browser-01/browser-results.json"
+        },
+        {
+          "kind": "browser",
+          "title": "AT-S03-04 nested Inspector field removal cancels a focused draft and Undo mounts fresh controls",
+          "log": "candidate-browser-01/browser-results.json"
+        }
+      ],
+      "residual": "Full S06 widget/accessibility/platform coverage not claimed",
+      "disposition": "SCOPED_IMPLEMENTER_EVIDENCE_AVAILABLE; NOT_RESOLVED_WITHOUT_HUMAN_ACCEPTANCE"
+    },
+    {
+      "id": "G-HANDOFF-CQ-OWNERSHIP",
+      "scope": "Canonical Graph/History; read-only generation; declared owner callbacks; independent persistence",
+      "evidence": [
+        {
+          "kind": "unit/conformance",
+          "title": "production ownership manifest covers every source and rejects mutation/platform/extension violations",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 custom declared/state closure same-Graph remaps identities only and Undo/Redo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 custom declared/state closure cross-Graph remaps identities only and Undo/Redo",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 owner collect/remap throws and escaping/incomplete references reject atomically with Redo preserved",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 encapsulation deduplicates crossing interfaces, shared generation is pure, Undo restores all references",
+          "log": "candidate-checks-01/unit.log"
+        },
+        {
+          "kind": "unit/conformance",
+          "title": "S03 structure emission is read-only, nominally declared once, field deletion preserves invalid edges and Undo",
+          "log": "candidate-checks-01/unit.log"
+        }
+      ],
+      "residual": "Frozen conflicting source summaries remain quarantined, not rewritten",
+      "disposition": "SCOPED_IMPLEMENTER_EVIDENCE_AVAILABLE; NOT_RESOLVED_WITHOUT_HUMAN_ACCEPTANCE"
+    }
+  ],
+  "limitations": [
+    "S03 scope is host-free Windows x64 Chromium 151.0.7922.34 / Playwright 1.62.1 at 1440x1000; no native OS IME, touch/iPad/Safari, physical GPU, TouchDesigner or other Host qualification.",
+    "LC-NODE-368/369/374 shared S05 catalog branches (Router/array_get/replace/length/array_create, other dynamic nodes and provider/native types) are not claimed by S03 nested/Structure tests.",
+    "LC-DATA-045/062 native TOP/sampler slot integration and native path-string 2048/constructor4096 branches remain native integration scope; the numeric inline-array 2049 test does not certify native path acceptance.",
+    "S04 Personal/library package workflows and symbolic-array policy remain separate. G-LU-DATA-007/G-PD-1 are not closed.",
+    "S02 AT-S02-03 legacy compatibility remains NOT DELIVERED/BLOCKED and G-VERSION-COMPAT remains unresolved. Its regression test verifies the rejection boundary, not compatibility delivery.",
+    "Performance is one recorded 200-node model sample, run alongside build/unit/conformance checks. No frame-rate or unbounded large-graph claim.",
+    "Inherited DEC-GRAPE-001 domain-separated History and HC-001 quarantine remain unchanged. S06 all-widget/accessibility/device matrices remain unqualified.",
+    "No independent reviewer verdict, Human acceptance, merge authority or later Slice authorization is asserted by this implementer submission."
+  ]
+}

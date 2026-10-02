@@ -1,6 +1,6 @@
-# S01 implementation evidence — awaiting review
+# S01 repair evidence — awaiting targeted re-review
 
-This is an Implementer submission, **not accepted evidence or a completed slice**. Root state keeps S01 active, `completedSlices` empty, and `acceptedEvidence` empty. No later slice or mixed History was started. Nothing was merged or published.
+This is an Implementer submission, **not accepted evidence or a completed slice**. Root state keeps S01 active, `completedSlices` empty, and `acceptedEvidence` empty. The independent review returned FAIL; this submission repairs M1 and N1 and awaits targeted re-review. No later slice or mixed History was started. Nothing was merged.
 
 ## Result and reproduction
 
@@ -10,7 +10,18 @@ The production entry provides the IH-005 Host-free image Graph → Float/Multipl
 
 Declared environment: Node **25.5.0**, Linux x64, Chromium **151.0.7922.34**, Playwright **1.62.1**, headless browser, viewport **1440 × 1000**. The browser suite exercises real DOM layout, accessibility names/focus, keyboard and pointer dispatch, IndexedDB transactions, downloads, file open, and adapter fault handling. It does not claim physical-device or native OS IME execution.
 
-Final execution: **37 model/conformance tests, 14 Chromium tests, 9 root bootstrap tests; zero failures or skips**. The production build, 29-file ownership check, module fingerprints, frozen Handoff integrity, and current-state validation passed. Tested production revision: `949527eaa0a8b281de3a39862976ca9180579d1c`.
+Final repair execution: **42 model/conformance tests, 17 Chromium tests, 9 root bootstrap tests; zero failures or skips**. The production build, 30-file ownership check, module fingerprints, frozen Handoff integrity, and current-state validation passed. Tested repair implementation revision: `c1ecb3cd1a4cd1685e3fb1d9ba2a17b4108e68c3`. The prior review checkpoint and original implementation remain available in Git history; their earlier passing tests did not detect M1 and do not constitute acceptance.
+
+## Review findings repaired
+
+- **M1 (acceptance blocking):** both Float Value and Multiply B originally reported success while emitting `1e+21.0`. The direct counterexamples were run before the fix and both failed; [m1-counterexample-initial.log](m1-counterexample-initial.log) retains that execution. A shared pure formatter now emits `1.0e+21`, placing the decimal point in the significand before any exponent, across Node emission and scalar/vector local-input lowering. It preserves existing finite/float32 admission without rounding or clamping model values. Five added model tests cover both counterexamples, ordinary integers/decimals/signs/exponents, 2,040 float32 bit patterns spanning all finite exponent bins, representative subnormal/normal/max-finite boundaries, and unchanged admission/rejection. The syntax oracle is the GLSL floating-constant grammar, not a GPU qualification claim.
+- **M1 browser evidence:** two added real-Inspector tests commit `1e21` independently in Float Value and Multiply B and assert successful generation with valid literals. Screenshots: [m1-float.png](m1-float.png), [m1-multiply.png](m1-multiply.png).
+- **N1:** a primary-button guard prevents middle/right pointerdown from starting node movement. One added Chromium test verifies unchanged node position, Graph revision and saved baseline for both buttons, then proves primary drag and its single Undo still work. No pan UX or deferred interaction redesign was added.
+- **N2:** PR #1's description is updated at publication with the repair implementation revision, evidence commit/pushed HEAD, current counts and links pinned to that checkpoint. This repository record deliberately does not self-reference its containing evidence commit.
+
+The Node module source changed, so its exact fingerprint was recomputed and checked. Older documents pinned to the previous module identity use existing missing-definition recovery; no migration, silent identity alias or external document-stability promise was added. The Human Owner's intervening Pages workflow commit `05d152d46570bc4e4ebe2af3412be3e153e31a20` is preserved unchanged.
+
+Deferred visual design, drag-release connection UX, temporary wire preview, grid/camera visuals and page-layout polish remain untouched. The repaired behavior is submitted for independent review; no reviewer acceptance or Gate resolution is inferred from test results.
 
 ## Acceptance mapping
 

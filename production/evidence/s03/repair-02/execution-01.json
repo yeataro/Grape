@@ -1,0 +1,93 @@
+{
+  "implementation": "80ee116b8f809c9160aa9cc311801cce15923cee",
+  "environment": {
+    "node": "v25.5.0",
+    "platform": "win32",
+    "architecture": "x64",
+    "osRelease": "10.0.26200",
+    "playwright": "1.62.1",
+    "chromium": "151.0.7922.34",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "browserMode": "Headless Chromium with actual DOM events; synthetic IME events. WebGL2 compiler tested for supported Structure-array shaders. No native OS IME, touch/device, physical GPU or Host qualification.",
+    "processPermissions": "The full round2 browser run used legitimately escalated normal Windows child-process permissions and completed without teardown hang."
+  },
+  "sourceManifest": {
+    "file": "production/evidence/s03/repair-02/source-config-manifest-01.json",
+    "sha256": "4c736d46bf6267b0d1401945f155afcc0423dffb9c950a72eb80aa7f3bbc78d6",
+    "bytes": 13594
+  },
+  "checks": [
+    {
+      "command": "npm --prefix production test",
+      "exitCode": 0,
+      "tests": 156,
+      "passed": 156,
+      "failed": 0,
+      "skipped": 0,
+      "log": "production/evidence/s03/repair-02/unit-final-01.log"
+    },
+    {
+      "command": "npm --prefix production run build",
+      "exitCode": 0,
+      "log": "production/evidence/s03/repair-02/build-final-01.log"
+    },
+    {
+      "command": "npm --prefix production run conformance",
+      "exitCode": 0,
+      "checkedSourceFiles": 38,
+      "log": "production/evidence/s03/repair-02/conformance-final-01.log"
+    },
+    {
+      "command": "GRAPE_EVIDENCE_DIR=evidence/s03/repair-02/browser-final-01 node node_modules/@playwright/test/cli.js test --output=evidence/s03/repair-02/browser-final-01/test-results",
+      "cwd": "production",
+      "exitCode": 0,
+      "tests": 48,
+      "passed": 48,
+      "failed": 0,
+      "skipped": 0,
+      "sessionId": 57372,
+      "durationMs": 44491.928,
+      "log": "production/evidence/s03/repair-02/browser-final-01/console.log",
+      "results": "production/evidence/s03/repair-02/browser-final-01/browser-results.json"
+    },
+    {
+      "command": "node tools/verify-bootstrap.mjs",
+      "exitCode": 0,
+      "checks": 463,
+      "indexedFiles": 411,
+      "frozenFiles": 412,
+      "log": "production/evidence/s03/repair-02/bootstrap-final-01.log"
+    },
+    {
+      "command": "node --test tools/verify-bootstrap.test.mjs",
+      "exitCode": 0,
+      "tests": 9,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "log": "production/evidence/s03/repair-02/bootstrap-tests-final-01.log"
+    },
+    {
+      "command": "node handoff/tools/check-implementation-state.mjs --current",
+      "exitCode": 0,
+      "status": "CURRENT_RECORD_VALID",
+      "log": "production/evidence/s03/repair-02/state-final-01.log"
+    },
+    {
+      "command": "node --experimental-transform-types production/tools/s03-performance.ts",
+      "exitCode": 0,
+      "scope": "single200-node model sample only",
+      "log": "production/evidence/s03/repair-02/performance-final-01.log"
+    }
+  ],
+  "environmentHistory": "Original teardown operation and prior repair runs remain recorded unchanged. Round2 used established escalated process permission once, completed exit0, no teardown retry or failure. Checks session62167 also completed0.",
+  "repairBudget": {
+    "findingGroup": "S03-FR-7c6c6ce-01:FR01-FR03-EG01",
+    "round": 2,
+    "unsuccessfulBefore": 1
+  },
+  "publication": "Local commits only; explicit Human publication permission remains pending."
+}

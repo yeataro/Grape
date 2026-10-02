@@ -1,0 +1,25 @@
+{
+  "task": "/root/s03_fresh_rereview_01/static_portable_audit",
+  "role": "Read-only focused static subreviewer",
+  "context": "fork_turns=none with normalized bounded dispatch, exact isolated R and no implementation conversation",
+  "reportPersistence": "Parent reviewer persisted the actual subagent final response in this JSON; subagent performed no writes and no tests.",
+  "candidateR": "cdc6d75389f68bb3a01b519f4005a72e02e4e84d",
+  "result": "EG01 remains open for one concrete contract mismatch; no other definite defect found in this focused static audit.",
+  "finding": {
+    "id": "S03-EG-01",
+    "source": "production/src/modules/networks.ts:325-335",
+    "observation": "Flat float/vec2-4 constant arrays are admitted across Graph/load boundaries. Accepted capability-coverage.json:11515 limits numeric constant/uniform clipboard validation to scalar/vector/matrix; lines11552-11553 preserve narrower cross-Graph behavior. Existing positive tests at s03.test.ts:227-256 and1321-1346 reinforce the incorrect admission."
+  },
+  "positiveBranches": [
+    "networks.ts346-352: native path clipboard2048, construction/document4096",
+    "networks.ts360-366, sdk/type-tokens.ts16-29, definitions/types.ts253-262: flat numeric native elements, expression rejection and integer-source length validation",
+    "networks.ts387-418: exact owner filtering, TOP source+origin match, existing binding/default preservation, vacant slot allocation",
+    "networks.ts420-425: minimal vacant specialization ID",
+    "transfer.ts409-430 and networks.ts356-358: detached descriptors, target kind, packet types, destination resources and exact GraphKind rejection",
+    "graph.ts1262-1288 and427-442: strict paste validation followed by atomic publication/history"
+  ],
+  "inspectionOnly": true,
+  "testsExecutedBySubagent": false,
+  "nativeRuntimeQualification": "NOT_PERFORMED",
+  "productAcceptance": "NOT_GRANTED"
+}

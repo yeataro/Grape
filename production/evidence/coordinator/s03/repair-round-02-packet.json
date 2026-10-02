@@ -1,0 +1,321 @@
+{
+  "packetVersion": 1,
+  "packetType": "TARGETED_REPAIR_OR_REREVIEW",
+  "mode": "REPAIR",
+  "packetId": "S03-REPAIR-FR01-GROUP-ROUND2",
+  "actionKey": "yeataro/Grape:S03:repair:cdc6d75389f68bb3a01b519f4005a72e02e4e84d:FR01-group:round2",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+  "acceptedMain": "3a59aeeeddb71a06a1172c85016ad06aeb59f34f",
+  "expectedWorkHead": "cdc6d75389f68bb3a01b519f4005a72e02e4e84d",
+  "PR": "Not created; remote publication permission pending",
+  "authorizationRef": "S03-AUTH-3a59aee-01 and current Human explicit S03 continuation including bounded repairs",
+  "sliceId": "S03",
+  "writer": "/root/s03_implementer_resume resumes exclusive product/state/evidence ownership after terminal Fresh Reviewer result",
+  "originalReview": {
+    "file": ".verification/s03-independent-rereview-01/INDEPENDENT_REVIEW_RESULT.json",
+    "sha256": "dc5cef57b813217225306ecad65cedd5bef6286cb49224a816ca5735f97e62e7",
+    "reviewId": "S03-FR-cdc6d75-R1",
+    "evidenceManifest": {
+      "file": ".verification/s03-independent-rereview-01/review-evidence-manifest.json",
+      "sha256": "7bcd20ae59a98a15dbc5f282bf31a113bd9df2c73b12c786249e127b85ffa084",
+      "verifiedFiles": 60
+    }
+  },
+  "findingGroup": "S03-FR-7c6c6ce-01:FR01-FR03-EG01",
+  "findingIds": [
+    "S03-EG-01"
+  ],
+  "round": 2,
+  "unsuccessfulRepairRereviewRoundsBefore": 1,
+  "retryBudget": "Retain this finding group; at most3 unsuccessful repair/re-review rounds; no reset by renaming or new evidence.",
+  "priorI": "572e89d41586c85287f45e3122f1cd989b2370d2",
+  "priorR": "cdc6d75389f68bb3a01b519f4005a72e02e4e84d",
+  "currentExpectedHead": "cdc6d75389f68bb3a01b519f4005a72e02e4e84d",
+  "counterexamples": [
+    {
+      "id": "S03-EG-01",
+      "severity": "P2",
+      "title": "Cross-Graph clipboard still admits inline composite constants outside the accepted numeric source rule",
+      "status": "OPEN_PARTIALLY_REPAIRED",
+      "affectedScope": [
+        "LC-DATA-045",
+        "LC-DATA-062",
+        "AT-S03-03"
+      ],
+      "source": [
+        {
+          "file": "production/src/modules/networks.ts",
+          "start": 325,
+          "end": 335
+        },
+        {
+          "file": "production/tests/unit/s03.test.ts",
+          "start": 227,
+          "end": 256
+        },
+        {
+          "file": "production/tests/unit/s03.test.ts",
+          "start": 1321,
+          "end": 1346
+        }
+      ],
+      "counterexample": {
+        "script": "independent-probes.ts",
+        "cases": [
+          {
+            "id": "EG01-inline-source-admission",
+            "type": "array@[\"glsl.float\",2]",
+            "value": [
+              1,
+              2
+            ],
+            "expected": "same-load reuse; cross-graph and cross-load rejection without publication",
+            "sameLoadResourceCount": 1,
+            "sourceGraphId": "id-1",
+            "destinationGraphId": "independent-destination",
+            "error": null,
+            "accepted": true,
+            "beforeRevision": 2,
+            "afterRevision": 3,
+            "beforeResources": 0,
+            "afterResources": 1,
+            "historyDelta": 1,
+            "redoBefore": true,
+            "redoAfter": false,
+            "notifications": 1,
+            "diagnostics": [],
+            "originalSourceUnchanged": true,
+            "reopenedError": null,
+            "reopenedRevisionDelta": 1,
+            "contractConforms": false
+          },
+          {
+            "id": "EG01-inline-source-admission",
+            "type": "array@[\"glsl.vec2\",2]",
+            "value": [
+              [
+                1,
+                2
+              ],
+              [
+                3,
+                4
+              ]
+            ],
+            "expected": "same-load reuse; cross-graph and cross-load rejection without publication",
+            "sameLoadResourceCount": 1,
+            "sourceGraphId": "id-1",
+            "destinationGraphId": "independent-destination",
+            "error": null,
+            "accepted": true,
+            "beforeRevision": 2,
+            "afterRevision": 3,
+            "beforeResources": 0,
+            "afterResources": 1,
+            "historyDelta": 1,
+            "redoBefore": true,
+            "redoAfter": false,
+            "notifications": 1,
+            "diagnostics": [],
+            "originalSourceUnchanged": true,
+            "reopenedError": null,
+            "reopenedRevisionDelta": 1,
+            "contractConforms": false
+          },
+          {
+            "id": "EG01-inline-source-admission",
+            "type": "glsl.vec2",
+            "value": [
+              1,
+              2
+            ],
+            "expected": "numeric control cross-graph success",
+            "sameLoadResourceCount": 1,
+            "sourceGraphId": "id-1",
+            "destinationGraphId": "independent-destination",
+            "error": null,
+            "accepted": true,
+            "beforeRevision": 2,
+            "afterRevision": 3,
+            "beforeResources": 0,
+            "afterResources": 1,
+            "historyDelta": 1,
+            "redoBefore": true,
+            "redoAfter": false,
+            "notifications": 1,
+            "diagnostics": [],
+            "originalSourceUnchanged": true,
+            "reopenedError": null,
+            "reopenedRevisionDelta": 1,
+            "contractConforms": true
+          },
+          {
+            "id": "EG01-inline-source-admission",
+            "type": "glsl.mat2",
+            "value": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "expected": "numeric control cross-graph success",
+            "sameLoadResourceCount": 1,
+            "sourceGraphId": "id-1",
+            "destinationGraphId": "independent-destination",
+            "error": null,
+            "accepted": true,
+            "beforeRevision": 2,
+            "afterRevision": 3,
+            "beforeResources": 0,
+            "afterResources": 1,
+            "historyDelta": 1,
+            "redoBefore": true,
+            "redoAfter": false,
+            "notifications": 1,
+            "diagnostics": [],
+            "originalSourceUnchanged": true,
+            "reopenedError": null,
+            "reopenedRevisionDelta": 1,
+            "contractConforms": true
+          }
+        ],
+        "steps": [
+          "Create a source with inline constant type array@[\"glsl.float\",2] and value [1,2], plus its source reference node; copySelection.",
+          "Paste in the same Graph/load: source ID reuse succeeds and resources stay1, as required.",
+          "Paste the same packet into a genuine different Graph with no resources and a seeded Redo entry.",
+          "Repeat after reopening the source Graph into a new load; analogous vec2[2] case also exercised."
+        ],
+        "expected": "Cross-Graph and cross-load numeric constant/uniform admission is limited to scalar/vector/matrix. Inline array constants reject atomically, retaining destination document/revision/History/Redo and no publication. Same Graph/load reuse remains allowed. Native-array descriptors retain their separate accepted type/path rules.",
+        "actual": "float[2] and vec2[2] cross-Graph and fresh-load imports succeed without diagnostics. Cross target revision2->3, resources0->1, History+1, Redo becomes false, one notification. Scalar vector/matrix controls continue to succeed.",
+        "evidence": [
+          "independent-probe-results.json",
+          "independent-probes.log",
+          "static-portable-audit.json"
+        ]
+      },
+      "contract": [
+        {
+          "file": "handoff/data/capability-coverage.json",
+          "line": 11515,
+          "requirement": "LC-DATA-062 numeric constant/uniform transfer checks scalar/vector/matrix only; general composite constants have no equivalent decode."
+        },
+        {
+          "file": "handoff/data/capability-coverage.json",
+          "line": 11552,
+          "requirement": "Same-Graph reuse may succeed while cross-Graph identical content rejects; retain this observable distinction."
+        },
+        {
+          "file": "handoff/data/capability-coverage.json",
+          "line": 11553,
+          "requirement": "Intent of limitation is unknown; do not self-correct it."
+        },
+        {
+          "file": "production/evidence/coordinator/s03/authorization.json",
+          "requirement": "Complete accepted S03 oracle scope; no contract weakening or new product decisions."
+        }
+      ],
+      "positiveRepairCoverage": {
+        "observed": "Portable source provider now delivers the previously omitted path and identity branches; blanket native exclusion is withdrawn. Fresh149-unit and46-browser runs confirm path2048/2049 and constructor4096/4097, allowed native elements/literal and typed lengths, invalid element/expression/owner lengths, TOP independent declaration IDs with source+origin slot/current-default reuse, distinct source/origin slot allocation, minimal vacant specialization0,2->1, exact unavailable target/owner and throwing callback rollback.",
+        "evidence": [
+          "unit.log",
+          "browser/browser-results.json",
+          "browser/repair-source-clipboard.png",
+          "static-portable-audit.json"
+        ]
+      },
+      "requiredRepair": "Restore the accepted narrow inline numeric clipboard admission through the existing owner source policy. Keep valid construction/load and same-load reuse behavior; keep separately supported native-array descriptors. Replace conflicting positive composite-constant cross-paste expectations with explicit atomic rejection controls and retain numeric scalar/vector/matrix/native success coverage. No new scope decision is necessary to implement the existing rule.",
+      "classification": "Unresolved branch of existing EG01, same finding group and round; not a new retry identity or native-runtime limitation."
+    }
+  ],
+  "requiredEvidenceGaps": [
+    {
+      "id": "S03-EG-01",
+      "status": "OPEN_WITH_CONCRETE_COUNTEREXAMPLE",
+      "scope": [
+        "LC-DATA-045",
+        "LC-DATA-062"
+      ],
+      "remaining": "No conforming negative evidence for rejected inline composite numeric cross-Graph/cross-load source transfer; current source and tests explicitly admit it. Previously missing native descriptor branch evidence is now supplied and freshly verified.",
+      "evidence": [
+        "independent-probe-results.json",
+        "static-portable-audit.json"
+      ]
+    }
+  ],
+  "allowedRepairScope": "Restore LC-DATA-062 scalar/vector/matrix-only inline numeric clipboard admission in existing exact-owner source policy; reject composite inline constants across Graph/new-load while preserving construction/document validity and same-Graph+load reuse. Retain independently verified native-source descriptor rules and all other S03 behavior. Correct conflicting positive tests; add counterexample/atomicity/adjacent regression evidence. No redesign or scope expansion.",
+  "exclusions": [
+    "No S04 Personal or S05 catalog expansion",
+    "No actual TD runtime integration required by EG01",
+    "No weakening of admission or scope to hide defects",
+    "No accepted evidence/policy/handoff mutations",
+    "No acceptance, merge, later Slice or GitHub publication pending permission"
+  ],
+  "inputRefs": [
+    "README.md, AGENTS.md, workflow/COORDINATOR.md, RUNBOOK.md, PACKETS.md and current state",
+    "Exact latest independent report and evidence tree .verification/s03-independent-rereview-01 (frozen)",
+    "handoff/data/capability-coverage.json LC-DATA-062 lines11515,11552-11553",
+    "Current R and prior repair submission production/evidence/s03/repair-01/submission-01.json"
+  ],
+  "requestedAction": "Sole maintainer resumes after terminal Reviewer. First verify exactHEAD and report/evidence hashes. Preserve full reviewer output (including manifest) byte-for-byte in a new repair-02/prior-rereview directory with relocation map. Persist this dispatch+launch ack under coordinator evidence. Implement bounded EG01 repair, meaningful tests, required checks in new explicit S03 directories, local implementation/evidence commits I/R and submission, then freeze. No publication while explicit GitHub permission remains pending.",
+  "reviewMetadata": "Actual new Reviewer report has24 explicit capability IDs and correct FAIL disposition; no supplement or invented Reviewer claims needed.",
+  "environment": "151.0.7922.34 Chromium / Node25.5.0 / Windows x64; use legitimately escalated browser to avoid known resolved teardown issue",
+  "verification": "Independent counterexamples inline float[2]/vec2[2] cross-Graph/new-load rejection preserving snapshot/revision/History/Redo/publication. Verify scalar/vector/matrix successes, same-load reuse, separately legal native-array descriptors, TOP identity/path/provider regressions, closedFR01..03 regressions. Build, unit/conformance, fullbrowser androot checks; source/build/protected/evidence hashes; explicit fresh browser dirs and legitimate escalated execution.",
+  "repairSubmission": "New exact I/R, source/build/evidence/coverage hashes, findings mapping and self-check execution; no independent PASS claim",
+  "reReviewCoverage": "Retained EG01 concrete counterexamples and affected source/provider/clipboard regressions; ensure FR01..03 stay closed and exact new candidate required scope checks.",
+  "outputLocation": "production/evidence/s03/repair-02 and new coordinator receipts; preserve all original artifacts",
+  "stopConditions": [
+    "Actual authority/contract conflict",
+    "Unexpected branch/head divergence",
+    "Required runtime unresolved within retained budget",
+    "Ready repaired submission; freeze product writes"
+  ],
+  "provenance": "Actual fresh Reviewer FAIL validated against exact I/R and60 evidence hashes. Round1 unsuccessful=1 for same group; no budget reset. Reviewer and subreviewer terminal; product writer remains sole original Implementer.",
+  "limitations": "Technical FAIL is not acceptance; current state remains active S03",
+  "recordedAt": "2026-10-02T18:10:32.924Z",
+  "closedFindingsToRetain": [
+    {
+      "id": "S03-FR-01",
+      "status": "CLOSED_AT_REVIEWED_R",
+      "closure": {
+        "observed": "Original nested length3/length2 Structure case now fails explicitly PROFILE_TYPE with zero artifacts. Browser freshly compiles supported one-dimensional Structure vertex+fragment, preserves canonical snapshot; admitted nested authoring remains supported, ES300 generation is unavailable as allowed by expected behavior.",
+        "evidence": [
+          "counterexamples-results.json",
+          "nested-array-compilation.json",
+          "browser/repair-webgl2.json"
+        ],
+        "limits": "No nested-array lowering or physical GPU/other-profile qualification claimed."
+      }
+    },
+    {
+      "id": "S03-FR-02",
+      "status": "CLOSED_AT_REVIEWED_R",
+      "closure": {
+        "observed": "Original mixed parent/shared-child owner reference succeeds. Independent probes also validate transitively cloned child variant: parent refs remap, child refs preserve/remap consistently, payload literal stays identical, exactly one publication and History entry, Undo/Redo exact documents. Full suite executes missing-address rejection and rollback.",
+        "evidence": [
+          "counterexamples-results.json",
+          "independent-probe-results.json",
+          "unit.log"
+        ],
+        "limits": "Bounded exact-owner declared/state codec fixture, not arbitrary third-party side-effect safety."
+      }
+    },
+    {
+      "id": "S03-FR-03",
+      "status": "CLOSED_AT_REVIEWED_R",
+      "closure": {
+        "observed": "Original inner edit producing dependent depth17 rejects STRUCTURE_DEPTH at unchanged revision18. Direct outer-depth control rejects. Fresh full suite confirms Redo/History/publication preservation. Independent adjacent dependent expansion65536->131072 rejects STRUCTURE_EXPANSION with exact snapshot and Redo retained, zero events.",
+        "evidence": [
+          "structure-depth-results.json",
+          "independent-probe-results.json",
+          "unit.log"
+        ],
+        "limits": "Metadata-only preservation of existing external large-array shapes retained; no broader catalog admission claim."
+      }
+    }
+  ]
+}

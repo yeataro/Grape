@@ -1,0 +1,80 @@
+{
+  "status": "DRAFT_NOT_DISPATCHED",
+  "proposedSlice": "S05 early bounded function-mode vertical delivery",
+  "authorization": "NONE; future explicit scope activation required",
+  "basis": [
+    {
+      "file": "decisions/DEC-GRAPE-003.md",
+      "sha256": "9a0acb74ee0bac36f23784db7743c45e2b3f36023ca329400b7f65711ee4428e"
+    },
+    {
+      "file": "decisions/AC-GRAPE-002.md",
+      "sha256": "ab1e4067f479f640c2fd59c3bc994413475a0dfc2b0e8259c4b5319f03c60c4a"
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "AT-DEC-GRAPE-003-01",
+      "behavior": "新建預設展開；定義模式影響全部共享引用；Make Independent 保留初始模式且之後可獨立修改。",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-02",
+      "behavior": "同一複雜子圖在同一 shader 重複引用及巢狀引用時，函式本文只生成一份，各 caller 的不同輸入與多輸出正確；不能共用不同 caller 的計算結果。",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-03",
+      "behavior": "普通常量／Uniform 都可作普通函式參數；內部固定常量及固定形狀長度查詢可用；外露參數被用於必須常量的位置時拒絕啟用，圖與 History 不變。",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-04",
+      "behavior": "root、nested、shared 的下游常量影響傳播至實際要求處；只拆本次新增失效的接收端線，保留正常分支及既有錯誤證據，通知含明確原因。",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-05",
+      "behavior": "模式、本地化、所有受影響引用及 losses 同筆發布／Undo／Redo；切回展開不復線；斷線後 required input 缺值可保存但阻止生成。",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-06",
+      "behavior": "授權範圍內的 Library／Personal 收錄、引入、再編輯、再收錄及 save/reopen 保留模式與依賴；原 Library 不被改動，不跳過既有 admission。",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-07",
+      "behavior": "受支持舊資料經明示升級維持展開；新資料缺失／未知模式不被猜成展開；缺 exact module 保留資料並遵循既有阻止生成／恢復規則。",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-08",
+      "behavior": "不同 stage／profile、資源、名義型別、nested helper、effects 與多輸出在所交付範圍內保持語意；實際 shader 編譯及相應結果驗證不以文字快照替代。",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-09",
+      "behavior": "已啟用的子圖後續變成不合資格，模式不被靜默重設；生成回確定 diagnostic，來源能定位共享定義與相關引用，Generator 不修改 Graph。",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-10",
+      "behavior": "模式、定義本文、依賴或 profile 改變後，不錯用先前產物；共享函式的診斷不虛構成單一 caller；既有 snapshot／stale reply 保護保留。",
+      "status": "REQUIRED_NOT_EXECUTED"
+    }
+  ],
+  "scope": [
+    "Owner versioned mode payload and explicit legacy expand upgrade; exact module missing/unknown preservation",
+    "Usable mode command, node-owned constant eligibility including nested/shared/dependent closure",
+    "One Graph transaction for localization, mode, affected references, new constant-invalid incoming edges, typed losses and diagnostics; Undo/Redo; queryable notification",
+    "Deduplicated function bodies per shader/exact dependencies/profile, per-caller inputs and no duplicate effects; independent real shader/result qualification",
+    "Library/Personal/save/reopen exchange after exact owner codec support; no admission bypass"
+  ],
+  "exclusions": [
+    "Q-003 remains unaccepted",
+    "No current S04 function-mode field, switch, codec or generation implementation",
+    "No performance promise or broad cache project"
+  ],
+  "nextOwner": "Coordinator derives exact base/scope and obtains separate Human Slice authorization before any dispatch"
+}

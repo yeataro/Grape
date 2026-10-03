@@ -1,0 +1,36 @@
+{
+  "recordType": "S03_COMPLETION_WORKSPACE_CHECKS",
+  "node": "v25.5.0",
+  "results": [
+    {
+      "name": "bootstrap",
+      "command": "node tools/verify-bootstrap.mjs",
+      "startedAt": "2026-10-03T19:00:23.549Z",
+      "exitCode": 0,
+      "log": "production/evidence/acceptance/s03/closeout-20261004-01/bootstrap-workspace.log"
+    },
+    {
+      "name": "current-state",
+      "command": "node handoff/tools/check-implementation-state.mjs --current",
+      "startedAt": "2026-10-03T19:00:24.315Z",
+      "exitCode": 0,
+      "log": "production/evidence/acceptance/s03/closeout-20261004-01/current-state-workspace.log"
+    },
+    {
+      "name": "bootstrap-tests",
+      "command": "node --test --test-isolation=none tools/verify-bootstrap.test.mjs",
+      "startedAt": "2026-10-03T19:00:24.361Z",
+      "exitCode": 1,
+      "log": "production/evidence/acceptance/s03/closeout-20261004-01/bootstrap-tests-workspace.log"
+    },
+    {
+      "name": "diff-check",
+      "command": "git diff --check",
+      "exitCode": 0,
+      "log": "production/evidence/acceptance/s03/closeout-20261004-01/diff-check-workspace.log"
+    }
+  ],
+  "protectedPreimagesUnchanged": 1216,
+  "knownIssue": "BOOT01/09 fixture copies dirty README but omits linked notes/decisions. No tool or README fix authorized. Separate committed candidate check follows.",
+  "productTests": "Not rerun: product/source/tests/config/build unchanged; accepted product remains I/R."
+}

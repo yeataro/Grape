@@ -1,0 +1,13 @@
+{
+  "recordType": "RAW_EVIDENCE_PRESERVATION_EXCEPTION",
+  "check": "git diff --cached --check",
+  "exitCode": 2,
+  "findings": 68,
+  "files": [
+    "production/evidence/acceptance/s03/closeout-20261004-01/bootstrap-tests-workspace.log",
+    "production/evidence/coordinator/s03/closeout-dispatch-parent-intent-03.json",
+    "production/evidence/coordinator/s03/closeout-dispatch-parent-result-03.json"
+  ],
+  "reason": "Four whitespace-only lines are original Node assertion output; 64 CRLF lines are immutable Coordinator-authored intent/result bytes. All are preserved exactly; no source/test/tool/config whitespace changes. Plain diff-check fails for these exact raw evidence bytes and is not claimed PASS.",
+  "action": "Preserve bytes under explicit packet immutability; proceed with metadata-only local commit after exact allowlist guard. No formatting policy/config changes."
+}

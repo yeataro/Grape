@@ -122,6 +122,20 @@ export class TypeEnvironment implements TypeSystem {
     next.#resources = resources;
     return next;
   }
+  extent(id: string): number | undefined {
+    const r = this.#resources.find((r) => r.id === id);
+    const source =
+      r?.model === "source" ? (r.data as unknown as SourceData) : null;
+    const value =
+      source && ["glsl.int", "glsl.uint"].includes(source.type)
+        ? source.value
+        : r?.extent;
+    return Number.isInteger(value) &&
+      Number(value) > 0 &&
+      Number(value) <= 2147483647
+      ? Number(value)
+      : undefined;
+  }
   defaultValue(id: string): Json {
     let budget = 65536;
     const build = (type: string, active: readonly string[] = []): Json => {
@@ -131,11 +145,7 @@ export class TypeEnvironment implements TypeSystem {
         const length =
           typeof t.extent === "number"
             ? t.extent
-            : (
-                this.#resources.find(
-                  (r) => r.id === (t.extent as { sourceId: string }).sourceId,
-                )?.data as unknown as SourceData
-              )?.value;
+            : this.extent(t.extent.sourceId);
         demand(
           Number.isInteger(length) &&
             Number(length) > 0 &&
@@ -248,7 +258,7 @@ export class TypeEnvironment implements TypeSystem {
         length =
           typeof t.extent === "number"
             ? t.extent
-            : (source?.data as unknown as SourceData)?.value;
+            : this.extent(t.extent.sourceId);
       if (
         (source &&
           !["glsl.int", "glsl.uint"].includes(
@@ -310,6 +320,11 @@ export class TypeEnvironment implements TypeSystem {
       if (s === t) operation = "numeric-cast";
       else if (s === 1) operation = "broadcast";
       else if (s > t) operation = "take-leading";
+      else if (
+        source.type === "glsl.vec2" &&
+        ["glsl.vec3", "glsl.vec4"].includes(target.type)
+      )
+        operation = "pad-vector";
       else {
         demand(s === 3 && t === 4, "TYPE_ADAPTATION");
         operation = "append-alpha-one";
@@ -317,7 +332,7 @@ export class TypeEnvironment implements TypeSystem {
     }
     return {
       schema: "grape.edge-adaptation",
-      version: 1,
+      version: operation === "pad-vector" ? 2 : 1,
       sourceType: source.type,
       targetType: target.type,
       operation,
@@ -332,6 +347,9 @@ export class TypeEnvironment implements TypeSystem {
     try {
       const expected = this.adaptation(source, target);
       return (
+        plan.schema === "grape.edge-adaptation" &&
+        (plan.version === 1 || plan.version === 2) &&
+        (plan.operation !== "pad-vector" || plan.version === 2) &&
         expected.operation === plan.operation &&
         expected.sourceType === plan.sourceType &&
         expected.targetType === plan.targetType

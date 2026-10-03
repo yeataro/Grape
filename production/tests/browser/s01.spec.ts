@@ -1,3 +1,4 @@
+import { openLegacyDocument } from "./legacy-document.ts";
 import { test, expect } from "@playwright/test";
 async function fullFlow(page: any) {
   await page.getByRole("button", { name: "Add Float", exact: true }).click();
@@ -24,6 +25,7 @@ async function fullFlow(page: any) {
 }
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
+  await openLegacyDocument(page);
 });
 test("AT-S01-01 browser: user creates connected shader, edits and sees generated GLSL", async ({
   page,
@@ -102,7 +104,9 @@ test("AT-S01-05 browser: IndexedDB ACK save/reopen and independent JSON download
   await expect(
     page.getByRole("button", { name: "Undo", exact: true }),
   ).toBeDisabled();
-  await page.locator("input[type=file]").setInputFiles(file!);
+  await page
+    .getByLabel("Open document file", { exact: true })
+    .setInputFiles(file!);
   await page
     .getByRole("button", { name: "Open in new session", exact: true })
     .click();
@@ -292,7 +296,7 @@ test("recovery browser: future structural document stays read-only and original 
     formatVersion: { major: 3, minor: 0 },
     graph: { future: true },
   });
-  await page.locator("input[type=file]").setInputFiles({
+  await page.getByLabel("Open document file", { exact: true }).setInputFiles({
     name: "future.grape.json",
     mimeType: "application/json",
     buffer: Buffer.from(raw),
@@ -362,7 +366,7 @@ test("invalid UTF-8 recovery retains original bytes; closing recovery and cancel
 }) => {
   const buffer = Buffer.from([0xff, 0xc0, 0xaf, 0x00, 0x7b]);
   const revision = await page.locator(".canvas").getAttribute("data-revision");
-  await page.locator("input[type=file]").setInputFiles({
+  await page.getByLabel("Open document file", { exact: true }).setInputFiles({
     name: "invalid.grape.json",
     mimeType: "application/json",
     buffer,

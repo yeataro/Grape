@@ -42,6 +42,9 @@ import type { IdentitySource } from "../sdk/kernel.ts";
 import { compile } from "../generation/compiler.ts";
 import { readDocument, writeDocument } from "../persistence/codec.ts";
 import { inspectDocument } from "./inspection.ts";
+import { upgradeDocument } from "./document-upgrade.ts";
+import { buildPersonal, readPersonal, packagePacket } from "./personal.ts";
+import type { PersonalPackage, PackageProbe } from "../sdk/library.ts";
 import type { DocumentInspection } from "./inspection.ts";
 
 export class EditorContext {
@@ -327,6 +330,75 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     });
     if (selected.length) context.select(selected);
   }
+  async exportPersonal(context: EditorContext): Promise<PersonalPackage> {
+    demand(
+      this.#contexts.get(context.id) === context && !this.busy,
+      "CONTEXT_EXPIRED",
+    );
+    const captured = context.capture(),
+      snapshot = this.snapshot;
+    const selected = captured.network.nodes.find(
+      (n) => n.id === captured.primary,
+    );
+    const id =
+      selected &&
+      this.#graph!.definitionSet.node(selected.type)?.modelRole === "call"
+        ? (selected.state as { definition: string }).definition
+        : captured.definition?.id;
+    demand(id, "PERSONAL_SELECT_SUBGRAPH");
+    const asset = await buildPersonal(
+      snapshot,
+      this.#graph!.definitionSet,
+      id,
+      this.profile,
+      this.packageProbe,
+    );
+    demand(
+      this.snapshot.loadId === snapshot.loadId &&
+        this.snapshot.revision === snapshot.revision &&
+        equal(context.capture().scope, captured.scope),
+      "PERSONAL_STALE",
+    );
+    return asset;
+  }
+  async insertPersonal(context: EditorContext, text: string): Promise<void> {
+    demand(
+      !this.#readonly &&
+        !this.busy &&
+        this.#contexts.get(context.id) === context,
+      "COMMAND_DENIED",
+    );
+    const snapshot = this.snapshot,
+      captured = context.capture();
+    const asset = await readPersonal(
+      text,
+      this.#graph!.definitionSet,
+      this.profile,
+      this.packageProbe,
+    );
+    demand(
+      !this.#readonly &&
+        !this.busy &&
+        this.#contexts.get(context.id) === context &&
+        this.snapshot.loadId === snapshot.loadId &&
+        this.snapshot.revision === snapshot.revision &&
+        equal(context.capture().scope, captured.scope),
+      "PERSONAL_STALE",
+    );
+    const stage = snapshot.document.graph.stages.find(
+      (s) => s.id === captured.scope.stageId,
+    )!;
+    demand(asset.stageKindIds.includes(stage.stageKindId), "PERSONAL_STAGE");
+    let ids: string[] = [];
+    this.#graph!.change("Insert Library subgraph", (d) => {
+      ids = d.insertLibrary(
+        captured.network.id,
+        packagePacket(asset, snapshot.document, this.#graph!.definitionSet),
+        asset.contentHash,
+      );
+    });
+    context.select(ids);
+  }
   #contexts = new Map<string, EditorContext>();
   #signal = new Signal<void>();
   #saved: CanonicalGraphDocument | null = null;
@@ -344,6 +416,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     private readonly profile: GLSLProfile,
     private readonly storage: StorageAdapter,
     private readonly output: DocumentOutput,
+    private readonly packageProbe?: PackageProbe,
   ) {}
   subscribe(fn: () => void): () => void {
     return this.#signal.subscribe(fn);
@@ -415,7 +488,10 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     );
     if (parsed.status === "editable") {
       const graph = new Graph(
-        parsed.document,
+        upgradeDocument(
+          parsed.document,
+          this.definitions.pin(parsed.document.graph.modules),
+        ),
         this.definitions.pin(parsed.document.graph.modules),
         this.identity,
       );

@@ -35,6 +35,8 @@ function adapt(
   if (plan.operation === "take-leading")
     code = `(${code}).${"xyzw".slice(0, width(plan.targetType))}`;
   if (plan.operation === "append-alpha-one") code = `vec4(${code}, 1.0)`;
+  if (plan.operation === "pad-vector")
+    code = `${type}(${code}, 0.0${plan.targetType === "glsl.vec4" ? ", 1.0" : ""})`;
   return { type: plan.targetType, code, constant: input.constant };
 }
 export function compile(
@@ -92,14 +94,7 @@ export function compile(
         .filter((r) => definitions.resource(r.type)?.model === "structure")
         .map((r) => r.id);
     const lengthOf = (extent: number | { sourceId: string }) =>
-      typeof extent === "number"
-        ? extent
-        : Number(
-            (
-              doc.graph.resources.find((r) => r.id === extent.sourceId)
-                ?.data as unknown as SourceData
-            )?.value,
-          );
+      typeof extent === "number" ? extent : types.extent(extent.sourceId);
     const typeName = (type: string): string => {
       const t = parseType(type);
       return t.kind === "structure"
@@ -148,7 +143,20 @@ export function compile(
       demand(types.resolve(type), "TYPE_UNKNOWN");
       const t = parseType(type);
       diagnostics.push(...profile.validateType(type));
-      if (t.kind === "array") checkType(formatType(t.element));
+      if (t.kind === "array") {
+        if (typeof t.extent !== "number") {
+          const ref = t.extent.sourceId,
+            r = doc.graph.resources.find((r) => r.id === ref);
+          if (r && definitions.resource(r.type)?.model === "source") {
+            const source = r.data as unknown as SourceData;
+            demand(
+              !source.binding || source.binding.kind === "constant",
+              "EXTENT_RUNTIME_UNAVAILABLE",
+            );
+          }
+        }
+        checkType(formatType(t.element));
+      }
       if (t.kind === "structure" && !declared.has(t.id)) {
         declared.add(t.id);
         const data = doc.graph.resources.find((r) => r.id === t.id)!
@@ -221,7 +229,10 @@ export function compile(
                   (p) => p.direction === "output" && p.key === e.from.portKey,
                 );
               demand(
-                !e.invalid && from && types.planValid(e.adaptation, from, p),
+                !e.invalid &&
+                  from &&
+                  types.planValid(e.adaptation, from, p) &&
+                  def.acceptsInput?.(detached(from), detached(p)) !== false,
                 "EDGE_INVALID",
               );
               const source = lower(e.from.nodeId)[e.from.portKey];
@@ -292,7 +303,9 @@ export function compile(
             // Job-local ordinals are collision-free even for port keys that sanitize identically.
             // Persistent identity remains in provenance, never inferred from a GLSL spelling.
             const symbol = `n_${path.length ? "s" + ordinal++ + "_" : ""}${network.nodes.indexOf(node)}_p${node.ports.indexOf(p)}`;
-            body.push(`${typeName(p.type)} ${symbol} = ${expression.code};`);
+            body.push(
+              `${expression.constant ? "const " : ""}${typeName(p.type)} ${symbol} = ${expression.code};`,
+            );
             values[p.key] = { ...expression, code: symbol };
             provenance.push({
               stageId: stage.id,

@@ -1,16 +1,15 @@
+import { openLegacyDocument } from "./legacy-document.ts";
 import { test, expect, type Page } from "@playwright/test";
 import fs from "node:fs/promises";
 import { flow } from "../fixtures/setup.ts";
 import { unwrapPNG } from "../../src/persistence/png.ts";
 const fixture = () => structuredClone(flow().graph.capture().document);
 async function choose(page: Page, doc: unknown, name = "source.grape.json") {
-  await page
-    .locator("input[type=file]")
-    .setInputFiles({
-      name,
-      mimeType: "application/json",
-      buffer: Buffer.from(JSON.stringify(doc)),
-    });
+  await page.getByLabel("Open document file", { exact: true }).setInputFiles({
+    name,
+    mimeType: "application/json",
+    buffer: Buffer.from(JSON.stringify(doc)),
+  });
   await expect(page.locator("#recovery")).toBeVisible();
 }
 async function exported(page: Page, button = "Export JSON") {
@@ -21,6 +20,7 @@ async function exported(page: Page, button = "Export JSON") {
 }
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
+  await openLegacyDocument(page);
 });
 test("AT-S02-01 browser: review/cancel, repair proposal and explicit one-Undo atomic acceptance", async ({
   page,
@@ -223,13 +223,11 @@ test("AT-S02-04 browser: real Canvas PNG preview/export/reimport, malformed CRC 
     path: `${process.env.GRAPE_EVIDENCE_DIR ?? "evidence/s02"}/png-preview.png`,
   });
   await page.getByRole("button", { name: "Cancel", exact: true }).click();
-  await page
-    .locator("input[type=file]")
-    .setInputFiles({
-      name: "roundtrip.png",
-      mimeType: "image/png",
-      buffer: png,
-    });
+  await page.getByLabel("Open document file", { exact: true }).setInputFiles({
+    name: "roundtrip.png",
+    mimeType: "image/png",
+    buffer: png,
+  });
   await expect(page.locator("#recovery-message")).toContainText(
     "valid: DOCUMENT_VALID",
   );
@@ -238,7 +236,7 @@ test("AT-S02-04 browser: real Canvas PNG preview/export/reimport, malformed CRC 
   const bad = Buffer.from(png);
   bad[29] ^= 1;
   await page
-    .locator("input[type=file]")
+    .getByLabel("Open document file", { exact: true })
     .setInputFiles({ name: "bad.png", mimeType: "image/png", buffer: bad });
   await expect(page.locator("#recovery-message")).toContainText("PNG_CRC");
   expect(await exported(page, "Export original")).toEqual(bad);
@@ -247,13 +245,11 @@ test("AT-S02-04 browser: real Canvas PNG preview/export/reimport, malformed CRC 
     const c = document.createElement("canvas");
     return c.toDataURL("image/png").split(",")[1];
   });
-  await page
-    .locator("input[type=file]")
-    .setInputFiles({
-      name: "bare.png",
-      mimeType: "image/png",
-      buffer: Buffer.from(bare, "base64"),
-    });
+  await page.getByLabel("Open document file", { exact: true }).setInputFiles({
+    name: "bare.png",
+    mimeType: "image/png",
+    buffer: Buffer.from(bare, "base64"),
+  });
   await expect(page.locator("#recovery-message")).toContainText(
     "PNG_METADATA_MISSING",
   );
@@ -268,13 +264,11 @@ test("AT-S02-01 browser: cancel during delayed file read fences the late review"
       return read.call(this);
     };
   });
-  await page
-    .locator("input[type=file]")
-    .setInputFiles({
-      name: "delayed.json",
-      mimeType: "application/json",
-      buffer: Buffer.from(JSON.stringify(fixture())),
-    });
+  await page.getByLabel("Open document file", { exact: true }).setInputFiles({
+    name: "delayed.json",
+    mimeType: "application/json",
+    buffer: Buffer.from(JSON.stringify(fixture())),
+  });
   await expect(page.locator("#recovery-message")).toContainText(
     "READING_INPUT",
   );

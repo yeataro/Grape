@@ -119,13 +119,12 @@ const node = shape({
   position,
   extensions,
 });
-function wire(schema: string, body: Check, versions = [1]): Check {
+function wire(schema: string, body: Check): Check {
   return (v, p, u) => {
     const r = record(v, p);
     nonempty(r.schema, p + ".schema", u);
     positive(r.version, p + ".version", u);
-    if (r.schema !== schema || !versions.includes(Number(r.version)))
-      u.push(p + ".schema/version");
+    if (r.schema !== schema || r.version !== 1) u.push(p + ".schema/version");
     else body(v, p, u);
   };
 }
@@ -145,14 +144,12 @@ const conversion = wire(
           "take-leading",
           "append-alpha-one",
           "numeric-cast",
-          "pad-vector",
         ].includes(v as string)
       )
         u.push(p);
     },
     extensions,
   }),
-  [1, 2],
 );
 const endpoint = shape({ nodeId: nonempty, portKey: nonempty });
 const edge = shape(
@@ -160,12 +157,7 @@ const edge = shape(
     id: nonempty,
     from: endpoint,
     to: endpoint,
-    adaptation: (v, p, u) => {
-      conversion(v, p, u);
-      const r = record(v, p);
-      if (r.version === 1 && r.operation === "pad-vector")
-        u.push(p + ".operation");
-    },
+    adaptation: conversion,
     extensions,
   },
   { invalid: shape({ code: nonempty, reason: nonempty }) },
@@ -307,31 +299,6 @@ export function inspectDocumentStructure(value: unknown): string[] {
   const unknowns: string[] = [];
   envelope(value, "$", unknowns);
   const document = value as CanonicalGraphDocument;
-  if (
-    document.formatVersion.major === 2 &&
-    document.formatVersion.minor === 0
-  ) {
-    for (const [i, stage] of document.graph.stages.entries())
-      stage.network.edges.forEach((e, j) => {
-        if (e.adaptation.version === 2)
-          unknowns.push(
-            `$.graph.stages[${i}].network.edges[${j}].adaptation.version`,
-          );
-      });
-    for (const kind of ["losses", "recovery"] as const)
-      document.graph[kind].forEach((item, i) => {
-        if (
-          item.schema ===
-            (kind === "losses" ? "grape.loss" : "grape.recovery") &&
-          item.version === 1 &&
-          item.payload.kind === "edge" &&
-          item.payload.edge.adaptation.version === 2
-        )
-          unknowns.push(
-            `$.graph.${kind}[${i}].payload.edge.adaptation.version`,
-          );
-      });
-  }
   pins(document);
   networkLimits(document);
   return unknowns;
@@ -346,7 +313,7 @@ export function validateDocumentStructure(
   demand(
     document.format === "grape.document" &&
       document.formatVersion.major === 2 &&
-      [0, 1].includes(document.formatVersion.minor),
+      document.formatVersion.minor === 0,
     "FORMAT_VERSION",
   );
   demand(!unknowns.length, "UNKNOWN_STRUCTURE");

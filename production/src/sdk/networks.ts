@@ -1,3 +1,4 @@
+import { parseType, formatType } from "./type-tokens.ts";
 import type { Json } from "./public-surface.ts";
 import type {
   CanonicalGraphDocument,
@@ -138,6 +139,15 @@ export function typeSystem(doc: CanonicalGraphDocument, defs: DefinitionSet) {
       id: r.id,
       model: defs.resource(r.type)?.model,
       data: r.data,
+      ...(defs.resource(r.type)?.resolveExtent
+        ? {
+            extent: defs.resource(r.type)!.resolveExtent!(
+              detached(r.data),
+              detached(doc.graph.resources),
+              detached(networks(doc, defs).map((n) => n.network)),
+            ),
+          }
+        : {}),
     })),
   );
 }
@@ -185,4 +195,22 @@ export function frames(
         (r.data as unknown as FrameData).networkId === networkId,
     )
     .map((r) => ({ id: r.id, ...(r.data as unknown as FrameData) }));
+}
+
+/** Resolve an authored symbolic-array default for the current captured extent.
+ * Only extent length varies; malformed element values remain errors. */
+export function materializeDefault(
+  type: string,
+  value: import("./public-surface.ts").Json,
+  types: import("./editing.ts").TypeSystem,
+): import("./public-surface.ts").Json {
+  const token = parseType(type);
+  if (
+    token.kind === "array" &&
+    typeof token.extent !== "number" &&
+    Array.isArray(value) &&
+    value.every((v) => types.validValue(formatType(token.element), v))
+  )
+    return types.reshape(type, value);
+  return value;
 }

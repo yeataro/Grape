@@ -5,10 +5,12 @@ import {
   nodeReferences,
 } from "./transfer.ts";
 import type { ClipboardPacket } from "./transfer.ts";
-import { parseType, typeReferences } from "../sdk/type-tokens.ts";
+import { personalSources } from "./library.ts";
+import { parseType, typeReferences, remapType } from "../sdk/type-tokens.ts";
 import type { StructureData, SourceData } from "../sdk/networks.ts";
 import {
   networks,
+  materializeDefault,
   networkAt,
   modelContext,
   asNetwork,
@@ -96,8 +98,10 @@ function schema(
     );
     keys.add(p.direction + ":" + p.key);
     demand(types.resolve(p.type), "TYPE_UNKNOWN");
-    if (p.defaultValue !== undefined)
+    if (p.defaultValue !== undefined) {
+      p.defaultValue = materializeDefault(p.type, p.defaultValue, types);
       demand(types.validValue(p.type, p.defaultValue), "PORT_DEFAULT");
+    }
   }
   return result;
 }
@@ -163,7 +167,7 @@ export class Graph {
     demand(kind, "KIND_MISSING");
     const document: CanonicalGraphDocument = {
       format: "grape.document",
-      formatVersion: { major: 2, minor: 0 },
+      formatVersion: { major: 2, minor: 1 },
       graph: {
         id: identity.next(),
         name,
@@ -484,7 +488,11 @@ export class Graph {
           old &&
           equal(old.state, node.state) &&
           equal(old.inputValues, node.inputValues) &&
-          equal(before.graph.resources, after.graph.resources)
+          equal(before.graph.resources, after.graph.resources) &&
+          !after.graph.resources.some(
+            (r) => this.definitions.resource(r.type)?.resolveExtent,
+          ) &&
+          !node.ports.some((p) => typeReferences(p.type).length > 0)
         )
           continue;
         demand(
@@ -611,10 +619,15 @@ export class Graph {
         if (!old) continue; // Fresh connections are validated by commands; hydrated plans must remain evidence.
         if (source && target) {
           try {
-            edge.adaptation = typeSystem(after, this.definitions).adaptation(
-              source,
-              target,
+            demand(
+              this.definitions
+                .node(to!.type)
+                ?.acceptsInput?.(detached(source), detached(target)) !== false,
+              "INPUT_TYPE_POLICY",
             );
+            const types = typeSystem(after, this.definitions);
+            if (!types.planValid(edge.adaptation, source, target))
+              edge.adaptation = types.adaptation(source, target);
             delete edge.invalid;
             continue;
           } catch {}
@@ -644,7 +657,7 @@ export class Graph {
     const out: ContractIssue[] = [];
     const g = document.graph;
     const checkReferences = (
-      references: import("../sdk/document.ts").DocumentReference[],
+      references: readonly import("../sdk/document.ts").DocumentReference[],
       networkId?: string,
     ) => {
       for (const ref of references) {
@@ -667,6 +680,38 @@ export class Graph {
       for (const node of stage.network.nodes)
         checkReferences(node.references, stage.network.id);
     for (const resource of g.resources) checkReferences(resource.references);
+    for (const resource of g.resources) {
+      const def = this.definitions.resource(resource.type);
+      try {
+        checkReferences(
+          def?.stateReferences?.collect(detached(resource.data)) ?? [],
+        );
+        if (
+          def?.resolveExtent &&
+          def.resolveExtent(
+            detached(resource.data),
+            detached(g.resources),
+            detached(
+              networks(document, this.definitions).map((n) => n.network),
+            ),
+          ) === undefined
+        )
+          out.push(
+            issue(
+              "EXTENT_UNRESOLVED",
+              "Array extent dependency is unavailable or invalid.",
+              { resourceId: resource.id },
+            ),
+          );
+      } catch {
+        out.push(
+          issue(
+            "RESOURCE_REFERENCES",
+            "Owner references could not be resolved.",
+          ),
+        );
+      }
+    }
     const kind = this.definitions.kind(g.kind);
     for (const pin of g.modules)
       if (!this.definitions.module(pin))
@@ -726,6 +771,11 @@ export class Graph {
     const stageIds = new Set<string>(),
       networkIds = new Set<string>();
     for (const row of networks(document, this.definitions)) {
+      demand(
+        document.formatVersion.minor >= 1 ||
+          row.network.edges.every((e) => e.adaptation.version === 1),
+        "EDGE_DOCUMENT_VERSION",
+      );
       const stage = g.stages.find((s) => s.id === row.stageId) ?? {
         id: row.stageId,
         network: row.network,
@@ -885,7 +935,14 @@ export class Graph {
           e.invalid ||
           !a ||
           !b ||
-          !typeSystem(document, this.definitions).planValid(e.adaptation, a, b)
+          !typeSystem(document, this.definitions).planValid(
+            e.adaptation,
+            a,
+            b,
+          ) ||
+          this.definitions
+            .node(network.nodes.find((n) => n.id === e.to.nodeId)!.type)
+            ?.acceptsInput?.(detached(a), detached(b)) === false
         )
           out.push(
             issue("EDGE_INVALID", "Stored connection is not executable.", {
@@ -1070,6 +1127,7 @@ export class Draft {
       const replacement = structuredClone(candidate);
       replacement.graph.id = this.document.graph.id;
       this.document.graph = replacement.graph;
+      this.document.formatVersion = replacement.formatVersion;
       this.#replacing = true;
     });
   }
@@ -1246,6 +1304,15 @@ export class Draft {
         (e) => e.to.nodeId === to.nodeId && e.to.portKey === to.portKey,
       );
       demand(!old || replace, "INPUT_OCCUPIED");
+      demand(
+        this.definitions
+          .node(
+            findNode(this.document, networkId, to.nodeId, this.definitions)
+              .type,
+          )
+          ?.acceptsInput?.(detached(a), detached(b)) !== false,
+        "INPUT_TYPE_POLICY",
+      );
       const plan = typeSystem(this.document, this.definitions).adaptation(a, b);
       if (old) network.edges.splice(network.edges.indexOf(old), 1);
       network.edges.push({
@@ -1286,6 +1353,56 @@ export class Draft {
       );
       if (result.length) this.strict = true;
       return result;
+    });
+  }
+  insertLibrary(
+    networkId: string,
+    packet: ClipboardPacket,
+    key: string,
+  ): string[] {
+    return this.run(() => {
+      this.fork(networkId);
+      demand(/^[a-f0-9]{64}$/.test(key), "LIBRARY_IDENTITY");
+      const result = pastePacket(
+        this.document,
+        this.definitions,
+        this.ids,
+        this.loadId,
+        networkId,
+        packet,
+        {
+          key,
+          admittedSources: personalSources(packet.resources, this.definitions),
+        },
+      );
+      this.strict = true;
+      return result;
+    });
+  }
+  addResource(
+    ref: NodeTypeRef,
+    data: Json,
+    references: import("../sdk/document.ts").DocumentReference[] = [],
+  ): string {
+    return this.run(() => {
+      const def = this.definitions.resource(ref);
+      demand(
+        def &&
+          !def.codec
+            .validate(detached(data))
+            .some((x) => x.severity === "error"),
+        "RESOURCE_STATE",
+      );
+      const id = this.ids.next();
+      this.document.graph.resources.push({
+        id,
+        type: { ...ref },
+        data: structuredClone(data),
+        references: structuredClone(references),
+        referencesComplete: true,
+        extensions: {},
+      });
+      return id;
     });
   }
   createStructure(
@@ -1955,12 +2072,12 @@ export class Draft {
         id = callResource(node, this.definitions),
         r = this.document.graph.resources.find((r) => r.id === id);
       demand(r, "DEFINITION_MISSING");
-      const copy = structuredClone(r),
-        data = asNetwork(copy, this.definitions)!;
+      const copy = structuredClone(r);
+      let data = asNetwork(copy, this.definitions)!;
       copy.id = this.ids.next();
       data.local = true;
       data.origin ??= r.id;
-      data.network.id = this.ids.next();
+      const independentNetworkId = this.ids.next();
       const ids = new Map(
         data.network.nodes.map((n) => [n.id, this.ids.next()]),
       );
@@ -1993,7 +2110,7 @@ export class Draft {
             changed = true;
           }
       }
-      const networkMap = new Map([[oldNetworkId, data.network.id]]),
+      const networkMap = new Map([[oldNetworkId, independentNetworkId]]),
         nodeMaps = new Map([[oldNetworkId, ids]]);
       for (const resource of reachable) {
         const nested = asNetwork(resource, this.definitions);
@@ -2045,6 +2162,7 @@ export class Draft {
           ...(ref.networkId ? { networkId: networkMap.get(network)! } : {}),
         };
       };
+      const typeMap = new Map([[r.id, copy.id], ...clonedIds]);
       const remapNetwork = (
         network: import("../sdk/document.ts").NetworkDocument,
         old: string,
@@ -2053,6 +2171,10 @@ export class Draft {
         network.id = networkMap.get(old)!;
         for (const n of network.nodes) {
           n.id = nodes.get(n.id)!;
+          n.ports = n.ports.map((p) => ({
+            ...p,
+            type: remapType(p.type, typeMap),
+          }));
           n.references = n.references.map((ref) => remap(ref, old));
           const codec = this.definitions.node(n.type)?.stateReferences;
           if (codec)
@@ -2064,8 +2186,20 @@ export class Draft {
           e.id = this.ids.next();
           e.from.nodeId = nodes.get(e.from.nodeId)!;
           e.to.nodeId = nodes.get(e.to.nodeId)!;
+          e.adaptation.sourceType = remapType(e.adaptation.sourceType, typeMap);
+          e.adaptation.targetType = remapType(e.adaptation.targetType, typeMap);
         }
       };
+      const rootCodec = this.definitions.resource(r.type)!.stateReferences;
+      if (rootCodec)
+        copy.data = structuredClone(
+          rootCodec.remap(detached(copy.data), (ref) => remap(ref)),
+        );
+      data = asNetwork(copy, this.definitions)!;
+      data.interface = data.interface.map((p) => ({
+        ...p,
+        type: remapType(p.type, typeMap),
+      }));
       remapNetwork(data.network, oldNetworkId);
       for (const original of reachable.filter((resource) =>
         clonedIds.has(resource.id),
@@ -2080,13 +2214,17 @@ export class Draft {
         cloned.references = cloned.references.map((ref) => remap(ref));
         const nested = asNetwork(cloned, this.definitions);
         if (nested) {
+          nested.interface = nested.interface.map((p) => ({
+            ...p,
+            type: remapType(p.type, typeMap),
+          }));
           nested.local = true;
           nested.origin ??= original.id;
           remapNetwork(nested.network, nested.network.id);
         }
         this.document.graph.resources.push(cloned);
       }
-      data.dependencies = data.dependencies.map(
+      data.dependencies = asNetwork(r, this.definitions)!.dependencies.map(
         (id) => clonedIds.get(id) ?? id,
       );
       copy.references = copy.references.map((ref) => remap(ref));

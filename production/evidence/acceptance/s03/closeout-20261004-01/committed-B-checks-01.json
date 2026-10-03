@@ -1,0 +1,74 @@
+{
+  "recordType": "S03_COMPLETION_COMMITTED_CANDIDATE_CHECKS",
+  "B": "1cfa1e9e22fd37e0965640f33bf1d681917db754",
+  "implementationI": "80ee116b8f809c9160aa9cc311801cce15923cee",
+  "reviewedR": "c209bba451149b9d54a6a54c3b35dd28f39225f3",
+  "source": "Exact B materialized in disposable tree; every Git blob verified after extraction recovery. No new product review.",
+  "node": "v25.5.0",
+  "tree": "C:\\Users\\user\\source\\Grape\\.verification\\s03-closeout-B-check-01\\tree",
+  "verifiedFiles": 1137,
+  "archiveOperation": {
+    "attempts": 3,
+    "retriesUsed": 2,
+    "firstOutcome": "ENOBUFS at64MiB stdout collection before archive/verification",
+    "secondOutcome": "git archive --output succeeded; Windows tar partially extracted but failed Unicode artifact paths",
+    "finalOutcome": "Reconciled entire B Git tree and filled missing blobs with exact identity verification",
+    "repairedFiles": 12,
+    "resolution": "PASS; no fourth retry, no source changes, no sandbox bypass."
+  },
+  "results": [
+    {
+      "name": "bootstrap",
+      "command": "node tools/verify-bootstrap.mjs",
+      "exitCode": 0,
+      "log": "production/evidence/acceptance/s03/closeout-20261004-01/bootstrap-committed-B.log"
+    },
+    {
+      "name": "current-state",
+      "command": "node handoff/tools/check-implementation-state.mjs --current",
+      "exitCode": 0,
+      "log": "production/evidence/acceptance/s03/closeout-20261004-01/current-state-committed-B.log"
+    },
+    {
+      "name": "bootstrap-tests",
+      "command": "node --test --test-isolation=none tools/verify-bootstrap.test.mjs",
+      "exitCode": 0,
+      "log": "production/evidence/acceptance/s03/closeout-20261004-01/bootstrap-tests-committed-B.log"
+    }
+  ],
+  "bootstrapTests": {
+    "pass": 9,
+    "fail": 0
+  },
+  "rootChecks": {
+    "checks": 463,
+    "indexedFiles": 411,
+    "frozenFiles": 412
+  },
+  "strictBAllowlist": true,
+  "changes": [
+    "M\timplementation-state.json",
+    "A\tproduction/evidence/acceptance/s03/closeout-20261004-01/STATUS-zh-TW.md",
+    "A\tproduction/evidence/acceptance/s03/closeout-20261004-01/accepted-scope-01.json",
+    "A\tproduction/evidence/acceptance/s03/closeout-20261004-01/bootstrap-tests-workspace.log",
+    "A\tproduction/evidence/acceptance/s03/closeout-20261004-01/bootstrap-workspace.log",
+    "A\tproduction/evidence/acceptance/s03/closeout-20261004-01/current-state-workspace.log",
+    "A\tproduction/evidence/acceptance/s03/closeout-20261004-01/diff-check-staged-raw.json",
+    "A\tproduction/evidence/acceptance/s03/closeout-20261004-01/diff-check-workspace.log",
+    "A\tproduction/evidence/acceptance/s03/closeout-20261004-01/execution-intent-01.json",
+    "A\tproduction/evidence/acceptance/s03/closeout-20261004-01/preimage-manifest-01.json",
+    "A\tproduction/evidence/acceptance/s03/closeout-20261004-01/raw-evidence-whitespace-01.json",
+    "A\tproduction/evidence/acceptance/s03/closeout-20261004-01/workspace-checks-01.json",
+    "A\tproduction/evidence/coordinator/s03/closeout-dispatch-attempt-01.json",
+    "A\tproduction/evidence/coordinator/s03/closeout-dispatch-attempt-02.json",
+    "A\tproduction/evidence/coordinator/s03/closeout-dispatch-parent-intent-03.json",
+    "A\tproduction/evidence/coordinator/s03/closeout-dispatch-parent-recovery-03.json",
+    "A\tproduction/evidence/coordinator/s03/closeout-dispatch-parent-result-03.json",
+    "A\tproduction/evidence/coordinator/s03/closeout-packet-20261004-01.json",
+    "A\tproduction/evidence/coordinator/s03/human-acceptance-20261004-01.json",
+    "A\tproduction/evidence/coordinator/s03/recovery-20261004-01.json"
+  ],
+  "ancestry": "I -> R -> P -> B confirmed",
+  "workspaceFixtureDiagnosis": "Only preexisting dirty README links omitted by fixture cause workspace BOOT01/09 failure; committed B retains prior README and all9 pass. Tool/README not modified.",
+  "mechanicalFollowUp": "If Human later authorizes committing README additions, separately consider a bounded disposable-fixture dependency-copy change with path containment checks. No tool change authorized or performed."
+}

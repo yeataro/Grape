@@ -1,0 +1,75 @@
+{
+  "recordType": "S04_REVIEW_PERSISTENCE_READY",
+  "actionKey": "yeataro/Grape:S04:preserve-review:985357b:01",
+  "attempt": 1,
+  "reviewId": "S04-FR-985357b-01",
+  "status": "AWAITING_HUMAN_ACCEPTANCE",
+  "reviewedI": "0c13932150bf1b78f215e25721292962e6c4263a",
+  "reviewedR": "985357be67cce2f2ecc232e827e83e5cdbb521ab",
+  "persistenceP": "Local evidence-only commit introducing this record; post-commit SHA and blob audit returned directly to Coordinator. P does not replace reviewed R and is not completion B.",
+  "copiedFiles": 72,
+  "sourceAndDestinationHashesVerified": true,
+  "report": {
+    "file": "production/evidence/s04/review-01/independent-review/INDEPENDENT_REVIEW_RESULT.json",
+    "sha256": "c1cb4fd813ba2f78405ba03eb07f1986a0c97021fae2dd3772eeb95001158d2c",
+    "bytes": 33023
+  },
+  "reviewerManifest": {
+    "file": "production/evidence/s04/review-01/independent-review/review-evidence-manifest-01.json",
+    "sha256": "45d5220f07dcfd94b31313c758f0f87a285d7d28aad9eeb0a766543d14b449ad",
+    "bytes": 14188
+  },
+  "relocation": {
+    "file": "production/evidence/s04/review-01/relocation-manifest-01.json",
+    "sha256": "1d3b8c3c2483b2dca87eaf4bc10a75980cba3038627a4cf341cf49ebde474ca6",
+    "bytes": 35533
+  },
+  "humanReview": {
+    "file": "production/evidence/s04/review-01/HUMAN-REVIEW.md",
+    "sha256": "b9ecff20f13a3b09e6aa10c1a046467110cd2cef898a4f952618c5da1b811b16",
+    "bytes": 5861
+  },
+  "provenance": {
+    "file": "production/evidence/s04/review-01/provenance-01.json",
+    "sha256": "7e99fe7c3c443d8c9ac07385e33b1ed02ef182cfce96bb879a0ee43c0a188983",
+    "bytes": 5073
+  },
+  "protectedTracked": 1481,
+  "protectedUntracked": 83,
+  "protectedBytesUnchanged": true,
+  "rootChecks": [
+    {
+      "command": "node tools/verify-bootstrap.mjs",
+      "exitCode": 0,
+      "log": {
+        "file": "production/evidence/s04/review-01/persistence-bootstrap-01.log",
+        "sha256": "8c99229a8b0843fff6638639d17ac6780f24e7d15ff2a9e35ac84ecb7de9140c",
+        "bytes": 1628
+      }
+    },
+    {
+      "command": "node handoff/tools/check-implementation-state.mjs --current",
+      "exitCode": 0,
+      "log": {
+        "file": "production/evidence/s04/review-01/persistence-state-01.log",
+        "sha256": "029cb32b15a71fb61132d8e5d452707201ad1354367f0340a5de69efaf599b95",
+        "bytes": 8017
+      }
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "log": {
+        "file": "production/evidence/s04/review-01/persistence-diff-check-01.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    }
+  ],
+  "productTestsRerun": false,
+  "reason": "Exact immutable evidence copy; original independent product/browser results preserved rather than rerun.",
+  "state": "S04 active/unaccepted; state bytes unchanged",
+  "remote": "Untouched; no push/PR/merge",
+  "next": "Coordinator checks persistence and presents exact bounded candidate to Human",
+  "stop": "STOP_WRITING after committed blob verification"
+}

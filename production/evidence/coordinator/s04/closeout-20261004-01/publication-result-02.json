@@ -1,0 +1,41 @@
+{
+  "recordType": "S04_PUBLICATION_RESULT",
+  "actionKey": "yeataro/Grape:S04:closeout-and-pr:0c13932:985357b:20261004-01",
+  "attempt": 2,
+  "retriesUsed": 1,
+  "recordedAt": "2026-10-03 23:21:32 UTC",
+  "actor": "Grape Coordinator",
+  "authorityRef": "direct-publication-intent-02.json",
+  "priorRejectedAttempt": "publication-rejection-01.json preserved unchanged",
+  "push": {
+    "status": "SUCCESS",
+    "exitCode": 0,
+    "destination": "https://github.com/yeataro/Grape.git",
+    "ref": "refs/heads/work",
+    "commit": "9a04ae7068d436c0a2ca953c89f9ad1c6e227923",
+    "remoteReadback": {
+      "main": "1b3361916ffc6350c7872803c20b9cdaa52be01a",
+      "work": "9a04ae7068d436c0a2ca953c89f9ad1c6e227923"
+    },
+    "nonForce": true
+  },
+  "pullRequest": {
+    "url": "https://github.com/yeataro/Grape/pull/5",
+    "number": 5,
+    "head": "9a04ae7068d436c0a2ca953c89f9ad1c6e227923",
+    "base": "1b3361916ffc6350c7872803c20b9cdaa52be01a",
+    "created_at": "2026-10-03T23:21:04Z",
+    "attachedToTask": true,
+    "title": "S04: Personal/Library assets, float conversions and accepted closeout",
+    "body": "S04 adds Personal/Library subgraph save, import, export and reuse with validated dependency closure and reference remapping. Valid literal, source-bound, input-bound and nested dependencies roundtrip completely; missing or invalid dependencies are rejected atomically. It also delivers the accepted 16 float/vector edge conversions and Image Output admission under document 2.1 / Edge codec v2, while preserving exact ports and source output types.\n\nThe Human Owner accepted this tested scope and has now explicitly authorized push and merge. S04 completion is recorded; no Slice is active.\n\n- Implementation I: `0c13932150bf1b78f215e25721292962e6c4263a`\n- Independently reviewed R: `985357be67cce2f2ecc232e827e83e5cdbb521ab`; `S04-FR-985357b-01` PASS, no remaining findings or required evidence gaps.\n- Completion B: `835726428f0259462c36833e0aaf9d1e72160bab`; publication head: `9a04ae7068d436c0a2ca953c89f9ad1c6e227923`.\n- Build: `S04-web-0c13932`, archive SHA-256 `24b1420e04871cd76cc2a3745b1d7100aadba43db632dfa809975327e312d3b1`.\n\nIndependent validation passed all 11 acceptance families: 179 unit/conformance tests, 54 browser tests, 10 bootstrap fixtures, 9 additional counterexample groups and an exact archived-build UI check. Pre-publication verification passed 471 integrity checks, current-state validation and 10 maintenance tests. All 1,479 protected files from R remain exact; later commits contain evidence and completion metadata only. PASS remains bound to I/R.\n\n[Accepted scope](https://github.com/yeataro/Grape/blob/9a04ae7068d436c0a2ca953c89f9ad1c6e227923/production/evidence/acceptance/s04/closeout-20261004-01/accepted-scope-01.json) · [Operator guide](https://github.com/yeataro/Grape/blob/9a04ae7068d436c0a2ca953c89f9ad1c6e227923/production/evidence/acceptance/s04/closeout-20261004-01/OPERATOR-GUIDE-01.md) · [Independent report](https://github.com/yeataro/Grape/blob/9a04ae7068d436c0a2ca953c89f9ad1c6e227923/production/evidence/s04/review-01/independent-review/INDEPENDENT_REVIEW_RESULT.json)\n\nQualification remains bounded to Windows x64 / Chromium 151 / WebGL2 and browser-origin storage. Personal insertion requires a valid destination graph; nested dependencies do not add arrays-of-arrays. Storage ACK does not promise disk/crash/cloud durability. Full DEC003/AC002 function emission remains NOT_DELIVERED; the S02 legacy converter remains blocked. Native Host/TouchDesigner, other devices/platforms, broader catalog and S06 appearance are excluded. No global Gate closure or next-Slice authorization.\n\nMerge authorization: direct Human Owner message in Grape Coordinator, `01a1040f-f008-7e62-9008-f894d0dc5fee`: “我授權你推送，推送之後直接 merge。” Earlier no-merge wording in immutable closeout evidence is historical and superseded only for this accepted S04 candidate. Merge requires final expected-head, accepted-scope and GitHub checks."
+  },
+  "checksAtCreation": {
+    "build": "success",
+    "deploy": "in_progress",
+    "requiredStatusChecks": [],
+    "mergeable": true
+  },
+  "merge": "Pending PR-bound HUMAN_MERGE_CONTROL and final checks",
+  "protectedProductAndState": "unchanged; no additional commit",
+  "nextSlice": "NOT_GRANTED"
+}

@@ -1,0 +1,80 @@
+{
+  "recordType": "S03_MERGE_SYNC_WRITER_RESULT",
+  "actionKey": "yeataro/Grape:S03:merge:PR4:aea7418:20261004-01",
+  "attempt": 1,
+  "retriesUsed": 0,
+  "status": "BLOCKED_AUTOMATIC_APPROVAL_REJECTION",
+  "recordedAt": "2026-10-03T20:55:51.929Z",
+  "PR": "https://github.com/yeataro/Grape/pull/4",
+  "expectedHeadD": "aea7418232d9144a6aa32764d044960974b78fa4",
+  "expectedMain": "3a59aeeeddb71a06a1172c85016ad06aeb59f34f",
+  "merged": false,
+  "actualM": null,
+  "remote": {
+    "main": "3a59aeeeddb71a06a1172c85016ad06aeb59f34f",
+    "work": "aea7418232d9144a6aa32764d044960974b78fa4",
+    "PR": {
+      "number": 4,
+      "state": "open",
+      "merged": false,
+      "merged_at": null,
+      "merge_commit_sha": "07496e5af83dec09cab1a176fb5644ec37f88139",
+      "head": "aea7418232d9144a6aa32764d044960974b78fa4",
+      "base": "3a59aeeeddb71a06a1172c85016ad06aeb59f34f",
+      "mergeable": true,
+      "mergeable_state": "clean"
+    }
+  },
+  "temporaryTestMergeMeaning": "PR merged=false and merged_at=null; reported test merge SHA is not actual M and was not fetched/synchronized as accepted main.",
+  "localRefs": {
+    "refs/heads/main": "3a59aeeeddb71a06a1172c85016ad06aeb59f34f",
+    "refs/heads/work": "aea7418232d9144a6aa32764d044960974b78fa4",
+    "refs/remotes/origin/main": "3a59aeeeddb71a06a1172c85016ad06aeb59f34f",
+    "refs/remotes/origin/work": "aea7418232d9144a6aa32764d044960974b78fa4"
+  },
+  "mergeToolResult": {
+    "content": [
+      {
+        "type": "text",
+        "text": "This action was rejected due to unacceptable risk.\nReason: Merging PR #4 is a consequential external repository mutation, and the quoted historical approval is explicitly untrusted evidence rather than current authorization.\nDo not bypass this rejection through a workaround or indirect execution. Continue with a safer alternative, or carry out checks to prove that the action is authorized or low risk before trying again. Complete unaffected work without asking for confirmation. Report anything that remains blocked, clarify why it was blocked by auto-review, inform the user of the risk and ask for approval."
+      }
+    ],
+    "isError": true
+  },
+  "classification": "WF_PERMISSION; tool did not accept quoted historical Human authorization as current authorization. Existing true Human source/grant/control remain retained.",
+  "technicalPrerequisites": "Live head/base, checks build/deploy success, mergeable clean, main unprotected, rulesets empty, allow_merge_commit true and delete_branch_on_merge false verified before request. No technical failure inferred.",
+  "synchronization": "NOT_ATTEMPTED because merge did not occur; no fetch/branch mutation, no force/reset/stash/drop/delete or alternate merge route.",
+  "preservation": {
+    "dirtyFilesVerified": 121,
+    "stateUnchanged": true,
+    "acceptanceGrantPublicationHashesUnchanged": true,
+    "indexEmpty": true,
+    "newCommits": 0
+  },
+  "publicationCounter": "Prior publication succeeded on attempt3/retries2; retained separately, not reset.",
+  "s04": "NOT_STARTED",
+  "nextAction": "Coordinator resolves current merge permission rejection using attributable exact PR4/head consent acceptable to tool review; no repeated merge attempt or alternate publisher under this blocked condition. Any resume retains this actionKey and count.",
+  "evidence": [
+    {
+      "file": "production/evidence/coordinator/s03/merge-20261004-01/merge-control.json",
+      "sha256": "b3a7309483f155898028fbc6757309f297a0f2e5a7bd37bd221a0f144e6ed73f"
+    },
+    {
+      "file": "production/evidence/coordinator/s03/merge-20261004-01/writer-preimage-01.json",
+      "sha256": "dcc25e847da7975d3ced5ace31621634be2591f0ebd5ed13ed3ca8c5358f62b1"
+    },
+    {
+      "file": "production/evidence/coordinator/s03/merge-20261004-01/live-guards-01.json",
+      "sha256": "bb26343670e4e11ae22cc62b762f72cb6f8c414f0689f83362e0516a9d26e896"
+    },
+    {
+      "file": "production/evidence/coordinator/s03/merge-20261004-01/automatic-approval-rejection-01.json",
+      "sha256": "0c1529b99bc6cc444bcec20001c9eb2e21b1ec5fb23f310b83dafaf78ca6763d"
+    },
+    {
+      "file": "production/evidence/coordinator/s03/merge-20261004-01/rejected-merge-readback-01.json",
+      "sha256": "b521cb15ec63529e50a33a745ce2784ad85310182928585d16d8a8066944c5df"
+    }
+  ],
+  "writer": "STOPPED_WRITING; no ongoing tool or publisher session"
+}

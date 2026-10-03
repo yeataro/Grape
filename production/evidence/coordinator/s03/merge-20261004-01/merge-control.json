@@ -1,0 +1,111 @@
+{
+  "packetVersion": 1,
+  "packetType": "HUMAN_MERGE_CONTROL",
+  "packetId": "S03-MERGE-PR4-20261004-01",
+  "actionKey": "yeataro/Grape:S03:merge:PR4:aea7418:20261004-01",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+  "recordedAt": "2026-10-03T20:51:34Z",
+  "authority": "Human Owner",
+  "source": {
+    "file": "production/evidence/coordinator/s03/publication-20261004-01/explicit-human-grant-02.json",
+    "sha256": "9d3eadc91ccd0d7a9747a3653fb6daad34c794cf7589355955563a1e2dbd2b07",
+    "threadId": "01a1010f-2b35-7861-bb35-0e7e9b0b42a9",
+    "mergeMessageId": "01a10378-1ab2-7852-a463-0fe4182df643",
+    "mergeQuote": "到底誰可以發布啊？我授權你 merge，S03，但誰可以發布。",
+    "sequenceMessageId": "01a10379-0b06-7b53-8257-81d4172bcd63",
+    "binding": "Coordinator binds already-granted S03 merge delegation to sole actual S03 PR4; no new Human product decision inferred."
+  },
+  "PR": {
+    "number": 4,
+    "url": "https://github.com/yeataro/Grape/pull/4",
+    "head": "work",
+    "base": "main"
+  },
+  "expectedMain": "3a59aeeeddb71a06a1172c85016ad06aeb59f34f",
+  "acceptedMain": "3a59aeeeddb71a06a1172c85016ad06aeb59f34f",
+  "expectedWorkHead": "aea7418232d9144a6aa32764d044960974b78fa4",
+  "I": "80ee116b8f809c9160aa9cc311801cce15923cee",
+  "R": "c209bba451149b9d54a6a54c3b35dd28f39225f3",
+  "B": "1cfa1e9e22fd37e0965640f33bf1d681917db754",
+  "D": "aea7418232d9144a6aa32764d044960974b78fa4",
+  "acceptanceRef": {
+    "file": "production/evidence/coordinator/s03/human-acceptance-20261004-01.json",
+    "sha256": "a7bf39289e400f288ec0156b0a2af3b8e70984cc617e5c1fae296977ac88d226"
+  },
+  "publicationResult": {
+    "file": "production/evidence/coordinator/s03/publication-20261004-01/writer-result-03.json",
+    "sha256": "99d52bf4b2a0a77a4719761389f6e1ea4c6720c29855a8413bb13fee80faffd9"
+  },
+  "bookkeepingIntegrity": "I->R->P->B->D ancestry verified; B records exact accepted scope and state; D adds accepted-but-undelivered DEC002/AC001 metadata and unissuedS04draft/status only; prior source/tests/tools/config/build/handoff/evidence unchanged. Later local DEC003/AC002/notes/references and receipts absent from remoteD.",
+  "requiredChecks": {
+    "local": "Original I/R independent PASS156unit48browser9bootstrap plus B/D exact candidate root/current-state/bootstrap9/9 evidence unchanged; no new review of metadata claimed.",
+    "remote": {
+      "PR": "open,non-draft,mergeabletrue,clean",
+      "checkRuns": [
+        {
+          "name": "build",
+          "id": 111290386012,
+          "head": "aea7418232d9144a6aa32764d044960974b78fa4",
+          "conclusion": "success"
+        },
+        {
+          "name": "deploy",
+          "id": 111290447017,
+          "head": "aea7418232d9144a6aa32764d044960974b78fa4",
+          "conclusion": "success"
+        }
+      ],
+      "classicStatuses": {
+        "total": 0,
+        "state": "pending",
+        "meaning": "No classic statuses, not an uncompleted check-run"
+      },
+      "mainProtection": {
+        "protected": false,
+        "requiredContexts": [],
+        "source": "freshGitHubbranches/main GET"
+      },
+      "repository": {
+        "allowMergeCommit": true,
+        "deleteBranchOnMerge": false
+      }
+    }
+  },
+  "sliceId": "S03",
+  "writer": {
+    "identity": "/root/s03_implementer_resume",
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "priorStatus": "Stopped after actual push/PR result; no publisher active"
+  },
+  "authorizedScope": "Merge accepted S03 PR4 only, then safe exact-main/work synchronization required for next authorized phase; no new product code, state adoption or subsequent docs included.",
+  "requestedAction": [
+    "Immediately reread actual main/work/PRhead, merge state, relevant check runs and acceptance hashes. Reject changed identities or unexpected changes.",
+    "Merge PR4 using merge commit method with expected_head_sha=exactD, no admin bypass/force/delete/settings edits.",
+    "Read back GitHub merged fact, actual mergeSHA M, parents/reachability and tree content; do not use GitHub temporary test mergeSHA as completed merge proof.",
+    "Fetch needed Git objects through authenticated Git. Verify D ancestorM, M content/tree equals acceptedD for this no-intervening-main merge; retain I/R/B/D identities.",
+    "With no activeSlice and guarded known localmain3a/currentworkD, safely fast-forward localmain and localwork to verifiedM, preserving all dirty preimages. No reset/stash/drop. If branch/worktree or dirty overlap blocks normalFF, retain it and report before alternate operation.",
+    "Recheck remote mainM/workD immediately, then permitted normal non-force work fast-forward D->M containing only accepted mergedS03. Re-read require main/work equalityM. Do not push any locally prepared docs/receipts beyondM.",
+    "Save immutable merge/readback/preservation/sync evidence locally and return actualM/refs/checks. Stop after verified baseline for Coordinator to issue exact-M S04 activation; no new Human approval needed."
+  ],
+  "exclusions": [
+    "All new DEC003/AC002/localnotes/references/docs/receipts remain excluded from remote S03",
+    "No S04 activation in this control",
+    "No modification to original review/evidence, product/test/tool/config or state",
+    "No remote branch deletion, force, reset, bypass or settings change"
+  ],
+  "changedHeadBehavior": "Stop and reconcile; no stale control reuse even if API could merge.",
+  "nextSliceAuthority": "Conditional S04 start granted separately by same explicit Human source after merged verified; this merge task does not activate it. No S04 external publication, acceptance or merge authority.",
+  "outputLocation": "production/evidence/coordinator/s03/merge-20261004-01",
+  "priorActionReceipt": "production/evidence/coordinator/s03/publication-20261004-01/writer-result-03.json",
+  "attempt": 1,
+  "findingGroup": "New merge/sync action, prior publication action completed on attempt3/retries2 retained.",
+  "stopConditions": [
+    "Unverified/stale refs/evidence/checks or unexpected diff",
+    "Ambiguous merge response: query actual PR/ancestry before retry",
+    "No budget reset; up to2retries after initial for genuinely transient sameoperation; credentials/permission wait requires diagnosis",
+    "Complete exact-M readback/sync and stop writer for next normalized activation packet"
+  ],
+  "provenance": "Coordinator independently fetched actual PR4, head/base,checkruns, mainprotection and repository merge flags and attached PR to current task. Human direct messages verified, not PM-granted authority.",
+  "limitations": "This adds no product PASS or Gate closure; current readonly/writable2.0 product and all S03 acceptance limits remain."
+}

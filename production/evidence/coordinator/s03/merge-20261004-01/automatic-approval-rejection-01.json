@@ -1,0 +1,28 @@
+{
+  "recordType": "S03_MERGE_AUTOMATIC_APPROVAL_REJECTION",
+  "actionKey": "yeataro/Grape:S03:merge:PR4:aea7418:20261004-01",
+  "attempt": 1,
+  "retriesUsed": 0,
+  "recordedAt": {
+    "current_time": "2026-10-03 20:55:24 UTC"
+  },
+  "tool": "mcp__codex_apps__github_merge_pull_request",
+  "arguments": {
+    "repository_full_name": "yeataro/Grape",
+    "pr_number": 4,
+    "merge_method": "merge",
+    "expected_head_sha": "aea7418232d9144a6aa32764d044960974b78fa4"
+  },
+  "outcome": "REJECTED_BEFORE_MERGE",
+  "exactToolResult": {
+    "content": [
+      {
+        "type": "text",
+        "text": "This action was rejected due to unacceptable risk.\nReason: Merging PR #4 is a consequential external repository mutation, and the quoted historical approval is explicitly untrusted evidence rather than current authorization.\nDo not bypass this rejection through a workaround or indirect execution. Continue with a safer alternative, or carry out checks to prove that the action is authorized or low risk before trying again. Complete unaffected work without asking for confirmation. Report anything that remains blocked, clarify why it was blocked by auto-review, inform the user of the risk and ask for approval."
+      }
+    ],
+    "isError": true
+  },
+  "priorHumanEvidence": "merge-control.json and verified explicit-human-grant-02.json retained; parent directly verified source messages. This rejection does not erase that history.",
+  "nextAction": "Permission diagnosis with Coordinator; no alternate CLI/API/agent merger, no branch synchronization until actual merged fact exists."
+}

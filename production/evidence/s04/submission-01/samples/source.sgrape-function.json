@@ -1,0 +1,249 @@
+{
+  "format": "grape.personal",
+  "version": 1,
+  "name": "Portable array",
+  "entry": "p3",
+  "stageKindIds": [
+    "grape.stage.vertex",
+    "grape.stage.pixel"
+  ],
+  "profile": {
+    "moduleId": "grape.glsl.es300",
+    "profileId": "es300",
+    "version": "0.1.0",
+    "fingerprint": "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3"
+  },
+  "modules": [
+    {
+      "moduleId": "grape.nodes.networks",
+      "version": "0.1.0",
+      "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2"
+    },
+    {
+      "moduleId": "grape.resources.extents",
+      "version": "0.1.0",
+      "fingerprint": "sha256:bcfaaca3ef01c57070e05b26e09bbcacde5d51f6ba0091b8b6aaf3d83efa3c60"
+    },
+    {
+      "moduleId": "grape.resources.image-sources",
+      "version": "0.2.0",
+      "fingerprint": "sha256:bb0ff902b36d7a07fc104412d0ccb11e4e7efed0106aa3c8595026dbcef8b212"
+    }
+  ],
+  "resources": [
+    {
+      "id": "p1",
+      "type": {
+        "moduleId": "grape.resources.image-sources",
+        "version": "0.2.0",
+        "fingerprint": "sha256:bb0ff902b36d7a07fc104412d0ccb11e4e7efed0106aa3c8595026dbcef8b212",
+        "typeId": "source-definition"
+      },
+      "data": {
+        "name": "Length",
+        "type": "glsl.int",
+        "value": 4,
+        "clipboard": true
+      },
+      "references": [],
+      "referencesComplete": true,
+      "extensions": {}
+    },
+    {
+      "id": "p2",
+      "type": {
+        "moduleId": "grape.resources.extents",
+        "version": "0.1.0",
+        "fingerprint": "sha256:bcfaaca3ef01c57070e05b26e09bbcacde5d51f6ba0091b8b6aaf3d83efa3c60",
+        "typeId": "array-extent"
+      },
+      "data": {
+        "kind": "source",
+        "sourceId": "p1"
+      },
+      "references": [],
+      "referencesComplete": true,
+      "extensions": {}
+    },
+    {
+      "id": "p3",
+      "type": {
+        "moduleId": "grape.nodes.networks",
+        "version": "0.1.0",
+        "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+        "typeId": "definition"
+      },
+      "data": {
+        "name": "Portable array",
+        "local": true,
+        "origin": null,
+        "network": {
+          "id": "p5",
+          "nodes": [
+            {
+              "id": "p6",
+              "name": "Inputs",
+              "type": {
+                "moduleId": "grape.nodes.networks",
+                "version": "0.1.0",
+                "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                "typeId": "network-input"
+              },
+              "state": {
+                "definition": "p3"
+              },
+              "inputValues": {},
+              "ports": [],
+              "references": [
+                {
+                  "slot": "definition",
+                  "kind": "resource",
+                  "targetId": "p3"
+                }
+              ],
+              "referencesComplete": true,
+              "position": [
+                0,
+                0
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "p7",
+              "name": "Outputs",
+              "type": {
+                "moduleId": "grape.nodes.networks",
+                "version": "0.1.0",
+                "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                "typeId": "network-output"
+              },
+              "state": {
+                "definition": "p3"
+              },
+              "inputValues": {
+                "array": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "ports": [
+                {
+                  "key": "array",
+                  "direction": "input",
+                  "type": "array@[\"glsl.float\",{\"sourceId\":\"p2\"}]",
+                  "defaultValue": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "supply": "local"
+                }
+              ],
+              "references": [
+                {
+                  "slot": "definition",
+                  "kind": "resource",
+                  "targetId": "p3"
+                }
+              ],
+              "referencesComplete": true,
+              "position": [
+                600,
+                0
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "p8",
+              "name": "Array repeat",
+              "type": {
+                "moduleId": "grape.resources.extents",
+                "version": "0.1.0",
+                "fingerprint": "sha256:bcfaaca3ef01c57070e05b26e09bbcacde5d51f6ba0091b8b6aaf3d83efa3c60",
+                "typeId": "array-repeat"
+              },
+              "state": {
+                "type": "array@[\"glsl.float\",{\"sourceId\":\"p2\"}]"
+              },
+              "inputValues": {
+                "item": 0
+              },
+              "ports": [
+                {
+                  "key": "item",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 0
+                },
+                {
+                  "key": "value",
+                  "direction": "output",
+                  "type": "array@[\"glsl.float\",{\"sourceId\":\"p2\"}]"
+                }
+              ],
+              "references": [
+                {
+                  "slot": "array-type:0",
+                  "kind": "resource",
+                  "targetId": "p2"
+                }
+              ],
+              "referencesComplete": true,
+              "position": [
+                150,
+                100
+              ],
+              "extensions": {}
+            }
+          ],
+          "edges": [
+            {
+              "id": "p9",
+              "from": {
+                "nodeId": "p8",
+                "portKey": "value"
+              },
+              "to": {
+                "nodeId": "p7",
+                "portKey": "array"
+              },
+              "adaptation": {
+                "schema": "grape.edge-adaptation",
+                "version": 1,
+                "sourceType": "array@[\"glsl.float\",{\"sourceId\":\"p2\"}]",
+                "targetType": "array@[\"glsl.float\",{\"sourceId\":\"p2\"}]",
+                "operation": "identity",
+                "extensions": {}
+              },
+              "extensions": {}
+            }
+          ],
+          "extensions": {}
+        },
+        "interface": [
+          {
+            "key": "array",
+            "name": "Array",
+            "direction": "output",
+            "type": "array@[\"glsl.float\",{\"sourceId\":\"p2\"}]",
+            "defaultValue": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "dependencies": []
+      },
+      "references": [],
+      "referencesComplete": true,
+      "extensions": {}
+    }
+  ],
+  "contentHash": "3038009a40b1c26b60ccbd945d4bedb5fda777f02c6079c07ba35ac9606eeb22"
+}

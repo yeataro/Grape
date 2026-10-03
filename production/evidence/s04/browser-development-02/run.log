@@ -1,0 +1,95 @@
+
+> grape-s01@0.1.0 test:browser
+> node tools/runtime.mjs && playwright test s04.spec.ts --output C:\Users\user\source\Grape\production\evidence\s04\browser-development-02\artifacts
+
+[WebServer] (node:1936) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:11932) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › tests\browser\s04.spec.ts:4:1 › S04 DEC002 all sixteen conversions execute on WebGL2 with correct components (313ms)
+  ok 2 [chromium] › tests\browser\s04.spec.ts:18:1 › S04 DEC004 actual Personal literal source input nested shaders compile after export import reopen (469ms)
+  ok 3 [chromium] › tests\browser\s04.spec.ts:34:1 › S04 actual IndexedDB collision concurrency relist quotas and failure isolation (313ms)
+  x  4 [chromium] › tests\browser\s04.spec.ts:49:1 › S04 DEC002 actual Canvas four shapes to current ImageOutput and edge identity Undo Redo (30.1s)
+(node:49092) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  5 [chromium] › tests\browser\s04.spec.ts:64:1 › S04 actual Personal UI saves relists imports downloads and inserts independent Graph snapshots (6.5s)
+
+
+  1) [chromium] › tests\browser\s04.spec.ts:49:1 › S04 DEC002 actual Canvas four shapes to current ImageOutput and edge identity Undo Redo 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.selectOption: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('[data-parameter="mode"]')
+
+
+      52 |     await page.goto("/");const name=shape==="float"?"Float":shape==="vec4"?"Compose":"Multiply";
+      53 |     await page.getByRole("button",{name:"Add "+name,exact:true}).click();
+    > 54 |     if(shape==="vec2"||shape==="vec3")await page.locator('[data-parameter="mode"]').selectOption(shape);
+         |                                                                                     ^
+      55 |     await page.getByRole("button",{name:name+" output "+(shape==="float"?"value":"result"),exact:true}).click();await page.getByRole("button",{name:"Image output input color",exact:true}).click();
+      56 |     await expect(page.locator(".wires [data-edge]")).toHaveCount(1);const edge=await page.locator(".wires [data-edge]").getAttribute("data-edge");
+      57 |     await page.getByRole("button",{name:"Generate GLSL",exact:true}).click();await expect(page.getByLabel("Generated GLSL")).toContainText("fragColor");
+        at C:\Users\user\source\Grape\production\tests\browser\s04.spec.ts:54:85
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    evidence\s04\browser-development-02\artifacts\s04-S04-DEC002-actual-Canv-b2b76-and-edge-identity-Undo-Redo-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: evidence\s04\browser-development-02\artifacts\s04-S04-DEC002-actual-Canv-b2b76-and-edge-identity-Undo-Redo-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\s04\browser-development-02\artifacts\s04-S04-DEC002-actual-Canv-b2b76-and-edge-identity-Undo-Redo-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\s04\browser-development-02\artifacts\s04-S04-DEC002-actual-Canv-b2b76-and-edge-identity-Undo-Redo-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests\browser\s04.spec.ts:64:1 › S04 actual Personal UI saves relists imports downloads and inserts independent Graph snapshots 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('dialog[open] [role="status"]')
+    Expected substring: "PERSONAL_FORMAT"
+    Received string:    "1 saved subgraphs"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('dialog[open] [role="status"]')
+        14 × locator resolved to <p role="status">1 saved subgraphs</p>
+           - unexpected value "1 saved subgraphs"
+
+
+      69 |   await page.getByRole("button",{name:"Personal Library",exact:true}).click();await page.getByRole("button",{name:"Insert Subgraph",exact:true}).click();const twice=await exported(page);expect(twice.graph.resources).toEqual(once.graph.resources);
+      70 |   await page.getByRole("button",{name:"Make independent",exact:true}).click();const independent=await exported(page);expect(independent.graph.resources.length).toBe(twice.graph.resources.length+1);await page.getByRole("button",{name:"Undo",exact:true}).click();expect((await exported(page)).graph).toEqual(twice.graph);
+    > 71 |   await page.getByRole("button",{name:"Personal Library",exact:true}).click();await page.getByLabel("Import Personal package").setInputFiles({name:"bad.sgrape-function.json",mimeType:"application/json",buffer:Buffer.from('{"bad":true}')});await expect(page.locator('dialog[open] [role="status"]')).toContainText("PERSONAL_FORMAT");await expect(page.locator('[data-personal-file]')).toHaveCount(1);await page.getByRole("button",{name:"Close Personal",exact:true}).click();expect((await exported(page)).graph).toEqual(twice.graph);
+         |                                                                                                                                                                                                                                                                                                           ^
+      72 |   await page.reload();await page.getByRole("button",{name:"Personal Library",exact:true}).click();await expect(page.locator('[data-personal-file]')).toHaveCount(1);await page.screenshot({path:evidence+"/s04-personal-ui.png",fullPage:true});await fs.writeFile(evidence+"/s04-personal-ui.json",JSON.stringify({asset:JSON.parse(text),once,twice,independent},null,2));
+      73 | });
+      74 |
+        at C:\Users\user\source\Grape\production\tests\browser\s04.spec.ts:71:299
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    evidence\s04\browser-development-02\artifacts\s04-S04-actual-Personal-UI-d3384-independent-Graph-snapshots-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: evidence\s04\browser-development-02\artifacts\s04-S04-actual-Personal-UI-d3384-independent-Graph-snapshots-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\s04\browser-development-02\artifacts\s04-S04-actual-Personal-UI-d3384-independent-Graph-snapshots-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\s04\browser-development-02\artifacts\s04-S04-actual-Personal-UI-d3384-independent-Graph-snapshots-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests\browser\s04.spec.ts:49:1 › S04 DEC002 actual Canvas four shapes to current ImageOutput and edge identity Undo Redo 
+    [chromium] › tests\browser\s04.spec.ts:64:1 › S04 actual Personal UI saves relists imports downloads and inserts independent Graph snapshots 
+  3 passed (39.4s)

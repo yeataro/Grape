@@ -1,0 +1,144 @@
+{
+  "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+  "executedAgainst": "Working bytes subsequently committed unchanged as I; manifest verifies exact commit bytes. Root state adoption followed product checks; final root checks are separate.",
+  "checks": [
+    {
+      "command": "npm --prefix production test",
+      "exitCode": 0,
+      "tests": 179,
+      "fail": 0,
+      "skips": 0,
+      "log": "unit-01.log"
+    },
+    {
+      "command": "npm --prefix production run typecheck",
+      "exitCode": 0,
+      "log": "typecheck-01.log"
+    },
+    {
+      "command": "npm --prefix production run conformance",
+      "exitCode": 0,
+      "checkedFiles": 48,
+      "log": "conformance-01.log"
+    },
+    {
+      "command": "npm --prefix production run build",
+      "exitCode": 0,
+      "log": "build-01.log"
+    },
+    {
+      "cwd": "production",
+      "command": "$env:GRAPE_EVIDENCE_DIR='evidence/s04/browser-candidate-01'; node node_modules/@playwright/test/cli.js test --output evidence/s04/browser-candidate-01/test-results",
+      "exitCode": 0,
+      "sessionId": 87141,
+      "tests": 54,
+      "fail": 0,
+      "skips": 0,
+      "stats": {
+        "startTime": "2026-10-03T22:00:54.567Z",
+        "duration": 50689.475999999995,
+        "expected": 54,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result": {
+        "file": "production/evidence/s04/browser-candidate-01/browser-results.json",
+        "sha256": "12bee7cff9209561947db727943596696e975e6557df62cbda5ca5a6fc69f826",
+        "bytes": 141912
+      }
+    },
+    {
+      "command": "node tools/verify-bootstrap.mjs",
+      "exitCode": 0,
+      "log": "bootstrap-01.log"
+    },
+    {
+      "command": "node --test --test-isolation=none tools/verify-bootstrap.test.mjs",
+      "exitCode": 0,
+      "tests": 10,
+      "log": "fixture-01.log"
+    },
+    {
+      "command": "node --experimental-transform-types production/tools/s03-performance.ts",
+      "exitCode": 0,
+      "log": "performance-01.log",
+      "scope": "One 200-node model sample; not frame-rate or scaling qualification"
+    }
+  ],
+  "historicalRuns": [
+    {
+      "directory": "production/evidence/s04/browser-development-01",
+      "status": {
+        "startTime": "2026-10-03T21:43:56.243Z",
+        "duration": 2769.6189999999997,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "reason": "Initial targeted browser checks.",
+      "result": {
+        "file": "production/evidence/s04/browser-development-01/browser-results.json",
+        "sha256": "6566a6f908d4164204b4535d337d4bbdaf6d57c3c9c8144cb89fea7d998a4419",
+        "bytes": 5560
+      }
+    },
+    {
+      "directory": "production/evidence/s04/browser-development-02",
+      "status": {
+        "startTime": "2026-10-03T21:45:16.210Z",
+        "duration": 39354.197,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "reason": "Two findings: incorrect Compose fixture and stale Personal refresh overwriting error; fixed and later checks pass.",
+      "result": {
+        "file": "production/evidence/s04/browser-development-02/browser-results.json",
+        "sha256": "0afe84a1be8d9b9903674a696d49628fc86f097488b4a417f4862d74ed599b0b",
+        "bytes": 18702
+      }
+    },
+    {
+      "directory": "production/evidence/s04/browser-development-03",
+      "status": {
+        "startTime": "2026-10-03T21:47:43.125Z",
+        "duration": 94941.888,
+        "expected": 37,
+        "skipped": 0,
+        "unexpected": 16,
+        "flaky": 0
+      },
+      "reason": "Legacy fixtures and ambiguous added file selector; corrected explicit old-document load and labels without relaxing original protections.",
+      "result": {
+        "file": "production/evidence/s04/browser-development-03/browser-results.json",
+        "sha256": "14436f7196cef5fa075fa27e35a0cd887b7265e6532ed29c7eb8c7d965cea2e1",
+        "bytes": 208796
+      }
+    },
+    {
+      "directory": "production/evidence/s04/browser-development-04",
+      "status": "ABORTED_INCOMPLETE_NO_PASS",
+      "reason": "Pre-edit script wrong cwd failed; runner nevertheless started, manually interrupted. Immutable aborted.json retains fact."
+    },
+    {
+      "directory": "production/evidence/s04/browser-development-05",
+      "status": {
+        "startTime": "2026-10-03T21:51:35.880Z",
+        "duration": 87437.167,
+        "expected": 51,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "reason": "Two S02 exact old-definition fixtures against new graph; corrected same old-document setup.",
+      "result": {
+        "file": "production/evidence/s04/browser-development-05/browser-results.json",
+        "sha256": "72f84503dd90ef98fb15c7063fd5ae5d33f73b7d178c91d239ad8c1da7ee0d95",
+        "bytes": 150576
+      }
+    }
+  ]
+}

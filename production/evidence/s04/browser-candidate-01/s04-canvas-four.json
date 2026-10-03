@@ -1,0 +1,850 @@
+[
+  {
+    "shape": "float",
+    "edge": "a57bcafd-0278-4f53-a6ee-b01886a14d41",
+    "plan": {
+      "schema": "grape.edge-adaptation",
+      "version": 1,
+      "sourceType": "glsl.float",
+      "targetType": "glsl.vec4",
+      "operation": "broadcast",
+      "extensions": {}
+    },
+    "document": {
+      "format": "grape.document",
+      "formatVersion": {
+        "major": 2,
+        "minor": 1
+      },
+      "graph": {
+        "id": "0f890277-d9cc-40d4-ba4a-8e6973801e97",
+        "name": "Untitled shader",
+        "kind": {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.2.0",
+          "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+          "kindId": "grape.image"
+        },
+        "kindSettings": {},
+        "modules": [
+          {
+            "moduleId": "grape.nodes.basic",
+            "version": "0.1.0",
+            "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292"
+          },
+          {
+            "moduleId": "grape.nodes.networks",
+            "version": "0.1.0",
+            "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2"
+          },
+          {
+            "moduleId": "grape.resources.extents",
+            "version": "0.1.0",
+            "fingerprint": "sha256:bcfaaca3ef01c57070e05b26e09bbcacde5d51f6ba0091b8b6aaf3d83efa3c60"
+          },
+          {
+            "moduleId": "grape.resources.image-sources",
+            "version": "0.2.0",
+            "fingerprint": "sha256:bb0ff902b36d7a07fc104412d0ccb11e4e7efed0106aa3c8595026dbcef8b212"
+          },
+          {
+            "moduleId": "grape.graph-kinds",
+            "version": "0.1.0",
+            "fingerprint": "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3"
+          },
+          {
+            "moduleId": "grape.nodes.image-output",
+            "version": "0.2.0",
+            "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+          },
+          {
+            "moduleId": "grape.graph-kinds",
+            "version": "0.2.0",
+            "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+          }
+        ],
+        "stages": [
+          {
+            "id": "222a60d0-9455-4607-bf8a-303982e23f52",
+            "key": "vertex",
+            "stageKindId": "grape.stage.vertex",
+            "implementation": "profile-default",
+            "network": {
+              "id": "998e42bc-34b0-47a4-8ad6-c7c9dd87bc20",
+              "nodes": [],
+              "edges": [],
+              "extensions": {}
+            },
+            "extensions": {}
+          },
+          {
+            "id": "e69ddab2-5791-4a4e-a980-b66c9dff049a",
+            "key": "pixel",
+            "stageKindId": "grape.stage.pixel",
+            "implementation": "network",
+            "network": {
+              "id": "9b5eace2-a363-4bf9-8a74-e7f75de0c040",
+              "nodes": [
+                {
+                  "id": "b8ff0aa2-b3f8-411d-88ff-423e58ce78c2",
+                  "name": "Image output",
+                  "type": {
+                    "moduleId": "grape.nodes.image-output",
+                    "version": "0.2.0",
+                    "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+                    "typeId": "image-output"
+                  },
+                  "state": {},
+                  "inputValues": {},
+                  "ports": [
+                    {
+                      "key": "color",
+                      "direction": "input",
+                      "type": "glsl.vec4",
+                      "supply": "required",
+                      "connectionPolicy": "numeric"
+                    }
+                  ],
+                  "references": [],
+                  "referencesComplete": true,
+                  "position": [
+                    650,
+                    180
+                  ],
+                  "extensions": {}
+                },
+                {
+                  "id": "350818b3-64c3-48f6-9003-05be6df31886",
+                  "name": "Float",
+                  "type": {
+                    "moduleId": "grape.nodes.basic",
+                    "version": "0.1.0",
+                    "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                    "typeId": "float"
+                  },
+                  "state": {
+                    "value": 0.25
+                  },
+                  "inputValues": {},
+                  "ports": [
+                    {
+                      "key": "value",
+                      "direction": "output",
+                      "type": "glsl.float"
+                    }
+                  ],
+                  "references": [],
+                  "referencesComplete": true,
+                  "position": [
+                    40,
+                    85
+                  ],
+                  "extensions": {}
+                }
+              ],
+              "edges": [
+                {
+                  "id": "a57bcafd-0278-4f53-a6ee-b01886a14d41",
+                  "from": {
+                    "nodeId": "350818b3-64c3-48f6-9003-05be6df31886",
+                    "portKey": "value"
+                  },
+                  "to": {
+                    "nodeId": "b8ff0aa2-b3f8-411d-88ff-423e58ce78c2",
+                    "portKey": "color"
+                  },
+                  "adaptation": {
+                    "schema": "grape.edge-adaptation",
+                    "version": 1,
+                    "sourceType": "glsl.float",
+                    "targetType": "glsl.vec4",
+                    "operation": "broadcast",
+                    "extensions": {}
+                  },
+                  "extensions": {}
+                }
+              ],
+              "extensions": {}
+            },
+            "extensions": {}
+          }
+        ],
+        "resources": [],
+        "losses": [],
+        "recovery": [],
+        "extensions": {}
+      }
+    }
+  },
+  {
+    "shape": "vec2",
+    "edge": "53788ef7-204b-42fd-9d0f-2bd535bc327d",
+    "plan": {
+      "schema": "grape.edge-adaptation",
+      "version": 2,
+      "sourceType": "glsl.vec2",
+      "targetType": "glsl.vec4",
+      "operation": "pad-vector",
+      "extensions": {}
+    },
+    "document": {
+      "format": "grape.document",
+      "formatVersion": {
+        "major": 2,
+        "minor": 1
+      },
+      "graph": {
+        "id": "7d193c6b-4eba-4644-8b79-3345ef77d583",
+        "name": "Untitled shader",
+        "kind": {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.2.0",
+          "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+          "kindId": "grape.image"
+        },
+        "kindSettings": {},
+        "modules": [
+          {
+            "moduleId": "grape.nodes.basic",
+            "version": "0.1.0",
+            "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292"
+          },
+          {
+            "moduleId": "grape.nodes.networks",
+            "version": "0.1.0",
+            "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2"
+          },
+          {
+            "moduleId": "grape.resources.extents",
+            "version": "0.1.0",
+            "fingerprint": "sha256:bcfaaca3ef01c57070e05b26e09bbcacde5d51f6ba0091b8b6aaf3d83efa3c60"
+          },
+          {
+            "moduleId": "grape.resources.image-sources",
+            "version": "0.2.0",
+            "fingerprint": "sha256:bb0ff902b36d7a07fc104412d0ccb11e4e7efed0106aa3c8595026dbcef8b212"
+          },
+          {
+            "moduleId": "grape.graph-kinds",
+            "version": "0.1.0",
+            "fingerprint": "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3"
+          },
+          {
+            "moduleId": "grape.nodes.image-output",
+            "version": "0.2.0",
+            "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+          },
+          {
+            "moduleId": "grape.graph-kinds",
+            "version": "0.2.0",
+            "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+          }
+        ],
+        "stages": [
+          {
+            "id": "15541987-ce80-4e5c-979d-c4c5e44b0ebc",
+            "key": "vertex",
+            "stageKindId": "grape.stage.vertex",
+            "implementation": "profile-default",
+            "network": {
+              "id": "9475e1e2-ccbc-4c10-99ff-c1942767df3b",
+              "nodes": [],
+              "edges": [],
+              "extensions": {}
+            },
+            "extensions": {}
+          },
+          {
+            "id": "578e391a-32a2-46de-8e9c-d24390c8fb48",
+            "key": "pixel",
+            "stageKindId": "grape.stage.pixel",
+            "implementation": "network",
+            "network": {
+              "id": "a14a9359-5b2e-4adb-be7a-a66b658d73ff",
+              "nodes": [
+                {
+                  "id": "14d31695-200e-4653-a59e-792b7019099c",
+                  "name": "Image output",
+                  "type": {
+                    "moduleId": "grape.nodes.image-output",
+                    "version": "0.2.0",
+                    "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+                    "typeId": "image-output"
+                  },
+                  "state": {},
+                  "inputValues": {},
+                  "ports": [
+                    {
+                      "key": "color",
+                      "direction": "input",
+                      "type": "glsl.vec4",
+                      "supply": "required",
+                      "connectionPolicy": "numeric"
+                    }
+                  ],
+                  "references": [],
+                  "referencesComplete": true,
+                  "position": [
+                    650,
+                    180
+                  ],
+                  "extensions": {}
+                },
+                {
+                  "id": "b3faf8ef-e18c-420e-ba39-b776bbe70208",
+                  "name": "Compose",
+                  "type": {
+                    "moduleId": "grape.nodes.basic",
+                    "version": "0.1.0",
+                    "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                    "typeId": "compose"
+                  },
+                  "state": {
+                    "mode": "vec2"
+                  },
+                  "inputValues": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "ports": [
+                    {
+                      "key": "x",
+                      "direction": "input",
+                      "type": "glsl.float",
+                      "supply": "local",
+                      "defaultValue": 0
+                    },
+                    {
+                      "key": "y",
+                      "direction": "input",
+                      "type": "glsl.float",
+                      "supply": "local",
+                      "defaultValue": 0
+                    },
+                    {
+                      "key": "result",
+                      "direction": "output",
+                      "type": "glsl.vec2"
+                    }
+                  ],
+                  "references": [],
+                  "referencesComplete": true,
+                  "position": [
+                    40,
+                    85
+                  ],
+                  "extensions": {}
+                }
+              ],
+              "edges": [
+                {
+                  "id": "53788ef7-204b-42fd-9d0f-2bd535bc327d",
+                  "from": {
+                    "nodeId": "b3faf8ef-e18c-420e-ba39-b776bbe70208",
+                    "portKey": "result"
+                  },
+                  "to": {
+                    "nodeId": "14d31695-200e-4653-a59e-792b7019099c",
+                    "portKey": "color"
+                  },
+                  "adaptation": {
+                    "schema": "grape.edge-adaptation",
+                    "version": 2,
+                    "sourceType": "glsl.vec2",
+                    "targetType": "glsl.vec4",
+                    "operation": "pad-vector",
+                    "extensions": {}
+                  },
+                  "extensions": {}
+                }
+              ],
+              "extensions": {}
+            },
+            "extensions": {}
+          }
+        ],
+        "resources": [],
+        "losses": [
+          {
+            "schema": "grape.loss",
+            "version": 1,
+            "id": "705a28c7-f532-4904-93fa-49695803bb41",
+            "code": "INPUT_REMOVED",
+            "reason": "Interface change removed authored data.",
+            "payload": {
+              "kind": "input-value",
+              "networkId": "a14a9359-5b2e-4adb-be7a-a66b658d73ff",
+              "nodeId": "b3faf8ef-e18c-420e-ba39-b776bbe70208",
+              "port": {
+                "key": "z",
+                "direction": "input",
+                "type": "glsl.float",
+                "supply": "local",
+                "defaultValue": 0
+              },
+              "value": 0
+            },
+            "extensions": {}
+          },
+          {
+            "schema": "grape.loss",
+            "version": 1,
+            "id": "db993542-4a67-43d8-8b05-e71485fcd07b",
+            "code": "INPUT_REMOVED",
+            "reason": "Interface change removed authored data.",
+            "payload": {
+              "kind": "input-value",
+              "networkId": "a14a9359-5b2e-4adb-be7a-a66b658d73ff",
+              "nodeId": "b3faf8ef-e18c-420e-ba39-b776bbe70208",
+              "port": {
+                "key": "w",
+                "direction": "input",
+                "type": "glsl.float",
+                "supply": "local",
+                "defaultValue": 1
+              },
+              "value": 1
+            },
+            "extensions": {}
+          }
+        ],
+        "recovery": [],
+        "extensions": {}
+      }
+    }
+  },
+  {
+    "shape": "vec3",
+    "edge": "ebec3159-62a6-48c4-93ca-86044db9d667",
+    "plan": {
+      "schema": "grape.edge-adaptation",
+      "version": 1,
+      "sourceType": "glsl.vec3",
+      "targetType": "glsl.vec4",
+      "operation": "append-alpha-one",
+      "extensions": {}
+    },
+    "document": {
+      "format": "grape.document",
+      "formatVersion": {
+        "major": 2,
+        "minor": 1
+      },
+      "graph": {
+        "id": "527d81be-16b5-4563-823b-5c765c9d6f09",
+        "name": "Untitled shader",
+        "kind": {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.2.0",
+          "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+          "kindId": "grape.image"
+        },
+        "kindSettings": {},
+        "modules": [
+          {
+            "moduleId": "grape.nodes.basic",
+            "version": "0.1.0",
+            "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292"
+          },
+          {
+            "moduleId": "grape.nodes.networks",
+            "version": "0.1.0",
+            "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2"
+          },
+          {
+            "moduleId": "grape.resources.extents",
+            "version": "0.1.0",
+            "fingerprint": "sha256:bcfaaca3ef01c57070e05b26e09bbcacde5d51f6ba0091b8b6aaf3d83efa3c60"
+          },
+          {
+            "moduleId": "grape.resources.image-sources",
+            "version": "0.2.0",
+            "fingerprint": "sha256:bb0ff902b36d7a07fc104412d0ccb11e4e7efed0106aa3c8595026dbcef8b212"
+          },
+          {
+            "moduleId": "grape.graph-kinds",
+            "version": "0.1.0",
+            "fingerprint": "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3"
+          },
+          {
+            "moduleId": "grape.nodes.image-output",
+            "version": "0.2.0",
+            "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+          },
+          {
+            "moduleId": "grape.graph-kinds",
+            "version": "0.2.0",
+            "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+          }
+        ],
+        "stages": [
+          {
+            "id": "2b803811-fa28-4e2d-8b5f-03b83a0bfd13",
+            "key": "vertex",
+            "stageKindId": "grape.stage.vertex",
+            "implementation": "profile-default",
+            "network": {
+              "id": "018e3670-c176-4b20-a12e-45d00f26040d",
+              "nodes": [],
+              "edges": [],
+              "extensions": {}
+            },
+            "extensions": {}
+          },
+          {
+            "id": "e6b99d1e-a867-4d8d-9b15-12b82e6c9ecd",
+            "key": "pixel",
+            "stageKindId": "grape.stage.pixel",
+            "implementation": "network",
+            "network": {
+              "id": "7e94aabd-c195-452c-885a-1f00ee20a1a9",
+              "nodes": [
+                {
+                  "id": "7ffb1a1b-6555-4091-a076-203094b60729",
+                  "name": "Image output",
+                  "type": {
+                    "moduleId": "grape.nodes.image-output",
+                    "version": "0.2.0",
+                    "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+                    "typeId": "image-output"
+                  },
+                  "state": {},
+                  "inputValues": {},
+                  "ports": [
+                    {
+                      "key": "color",
+                      "direction": "input",
+                      "type": "glsl.vec4",
+                      "supply": "required",
+                      "connectionPolicy": "numeric"
+                    }
+                  ],
+                  "references": [],
+                  "referencesComplete": true,
+                  "position": [
+                    650,
+                    180
+                  ],
+                  "extensions": {}
+                },
+                {
+                  "id": "651ee696-b245-483f-8f10-f115dfd01a6a",
+                  "name": "Compose",
+                  "type": {
+                    "moduleId": "grape.nodes.basic",
+                    "version": "0.1.0",
+                    "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                    "typeId": "compose"
+                  },
+                  "state": {
+                    "mode": "vec3"
+                  },
+                  "inputValues": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                  },
+                  "ports": [
+                    {
+                      "key": "x",
+                      "direction": "input",
+                      "type": "glsl.float",
+                      "supply": "local",
+                      "defaultValue": 0
+                    },
+                    {
+                      "key": "y",
+                      "direction": "input",
+                      "type": "glsl.float",
+                      "supply": "local",
+                      "defaultValue": 0
+                    },
+                    {
+                      "key": "z",
+                      "direction": "input",
+                      "type": "glsl.float",
+                      "supply": "local",
+                      "defaultValue": 0
+                    },
+                    {
+                      "key": "result",
+                      "direction": "output",
+                      "type": "glsl.vec3"
+                    }
+                  ],
+                  "references": [],
+                  "referencesComplete": true,
+                  "position": [
+                    40,
+                    85
+                  ],
+                  "extensions": {}
+                }
+              ],
+              "edges": [
+                {
+                  "id": "ebec3159-62a6-48c4-93ca-86044db9d667",
+                  "from": {
+                    "nodeId": "651ee696-b245-483f-8f10-f115dfd01a6a",
+                    "portKey": "result"
+                  },
+                  "to": {
+                    "nodeId": "7ffb1a1b-6555-4091-a076-203094b60729",
+                    "portKey": "color"
+                  },
+                  "adaptation": {
+                    "schema": "grape.edge-adaptation",
+                    "version": 1,
+                    "sourceType": "glsl.vec3",
+                    "targetType": "glsl.vec4",
+                    "operation": "append-alpha-one",
+                    "extensions": {}
+                  },
+                  "extensions": {}
+                }
+              ],
+              "extensions": {}
+            },
+            "extensions": {}
+          }
+        ],
+        "resources": [],
+        "losses": [
+          {
+            "schema": "grape.loss",
+            "version": 1,
+            "id": "e9ab5c89-1138-4b2c-b674-b1486070645a",
+            "code": "INPUT_REMOVED",
+            "reason": "Interface change removed authored data.",
+            "payload": {
+              "kind": "input-value",
+              "networkId": "7e94aabd-c195-452c-885a-1f00ee20a1a9",
+              "nodeId": "651ee696-b245-483f-8f10-f115dfd01a6a",
+              "port": {
+                "key": "w",
+                "direction": "input",
+                "type": "glsl.float",
+                "supply": "local",
+                "defaultValue": 1
+              },
+              "value": 1
+            },
+            "extensions": {}
+          }
+        ],
+        "recovery": [],
+        "extensions": {}
+      }
+    }
+  },
+  {
+    "shape": "vec4",
+    "edge": "a7ccfdf6-1327-4344-8485-0b8035390f92",
+    "plan": {
+      "schema": "grape.edge-adaptation",
+      "version": 1,
+      "sourceType": "glsl.vec4",
+      "targetType": "glsl.vec4",
+      "operation": "identity",
+      "extensions": {}
+    },
+    "document": {
+      "format": "grape.document",
+      "formatVersion": {
+        "major": 2,
+        "minor": 1
+      },
+      "graph": {
+        "id": "1d6037b7-f5da-4323-896d-a60c22dc22bf",
+        "name": "Untitled shader",
+        "kind": {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.2.0",
+          "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+          "kindId": "grape.image"
+        },
+        "kindSettings": {},
+        "modules": [
+          {
+            "moduleId": "grape.nodes.basic",
+            "version": "0.1.0",
+            "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292"
+          },
+          {
+            "moduleId": "grape.nodes.networks",
+            "version": "0.1.0",
+            "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2"
+          },
+          {
+            "moduleId": "grape.resources.extents",
+            "version": "0.1.0",
+            "fingerprint": "sha256:bcfaaca3ef01c57070e05b26e09bbcacde5d51f6ba0091b8b6aaf3d83efa3c60"
+          },
+          {
+            "moduleId": "grape.resources.image-sources",
+            "version": "0.2.0",
+            "fingerprint": "sha256:bb0ff902b36d7a07fc104412d0ccb11e4e7efed0106aa3c8595026dbcef8b212"
+          },
+          {
+            "moduleId": "grape.graph-kinds",
+            "version": "0.1.0",
+            "fingerprint": "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3"
+          },
+          {
+            "moduleId": "grape.nodes.image-output",
+            "version": "0.2.0",
+            "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+          },
+          {
+            "moduleId": "grape.graph-kinds",
+            "version": "0.2.0",
+            "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+          }
+        ],
+        "stages": [
+          {
+            "id": "487ec87b-0462-43af-99fc-df7b3525a76a",
+            "key": "vertex",
+            "stageKindId": "grape.stage.vertex",
+            "implementation": "profile-default",
+            "network": {
+              "id": "983b99bf-c6fe-4920-8853-72137d15be75",
+              "nodes": [],
+              "edges": [],
+              "extensions": {}
+            },
+            "extensions": {}
+          },
+          {
+            "id": "92febec6-c0f7-4e79-ba66-0c5211d1a70c",
+            "key": "pixel",
+            "stageKindId": "grape.stage.pixel",
+            "implementation": "network",
+            "network": {
+              "id": "739bf1ab-8be8-49c1-8577-b5448408f5a6",
+              "nodes": [
+                {
+                  "id": "cb4f5090-5f0a-4d2e-b0fd-d9d9eccf80ae",
+                  "name": "Image output",
+                  "type": {
+                    "moduleId": "grape.nodes.image-output",
+                    "version": "0.2.0",
+                    "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+                    "typeId": "image-output"
+                  },
+                  "state": {},
+                  "inputValues": {},
+                  "ports": [
+                    {
+                      "key": "color",
+                      "direction": "input",
+                      "type": "glsl.vec4",
+                      "supply": "required",
+                      "connectionPolicy": "numeric"
+                    }
+                  ],
+                  "references": [],
+                  "referencesComplete": true,
+                  "position": [
+                    650,
+                    180
+                  ],
+                  "extensions": {}
+                },
+                {
+                  "id": "f1c02601-f202-4c64-af82-94a2f5cabea4",
+                  "name": "Compose",
+                  "type": {
+                    "moduleId": "grape.nodes.basic",
+                    "version": "0.1.0",
+                    "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                    "typeId": "compose"
+                  },
+                  "state": {
+                    "mode": "vec4"
+                  },
+                  "inputValues": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0,
+                    "w": 1
+                  },
+                  "ports": [
+                    {
+                      "key": "x",
+                      "direction": "input",
+                      "type": "glsl.float",
+                      "supply": "local",
+                      "defaultValue": 0
+                    },
+                    {
+                      "key": "y",
+                      "direction": "input",
+                      "type": "glsl.float",
+                      "supply": "local",
+                      "defaultValue": 0
+                    },
+                    {
+                      "key": "z",
+                      "direction": "input",
+                      "type": "glsl.float",
+                      "supply": "local",
+                      "defaultValue": 0
+                    },
+                    {
+                      "key": "w",
+                      "direction": "input",
+                      "type": "glsl.float",
+                      "supply": "local",
+                      "defaultValue": 1
+                    },
+                    {
+                      "key": "result",
+                      "direction": "output",
+                      "type": "glsl.vec4"
+                    }
+                  ],
+                  "references": [],
+                  "referencesComplete": true,
+                  "position": [
+                    40,
+                    85
+                  ],
+                  "extensions": {}
+                }
+              ],
+              "edges": [
+                {
+                  "id": "a7ccfdf6-1327-4344-8485-0b8035390f92",
+                  "from": {
+                    "nodeId": "f1c02601-f202-4c64-af82-94a2f5cabea4",
+                    "portKey": "result"
+                  },
+                  "to": {
+                    "nodeId": "cb4f5090-5f0a-4d2e-b0fd-d9d9eccf80ae",
+                    "portKey": "color"
+                  },
+                  "adaptation": {
+                    "schema": "grape.edge-adaptation",
+                    "version": 1,
+                    "sourceType": "glsl.vec4",
+                    "targetType": "glsl.vec4",
+                    "operation": "identity",
+                    "extensions": {}
+                  },
+                  "extensions": {}
+                }
+              ],
+              "extensions": {}
+            },
+            "extensions": {}
+          }
+        ],
+        "resources": [],
+        "losses": [],
+        "recovery": [],
+        "extensions": {}
+      }
+    }
+  }
+]

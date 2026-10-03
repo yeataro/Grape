@@ -1,3 +1,4 @@
+import { networkModule } from "../../src/modules/networks.ts";
 import { shellText, shellPresentation, shellDefaults } from "./shell-copy.ts";
 import { Definitions } from "../../src/definitions/registry.ts";
 import { basicNodes, nodeText } from "../../src/modules/nodes.ts";
@@ -30,6 +31,7 @@ import { inspectorType, inspectorText } from "../../src/features/inspector.ts";
 import { actionsType, actionsText } from "../../src/features/actions.ts";
 import { codeType, codeText } from "../../src/features/code.ts";
 import {
+  jsonWidget,
   numberWidget,
   choiceWidget,
   controlsText,
@@ -38,6 +40,7 @@ import {
 const definitions = new Definitions();
 stages.forEach((s) => definitions.registerStage(s));
 definitions.register(basicNodes);
+definitions.register(networkModule);
 definitions.register(graphKinds);
 definitions.registerKind(imageKind);
 const locale = new Localization();
@@ -57,6 +60,7 @@ const text = (
 ) => locale.resolve(shellText(key, params)).text;
 const feedback = browserFeedback(locale);
 const widgets = new WidgetRegistry(feedback);
+widgets.register(jsonWidget, (p) => p.spec.type === "json");
 widgets.register(numberWidget, (p) => p.spec.type === "number");
 widgets.register(choiceWidget, (p) => p.spec.type === "choice");
 const application = new EditorApplication(

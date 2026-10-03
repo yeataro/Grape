@@ -1,0 +1,125 @@
+{
+  "implementation": "5a2dec1772735ce259912a0c26a9e3dc8fd2a20a",
+  "sourceManifest": {
+    "file": "production/evidence/s03/source-config-manifest-01.json",
+    "sha256": "08d950d470aa954bc3dfb7985089910bd91b65289cf74d69c8049cd27bcbe1e6",
+    "bytes": 12157
+  },
+  "environment": {
+    "node": "v25.5.0",
+    "platform": "win32",
+    "architecture": "x64",
+    "osRelease": "10.0.26200",
+    "playwright": "1.62.1",
+    "chromium": "151.0.7922.34",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "mode": "headless desktop Chromium; actual browser DOM events; synthetic composition events; no native OS IME or GPU/Host qualification",
+    "processPermissions": "Final Playwright suite ran with normal Windows process permissions after two sandbox teardown hangs"
+  },
+  "checks": [
+    {
+      "command": "npm run build",
+      "cwd": "production",
+      "exitCode": 0,
+      "log": "candidate-checks-01/build.log"
+    },
+    {
+      "command": "npm test",
+      "cwd": "production",
+      "exitCode": 0,
+      "tests": 129,
+      "passed": 129,
+      "failed": 0,
+      "skipped": 0,
+      "log": "candidate-checks-01/unit.log"
+    },
+    {
+      "command": "npm run conformance",
+      "cwd": "production",
+      "exitCode": 0,
+      "checkedSourceFiles": 38,
+      "log": "candidate-checks-01/conformance.log"
+    },
+    {
+      "command": "GRAPE_EVIDENCE_DIR=evidence/s03/candidate-browser-01 npm run test:browser -- --output=evidence/s03/candidate-browser-01/artifacts",
+      "cwd": "production",
+      "exitCode": 0,
+      "tests": 44,
+      "passed": 44,
+      "failed": 0,
+      "skipped": 0,
+      "log": "candidate-checks-01/browser.log",
+      "results": "candidate-browser-01/browser-results.json"
+    },
+    {
+      "command": "node tools/verify-bootstrap.mjs",
+      "cwd": ".",
+      "exitCode": 0,
+      "indexedFiles": 411,
+      "log": "candidate-checks-01/bootstrap.log",
+      "checks": 463,
+      "frozenFiles": 412
+    },
+    {
+      "command": "node handoff/tools/check-implementation-state.mjs --current",
+      "cwd": ".",
+      "exitCode": 0,
+      "status": "CURRENT_RECORD_VALID",
+      "log": "candidate-checks-01/current-state.log"
+    },
+    {
+      "command": "node --test --test-isolation=none tools/verify-bootstrap.test.mjs",
+      "cwd": ".",
+      "exitCode": 0,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "log": "candidate-checks-01/bootstrap-tests.log"
+    },
+    {
+      "command": "node --experimental-transform-types tools/s03-performance.ts",
+      "cwd": "production",
+      "exitCode": 0,
+      "log": "candidate-checks-01/performance.json"
+    }
+  ],
+  "developmentHistory": {
+    "priorWriter": "development-browser-01 through06 retained unchanged; historical nonfinal evidence",
+    "resumeBrowser01": {
+      "tests": 41,
+      "passed": 39,
+      "failed": 2,
+      "reporter": "incomplete after sandbox Vite teardown hang; session67686 interrupted, preserved artifacts"
+    },
+    "resumeBrowser02": {
+      "tests": 44,
+      "passed": 41,
+      "failed": 3,
+      "reporter": "completed after verified Vite child tree67136/46012 terminated with escalated taskkill; Stop-Process first returned null-reference error; full JSON retained"
+    },
+    "sameEnvironmentOperation": {
+      "initial": "sandbox teardown hang",
+      "retry1": "direct Vite command still hung",
+      "retry2": "normal Windows permissions, final candidate run completed44/44 without manual teardown",
+      "result": "RESOLVED",
+      "reviewRepairRounds": 0
+    }
+  },
+  "limitations": [
+    "S03 scope is host-free Windows x64 Chromium 151.0.7922.34 / Playwright 1.62.1 at 1440x1000; no native OS IME, touch/iPad/Safari, physical GPU, TouchDesigner or other Host qualification.",
+    "LC-NODE-368/369/374 shared S05 catalog branches (Router/array_get/replace/length/array_create, other dynamic nodes and provider/native types) are not claimed by S03 nested/Structure tests.",
+    "LC-DATA-045/062 native TOP/sampler slot integration and native path-string 2048/constructor4096 branches remain native integration scope; the numeric inline-array 2049 test does not certify native path acceptance.",
+    "S04 Personal/library package workflows and symbolic-array policy remain separate. G-LU-DATA-007/G-PD-1 are not closed.",
+    "S02 AT-S02-03 legacy compatibility remains NOT DELIVERED/BLOCKED and G-VERSION-COMPAT remains unresolved. Its regression test verifies the rejection boundary, not compatibility delivery.",
+    "Performance is one recorded 200-node model sample, run alongside build/unit/conformance checks. No frame-rate or unbounded large-graph claim.",
+    "Inherited DEC-GRAPE-001 domain-separated History and HC-001 quarantine remain unchanged. S06 all-widget/accessibility/device matrices remain unqualified.",
+    "No independent reviewer verdict, Human acceptance, merge authority or later Slice authorization is asserted by this implementer submission."
+  ],
+  "supersedes": {
+    "file": "production/evidence/s03/execution-01.json",
+    "reason": "Correct metadata distinction: 463 validation checks, 411 indexed files and 412 frozen files. Actual execution/logs and source/build are unchanged."
+  }
+}

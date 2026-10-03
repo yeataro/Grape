@@ -24,12 +24,45 @@ import type {
 } from "./document.ts";
 export interface ParameterSpec {
   readonly key: string;
+  readonly label?: import("./localization.ts").TextRef;
   readonly target: "state" | "input";
   readonly type: string;
   readonly choices?: readonly Json[];
   readonly presentation: ParameterPresentation;
 }
+export interface ModelContext {
+  readonly resources: readonly import("./document.ts").ResourceDocument[];
+  readonly types: TypeSystem;
+}
+export interface EmissionContext extends ModelContext {
+  readonly boundaryInputs: Readonly<Record<string, GLSLExpression>>;
+  literal(type: string, value: Json): string;
+  typeName(type: string): string;
+  emitNetwork(
+    id: string,
+    inputs: Readonly<Record<string, GLSLExpression>>,
+  ): Readonly<Record<string, GLSLExpression>>;
+}
+export interface StateReferences {
+  collect(state: Json): readonly import("./document.ts").DocumentReference[];
+  remap(
+    state: Json,
+    map: (
+      ref: import("./document.ts").DocumentReference,
+    ) => import("./document.ts").DocumentReference,
+  ): Json;
+}
 export interface NodeDefinition {
+  readonly modelRole?:
+    | "call"
+    | "network-input"
+    | "network-output"
+    | "source"
+    | "structure"
+    | "field";
+  readonly stateReferences?: StateReferences;
+  markInputOverride?(state: Json, key: string): Json;
+  isInputOverridden?(state: Json, key: string): boolean;
   readonly ref: NodeTypeRef;
   readonly role: "operation" | "boundary";
   readonly eligibility: NodeEligibility;
@@ -37,13 +70,19 @@ export interface NodeDefinition {
   readonly stateCodec: DataCodec;
   readonly invalidEdgePolicy?: "detach" | "preserve";
   initialize(): Json;
-  ports(state: Json): readonly PortSnapshot[];
-  parameters(state: Json): readonly ParameterSpec[];
-  validate(node: Readonly<NodeDocument>): readonly LocalizableIssue[];
+  ports(state: Json, context?: ModelContext): readonly PortSnapshot[];
+  parameters(state: Json, context?: ModelContext): readonly ParameterSpec[];
+  validate(
+    node: Readonly<NodeDocument>,
+    context?: ModelContext,
+  ): readonly LocalizableIssue[];
   emit(
     state: Json,
     inputs: Readonly<Record<string, GLSLExpression>>,
-  ): NodeEmission;
+    context?: EmissionContext,
+  ): NodeEmission & {
+    readonly networkOutputs?: Readonly<Record<string, GLSLExpression>>;
+  };
   boundaryOutputs?(
     state: Json,
     ports: readonly PortSnapshot[],
@@ -52,6 +91,29 @@ export interface NodeDefinition {
 export interface ResourceDefinition {
   readonly ref: NodeTypeRef;
   readonly codec: DataCodec;
+  readonly model?: "network" | "structure" | "source" | "frame";
+  readonly referencePolicy?: "declared";
+  readonly library?: {
+    readonly origin: string;
+    readonly nodes: readonly {
+      ref: NodeTypeRef;
+      state: Json;
+      position: [number, number];
+    }[];
+  };
+  readonly stateReferences?: StateReferences;
+  /** Pure owner admission and preparation; never resolves live native resources. */
+  readonly sourcePolicy?: {
+    validate(
+      data: Json,
+      context: SourcePolicyContext,
+    ): readonly ContractIssue[];
+    prepareTransfer?(data: Json, context: SourcePolicyContext): Json;
+  };
+}
+export interface SourcePolicyContext extends ModelContext {
+  readonly phase: "construction" | "clipboard" | "document";
+  readonly graphKind: CanonicalGraphDocument["graph"]["kind"];
 }
 export interface ModuleContribution {
   readonly manifest: ModulePin;
@@ -66,11 +128,20 @@ export interface ModuleContribution {
 }
 export interface ShaderTypeDefinition {
   readonly id: string;
+  readonly structureField?: false;
   readonly valueCodec: DataCodec;
   /** Numeric shape participates in the shared adaptation policy; nominal types use exact identity. */
   readonly numeric?: { readonly scalar: "float"; readonly width: number };
 }
+export interface TypeResource {
+  readonly id: string;
+  readonly model?: "network" | "source" | "structure" | "frame";
+  readonly data: Json;
+}
 export interface TypeSystem {
+  forResources(resources: readonly TypeResource[]): TypeSystem;
+  defaultValue(id: string): Json;
+  reshape(id: string, value: Json): Json;
   resolve(id: string): Readonly<ShaderTypeDefinition> | undefined;
   validValue(id: string, value: Json): boolean;
   adaptation(
@@ -85,6 +156,12 @@ export interface TypeSystem {
 }
 export interface DefinitionSet {
   readonly pins: readonly ModulePin[];
+  nodeByRole(
+    role: NonNullable<NodeDefinition["modelRole"]>,
+  ): Readonly<NodeDefinition> | undefined;
+  resourceByModel(
+    model: NonNullable<ResourceDefinition["model"]>,
+  ): Readonly<ResourceDefinition> | undefined;
   readonly types: TypeSystem;
   node(ref: NodeTypeRef): Readonly<NodeDefinition> | undefined;
   kind(
@@ -126,6 +203,7 @@ export interface ScopeRef {
   readonly contextId: string;
   readonly stageId: string;
   readonly networkPath: readonly string[];
+  readonly lifetime?: number;
 }
 export interface ParameterProjection {
   readonly nodeId: string;
@@ -153,9 +231,28 @@ export interface FieldTarget extends WidgetReadBinding<ParameterProjection> {
 }
 
 export interface ContextSnapshot {
+  readonly definitionNames: Readonly<Record<string, string>>;
+  readonly breadcrumbs: readonly { depth: number; name: string }[];
+  readonly frames: readonly (import("./networks.ts").FrameData & {
+    id: string;
+  })[];
   readonly scope: ScopeRef;
   readonly selection: readonly string[];
   readonly primary: string | null;
   readonly navigation: number;
+  readonly network: import("./document.ts").NetworkDocument;
+  readonly portLabels: Readonly<
+    Record<string, Readonly<Record<string, string>>>
+  >;
+  readonly nodeRoles: Readonly<Record<string, string>>;
+  readonly structures: readonly {
+    id: string;
+    data: import("./networks.ts").StructureData;
+    uses: readonly string[];
+  }[];
+  readonly definition: {
+    id: string;
+    data: import("./networks.ts").NetworkData;
+  } | null;
   readonly graph: GraphSnapshot;
 }

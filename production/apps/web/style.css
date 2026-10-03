@@ -350,7 +350,8 @@ dialog::backdrop {
   top: 32px;
   color: #bab3d4;
   font-size: 12px;
-  pointer-events: none;
+  pointer-events: auto;
+  z-index: 3;
 }
 .node:focus-visible,
 button:focus-visible,
@@ -364,4 +365,53 @@ select:focus-visible {
   border: 1px solid #b86b75;
   border-radius: 8px;
   color: #ffd5db;
+}
+
+.network-toolbar {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  z-index: 4;
+  background: #20232b;
+  padding: 6px;
+  border-radius: 6px;
+}
+.network-toolbar details {
+  width: 100%;
+  max-height: 220px;
+  overflow: auto;
+}
+.network-toolbar details input {
+  width: 120px;
+}
+
+.canvas-frame {
+  position: absolute;
+  border: 1px solid #6b7097;
+  background: #72779712;
+  border-radius: 10px;
+  padding: 4px 10px;
+  color: #b7bddb;
+  pointer-events: none;
+}
+
+.instance-name {
+  display: block;
+  padding: 0 12px;
+  color: #bab3d4;
+  font-size: 11px;
+}
+.canvas-breadcrumb {
+  pointer-events: none;
+}
+.canvas-breadcrumb button:not(:disabled) {
+  pointer-events: auto;
+}
+.network-toolbar details textarea {
+  vertical-align: middle;
+  max-width: 100%;
 }

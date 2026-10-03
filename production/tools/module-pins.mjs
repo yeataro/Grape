@@ -1,6 +1,10 @@
 import fs from "node:fs";
 import crypto from "node:crypto";
-const entries = ["src/modules/nodes.ts", "src/modules/image.ts"];
+const entries = [
+  "src/modules/nodes.ts",
+  "src/modules/image.ts",
+  "src/modules/networks.ts",
+];
 const report = [];
 for (const file of entries) {
   const path = new URL("../" + file, import.meta.url),

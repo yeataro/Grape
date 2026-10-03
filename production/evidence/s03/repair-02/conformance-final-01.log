@@ -1,0 +1,37 @@
+
+> grape-s01@0.1.0 conformance
+> node tools/runtime.mjs && node tools/module-pins.mjs && node tools/boundaries.mjs
+
+{
+  "status": "PASS",
+  "algorithm": "sha256 source UTF-8 with digest literals normalized to sha256:<self>",
+  "modules": [
+    {
+      "file": "src/modules/nodes.ts",
+      "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292"
+    },
+    {
+      "file": "src/modules/image.ts",
+      "fingerprint": "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3"
+    },
+    {
+      "file": "src/modules/networks.ts",
+      "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2"
+    }
+  ]
+}
+{
+  "status": "PASS",
+  "errors": [],
+  "checkedFiles": 38,
+  "limits": [
+    "Manifest role and public-export correctness require review.",
+    "No security sandbox or proof of callback purity; injected service surface and behavioral tests still enforce runtime authority.",
+    "Does not prove absence of arbitrary aliases/casts/reflection or semantic node-name switches. Changes to core by an ordinary extension are independently rejected."
+  ]
+}
+npm notice
+npm notice New minor version of npm available! 11.8.0 -> 11.21.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.0
+npm notice To update run: npm install -g npm@11.21.0
+npm notice

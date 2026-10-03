@@ -1,3 +1,4 @@
+import type { Json } from "../sdk/public-surface.ts";
 import type {
   Panel,
   PanelType,
@@ -103,6 +104,23 @@ export class Workspace {
         "PANEL_UNAVAILABLE",
       );
       const services: PanelServices = {
+        clipboard: () => this.application.clipboardText,
+        reshape: (lease, type, value) => {
+          this.assertLease(r, lease);
+          demand(r.update.target, "TARGET_MISSING");
+          return this.application.reshapeValue(
+            this.application.context(r.update.target.scope.contextId),
+            type,
+            value,
+          );
+        },
+        layout: (lease) => {
+          this.assertLease(r, lease);
+          demand(r.update.target, "TARGET_MISSING");
+          return this.application.layoutProposal(
+            this.application.context(r.update.target.scope.contextId),
+          ) as unknown as Json;
+        },
         context: (lease) => {
           this.assertLease(r, lease);
           demand(r.update.target, "TARGET_MISSING");

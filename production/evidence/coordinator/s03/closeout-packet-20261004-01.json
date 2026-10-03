@@ -1,0 +1,115 @@
+{
+  "packetVersion": 1,
+  "packetType": "IMPLEMENTER_DISPATCH",
+  "packetId": "S03-CLOSEOUT-AND-S04-PREP-20261004-01",
+  "actionKey": "yeataro/Grape:S03:closeout:80ee116:c209bba:20261004-01",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0f164cbba205a981f2ff21f5b402cd6ca4db42ee",
+  "acceptedMain": "3a59aeeeddb71a06a1172c85016ad06aeb59f34f",
+  "expectedWorkHead": "04834e2d0c11656f9d06a3e9ab82350f6edede33",
+  "PR": "NONE; API confirms only merged PR1..3; no S03 PR",
+  "sliceId": "S03",
+  "authorizationRef": "production/evidence/coordinator/s03/human-acceptance-20261004-01.json",
+  "writer": {
+    "identity": "/root/s03_implementer_resume",
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "hostId": "local",
+    "ownership": "Existing sole product/state/evidence maintainer retained. Coordinator writes dispatch/recovery receipts only.",
+    "priorResult": "04834e2 evidence persistence complete, explicit stopped writing; thread last turn completed, no replacement writer."
+  },
+  "requestedAction": "Perform authorized local S03 acceptance/completion bookkeeping, separately preserve/register accepted DEC/AC as future S04 requirements and prepare an unissued S04 packet for Human confirmation.",
+  "authorizedScope": [
+    "Record attributable Human acceptance at original I/R, two acceptedEvidence kinds at I, complete S03 and clear activeSlices using normal schema, update baseline/build and status documentation.",
+    "Keep I, exact independently reviewed R, evidence-retention P, and metadata-only completion B distinct; bind accepted product review to I/R only.",
+    "Save exact submitted DEC-GRAPE-002 and AC-GRAPE-001 bytes, register accepted decisionReferences with hashes and S04 intended scope, not runtime delivered evidence or retroactive S03 baseline adoption.",
+    "Prepare PACKETS.md IMPLEMENTER_DISPATCH-shaped S04 draft with DRAFT_NOT_DISPATCHED status, no Slice authorization, exact proposed/current baseline identities and activation rebind prerequisites; include accepted amendment full obligations and AT-DEC-GRAPE-002-01..08 plus inherited S04 AT01..03.",
+    "Identify G-PD-1 Personal symbolic extent decision scope, environment/Storage profile boundaries and remaining real Human choices; offer bounded proposals without making product decisions.",
+    "Make necessary local commits, separate strict S03 completion bookkeeping B from amendment registration and S04 preparation if needed, and return exact commit IDs/diffs/checks/limits."
+  ],
+  "exclusions": [
+    "No product implementation, no S04 activation, no product/test/tool/config changes, no source-format/runtime adoption of new amendments, no new PASS, no merge/push/PR creation.",
+    "No edits/normalization to handoff or historical evidence including acceptance-01 pending labels; no rewriting original report/verdict/authorship.",
+    "Do not stage notes/, references/ or unrelated preexisting README hunks; preserve all user/workspace changes byte-for-byte outside authorized status/amendment edits. No blanket git add."
+  ],
+  "inputRefs": [
+    {
+      "file": "implementation-state.json",
+      "sha256": "41b0f304673c0d0c22c7a1d1530bf00c71b0fd86bc34ec1d5f3b74cb0837fd96"
+    },
+    {
+      "file": "decisions/DEC-GRAPE-002.md",
+      "sha256": "ef2492ba16e5c96cede2d9b70e638033f80ecb7825b2d2c8c2dbe36d24fad848"
+    },
+    {
+      "file": "decisions/AC-GRAPE-001.md",
+      "sha256": "00c21f29fb66c07e1db1a7ea6dce2dbffadb47682c534f3019e2dc984057be00"
+    },
+    {
+      "id": "S03-FR-c209bba-R2",
+      "file": "production/evidence/s03/acceptance-01/independent-review/INDEPENDENT_REVIEW_RESULT.json",
+      "sha256": "5c36c11da58b739a84a089ae5bc1c90aa8c3b079f3b9cfe5c2ca90644d25c565"
+    },
+    {
+      "id": "S03-repair2-web-80ee116",
+      "file": "production/evidence/s03/repair-02/candidate-web-01.tar.gz",
+      "sha256": "46cd7c70aba4139416173495453486a0d0ff8da41c2d10d7bd06a88329b4dc79"
+    },
+    {
+      "file": "production/evidence/s03/acceptance-01/persistence-receipt-01.json"
+    },
+    {
+      "file": "production/evidence/coordinator/s03/recovery-20261004-01.json"
+    },
+    {
+      "file": "production/evidence/coordinator/s03/s03-publication-wait-01.json"
+    }
+  ],
+  "contractRefs": [
+    "README.md",
+    "AGENTS.md",
+    "workflow/COORDINATOR.md",
+    "workflow/RUNBOOK.md",
+    "workflow/PACKETS.md",
+    "HANDOFF_ACCEPTANCE.json",
+    "handoff/08_IMPLEMENTATION_PLAN.md#S04",
+    "handoff/09_ACCEPTANCE_AND_CONFORMANCE.md#S04",
+    "handoff/10_KNOWN_GATES.md",
+    "handoff/14_DOCUMENT_FORMAT.md",
+    "handoff/data/slices.json",
+    "decisions/DEC-GRAPE-002.md",
+    "decisions/AC-GRAPE-001.md"
+  ],
+  "invariants": [
+    "Exact-port rejection remains available; Image Output still vec4 target/boundary and source output types unchanged.",
+    "Current S03 writer/document format remains2.0; approved new doc2.1/edgev2/pad-vector and module exact-identity obligations are future S04 implementation.",
+    "No global Gate closure, S02 legacy AT03 remains blocked, inherited DEC-GRAPE-001 unchanged.",
+    "New decisionReferences accepted status is product/contract acceptance, not new implementation evidence; S03 baseline decisionReferenceIds must not imply these amendments implemented at I."
+  ],
+  "environment": "Use existing Node25.5.0 and root read-only verifiers; no installs or services.",
+  "verificationCommands": [
+    "node tools/verify-bootstrap.mjs",
+    "node handoff/tools/check-implementation-state.mjs --current",
+    "node --test --test-isolation=none tools/verify-bootstrap.test.mjs",
+    "git diff --check",
+    "Byte/hash manifests and I->R->B ancestry; B strict allowlist and original source/tests/tools/config/build/evidence unchanged."
+  ],
+  "knownCheckIssue": "Prior intake found root bootstrap test disposable-fixture excludes notes/decisions README targets; dirty README link caused BOOT01/09 failure while isolated R had9/9PASS. Do not silently fix tools or weaken checks in B. Diagnose against committed closeout/docs candidate, report exact failure and separate any proposed mechanical test-harness fix for Coordinator routing; preserve unrelated README note hunk.",
+  "outputLocation": "Existing evidence conventions: append-only production/evidence/acceptance/s03/ or equivalent unused S03 closeout folder; decisions/ exact files; implementation-state.json; scoped status docs; production/evidence/coordinator/s04/ unissued draft. Return result summary in this task.",
+  "priorActionReceipt": "production/evidence/s03/acceptance-01/persistence-receipt-01.json",
+  "attempt": 1,
+  "findingGroup": "No new repair group; retain S03-FR-7c6c6ce-01:FR01-FR03-EG01 round2, unsuccessful1.",
+  "stopConditions": [
+    "Unexpected HEAD/writer/input hash; reconcile before writing.",
+    "No dispatch/startS04; stop after local closeout, decision registration and draft packet delivery.",
+    "No remote publication. Historical automatic approval rejection remains unresolved; do not bypass via connector."
+  ],
+  "provenance": {
+    "remoteRead": "Authenticated GitHub GET2026-10-03: main/work3a59aee; PR1..3merged; noopenS03",
+    "human": "Current Human message quoted in acceptance receipt; no request to reapprove accepted table",
+    "coordinator": "Current root thread01a10301-6199-7533-af8d-cf3d348c0990"
+  },
+  "limitations": [
+    "S04 starting accepted main cannot be finalized until S03 publication/merge independently authorized and verified; draft must retain this prerequisite.",
+    "Authoritative state remains implementation-state.json; drafts/receipts are immutable evidence, not alternative mutable state."
+  ]
+}

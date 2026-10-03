@@ -1,0 +1,174 @@
+[
+  {
+    "id": "EG01-inline-source-admission",
+    "type": "array@[\"glsl.float\",2]",
+    "value": [
+      1,
+      2
+    ],
+    "expected": "same-load reuse; cross-graph and cross-load rejection without publication",
+    "sameLoadResourceCount": 1,
+    "sourceGraphId": "id-1",
+    "destinationGraphId": "independent-destination",
+    "error": null,
+    "accepted": true,
+    "beforeRevision": 2,
+    "afterRevision": 3,
+    "beforeResources": 0,
+    "afterResources": 1,
+    "historyDelta": 1,
+    "redoBefore": true,
+    "redoAfter": false,
+    "notifications": 1,
+    "diagnostics": [],
+    "originalSourceUnchanged": true,
+    "reopenedError": null,
+    "reopenedRevisionDelta": 1,
+    "contractConforms": false
+  },
+  {
+    "id": "EG01-inline-source-admission",
+    "type": "array@[\"glsl.vec2\",2]",
+    "value": [
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "expected": "same-load reuse; cross-graph and cross-load rejection without publication",
+    "sameLoadResourceCount": 1,
+    "sourceGraphId": "id-1",
+    "destinationGraphId": "independent-destination",
+    "error": null,
+    "accepted": true,
+    "beforeRevision": 2,
+    "afterRevision": 3,
+    "beforeResources": 0,
+    "afterResources": 1,
+    "historyDelta": 1,
+    "redoBefore": true,
+    "redoAfter": false,
+    "notifications": 1,
+    "diagnostics": [],
+    "originalSourceUnchanged": true,
+    "reopenedError": null,
+    "reopenedRevisionDelta": 1,
+    "contractConforms": false
+  },
+  {
+    "id": "EG01-inline-source-admission",
+    "type": "glsl.vec2",
+    "value": [
+      1,
+      2
+    ],
+    "expected": "numeric control cross-graph success",
+    "sameLoadResourceCount": 1,
+    "sourceGraphId": "id-1",
+    "destinationGraphId": "independent-destination",
+    "error": null,
+    "accepted": true,
+    "beforeRevision": 2,
+    "afterRevision": 3,
+    "beforeResources": 0,
+    "afterResources": 1,
+    "historyDelta": 1,
+    "redoBefore": true,
+    "redoAfter": false,
+    "notifications": 1,
+    "diagnostics": [],
+    "originalSourceUnchanged": true,
+    "reopenedError": null,
+    "reopenedRevisionDelta": 1,
+    "contractConforms": true
+  },
+  {
+    "id": "EG01-inline-source-admission",
+    "type": "glsl.mat2",
+    "value": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "expected": "numeric control cross-graph success",
+    "sameLoadResourceCount": 1,
+    "sourceGraphId": "id-1",
+    "destinationGraphId": "independent-destination",
+    "error": null,
+    "accepted": true,
+    "beforeRevision": 2,
+    "afterRevision": 3,
+    "beforeResources": 0,
+    "afterResources": 1,
+    "historyDelta": 1,
+    "redoBefore": true,
+    "redoAfter": false,
+    "notifications": 1,
+    "diagnostics": [],
+    "originalSourceUnchanged": true,
+    "reopenedError": null,
+    "reopenedRevisionDelta": 1,
+    "contractConforms": true
+  },
+  {
+    "id": "FR02-independent-remap",
+    "cloneChild": false,
+    "status": "PASS",
+    "parentReference": {
+      "slot": "subject",
+      "kind": "node",
+      "targetId": "ind-false-13",
+      "networkId": "ind-false-10"
+    },
+    "childReference": {
+      "slot": "child-node",
+      "kind": "node",
+      "networkId": "id-18",
+      "targetId": "id-19"
+    },
+    "literalPreserved": true,
+    "oneHistoryEntry": true,
+    "onePublication": true,
+    "undoRedoExact": true
+  },
+  {
+    "id": "FR02-independent-remap",
+    "cloneChild": true,
+    "status": "PASS",
+    "parentReference": {
+      "slot": "subject",
+      "kind": "node",
+      "targetId": "ind-true-13",
+      "networkId": "ind-true-10"
+    },
+    "childReference": {
+      "slot": "child-node",
+      "kind": "node",
+      "networkId": "ind-true-19",
+      "targetId": "ind-true-20"
+    },
+    "literalPreserved": true,
+    "oneHistoryEntry": true,
+    "onePublication": true,
+    "undoRedoExact": true
+  },
+  {
+    "id": "FR03-independent-dependent-expansion",
+    "status": "PASS",
+    "error": "STRUCTURE_EXPANSION: STRUCTURE_EXPANSION",
+    "expansionBefore": 65536,
+    "expansionAttempted": 131072,
+    "snapshotUnchanged": true,
+    "redoRetained": true,
+    "notifications": 0
+  }
+]

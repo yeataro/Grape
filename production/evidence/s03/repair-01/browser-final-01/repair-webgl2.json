@@ -1,0 +1,82 @@
+{
+  "browser": "151.0.7922.34",
+  "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+  "renderer": "WebKit WebGL",
+  "rows": [
+    {
+      "nested": false,
+      "graphDiagnostics": [],
+      "status": "success",
+      "diagnostics": [],
+      "artifacts": [
+        {
+          "key": "vertex",
+          "stageId": "id-3",
+          "mediaType": "text/x-glsl",
+          "text": "#version 300 es\nlayout(location=0) in vec2 position;\nvoid main() { gl_Position = vec4(position, 0.0, 1.0); }\n"
+        },
+        {
+          "key": "pixel",
+          "stageId": "id-6",
+          "mediaType": "text/x-glsl",
+          "text": "#version 300 es\nprecision highp float;\nout vec4 fragColor;\nstruct GrapeStruct0 { float[3] f0; float f1; };\nvoid main() {\n  float n_1_p0 = 0.25;\n  float n_2_p2 = (n_1_p0 * 2.0);\n  GrapeStruct0 n_4_p2 = GrapeStruct0(float[3](0.0, 0.0, 0.0), 0.0);\n  float n_5_p1 = (n_4_p2).f1;\n  vec4 n_3_p4 = vec4(n_2_p2, n_5_p1, 0.0, 1.0);\n  fragColor = n_3_p4;\n}\n"
+        }
+      ],
+      "shaders": [
+        {
+          "key": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "key": "pixel",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "unchanged": true
+    },
+    {
+      "nested": true,
+      "graphDiagnostics": [],
+      "status": "failed",
+      "diagnostics": [
+        {
+          "code": "PROFILE_TYPE",
+          "message": "Type unavailable in this GLSL profile.",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.glsl.es300",
+              "version": "0.1.0",
+              "fingerprint": "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3",
+              "namespace": "grape.glsl.es300",
+              "catalogVersion": 1
+            },
+            "key": "type",
+            "fallback": "Type unavailable in this GLSL profile."
+          }
+        },
+        {
+          "code": "PROFILE_TYPE",
+          "message": "Type unavailable in this GLSL profile.",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.glsl.es300",
+              "version": "0.1.0",
+              "fingerprint": "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3",
+              "namespace": "grape.glsl.es300",
+              "catalogVersion": 1
+            },
+            "key": "type",
+            "fallback": "Type unavailable in this GLSL profile."
+          }
+        }
+      ],
+      "artifacts": [],
+      "shaders": [],
+      "unchanged": true
+    }
+  ]
+}

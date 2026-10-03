@@ -1,3 +1,15 @@
+import { frames } from "../sdk/networks.ts";
+import { validateNetworkStructure } from "../sdk/document-validation.ts";
+import { networks } from "../sdk/networks.ts";
+import {
+  copySelection,
+  dependencies,
+  nodeReferences,
+} from "../model/transfer.ts";
+import type { ClipboardPacket } from "../model/transfer.ts";
+import type { StructureData } from "../sdk/networks.ts";
+import { resolveOccurrence, modelContext } from "../sdk/networks.ts";
+import type { NetworkData } from "../sdk/networks.ts";
 import type { ContextSnapshot } from "../sdk/editing.ts";
 import { Graph } from "../model/graph.ts";
 import type { Operation } from "../model/graph.ts";
@@ -38,6 +50,9 @@ export class EditorContext {
   #navigation = 0;
   #live = true;
   #stage: string;
+  #path: string[] = [];
+  #chain: string[] = [];
+  #epoch = 0;
   #stageKey: string;
   #signal = new Signal<void>();
   #unsubscribe: () => void;
@@ -60,6 +75,32 @@ export class EditorContext {
         this.#selection = [];
         this.#primary = null;
       }
+      if (this.#epoch !== graph.epoch) {
+        this.#epoch = graph.epoch;
+        if (this.#path.length) this.#navigation++;
+      }
+      let resolved;
+      try {
+        resolved = resolveOccurrence(
+          graph.capture().document,
+          graph.definitionSet,
+          this.#stage,
+          this.#path,
+        );
+      } catch {
+        this.#path = [];
+        resolved = resolveOccurrence(
+          graph.capture().document,
+          graph.definitionSet,
+          this.#stage,
+          [],
+        );
+        this.#navigation++;
+      }
+      if (!equal(this.#chain, resolved.chain)) {
+        this.#chain = [...resolved.chain];
+        this.#navigation++;
+      }
       const ids = this.network().nodes.map((n) => n.id);
       this.#selection = this.#selection.filter((id) => ids.includes(id));
       if (!this.#selection.includes(this.#primary!))
@@ -76,11 +117,121 @@ export class EditorContext {
         loadId: graph.loadId,
         contextId: this.id,
         stageId: this.#stage,
-        networkPath: [],
+        networkPath: this.#path,
+        lifetime: this.#navigation,
       },
       selection: this.#selection,
       primary: this.#primary,
       navigation: this.#navigation,
+      definitionNames: Object.fromEntries(
+        this.network().nodes.flatMap((n) => {
+          if (this.graph.definitionSet.node(n.type)?.modelRole !== "call")
+            return [];
+          const id = (n.state as { definition: string }).definition;
+          const data = graph.document.graph.resources.find((r) => r.id === id)
+            ?.data as unknown as NetworkData | undefined;
+          return data ? [[n.id, data.name]] : [];
+        }),
+      ),
+      breadcrumbs: [
+        {
+          depth: 0,
+          name:
+            graph.document.graph.name +
+            " / " +
+            graph.document.graph.stages.find((s) => s.id === this.#stage)!.key,
+        },
+        ...this.#chain.map((id, i) => ({
+          depth: i + 1,
+          name: (
+            graph.document.graph.resources.find((r) => r.id === id)!
+              .data as unknown as NetworkData
+          ).name,
+        })),
+      ],
+      network: this.network(),
+      frames: frames(
+        graph.document,
+        this.graph.definitionSet,
+        this.network().id,
+      ),
+      portLabels: Object.fromEntries(
+        this.network().nodes.map((n) => {
+          const role = this.graph.definitionSet.node(n.type)?.modelRole;
+          const id = (n.state as { definition?: string }).definition;
+          const d = graph.document.graph.resources.find((r) => r.id === id)
+            ?.data as unknown as NetworkData | undefined;
+          return [
+            n.id,
+            role && ["call", "network-input", "network-output"].includes(role)
+              ? Object.fromEntries(
+                  (d?.interface ?? []).map((p) => [p.key, p.name]),
+                )
+              : {},
+          ];
+        }),
+      ),
+      nodeRoles: Object.fromEntries(
+        this.network().nodes.map((n) => [
+          n.id,
+          this.graph.definitionSet.node(n.type)?.modelRole ?? "operation",
+        ]),
+      ),
+      structures: graph.document.graph.resources
+        .filter(
+          (r) =>
+            this.graph.definitionSet.resource(r.type)?.model === "structure",
+        )
+        .map((r) => {
+          const reaches = (id: string, seen = new Set<string>()): boolean => {
+            if (id === r.id) return true;
+            if (seen.has(id)) return false;
+            seen.add(id);
+            const resource = graph.document.graph.resources.find(
+              (x) => x.id === id,
+            );
+            if (!resource) return false;
+            try {
+              return dependencies(resource, this.graph.definitionSet).some(
+                (next) => reaches(next, seen),
+              );
+            } catch {
+              return false;
+            }
+          };
+          const uses = graph.document.graph.resources
+            .filter((x) => x.id !== r.id && reaches(x.id))
+            .map(
+              (x) =>
+                "Definition " +
+                String((x.data as { name?: string }).name ?? x.id),
+            );
+          for (const { network } of networks(
+            graph.document,
+            this.graph.definitionSet,
+          ))
+            for (const node of network.nodes) {
+              try {
+                if (
+                  nodeReferences(node, this.graph.definitionSet).some(
+                    (ref) => ref.kind === "resource" && reaches(ref.targetId),
+                  )
+                )
+                  uses.push(node.name + " / " + network.id);
+              } catch {
+                /* Diagnostics expose incomplete references; Help stays readable. */
+              }
+            }
+          return { id: r.id, data: r.data as unknown as StructureData, uses };
+        }),
+      definition: this.#chain.length
+        ? {
+            id: this.#chain.at(-1)!,
+            data: graph.document.graph.resources.find(
+              (r) => r.id === this.#chain.at(-1),
+            )!.data as unknown as NetworkData,
+          }
+        : null,
       graph,
     });
   }
@@ -90,7 +241,12 @@ export class EditorContext {
       .capture()
       .document.graph.stages.find((s) => s.id === this.#stage);
     demand(stage, "STAGE_MISSING");
-    return stage.network;
+    return resolveOccurrence(
+      this.graph.capture().document,
+      this.graph.definitionSet,
+      this.#stage,
+      this.#path,
+    ).network;
   }
   select(
     ids: readonly string[],
@@ -106,12 +262,23 @@ export class EditorContext {
     this.#primary = primary;
     this.#signal.emit();
   }
-  navigate(stageId: string): void {
+  enter(nodeId: string): void {
+    this.navigate(this.#stage, [...this.#path, nodeId]);
+  }
+  navigate(stageId: string, path: readonly string[] = []): void {
     demand(!this.#signal.notifying && !this.graph.busy, "CONTEXT_BUSY");
     demand(
       this.graph.capture().document.graph.stages.some((s) => s.id === stageId),
       "STAGE_MISSING",
     );
+    const resolved = resolveOccurrence(
+      this.graph.capture().document,
+      this.graph.definitionSet,
+      stageId,
+      path,
+    );
+    this.#path = [...path];
+    this.#chain = resolved.chain;
     this.#stage = stageId;
     this.#stageKey = this.graph
       .capture()
@@ -135,6 +302,31 @@ export class EditorContext {
 }
 export class EditorApplication implements ApplicationPanelCommandAuthority {
   #graph: Graph | null = null;
+  #clipboard = "";
+  get clipboardText() {
+    return this.#clipboard;
+  }
+  copy(context: EditorContext): string {
+    this.#clipboard = JSON.stringify(
+      copySelection(
+        this.snapshot,
+        this.#graph!.definitionSet,
+        context.network().id,
+        context.capture().selection,
+      ),
+    );
+    return this.#clipboard;
+  }
+  paste(context: EditorContext, text: string): void {
+    demand(!this.#readonly, "COMMAND_DENIED");
+    demand(new TextEncoder().encode(text).length <= 512000, "CLIPBOARD_SIZE");
+    const packet = JSON.parse(text) as ClipboardPacket;
+    let selected: string[] = [];
+    this.#graph!.change("Paste", (d) => {
+      selected = d.paste(context.network().id, packet, this.snapshot.loadId);
+    });
+    if (selected.length) context.select(selected);
+  }
   #contexts = new Map<string, EditorContext>();
   #signal = new Signal<void>();
   #saved: CanonicalGraphDocument | null = null;
@@ -189,7 +381,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
   catalog() {
     return this.definitions
       .nodeTypes()
-      .filter((n) => n.role === "operation")
+      .filter((n) => n.role === "operation" && !n.modelRole)
       .map((n) => ({ ref: n.ref, presentation: n.presentation }));
   }
   private install(graph: Graph, saved: CanonicalGraphDocument | null): void {
@@ -318,7 +510,15 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     this.#signal.emit();
     return this.#compile;
   }
+  private validateSave() {
+    for (const row of networks(
+      this.snapshot.document,
+      this.#graph!.definitionSet,
+    ))
+      validateNetworkStructure(row.network, true);
+  }
   async save(): Promise<void> {
+    this.validateSave();
     demand(!this.#saving, "SAVE_BUSY");
     const snapshot = this.snapshot,
       text = writeDocument(snapshot.document);
@@ -354,6 +554,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     );
   }
   exportText(): string {
+    this.validateSave();
     return writeDocument(this.snapshot.document);
   }
   grant(typeId: string, commands: readonly string[]): void {
@@ -391,6 +592,130 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
       demand(typeof args.id === "string", "COMMAND_ARGS");
       return args.id;
     };
+    if (intent.commandId === "grape.network.frame") {
+      graph.change("Frame selection", (d) =>
+        d.frameSelection(network, context.capture().selection),
+      );
+      return;
+    }
+    if (intent.commandId === "grape.network.layout") {
+      const proposal = args as unknown as ReturnType<
+        EditorApplication["layoutProposal"]
+      >;
+      demand(
+        equal(proposal.scope, context.capture().scope) &&
+          proposal.revision === this.snapshot.revision,
+        "STALE_PROPOSAL",
+      );
+      demand(
+        Object.keys(proposal.positions).length ===
+          context.network().nodes.length,
+        "LAYOUT_NODES",
+      );
+      graph.change("Arrange nodes", (d) => {
+        for (const [id, position] of Object.entries(proposal.positions))
+          d.move(network, id, position as [number, number]);
+      });
+      return;
+    }
+    if (intent.commandId === "grape.network.spare") {
+      graph.change("Create interface port and connection", (d) =>
+        d.sparePort(
+          network,
+          String(args.boundary),
+          args.endpoint as unknown as { nodeId: string; portKey: string },
+        ),
+      );
+      return;
+    }
+    if (intent.commandId === "grape.clipboard.copy") {
+      this.copy(context);
+      return;
+    }
+    if (intent.commandId === "grape.clipboard.paste") {
+      demand(typeof args.text === "string", "COMMAND_ARGS");
+      this.paste(context, args.text);
+      return;
+    }
+    if (intent.commandId.startsWith("grape.structure.")) {
+      demand(args.revision === this.snapshot.revision, "STALE_PROPOSAL");
+      let node = "";
+      graph.change("Edit structure", (d) => {
+        if (intent.commandId === "grape.structure.apply") {
+          const data = args.data as unknown as StructureData;
+          if (typeof args.id === "string" && args.id)
+            d.editStructure(args.id, data);
+          else
+            d.createStructure(data.name, data.fields, data.description ?? "");
+        } else if (intent.commandId === "grape.structure.delete")
+          d.removeResource(id());
+        else if (intent.commandId === "grape.structure.instance")
+          node = d.addReferenceNode(network, "structure", id());
+        else if (intent.commandId === "grape.structure.field")
+          node = d.addReferenceNode(network, "field", id(), String(args.field));
+        else throw Error("COMMAND_UNKNOWN");
+      });
+      if (node) context.select([node]);
+      return;
+    }
+    if (intent.commandId === "grape.network.enter") {
+      context.enter(id());
+      return;
+    }
+    if (intent.commandId === "grape.network.navigate") {
+      const c = context.capture();
+      demand(
+        Number.isInteger(args.depth) &&
+          Number(args.depth) >= 0 &&
+          Number(args.depth) <= c.scope.networkPath.length,
+        "COMMAND_ARGS",
+      );
+      context.navigate(
+        c.scope.stageId,
+        c.scope.networkPath.slice(0, Number(args.depth)),
+      );
+      return;
+    }
+    if (intent.commandId === "grape.network.up") {
+      context.navigate(
+        context.capture().scope.stageId,
+        context.capture().scope.networkPath.slice(0, -1),
+      );
+      return;
+    }
+    if (
+      [
+        "grape.network.create",
+        "grape.network.encapsulate",
+        "grape.network.independent",
+        "grape.network.interface",
+      ].includes(intent.commandId)
+    ) {
+      let created = "";
+      graph.change("Edit subgraph", (d) => {
+        if (intent.commandId === "grape.network.create")
+          created = d.createSubgraph(
+            network,
+            typeof args.name === "string" ? args.name : "Subgraph",
+            args.library === true ? "example-library/1" : null,
+          );
+        if (intent.commandId === "grape.network.encapsulate")
+          created = d.encapsulate(network, context.capture().selection);
+        if (intent.commandId === "grape.network.independent")
+          d.makeIndependent(network, context.capture().primary!);
+        if (intent.commandId === "grape.network.interface") {
+          demand(Array.isArray(args.ports), "COMMAND_ARGS");
+          demand(args.revision === this.snapshot.revision, "STALE_PROPOSAL");
+          d.interface(
+            network,
+            args.ports as unknown as NetworkData["interface"],
+            typeof args.name === "string" ? args.name : undefined,
+          );
+        }
+      });
+      if (created) context.select([created]);
+      return;
+    }
     if (intent.commandId === "grape.undo") {
       graph.undo();
       return;
@@ -522,6 +847,26 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
       cancel,
     };
   }
+  layoutProposal(context: EditorContext) {
+    const c = context.capture();
+    return detached({
+      scope: c.scope,
+      revision: c.graph.revision,
+      positions: Object.fromEntries(
+        c.network.nodes.map((n, i) => [
+          n.id,
+          [40 + (i % 4) * 220, 60 + Math.floor(i / 4) * 190],
+        ]),
+      ),
+    });
+  }
+  reshapeValue(context: EditorContext, type: string, value: Json): Json {
+    context.capture();
+    return modelContext(
+      this.snapshot.document,
+      this.#graph!.definitionSet,
+    ).types.reshape(type, value);
+  }
   parameterKeys(context: EditorContext, nodeId: string): readonly string[] {
     const node = context.network().nodes.find((n) => n.id === nodeId);
     if (!node) return [];
@@ -529,7 +874,10 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
       this.definitions
         .pin(this.snapshot.document.graph.modules)
         .node(node.type)
-        ?.parameters(node.state)
+        ?.parameters(
+          node.state,
+          modelContext(this.snapshot.document, this.#graph!.definitionSet),
+        )
         .map((p) => p.key) ?? []
     );
   }
@@ -541,9 +889,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
   ): FieldTarget {
     const original = context.capture();
     demand(equal(scope, original.scope), "STALE_SCOPE");
-    const type = original.graph.document.graph.stages
-      .find((s) => s.id === scope.stageId)
-      ?.network.nodes.find((n) => n.id === nodeId)?.type;
+    const type = context.network().nodes.find((n) => n.id === nodeId)?.type;
     demand(type, "NODE_MISSING");
     let live = true,
       epoch = 0,
@@ -564,7 +910,12 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
           .pin(c.graph.document.graph.modules)
           .node(node.type);
         demand(def, "NODE_MISSING");
-        const spec = def.parameters(node.state).find((s) => s.key === key);
+        const spec = def
+          .parameters(
+            node.state,
+            modelContext(c.graph.document, this.#graph!.definitionSet),
+          )
+          .find((s) => s.key === key);
         demand(spec, "PARAMETER_MISSING");
         const value =
           spec.target === "input"
@@ -586,11 +937,12 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
         const projection: ParameterProjection = {
           nodeId,
           spec,
-          label: def.presentation.parameters?.[key]?.label ?? {
-            ...def.presentation.label,
-            key,
-            fallback: key,
-          },
+          label: spec.label ??
+            def.presentation.parameters?.[key]?.label ?? {
+              ...def.presentation.label,
+              key,
+              fallback: key,
+            },
           value,
           ...(port ? { port } : {}),
           links,

@@ -1,0 +1,53 @@
+✖ BOOT01 accepted baseline and materialized current record remain valid and not-started (522.0559ms)
+✔ BOOT02 changing one frozen file is detected without executing changed checkers (526.9421ms)
+✔ BOOT03 unindexed files including dependency/scratch files are rejected (535.4803ms)
+✔ BOOT04 owner acceptance must bind the exact frozen index digest (512.0425ms)
+✔ BOOT05 external current locator cannot masquerade as the frozen template (645.8904ms)
+✔ BOOT06 not-started state cannot contain invented slice progress (544.2226ms)
+✔ BOOT07 changing status alone cannot invent a valid started project (478.4515ms)
+✔ BOOT08 inherited DEC-GRAPE-001 remains single and is not fabricated as implementation progress (492.1216ms)
+✖ BOOT09 staged qualification is an isolated byte copy; edits cannot alter accepted handoff or current state (1117.23ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 7
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5388.3208
+
+✖ failing tests:
+
+test at tools\verify-bootstrap.test.mjs:40:1
+✖ BOOT01 accepted baseline and materialized current record remain valid and not-started (522.0559ms)
+  AssertionError [ERR_ASSERTION]: ["README.md broken/outside navigation decisions/DEC-GRAPE-002.md","README.md broken/outside navigation decisions/AC-GRAPE-001.md","README.md broken/outside navigation notes/OPEN_QUESTIONS.md"]
+  
+  'FAIL' !== 'PASS'
+  
+      at TestContext.<anonymous> (file:///C:/Users/user/source/Grape/tools/verify-bootstrap.test.mjs:43:10)
+      at async Test.run (node:internal/test_runner/test:1116:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'FAIL',
+    expected: 'PASS',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tools\verify-bootstrap.test.mjs:105:1
+✖ BOOT09 staged qualification is an isolated byte copy; edits cannot alter accepted handoff or current state (1117.23ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'FAIL' !== 'PASS'
+  
+      at TestContext.<anonymous> (file:///C:/Users/user/source/Grape/tools/verify-bootstrap.test.mjs:119:82)
+      at async Test.run (node:internal/test_runner/test:1116:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'FAIL',
+    expected: 'PASS',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

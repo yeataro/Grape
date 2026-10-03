@@ -9,15 +9,15 @@
     "root": "production"
   },
   "implementationBaseline": {
-    "id": "S02-IH-005",
-    "revision": "e23a997f53a17f3e00bf7f83de489cfaeb367251",
+    "id": "S03-IH-005",
+    "revision": "80ee116b8f809c9160aa9cc311801cce15923cee",
     "decisionReferenceIds": []
   },
   "build": {
-    "id": "S02-repair-web-e23a997",
-    "revision": "e23a997f53a17f3e00bf7f83de489cfaeb367251",
-    "profile": "static-web/chromium-151.0.7922.34/desktop-root-document-review",
-    "artifact": "production/evidence/s02-repair/s02-web.tar.gz"
+    "id": "S03-repair2-web-80ee116",
+    "revision": "80ee116b8f809c9160aa9cc311801cce15923cee",
+    "profile": "static-web/win32-x64/chromium-151.0.7922.34/desktop-nested-subgraph-structure-review",
+    "artifact": "production/evidence/s03/repair-02/candidate-web-01.tar.gz"
   },
   "activeSlices": [],
   "completedSlices": [
@@ -37,6 +37,15 @@
       "evidenceIds": [
         "S02-ARCHITECTURE-e23a997",
         "S02-PRODUCT-e23a997"
+      ]
+    },
+    {
+      "sliceId": "S03",
+      "scope": "S03 shared/local/nested subgraphs, stable interfaces, Structure authoring and typed local clipboard closure; all 24 mapped capabilities and AT-S03-01..04 within original reviewed Windows x64 Chromium 151.0.7922.34 / Playwright 1.62.1 / 1440x1000 scope. Exact source-owner admission, WebGL/profile boundaries and inherited limitations are those of S03-FR-c209bba-R2 and the immutable acceptance materials. S04 Personal policy, DEC-GRAPE-002/AC-GRAPE-001 implementation, wider S05 catalog, native runtime and broader device/IME/accessibility scopes are excluded; S02 AT-S02-03 remains blocked. No global Gate closure.",
+      "implementationRevision": "80ee116b8f809c9160aa9cc311801cce15923cee",
+      "evidenceIds": [
+        "S03-ARCHITECTURE-80ee116",
+        "S03-PRODUCT-80ee116"
       ]
     }
   ],
@@ -126,9 +135,70 @@
         "S02"
       ],
       "gateIds": []
+    },
+    {
+      "id": "S03-ARCHITECTURE-80ee116",
+      "kind": "architecture-conformance",
+      "scope": "S03 shared/local/nested subgraphs, stable interfaces, Structure authoring and typed local clipboard closure; all 24 mapped capabilities and AT-S03-01..04 within original reviewed Windows x64 Chromium 151.0.7922.34 / Playwright 1.62.1 / 1440x1000 scope. Exact source-owner admission, WebGL/profile boundaries and inherited limitations are those of S03-FR-c209bba-R2 and the immutable acceptance materials. S04 Personal policy, DEC-GRAPE-002/AC-GRAPE-001 implementation, wider S05 catalog, native runtime and broader device/IME/accessibility scopes are excluded; S02 AT-S02-03 remains blocked. No global Gate closure.",
+      "file": "production/evidence/s03/acceptance-01/independent-review/INDEPENDENT_REVIEW_RESULT.json",
+      "sha256": "5c36c11da58b739a84a089ae5bc1c90aa8c3b079f3b9cfe5c2ca90644d25c565",
+      "implementationRevision": "80ee116b8f809c9160aa9cc311801cce15923cee",
+      "acceptedBy": "Human Owner (explicit acceptance of exact I/R after directly attributed independent PASS; source message identified in closeout registration)",
+      "acceptedAt": "2026-10-03T18:53:32Z",
+      "sliceIds": [
+        "S03"
+      ],
+      "gateIds": []
+    },
+    {
+      "id": "S03-PRODUCT-80ee116",
+      "kind": "product-behavior",
+      "scope": "S03 shared/local/nested subgraphs, stable interfaces, Structure authoring and typed local clipboard closure; all 24 mapped capabilities and AT-S03-01..04 within original reviewed Windows x64 Chromium 151.0.7922.34 / Playwright 1.62.1 / 1440x1000 scope. Exact source-owner admission, WebGL/profile boundaries and inherited limitations are those of S03-FR-c209bba-R2 and the immutable acceptance materials. S04 Personal policy, DEC-GRAPE-002/AC-GRAPE-001 implementation, wider S05 catalog, native runtime and broader device/IME/accessibility scopes are excluded; S02 AT-S02-03 remains blocked. No global Gate closure.",
+      "file": "production/evidence/coordinator/s03/human-acceptance-20261004-01.json",
+      "sha256": "a7bf39289e400f288ec0156b0a2af3b8e70984cc617e5c1fae296977ac88d226",
+      "implementationRevision": "80ee116b8f809c9160aa9cc311801cce15923cee",
+      "acceptedBy": "Human Owner (explicit acceptance of exact I/R after directly attributed independent PASS; source message identified in closeout registration)",
+      "acceptedAt": "2026-10-03T18:53:32Z",
+      "sliceIds": [
+        "S03"
+      ],
+      "gateIds": []
     }
   ],
-  "latestAcceptedEvidenceId": "S02-PRODUCT-e23a997",
-  "updatedAt": "2026-10-02T07:20:02.945516+00:00",
-  "decisionReferences": []
+  "latestAcceptedEvidenceId": "S03-PRODUCT-80ee116",
+  "updatedAt": "2026-10-03T19:04:34.938Z",
+  "decisionReferences": [
+    {
+      "id": "DEC-GRAPE-002",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "Accepted product/contract amendment intended for future S04 only; implementation NOT_DELIVERED, all AT-DEC-GRAPE-002-01..08 REQUIRED_NOT_EXECUTED; no S04 activation and no retroactive S03 adoption.",
+      "reason": "Human Owner confirmed these amendments in S03 Owner Review and explicitly assigned future implementation to S04. Authority: production/evidence/coordinator/s03/human-acceptance-20261004-01.json; source thread 01a10301-6199-7533-af8d-cf3d348c0990 message 01a1031b-5f5b-7063-8600-1d26e01a2dea. acceptedAt is Coordinator registration time, not an invented Human submission time.",
+      "file": "decisions/DEC-GRAPE-002.md",
+      "sha256": "ef2492ba16e5c96cede2d9b70e638033f80ecb7825b2d2c8c2dbe36d24fad848",
+      "sliceIds": [
+        "S04"
+      ],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (accepted semantic/contract decision; not runtime verification)",
+      "acceptedAt": "2026-10-03T18:53:32Z"
+    },
+    {
+      "id": "AC-GRAPE-001",
+      "kind": "architecture-change",
+      "status": "accepted",
+      "scope": "Accepted product/contract amendment intended for future S04 only; implementation NOT_DELIVERED, all AT-DEC-GRAPE-002-01..08 REQUIRED_NOT_EXECUTED; no S04 activation and no retroactive S03 adoption.",
+      "reason": "Human Owner confirmed these amendments in S03 Owner Review and explicitly assigned future implementation to S04. Authority: production/evidence/coordinator/s03/human-acceptance-20261004-01.json; source thread 01a10301-6199-7533-af8d-cf3d348c0990 message 01a1031b-5f5b-7063-8600-1d26e01a2dea. acceptedAt is Coordinator registration time, not an invented Human submission time.",
+      "file": "decisions/AC-GRAPE-001.md",
+      "sha256": "00c21f29fb66c07e1db1a7ea6dce2dbffadb47682c534f3019e2dc984057be00",
+      "sliceIds": [
+        "S04"
+      ],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (accepted semantic/contract decision; not runtime verification)",
+      "acceptedAt": "2026-10-03T18:53:32Z"
+    }
+  ]
 }

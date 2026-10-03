@@ -1,0 +1,53 @@
+[WebServer] (node:15892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:34456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › tests\browser\s03-repair.spec.ts:11:1 › S03 FR01 real WebGL2 compiles supported Structure arrays and ES300 explicitly rejects admitted nested arrays (205ms)
+  x  2 [chromium] › tests\browser\s03-repair.spec.ts:100:1 › S03 EG01 browser clipboard imports TOP declarations with one slot and shows atomic native path rejection (5.3s)
+
+
+  1) [chromium] › tests\browser\s03-repair.spec.ts:100:1 › S03 EG01 browser clipboard imports TOP declarations with one slot and shows atomic native path rejection 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.node')
+    Expected: 2
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for locator('.node')
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      139 |   await text.fill(JSON.stringify(packets.top));
+      140 |   await paste.click();
+    > 141 |   await expect(page.locator(".node")).toHaveCount(2);
+          |                                       ^
+      142 |   await paste.click();
+      143 |   await expect(page.locator(".node")).toHaveCount(3);
+      144 |   const after = await exported(page);
+        at C:\Users\user\source\Grape\production\tests\browser\s03-repair.spec.ts:141:39
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    evidence\s03\repair-01\browser-draft-01\test-results\s03-repair-S03-EG01-browse-dc8b0-tomic-native-path-rejection-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: evidence\s03\repair-01\browser-draft-01\test-results\s03-repair-S03-EG01-browse-dc8b0-tomic-native-path-rejection-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\s03\repair-01\browser-draft-01\test-results\s03-repair-S03-EG01-browse-dc8b0-tomic-native-path-rejection-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\s03\repair-01\browser-draft-01\test-results\s03-repair-S03-EG01-browse-dc8b0-tomic-native-path-rejection-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests\browser\s03-repair.spec.ts:100:1 › S03 EG01 browser clipboard imports TOP declarations with one slot and shows atomic native path rejection 
+  1 passed (6.6s)

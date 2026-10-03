@@ -12,152 +12,167 @@ const owner = {
   namespace: "grape.ui.controls",
   catalogVersion: 1,
 };
-export const numberWidget: ParameterWidgetViewType<ParameterProjection> = {
-  widgetId: "grape.widget.number",
-  create: ({ binding }) => {
-    let editing = false,
-      retainedText = "",
-      composing = false;
-    return {
-      kind: "parameter-widget",
-      capture: () => binding.capture(),
-      subscribe: (fn) => binding.subscribe(fn),
-      dispose: () => {},
-      mount: ({ surface, scope, commands }) => {
-        demand(surface.protocol === "grape.dom.v1", "SURFACE_PROTOCOL");
-        const anchor = surface.target as HTMLElement,
-          root = document.createElement("div");
-        root.className = "field";
-        anchor.append(root);
-        scope.own(() => root.remove());
-        const label = document.createElement("label"),
-          input = document.createElement("input"),
-          error = document.createElement("span"),
-          cancel = document.createElement("button");
-        input.type = "text";
-        input.inputMode = "decimal";
-        error.className = "field-error";
-        error.setAttribute("role", "alert");
+function valueWidget(
+  json = false,
+): ParameterWidgetViewType<ParameterProjection> {
+  return {
+    widgetId: json ? "grape.widget.json" : "grape.widget.number",
+    create: ({ binding }) => {
+      let editing = false,
+        retainedText = "",
+        composing = false;
+      return {
+        kind: "parameter-widget",
+        capture: () => binding.capture(),
+        subscribe: (fn) => binding.subscribe(fn),
+        dispose: () => {},
+        mount: ({ surface, scope, commands }) => {
+          demand(surface.protocol === "grape.dom.v1", "SURFACE_PROTOCOL");
+          const anchor = surface.target as HTMLElement,
+            root = document.createElement("div");
+          root.className = "field";
+          anchor.append(root);
+          scope.own(() => root.remove());
+          const label = document.createElement("label"),
+            input = document.createElement("input"),
+            error = document.createElement("span"),
+            cancel = document.createElement("button");
+          input.type = "text";
+          input.inputMode = "decimal";
+          error.className = "field-error";
+          error.setAttribute("role", "alert");
 
-        cancel.type = "button";
-        cancel.hidden = true;
-        root.append(label, input, cancel, error);
-        let draft: WidgetDraft | null = null;
-        input.value = retainedText;
-        cancel.hidden = !editing;
-        const attempt = (fn: () => void) => {
-          try {
-            fn();
-            error.textContent = "";
-            input.removeAttribute("aria-invalid");
-          } catch (e) {
-            error.textContent = String(e);
-            input.setAttribute("aria-invalid", "true");
-          }
-        };
-        const listen = (name: string, fn: (event: Event) => void) => {
-          const guarded = scope.event(fn);
-          input.addEventListener(name, guarded);
-          scope.own(() => input.removeEventListener(name, guarded));
-        };
-        listen("input", () => {
-          draft = commands.draft();
-          draft.setText(input.value);
-          retainedText = input.value;
-          editing = true;
-          input.dataset.draft = "true";
-          cancel.hidden = false;
-        });
-        listen("compositionstart", () => {
-          draft = commands.draft();
-          composing = true;
-          input.dataset.composing = "true";
-          draft.composition(true);
-        });
-        listen("compositionend", () => {
-          composing = false;
-          input.dataset.composing = "false";
-          draft = commands.draft();
-          draft.composition(false);
-        });
-        const commit = () =>
-          attempt(() => {
-            if (!editing) return;
-            demand(!composing, "IME_COMPOSITION");
+          cancel.type = "button";
+          cancel.hidden = true;
+          root.append(label, input, cancel, error);
+          let draft: WidgetDraft | null = null;
+          input.value = retainedText;
+          cancel.hidden = !editing;
+          const attempt = (fn: () => void) => {
+            try {
+              fn();
+              error.textContent = "";
+              input.removeAttribute("aria-invalid");
+            } catch (e) {
+              error.textContent = String(e);
+              input.setAttribute("aria-invalid", "true");
+            }
+          };
+          const listen = (name: string, fn: (event: Event) => void) => {
+            const guarded = scope.event(fn);
+            input.addEventListener(name, guarded);
+            scope.own(() => input.removeEventListener(name, guarded));
+          };
+          listen("input", () => {
             draft = commands.draft();
-            draft.commit((text) => {
-              demand(
-                text.trim() !== "" && Number.isFinite(Number(text)),
-                "NUMBER_PARSE",
-              );
-              return Number(text);
-            });
-            editing = false;
-            input.dataset.draft = "false";
-            input.value = String(binding.capture().projection.value);
-            cancel.hidden = true;
+            draft.setText(input.value);
+            retainedText = input.value;
+            editing = true;
+            input.dataset.draft = "true";
+            cancel.hidden = false;
           });
-        listen("keydown", (event) => {
-          const e = event as KeyboardEvent;
-          if (e.key === "Enter") {
-            e.stopPropagation();
-            if (!e.isComposing) commit();
-          }
-          if (e.key === "Escape") {
-            e.stopPropagation();
+          listen("compositionstart", () => {
+            draft = commands.draft();
+            composing = true;
+            input.dataset.composing = "true";
+            draft.composition(true);
+          });
+          listen("compositionend", () => {
+            composing = false;
+            input.dataset.composing = "false";
+            draft = commands.draft();
+            draft.composition(false);
+          });
+          const commit = () =>
+            attempt(() => {
+              if (!editing) return;
+              demand(!composing, "IME_COMPOSITION");
+              draft = commands.draft();
+              draft.commit((text) => {
+                if (json) return JSON.parse(text);
+                demand(
+                  text.trim() !== "" && Number.isFinite(Number(text)),
+                  "NUMBER_PARSE",
+                );
+                return Number(text);
+              });
+              editing = false;
+              input.dataset.draft = "false";
+              input.value = json
+                ? JSON.stringify(binding.capture().projection.value)
+                : String(binding.capture().projection.value);
+              cancel.hidden = true;
+            });
+          listen("keydown", (event) => {
+            const e = event as KeyboardEvent;
+            if (e.key === "Enter") {
+              e.stopPropagation();
+              if (!e.isComposing) commit();
+            }
+            if (e.key === "Escape") {
+              e.stopPropagation();
+              draft = commands.draft();
+              draft.cancel();
+              editing = false;
+              input.dataset.draft = "false";
+              input.value = json
+                ? JSON.stringify(binding.capture().projection.value)
+                : String(binding.capture().projection.value);
+              cancel.hidden = true;
+              error.textContent = "";
+            }
+          });
+          const cancelEvent = scope.event(() => {
             draft = commands.draft();
             draft.cancel();
             editing = false;
             input.dataset.draft = "false";
-            input.value = String(binding.capture().projection.value);
+            input.value = json
+              ? JSON.stringify(binding.capture().projection.value)
+              : String(binding.capture().projection.value);
             cancel.hidden = true;
             error.textContent = "";
-          }
-        });
-        const cancelEvent = scope.event(() => {
-          draft = commands.draft();
-          draft.cancel();
-          editing = false;
-          input.dataset.draft = "false";
-          input.value = String(binding.capture().projection.value);
-          cancel.hidden = true;
-          error.textContent = "";
-        });
-        cancel.addEventListener("click", cancelEvent);
-        scope.own(() => cancel.removeEventListener("click", cancelEvent));
-        return {
-          update: (snapshot, frame) => {
-            const p = snapshot.projection;
-            cancel.textContent = frame.text({
-              owner,
-              key: "cancel",
-              fallback: "Cancel edit",
-            });
-            label.textContent = frame.text(p.label);
-            input.setAttribute("aria-label", frame.text(p.label));
-            input.dataset.parameter = p.spec.key;
-            if (!editing) input.value = String(p.value);
-            else input.value = retainedText;
-            input.dataset.draft = String(editing);
-            input.dataset.composing = String(composing);
-            input.readOnly = !snapshot.writable;
-            root.classList.toggle(
-              "connected",
-              p.links.some((x) => !x.invalid),
-            );
-            if (p.links.some((x) => !x.invalid))
-              error.textContent = frame.text({
+          });
+          cancel.addEventListener("click", cancelEvent);
+          scope.own(() => cancel.removeEventListener("click", cancelEvent));
+          return {
+            update: (snapshot, frame) => {
+              const p = snapshot.projection;
+              cancel.textContent = frame.text({
                 owner,
-                key: "connected",
-                fallback: "Connected input — local value retained.",
+                key: "cancel",
+                fallback: "Cancel edit",
               });
-            else if (!editing) error.textContent = "";
-          },
-        };
-      },
-    };
-  },
-};
+              label.textContent = frame.text(p.label);
+              input.setAttribute("aria-label", frame.text(p.label));
+              input.dataset.parameter = p.spec.key;
+              if (!editing)
+                input.value = json ? JSON.stringify(p.value) : String(p.value);
+              else input.value = retainedText;
+              input.dataset.draft = String(editing);
+              input.dataset.composing = String(composing);
+              input.readOnly = !snapshot.writable;
+              root.classList.toggle(
+                "connected",
+                p.links.some((x) => !x.invalid),
+              );
+              if (p.links.some((x) => !x.invalid))
+                error.textContent = frame.text({
+                  owner,
+                  key: "connected",
+                  fallback: "Connected input — local value retained.",
+                });
+              else if (!editing) error.textContent = "";
+            },
+          };
+        },
+      };
+    },
+  };
+}
+export const numberWidget = valueWidget();
+export const jsonWidget = valueWidget(true);
+
 export const choiceWidget: ParameterWidgetViewType<ParameterProjection> = {
   widgetId: "grape.widget.choice",
   create: ({ binding }) => ({

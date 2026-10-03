@@ -6,11 +6,12 @@ import type {
 } from "../sdk/public-surface.ts";
 import { demand } from "../sdk/kernel.ts";
 import { nodeRef } from "./nodes.ts";
+import { parseType } from "../sdk/type-tokens.ts";
 export const KIND_PIN = {
   moduleId: "grape.graph-kinds",
   version: "0.1.0",
   fingerprint:
-    "sha256:d08c6602eb9874e9306202223961d04de5ae84f2e384428a1215fe6e4a93226c",
+    "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3",
 };
 const owner = { ...KIND_PIN, namespace: KIND_PIN.moduleId, catalogVersion: 1 };
 export const graphKinds: ModuleContribution = {
@@ -86,7 +87,7 @@ export const PROFILE_PIN = {
   profileId: "es300",
   version: "0.1.0",
   fingerprint:
-    "sha256:d08c6602eb9874e9306202223961d04de5ae84f2e384428a1215fe6e4a93226c",
+    "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3",
 };
 export const esProfile: GLSLProfile = {
   ref: PROFILE_PIN,
@@ -95,7 +96,11 @@ export const esProfile: GLSLProfile = {
   stageKindIds: stages.map((x) => x.id),
   capabilities: ["grape.glsl.numeric"],
   validateType: (type) =>
-    /^glsl\.(float|vec[234])$/.test(type)
+    parseType(type).kind === "structure" ||
+    (parseType(type).kind === "array" &&
+      (parseType(type) as { element: { kind: string } }).element.kind !==
+        "array") ||
+    /^glsl\.(float|int|uint|vec[234]|mat[234](x[234])?)$/.test(type)
       ? []
       : [
           {
@@ -138,7 +143,7 @@ export const esProfile: GLSLProfile = {
         key: stage.slotKey,
         stageId: stage.stageId,
         mediaType: "text/x-glsl",
-        text: `#version 300 es\nprecision highp float;\n${vertex ? "" : "out vec4 fragColor;\n"}void main() {\n${stage.body.map((line) => "  " + line).join("\n")}\n  ${vertex ? "gl_Position" : "fragColor"} = ${output.code};\n}\n`,
+        text: `#version 300 es\nprecision highp float;\n${vertex ? "" : "out vec4 fragColor;\n"}${stage.globals.join("\n")}\nvoid main() {\n${stage.body.map((line) => "  " + line).join("\n")}\n  ${vertex ? "gl_Position" : "fragColor"} = ${output.code};\n}\n`,
       };
     }),
   }),

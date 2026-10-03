@@ -1,3 +1,4 @@
+import { networkModule } from "../../src/modules/networks.ts";
 import { Definitions } from "../../src/definitions/registry.ts";
 import { Graph } from "../../src/model/graph.ts";
 import { basicNodes, nodeRef } from "../../src/modules/nodes.ts";
@@ -15,6 +16,7 @@ export function setup() {
     definitions = new Definitions();
   stages.forEach((s) => definitions.registerStage(s));
   definitions.register(basicNodes);
+  definitions.register(networkModule);
   definitions.register(graphKinds);
   definitions.registerKind(imageKind);
   const fixed = definitions.pin(definitions.pins()),

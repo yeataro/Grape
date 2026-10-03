@@ -1,0 +1,195 @@
+{
+  "recordType": "S03_ACCEPTED_SCOPE_REGISTRATION",
+  "actionKey": "yeataro/Grape:S03:closeout:80ee116:c209bba:20261004-01",
+  "recordedAt": "2026-10-03T19:00:11.714Z",
+  "humanAcceptance": {
+    "file": "production/evidence/coordinator/s03/human-acceptance-20261004-01.json",
+    "sha256": "a7bf39289e400f288ec0156b0a2af3b8e70984cc617e5c1fae296977ac88d226",
+    "sourceThreadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "sourceMessageId": "01a1031b-5f5b-7063-8600-1d26e01a2dea",
+    "acceptedAt": "2026-10-03T18:53:32Z",
+    "timestampMeaning": "Coordinator registration time observed from clock; original Human message submission timestamp is unavailable and is not invented."
+  },
+  "implementationI": "80ee116b8f809c9160aa9cc311801cce15923cee",
+  "reviewedR": "c209bba451149b9d54a6a54c3b35dd28f39225f3",
+  "evidencePersistenceP": "04834e2d0c11656f9d06a3e9ab82350f6edede33",
+  "bookkeepingB": "Commit containing this record; exact ID recorded by subsequent immutable closeout result. Not an independently reviewed implementation.",
+  "review": {
+    "id": "S03-FR-c209bba-R2",
+    "file": "production/evidence/s03/acceptance-01/independent-review/INDEPENDENT_REVIEW_RESULT.json",
+    "sha256": "5c36c11da58b739a84a089ae5bc1c90aa8c3b079f3b9cfe5c2ca90644d25c565"
+  },
+  "build": {
+    "id": "S03-repair2-web-80ee116",
+    "file": "production/evidence/s03/repair-02/candidate-web-01.tar.gz",
+    "sha256": "46cd7c70aba4139416173495453486a0d0ff8da41c2d10d7bd06a88329b4dc79"
+  },
+  "acceptedScope": "S03 shared/local/nested subgraphs, stable interfaces, Structure authoring and typed local clipboard closure; all 24 mapped capabilities and AT-S03-01..04 within original reviewed Windows x64 Chromium 151.0.7922.34 / Playwright 1.62.1 / 1440x1000 scope. Exact source-owner admission, WebGL/profile boundaries and inherited limitations are those of S03-FR-c209bba-R2 and the immutable acceptance materials. S04 Personal policy, DEC-GRAPE-002/AC-GRAPE-001 implementation, wider S05 catalog, native runtime and broader device/IME/accessibility scopes are excluded; S02 AT-S02-03 remains blocked. No global Gate closure.",
+  "scopeDetail": {
+    "acceptanceFamilies": [
+      "AT-S03-01",
+      "AT-S03-02",
+      "AT-S03-03",
+      "AT-S03-04"
+    ],
+    "capabilityIds": [
+      "LC-DATA-027",
+      "LC-DATA-029",
+      "LC-DATA-030",
+      "LC-DATA-031",
+      "LC-DATA-032",
+      "LC-DATA-033",
+      "LC-DATA-034",
+      "LC-DATA-035",
+      "LC-DATA-036",
+      "LC-DATA-037",
+      "LC-DATA-043",
+      "LC-DATA-044",
+      "LC-DATA-045",
+      "LC-DATA-046",
+      "LC-DATA-047",
+      "LC-DATA-048",
+      "LC-DATA-049",
+      "LC-DATA-050",
+      "LC-DATA-051",
+      "LC-DATA-058",
+      "LC-DATA-062",
+      "LC-NODE-368",
+      "LC-NODE-369",
+      "LC-NODE-374"
+    ],
+    "mapping": {
+      "file": "production/evidence/s03/repair-02/coverage-01.json",
+      "sha256": "2f258613b067f641cca56a667249bd60b63dd6814e8e48798412cda792dbb367",
+      "bytes": 95029
+    }
+  },
+  "originalAcceptanceMaterials": {
+    "file": "production/evidence/s03/acceptance-01/pending-human-acceptance-01.json",
+    "sha256": "2bef856055cdbd237f2ffd17390cbff2163cbadff8587fa0880f6f3f4d84ab1a",
+    "meaning": "Historical pending request remains unchanged; this Human acceptance supersedes pending status without rewriting original evidence."
+  },
+  "limitsSource": "All limitations/exclusions/residualGates in the exact report and materials above retained without expansion.",
+  "checks": [
+    {
+      "check": "Independent unit and conformance suite",
+      "result": "PASS",
+      "tests": 156,
+      "failures": 0,
+      "skips": 0,
+      "evidence": [
+        "execution-unit.json",
+        "unit.log"
+      ]
+    },
+    {
+      "check": "Independent complete browser suite",
+      "result": "PASS",
+      "tests": 48,
+      "failures": 0,
+      "skips": 0,
+      "flaky": 0,
+      "evidence": [
+        "execution-browser.json",
+        "browser.log",
+        "browser/browser-results.json"
+      ]
+    },
+    {
+      "check": "Read-only root integrity/current state",
+      "result": "PASS",
+      "checks": 463,
+      "indexedFiles": 411,
+      "frozenFiles": 412,
+      "evidence": [
+        "bootstrap.log",
+        "current-state.log",
+        "execution-root.json"
+      ]
+    },
+    {
+      "check": "Bootstrap mutation/relocation tests",
+      "result": "PASS",
+      "tests": 9,
+      "failures": 0,
+      "skips": 0,
+      "evidence": [
+        "bootstrap-tests.log"
+      ]
+    },
+    {
+      "check": "Runtime/typecheck/build/module pins/dependency boundaries",
+      "result": "PASS",
+      "evidence": [
+        "execution-build.json",
+        "typecheck.log",
+        "build.log",
+        "module-pins.log",
+        "boundaries.log"
+      ]
+    },
+    {
+      "check": "Retained original counterexamples and adjacent probes",
+      "result": "PASS",
+      "evidence": [
+        "execution-probes.json",
+        "counterexamples-results.json",
+        "structure-depth-results.json",
+        "independent-probe-results.json"
+      ]
+    },
+    {
+      "check": "Independent stronger EG01 atomic matrix",
+      "result": "PASS",
+      "cases": 30,
+      "compositeRefusals": 12,
+      "numericSuccesses": 18,
+      "evidence": [
+        "eg01-atomic-results.json",
+        "eg01-atomic.log"
+      ]
+    },
+    {
+      "check": "Packet/source/evidence/protected identities before and after",
+      "result": "PASS",
+      "packetSubmissionObjects": 18,
+      "sourceConfigFiles": 78,
+      "evidenceFiles": 112,
+      "protectedFiles": 743,
+      "evidence": [
+        "identities-before.json",
+        "identities-after.json"
+      ]
+    },
+    {
+      "check": "Build/relocation/full current coverage identities",
+      "result": "PASS",
+      "buildFiles": 3,
+      "relocatedPriorFiles": 61,
+      "capabilityIds": 24,
+      "mappedEvidenceEntries": 338,
+      "evidence": [
+        "build-relocation-coverage.json"
+      ]
+    },
+    {
+      "check": "Read-only static owner policy, invariants and fingerprint",
+      "result": "PASS",
+      "evidence": [
+        "static-portable-audit.json"
+      ]
+    },
+    {
+      "check": "200-node model performance sample",
+      "result": "RECORDED_WITHOUT_SCALABILITY_CLAIM",
+      "evidence": [
+        "performance.log"
+      ]
+    }
+  ],
+  "gateDisposition": "Existing current-state Gate decisions unchanged; no new inferred global closure.",
+  "format": "S03 production writer remains grape.document 2.0. DEC/AC accepted future S04 requirements are not delivered here.",
+  "merge": "NOT_GRANTED",
+  "publication": "WF_PERMISSION_PENDING; no remote action",
+  "nextSlice": "NOT_AUTHORIZED; draft preparation only"
+}

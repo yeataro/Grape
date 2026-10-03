@@ -1,0 +1,72 @@
+{
+  "reviewerIdentity": "/root/s03_fresh_rereview_02/portable_static",
+  "attribution": "Actual read-only subreview returned through collaboration; parent records its findings here. No source writes or test/build execution by subreviewer.",
+  "reviewedR": "c209bba451149b9d54a6a54c3b35dd28f39225f3",
+  "verdict": "PASS_FOR_BOUNDED_STATIC_REPAIR",
+  "additionalFindings": [],
+  "inspected": [
+    {
+      "area": "Accepted source admission",
+      "refs": [
+        "handoff/data/capability-coverage.json:11515",
+        "handoff/data/capability-coverage.json:11519",
+        "handoff/data/capability-coverage.json:11532",
+        "handoff/data/capability-coverage.json:11552",
+        "handoff/data/capability-coverage.json:8326"
+      ],
+      "observation": "Numeric scalar/vector/matrix clipboard rule, same Graph/load reuse, separately legal bounded native arrays and independent source declaration rules."
+    },
+    {
+      "area": "Round2 owner policy and exact identity",
+      "refs": [
+        "production/src/modules/networks.ts:300",
+        "production/src/model/transfer.ts:234",
+        "production/src/model/transfer.ts:282",
+        "production/src/model/transfer.ts:404"
+      ],
+      "observation": "Constant/uniform/specialization clipboard imports reject non-scalar TypeToken kinds; scalar token category includes GLSL vectors/matrices. Construction/document phases retain value validation. Only exact Graph+load resource reuse skips import policy."
+    },
+    {
+      "area": "Atomicity and detached owner execution",
+      "refs": [
+        "production/src/model/transfer.ts:192",
+        "production/src/model/transfer.ts:410",
+        "production/src/sdk/kernel.ts:48",
+        "production/src/model/graph.ts:370"
+      ],
+      "observation": "Exact definitions/modules, required policy, detached deep-frozen callback inputs, candidate validation before History/Redo/publication."
+    },
+    {
+      "area": "Adjacent portable rules",
+      "refs": [
+        "production/src/modules/networks.ts:341",
+        "production/src/modules/networks.ts:381",
+        "production/src/sdk/type-tokens.ts:10",
+        "production/src/definitions/types.ts:239"
+      ],
+      "observation": "2048 clipboard and 4096 construction path bounds; exact image target; null authored native value; float/vec2/vec3/vec4 native elements; typed positive int/uint extents; TOP source+origin/current defaults; minimum vacant specialization ID retained."
+    },
+    {
+      "area": "Tests and retained FR01..03",
+      "refs": [
+        "production/tests/unit/s03-repair2.test.ts:23",
+        "production/tests/unit/s03-repair2.test.ts:104",
+        "production/tests/browser/s03-repair2.spec.ts:8",
+        "production/tests/unit/s03-repair.test.ts:232",
+        "production/src/modules/image.ts:98",
+        "production/src/model/graph.ts:1967",
+        "production/src/model/graph.ts:1336"
+      ],
+      "observation": "Round2 tests cover real distinct Graph/new load, full atomicity, changed current same-load values, numeric positives; previous repair tests unchanged. ES300 explicit nested refusal, mixed shared/cloned addresses and dependent Structure limits retained."
+    }
+  ],
+  "fingerprint": {
+    "source": "production/src/modules/networks.ts",
+    "algorithm": "Normalized source SHA256 as module-pins.mjs",
+    "actual": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+    "matches": true
+  },
+  "limits": [
+    "Static findings do not by themselves establish runtime pass, native resolution, arbitrary callback purity, Human acceptance or global Gate closure."
+  ]
+}

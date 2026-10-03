@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grape 實機測試 · S04 · S04-web-0c13932</title>
+<style>
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{display:flex;flex-direction:column;background:#111827;color:#f3f4f6;font:14px system-ui,sans-serif}.deployment{display:flex;align-items:center;gap:20px;flex-wrap:wrap;min-height:54px;padding:12px 20px;border-bottom:1px solid #475569}.slice{font-size:17px;font-weight:700}.build{font-family:ui-monospace,monospace;font-size:14px}.review{color:#cbd5e1;font-size:12px}#status{margin-left:auto;color:#a7b5c9;font-size:12px}iframe{display:block;flex:1;width:100%;min-height:0;border:0;background:#fff}#failure{padding:24px;color:#fca5a5}
+</style>
+</head>
+<body>
+<header class="deployment" aria-label="目前部署版本">
+<span class="slice">Grape · S04</span>
+<span class="build">S04-web-0c13932</span>
+<span class="review" title="985357be67cce2f2ecc232e827e83e5cdbb521ab">受審版本 985357b</span>
+<span id="status" role="status">版本核對中</span>
+</header>
+<p id="failure" hidden>部署版本核對失敗，請通知協調員。</p>
+<iframe id="product" title="Grape S04 測試畫面" hidden></iframe>
+<script type="module">
+const expected=[{"path":"index.html","sha256":"60558939e62c30d4e71b1d6753f311efe646fc0979d075b847aaab85abba7893","bytes":404},{"path":"assets/index-BdaXQCVs.css","sha256":"1d376bbcfc7bb380c274ad19bd00d2a96e14bc7b38c257077867978d9906599f","bytes":5286},{"path":"assets/index-BFQ61do0.js","sha256":"e28318ab854220246238aa184ca27924ab0172d97a2f79ad8d7c984d6cefc9de","bytes":199977}];
+const status=document.getElementById('status');
+try{
+ for(const asset of expected){
+  const response=await fetch('/'+asset.path,{cache:'no-store'});
+  if(!response.ok)throw Error('HTTP '+response.status);
+  const bytes=await response.arrayBuffer();
+  const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),n=>n.toString(16).padStart(2,'0')).join('');
+  if(digest!==asset.sha256||bytes.byteLength!==asset.bytes)throw Error('Build mismatch');
+ }
+ status.textContent='版本已核對 · 本機實測';
+ const frame=document.getElementById('product');frame.src='/';frame.hidden=false;
+}catch(error){status.textContent='版本核對失敗';document.getElementById('failure').hidden=false;}
+</script>
+</body>
+</html>

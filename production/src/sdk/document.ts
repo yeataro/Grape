@@ -8,7 +8,7 @@ import type {
 } from "./public-surface.ts";
 
 export const DOCUMENT_FORMAT = "grape.document" as const;
-export const DOCUMENT_VERSION = Object.freeze({ major: 2, minor: 0 });
+export const DOCUMENT_VERSION = Object.freeze({ major: 2, minor: 1 });
 export interface ModulePin {
   moduleId: string;
   version: string;
@@ -53,7 +53,7 @@ export interface EdgeDocument {
 /** Core-owned, explicitly adopted wire identity; not the reference Adaptation runtime shape. */
 export interface EdgeAdaptationDocument {
   schema: "grape.edge-adaptation";
-  version: 1;
+  version: 1 | 2;
   sourceType: string;
   targetType: string;
   operation:
@@ -61,7 +61,8 @@ export interface EdgeAdaptationDocument {
     | "broadcast"
     | "take-leading"
     | "append-alpha-one"
-    | "numeric-cast";
+    | "numeric-cast"
+    | "pad-vector";
   extensions: Record<string, Json>;
 }
 export interface NetworkDocument {

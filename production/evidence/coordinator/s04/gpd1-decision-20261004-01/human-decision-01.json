@@ -1,0 +1,30 @@
+{
+  "recordType": "HUMAN_PRODUCT_DECISION",
+  "id": "S04-GPD1-HUMAN-20261004-01",
+  "recordedAt": "2026-10-03 21:14:55 UTC",
+  "authority": "Human Owner",
+  "source": {
+    "threadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "messageId": "01a1039d-cf0a-7071-b420-4c6349469e5b",
+    "questionItemId": "[\"request_user_input_async\",\"call_m1t7Jkdk2ehHTrGjmeYmQ4OJ\",0]",
+    "question": "S04 的 Personal 子圖若含長度由其他來源、子圖輸入或巢狀依賴決定的陣列，要承諾完整保存、重新對應引用及往返嗎？建議支援合法且依賴完整的資料；缺依賴或不合法資料仍整筆拒絕。這是尚未決定的 G-PD-1，已定工作會繼續。",
+    "answer": "支援完整往返（建議）",
+    "verification": "Direct Human answer in Coordinator chat; original message ID read back through read_thread."
+  },
+  "decision": {
+    "gate": "G-PD-1 / G-LU-DATA-007",
+    "selected": "FULL_BOUNDED_MATRIX",
+    "sliceId": "S04",
+    "scope": "Existing supported types and valid self-contained portable Personal subgraphs: literal, source-bound, input-bound and nested symbolic extents must preserve full dependency/reference meaning through save/export, typed identity remapping, import/reopen and generation.",
+    "invalidBehavior": "Missing dependencies, malformed or otherwise inadmissible data reject atomically with no partial resources/Graph/History; checksum alone cannot qualify usability.",
+    "unchanged": "No new type family, host/native capability or automatic repair of invalid input; existing owner, exact-module, portability, profile and lifetime contracts remain."
+  },
+  "status": "PRODUCT_POLICY_ACCEPTED_IMPLEMENTATION_AND_INDEPENDENT_REVIEW_PENDING",
+  "priorQuestion": {
+    "file": "production/evidence/coordinator/s04/activation-20261004-01/pending-policy-question.json",
+    "disposition": "Answered by this immutable receipt; do not rewrite historical pending record."
+  },
+  "authorityEffect": "Unblocks previously isolated dependent Personal symbolic policy branch in already-authorized S04. No new Slice, S04 Human acceptance, publication or merge.",
+  "recordMaintenance": "PM prepares normalized product decision record; original designated maintainer saves/registers it and binds exact hashes. Neither role invents technical PASS/Gate closure.",
+  "requiredEvidence": "AT-S04-02 full declared four-class success and refusal/remap/roundtrip matrix, plus affected regressions and Fresh Review."
+}

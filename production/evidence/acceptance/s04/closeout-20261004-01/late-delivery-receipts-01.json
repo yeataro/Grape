@@ -1,0 +1,44 @@
+{
+  "recordedAt": "2026-10-03T23:11:00.361Z",
+  "recordType": "S04_CLOSEOUT_LATE_COORDINATOR_EVIDENCE",
+  "actionKey": "yeataro/Grape:S04:closeout-and-pr:0c13932:985357b:20261004-01",
+  "completionB": "835726428f0259462c36833e0aaf9d1e72160bab",
+  "publicationHead": "Evidence-only descendant to be bound after commit; all acceptance/state/source/build invariants remain at completion B.",
+  "reason": "Coordinator supplied final retirement attempt/result after completion B was committed and before any S04 push/PR. Preserve append-only; no amend and no repeated cleanup.",
+  "originalBytes": [
+    {
+      "file": "production/evidence/coordinator/s04/preview-01/s03-service-retirement-intent-01.json",
+      "sha256": "242fee81d07d56f7e7fe30a3d34958300e456a9a6fe221364d619e9f380d8f3d",
+      "bytes": 1688
+    },
+    {
+      "file": "production/evidence/coordinator/s04/preview-01/s03-service-retirement-attempt-01.json",
+      "sha256": "ea1610349e5bee63555a87b22f6ea3102969285a04655d99b4455fc85642cb31",
+      "bytes": 1079
+    },
+    {
+      "file": "production/evidence/coordinator/s04/preview-01/s03-service-retirement-result-01.json",
+      "sha256": "3043bbcbd3c350b8485cb86974ea5cd6dbe989c043e0b2d628d3b110dbe47d81",
+      "bytes": 1087
+    }
+  ],
+  "cleanupOperation": {
+    "actionKey": "yeataro/Grape:S03:retire-preview-4174:20261004:01",
+    "attempt": 2,
+    "retriesUsed": 1,
+    "actor": "Grape Coordinator; not repeated by this writer",
+    "firstResult": "Runtime NullReference/no effect; not automatic approval rejection",
+    "finalResult": "OLD_PREVIEW_STOPPED_CURRENT_PREVIEW_OPERATIONAL"
+  },
+  "thisPublication": {
+    "attempt": 1,
+    "retriesUsed": 0,
+    "pushAttemptsSoFar": 0
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4192/review.html",
+    "httpStatus": 200,
+    "guideAlreadyUsesOnly4192": true
+  },
+  "checks": "State/product/build/old evidence unchanged; no product or root rerun needed for added historical receipts."
+}

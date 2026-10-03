@@ -1,4 +1,16 @@
+import { currentSources } from "../../src/modules/sources-current.ts";
 import { networkModule } from "../../src/modules/networks.ts";
+import { probeDefinitions } from "../../src/modules/package-probe.ts";
+import { extentModule } from "../../src/modules/extents.ts";
+import { BrowserLibraryStore } from "../../src/adapters/browser/library.ts";
+import { PersonalLibrary } from "../../src/application/personal.ts";
+import { mountPersonal } from "./personal.ts";
+import {
+  currentOutputModule,
+  currentGraphKinds,
+  currentImageKind,
+  currentOutputText,
+} from "../../src/modules/image-current.ts";
 import { shellText, shellPresentation, shellDefaults } from "./shell-copy.ts";
 import { Definitions } from "../../src/definitions/registry.ts";
 import { basicNodes, nodeText } from "../../src/modules/nodes.ts";
@@ -41,12 +53,18 @@ const definitions = new Definitions();
 stages.forEach((s) => definitions.registerStage(s));
 definitions.register(basicNodes);
 definitions.register(networkModule);
+definitions.register(extentModule);
+definitions.register(currentSources);
 definitions.register(graphKinds);
 definitions.registerKind(imageKind);
+definitions.register(currentOutputModule);
+definitions.register(currentGraphKinds);
+definitions.registerKind(currentImageKind);
 const locale = new Localization();
 locale.registerModule(shellPresentation, shellDefaults);
 for (const contribution of [
   nodeText,
+  currentOutputText,
   canvasText,
   inspectorText,
   actionsText,
@@ -66,10 +84,11 @@ widgets.register(choiceWidget, (p) => p.spec.type === "choice");
 const application = new EditorApplication(
   definitions,
   { next: () => crypto.randomUUID() },
-  imageKind.ref,
+  currentImageKind.ref,
   esProfile,
   new BrowserStorage(),
   browserOutput,
+  probeDefinitions,
 );
 const app = document.querySelector<HTMLElement>("#app")!;
 app.innerHTML =
@@ -338,6 +357,7 @@ action("png", async () => {
 });
 const input = document.createElement("input");
 input.type = "file";
+input.setAttribute("aria-label", "Open document file");
 input.accept = ".json,.grape.json,.png,application/json,image/png";
 input.hidden = true;
 app.append(input);
@@ -508,3 +528,20 @@ application.subscribe(() => {
 });
 application.newDocument();
 buildWorkspace();
+mountPersonal(
+  nav,
+  application,
+  () => {
+    const id = workspace?.records().find((r) => r.saved.id === "inspector")
+      ?.update.target?.scope.contextId;
+    if (!id) throw Error("Select a Canvas first.");
+    return application.context(id);
+  },
+  new PersonalLibrary(
+    new BrowserLibraryStore(),
+    definitions.pin(definitions.pins()),
+    esProfile,
+    probeDefinitions,
+  ),
+  report,
+);

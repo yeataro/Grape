@@ -148,9 +148,9 @@ export class Definitions {
           (n) => n.modelRole === role && modules.get(pinKey(n.ref)),
         ),
       resourceByModel: (model: NonNullable<ResourceDefinition["model"]>) =>
-        [...resources.values()].find(
-          (r) => r.model === model && modules.get(pinKey(r.ref)),
-        ),
+        [...resources.values()]
+          .reverse()
+          .find((r) => r.model === model && modules.get(pinKey(r.ref))),
       pins: Object.freeze(pins.map((p) => Object.freeze({ ...p }))),
       types: new TypeEnvironment(
         [...modules.values()].flatMap((m) => m?.types ?? []),

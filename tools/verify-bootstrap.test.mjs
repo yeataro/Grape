@@ -11,6 +11,28 @@ const read = (root, file) => JSON.parse(fs.readFileSync(path.join(root, file), '
 const write = (root, file, value) => fs.writeFileSync(path.join(root, file), JSON.stringify(value, null, 2) + '\n');
 const digest = file => sha256(fs.readFileSync(file));
 
+// Copy only navigation inputs used by root verification. Never follow a link
+// outside the repository, or a symlink at any level, into a disposable fixture.
+function copyNavigation(source, destination, document) {
+  const root = path.resolve(source);
+  for (const match of fs.readFileSync(path.join(root, document), 'utf8').matchAll(/\]\(([^)]+)\)/g)) {
+    const target = match[1].split('#')[0];
+    if (!target || /^[a-z]+:/i.test(target)) continue;
+    const file = path.resolve(root, target);
+    assert.ok(file.startsWith(root + path.sep), 'navigation must stay within repository');
+    const relative = path.relative(root, file);
+    let cursor = root;
+    for (const part of relative.split(path.sep)) {
+      cursor = path.join(cursor, part);
+      assert.equal(fs.lstatSync(cursor).isSymbolicLink(), false, 'navigation cannot follow symlinks');
+    }
+    assert.ok(fs.statSync(file).isFile(), 'navigation must name a file');
+    const output = path.join(destination, relative);
+    fs.mkdirSync(path.dirname(output), {recursive: true});
+    fs.copyFileSync(file, output);
+  }
+}
+
 function fixture(t) {
   const temporaryBase = path.resolve(os.tmpdir());
   const root = fs.mkdtempSync(path.join(temporaryBase, 'grape-bootstrap-test-'));
@@ -31,6 +53,7 @@ function fixture(t) {
     const target = path.join(root, 'handoff', file); fs.mkdirSync(path.dirname(target), {recursive: true});
     fs.copyFileSync(path.join(repositoryRoot, 'handoff', file), target);
   }
+  for (const file of ['README.md', 'AGENTS.md']) copyNavigation(repositoryRoot, root, file);
   // Qualification fixtures always exercise the initial state, independent of later
   // real project progress. The wrapper separately validates the actual root record.
   write(root, 'implementation-state.json', {...read(root, 'handoff/implementation-state.json'), recordRole: 'current'});
@@ -45,6 +68,23 @@ test('BOOT01 accepted baseline and materialized current record remain valid and 
   assert.equal(result.currentState, 'not-started'); assert.equal(result.currentRecordValidation, 'CURRENT_RECORD_VALID');
   assert.deepEqual(result.activeSlices, []); assert.deepEqual(result.commands, []);
   assert.equal(digest(path.join(root, 'implementation-state.json')), before, 'read-only verification must not update progress');
+});
+
+test('BOOT10 navigation fixtures preserve linked bytes and reject escaping paths and symlink ancestors', t => {
+  const root = fixture(t), source = path.join(root, 'source'), destination = path.join(root, 'copy');
+  fs.mkdirSync(source); fs.mkdirSync(destination);
+  fs.writeFileSync(path.join(source, 'value.md'), 'exact linked bytes\r\n');
+  fs.writeFileSync(path.join(source, 'README.md'), '[value](value.md#anchor)');
+  copyNavigation(source, destination, 'README.md');
+  assert.equal(digest(path.join(destination, 'value.md')), digest(path.join(source, 'value.md')));
+  fs.writeFileSync(path.join(source, 'README.md'), '[escape](../README.md)');
+  assert.throws(() => copyNavigation(source, destination, 'README.md'), /within repository/);
+  fs.mkdirSync(path.join(root, 'outside'));
+  fs.writeFileSync(path.join(root, 'outside', 'data.md'), 'must not copy');
+  fs.symlinkSync(path.join(root, 'outside'), path.join(source, 'linked'), 'junction');
+  fs.writeFileSync(path.join(source, 'README.md'), '[symlink](linked/data.md)');
+  assert.throws(() => copyNavigation(source, destination, 'README.md'), /symlinks/);
+  assert.equal(fs.existsSync(path.join(destination, 'linked')), false);
 });
 
 test('BOOT02 changing one frozen file is detected without executing changed checkers', async t => {

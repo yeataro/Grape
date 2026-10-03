@@ -1,0 +1,653 @@
+{
+  "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+  "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+  "authority": [
+    "production/evidence/coordinator/s04/activation-20261004-01/implementer-packet-01.json",
+    "decisions/DEC-GRAPE-002.md",
+    "decisions/AC-GRAPE-001.md",
+    "decisions/DEC-GRAPE-004.md"
+  ],
+  "acceptanceFamilies": [
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "AT-S04-01",
+      "branch": "Same-version reuse; direct Independent; semantic fork; saved snapshots independent of provider/source; full owner payload and typed refs",
+      "tests": [
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 Personal canonical package preserves snapshots, same-version reuse, independent and collision-safe filenames",
+          "line": 45
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 Personal complete owner payload and typed references survive reuse fork and absent Library source",
+          "line": 39
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 Personal root owner remap and input-bound Independent retain complete typed scope",
+          "line": 433
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 nested shared input bindings remap through Personal and remain independent after semantic fork and reinsert",
+          "line": 326
+        },
+        {
+          "file": "production/tests/browser/s04.spec.ts",
+          "title": "S04 actual Personal UI saves relists imports downloads and inserts independent Graph snapshots",
+          "line": 357
+        }
+      ]
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "AT-S04-02",
+      "branch": "DEC004 literal, source-bound (direct and owner-coded), input-bound and nested scope closure through export/read/typed remap/save/reopen/generation. Same-name destination and changed imported length remain bound by identity. All required source dependencies are constant int/uint; arrays-of-arrays is not added.",
+      "tests": [
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 literal Personal typed closure survives canonical export import save reopen generation (24.8775ms)",
+          "line": 224
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 source Personal typed closure survives canonical export import save reopen generation (64.7324ms)",
+          "line": 224
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 direct-source Personal typed closure survives canonical export import save reopen generation (31.0128ms)",
+          "line": 224
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 input Personal typed closure survives canonical export import save reopen generation (67.8607ms)",
+          "line": 224
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 DEC004 same-name destination sources retain distinct identity and changed imported bindings regenerate",
+          "line": 163
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 required int length input qualifies with an actual constant supply and changed caller defaults regenerate",
+          "line": 890
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 nested shared input bindings remap through Personal and remain independent after semantic fork and reinsert",
+          "line": 326
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 rejected literal/source/input/nested candidates are atomic through Application with valid checksums",
+          "line": 486
+        },
+        {
+          "file": "production/tests/browser/s04.spec.ts",
+          "title": "S04 DEC004 actual Personal literal source input nested shaders compile after export import reopen",
+          "line": 86
+        },
+        {
+          "file": "production/tests/browser/s04.spec.ts",
+          "title": "S04 DEC004 browser hash-valid missing dependency scope cycle and module candidates reject atomically",
+          "line": 450
+        }
+      ],
+      "evidence": [
+        "../browser-candidate-01/s04-personal-webgl.json",
+        "../browser-candidate-01/s04-personal-rejections.json"
+      ],
+      "note": "Package records definition input defaults, not an outside caller occurrence override. Imported caller overrides remain Graph state. Shared input-bound definitions require consistent constant binding identity across their active callers; conflicting bindings reject atomically under resolved-type rules."
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "AT-S04-03",
+      "branch": "No-overwrite names/suffixes, casefold/UTF8 stem bounds, renamed-content dedupe, file/byte/total quotas, actual browser provider races and per-file errors; failed export performs no provider writes.",
+      "tests": [
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 Personal Library per-file isolation, safe names, duplicate-at-capacity and provider failures leave existing assets unchanged",
+          "line": 623
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 Personal malformed envelope checksum and unsupported owner reject before provider writes; list deduplicates renamed files",
+          "line": 264
+        },
+        {
+          "file": "production/tests/browser/s04.spec.ts",
+          "title": "S04 actual IndexedDB collision concurrency relist quotas and failure isolation",
+          "line": 213
+        },
+        {
+          "file": "production/tests/browser/s04.spec.ts",
+          "title": "S04 actual Personal UI saves relists imports downloads and inserts independent Graph snapshots",
+          "line": 357
+        }
+      ],
+      "evidence": [
+        "../browser-candidate-01/s04-provider.json"
+      ]
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "AT-DEC-GRAPE-002-01",
+      "branch": "All 16 float/vector plans; scalar0.5 broadcast and unequal vector0.2/0.4/0.6/0.8 establish fixed padding/truncation numerically.",
+      "tests": [
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC002 all16 default float plans, version fences and current ImageOutput compile",
+          "line": 128
+        },
+        {
+          "file": "production/tests/browser/s04.spec.ts",
+          "title": "S04 DEC002 all sixteen conversions execute on WebGL2 with correct components",
+          "line": 4
+        }
+      ],
+      "evidence": [
+        "../browser-candidate-01/s04-webgl16.json"
+      ]
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "AT-DEC-GRAPE-002-02",
+      "branch": "One vec2 source fans out to float, vec3, vec4 inputs; full source state/ports/identity and original edge/plan unchanged.",
+      "tests": [
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 DEC002 one-source fanout does not mutate source or existing conversions and pad failures agree",
+          "line": 333
+        }
+      ]
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "AT-DEC-GRAPE-002-03",
+      "branch": "Actual Canvas four source shapes to new exact required vec4 Image Output, generated GLSL and edge/plan identity after Undo/Redo.",
+      "tests": [
+        {
+          "file": "production/tests/browser/s04.spec.ts",
+          "title": "S04 DEC002 actual Canvas four shapes to current ImageOutput and edge identity Undo Redo",
+          "line": 307
+        }
+      ],
+      "evidence": [
+        "../browser-candidate-01/s04-webgl16.json"
+      ]
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "AT-DEC-GRAPE-002-04",
+      "branch": "Exact old ports reject, new ImageOutput only accepts exact four glsl types, failed replacement retains valid edge, state/history/events; malformed pad types/operation/version rejected.",
+      "tests": [
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC002 all16 default float plans, version fences and current ImageOutput compile",
+          "line": 128
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 AC001 unchanged accepted reader and exact old/new definition boundaries",
+          "line": 719
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 DEC002 one-source fanout does not mutate source or existing conversions and pad failures agree",
+          "line": 333
+        }
+      ]
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "AT-DEC-GRAPE-002-05",
+      "branch": "Single TypeEnvironment authority for plans, Graph hydration/revalidation/final connection and immutable Generator independently validate plans.",
+      "tests": [
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC002 all16 default float plans, version fences and current ImageOutput compile",
+          "line": 128
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 DEC002 one-source fanout does not mutate source or existing conversions and pad failures agree",
+          "line": 333
+        },
+        {
+          "file": "production/tests/browser/s04.spec.ts",
+          "title": "S04 DEC002 all sixteen conversions execute on WebGL2 with correct components",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "AT-DEC-GRAPE-002-06",
+      "branch": "Complete stored inherited-v2 and pad plans/extensions survive JSON/save/reopen, shared/nested Personal import and clipboard; endpoint identities remap semantically.",
+      "tests": [
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 stored inherited v2 and pad plans retain complete extensions through Personal shared import and reopen",
+          "line": 549
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 inherited v2 plans preserve extensions across hydration move clipboard nested and Personal",
+          "line": 781
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 nested shared input bindings remap through Personal and remain independent after semantic fork and reinsert",
+          "line": 326
+        }
+      ]
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "AT-DEC-GRAPE-002-07",
+      "branch": "2.0/v1 read and additive explicit 2.1 upgrade; old reader2.1 recovery; supported v1/v2; live and typed inactive resource edge fences, unknown outer wrappers preserve raw, malformed-known reject.",
+      "tests": [
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 AC001 additive envelope upgrade retains exact pins and inactive evidence, fences v2 under2.0",
+          "line": 173
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 AC001 inactive owner network resources and unknown wrapper versions preserve the version fence",
+          "line": 413
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 AC001 unchanged accepted reader and exact old/new definition boundaries",
+          "line": 719
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC002 all16 default float plans, version fences and current ImageOutput compile",
+          "line": 128
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 DEC002 one-source fanout does not mutate source or existing conversions and pad failures agree",
+          "line": 333
+        }
+      ],
+      "inheritedTests": [
+        "production/tests/unit/persistence.test.ts",
+        "production/tests/unit/s02.test.ts"
+      ],
+      "note": "The accepted reader-2.0 byte copies are test-only behavioral oracles with exact provenance; no v1/Legacy converter or downgrade is delivered."
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "AT-DEC-GRAPE-002-08",
+      "branch": "Old nodes/image/networks source bytes and exact pins unchanged; missing old ImageOutput not replaced by available new definition; new owner0.2 exact GraphKind compatibility; no silent upgrades.",
+      "tests": [
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 AC001 unchanged accepted reader and exact old/new definition boundaries",
+          "line": 719
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 current exact source owner supports new image descriptors without retargeting legacy owner",
+          "line": 851
+        }
+      ],
+      "evidence": [
+        "protected-identities-01.json"
+      ]
+    }
+  ],
+  "capabilities": [
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "LC-DATA-028",
+      "branch": "Graph-owned Library snapshots, same-version reuse, first semantic fork, direct Independent; owner payload/typed refs; no live synchronization",
+      "families": [
+        "AT-S04-01"
+      ],
+      "tests": [
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 Personal complete owner payload and typed references survive reuse fork and absent Library source",
+          "line": 39
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 Personal root owner remap and input-bound Independent retain complete typed scope",
+          "line": 433
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 nested shared input bindings remap through Personal and remain independent after semantic fork and reinsert",
+          "line": 326
+        }
+      ]
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "LC-DATA-038",
+      "branch": "Self-contained exact closure, canonical format/checksum, exact advertised stage qualification; generation and byte budget checked before publication",
+      "families": [
+        "AT-S04-01",
+        "AT-S04-02"
+      ],
+      "tests": [
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 Personal canonical package preserves snapshots, same-version reuse, independent and collision-safe filenames",
+          "line": 45
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 rejected literal/source/input/nested candidates are atomic through Application with valid checksums",
+          "line": 486
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 Personal malformed envelope checksum and unsupported owner reject before provider writes; list deduplicates renamed files",
+          "line": 264
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 shipped basic Library snapshot compiles after semantic fork and Personal roundtrip",
+          "line": 638
+        }
+      ],
+      "residual": "Only shipped basic Library asset and registered host-free profile are qualified; full legacy built-in catalog/native targets are not delivered."
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "LC-DATA-039",
+      "branch": "Ordinary live Sources rejected for Personal; complete legal positive int/uint compile-time extent source closure admitted under DEC004; invalid binding rejected atomically",
+      "families": [
+        "AT-S04-02"
+      ],
+      "tests": [
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 rejected literal/source/input/nested candidates are atomic through Application with valid checksums",
+          "line": 486
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 DEC004 same-name destination sources retain distinct identity and changed imported bindings regenerate",
+          "line": 163
+        }
+      ],
+      "residual": "Live TD/native reads are unavailable; no TD exception or native package qualification claimed."
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "LC-DATA-040",
+      "branch": "Casefold sorted provider listing, duplicate content suppression, per-file failures and explicit limits do not edit Graph",
+      "families": [
+        "AT-S04-03"
+      ],
+      "tests": [
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 Personal Library per-file isolation, safe names, duplicate-at-capacity and provider failures leave existing assets unchanged",
+          "line": 623
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 Personal malformed envelope checksum and unsupported owner reject before provider writes; list deduplicates renamed files",
+          "line": 264
+        },
+        {
+          "file": "production/tests/browser/s04.spec.ts",
+          "title": "S04 actual IndexedDB collision concurrency relist quotas and failure isolation",
+          "line": 213
+        }
+      ]
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "LC-DATA-041",
+      "branch": "Readable collision-safe UTF8 filenames separate from display name/content; no overwrite; reuse renamed identical content; Graph Undo separate from saved asset lifetime",
+      "families": [
+        "AT-S04-03"
+      ],
+      "tests": [
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 Personal canonical package preserves snapshots, same-version reuse, independent and collision-safe filenames",
+          "line": 45
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 Personal malformed envelope checksum and unsupported owner reject before provider writes; list deduplicates renamed files",
+          "line": 264
+        },
+        {
+          "file": "production/tests/browser/s04.spec.ts",
+          "title": "S04 actual Personal UI saves relists imports downloads and inserts independent Graph snapshots",
+          "line": 357
+        },
+        {
+          "file": "production/tests/browser/s04.spec.ts",
+          "title": "S04 actual IndexedDB collision concurrency relist quotas and failure isolation",
+          "line": 213
+        }
+      ]
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "LC-DATA-042",
+      "branch": "Strict version/shape/hash validation, type-preserving serialization and semantic qualification, no value coercion; source bytes retained on rejection",
+      "families": [
+        "AT-S04-02",
+        "AT-S04-03"
+      ],
+      "tests": [
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 Personal malformed envelope checksum and unsupported owner reject before provider writes; list deduplicates renamed files",
+          "line": 264
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 rejected literal/source/input/nested candidates are atomic through Application with valid checksums",
+          "line": 486
+        },
+        {
+          "file": "production/tests/browser/s04.spec.ts",
+          "title": "S04 DEC004 browser hash-valid missing dependency scope cycle and module candidates reject atomically",
+          "line": 450
+        }
+      ]
+    },
+    {
+      "status": "IMPLEMENTER_CHECKS_PASS_PENDING_FRESH_REVIEW",
+      "implementationI": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "id": "LC-DATA-047",
+      "branch": "DEC004 portable literal/source/input/nested typed dependency closure remaps exact resource/network/node IDs and retains ordinary strings/owner payload",
+      "families": [
+        "AT-S04-02"
+      ],
+      "tests": [
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 Personal complete owner payload and typed references survive reuse fork and absent Library source",
+          "line": 39
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 DEC004 same-name destination sources retain distinct identity and changed imported bindings regenerate",
+          "line": 163
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 Personal root owner remap and input-bound Independent retain complete typed scope",
+          "line": 433
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 nested shared input bindings remap through Personal and remain independent after semantic fork and reinsert",
+          "line": 326
+        }
+      ]
+    }
+  ],
+  "gates": [
+    {
+      "id": "G-PD-1",
+      "status": "HUMAN_POLICY_RESOLVED_DEC004; IMPLEMENTATION_REVIEW_PENDING",
+      "scope": "Human chose full bounded four-class roundtrip; prior pending-policy receipt remains historical unchanged.",
+      "authority": "decisions/DEC-GRAPE-004.md",
+      "families": [
+        "AT-S04-02"
+      ],
+      "residual": "No extra type families, live native providers or global Gate closure inferred."
+    },
+    {
+      "id": "G-LU-DATA-007",
+      "status": "SCOPED_IMPLEMENTER_EVIDENCE_PENDING_REVIEW",
+      "scope": "Full DEC004 portable Personal typed array roundtrip including positive and invalid/missing dependency matrix",
+      "families": [
+        "AT-S04-02"
+      ],
+      "residual": "Arrays-of-arrays/profile-unsupported types retain explicit rejection; nested means nested scopes/dependencies."
+    },
+    {
+      "id": "G-LU-DATA-005",
+      "status": "SCOPED_IMPLEMENTER_EVIDENCE_PENDING_REVIEW",
+      "scope": "Shipped basic Library insertion, semantic fork/wiring, compile and Personal roundtrip; every advertised package stage qualifies through private job Graph",
+      "tests": [
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 shipped basic Library snapshot compiles after semantic fork and Personal roundtrip",
+          "line": 638
+        },
+        {
+          "file": "production/tests/browser/s04.spec.ts",
+          "title": "S04 DEC004 actual Personal literal source input nested shaders compile after export import reopen",
+          "line": 86
+        }
+      ],
+      "residual": "No full Legacy built-in catalog/proper-MAT/native stage qualification claimed."
+    },
+    {
+      "id": "G-LU-DATA-003",
+      "status": "DECLARED_HOST_FREE_ENVIRONMENT_ONLY",
+      "scope": "Windows Chromium WebGL2 and browser-origin IndexedDB with explicit selected provider semantics",
+      "evidence": [
+        "environment-01.json",
+        "../browser-candidate-01/s04-provider.json"
+      ],
+      "residual": "No macOS/TouchDesigner/native filesystem, physical GPU or cross-platform qualification."
+    },
+    {
+      "id": "G-HANDOFF-CQ-OWNERSHIP",
+      "status": "SCOPED_IMPLEMENTER_EVIDENCE_PENDING_REVIEW; QUARANTINE_RETAINED",
+      "scope": "Graph transactional model/History, Application intent authority, exact owner callbacks and pure snapshot Generator; package qualification is a private job Graph, never a parallel authored model",
+      "tests": [
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 Personal complete owner payload and typed references survive reuse fork and absent Library source",
+          "line": 39
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 Personal root owner remap and input-bound Independent retain complete typed scope",
+          "line": 433
+        },
+        {
+          "file": "production/tests/unit/s04-closure.test.ts",
+          "title": "S04 DEC002 one-source fanout does not mutate source or existing conversions and pad failures agree",
+          "line": 333
+        },
+        {
+          "file": "production/tests/unit/s04.test.ts",
+          "title": "S04 DEC004 rejected literal/source/input/nested candidates are atomic through Application with valid checksums",
+          "line": 486
+        }
+      ],
+      "evidence": [
+        "conformance-01.log"
+      ],
+      "residual": "Frozen contradictory CQ summaries remain quarantined and unchanged; no global Gate closure."
+    }
+  ],
+  "independentReview": "NOT_PERFORMED_BY_IMPLEMENTER",
+  "fullFunctionMode": {
+    "decisionIds": [
+      "DEC-GRAPE-003",
+      "AC-GRAPE-002"
+    ],
+    "status": "NOT_DELIVERED",
+    "acceptanceFamilies": [
+      {
+        "id": "AT-DEC-GRAPE-003-01",
+        "status": "REQUIRED_NOT_EXECUTED"
+      },
+      {
+        "id": "AT-DEC-GRAPE-003-02",
+        "status": "REQUIRED_NOT_EXECUTED"
+      },
+      {
+        "id": "AT-DEC-GRAPE-003-03",
+        "status": "REQUIRED_NOT_EXECUTED"
+      },
+      {
+        "id": "AT-DEC-GRAPE-003-04",
+        "status": "REQUIRED_NOT_EXECUTED"
+      },
+      {
+        "id": "AT-DEC-GRAPE-003-05",
+        "status": "REQUIRED_NOT_EXECUTED"
+      },
+      {
+        "id": "AT-DEC-GRAPE-003-06",
+        "status": "REQUIRED_NOT_EXECUTED"
+      },
+      {
+        "id": "AT-DEC-GRAPE-003-07",
+        "status": "REQUIRED_NOT_EXECUTED"
+      },
+      {
+        "id": "AT-DEC-GRAPE-003-08",
+        "status": "REQUIRED_NOT_EXECUTED"
+      },
+      {
+        "id": "AT-DEC-GRAPE-003-09",
+        "status": "REQUIRED_NOT_EXECUTED"
+      },
+      {
+        "id": "AT-DEC-GRAPE-003-10",
+        "status": "REQUIRED_NOT_EXECUTED"
+      }
+    ],
+    "futureDraft": "production/evidence/coordinator/decisions/dec003-intake-20261004-01/local-delivery/"
+  },
+  "inheritedLimits": [
+    "S02 AT-S02-03 legacy converter remains NOT_DELIVERED/BLOCKED; G-VERSION-COMPAT remains unresolved.",
+    "DEC-GRAPE-001 domain-separated History retained.",
+    "S05 broader catalog, S06 full extension UI/accessibility/device matrices remain outside this S04.",
+    "Storage ACK is not disk/crash/cloud durability; browser-origin files are not native directory enumeration.",
+    "No S04 Human acceptance, completion, external publication, merge or next Slice authorization."
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "recordType": "S04_PRODUCT_GATE_QUESTION",
+  "id": "S04-GPD1-QUESTION-20261004-01",
+  "recordedAt": "2026-10-03 20:45:01 UTC",
+  "authorityContext": {
+    "file": "production/evidence/coordinator/s03/publication-20261004-01/explicit-human-grant-02.json",
+    "sha256": "9d3eadc91ccd0d7a9747a3653fb6daad34c794cf7589355955563a1e2dbd2b07"
+  },
+  "status": "QUESTION_PENDING_NO_PRODUCT_DECISION",
+  "gate": "G-PD-1 / G-LU-DATA-007",
+  "sources": [
+    "handoff/08_IMPLEMENTATION_PLAN.md S04 completion definition",
+    "handoff/10_KNOWN_GATES.md G-LU-DATA-007 and PD-1 routing row"
+  ],
+  "affectedScope": "Only Personal symbolic-array success/refusal policy; does not block S03 publication/merge or settled S04 branches.",
+  "question": "Personal 子圖若含長度取決於來源/子圖輸入或巢狀依賴的符號陣列，S04要支援完整保存、重新配置引用並往返，還是本輪明確只交付固定長度陣列？",
+  "proposedOptions": [
+    {
+      "id": "FULL_BOUNDED_MATRIX",
+      "meaning": "Within existing supported types and valid self-contained portable dependency scope: literal/source-bound/input-bound/nested admitted with complete typed remap and roundtrip evidence; missing dependencies/malformed or otherwise inadmissible data reject atomically.",
+      "status": "PROPOSAL_NOT_SELECTED"
+    },
+    {
+      "id": "LITERAL_ONLY_BOUNDED",
+      "meaning": "Explicit Human exclusion of symbolic Personal branches from this delivery; fixed literal branch only; symbolic remains not delivered, no globalS04/Gate closure.",
+      "status": "PROPOSAL_NOT_SELECTED"
+    }
+  ],
+  "transport": "functions.request_user_input_async; no answer observed yet",
+  "next": "Bind actual Human answer and exact intended scope before implementing dependent admission policy. Generic S04 start grant is not a matrix selection.",
+  "unchanged": "No accepted product rule changed; no Slice activated; sole mutable project truth remains implementation-state.json."
+}

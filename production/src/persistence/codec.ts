@@ -116,7 +116,7 @@ export function readDocument(
         "VERSION",
         key,
       );
-    if (version.major !== 2 || version.minor !== 0)
+    if (version.major !== 2 || ![0, 1].includes(Number(version.minor)))
       return {
         status: "recovery-readonly",
         raw,
@@ -151,6 +151,7 @@ export function readDocument(
 }
 export function writeDocument(document: CanonicalGraphDocument): string {
   validateDocumentStructure(document);
+  demand(document.formatVersion.minor === 1, "DOCUMENT_UPGRADE_REQUIRED");
   const formatted = JSON.stringify(document, null, 2);
   const emitted =
     new TextEncoder().encode(formatted).length <= DOCUMENT_MAX_BYTES

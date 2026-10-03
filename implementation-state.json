@@ -3,21 +3,25 @@
   "recordRole": "current",
   "handoffRevision": "IH-005",
   "currentRecord": "../implementation-state.json",
-  "status": "complete",
+  "status": "active",
   "project": {
     "id": "grape",
     "root": "production"
   },
   "implementationBaseline": {
-    "id": "S03-IH-005",
-    "revision": "80ee116b8f809c9160aa9cc311801cce15923cee",
-    "decisionReferenceIds": []
+    "id": "S04-IH-005-DEC002-AC001-DEC004",
+    "revision": "0c13932150bf1b78f215e25721292962e6c4263a",
+    "decisionReferenceIds": [
+      "DEC-GRAPE-002",
+      "AC-GRAPE-001",
+      "DEC-GRAPE-004"
+    ]
   },
   "build": {
-    "id": "S03-repair2-web-80ee116",
-    "revision": "80ee116b8f809c9160aa9cc311801cce15923cee",
-    "profile": "static-web/win32-x64/chromium-151.0.7922.34/desktop-nested-subgraph-structure-review",
-    "artifact": "production/evidence/s03/repair-02/candidate-web-01.tar.gz"
+    "id": "S04-web-0c13932",
+    "revision": "0c13932150bf1b78f215e25721292962e6c4263a",
+    "profile": "static-web/win32-x64/chromium-151.0.7922.34/desktop-personal-library-float-conversions",
+    "artifact": "production/evidence/s04/submission-01/candidate-web-01.tar.gz"
   },
   "activeSlices": [],
   "completedSlices": [
@@ -46,6 +50,15 @@
       "evidenceIds": [
         "S03-ARCHITECTURE-80ee116",
         "S03-PRODUCT-80ee116"
+      ]
+    },
+    {
+      "sliceId": "S04",
+      "scope": "Exact bounded S04 acceptance materials: Personal/Library assets, typed closure/reference remapping and complete literal/source-bound/input-bound/nested portable roundtrip matrix, 16 float/vector edge conversions with exact-port preservation, document2.1/codec-v2 compatibility; all7 capabilities and11 acceptance families in the independent report, actual Windows x64 Chromium151 desktop profile, original exclusions/limitations/residualGates retained. Full DEC003/AC002 function-mode remains NOT_DELIVERED; no broader catalog, native Host, S06 appearance/device qualification or global Gate closure.",
+      "implementationRevision": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "evidenceIds": [
+        "S04-ARCHITECTURE-0c13932",
+        "S04-PRODUCT-0c13932"
       ]
     }
   ],
@@ -163,16 +176,44 @@
         "S03"
       ],
       "gateIds": []
+    },
+    {
+      "id": "S04-ARCHITECTURE-0c13932",
+      "kind": "architecture-conformance",
+      "scope": "Exact bounded S04 acceptance materials: Personal/Library assets, typed closure/reference remapping and complete literal/source-bound/input-bound/nested portable roundtrip matrix, 16 float/vector edge conversions with exact-port preservation, document2.1/codec-v2 compatibility; all7 capabilities and11 acceptance families in the independent report, actual Windows x64 Chromium151 desktop profile, original exclusions/limitations/residualGates retained. Full DEC003/AC002 function-mode remains NOT_DELIVERED; no broader catalog, native Host, S06 appearance/device qualification or global Gate closure.",
+      "file": "production/evidence/s04/review-01/independent-review/INDEPENDENT_REVIEW_RESULT.json",
+      "sha256": "c1cb4fd813ba2f78405ba03eb07f1986a0c97021fae2dd3772eeb95001158d2c",
+      "implementationRevision": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "acceptedBy": "Human Owner (direct message 01a103fe-206e-7f43-9627-43b0d2197de0: 測試通過OK，請發起PR。; exact I/R after independently attributed PASS)",
+      "acceptedAt": "2026-10-03T23:07:58.815Z",
+      "sliceIds": [
+        "S04"
+      ],
+      "gateIds": []
+    },
+    {
+      "id": "S04-PRODUCT-0c13932",
+      "kind": "product-behavior",
+      "scope": "Exact bounded S04 acceptance materials: Personal/Library assets, typed closure/reference remapping and complete literal/source-bound/input-bound/nested portable roundtrip matrix, 16 float/vector edge conversions with exact-port preservation, document2.1/codec-v2 compatibility; all7 capabilities and11 acceptance families in the independent report, actual Windows x64 Chromium151 desktop profile, original exclusions/limitations/residualGates retained. Full DEC003/AC002 function-mode remains NOT_DELIVERED; no broader catalog, native Host, S06 appearance/device qualification or global Gate closure.",
+      "file": "production/evidence/coordinator/s04/closeout-20261004-01/human-acceptance-01.json",
+      "sha256": "a7bd3e8dda83132be9ca5a1cef1191fa13588393aa09c3228764759fe67d9d63",
+      "implementationRevision": "0c13932150bf1b78f215e25721292962e6c4263a",
+      "acceptedBy": "Human Owner (direct message 01a103fe-206e-7f43-9627-43b0d2197de0: 測試通過OK，請發起PR。; exact I/R after independently attributed PASS)",
+      "acceptedAt": "2026-10-03T23:07:58.815Z",
+      "sliceIds": [
+        "S04"
+      ],
+      "gateIds": []
     }
   ],
-  "latestAcceptedEvidenceId": "S03-PRODUCT-80ee116",
-  "updatedAt": "2026-10-03T19:04:34.938Z",
+  "latestAcceptedEvidenceId": "S04-PRODUCT-0c13932",
+  "updatedAt": "2026-10-03T23:07:58.815Z",
   "decisionReferences": [
     {
       "id": "DEC-GRAPE-002",
       "kind": "product-decision",
       "status": "accepted",
-      "scope": "Accepted product/contract amendment intended for future S04 only; implementation NOT_DELIVERED, all AT-DEC-GRAPE-002-01..08 REQUIRED_NOT_EXECUTED; no S04 activation and no retroactive S03 adoption.",
+      "scope": "Implemented and Human Owner accepted within bounded S04 at I 0c13932150bf1b78f215e25721292962e6c4263a, independently reviewed R 985357be67cce2f2ecc232e827e83e5cdbb521ab. See S04 accepted evidence and closeout registration. No retroactive S03 adoption or global Gate closure.",
       "reason": "Human Owner confirmed these amendments in S03 Owner Review and explicitly assigned future implementation to S04. Authority: production/evidence/coordinator/s03/human-acceptance-20261004-01.json; source thread 01a10301-6199-7533-af8d-cf3d348c0990 message 01a1031b-5f5b-7063-8600-1d26e01a2dea. acceptedAt is Coordinator registration time, not an invented Human submission time.",
       "file": "decisions/DEC-GRAPE-002.md",
       "sha256": "ef2492ba16e5c96cede2d9b70e638033f80ecb7825b2d2c8c2dbe36d24fad848",
@@ -188,7 +229,7 @@
       "id": "AC-GRAPE-001",
       "kind": "architecture-change",
       "status": "accepted",
-      "scope": "Accepted product/contract amendment intended for future S04 only; implementation NOT_DELIVERED, all AT-DEC-GRAPE-002-01..08 REQUIRED_NOT_EXECUTED; no S04 activation and no retroactive S03 adoption.",
+      "scope": "Implemented and Human Owner accepted within bounded S04 at I 0c13932150bf1b78f215e25721292962e6c4263a, independently reviewed R 985357be67cce2f2ecc232e827e83e5cdbb521ab. See S04 accepted evidence and closeout registration. No retroactive S03 adoption or global Gate closure.",
       "reason": "Human Owner confirmed these amendments in S03 Owner Review and explicitly assigned future implementation to S04. Authority: production/evidence/coordinator/s03/human-acceptance-20261004-01.json; source thread 01a10301-6199-7533-af8d-cf3d348c0990 message 01a1031b-5f5b-7063-8600-1d26e01a2dea. acceptedAt is Coordinator registration time, not an invented Human submission time.",
       "file": "decisions/AC-GRAPE-001.md",
       "sha256": "00c21f29fb66c07e1db1a7ea6dce2dbffadb47682c534f3019e2dc984057be00",
@@ -199,6 +240,53 @@
       "evidenceIds": [],
       "acceptedBy": "Human Owner (accepted semantic/contract decision; not runtime verification)",
       "acceptedAt": "2026-10-03T18:53:32Z"
+    },
+    {
+      "id": "DEC-GRAPE-003",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "Accepted optional subgraph function-emission requirements only. Runtime NOT_DELIVERED; all AT-DEC-GRAPE-003-01..10 REQUIRED_NOT_EXECUTED. No assigned delivery Slice; not adopted by S03 or current S04 baseline.",
+      "reason": "Human Owner accepted the bounded semantic amendment; original writer registers only the exact authorized S04 initialMaintenance projection. Authority production/evidence/coordinator/decisions/dec003-intake-20261004-01/human-authority.json; recordedAt is registration time, not an invented Human timestamp.",
+      "file": "decisions/DEC-GRAPE-003.md",
+      "sha256": "9a0acb74ee0bac36f23784db7743c45e2b3f36023ca329400b7f65711ee4428e",
+      "sliceIds": [],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (accepted requirements; no runtime verification)",
+      "acceptedAt": "2026-10-03T20:33:04Z"
+    },
+    {
+      "id": "AC-GRAPE-002",
+      "kind": "architecture-change",
+      "status": "accepted",
+      "scope": "Accepted optional subgraph function-emission requirements only. Runtime NOT_DELIVERED; all AT-DEC-GRAPE-003-01..10 REQUIRED_NOT_EXECUTED. No assigned delivery Slice; not adopted by S03 or current S04 baseline.",
+      "reason": "Human Owner accepted the bounded semantic amendment; original writer registers only the exact authorized S04 initialMaintenance projection. Authority production/evidence/coordinator/decisions/dec003-intake-20261004-01/human-authority.json; recordedAt is registration time, not an invented Human timestamp.",
+      "file": "decisions/AC-GRAPE-002.md",
+      "sha256": "ab1e4067f479f640c2fd59c3bc994413475a0dfc2b0e8259c4b5319f03c60c4a",
+      "sliceIds": [],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (accepted requirements; no runtime verification)",
+      "acceptedAt": "2026-10-03T20:33:04Z"
+    },
+    {
+      "id": "DEC-GRAPE-004",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "Implemented and Human Owner accepted within bounded S04 at I 0c13932150bf1b78f215e25721292962e6c4263a, independently reviewed R 985357be67cce2f2ecc232e827e83e5cdbb521ab. See S04 accepted evidence and closeout registration. No retroactive S03 adoption or global Gate closure.",
+      "reason": "Direct Human message 01a1039d-cf0a-7071-b420-4c6349469e5b in Coordinator thread 01a10301-6199-7533-af8d-cf3d348c0990; normalized receipt production/evidence/coordinator/s04/gpd1-decision-20261004-01/human-decision-01.json; acceptedAt is receipt registration time.",
+      "file": "decisions/DEC-GRAPE-004.md",
+      "sha256": "9d1af8aba9e1e65d9318590f601b89e094404eeea09e3670382d42b171e57238",
+      "sliceIds": [
+        "S04"
+      ],
+      "gateIds": [
+        "G-PD-1",
+        "G-LU-DATA-007"
+      ],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (product policy; implementation and review pending)",
+      "acceptedAt": "2026-10-03T21:14:55Z"
     }
   ]
 }

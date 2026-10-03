@@ -445,7 +445,8 @@
         "typeSystem": "contract",
         "FrameData": "contract",
         "frames": "contract",
-        "definitionStages": "contract"
+        "definitionStages": "contract",
+        "materializeDefault": "contract"
       }
     },
     "src/sdk/type-tokens.ts": {
@@ -478,6 +479,98 @@
         "closure": "service",
         "copySelection": "service",
         "pastePacket": "service"
+      }
+    },
+    "src/application/document-upgrade.ts": {
+      "owner": "application",
+      "role": "application",
+      "exports": {
+        "upgradeDocument": "command"
+      }
+    },
+    "src/modules/image-current.ts": {
+      "owner": "basic-modules",
+      "role": "module",
+      "exports": {
+        "IMAGE_OUTPUT_PIN": "contract",
+        "currentOutput": "contract",
+        "currentOutputModule": "contract",
+        "currentOutputText": "contract",
+        "CURRENT_KIND_PIN": "contract",
+        "currentGraphKinds": "contract",
+        "currentImageKind": "contract"
+      }
+    },
+    "src/modules/extents.ts": {
+      "owner": "basic-modules",
+      "role": "module",
+      "exports": {
+        "EXTENT_PIN": "contract",
+        "extentRef": "contract",
+        "ExtentData": "contract",
+        "extentModule": "contract",
+        "arrayRepeatRef": "contract"
+      }
+    },
+    "src/modules/package-probe.ts": {
+      "owner": "basic-modules",
+      "role": "module",
+      "exports": {
+        "PROBE_PIN": "contract",
+        "probeDefinitions": "contract"
+      }
+    },
+    "src/model/library.ts": {
+      "owner": "model",
+      "role": "model",
+      "exports": {
+        "personalSources": "service"
+      }
+    },
+    "src/application/personal.ts": {
+      "owner": "application",
+      "role": "application",
+      "exports": {
+        "PERSONAL_LIMITS": "command",
+        "packagePacket": "command",
+        "qualifyPackage": "command",
+        "buildPersonal": "command",
+        "readPersonal": "command",
+        "personalFilename": "command",
+        "PersonalLibrary": "command"
+      }
+    },
+    "src/sdk/library.ts": {
+      "owner": "sdk",
+      "role": "contracts",
+      "exports": {
+        "PersonalPackage": "contract",
+        "LibraryFile": "contract",
+        "LibraryStore": "contract",
+        "PackageProbe": "contract"
+      }
+    },
+    "src/adapters/browser/library.ts": {
+      "owner": "browser-adapters",
+      "role": "adapter",
+      "exports": {
+        "BrowserLibraryStore": "environment"
+      }
+    },
+    "apps/web/personal.ts": {
+      "owner": "web-bootstrap",
+      "role": "bootstrap",
+      "exports": {
+        "mountPersonal": "environment"
+      }
+    },
+    "src/modules/sources-current.ts": {
+      "owner": "basic-modules",
+      "role": "module",
+      "exports": {
+        "SOURCE_PIN": "contract",
+        "currentSourceRef": "contract",
+        "currentSources": "contract"
       }
     }
   },

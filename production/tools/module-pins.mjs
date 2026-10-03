@@ -4,6 +4,10 @@ const entries = [
   "src/modules/nodes.ts",
   "src/modules/image.ts",
   "src/modules/networks.ts",
+  "src/modules/image-current.ts",
+  "src/modules/extents.ts",
+  "src/modules/sources-current.ts",
+  "src/modules/package-probe.ts",
 ];
 const report = [];
 for (const file of entries) {

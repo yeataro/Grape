@@ -68,6 +68,11 @@ export interface NodeDefinition {
   readonly eligibility: NodeEligibility;
   readonly presentation: NodePresentation;
   readonly stateCodec: DataCodec;
+  /** Optional stricter input admission owned by this exact node definition. */
+  acceptsInput?(
+    source: Readonly<PortSnapshot>,
+    target: Readonly<PortSnapshot>,
+  ): boolean;
   readonly invalidEdgePolicy?: "detach" | "preserve";
   initialize(): Json;
   ports(state: Json, context?: ModelContext): readonly PortSnapshot[];
@@ -102,6 +107,12 @@ export interface ResourceDefinition {
     }[];
   };
   readonly stateReferences?: StateReferences;
+  /** Pure owner interpretation of a symbolic array extent from a closed snapshot. */
+  resolveExtent?(
+    data: Json,
+    resources: readonly import("./document.ts").ResourceDocument[],
+    networks?: readonly import("./document.ts").NetworkDocument[],
+  ): number | undefined;
   /** Pure owner admission and preparation; never resolves live native resources. */
   readonly sourcePolicy?: {
     validate(
@@ -137,8 +148,10 @@ export interface TypeResource {
   readonly id: string;
   readonly model?: "network" | "source" | "structure" | "frame";
   readonly data: Json;
+  readonly extent?: number;
 }
 export interface TypeSystem {
+  extent(id: string): number | undefined;
   forResources(resources: readonly TypeResource[]): TypeSystem;
   defaultValue(id: string): Json;
   reshape(id: string, value: Json): Json;

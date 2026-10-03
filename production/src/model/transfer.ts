@@ -186,6 +186,7 @@ export function pastePacket(
   loadId: string,
   networkId: string,
   packet: ClipboardPacket,
+  library?: { key: string | null; admittedSources: readonly string[] },
 ): string[] {
   plain(packet);
   validateNetworkStructure(packet.network);
@@ -231,7 +232,10 @@ export function pastePacket(
     );
     return [];
   }
-  const same = document.graph.id === packet.graphId && loadId === packet.loadId,
+  const same =
+      !library &&
+      document.graph.id === packet.graphId &&
+      loadId === packet.loadId,
     resourceIds = new Set(packet.resources.map((r) => r.id));
   demand(resourceIds.size === packet.resources.length, "DUPLICATE_RESOURCE");
   closure(packet.resources, [...resourceIds], defs);
@@ -262,7 +266,7 @@ export function pastePacket(
         );
   for (const r of packet.resources) {
     const current = document.graph.resources.find((x) => x.id === r.id);
-    if (current && defs.resource(r.type)?.model === "structure")
+    if (!library && current && defs.resource(r.type)?.model === "structure")
       demand(equal(current, r), "NOMINAL_CONTENT_CONFLICT");
   }
   const occupied = new Set([
@@ -279,11 +283,37 @@ export function pastePacket(
     }
     throw Error("IDENTITY_EXHAUSTED");
   };
+  let libraryPrefix: string | undefined;
+  if (library?.key) {
+    const base = "library:" + library.key + ":";
+    const first = packet.resources[0];
+    const candidates = first
+      ? document.graph.resources
+          .filter((r) => r.id.startsWith(base) && r.id.endsWith(":" + first.id))
+          .map((r) => r.id.slice(0, -first.id.length))
+      : [];
+    libraryPrefix = candidates.find((prefix) =>
+      packet.resources.every((r) =>
+        document.graph.resources.some(
+          (x) =>
+            x.id === prefix + r.id &&
+            (!asNetwork(x, defs) || asNetwork(x, defs)!.local === false),
+        ),
+      ),
+    );
+    if (!libraryPrefix) {
+      libraryPrefix = base + allocate() + ":";
+      while (
+        document.graph.resources.some((r) => r.id.startsWith(libraryPrefix!))
+      )
+        libraryPrefix = base + allocate() + ":";
+    }
+  }
   const reused = new Set(
     packet.resources
       .filter(
         (r) =>
-          same &&
+          (same || !!library) &&
           ![
             ...r.references,
             ...(defs
@@ -292,7 +322,12 @@ export function pastePacket(
           ].some(
             (ref) => ref.kind === "node" && ref.networkId === packet.network.id,
           ) &&
-          document.graph.resources.some((x) => x.id === r.id),
+          document.graph.resources.some((x) =>
+            library?.key
+              ? x.id === `${libraryPrefix}${r.id}` &&
+                (!asNetwork(x, defs) || asNetwork(x, defs)!.local === false)
+              : x.id === r.id,
+          ),
       )
       .map((r) => r.id),
   );
@@ -320,8 +355,23 @@ export function pastePacket(
     "DEFINITION_LIMIT",
   );
   const map = new Map(
-    packet.resources.map((r) => [r.id, reused.has(r.id) ? r.id : allocate()]),
+    packet.resources.map((r) => [
+      r.id,
+      library?.key
+        ? `${libraryPrefix}${r.id}`
+        : reused.has(r.id)
+          ? r.id
+          : allocate(),
+    ]),
   );
+  if (library)
+    for (const r of packet.resources) {
+      const id = map.get(r.id)!;
+      demand(
+        reused.has(r.id) || !document.graph.resources.some((x) => x.id === id),
+        "LIBRARY_IDENTITY_COLLISION",
+      );
+    }
   const networkMap = new Map<string, string>(),
     nodeMaps = new Map<string, Map<string, string>>();
   const target = networkAt(document, defs, networkId);
@@ -333,7 +383,16 @@ export function pastePacket(
     );
     nodeMaps.set(
       network.id,
-      new Map(network.nodes.map((n) => [n.id, reuse ? n.id : ids.next()])),
+      new Map(
+        network.nodes.map((n) => [
+          n.id,
+          library?.key && network.id !== packet.network.id
+            ? `${libraryPrefix}node:${network.id}:${n.id}`
+            : reuse
+              ? n.id
+              : ids.next(),
+        ]),
+      ),
     );
   };
   const networkIds = [
@@ -350,7 +409,14 @@ export function pastePacket(
     if (data) {
       networkMap.set(
         data.network.id,
-        reused.has(r.id) ? data.network.id : ids.next(),
+        library?.key
+          ? `${libraryPrefix}network:${data.network.id}`
+          : reused.has(r.id)
+            ? asNetwork(
+                document.graph.resources.find((x) => x.id === map.get(r.id))!,
+                defs,
+              )!.network.id
+            : ids.next(),
       );
       setup(data.network, reused.has(r.id));
     }
@@ -393,7 +459,10 @@ export function pastePacket(
         nodeMap.has(e.from.nodeId) && nodeMap.has(e.to.nodeId),
         "EDGE_ENDPOINT",
       );
-      e.id = ids.next();
+      e.id =
+        library?.key && old !== packet.network.id
+          ? `${libraryPrefix}edge:${old}:${e.id}`
+          : ids.next();
       e.from.nodeId = nodeMap.get(e.from.nodeId)!;
       e.to.nodeId = nodeMap.get(e.to.nodeId)!;
       e.adaptation.sourceType = remapType(e.adaptation.sourceType, map);
@@ -406,7 +475,25 @@ export function pastePacket(
     const r = structuredClone(original),
       def = defs.resource(r.type)!;
     r.id = map.get(original.id)!;
-    if (def.model === "source") {
+    if (def.model === "source" && library) {
+      demand(
+        library.admittedSources.includes(original.id),
+        "PERSONAL_SOURCE_DENIED",
+      );
+      const data = r.data as unknown as SourceData;
+      data.type = remapType(data.type, map);
+      const base = data.name;
+      let suffix = 2;
+      while (
+        [...document.graph.resources, ...imported].some(
+          (x) =>
+            defs.resource(x.type)?.model === "source" &&
+            (x.data as unknown as SourceData).name === data.name,
+        )
+      )
+        data.name = base + " " + suffix++;
+    }
+    if (def.model === "source" && !library) {
       demand(def.sourcePolicy, "SOURCE_PROVIDER_UNAVAILABLE");
       const context = Object.freeze({
         phase: "clipboard" as const,
@@ -448,7 +535,8 @@ export function pastePacket(
     r.references = r.references.map((ref) => remap(ref, ""));
     const data = asNetwork(r, defs);
     if (data) {
-      data.local = true;
+      data.local = !library?.key;
+      if (library) data.origin = library.key;
       remapNetwork(data.network);
       data.interface = data.interface.map((p) => ({
         ...p,

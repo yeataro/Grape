@@ -1,0 +1,49 @@
+{
+  "actionKey": "yeataro/Grape:S04:preserve-review:985357b:01",
+  "status": "ORIGINAL_BYTE_PRESERVATION_FORMAT_OBSERVATION",
+  "commitAttempt": "Initial authorized persistence operation; first commit command stopped before commit at additional staged whitespace check. No automatic approval rejection. Same action and count retained.",
+  "originalStagedCheck": {
+    "command": "git diff --cached --check",
+    "exitCode": 2,
+    "log": {
+      "file": "production/evidence/s04/review-01/persistence-staged-diff-original-01.log",
+      "sha256": "1c63f753adf412fbf4b81faecb47787e763fc53e39c43f5be580f92a6f92897a",
+      "bytes": 205537
+    },
+    "reason": "Original immutable CRLF receipts/reviewer evidence trigger line-ending whitespace diagnostics; exact bytes must be preserved."
+  },
+  "crlfAwareCheck": {
+    "command": "git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol diff --cached --check",
+    "exitCode": 2,
+    "log": {
+      "file": "production/evidence/s04/review-01/persistence-staged-diff-crlf-01.log",
+      "sha256": "4df2988180a1fda750dd588fc906c9e2884cd394f770dd95cc47ef5257c0bf22",
+      "bytes": 502
+    },
+    "remainingOriginalFormatting": [
+      "production/evidence/s04/review-01/independent-review/adversarial-probes-02.ts:26: new blank line at EOF.",
+      "production/evidence/s04/review-01/independent-review/artifact-browser-01.log:2: new blank line at EOF.",
+      "production/evidence/s04/review-01/independent-review/artifact-playwright-02.config.mjs:3: new blank line at EOF.",
+      "production/evidence/s04/review-01/independent-review/typecheck-01.log:4: new blank line at EOF."
+    ]
+  },
+  "authoredIndexCheck": {
+    "exitCode": 0,
+    "files": [
+      "production/evidence/s04/review-01/HUMAN-REVIEW.md",
+      "production/evidence/s04/review-01/persistence-bootstrap-01.log",
+      "production/evidence/s04/review-01/persistence-diff-check-01.log",
+      "production/evidence/s04/review-01/persistence-result-01.json",
+      "production/evidence/s04/review-01/persistence-state-01.log",
+      "production/evidence/s04/review-01/preservation-preimages-01.json",
+      "production/evidence/s04/review-01/provenance-01.json",
+      "production/evidence/s04/review-01/relocation-manifest-01.json"
+    ],
+    "log": {
+      "file": "production/evidence/s04/review-01/persistence-authored-diff-01.log",
+      "sha256": "2a425abd7d28281ac475712445523d919d5d5cdd38bf5c428b3d2369d9c87ed4",
+      "bytes": 80
+    }
+  },
+  "disposition": "Preserve all original reviewer and Coordinator bytes, including four original final blank lines. Do not claim staged whitespace PASS. New maintainer-authored index files have no detected whitespace errors. Required read-only root/state and worktree diff check passed; byte/hash and append-only path guards remain mandatory. No repo settings, verifier, source or policy changed."
+}

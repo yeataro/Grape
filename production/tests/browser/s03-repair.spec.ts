@@ -1,3 +1,4 @@
+import { openLegacyDocument } from "./legacy-document.ts";
 import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 const evidence = process.env.GRAPE_EVIDENCE_DIR!;
@@ -101,6 +102,7 @@ test("S03 EG01 browser clipboard imports TOP declarations with one slot and show
   page,
 }) => {
   await page.goto("/");
+  await openLegacyDocument(page);
   await page.getByRole("button", { name: "Add Compose", exact: true }).click();
   await page
     .getByRole("button", { name: "Compose output result", exact: true })

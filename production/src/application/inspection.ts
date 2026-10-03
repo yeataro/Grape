@@ -3,6 +3,7 @@ import type { ContractIssue, Json } from "../sdk/public-surface.ts";
 import { Definitions } from "../definitions/registry.ts";
 import { Graph } from "../model/graph.ts";
 import { detached } from "../sdk/kernel.ts";
+import { upgradeDocument } from "./document-upgrade.ts";
 import {
   DOCUMENT_MAX_BYTES,
   parseJSON,
@@ -33,7 +34,7 @@ export interface DocumentInspection {
     format: string | null;
     sourceVersion: Json | null;
     sourceGraphId: string | null;
-    conversion: "none";
+    conversion: "none" | "document-2.0-to-2.1";
     legacyGate: string | null;
   };
 }
@@ -82,7 +83,7 @@ export function inspectDocument(
       if (
         value.format === "grape.document" &&
         value.formatVersion.major === 2 &&
-        value.formatVersion.minor === 0
+        [0, 1].includes(value.formatVersion.minor)
       ) {
         value.graph.stages.forEach((stage, si) =>
           stage.network.nodes.forEach((node, ni) => {
@@ -126,6 +127,10 @@ export function inspectDocument(
       );
       diagnostics = graph.capture().diagnostics;
       graph.dispose();
+      document = upgradeDocument(
+        document,
+        definitions.pin(document.graph.modules),
+      );
       if (diagnostics.some((d) => d.severity === "error")) {
         status = "blocked";
         reason = "IMPORT_ERRORS";
@@ -160,7 +165,10 @@ export function inspectDocument(
       format: sourceFormat,
       sourceVersion,
       sourceGraphId,
-      conversion: "none",
+      conversion:
+        read.status === "editable" && read.document.formatVersion.minor === 0
+          ? "document-2.0-to-2.1"
+          : "none",
       legacyGate: original.status === "foreign" ? "G-VERSION-COMPAT" : null,
     },
   });

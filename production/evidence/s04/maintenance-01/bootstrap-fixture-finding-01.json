@@ -1,0 +1,19 @@
+{
+  "id": "S04-MAINT-BOOT-NAV-01",
+  "scope": "Disposable bootstrap fixture navigation inputs only",
+  "problem": "BOOT01/09 fixtures omitted legitimate README navigation targets introduced by separately authorized documentation; production verification correctly required them.",
+  "repair": "Materialize actual root README/AGENTS linked files with containment and symlink rejection; retain all production verifier and existing negative controls unchanged.",
+  "command": "node --test --test-isolation=none tools/verify-bootstrap.test.mjs",
+  "result": {
+    "exitCode": 0,
+    "tests": 10,
+    "passed": 10,
+    "failed": 0
+  },
+  "newEvidence": "BOOT10 verifies exact linked bytes, parent traversal rejection and symlink-ancestor rejection before copy.",
+  "node": "v25.5.0",
+  "changedFile": "tools/verify-bootstrap.test.mjs",
+  "sha256": "1adce1a9358a862e1dab03e87fb6e364c792b19bcce4d1f65752cf518b662df6",
+  "unchangedVerifierSha256": "11a8600011e61a5d91c83bf95bec96669cfc3b727711ce7dbe882a871a77e164",
+  "independentReview": "REQUIRED_PENDING_WITH_S04"
+}

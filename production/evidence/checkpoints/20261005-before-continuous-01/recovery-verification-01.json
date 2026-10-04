@@ -1,0 +1,91 @@
+{
+  "recordType": "CHECKPOINT_RECOVERY_VERIFICATION",
+  "recordedAt": "2026-10-04T19:27:03.919Z",
+  "snapshotCommit": "8ebf11d9161dec8cf94a03d94f61dab6e2eb1cf3",
+  "implementationI": "30c867945c992d25956a2a32825de34571f7749e",
+  "buildId": "S06-debug-30c8679",
+  "scope": "Recovery/packaging verification only; no S06 independent review or Human acceptance",
+  "method": "git archive of exact snapshot, extraction into separate directory, exact Git blob comparison, clean offline npm ci from locked dependencies, typecheck, metadata-bound rebuild and headless Chromium localhost boot",
+  "results": {
+    "exactRestoredFiles": 12028,
+    "bootstrapChecks": 481,
+    "bootstrap": "PASS",
+    "rootTests": {
+      "pass": 10,
+      "fail": 0
+    },
+    "dependencyInstall": "PASS, 20 locked packages using offline cache; elevated access to existing npm cache",
+    "typecheck": "PASS",
+    "rebuiltFiles": "3/3 identical bytes and SHA-256 to original candidate manifest",
+    "browserSmoke": "PASS, Chromium 151.0.7922.34; visible build identity; no page errors; all 3 served resources HTTP 200",
+    "temporarySmokeService": "Closed after check",
+    "implementationStateUnchanged": true,
+    "frozenHandoffUnchanged": true
+  },
+  "preparationIssues": [
+    {
+      "issue": "Initial Windows tar ZIP extraction rejected some entry names; dependent checks started before extraction completion",
+      "resolution": ".NET ZIP extraction into a different fresh directory succeeded, and every tracked file was verified against its Git blob; premature checks were discarded, not product test results"
+    },
+    {
+      "issue": "Initial Git file-list capture exceeded Node default buffer",
+      "resolution": "Increased local read buffer; complete 12028-file verification succeeded"
+    },
+    {
+      "issue": "Default sandbox could not read npm cache",
+      "resolution": "Authorized elevated offline install succeeded in isolated recovery directory"
+    },
+    {
+      "issue": "Git whitespace scan flagged original CRLF evidence and historical formatting",
+      "resolution": "Preserved original bytes. Newly authored workflow/recovery files checked with CRLF-aware whitespace validation; no historical evidence normalized"
+    }
+  ],
+  "files": [
+    {
+      "file": "checks/bootstrap.json",
+      "bytes": 1628,
+      "sha256": "984a890489b3f6459a046614688bb442f2bd2a2a2864eec6880ee8b7ff878ec3"
+    },
+    {
+      "file": "checks/root-tests.log",
+      "bytes": 1106,
+      "sha256": "0d03d3da3c030c2ca907da69ae96d44e0db1ce17a42cdc9c7c59199bacd3e65d"
+    },
+    {
+      "file": "checks/typecheck.log",
+      "bytes": 75,
+      "sha256": "730248b4c2e06dd22a3963eba11751c52e01dc488e63eddd00ae0dfcc469d93b"
+    },
+    {
+      "file": "checks/rebuild.log",
+      "bytes": 395,
+      "sha256": "93365d41dae2d514de20c7fbd08a16a285b7d5a39cd32c624c78adea40959f0e"
+    },
+    {
+      "file": "checks/git-tree-verification.json",
+      "bytes": 116,
+      "sha256": "425fe80cde84d15ccd1f8c829d6739db7dd1f7951325e21afabdf293dc51dc2c"
+    },
+    {
+      "file": "checks/rebuild-verification.json",
+      "bytes": 687,
+      "sha256": "8dbc3aa148e23fd9d36161b96011ddf06cfcd99fe3e647b83dcd839867cca90c"
+    },
+    {
+      "file": "checks/smoke-result.json",
+      "bytes": 577,
+      "sha256": "316660e128e804e579cfee1cda1dc0a50acd9d4e89bd250fe4ca0651bc998900"
+    },
+    {
+      "file": "checks/restored-preview.png",
+      "bytes": 55232,
+      "sha256": "28e73db45fa47fb9d702c22cf61be95cb66d05c66527ef29e5535ada4ce5da02"
+    }
+  ],
+  "limitations": [
+    "This is not an independent product review; current Owner-corrections candidate remains unreviewed",
+    "Does not capture browser IndexedDB, unsaved graphs, external Host state or machine credentials",
+    "Temporary restore/smoke server is not a new persistent user acceptance deployment",
+    "Final PR/merge identities are bound by GitHub and the post-merge handoff; no invented merge SHA in this pre-merge record"
+  ]
+}

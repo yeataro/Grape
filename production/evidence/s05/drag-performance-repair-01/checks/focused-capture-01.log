@@ -1,0 +1,44 @@
+✖ S05 drag repair root reads one fresh snapshot and retains immutable earlier projections (4.0057ms)
+✖ S05 drag repair nested reads one fresh snapshot and retains immutable earlier projections (1.2773ms)
+✔ S05 drag repair preserves readonly and busy notification values while movement keeps field token (8.755ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 144.18
+
+✖ failing tests:
+
+test at tests\unit\s05-drag-capture.test.ts:25:3
+✖ S05 drag repair root reads one fresh snapshot and retains immutable earlier projections (4.0057ms)
+  DUPLICATE_GRANT: DUPLICATE_GRANT
+      at demand (C:\Users\user\source\Grape\production\src\sdk\kernel.ts:12:18)
+      at EditorApplication.grant (C:\Users\user\source\Grape\production\src\application\editor.ts:729:5)
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-drag-capture.test.ts:27:11)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.start (node:internal/test_runner/test:1006:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {
+    code: 'DUPLICATE_GRANT'
+  }
+
+test at tests\unit\s05-drag-capture.test.ts:25:3
+✖ S05 drag repair nested reads one fresh snapshot and retains immutable earlier projections (1.2773ms)
+  DUPLICATE_GRANT: DUPLICATE_GRANT
+      at demand (C:\Users\user\source\Grape\production\src\sdk\kernel.ts:12:18)
+      at EditorApplication.grant (C:\Users\user\source\Grape\production\src\application\editor.ts:729:5)
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-drag-capture.test.ts:27:11)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    code: 'DUPLICATE_GRANT'
+  }
+
+(node:50468) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

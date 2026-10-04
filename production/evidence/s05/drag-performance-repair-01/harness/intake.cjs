@@ -1,0 +1,22 @@
+const fs=require('fs'),path=require('path'),cp=require('child_process'),crypto=require('crypto');
+const root='C:/Users/user/source/Grape',out=root+'/production/evidence/s05/drag-performance-repair-01',scratch=__dirname;
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex'),git=(...a)=>cp.execFileSync('git',a,{cwd:root,maxBuffer:100e6});
+const packetFile='production/evidence/coordinator/s05/owner-review-drag-performance-01/repair-packet-01.json',packet=JSON.parse(fs.readFileSync(root+'/'+packetFile));
+if(sha(fs.readFileSync(root+'/'+packetFile))!=='aac13fe49ce6e09fb871ba84036fb8aa49941cf90bcc7e456e29e6b139110e1c')throw Error('packet');
+if(git('rev-parse','HEAD').toString().trim()!==packet.expectedWorkHead||git('diff','--name-only').length||git('diff','--cached','--name-only').length)throw Error('HEAD/index');
+if(fs.existsSync(out))throw Error('existing action output');
+const verify=(base,r)=>{const file=path.resolve(base,r.file);if(!file.startsWith(path.resolve(base)+path.sep))throw Error('containment');const b=fs.readFileSync(file);if(sha(b)!==r.sha256||(r.bytes!==undefined&&r.bytes!==b.length))throw Error('identity '+file);return b;};
+for(const r of packet.inputRefs)verify(root,r);
+const tracked=git('ls-files','-s','-z').toString().split('\0').filter(Boolean).map(entry=>{const [header,file]=entry.split('\t'),b=fs.readFileSync(root+'/'+file),oid=crypto.createHash('sha1').update(Buffer.from('blob '+b.length+'\0')).update(b).digest('hex');if(oid!==header.split(' ')[1])throw Error('preimage '+file);return{file,bytes:b.length,sha256:sha(b),gitBlob:oid}});
+const untracked=git('ls-files','--others','--exclude-standard','-z').toString().split('\0').filter(Boolean).map(file=>{const b=fs.readFileSync(root+'/'+file);return{file,bytes:b.length,sha256:sha(b)}});
+fs.mkdirSync(out,{recursive:true});const write=(f,v)=>fs.writeFileSync(out+'/'+f,JSON.stringify(v,null,2)+'\n',{flag:'wx'});
+write('preimages-01.json',{head:packet.expectedWorkHead,tracked,untracked});
+const review=packet.rawIndependentReview,manifest=JSON.parse(verify(review.root,review.manifest)),raw=[review.report,review.manifest,...manifest.files,review.clarification];if(manifest.files.length!==196)throw Error('count');
+const seen=new Set(),relocations=[];for(const f of raw){if(seen.has(f.file))throw Error('duplicate');seen.add(f.file);const b=verify(review.root,f),target=root+'/'+review.destination+f.file;if(fs.existsSync(target))throw Error('destination exists');fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,b,{flag:'wx'});relocations.push({source:path.resolve(review.root,f.file),destination:review.destination+f.file,bytes:b.length,sha256:sha(b)});}
+const diagnosticRoot='production/evidence/s05/drag-performance-01',diagnostic=JSON.parse(fs.readFileSync(root+'/'+diagnosticRoot+'/manifest-01.json'));for(const f of diagnostic.files)verify(root+'/'+diagnosticRoot,f);if(diagnostic.files.length!==237)throw Error('diagnostic count');
+write('review-relocation-01.json',{preservation:'Original bytes/author/verdict/paths and independent clarification unchanged; historical I5/R5 only',files:relocations});
+write('start-01.json',{actionKey:packet.actionKey,packetId:packet.packetId,startedAt:new Date().toISOString(),head:packet.expectedWorkHead,writer:packet.writer,scope:packet.implementationBoundary,inputs:packet.inputRefs,rawReviewFiles:raw.length,diagnosticFiles:diagnostic.files.length+1,preimages:{tracked:tracked.length,untracked:untracked.length},findingGroup:packet.findingGroup,status:'ACTIVE_BOUNDED_REPAIR'});
+const folders=['production/evidence/coordinator/s05/review-05','production/evidence/coordinator/s05/owner-review-drag-performance-01'];const coordinator=folders.flatMap(dir=>fs.readdirSync(root+'/'+dir).filter(f=>fs.statSync(root+'/'+dir+'/'+f).isFile()).map(f=>dir+'/'+f));
+const allowlist=[...relocations.map(r=>r.destination),...diagnostic.files.map(f=>diagnosticRoot+'/'+f.file),diagnosticRoot+'/manifest-01.json',...coordinator,...['preimages-01.json','review-relocation-01.json','start-01.json'].map(n=>'production/evidence/s05/drag-performance-repair-01/'+n)];
+fs.writeFileSync(scratch+'/checkpoint-paths.json',JSON.stringify(allowlist,null,2)+'\n');
+console.log(JSON.stringify({rawReviewFiles:raw.length,diagnosticFiles:diagnostic.files.length+1,tracked:tracked.length,untracked:untracked.length,checkpointPaths:allowlist.length}));

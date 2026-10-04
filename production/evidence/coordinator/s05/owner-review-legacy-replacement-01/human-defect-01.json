@@ -1,0 +1,64 @@
+{
+  "packetType": "HUMAN_PRODUCT_DEFECT_REPORT",
+  "recordedAt": "2026-10-04T05:19:39.178Z",
+  "findingId": "S05-OWNER-002",
+  "findingGroup": "S05-FG-LEGACY-IMPORT-01",
+  "source": {
+    "threadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "messageId": null,
+    "directHumanReport": true,
+    "quote": "Open in new session沒事，然後 Replace 的話會出現這樣子，然後卡在第二個畫面。"
+  },
+  "screenshots": [
+    {
+      "file": "production/evidence/coordinator/s05/owner-review-legacy-replacement-01/human-before-replace-01.png",
+      "sha256": "a86b417072dcab67d88e3ad5ca834a49c013a6221e03433fccf776148b2a14d2",
+      "bytes": 80611,
+      "originalSource": "C:/Users/user/AppData/Local/Temp/codex-clipboard-19c085f4-bd80-46fd-8a3d-153f19efe65e.png"
+    },
+    {
+      "file": "production/evidence/coordinator/s05/owner-review-legacy-replacement-01/human-after-replace-01.png",
+      "sha256": "60da99247819ec91662eee4f31bd81d75cafa5282b0b2eb2df5aff7c7c84500d",
+      "bytes": 76125,
+      "originalSource": "C:/Users/user/AppData/Local/Temp/codex-clipboard-a0931eba-9f41-4abf-9f0f-68717db257ef.png"
+    }
+  ],
+  "observed": [
+    "Before click: valid DOCUMENT_VALID, diagnostics[], candidate present, Accept replacement (one Undo) and Open in new session visible.",
+    "After click: IMPORT_DEFINITIONS, review dialog remains visible with both actions and Close.",
+    "Human explicitly reports Open in new session works."
+  ],
+  "currentCandidate": {
+    "I": "b0d61c61d35908f6332b439aae539ce87bf854c5",
+    "R": "cfcde2ac26908c1850ade4d387d5ab41ab72ee11",
+    "persistenceP": "d634d7edb195839d75707c528072479b48f478b1",
+    "build": "S05-web-b0d61c6",
+    "deliveryReceipt": {
+      "file": "production/evidence/coordinator/s05/preview-03/delivery-result-01.json",
+      "sha256": "2c7f300a64f16ef9485034985c3a89eac64d59c2a5844f503a48f03c0c63c761",
+      "bytes": 4708
+    }
+  },
+  "identityLimits": [
+    "Screenshot omits URL/version label and exact file name; association with current legacy retest is from conversation context, to be checked by reproduction.",
+    "Ambient browser tab points to current4194 ZIP; this does not prove the exact tab/profile used for the screenshot.",
+    "No claim the application is deadlocked; Human reports the dialog is stuck after refusal."
+  ],
+  "readOnlyCodeObservation": {
+    "file": "production/src/model/graph.ts",
+    "line": 1146,
+    "behavior": "replaceDocument demands identical candidate/destination graph.modules and graph.kind, otherwise IMPORT_DEFINITIONS; diagnosis must verify actual snapshots."
+  },
+  "contract": "IH-005 WORKSPACE_QUALIFICATION_CONTRACTS.md line140 and COMPUTE_QUALIFICATION_CONTRACTS.md line57 require matching destination exact pins/output and no change on failure.",
+  "scope": "Diagnose the reported public Replace path under existing S05 repair authority. Preserve exact-pin replacement guard. Repair only a proven defect or misleading eligibility/error presentation; no new replacement semantics.",
+  "counterTreatment": {
+    "sameUnderlyingGroup": true,
+    "priorRepairAttempts": 1,
+    "currentRepairAttempt": 2,
+    "priorUnsuccessfulReviewRounds": 0,
+    "reason": "Further owner-reported legacy document admission/replacement symptom in same import finding group. Do not reset budget by new diagnostic code or rename.",
+    "priorPass": "Preserve exact R3 PASS and its public-new-session coverage; do not reinterpret it as proof of current replacement subcase."
+  },
+  "acceptance": "No acceptance inferred for repaired candidate or full S05",
+  "vertex": "Explanation-only item remains resolved; no Vertex changes or retest."
+}

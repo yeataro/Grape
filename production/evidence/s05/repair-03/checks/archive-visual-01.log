@@ -1,0 +1,17 @@
+file:///C:/Users/user/source/Grape/.verification/s05-replacement-archive-visual-01.mjs:12
+const result=await deliveredFlow(page,name,bytes,seed);await page.screenshot({path:evidence+'/'+name+'.png',fullPage:true});fs.writeFileSync(evidence+'/'+name+'.json',JSON.stringify(result,null,2)+'\n',{flag:'wx'});rows.push({name,sha256:hash(bytes),status:'PASS_PUBLIC_UI_FLOW',actions:result.actions,evidence:evidence+'/'+name+'.json'});}finally{await context.close();}}for(const mode of ['default','upgraded','matching']){const context=await browser.newContext({viewport:{width:1440,height:1000}});try{const page=await context.newPage();page.on('dialog',d=>d.accept());await page.goto(origin+'/');const response=await page.request.get(origin+'/samples/legacy-owner.grape.json'),bytes=await response.body();assert.equal(hash(bytes),samples.entries.find(r=>r.file==='legacy-owner.grape.json').sha256);const result=await replacementFlow(page,mode,bytes);const name='replacement-'+mode;await page.screenshot({path:evidence+'/'+name+'.png',fullPage:true});fs.writeFileSync(evidence+'/'+name+'.json',JSON.stringify(result,null,2)+'\n',{flag:'wx'});rows.push({name,status:'PASS_PUBLIC_REPLACEMENT_FLOW',evidence:evidence+'/'+name+'.json'});}finally{await context.close();}}}finally{await browser.close();await new Promise(resolve=>server.close(resolve));}
+                                                                                                                                                                                                                                                                                                                                                   ^
+
+SyntaxError: Unexpected token '}'
+    at compileSourceTextModule (node:internal/modules/esm/utils:305:16)
+    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:110:18)
+    at #translate (node:internal/modules/esm/loader:467:20)
+    at afterLoad (node:internal/modules/esm/loader:523:29)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:528:12)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:571:36)
+    at afterResolve (node:internal/modules/esm/loader:619:52)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:625:12)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:32)
+    at TracingChannel.tracePromise (node:diagnostics_channel:350:14)
+
+Node.js v25.5.0

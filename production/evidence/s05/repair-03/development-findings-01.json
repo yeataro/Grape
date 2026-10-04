@@ -1,0 +1,64 @@
+{
+  "findingGroup": "S05-FG-LEGACY-IMPORT-01",
+  "counters": {
+    "sameUnderlyingFindingGroup": true,
+    "priorRepairAttempt": 1,
+    "currentRepairAttempt": 2,
+    "priorUnsuccessfulRepairReviewRounds": 0,
+    "priorReviewSequence": 3,
+    "priorTargetedRoundVerdict": "PASS",
+    "counterReset": false,
+    "originalUniformCounters": "Separate S05-FG-RESOURCE-01 retains initialFailure1/repair1/reviewRound2 PASS"
+  },
+  "transport": {
+    "attempt": 1,
+    "retriesUsed": 0
+  },
+  "retained": [
+    {
+      "check": {
+        "file": "production/evidence/s05/repair-03/checks/replacement-unit-01.json",
+        "sha256": "19154c5c976b1947b8936b4862169974553f5c2e76467c8b54ad3a3655c98240",
+        "bytes": 424
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-03/checks/replacement-unit-01.log",
+        "sha256": "d5265b8aa3594c13512a17f4398e6f68924aedb0322313b856d056a261dffcaa",
+        "bytes": 1662
+      },
+      "cause": "New test expected one Application notification. Existing Application subscribes to both Graph publication and operation-end; actual2 notifications were valid.",
+      "repair": "Assert every notification sees identical final Graph snapshot plus one revision and full-content single Undo/Redo. No production behavior changed to satisfy the mistaken count.",
+      "resolution": {
+        "file": "production/evidence/s05/repair-03/checks/replacement-unit-02.json",
+        "sha256": "b6421b245f412028b35e6a33d7ac7c5f6b5865ac26c0322e5003f107b4cfda93",
+        "bytes": 424
+      }
+    },
+    {
+      "check": {
+        "file": "production/evidence/s05/repair-03/checks/archive-visual-01.json",
+        "sha256": "9c6698a83656c31e5a9ec5646f7b3516612aa0a6c240d09ce05f79ab2201c259",
+        "bytes": 511
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-03/checks/archive-visual-01.log",
+        "sha256": "5ba5481a430309474d2feca19f7e046da39774dc8a6a8c9ef3d82f25d7f9dd2d",
+        "bytes": 2482
+      },
+      "cause": "Scratch visual harness source splice used an inner const result marker and had a parse-time extra brace. Browser/service never launched.",
+      "repair": "Separate archive-visual-02 script uses final result marker. Original failed script and logs retained; no product change.",
+      "resolution": {
+        "file": "production/evidence/s05/repair-03/checks/archive-visual-02.json",
+        "sha256": "493a9b637c3a14538b3092f3fd9b7f11d2f6e00806c71c24bf34e3ff545c917c",
+        "bytes": 511
+      },
+      "sameVisualOperation": {
+        "attempts": 2,
+        "retriesUsed": 1
+      }
+    }
+  ],
+  "lineEndingCorrection": "Formatting command initially emitted CRLF in authored production files. Compared against HEAD LF bytes and restored LF before I; Git diff check clean. No historical evidence was normalized. Semantic test results unchanged; regression42 and archive17 executed final LF candidate.",
+  "independentReviewFailuresAdded": 0,
+  "approvalRejections": 0
+}

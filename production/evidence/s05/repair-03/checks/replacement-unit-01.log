@@ -1,0 +1,37 @@
+✔ S05 replacement eligibility keeps source validity separate and exact mismatch refusal atomic (28.2029ms)
+✖ S05 matching replacement preserves Graph load and Context identity with one full-content Undo Redo (9.7993ms)
+✔ S05 replacement eligibility and command retain stale cancelled invalid readonly and fabricated guards (31.3602ms)
+✔ S05 model preflight and publication share exact kind and ordered-pin refusal without History (4.306ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 236.891
+
+✖ failing tests:
+
+test at tests\unit\s05-replacement.test.ts:37:1
+✖ S05 matching replacement preserves Graph load and Context identity with one full-content Undo Redo (9.7993ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  2 !== 1
+  
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-replacement.test.ts:49:10)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+(node:42044) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

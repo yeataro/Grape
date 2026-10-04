@@ -1,0 +1,16 @@
+{
+  "packetType": "COORDINATOR_TRANSPORT_RECONCILIATION",
+  "recordedAt": "2026-10-04T06:07:36.335Z",
+  "actionKey": "yeataro/Grape:S05:catalog-fixed-values:676c339:01",
+  "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+  "parentTurnId": "01a10583-4ecf-7470-9367-e6f108473c81",
+  "observation": "Parent initially read correct S05 packet, then contextCompaction followed by unrelated S03 preview recovery. No new Human input shown in read_thread turn. No catalog parent dispatch intent/result, no child continuation; original writer remains idle at cursor553.",
+  "expectedWorkHead": "676c33930e82b5bacc2fd69f8d70e535837449bf",
+  "workHeadUnchanged": true,
+  "productOrStateWritesObserved": false,
+  "transportAttempt": 2,
+  "transportRetriesUsed": 1,
+  "actualImplementerDispatches": 0,
+  "route": "Send corrective continuation to same parent, same actionKey and exact packet; verify no prior child dispatch before one followup. Do not create a new writer or reinterpret old S03 context as active work.",
+  "limitations": "Observation is routing evidence, not a new product or Human authorization."
+}

@@ -333,7 +333,9 @@ for (const host of ["127.0.0.1", "192.168.1.105", "100.83.88.97"])
     page,
     browser,
   }) => {
-    await page.goto(`http://${host}:4195`);
+    await page.goto(
+      `http://${host}:${process.env.GRAPE_TEST_HTTP_PORT ?? "4195"}`,
+    );
     await expect(page.locator(".canvas").first()).toBeVisible();
     const result = await page.evaluate(async () => {
       const { browserIdentity } =

@@ -1,4 +1,9 @@
 import { currentSources } from "../../src/modules/sources-current.ts";
+import {
+  fixedValues,
+  FIXED_VALUES_PIN,
+} from "../../src/modules/fixed-values.ts";
+import { vectorWidget } from "../../src/features/vector-control.ts";
 import { browserIdentity } from "../../src/adapters/browser/identity.ts";
 import { functionNetworks } from "../../src/modules/function-networks.ts";
 import {
@@ -58,6 +63,7 @@ import {
 const definitions = new Definitions();
 stages.forEach((s) => definitions.registerStage(s));
 definitions.register(basicNodes);
+definitions.register(fixedValues);
 definitions.register(networkModule);
 definitions.register(extentModule);
 definitions.register(currentSources);
@@ -89,6 +95,12 @@ const widgets = new WidgetRegistry(feedback);
 widgets.register(jsonWidget, (p) => p.spec.type === "json");
 widgets.register(numberWidget, (p) => p.spec.type === "number");
 widgets.register(choiceWidget, (p) => p.spec.type === "choice");
+widgets.register(
+  vectorWidget,
+  (p) =>
+    p.spec.presentation.widget === "grape.widget.vector" &&
+    Array.isArray(p.value),
+);
 const application = new EditorApplication(
   definitions,
   browserIdentity(),
@@ -161,11 +173,31 @@ function buildWorkspace() {
   workspace.register(canvasType);
   workspace.register(inspectorType(widgets, locale));
   workspace.register(
-    actionsType(application.catalog(), () => ({
-      undo: application.canUndo,
-      redo: application.canRedo,
-      editing: !application.readonly && !application.busy,
-    })),
+    actionsType(
+      application
+        .catalog()
+        .map((item) =>
+          item.ref.moduleId === FIXED_VALUES_PIN.moduleId &&
+          item.ref.typeId === "float"
+            ? {
+                ...item,
+                presentation: {
+                  ...item.presentation,
+                  label: {
+                    ...item.presentation.label,
+                    key: "float.authoring",
+                    fallback: "Float (fixed)",
+                  },
+                },
+              }
+            : item,
+        ),
+      () => ({
+        undo: application.canUndo,
+        redo: application.canRedo,
+        editing: !application.readonly && !application.busy,
+      }),
+    ),
   );
   workspace.register(
     codeType(() => ({

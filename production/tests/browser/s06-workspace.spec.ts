@@ -1,3 +1,4 @@
+import { requiredOutput } from "../fixtures/required-output.ts";
 import { test, expect, type Page } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
@@ -101,62 +102,45 @@ test("S06 blank double-click and Tab create previews; movement is independent, c
   ).toBeDisabled();
   expect(position.length).toBe(2);
 });
-test("S06 wired creation is preview-only until snap placement and one Undo restores occupied input", async ({
+test("S06 connected input blank drop disconnects once and Undo restores occupied input", async ({
   page,
 }) => {
   await createNode(page, "Float (fixed)");
-  const output = page.getByRole("button", {
-      name: "Float output Value",
-      exact: true,
-    }),
-    input = page.getByRole("button", {
-      name: "Image Output input Color",
-      exact: true,
-    });
-  // Locate semantic ports independently of current localized labels.
   const source = page
-    .locator(".nodes .node")
-    .filter({ has: page.getByRole("heading", { name: "Float", exact: true }) })
-    .locator("[data-direction=output]");
-  const destination = page
-    .locator('.nodes [data-direction=input][data-port="color"]')
-    .first();
+      .locator(".nodes .node")
+      .filter({
+        has: page.getByRole("heading", { name: "Float", exact: true }),
+      })
+      .locator("[data-direction=output]"),
+    destination = page
+      .locator('.nodes [data-direction=input][data-port="color"]')
+      .first();
   await source.click();
   await destination.click();
   const before = await documentOf(page),
     canvas = page.locator(".canvas"),
     r = (await canvas.boundingBox())!,
     start = (await destination.boundingBox())!;
-  await page.mouse.move(start.x + 3, start.y + start.height / 2);
+  await page.mouse.move(start.x + start.width / 2, start.y + start.height / 2);
   await page.mouse.down();
   await page.mouse.move(r.x + 350, r.y + 320, { steps: 6 });
   await page.mouse.up();
-  const catalog = page.getByRole("dialog", { name: "Node catalog" });
-  await expect(catalog).toBeVisible();
-  await catalog.getByLabel("Search nodes", { exact: true }).fill("Color RGBA");
-  await page.keyboard.press("Enter");
-  await expect(page.locator(".creation-wire")).toBeVisible();
-  expect(await canvas.locator(".nodes .node").count()).toBe(2);
-  await page.mouse.move(r.x + 355, r.y + 315);
-  await page.mouse.click(r.x + 355, r.y + 315);
+  await expect(page.getByRole("dialog", { name: "Node catalog" })).toHaveCount(
+    0,
+  );
   const after = await documentOf(page),
     network = after.graph.stages.find((s: any) => s.key === "pixel").network;
-  expect(network.nodes.length).toBe(3);
-  expect(network.edges.length).toBe(1);
-  const added = network.nodes.find((n: any) => n.name === "Color RGBA");
-  expect(added.position.every((n: number) => n % 24 === 0)).toBe(true);
+  expect(network.nodes.length).toBe(2);
+  expect(network.edges.length).toBe(0);
   await page.getByRole("button", { name: "Undo", exact: true }).click();
   expect(await documentOf(page)).toEqual(before);
   await page.getByRole("button", { name: "Redo", exact: true }).click();
   expect(await documentOf(page)).toEqual(after);
-  await page
-    .getByRole("button", { name: "Generate GLSL", exact: true })
-    .click();
-  await expect(page.getByLabel("Generated GLSL")).toContainText("vec4");
   await page.screenshot({
-    path: path.join(evidence(), "s06-wired-placement.png"),
+    path: path.join(evidence(), "s06-input-disconnection.png"),
   });
 });
+
 test("S06 help and context menu keyboard, readonly browsing and responsive original actions", async ({
   page,
 }) => {
@@ -220,6 +204,7 @@ test("S06 help and context menu keyboard, readonly browsing and responsive origi
 test("S06 compile error survives unrelated successful Save and clears on matching successful Generate", async ({
   page,
 }) => {
+  await requiredOutput(page);
   await page
     .getByRole("button", { name: "Generate GLSL", exact: true })
     .click();

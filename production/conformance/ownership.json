@@ -2,10 +2,7 @@
   "version": 1,
   "scope": "production",
   "base": "..",
-  "roots": [
-    "src",
-    "apps"
-  ],
+  "roots": ["src", "apps"],
   "files": {
     "src/ui/hover.ts": {
       "owner": "presentation",
@@ -97,7 +94,8 @@
       "exports": {
         "canvasCommands": "contract",
         "canvasType": "command",
-        "canvasText": "contract"
+        "canvasText": "contract",
+        "createCanvasType": "command"
       }
     },
     "src/features/code.ts": {
@@ -674,18 +672,37 @@
         "FloatingOptions": "contract",
         "floatingSurface": "command"
       }
+    },
+    "src/features/wire-geometry.ts": {
+      "owner": "feature-canvas",
+      "role": "ui",
+      "exports": {
+        "wireCurve": "command"
+      }
+    },
+    "src/modules/image-zero.ts": {
+      "owner": "basic-modules",
+      "role": "module",
+      "exports": {
+        "ZERO_OUTPUT_PIN": "contract",
+        "zeroOutput": "contract",
+        "zeroOutputModule": "contract",
+        "zeroOutputText": "contract",
+        "ZERO_KIND_PIN": "contract",
+        "zeroGraphKinds": "contract",
+        "ZERO_SOURCE_PIN": "contract",
+        "zeroSourceRef": "contract",
+        "zeroSources": "contract",
+        "zeroImageKind": "contract"
+      }
     }
   },
   "externals": {
     "@noble/hashes/sha2.js": {
-      "runtimeRoles": [
-        "application"
-      ],
+      "runtimeRoles": ["application"],
       "version": "2.0.1",
       "purpose": "Pure SHA-256 over canonical package bytes; no native or network imports"
     }
   },
-  "registrationFiles": [
-    "apps/web/main.ts"
-  ]
+  "registrationFiles": ["apps/web/main.ts"]
 }

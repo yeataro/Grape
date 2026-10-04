@@ -9,6 +9,7 @@ import { parseType, formatType } from "../sdk/type-tokens.ts";
 import type { ContextSnapshot } from "../sdk/editing.ts";
 import type { PanelGestureCommands } from "../sdk/panel-commands.ts";
 import { Signal, detached, demand } from "../sdk/kernel.ts";
+import { wireCurve } from "./wire-geometry.ts";
 import { mountNodeBrowser, icon, nodePortRow } from "./node-browser.ts";
 const owner = {
   moduleId: "grape.ui.canvas",
@@ -45,73 +46,82 @@ export const canvasCommands = [
   "grape.undo",
   "grape.redo",
 ];
-export const canvasType: PanelType = {
-  typeId: "grape.panel.canvas",
-  viewStateVersion: 1,
-  providesContext: true,
-  commandIds: canvasCommands,
-  presentation: { label: { owner, key: "title", fallback: "Canvas" } },
-  create: (_id, services) => {
-    let update: PanelUpdate = {
-        lease: { panelId: _id, generation: 0 },
-        target: null,
-      },
-      // View-only margin keeps imported origin nodes clear of the stage/header controls.
-      camera = { x: 24, y: 104, zoom: 1 };
-    const signal = new Signal<void>();
-    const capture = () =>
-      detached({
-        update,
-        context: update.target
-          ? services.context(update.lease).capture()
-          : null,
-        camera,
-      });
-    return {
-      restoreViewState: (state) => {
-        if (state && typeof state === "object" && !Array.isArray(state)) {
-          const s = state as Record<string, Json>;
-          if (
-            typeof s.x === "number" &&
-            typeof s.y === "number" &&
-            typeof s.zoom === "number" &&
-            s.zoom > 0
-          )
-            camera = { x: s.x, y: s.y, zoom: s.zoom };
-        }
-      },
-      exportViewState: () => camera,
-      receive: (value) => {
-        update = value;
-        signal.emit();
-      },
-      canClose: () => true,
-      dispose: () => signal.clear(),
-      createView: () =>
-        ({
-          kind: "panel",
-          capture,
-          subscribe: (fn) => signal.subscribe(fn),
-          dispose: () => {},
-          mount: (context) =>
-            mountCanvas(
-              context,
-              services,
-              capture,
-              () => update,
-              () => camera,
-              (value) => {
-                camera = value;
-                signal.emit();
-              },
-            ),
-        }) as PanelViewContribution,
-    };
-  },
-};
+/** Presentation configuration; model commands retain their explicit replacement policy. */
+export function createCanvasType(
+  options: { readonly replaceConnections?: boolean } = {},
+): PanelType {
+  const replaceConnections = options.replaceConnections ?? true;
+  return {
+    typeId: "grape.panel.canvas",
+    viewStateVersion: 1,
+    providesContext: true,
+    commandIds: canvasCommands,
+    presentation: { label: { owner, key: "title", fallback: "Canvas" } },
+    create: (_id, services) => {
+      let update: PanelUpdate = {
+          lease: { panelId: _id, generation: 0 },
+          target: null,
+        },
+        // View-only margin keeps imported origin nodes clear of the stage/header controls.
+        camera = { x: 24, y: 104, zoom: 1 };
+      const signal = new Signal<void>();
+      const capture = () =>
+        detached({
+          update,
+          context: update.target
+            ? services.context(update.lease).capture()
+            : null,
+          camera,
+        });
+      return {
+        restoreViewState: (state) => {
+          if (state && typeof state === "object" && !Array.isArray(state)) {
+            const s = state as Record<string, Json>;
+            if (
+              typeof s.x === "number" &&
+              typeof s.y === "number" &&
+              typeof s.zoom === "number" &&
+              s.zoom > 0
+            )
+              camera = { x: s.x, y: s.y, zoom: s.zoom };
+          }
+        },
+        exportViewState: () => camera,
+        receive: (value) => {
+          update = value;
+          signal.emit();
+        },
+        canClose: () => true,
+        dispose: () => signal.clear(),
+        createView: () =>
+          ({
+            kind: "panel",
+            capture,
+            subscribe: (fn) => signal.subscribe(fn),
+            dispose: () => {},
+            mount: (context) =>
+              mountCanvas(
+                context,
+                services,
+                replaceConnections,
+                capture,
+                () => update,
+                () => camera,
+                (value) => {
+                  camera = value;
+                  signal.emit();
+                },
+              ),
+          }) as PanelViewContribution,
+      };
+    },
+  };
+}
+export const canvasType = createCanvasType();
 function mountCanvas(
   mount: PanelMountContext,
   services: PanelServices,
+  replaceConnections: boolean,
   capture: () => {
     context: ContextSnapshot | null;
     camera: { x: number; y: number; zoom: number };
@@ -1079,10 +1089,7 @@ function mountCanvas(
       direction = pending.direction === "output" ? 1 : -1;
     const p = document.createElementNS(connectionPreview.namespaceURI, "path"),
       ring = document.createElementNS(connectionPreview.namespaceURI, "circle");
-    p.setAttribute(
-      "d",
-      `M${x} ${y} C${x + 70 * direction} ${y},${toX - 70 * direction} ${toY},${toX} ${toY}`,
-    );
+    p.setAttribute("d", wireCurve([x, y], [toX, toY], direction));
     p.setAttribute(
       "stroke",
       getComputedStyle(socket.parentElement!)
@@ -1092,10 +1099,7 @@ function mountCanvas(
     ring.setAttribute("cx", String(x));
     ring.setAttribute("cy", String(y));
     ring.setAttribute("r", "8");
-    ring.setAttribute(
-      "style",
-      `stroke:${p.getAttribute("stroke")};fill:transparent`,
-    );
+    ring.setAttribute("style", "stroke:none;fill:#aa84d64d");
     connectionPreview.append(p, ring);
   };
   const clearConnection = () => {
@@ -1308,6 +1312,10 @@ function mountCanvas(
           selection,
           selection.includes(id) ? id : (selection.at(-1) ?? null),
         );
+        // Selection can redraw the card. Transfer native focus to its current instance.
+        nodes
+          .querySelector<HTMLElement>(`[data-node="${CSS.escape(id)}"]`)
+          ?.focus({ preventScroll: true });
         drag = {
           id: e.pointerId,
           startX: e.clientX,
@@ -1432,11 +1440,35 @@ function mountCanvas(
               ".node,.network-toolbar,button,input,select,textarea,dialog",
             )
           ) {
-            browser.open(e.clientX, e.clientY, "create", {
-              nodeId: pending.nodeId,
-              portKey: pending.portKey,
-              direction: pending.direction as "input" | "output",
-            });
+            if (pending.direction === "input") {
+              const edge = services
+                .context(lease().lease)
+                .network()
+                .edges.find(
+                  (edge) =>
+                    edge.to.nodeId === pending.nodeId &&
+                    edge.to.portKey === pending.portKey,
+                );
+              if (edge) {
+                demand(mount.commands, "COMMAND_DENIED");
+                mount.commands.execute(lease().lease, {
+                  commandId: "grape.edge.disconnect",
+                  args: { id: edge.id },
+                });
+              }
+              return;
+            }
+            browser.open(
+              e.clientX,
+              e.clientY,
+              "create",
+              {
+                nodeId: pending.nodeId,
+                portKey: pending.portKey,
+                direction: "output",
+              },
+              true,
+            );
             return false;
           }
           demand(target && root.contains(target), "PORT_TARGET");
@@ -1464,7 +1496,7 @@ function mountCanvas(
               args: {
                 from: pending.direction === "output" ? a : b,
                 to: pending.direction === "input" ? a : b,
-                replace: e.shiftKey,
+                replace: replaceConnections,
               },
             });
           }
@@ -1552,7 +1584,7 @@ function mountCanvas(
           args: {
             from: { nodeId: source.nodeId, portKey: source.portKey },
             to: { nodeId: target.nodeId, portKey: target.portKey },
-            replace: (event as MouseEvent).shiftKey,
+            replace: replaceConnections,
           },
         });
       }, "grape.edge.connect");
@@ -1743,7 +1775,7 @@ function mountCanvas(
         owner,
         key: "connectHint",
         fallback:
-          "Choose the opposite port. Hold Shift to replace an existing connection.",
+          "Choose the opposite port. Existing connections follow the configured replacement policy.",
       });
       const c = projection.context;
       if (!c) {
@@ -2018,7 +2050,11 @@ function mountCanvas(
           : card;
         target?.focus({ preventScroll: true });
       }
-      const point = (id: string, key: string, direction: string) => {
+      const point = (
+        id: string,
+        key: string,
+        direction: string,
+      ): [number, number] => {
         const socket = nodes.querySelector<HTMLElement>(
           `[data-node="${CSS.escape(id)}"] [data-port="${CSS.escape(key)}"][data-direction="${direction}"] .socket`,
         );
@@ -2039,10 +2075,7 @@ function mountCanvas(
               "http://www.w3.org/2000/svg",
               "path",
             );
-          path.setAttribute(
-            "d",
-            `M ${a[0]} ${a[1]} C ${a[0] + 70} ${a[1]}, ${b[0] - 70} ${b[1]}, ${b[0]} ${b[1]}`,
-          );
+          path.setAttribute("d", wireCurve(a, b));
           path.classList.toggle("invalid", !!e.invalid);
           const sourcePort = network.nodes
             .find((n) => n.id === e.from.nodeId)
@@ -2095,7 +2128,7 @@ export const canvasText = {
       { key: "accessibleTitle", text: "Shader graph canvas" },
       {
         key: "connectHint",
-        text: "Choose the opposite port. Hold Shift to replace an existing connection.",
+        text: "Choose the opposite port. Existing connections follow the configured replacement policy.",
       },
       { key: "selected", text: "Selected" },
     ],

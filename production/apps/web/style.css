@@ -8,8 +8,22 @@
 * {
   box-sizing: border-box;
 }
+html,
 body {
+  height: 100%;
   margin: 0;
+  overflow: hidden;
+}
+#app {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+#app > header,
+#app > #actions,
+#app > footer {
+  flex: none;
 }
 button,
 input,
@@ -99,16 +113,23 @@ nav {
 main {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;
-  min-height: 520px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 #canvases {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  min-height: 0;
+}
+#inspector {
+  min-height: 0;
+  overflow: auto;
 }
 .canvas-pane {
   position: relative;
-  min-height: 480px;
+  min-height: 0;
   flex: 1;
   border-bottom: 1px solid #40394b;
 }
@@ -294,7 +315,8 @@ footer {
   bottom: 0;
   z-index: 30;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  width: 100%;
   align-items: center;
   justify-content: flex-start;
   gap: 5px;
@@ -335,7 +357,7 @@ dialog::backdrop {
     font-size: 12px;
   }
   .canvas-pane {
-    min-height: 470px;
+    min-height: 0;
   }
 }
 .port {
@@ -488,7 +510,7 @@ main {
   grid-template-columns: minmax(0, 1fr) 290px;
 }
 .canvas-pane {
-  min-height: 620px;
+  min-height: 0;
   border-radius: 0;
 }
 .canvas {
@@ -649,22 +671,20 @@ main {
   background: var(--port-color);
 }
 .port:hover .socket {
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--port-color) 35%, transparent);
+  box-shadow: 0 0 0 4px rgb(180 154 203 / 25%);
 }
 .port:active .socket {
-  box-shadow: 0 0 0 3px var(--port-color);
+  box-shadow: 0 0 0 5px rgb(170 132 214 / 35%);
 }
 .port:focus-visible {
   outline: 1px solid var(--port-color);
   outline-offset: 1px;
 }
 .port.wire-origin .socket {
-  box-shadow: 0 0 0 2px var(--port-color);
+  box-shadow: 0 0 0 6px #aa84d64d;
 }
 .port.wire-target .socket {
-  box-shadow:
-    0 0 0 4px var(--port-color),
-    0 0 12px var(--port-color);
+  box-shadow: 0 0 0 7px #aa84d64d;
 }
 .wires path {
   stroke-width: 2;
@@ -1018,14 +1038,7 @@ main {
 }
 @media (max-width: 620px) {
   main {
-    display: block;
-  }
-  .canvas-pane {
-    min-height: 650px;
-  }
-  #inspector {
-    max-height: 340px;
-    overflow: auto;
+    grid-template-columns: minmax(0, 1fr) 190px;
   }
   .brand {
     font-size: 18px;
@@ -1164,6 +1177,6 @@ main {
     gap: 3px;
   }
   .application-status {
-    flex-basis: 100%;
+    min-width: 0;
   }
 }

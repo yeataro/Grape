@@ -847,6 +847,42 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     );
     this.install(graph, null);
   }
+  /** Explicit kind migration creates a new load, not a content-replacement Undo. */
+  upgradeGraphKind(destination: GraphKindRef): void {
+    demand(
+      !this.#readonly && !this.busy && !this.saving,
+      "UPGRADE_UNAVAILABLE",
+    );
+    const source = this.snapshot;
+    const owner = this.definitions
+      .kinds()
+      .find((k) => equal(k.ref, destination));
+    demand(owner, "UPGRADE_OWNER_MISSING");
+    if (equal(source.document.graph.kind, destination)) return;
+    const choices = (owner.upgrades ?? []).filter((u) =>
+      equal(u.from, source.document.graph.kind),
+    );
+    demand(choices.length === 1, "UPGRADE_UNSUPPORTED");
+    const candidate = detached(choices[0].upgrade(detached(source.document)));
+    demand(equal(candidate.graph.kind, destination), "UPGRADE_KIND");
+    const graph = new Graph(
+      candidate,
+      this.definitions.pin(candidate.graph.modules),
+      this.identity,
+    );
+    if (
+      this.snapshot.loadId !== source.loadId ||
+      this.snapshot.revision !== source.revision ||
+      !equal(this.snapshot.document, source.document) ||
+      this.#readonly ||
+      this.busy ||
+      this.saving
+    ) {
+      graph.dispose();
+      throw new Fault("STALE_PROPOSAL");
+    }
+    this.install(graph, null);
+  }
   inspectText(raw: string): DocumentInspection {
     const base = this.snapshot;
     const review = inspectDocument(raw, this.definitions);

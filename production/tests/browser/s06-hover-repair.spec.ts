@@ -1,3 +1,4 @@
+import { requiredOutput } from "../fixtures/required-output.ts";
 import { test, expect, type Page, type Locator } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
@@ -84,6 +85,7 @@ test("S06 repair compact disclosures share presentation without model changes", 
   page,
 }) => {
   await page.goto("/");
+  await requiredOutput(page);
   const before = await exported(page);
   await expect(page.locator("#code")).not.toBeVisible();
   for (const name of ["Project actions", "Shader output", "Hints"]) {
@@ -167,6 +169,7 @@ test("S06 output diagnostics locate current nodes and reject stale detached acti
   page,
 }) => {
   await page.goto("/");
+  await requiredOutput(page);
   const before = await exported(page),
     c = page.locator(".canvas");
   await clickAction(page, "Generate GLSL");

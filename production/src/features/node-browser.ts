@@ -1,3 +1,4 @@
+import { wireCurve } from "./wire-geometry.ts";
 import type {
   CatalogEntry,
   CatalogWire,
@@ -208,6 +209,7 @@ export function mountNodeBrowser(
       item: CatalogEntry;
       started: boolean;
     } | null = null;
+  let releasePoint: [number, number] | null = null;
   const expanded = new Map<string, boolean>();
   const listen = (
     target: EventTarget,
@@ -238,6 +240,7 @@ export function mountNodeBrowser(
     moving = null;
     rowDrag = null;
     current = null;
+    releasePoint = null;
     panel.hidden = true;
     preview.hidden = true;
     preview.replaceChildren();
@@ -292,10 +295,7 @@ export function mountNodeBrowser(
         x2 = b.left + b.width / 2 - r.left,
         y2 = b.top + b.height / 2 - r.top;
       const dir = wire.direction === "output" ? 1 : -1;
-      p.setAttribute(
-        "d",
-        `M${x1} ${y1} C${x1 + 70 * dir} ${y1},${x2 - 70 * dir} ${y2},${x2} ${y2}`,
-      );
+      p.setAttribute("d", wireCurve([x1, y1], [x2, y2], dir));
       p.style.stroke =
         getComputedStyle(socket.parentElement!)
           .getPropertyValue("--port-color")
@@ -333,6 +333,10 @@ export function mountNodeBrowser(
   };
   const choose = (item: CatalogEntry) => {
     if (!editable()) return;
+    if (releasePoint) {
+      commit(item, [...releasePoint]);
+      return;
+    }
     current = item;
     panel.hidden = true;
     preview.replaceChildren();
@@ -459,7 +463,8 @@ export function mountNodeBrowser(
         }),
       );
       label.textContent = item.presentation.label.fallback;
-      label.ariaLabel = "Inspect " + label.textContent;
+      label.ariaLabel =
+        (releasePoint ? "Create " : "Inspect ") + label.textContent;
       badge.textContent =
         (item.creation?.kind === "source"
           ? "New source · "
@@ -474,8 +479,9 @@ export function mountNodeBrowser(
           : "");
       label.append(badge);
       plus.ariaLabel = "Add " + item.presentation.label.fallback;
-      plus.title =
-        mode === "create"
+      plus.title = releasePoint
+        ? "Create and connect at wire release"
+        : mode === "create"
           ? "Preview, then place on Canvas"
           : "Insert at viewport (180, 160)";
       plus.append(icon("add"));
@@ -484,7 +490,14 @@ export function mountNodeBrowser(
       label.onclick = mount.scope.event(() => {
         if (rowDrag?.started) return;
         selected = index;
-        inspect(item);
+        if (releasePoint) {
+          try {
+            choose(item);
+          } catch (err) {
+            report(err);
+            cancel();
+          }
+        } else inspect(item);
       });
       label.ondblclick = mount.scope.event((e) => {
         e.preventDefault();
@@ -524,6 +537,7 @@ export function mountNodeBrowser(
       const start = mount.scope.event((e: PointerEvent) => {
         if (
           e.button !== 0 ||
+          releasePoint ||
           !editable() ||
           (e.pointerType === "touch" && e.currentTarget === label)
         )
@@ -547,6 +561,7 @@ export function mountNodeBrowser(
     y: number,
     requestedMode: "create" | "browse" = "create",
     from?: CatalogWire,
+    atRelease = false,
   ) => {
     if (requestedMode === "create" && !editable()) return;
     cancel(false);
@@ -560,6 +575,8 @@ export function mountNodeBrowser(
     revision = c.graph.revision;
     zoom = camera().zoom;
     point = graphPoint(x, y);
+    releasePoint =
+      atRelease && from?.direction === "output" ? [...point] : null;
     wire = from;
     mode = requestedMode;
     entries = services.catalog?.(lease().lease, wire) ?? [];

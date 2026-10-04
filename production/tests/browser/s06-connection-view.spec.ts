@@ -1,3 +1,4 @@
+import { requiredOutput } from "../fixtures/required-output.ts";
 import { test, expect, type Page, type Locator } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
@@ -136,6 +137,7 @@ for (const zoom of [1, 1.2])
 test("S06 PORT_TARGET and same-direction refusal remain visible until matching recovery; compiler error stays", async ({
   page,
 }) => {
+  await requiredOutput(page);
   const { c, out, input } = await color(page);
   await clickAction(page, "Generate GLSL");
   await expect(page.locator("#message")).toContainText("INPUT_REQUIRED");
@@ -390,10 +392,14 @@ test("S06 pending connection expires on shared revision and new load without sta
   await expect(page.locator(".canvas-notice")).toBeEmpty();
 });
 
-test("S06 subthreshold port release outside the button leaves no orphan wire or History", async ({ page }) => {
-  const { c, out } = await color(page), before = await doc(page);
+test("S06 subthreshold port release outside the button leaves no orphan wire or History", async ({
+  page,
+}) => {
+  const { c, out } = await color(page),
+    before = await doc(page);
   const r = (await out.boundingBox())!;
-  const x = r.x + r.width / 2, y = r.y + 0.5;
+  const x = r.x + r.width / 2,
+    y = r.y + 0.5;
   await page.mouse.move(x, y);
   await page.mouse.down();
   await page.mouse.move(x, y - 3, { steps: 2 });
@@ -403,5 +409,7 @@ test("S06 subthreshold port release outside the button leaves no orphan wire or 
   await expect(c.locator(".canvas-notice")).toBeEmpty();
   expect(await doc(page)).toEqual(before);
   await clickAction(page, "Undo");
-  await expect(c.getByRole("heading", { name: "Color RGBA", exact: true })).toHaveCount(0);
+  await expect(
+    c.getByRole("heading", { name: "Color RGBA", exact: true }),
+  ).toHaveCount(0);
 });

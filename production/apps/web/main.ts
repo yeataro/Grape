@@ -1,3 +1,10 @@
+import {
+  zeroOutputModule,
+  zeroGraphKinds,
+  zeroImageKind,
+  zeroSources,
+  zeroOutputText,
+} from "../../src/modules/image-zero.ts";
 import { floatingSurface } from "../../src/ui/floating.ts";
 import { mountBuildInfo } from "./build-info.ts";
 import { icon } from "../../src/features/node-browser.ts";
@@ -78,11 +85,16 @@ definitions.registerKind(imageKind);
 definitions.register(currentOutputModule);
 definitions.register(currentGraphKinds);
 definitions.registerKind(currentImageKind);
+definitions.register(zeroOutputModule);
+definitions.register(zeroGraphKinds);
+definitions.registerKind(zeroImageKind);
+definitions.register(zeroSources);
 const locale = new Localization();
 locale.registerModule(shellPresentation, shellDefaults);
 for (const contribution of [
   nodeText,
   currentOutputText,
+  zeroOutputText,
   canvasText,
   inspectorText,
   actionsText,
@@ -108,7 +120,7 @@ widgets.register(
 const application = new EditorApplication(
   definitions,
   browserIdentity(),
-  currentImageKind.ref,
+  zeroImageKind.ref,
   functionProfile,
   new BrowserStorage(),
   browserOutput,
@@ -401,6 +413,22 @@ upgradeButton.onclick = () => {
   }
 };
 nav.append(upgradeButton);
+const imageUpgrade = document.createElement("button");
+imageUpgrade.textContent = "Upgrade Image Output";
+imageUpgrade.onclick = () => {
+  try {
+    if (!replacing()) return;
+    prepareReplace();
+    application.upgradeGraphKind(zeroImageKind.ref);
+    buildWorkspace();
+    setMessage(
+      "Image Output and compatible image source owners explicitly upgraded to 0.3.0 in a new session. Unconnected color is transparent zero. Save to retain this version.",
+    );
+  } catch (error) {
+    report(error);
+  }
+};
+nav.append(imageUpgrade);
 const saveButton = action("save", async () => {
   await application.save();
   success(text("stored"));

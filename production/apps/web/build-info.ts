@@ -31,7 +31,11 @@ export function mountBuildInfo(brand: HTMLElement): void {
     identity
       ? `Implementation: ${identity.implementationI}`
       : "Development source: no archived candidate identity declared.",
-    "底部功能列集中 Project actions、Shader output 與 Hints；輸出預設收合，GLSL、診斷與 Locate 仍可取得。",
+    "底部功能列貼底佔满可用寬度；輸出預設收合，GLSL、診斷與 Locate 仍可取得。",
+    "新版 Image Output 未接線時輸出零 RGBA；舊文件保留原版本，可由 Project actions 明確 Upgrade Image Output。",
+    "Output 拉線到空白後，單點相容節點原地新增並接線；已接線 Input 拉到空白則斷線，均可一次 Undo。",
+    "接線預設允許 Replace；圓點保留型別色，柔和紫色提示與平滑曲線不改節點排版。",
+    "一般點擊 Node 會交付焦點；F2 在開窗前讀取當下焦點物件一次，不依 incidental hover 改換對象。",
     "物件資訊只由 F2 開啟，直接讀取目前鍵盤焦點；不需要開啟偏好，普通 hover 操作提示保留。",
     "接線只點 socket 圓；名稱與型別分開。實心提示保留各型別顏色，選取與提示不改節點排版。",
     "Node、Port、Edge、Parameter Widget、Panel 與一般控制項提供各自可讀的資料；未提供資料會明示。",

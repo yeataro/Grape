@@ -1,0 +1,1554 @@
+{
+  "implementationI": "8ffbea96bdc76e307d59eaa8514f3c6432a7d34d",
+  "status": "SELF_CHECKED_REVIEW_PENDING",
+  "scope": "Exactly4 fixed-value leaves. No all391 catalog claim.",
+  "rows": [
+    {
+      "leaf": "LC-NODE-011",
+      "key": "float",
+      "defaultValue": 0.5,
+      "fixedOutput": "float",
+      "inputPorts": [],
+      "modes": [
+        "fixed"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "portable functionProfile GLSL ES3.00",
+      "publicAuthoring": {
+        "button": "Add Float (fixed)",
+        "tests": [
+          "S05 fixed float pixel: public create edit connect history save and JSON reopen",
+          "S05 fixed float vertex: public create edit connect history save and JSON reopen",
+          "S05 fixed float: shared Function nested Inspector edits persist across both Canvas occurrences"
+        ],
+        "evidence": [
+          {
+            "file": "production/evidence/s05/catalog-values-01/browser-full-02/fixed-float-pixel.json",
+            "sha256": "ae3a3471d1d6fe3e774664008ce9882828c36e05a07e4195d816a470ce9eb723",
+            "bytes": 6364
+          },
+          {
+            "file": "production/evidence/s05/catalog-values-01/browser-full-02/fixed-float-vertex.json",
+            "sha256": "4127b38f0e1a84d0898ed883b5da8b051127cbafe09e368ae6e54f8f75ab009e",
+            "bytes": 16255
+          },
+          {
+            "file": "production/evidence/s05/catalog-values-01/browser-full-02/fixed-float-shared.json",
+            "sha256": "7d754cdfbaa3932948a4ff4706754d166555080d922adda4a4d4d426d6026830",
+            "bytes": 12000
+          }
+        ]
+      },
+      "modelTests": [
+        "S05 fixed float: defaults fixed schema every stage and mode with pure generation and roundtrip",
+        "S05 fixed float: bad payloads unused errors atomic commands fixed source and constant distinction",
+        "S05 fixed float: scoped two-context edits one Undo and stale token preserve History",
+        "S05 fixed float: shared Function and Personal owner closure retain exact values",
+        "S05 fixed float: literals inside Function stay constant while formal and result are runtime"
+      ],
+      "numericCases": [
+        {
+          "stage": "pixel",
+          "composition": "root",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "actual": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "root",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.125,
+            0.125,
+            0.125
+          ],
+          "actual": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "expand",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "actual": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "expand",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.125,
+            0.125,
+            0.125
+          ],
+          "actual": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "function",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "actual": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "function",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.125,
+            0.125,
+            0.125
+          ],
+          "actual": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "nested",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "actual": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "nested",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.125,
+            0.125,
+            0.125
+          ],
+          "actual": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "root",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "actual": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "root",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.125,
+            0.125,
+            0.125
+          ],
+          "actual": [
+            0.125,
+            0.125,
+            0.125,
+            0.125
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "expand",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "actual": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "expand",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.125,
+            0.125,
+            0.125
+          ],
+          "actual": [
+            0.125,
+            0.125,
+            0.125,
+            0.125
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "function",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "actual": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "function",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.125,
+            0.125,
+            0.125
+          ],
+          "actual": [
+            0.125,
+            0.125,
+            0.125,
+            0.125
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "nested",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "actual": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "nested",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.125,
+            0.125,
+            0.125
+          ],
+          "actual": [
+            0.125,
+            0.125,
+            0.125,
+            0.125
+          ],
+          "unchanged": true
+        }
+      ],
+      "exchange": [
+        "public JSON export/file review/new session",
+        "ACK save/reopen",
+        "owner-exact Personal closure build/read/insert",
+        "missing exact module retained with generation refusal"
+      ],
+      "ordinaryConstantEligible": true,
+      "specializationExpressionEligible": false,
+      "negativeEvidence": [
+        {
+          "file": "production/evidence/s05/catalog-values-01/specialization-probe-result-01.json",
+          "sha256": "1c39fd3fa982417a109d0a690e496796aa719531aa747cc4f68c6cefee3b6eb5",
+          "bytes": 3969
+        },
+        {
+          "file": "production/evidence/s05/catalog-values-01/checks/unit-final-02.log",
+          "sha256": "3278eaa5e79860fd8cbd339c4c2c8792af32f312a90ffc3f0e272d75da9d80a3",
+          "bytes": 24737
+        }
+      ],
+      "portableTargetMapping": "Pixel is current Image Output; vertex goes through existing Position passthrough with DEC002 conversion to unchanged vec4 boundary. No new Convert/Vertex leaf.",
+      "residual": [
+        "Native top/mat Host execution deferred to S07/S08; browser stage semantics do not qualify native targets.",
+        "No scalar conversion, math, matrix or dynamic catalog family included."
+      ]
+    },
+    {
+      "leaf": "LC-NODE-012",
+      "key": "vec2",
+      "defaultValue": [
+        0.5,
+        0.5
+      ],
+      "fixedOutput": "vec2",
+      "inputPorts": [],
+      "modes": [
+        "fixed"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "portable functionProfile GLSL ES3.00",
+      "publicAuthoring": {
+        "button": "Add Vector 2",
+        "tests": [
+          "S05 fixed vec2 pixel: public create edit connect history save and JSON reopen",
+          "S05 fixed vec2 vertex: public create edit connect history save and JSON reopen",
+          "S05 fixed vec2: shared Function nested Inspector edits persist across both Canvas occurrences"
+        ],
+        "evidence": [
+          {
+            "file": "production/evidence/s05/catalog-values-01/browser-full-02/fixed-vec2-pixel.json",
+            "sha256": "48bb92631b41d012096d4d793cc4f2a2ce00dcfdde45f6d01f91cbef631ca164",
+            "bytes": 6433
+          },
+          {
+            "file": "production/evidence/s05/catalog-values-01/browser-full-02/fixed-vec2-vertex.json",
+            "sha256": "d598f7ac41fadc33bc4f8e02ff5fe9bd16928fb7faf0a4258dc6cacc37cc2c56",
+            "bytes": 16324
+          },
+          {
+            "file": "production/evidence/s05/catalog-values-01/browser-full-02/fixed-vec2-shared.json",
+            "sha256": "6a6719b828a23889f3ac6f7780030ba8e45f42b8fdb5453df842b8395bffde6f",
+            "bytes": 12218
+          }
+        ]
+      },
+      "modelTests": [
+        "S05 fixed vec2: defaults fixed schema every stage and mode with pure generation and roundtrip",
+        "S05 fixed vec2: bad payloads unused errors atomic commands fixed source and constant distinction",
+        "S05 fixed vec2: scoped two-context edits one Undo and stale token preserve History",
+        "S05 fixed vec2: shared Function and Personal owner closure retain exact values",
+        "S05 fixed vec2: literals inside Function stay constant while formal and result are runtime"
+      ],
+      "numericCases": [
+        {
+          "stage": "pixel",
+          "composition": "root",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0,
+            1
+          ],
+          "actual": [
+            128,
+            128,
+            0,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "root",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0,
+            1
+          ],
+          "actual": [
+            32,
+            96,
+            0,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "expand",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0,
+            1
+          ],
+          "actual": [
+            128,
+            128,
+            0,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "expand",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0,
+            1
+          ],
+          "actual": [
+            32,
+            96,
+            0,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "function",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0,
+            1
+          ],
+          "actual": [
+            128,
+            128,
+            0,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "function",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0,
+            1
+          ],
+          "actual": [
+            32,
+            96,
+            0,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "nested",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0,
+            1
+          ],
+          "actual": [
+            128,
+            128,
+            0,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "nested",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0,
+            1
+          ],
+          "actual": [
+            32,
+            96,
+            0,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "root",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0,
+            1
+          ],
+          "actual": [
+            0.5,
+            0.5,
+            0,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "root",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0,
+            1
+          ],
+          "actual": [
+            0.125,
+            0.375,
+            0,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "expand",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0,
+            1
+          ],
+          "actual": [
+            0.5,
+            0.5,
+            0,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "expand",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0,
+            1
+          ],
+          "actual": [
+            0.125,
+            0.375,
+            0,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "function",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0,
+            1
+          ],
+          "actual": [
+            0.5,
+            0.5,
+            0,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "function",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0,
+            1
+          ],
+          "actual": [
+            0.125,
+            0.375,
+            0,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "nested",
+          "edited": false,
+          "expected": [
+            0.5,
+            0.5,
+            0,
+            1
+          ],
+          "actual": [
+            0.5,
+            0.5,
+            0,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "nested",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0,
+            1
+          ],
+          "actual": [
+            0.125,
+            0.375,
+            0,
+            1
+          ],
+          "unchanged": true
+        }
+      ],
+      "exchange": [
+        "public JSON export/file review/new session",
+        "ACK save/reopen",
+        "owner-exact Personal closure build/read/insert",
+        "missing exact module retained with generation refusal"
+      ],
+      "ordinaryConstantEligible": true,
+      "specializationExpressionEligible": false,
+      "negativeEvidence": [
+        {
+          "file": "production/evidence/s05/catalog-values-01/specialization-probe-result-01.json",
+          "sha256": "1c39fd3fa982417a109d0a690e496796aa719531aa747cc4f68c6cefee3b6eb5",
+          "bytes": 3969
+        },
+        {
+          "file": "production/evidence/s05/catalog-values-01/checks/unit-final-02.log",
+          "sha256": "3278eaa5e79860fd8cbd339c4c2c8792af32f312a90ffc3f0e272d75da9d80a3",
+          "bytes": 24737
+        }
+      ],
+      "portableTargetMapping": "Pixel is current Image Output; vertex goes through existing Position passthrough with DEC002 conversion to unchanged vec4 boundary. No new Convert/Vertex leaf.",
+      "residual": [
+        "Native top/mat Host execution deferred to S07/S08; browser stage semantics do not qualify native targets.",
+        "No scalar conversion, math, matrix or dynamic catalog family included."
+      ]
+    },
+    {
+      "leaf": "LC-NODE-013",
+      "key": "vec3",
+      "defaultValue": [
+        1,
+        1,
+        1
+      ],
+      "fixedOutput": "vec3",
+      "inputPorts": [],
+      "modes": [
+        "fixed"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "portable functionProfile GLSL ES3.00",
+      "publicAuthoring": {
+        "button": "Add Vector 3",
+        "tests": [
+          "S05 fixed vec3 pixel: public create edit connect history save and JSON reopen",
+          "S05 fixed vec3 vertex: public create edit connect history save and JSON reopen",
+          "S05 fixed vec3: shared Function nested Inspector edits persist across both Canvas occurrences"
+        ],
+        "evidence": [
+          {
+            "file": "production/evidence/s05/catalog-values-01/browser-full-02/fixed-vec3-pixel.json",
+            "sha256": "7cea583eacee93954463d3d5cb71021e01e27ff97d45f378a0c5f3be138c8ce3",
+            "bytes": 6466
+          },
+          {
+            "file": "production/evidence/s05/catalog-values-01/browser-full-02/fixed-vec3-vertex.json",
+            "sha256": "43165a2600bf97d0dc06184b757f4bb0ea4d53a8c3ef0278d391bedbfc7e0b8a",
+            "bytes": 16357
+          },
+          {
+            "file": "production/evidence/s05/catalog-values-01/browser-full-02/fixed-vec3-shared.json",
+            "sha256": "cd740b3f462e1c2202123f094bf0871e36bc2cf64d3f5c96a3e7373db3f2ff25",
+            "bytes": 12305
+          }
+        ]
+      },
+      "modelTests": [
+        "S05 fixed vec3: defaults fixed schema every stage and mode with pure generation and roundtrip",
+        "S05 fixed vec3: bad payloads unused errors atomic commands fixed source and constant distinction",
+        "S05 fixed vec3: scoped two-context edits one Undo and stale token preserve History",
+        "S05 fixed vec3: shared Function and Personal owner closure retain exact values",
+        "S05 fixed vec3: literals inside Function stay constant while formal and result are runtime"
+      ],
+      "numericCases": [
+        {
+          "stage": "pixel",
+          "composition": "root",
+          "edited": false,
+          "expected": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "actual": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "root",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            1
+          ],
+          "actual": [
+            32,
+            96,
+            159,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "expand",
+          "edited": false,
+          "expected": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "actual": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "expand",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            1
+          ],
+          "actual": [
+            32,
+            96,
+            159,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "function",
+          "edited": false,
+          "expected": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "actual": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "function",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            1
+          ],
+          "actual": [
+            32,
+            96,
+            159,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "nested",
+          "edited": false,
+          "expected": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "actual": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "nested",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            1
+          ],
+          "actual": [
+            32,
+            96,
+            159,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "root",
+          "edited": false,
+          "expected": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "actual": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "root",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            1
+          ],
+          "actual": [
+            0.125,
+            0.375,
+            0.625,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "expand",
+          "edited": false,
+          "expected": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "actual": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "expand",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            1
+          ],
+          "actual": [
+            0.125,
+            0.375,
+            0.625,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "function",
+          "edited": false,
+          "expected": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "actual": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "function",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            1
+          ],
+          "actual": [
+            0.125,
+            0.375,
+            0.625,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "nested",
+          "edited": false,
+          "expected": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "actual": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "nested",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            1
+          ],
+          "actual": [
+            0.125,
+            0.375,
+            0.625,
+            1
+          ],
+          "unchanged": true
+        }
+      ],
+      "exchange": [
+        "public JSON export/file review/new session",
+        "ACK save/reopen",
+        "owner-exact Personal closure build/read/insert",
+        "missing exact module retained with generation refusal"
+      ],
+      "ordinaryConstantEligible": true,
+      "specializationExpressionEligible": false,
+      "negativeEvidence": [
+        {
+          "file": "production/evidence/s05/catalog-values-01/specialization-probe-result-01.json",
+          "sha256": "1c39fd3fa982417a109d0a690e496796aa719531aa747cc4f68c6cefee3b6eb5",
+          "bytes": 3969
+        },
+        {
+          "file": "production/evidence/s05/catalog-values-01/checks/unit-final-02.log",
+          "sha256": "3278eaa5e79860fd8cbd339c4c2c8792af32f312a90ffc3f0e272d75da9d80a3",
+          "bytes": 24737
+        }
+      ],
+      "portableTargetMapping": "Pixel is current Image Output; vertex goes through existing Position passthrough with DEC002 conversion to unchanged vec4 boundary. No new Convert/Vertex leaf.",
+      "residual": [
+        "Native top/mat Host execution deferred to S07/S08; browser stage semantics do not qualify native targets.",
+        "No scalar conversion, math, matrix or dynamic catalog family included."
+      ]
+    },
+    {
+      "leaf": "LC-NODE-014",
+      "key": "color",
+      "defaultValue": [
+        0.55,
+        0.28,
+        0.9,
+        1
+      ],
+      "fixedOutput": "vec4",
+      "inputPorts": [],
+      "modes": [
+        "fixed"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "portable functionProfile GLSL ES3.00",
+      "publicAuthoring": {
+        "button": "Add Color RGBA",
+        "tests": [
+          "S05 fixed color pixel: public create edit connect history save and JSON reopen",
+          "S05 fixed color vertex: public create edit connect history save and JSON reopen",
+          "S05 fixed color: shared Function nested Inspector edits persist across both Canvas occurrences"
+        ],
+        "evidence": [
+          {
+            "file": "production/evidence/s05/catalog-values-01/browser-full-02/fixed-color-pixel.json",
+            "sha256": "9b201fd33d992ec0a404cdfb7cb1f0dabc37ad29e9fa7e0a2796ed2fcd456451",
+            "bytes": 6489
+          },
+          {
+            "file": "production/evidence/s05/catalog-values-01/browser-full-02/fixed-color-vertex.json",
+            "sha256": "0f08a79acda4436d8f9163a3410181f50f7d16c949a3a801382026c5995eabde",
+            "bytes": 16380
+          },
+          {
+            "file": "production/evidence/s05/catalog-values-01/browser-full-02/fixed-color-shared.json",
+            "sha256": "1deca062a504c4df4d295556eebb3f8ed8b29406967cc5c19db975925f6ed668",
+            "bytes": 12381
+          }
+        ]
+      },
+      "modelTests": [
+        "S05 fixed color: defaults fixed schema every stage and mode with pure generation and roundtrip",
+        "S05 fixed color: bad payloads unused errors atomic commands fixed source and constant distinction",
+        "S05 fixed color: scoped two-context edits one Undo and stale token preserve History",
+        "S05 fixed color: shared Function and Personal owner closure retain exact values",
+        "S05 fixed color: literals inside Function stay constant while formal and result are runtime"
+      ],
+      "numericCases": [
+        {
+          "stage": "pixel",
+          "composition": "root",
+          "edited": false,
+          "expected": [
+            0.55,
+            0.28,
+            0.9,
+            1
+          ],
+          "actual": [
+            140,
+            71,
+            230,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "root",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            0.875
+          ],
+          "actual": [
+            32,
+            96,
+            159,
+            223
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "expand",
+          "edited": false,
+          "expected": [
+            0.55,
+            0.28,
+            0.9,
+            1
+          ],
+          "actual": [
+            140,
+            71,
+            230,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "expand",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            0.875
+          ],
+          "actual": [
+            32,
+            96,
+            159,
+            223
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "function",
+          "edited": false,
+          "expected": [
+            0.55,
+            0.28,
+            0.9,
+            1
+          ],
+          "actual": [
+            140,
+            71,
+            230,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "function",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            0.875
+          ],
+          "actual": [
+            32,
+            96,
+            159,
+            223
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "nested",
+          "edited": false,
+          "expected": [
+            0.55,
+            0.28,
+            0.9,
+            1
+          ],
+          "actual": [
+            140,
+            71,
+            230,
+            255
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "pixel",
+          "composition": "nested",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            0.875
+          ],
+          "actual": [
+            32,
+            96,
+            159,
+            223
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "root",
+          "edited": false,
+          "expected": [
+            0.55,
+            0.28,
+            0.9,
+            1
+          ],
+          "actual": [
+            0.550000011920929,
+            0.2800000011920929,
+            0.8999999761581421,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "root",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            0.875
+          ],
+          "actual": [
+            0.125,
+            0.375,
+            0.625,
+            0.875
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "expand",
+          "edited": false,
+          "expected": [
+            0.55,
+            0.28,
+            0.9,
+            1
+          ],
+          "actual": [
+            0.550000011920929,
+            0.2800000011920929,
+            0.8999999761581421,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "expand",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            0.875
+          ],
+          "actual": [
+            0.125,
+            0.375,
+            0.625,
+            0.875
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "function",
+          "edited": false,
+          "expected": [
+            0.55,
+            0.28,
+            0.9,
+            1
+          ],
+          "actual": [
+            0.550000011920929,
+            0.2800000011920929,
+            0.8999999761581421,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "function",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            0.875
+          ],
+          "actual": [
+            0.125,
+            0.375,
+            0.625,
+            0.875
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "nested",
+          "edited": false,
+          "expected": [
+            0.55,
+            0.28,
+            0.9,
+            1
+          ],
+          "actual": [
+            0.550000011920929,
+            0.2800000011920929,
+            0.8999999761581421,
+            1
+          ],
+          "unchanged": true
+        },
+        {
+          "stage": "vertex",
+          "composition": "nested",
+          "edited": true,
+          "expected": [
+            0.125,
+            0.375,
+            0.625,
+            0.875
+          ],
+          "actual": [
+            0.125,
+            0.375,
+            0.625,
+            0.875
+          ],
+          "unchanged": true
+        }
+      ],
+      "exchange": [
+        "public JSON export/file review/new session",
+        "ACK save/reopen",
+        "owner-exact Personal closure build/read/insert",
+        "missing exact module retained with generation refusal"
+      ],
+      "ordinaryConstantEligible": true,
+      "specializationExpressionEligible": false,
+      "negativeEvidence": [
+        {
+          "file": "production/evidence/s05/catalog-values-01/specialization-probe-result-01.json",
+          "sha256": "1c39fd3fa982417a109d0a690e496796aa719531aa747cc4f68c6cefee3b6eb5",
+          "bytes": 3969
+        },
+        {
+          "file": "production/evidence/s05/catalog-values-01/checks/unit-final-02.log",
+          "sha256": "3278eaa5e79860fd8cbd339c4c2c8792af32f312a90ffc3f0e272d75da9d80a3",
+          "bytes": 24737
+        }
+      ],
+      "portableTargetMapping": "Pixel is current Image Output; vertex goes through existing Position passthrough with DEC002 conversion to unchanged vec4 boundary. No new Convert/Vertex leaf.",
+      "residual": [
+        "Native top/mat Host execution deferred to S07/S08; browser stage semantics do not qualify native targets.",
+        "No scalar conversion, math, matrix or dynamic catalog family included."
+      ]
+    }
+  ],
+  "matrixAxes": {
+    "leaf": 4,
+    "stage": 2,
+    "composition": [
+      "root",
+      "expand",
+      "function",
+      "nested"
+    ],
+    "values": [
+      "default",
+      "edited"
+    ],
+    "numericalCases": 64,
+    "operations": [
+      "create",
+      "component-edit",
+      "connect",
+      "generate",
+      "save/reopen",
+      "JSON public import/export",
+      "Undo",
+      "Redo",
+      "nested shared edit",
+      "Personal closure"
+    ]
+  },
+  "sharedSupport": {
+    "widget": {
+      "file": "production/evidence/s05/catalog-values-01/browser-full-02/vector-lifetime.json",
+      "sha256": "8182db7b5742299800233e60813c21e7ae7fdda76cca08d009b10da9535cfc6f",
+      "bytes": 397
+    },
+    "guarantees": [
+      "real mounted FieldTarget/WidgetSlot concurrent draft CAS",
+      "IME Enter suppression",
+      "readonly during draft",
+      "Escape restores authoritative components",
+      "disposed DOM events inert"
+    ],
+    "GraphAndHistory": "No core model/Application/History/compiler edits. Ordinary owner transactions and scoped controls retained."
+  },
+  "affected": {
+    "browser": "All108 current tests including S01/S02/S03/S04,14 old delivered samples, replacement default/upgraded/matching+stale refusal,13 linked Uniform tests and early Function cases.",
+    "unit": "All224 unit/conformance tests including DEC004 symbolic Personal roundtrips; old owner pins unchanged."
+  },
+  "gateEvidence": [
+    {
+      "gate": "LU-NODE-002",
+      "scope": "UI/create/edit/save/reopen/Undo for4 selected leaves",
+      "disposition": "New evidence only; no globalGate closure"
+    },
+    {
+      "gate": "G-EXTENSION-WIDGET-SCOPE",
+      "scope": "New vector component widget through existing scoped target/lifetime",
+      "disposition": "Scoped self-check awaiting review, inherited residuals preserved"
+    },
+    {
+      "gate": "G-HANDOFF-CQ-OWNERSHIP",
+      "scope": "owner model codec/emission; pure generator; UI authority",
+      "disposition": "Inherited quarantine and limitations retained"
+    }
+  ],
+  "acceptanceFamilies": [
+    "AT-S05-01 all4 selected leaf fixed modes: complete public UI lifecycle and per-leaf oracle",
+    "AT-S05-02 type/constant/stage checks and whole-graph errors for applicable selected-leaf cases",
+    "AT-S05-03 actual supported profile compiler/link/run behavior and deterministic unsupported refusal",
+    "AT-S05-04 declared browser runtime numeric/component evidence only; native TD/backend matrix remains unqualified"
+  ],
+  "limitations": [
+    "All other catalog leaves, Scalar/Convert/math/matrix/dynamic nodes are later bounded batches",
+    "Unrelated Vertex enablement, current complaint was explanation-only",
+    "S06 appearance/workspace redesign, S07/S08 native Host controls, Q003",
+    "S02 legacy revision converter/global catalog parity",
+    "Whole early-batch or S05 acceptance, remote publication/PR/merge, next Slice",
+    "New daemon, scheduling system or permanent service"
+  ],
+  "supersedes": {
+    "file": "production/evidence/s05/catalog-values-01/capability-coverage-01.json",
+    "sha256": "73379ab7f32c7db96eda0a1e1bd275c5880d6ae1e262beaec5c25624781d1754",
+    "reason": "Correct linked Uniform test count:13 = one original counterexample plus3x4 fixture combinations. Product/check results unchanged."
+  },
+  "exactProfile": {
+    "moduleId": "grape.nodes.function-ops",
+    "profileId": "es300-functions",
+    "ownerSource": "production/src/modules/function-operations.ts"
+  }
+}

@@ -1,0 +1,204 @@
+✔ S05 fixed float: defaults fixed schema every stage and mode with pure generation and roundtrip (293.7964ms)
+✖ S05 fixed float: bad payloads unused errors atomic commands fixed source and constant distinction (4.0709ms)
+✖ S05 fixed float: scoped two-context edits one Undo and stale token preserve History (2.9178ms)
+✖ S05 fixed float: shared Function and Personal owner closure retain exact values (34.0365ms)
+✔ S05 fixed vec2: defaults fixed schema every stage and mode with pure generation and roundtrip (261.2906ms)
+✖ S05 fixed vec2: bad payloads unused errors atomic commands fixed source and constant distinction (3.7236ms)
+✖ S05 fixed vec2: scoped two-context edits one Undo and stale token preserve History (1.6981ms)
+✖ S05 fixed vec2: shared Function and Personal owner closure retain exact values (18.4939ms)
+✔ S05 fixed vec3: defaults fixed schema every stage and mode with pure generation and roundtrip (265.0099ms)
+✖ S05 fixed vec3: bad payloads unused errors atomic commands fixed source and constant distinction (3.0856ms)
+✖ S05 fixed vec3: scoped two-context edits one Undo and stale token preserve History (1.7142ms)
+✖ S05 fixed vec3: shared Function and Personal owner closure retain exact values (20.1373ms)
+✔ S05 fixed color: defaults fixed schema every stage and mode with pure generation and roundtrip (236.1937ms)
+✖ S05 fixed color: bad payloads unused errors atomic commands fixed source and constant distinction (3.0512ms)
+✖ S05 fixed color: scoped two-context edits one Undo and stale token preserve History (1.5781ms)
+✖ S05 fixed color: shared Function and Personal owner closure retain exact values (19.7429ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 4
+ℹ fail 12
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1300.7369
+
+✖ failing tests:
+
+test at production\tests\unit\s05-values.test.ts:66:3
+✖ S05 fixed float: bad payloads unused errors atomic commands fixed source and constant distinction (4.0709ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-values.test.ts:117:12)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at production\tests\unit\s05-values.test.ts:140:3
+✖ S05 fixed float: scoped two-context edits one Undo and stale token preserve History (2.9178ms)
+  CONTEXT_MISSING: CONTEXT_MISSING
+      at demand (C:\Users\user\source\Grape\production\src\sdk\kernel.ts:12:18)
+      at EditorApplication.context (C:\Users\user\source\Grape\production\src\application\editor.ts:645:7)
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-values.test.ts:151:19)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    code: 'CONTEXT_MISSING'
+  }
+
+test at production\tests\unit\s05-values.test.ts:182:3
+✖ S05 fixed float: shared Function and Personal owner closure retain exact values (34.0365ms)
+  IMPORT_ERRORS: IMPORT_ERRORS
+      at demand (C:\Users\user\source\Grape\production\src\sdk\kernel.ts:12:18)
+      at Graph.change (C:\Users\user\source\Grape\production\src\model\graph.ts:451:9)
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-values.test.ts:199:18)
+      at async Test.run (node:internal/test_runner/test:1116:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    code: 'IMPORT_ERRORS'
+  }
+
+test at production\tests\unit\s05-values.test.ts:66:3
+✖ S05 fixed vec2: bad payloads unused errors atomic commands fixed source and constant distinction (3.7236ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-values.test.ts:117:12)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at production\tests\unit\s05-values.test.ts:140:3
+✖ S05 fixed vec2: scoped two-context edits one Undo and stale token preserve History (1.6981ms)
+  CONTEXT_MISSING: CONTEXT_MISSING
+      at demand (C:\Users\user\source\Grape\production\src\sdk\kernel.ts:12:18)
+      at EditorApplication.context (C:\Users\user\source\Grape\production\src\application\editor.ts:645:7)
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-values.test.ts:151:19)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    code: 'CONTEXT_MISSING'
+  }
+
+test at production\tests\unit\s05-values.test.ts:182:3
+✖ S05 fixed vec2: shared Function and Personal owner closure retain exact values (18.4939ms)
+  IMPORT_ERRORS: IMPORT_ERRORS
+      at demand (C:\Users\user\source\Grape\production\src\sdk\kernel.ts:12:18)
+      at Graph.change (C:\Users\user\source\Grape\production\src\model\graph.ts:451:9)
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-values.test.ts:199:18)
+      at async Test.run (node:internal/test_runner/test:1116:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    code: 'IMPORT_ERRORS'
+  }
+
+test at production\tests\unit\s05-values.test.ts:66:3
+✖ S05 fixed vec3: bad payloads unused errors atomic commands fixed source and constant distinction (3.0856ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-values.test.ts:117:12)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at production\tests\unit\s05-values.test.ts:140:3
+✖ S05 fixed vec3: scoped two-context edits one Undo and stale token preserve History (1.7142ms)
+  CONTEXT_MISSING: CONTEXT_MISSING
+      at demand (C:\Users\user\source\Grape\production\src\sdk\kernel.ts:12:18)
+      at EditorApplication.context (C:\Users\user\source\Grape\production\src\application\editor.ts:645:7)
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-values.test.ts:151:19)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    code: 'CONTEXT_MISSING'
+  }
+
+test at production\tests\unit\s05-values.test.ts:182:3
+✖ S05 fixed vec3: shared Function and Personal owner closure retain exact values (20.1373ms)
+  IMPORT_ERRORS: IMPORT_ERRORS
+      at demand (C:\Users\user\source\Grape\production\src\sdk\kernel.ts:12:18)
+      at Graph.change (C:\Users\user\source\Grape\production\src\model\graph.ts:451:9)
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-values.test.ts:199:18)
+      at async Test.run (node:internal/test_runner/test:1116:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    code: 'IMPORT_ERRORS'
+  }
+
+test at production\tests\unit\s05-values.test.ts:66:3
+✖ S05 fixed color: bad payloads unused errors atomic commands fixed source and constant distinction (3.0512ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-values.test.ts:117:12)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at production\tests\unit\s05-values.test.ts:140:3
+✖ S05 fixed color: scoped two-context edits one Undo and stale token preserve History (1.5781ms)
+  CONTEXT_MISSING: CONTEXT_MISSING
+      at demand (C:\Users\user\source\Grape\production\src\sdk\kernel.ts:12:18)
+      at EditorApplication.context (C:\Users\user\source\Grape\production\src\application\editor.ts:645:7)
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-values.test.ts:151:19)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    code: 'CONTEXT_MISSING'
+  }
+
+test at production\tests\unit\s05-values.test.ts:182:3
+✖ S05 fixed color: shared Function and Personal owner closure retain exact values (19.7429ms)
+  IMPORT_ERRORS: IMPORT_ERRORS
+      at demand (C:\Users\user\source\Grape\production\src\sdk\kernel.ts:12:18)
+      at Graph.change (C:\Users\user\source\Grape\production\src\model\graph.ts:451:9)
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\s05-values.test.ts:199:18)
+      at async Test.run (node:internal/test_runner/test:1116:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:786:7) {
+    code: 'IMPORT_ERRORS'
+  }
+(node:51268) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

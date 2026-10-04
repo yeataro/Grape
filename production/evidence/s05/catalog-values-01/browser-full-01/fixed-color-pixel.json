@@ -1,0 +1,199 @@
+{
+  "leaf": "color",
+  "stage": "pixel",
+  "document": {
+    "format": "grape.document",
+    "formatVersion": {
+      "major": 2,
+      "minor": 1
+    },
+    "graph": {
+      "id": "410a0cc9-8c90-4df6-b41e-f21d9a256c67",
+      "name": "Untitled shader",
+      "kind": {
+        "moduleId": "grape.graph-kinds",
+        "version": "0.2.0",
+        "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+        "kindId": "grape.image"
+      },
+      "kindSettings": {},
+      "modules": [
+        {
+          "moduleId": "grape.nodes.basic",
+          "version": "0.1.0",
+          "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292"
+        },
+        {
+          "moduleId": "grape.nodes.fixed-values",
+          "version": "0.1.0",
+          "fingerprint": "sha256:0d75d254ae4654e672001bc326252ab9775c87b581b79c15e6e8d44fee59a6ba"
+        },
+        {
+          "moduleId": "grape.nodes.networks",
+          "version": "0.1.0",
+          "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2"
+        },
+        {
+          "moduleId": "grape.resources.extents",
+          "version": "0.1.0",
+          "fingerprint": "sha256:bcfaaca3ef01c57070e05b26e09bbcacde5d51f6ba0091b8b6aaf3d83efa3c60"
+        },
+        {
+          "moduleId": "grape.resources.image-sources",
+          "version": "0.2.0",
+          "fingerprint": "sha256:bb0ff902b36d7a07fc104412d0ccb11e4e7efed0106aa3c8595026dbcef8b212"
+        },
+        {
+          "moduleId": "grape.resources.function-networks",
+          "version": "0.1.0",
+          "fingerprint": "sha256:25d291427adb77405f826a636cd2a7c9a5851f0017cb779ced1a13e5a9b0b9e7"
+        },
+        {
+          "moduleId": "grape.nodes.function-operations",
+          "version": "0.1.0",
+          "fingerprint": "sha256:86501aa76e15aa05f3837ec050f2f883ab6aba6932e4ee59998a864432435b01"
+        },
+        {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.1.0",
+          "fingerprint": "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3"
+        },
+        {
+          "moduleId": "grape.nodes.image-output",
+          "version": "0.2.0",
+          "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+        },
+        {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.2.0",
+          "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+        }
+      ],
+      "stages": [
+        {
+          "id": "3ea1d65c-8614-455f-909b-89502e9fab65",
+          "key": "vertex",
+          "stageKindId": "grape.stage.vertex",
+          "implementation": "profile-default",
+          "network": {
+            "id": "c1f0f26e-8330-49d4-8d55-d513fa98a1d6",
+            "nodes": [],
+            "edges": [],
+            "extensions": {}
+          },
+          "extensions": {}
+        },
+        {
+          "id": "4286e28a-b1b1-436e-8809-4553f31d0016",
+          "key": "pixel",
+          "stageKindId": "grape.stage.pixel",
+          "implementation": "network",
+          "network": {
+            "id": "0fa77ca1-a9fb-46c5-8619-a2f1cbc5748a",
+            "nodes": [
+              {
+                "id": "ba8d86e1-9116-4440-8af8-8800e1e0848c",
+                "name": "Image output",
+                "type": {
+                  "moduleId": "grape.nodes.image-output",
+                  "version": "0.2.0",
+                  "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+                  "typeId": "image-output"
+                },
+                "state": {},
+                "inputValues": {},
+                "ports": [
+                  {
+                    "key": "color",
+                    "direction": "input",
+                    "type": "glsl.vec4",
+                    "supply": "required",
+                    "connectionPolicy": "numeric"
+                  }
+                ],
+                "references": [],
+                "referencesComplete": true,
+                "position": [
+                  650,
+                  180
+                ],
+                "extensions": {}
+              },
+              {
+                "id": "03bfdb9f-9c81-47a6-a93b-5c556a8111c0",
+                "name": "Color RGBA",
+                "type": {
+                  "moduleId": "grape.nodes.fixed-values",
+                  "version": "0.1.0",
+                  "fingerprint": "sha256:0d75d254ae4654e672001bc326252ab9775c87b581b79c15e6e8d44fee59a6ba",
+                  "typeId": "color"
+                },
+                "state": {
+                  "value": [
+                    0.125,
+                    0.375,
+                    0.625,
+                    0.875
+                  ]
+                },
+                "inputValues": {},
+                "ports": [
+                  {
+                    "key": "out",
+                    "direction": "output",
+                    "type": "glsl.vec4"
+                  }
+                ],
+                "references": [],
+                "referencesComplete": true,
+                "position": [
+                  40,
+                  85
+                ],
+                "extensions": {}
+              }
+            ],
+            "edges": [
+              {
+                "id": "6f22c798-af4b-4438-975c-8eb2422e934e",
+                "from": {
+                  "nodeId": "03bfdb9f-9c81-47a6-a93b-5c556a8111c0",
+                  "portKey": "out"
+                },
+                "to": {
+                  "nodeId": "ba8d86e1-9116-4440-8af8-8800e1e0848c",
+                  "portKey": "color"
+                },
+                "adaptation": {
+                  "schema": "grape.edge-adaptation",
+                  "version": 1,
+                  "sourceType": "glsl.vec4",
+                  "targetType": "glsl.vec4",
+                  "operation": "identity",
+                  "extensions": {}
+                },
+                "extensions": {}
+              }
+            ],
+            "extensions": {}
+          },
+          "extensions": {}
+        }
+      ],
+      "resources": [],
+      "losses": [],
+      "recovery": [],
+      "extensions": {}
+    }
+  },
+  "operations": [
+    "public create",
+    "every component edit",
+    "one-component Undo/Redo",
+    "nonfinite rejection and Escape",
+    "fixed out connection",
+    "Generate",
+    "save/reopen",
+    "JSON export/file review/new session"
+  ]
+}

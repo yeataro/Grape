@@ -1,0 +1,26 @@
+{
+  "attempts": [
+    {
+      "run": "prepare-review.mjs",
+      "status": "FAILED_SETUP_ASSUMPTION",
+      "reason": "Attempted to resolve post-R Coordinator collection receipt as R blob. Verified exact operational receipt read-only in main; 1902 bytes and packet SHA match. Original script and setup-attempt-01.json retained."
+    },
+    {
+      "run": "checks-01/unit-conformance.log",
+      "status": "235_CASES_PASS_PLUS_ONE_FIXTURE_LOAD_FAILURE",
+      "reason": "Reviewer runtime omitted existing legacy-owner fixture; add-fixtures.mjs verified exact R bytes, copied into runtime and only 4 previously unexecuted S05 replacement tests passed in unit-missing-fixture-rerun.log. Total unique completed unit/conformance cases239."
+    },
+    {
+      "run": "archive-affected-01",
+      "status": "51_PASS_4_FIXTURE_LOAD_FAILURES",
+      "reason": "Reviewer runtime omitted existing 14-Multiply fixture. Original raw errors/traces/screenshots retained. Exact R fixture copied and only four natural Escape cases rerun at archive-escape-02, allPASS."
+    },
+    {
+      "run": "reviewer-public-01",
+      "status": "1_PASS_2_COLLECTOR_LOCATOR_FAILURES",
+      "reason": "Reviewer requested a closed native dialog by visible role while collecting old handle. Both long-loss flows completed pre-load assertions but stopped at elementHandle timeout; collector corrected to explicit hidden dialog locator. Original results/screenshots/traces preserved; reviewer-public-02 reruns only those2 lifecycle cases, bothPASS."
+    }
+  ],
+  "notProductRepairRounds": true,
+  "noCounterReset": true
+}

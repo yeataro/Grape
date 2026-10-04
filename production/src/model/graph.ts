@@ -1169,7 +1169,12 @@ export class Draft {
       this.#replacing = true;
     });
   }
-  add(networkId: string, ref: NodeTypeRef, position: [number, number]): string {
+  add(
+    networkId: string,
+    ref: NodeTypeRef,
+    position: [number, number],
+    parameters: Readonly<Record<string, Json>> = {},
+  ): string {
     return this.run(() => {
       this.fork(networkId);
       const network = findNetwork(this.document, networkId, this.definitions),
@@ -1193,7 +1198,37 @@ export class Draft {
             )),
         "NODE_ELIGIBILITY",
       );
-      const node = this.make(def, def.initialize(), position, network);
+      plain(parameters);
+      demand(
+        parameters &&
+          typeof parameters === "object" &&
+          !Array.isArray(parameters),
+        "PARAMETER_VALUE",
+      );
+      const initial = def.initialize();
+      plain(initial);
+      const state = structuredClone(initial);
+      for (const [key, value] of Object.entries(parameters)) {
+        const spec = def
+          .parameters(
+            detached(state),
+            modelContext(this.document, this.definitions),
+          )
+          .find((p) => p.key === key);
+        demand(spec, "PARAMETER_MISSING");
+        demand(
+          spec.target === "state" &&
+            spec.type === "choice" &&
+            spec.choices?.some((v) => equal(v, value)),
+          "PARAMETER_VALUE",
+        );
+        demand(
+          state && typeof state === "object" && !Array.isArray(state),
+          "STATE_RECORD",
+        );
+        state[key] = structuredClone(value);
+      }
+      const node = this.make(def, state, position, network);
       network.nodes.push(node);
       return node.id;
     });

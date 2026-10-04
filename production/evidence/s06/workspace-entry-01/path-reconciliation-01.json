@@ -1,0 +1,48 @@
+{
+  "actionKey": "yeataro/Grape:S06:workspace-entry:ad31676:01",
+  "status": "COORDINATOR_PATH_RECONCILIATION_REQUIRED",
+  "workflowStatus": "IMPLEMENTING; not a Human product/architecture decision or independent technical review",
+  "packet": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/implementer-packet-01.json",
+    "bytes": 14605,
+    "sha256": "f1780732ae23680a21ac8602d4eeffb861e8988541cda3d703f67258b12fd082"
+  },
+  "requiredBehavior": "LC-UI-034/036 existing owner typed wired creation: preview, accepted variant and connection must agree in one Graph operation",
+  "requestedAdditionalPath": "production/src/model/graph.ts",
+  "reason": "The packet explicitly lists allowed paths but omits model/. Required configured initial state must remain Graph-owned before schema and connection planning. Current add initializes Compose vec4 despite the admitted preview choosing vec2. Existing parameter mutation reconciles the schema after the transaction callback; using it before connect retains stale connection planning. Clipboard/whole-document replacement is not a correct substitute for ordinary draft creation.",
+  "counterexample": {
+    "file": "production/evidence/s06/workspace-entry-01/configured-creation-counterexample-01.json",
+    "bytes": 10743,
+    "sha256": "97f7ce83b721c9293f76360a00575a25c33017ae9035850559d43493459a6b1a"
+  },
+  "unappliedProposal": {
+    "file": "production/evidence/s06/workspace-entry-01/configured-creation-proposal-02.patch",
+    "bytes": 2888,
+    "sha256": "24b6797a2f384e01b79e7dbb112ab4fffcdc7fb5de34fef54ec7c53628303d0a"
+  },
+  "disposableResult": {
+    "file": "production/evidence/s06/workspace-entry-01/configured-creation-proposal-result-02.json",
+    "bytes": 1574,
+    "sha256": "ba5435b12492f3be29f7331181c4fb779c7ff888c84468ef75bc45ee8eda81fd"
+  },
+  "proposalCheck": "git apply --check passed against current dirty Application source and unchanged production model",
+  "productionModelUnmodified": {
+    "file": "production/src/model/graph.ts",
+    "bytes": 83854,
+    "sha256": "03960bdcfefe003997b8f8606ad386eabe8b4850a0b0447f2212499bade8a3ef"
+  },
+  "next": "Coordinator clarify only the necessary existing Graph Draft.add initial state-choice path, keeping original scope/counters. Same writer applies/tests the prepared change, adds a public wired-vec2 regression, reruns affected checks, then creates actual I/R and fresh final archive/manifests. Do not route the current preintegration state as review-ready.",
+  "newProductDecision": false,
+  "newLeaf": false,
+  "architectureConflict": false,
+  "independentPass": false,
+  "implementationI": null,
+  "submissionR": null,
+  "attempt": 1,
+  "transientRetries": 0,
+  "usageRecovery": 1,
+  "escape": {
+    "repairAttempt": 1,
+    "unsuccessfulRounds": 0
+  }
+}

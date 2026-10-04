@@ -1,0 +1,444 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+      "s06-status-pointer.spec.ts",
+      "--output",
+      "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/workspace-repair-03/baseline-01/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s06-status-pointer.spec.ts",
+      "file": "s06-status-pointer.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 complete persistent loss details have a keyboard read path at 620",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30057,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                        "column": 83,
+                        "line": 39
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').first().getByRole('heading', { name: 'Shared arithmetic', exact: true }).last()\u001b[22m\n\n\n  37 |   await page.getByRole(\"button\", { name: \"Open in new session\", exact: true }).click();\n  38 |   const c = page.locator(\".canvas\").first();\n> 39 |   await c.getByRole(\"heading\", { name: \"Shared arithmetic\", exact: true }).last().click();\n     |                                                                                   ^\n  40 |   await c.getByRole(\"button\", { name: \"Enter subgraph\", exact: true }).click();\n  41 |   await c.getByText(\"Subgraph interface\", { exact: true }).click();\n  42 |   const before = await doc(page);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:39:83"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:50:16.380Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-b0805a555fd463f6023d",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 33,
+          "column": 34
+        },
+        {
+          "title": "S06 complete persistent loss details have a keyboard read path at 1440",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30077,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                        "column": 83,
+                        "line": 39
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').first().getByRole('heading', { name: 'Shared arithmetic', exact: true }).last()\u001b[22m\n\n\n  37 |   await page.getByRole(\"button\", { name: \"Open in new session\", exact: true }).click();\n  38 |   const c = page.locator(\".canvas\").first();\n> 39 |   await c.getByRole(\"heading\", { name: \"Shared arithmetic\", exact: true }).last().click();\n     |                                                                                   ^\n  40 |   await c.getByRole(\"button\", { name: \"Enter subgraph\", exact: true }).click();\n  41 |   await c.getByText(\"Subgraph interface\", { exact: true }).click();\n  42 |   const before = await doc(page);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:39:83"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:50:47.052Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-07afa74c943b601bb29e",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 33,
+          "column": 34
+        },
+        {
+          "title": "S06 actual 3px uncaptured port release across Canvas Inspector retires wire and ring",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1060,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:100:26",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                      "column": 26,
+                      "line": 100
+                    },
+                    "snippet": "   98 |   save(\"tiny-cross-boundary\", { start: a, release: { x: a.x + 3, y: a.y }, canvas: cr, during, released, returned });\n   99 |   await page.screenshot({ path: path.join(evidence, \"tiny-cross-boundary.png\") });\n> 100 |   expect(released.paths).toBe(0); expect(released.rings).toBe(0); expect(returned.paths).toBe(0); expect(returned.rings).toBe(0);\n      |                          ^\n  101 |   expect(await doc(page)).toEqual(before);\n  102 |   await clickAction(page, \"Undo\"); await expect(c.getByRole(\"heading\", { name: \"Color RGBA\", exact: true })).toHaveCount(0);\n  103 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                        "column": 26,
+                        "line": 100
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n\n   98 |   save(\"tiny-cross-boundary\", { start: a, release: { x: a.x + 3, y: a.y }, canvas: cr, during, released, returned });\n   99 |   await page.screenshot({ path: path.join(evidence, \"tiny-cross-boundary.png\") });\n> 100 |   expect(released.paths).toBe(0); expect(released.rings).toBe(0); expect(returned.paths).toBe(0); expect(returned.rings).toBe(0);\n      |                          ^\n  101 |   expect(await doc(page)).toEqual(before);\n  102 |   await clickAction(page, \"Undo\"); await expect(c.getByRole(\"heading\", { name: \"Color RGBA\", exact: true })).toHaveCount(0);\n  103 | });\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:100:26"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:51:17.700Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-act-04bca-ector-retires-wire-and-ring-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-act-04bca-ector-retires-wire-and-ring-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-act-04bca-ector-retires-wire-and-ring-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                    "column": 26,
+                    "line": 100
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-b426a004c4317647ca96",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 87,
+          "column": 1
+        },
+        {
+          "title": "S06 trusted Enter socket activation waits for real pointer and preserves keyboard connection",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 614,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: not \u001b[32m/,0 -176.1875$/\u001b[39m\nReceived string:      \u001b[31m\"M261.5 263.5 C331.5 263.5,-70 -176.1875\u001b[7m,0 -176.1875\u001b[27m\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: not \u001b[32m/,0 -176.1875$/\u001b[39m\nReceived string:      \u001b[31m\"M261.5 263.5 C331.5 263.5,-70 -176.1875\u001b[7m,0 -176.1875\u001b[27m\"\u001b[39m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:112:40",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                      "column": 40,
+                      "line": 112
+                    },
+                    "snippet": "  110 |   save(`keyboard-${key}`, { pending, canvas: cr });\n  111 |   await expect(c.locator(\".canvas-notice\")).toContainText(\"opposite port\");\n> 112 |   if (pending.d) expect(pending.d).not.toMatch(new RegExp(`,0 ${-cr.y}$`));\n      |                                        ^\n  113 |   expect(pending.paths).toBe(0);\n  114 |   await page.mouse.move(cr.x + 450, cr.y + 180, { steps: 5 });\n  115 |   await expect(c.locator(\".connection-preview path\")).toHaveCount(1);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                        "column": 40,
+                        "line": 112
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: not \u001b[32m/,0 -176.1875$/\u001b[39m\nReceived string:      \u001b[31m\"M261.5 263.5 C331.5 263.5,-70 -176.1875\u001b[7m,0 -176.1875\u001b[27m\"\u001b[39m\n\n  110 |   save(`keyboard-${key}`, { pending, canvas: cr });\n  111 |   await expect(c.locator(\".canvas-notice\")).toContainText(\"opposite port\");\n> 112 |   if (pending.d) expect(pending.d).not.toMatch(new RegExp(`,0 ${-cr.y}$`));\n      |                                        ^\n  113 |   expect(pending.paths).toBe(0);\n  114 |   await page.mouse.move(cr.x + 450, cr.y + 180, { steps: 5 });\n  115 |   await expect(c.locator(\".connection-preview path\")).toHaveCount(1);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:112:40"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:51:19.370Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-tru-28233-eserves-keyboard-connection-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-tru-28233-eserves-keyboard-connection-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-tru-28233-eserves-keyboard-connection-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                    "column": 40,
+                    "line": 112
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-546b82f73f21e4b338e9",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 105,
+          "column": 39
+        },
+        {
+          "title": "S06 trusted Space socket activation waits for real pointer and preserves keyboard connection",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 594,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: not \u001b[32m/,0 -176.1875$/\u001b[39m\nReceived string:      \u001b[31m\"M261.5 263.5 C331.5 263.5,-70 -176.1875\u001b[7m,0 -176.1875\u001b[27m\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: not \u001b[32m/,0 -176.1875$/\u001b[39m\nReceived string:      \u001b[31m\"M261.5 263.5 C331.5 263.5,-70 -176.1875\u001b[7m,0 -176.1875\u001b[27m\"\u001b[39m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:112:40",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                      "column": 40,
+                      "line": 112
+                    },
+                    "snippet": "  110 |   save(`keyboard-${key}`, { pending, canvas: cr });\n  111 |   await expect(c.locator(\".canvas-notice\")).toContainText(\"opposite port\");\n> 112 |   if (pending.d) expect(pending.d).not.toMatch(new RegExp(`,0 ${-cr.y}$`));\n      |                                        ^\n  113 |   expect(pending.paths).toBe(0);\n  114 |   await page.mouse.move(cr.x + 450, cr.y + 180, { steps: 5 });\n  115 |   await expect(c.locator(\".connection-preview path\")).toHaveCount(1);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                        "column": 40,
+                        "line": 112
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: not \u001b[32m/,0 -176.1875$/\u001b[39m\nReceived string:      \u001b[31m\"M261.5 263.5 C331.5 263.5,-70 -176.1875\u001b[7m,0 -176.1875\u001b[27m\"\u001b[39m\n\n  110 |   save(`keyboard-${key}`, { pending, canvas: cr });\n  111 |   await expect(c.locator(\".canvas-notice\")).toContainText(\"opposite port\");\n> 112 |   if (pending.d) expect(pending.d).not.toMatch(new RegExp(`,0 ${-cr.y}$`));\n      |                                        ^\n  113 |   expect(pending.paths).toBe(0);\n  114 |   await page.mouse.move(cr.x + 450, cr.y + 180, { steps: 5 });\n  115 |   await expect(c.locator(\".connection-preview path\")).toHaveCount(1);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:112:40"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:51:20.547Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-tru-3e260-eserves-keyboard-connection-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-tru-3e260-eserves-keyboard-connection-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\baseline-01\\test-results\\s06-status-pointer-S06-tru-3e260-eserves-keyboard-connection-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                    "column": 40,
+                    "line": 112
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-09a2810c05fb1e2d8096",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 105,
+          "column": 39
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T12:50:16.035Z",
+    "duration": 65439.651,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 5,
+    "flaky": 0
+  }
+}

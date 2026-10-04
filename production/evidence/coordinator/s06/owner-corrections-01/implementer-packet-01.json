@@ -1,0 +1,243 @@
+{
+  "packetVersion": 1,
+  "packetType": "IMPLEMENTER_DISPATCH",
+  "packetId": "S06-OWNER-CORRECTIONS-01",
+  "actionKey": "yeataro/Grape:S06:implementation:owner-corrections:a9398e3:01",
+  "recordedAt": "2026-10-04T16:00:34.442Z",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0826de5a9cca7cf200d843435985a7dc624634a2",
+  "acceptedMain": "ad31676b555120cf455fc2a7677be38791b62b64",
+  "expectedWorkHead": "a9398e38a053c605e12889d10a27d2f8c33a9506",
+  "PR": "NONE",
+  "authorizationRef": {
+    "file": "production/evidence/coordinator/s06/owner-corrections-01/human-control-01.json",
+    "bytes": 9106,
+    "sha256": "b1e1efcb141795df3555a10ff62783669f26831b6787ad35d56b0ad0e7f75527"
+  },
+  "sliceId": "S06",
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "displayTitle": "Grape S06 實作與維護",
+    "stateMaintainer": "same original Implementer",
+    "verified": "Completed STOP_WRITING cursor1077; original parent idle cursor238. Same logical writer, no replacement."
+  },
+  "startingBaseline": {
+    "implementationI": "e8c477ec511637f71646b79272422c72e40bd680",
+    "submittedR": "a9398e38a053c605e12889d10a27d2f8c33a9506",
+    "build": "S06-debug-e8c477e",
+    "review": "NOT_REVIEWED; Human now requests follow-up correction before AI review"
+  },
+  "scope": "Implement exactly accepted Owner4202 correction items OC01..08/10/11, retaining F2-only and core isolation; self-check and deliver exact local candidate for Human-first inspection.",
+  "requirements": [
+    {
+      "id": "OC01",
+      "name": "Unconnected Image Output",
+      "quote": "當 image output 沒接任何東西的時候，它沒有任何錯誤，因為它輸出的就是零零零零嘛。",
+      "required": "Image Output/color unconnected is valid and emits vec4(0,0,0,0), including alpha zero. No INPUT_REQUIRED for that missing color input. Connected conversion table and mandatory vec4 boundary output remain. Other required inputs and Vertex output do not change.",
+      "contractDelta": "Supersedes only required-connection wording in DEC-GRAPE-002 line44 and AC-GRAPE-001 line67 for the newly versioned adopted Image Output definition. Preserve accepted documents and old exact pins. Record external accepted addendum, use new exact module identity and existing explicit upgrade boundary; never silently repin older documents."
+    },
+    {
+      "id": "OC02",
+      "name": "Full-width compact footer",
+      "quote": "下面的功能狀態列，它就不能佔滿整個螢幕自動排版嘛。就是，會不會覺得很彆扭嗎？下面多一塊東西。",
+      "required": "Single compact functional/status footer spans available viewport width and sits at bottom. Collapsed content reserves no extra blank/shader-output block; remaining height belongs to canvas. Responsive wide/narrow layout, anchored disclosures and existing Locate remain usable in direct and wrapped preview."
+    },
+    {
+      "id": "OC03",
+      "name": "Wire-drop single-click create in place",
+      "quote": "拖拉線再放開的新增節點的意思就是原地新增節點。",
+      "required": "Output port wire released over blank canvas opens compatible creation. A SINGLE click on a node entry creates at the captured wire-release graph coordinate, retaining the existing create/connect transaction. No extra drag or second placement click. Coordinate remains correct under pan/zoom and menu movement/clamping. Abort/invalid target has no partial node/edge/history. Limit this change to this wire-drop route; general Add/Browse modes remain shared and unchanged."
+    },
+    {
+      "id": "OC04",
+      "name": "Input-drop disconnect",
+      "quote": "從 input 拉線到別地方，空的地方再放開是斷線的意思。",
+      "required": "Dragging a CONNECTED input to blank canvas and releasing disconnects that input in one Graph operation/Undo; do not open Create. Escape/cancel/outside-window/invalid-lifetime do not become disconnect. Preserve LC-UI-026 default behavior and other connections."
+    },
+    {
+      "id": "OC05",
+      "name": "Replace enabled by default but configurable",
+      "quote": "我們預設接線的 replace 是啟開的，好不好？但這個終究是一個參數。",
+      "required": "Default connection replacement is enabled without Shift. Retain an explicit configurable parameter and the disabled/reject-existing behavior, via existing application/view configuration seam. Do not hardcode replace true into every model command or invent a global settings subsystem. Validation, atomicity and single Undo remain."
+    },
+    {
+      "id": "OC06",
+      "name": "No extra replace ring",
+      "quote": "在 replace 上面，你現在有額外的視覺顯示這件事情就不用了。現在外面會多一個圈圈。",
+      "required": "Remove extra replace-specific outer ring. Keep normal port hover and valid wire-target feedback."
+    },
+    {
+      "id": "OC07",
+      "name": "Legacy purple socket feedback",
+      "quote": "我覺得就用Legacy的紫色球球就可以了。就完全模仿它就還蠻好的。",
+      "required": "Use observed Legacy soft translucent purple circular origin/target feedback, preserving solid type-colored socket bodies and distinct ordinary hover versus wire-hit states. This supersedes the earlier tentative blanket50% backdrop instruction. Minimum reusable primitive/state reference only, no copying Legacy rendering architecture, no node geometry shift."
+    },
+    {
+      "id": "OC08",
+      "name": "Legacy-like wire curves",
+      "quote": "現在接線的弧線很不好看，你要參考 Legacy的弧線的感覺。",
+      "required": "Use smooth Legacy-like cubic curves with horizontal endpoint tangents and distance-aware control extent, shared across real/temporary/creation-preview wires where applicable. Preserve endpoint identities, hit paths and zoom/pan correctness. Read observed SVG/CSS only; implement in our own shared geometry primitive."
+    },
+    {
+      "id": "OC10",
+      "name": "F2 capture before modal",
+      "quote": "物件資訊因為那個彈出視窗因為有黑底的關係，應該是因為這樣變成 Canvas。它應該是捕捉按下去的那一刻吧。",
+      "required": "Capture the intended current inspection target and readonly data once at F2 keydown BEFORE opening the modal. Modal/backdrop/focus movement cannot retarget or substitute Canvas. Reproduce physical Node/Port/F2 route and Canvas fallback to distinguish target-selection from capture-timing defect. Preserve F2-only/current keyboard-focus policy and focusA-hoverB guard; do not silently substitute global hovered target. If a distinct target policy question remains, return exact counterexample while finishing unaffected items. Keep optional core-isolated helper and all F2-only lifetime/IME/gesture/readonly guards."
+    },
+    {
+      "id": "OC11",
+      "name": "Bounded selection foreground",
+      "quote": "單選跟多選都一樣，請把它們的層級提高，就是 layer 的層級提高。但我又擔心，這樣子 layer 只會越來越高。",
+      "required": "Selected editable objects, single or multiple, render above unselected peer nodes/objects. Derive a bounded presentation tier from existing selection state; no monotonically increasing z counter. Deselect restores ordinary layer, preserve stable order within each tier and floating-surface priority. Put behavior in proper existing Canvas/presentation consumer of selection; no new Graph field, dirty/History entry, layout shift, wholesale node remount or duplicated selection manager. Check repeated selection and overlapping nodes/controls/ports."
+    }
+  ],
+  "excluded": [
+    "No automatic code generation/Updates/incremental compiler; withdrawnOC09 stays withdrawn.",
+    "No new right-click socket pointer-follow second-click creation route; deferred only. Existing general Add/Browse behavior/shared panel retained except explicit wire-drop immediate-placement route.",
+    "No broad multi-workspace/new catalog/Host/publish/merge/newSlice.",
+    "No AI independent review now; do not spawn/request reviewer or label independentPASS.",
+    "No global high-water z-index counter, selection model duplication, Graph presentation fields, hidden core devtool dependency."
+  ],
+  "inputRefs": [
+    {
+      "file": "production/evidence/coordinator/s06/owner-corrections-01/human-control-01.json",
+      "bytes": 9106,
+      "sha256": "b1e1efcb141795df3555a10ff62783669f26831b6787ad35d56b0ad0e7f75527"
+    },
+    {
+      "file": "production/evidence/coordinator/s06/owner-corrections-01/legacy-observation-01.json",
+      "bytes": 2316,
+      "sha256": "178b8ee41c0131a3b343f73e510ed95c25ab8a39e72722f9efbbff2c32784e4d"
+    },
+    {
+      "file": "production/evidence/coordinator/s06/owner-corrections-01/owner-images-01.json",
+      "bytes": 1267,
+      "sha256": "bb4486ddd8ad7bd8057cd2ccb2eb8e7b498d1d309722526439c3c0c241345159"
+    },
+    {
+      "file": "production/evidence/coordinator/s06/owner-corrections-01/f2-collection-01.json",
+      "bytes": 3252,
+      "sha256": "31f7f459bea60a6a61e6b25e7deec8b4b3233e9b7e11665f883a973835400888"
+    },
+    {
+      "file": "production/evidence/s06/f2-only-01/submission-01.json",
+      "bytes": 20358,
+      "sha256": "2f3bf0cd5f91f061b6c6f2cab6d1f407fed94c76ba95b976fb75c6d6dafcddbd"
+    },
+    {
+      "file": ".verification/s06-f2-submission-result-01.json",
+      "bytes": 256982,
+      "sha256": "e69616be788661efd0147346612345dd613f589d8dd101fd401785f5f1ee2245"
+    },
+    {
+      "file": "decisions/DEC-GRAPE-002.md",
+      "bytes": 8075,
+      "sha256": "ef2492ba16e5c96cede2d9b70e638033f80ecb7825b2d2c8c2dbe36d24fad848"
+    },
+    {
+      "file": "decisions/AC-GRAPE-001.md",
+      "bytes": 9288,
+      "sha256": "00c21f29fb66c07e1db1a7ea6dce2dbffadb47682c534f3019e2dc984057be00"
+    },
+    {
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-f2-only-01.json",
+      "bytes": 3211,
+      "sha256": "3485a4d5c7f81ef49d3999fe0abeb631c2324f34ebf790cc924c488fbb5b26ac"
+    },
+    {
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-inspection-isolation-01.json",
+      "bytes": 2991,
+      "sha256": "3d9b9d0309169c762f13360af9ec57c5aef3861f3bf55c3a641239cd22a58871"
+    }
+  ],
+  "contractRefs": [
+    "README.md",
+    "AGENTS.md",
+    "workflow/COORDINATOR.md",
+    "workflow/RUNBOOK.md",
+    "workflow/PACKETS.md",
+    "handoff/04_EXTENSION_MODEL.md",
+    "handoff/13_PRODUCTION_CONTRACT_SURFACE.md",
+    "handoff/14_DOCUMENT_FORMAT.md",
+    "handoff/16_VIEW_MOUNT_CONTRACT.md",
+    "handoff/17_PANEL_COMMAND_CONTRACT.md",
+    "handoff/compatibility/behavior-contracts.md LC-UI-001/002/026 and relevant create/connection rules",
+    "decisions/DEC-GRAPE-002.md",
+    "decisions/AC-GRAPE-001.md"
+  ],
+  "contractHandling": "OC01 direct Human decision changes required connection only; record separate external amendment and exact versioning using original state maintainer. Do not modify frozen handoff or overwrite accepted decision bytes. General required-port, boundary-required vec4, conversions/exact capability, CAS/History/lifetime remain. Any genuinely unresolved product change is isolated with counterexample; no repeat approval for zero fallback or Human-first order.",
+  "allowedPaths": [
+    "Relevant production node definitions/exact module registration and supported upgrade code for OC01",
+    "Current Canvas/node-browser/shared wire geometry/port state/footer/floating/F2 presentation",
+    "Affected tests, reproducible build/guide and production/evidence/s06/owner-corrections-01",
+    "New external decision/amendment and original-maintainer state/README registration",
+    "Exact Coordinator receipt/evidence persistence"
+  ],
+  "prohibitedPaths": [
+    "handoff/**",
+    "Historical accepted/review/raw evidence modifications",
+    "Unrelated Human untracked work",
+    "Remote refs/settings or existing Human preview services"
+  ],
+  "verification": [
+    "Root read-only bootstrap/current-state/fixtures using Node25.5.0",
+    "Production typecheck/conformance and meaningful affected unit/browser self-checks",
+    "New ImageOutput zero RGBA, connected conversion behavior, old exact pin rejection/preservation and new doc roundtrip",
+    "Physical output wire-release single-click placement with nondefault pan/zoom; connected input empty-drop single Undo/cancel; replace default on and configurable off",
+    "Direct/wrapped wide/narrow full-height footer without blank lower block; status/Locate/popup return",
+    "Socket type/body/hover-target and no extra replace ring; shared real/temp curve endpoints and geometry",
+    "F2 before-modal identity/read-once and optional-helper faults, normal editing unaffected",
+    "Single/multi selection overlap and repeated12000 selection changes with bounded layer values; no dirty/history/layout/focus regressions"
+  ],
+  "submission": "New I and R, buildId, source/config/evidence/archive manifests with byte hashes, meaningful self-test results and retained failures/counters, exact change list and simple Human test guide. New external postcommit receipt may bind R without recursive tracked rewrite. All delivered evidence must be Git-reachable at R. Status READY_FOR_HUMAN_PREVIEW_NOT_INDEPENDENTLY_REVIEWED; STOP_WRITING.",
+  "delivery": "Coordinator will deploy exact submitted archive to a new loopback port after collection. Provide archive/guide/sample URLs content and verify own disposable listener; never alter4202 or older Human/Legacy sessions. No LAN/Tailscale prerequisite. Root will verify serving identity and basic delivery, not pretend Fresh Review.",
+  "initialMaintenance": [
+    "Preserve F2-only I/R and all pending submission evidence; old PASS stays I528c4f7/R571f04a.",
+    "Persist this exact Human control, observed references, images, collection and dispatch receipts; original state maintainer registers actual new decisions/progress only. acceptedEvidence unchanged.",
+    "No wholeS06 completion or acceptance. Save deferred right-click reference explicitly unassigned."
+  ],
+  "priorActionReceipt": {
+    "file": "production/evidence/coordinator/s06/owner-corrections-01/f2-collection-01.json",
+    "bytes": 3252,
+    "sha256": "31f7f459bea60a6a61e6b25e7deec8b4b3233e9b7e11665f883a973835400888"
+  },
+  "attempt": {
+    "ownerCorrectionRound": 1,
+    "inheritedCounters": {
+      "implementationAttempt": 2,
+      "transientRetries": 0,
+      "unsuccessfulRepairReReviewRounds": 0,
+      "distinctIdentityBasis": "New Human-authorized debug-hover feature after all three workspace-entry review3 findings closed at I4/R4. This does not rename or reset the old group.",
+      "retainedPriorGroup": {
+        "id": "S06-FG-WORKSPACE-ENTRY-01",
+        "reviewAttempt": 4,
+        "repairRound": 3,
+        "unsuccessfulRepairReReviewRounds": 2,
+        "currentScopedVerdict": "PASS"
+      },
+      "retainedEscape": {
+        "id": "S05-FG-ESCAPE-FOCUS-01",
+        "repairAttempt": 1,
+        "unsuccessfulRepairReReviewRounds": 0
+      },
+      "policy": "Two transient retries maximum; third unsuccessful repair/re-review routes technical diagnosis, no restart reset.",
+      "reviewAttempt": 2,
+      "repairRound": 1,
+      "automaticBrowserRetries": 0,
+      "explanation": "This is the first independent review of the new debug-hover feature. Initial technical FAIL does not count as an unsuccessful repair/re-review. Diagnosed reviewer runtime/launcher corrections above are explicitly retained, not resets of product repair counters.",
+      "reviewerOperationalCorrections": 2,
+      "comment": "SameS06-FG-DEBUG-HOVER-01 repairRound1/reviewAttempt2. Both original findings close here. Retained prior group unsuccessful rounds2 and originalS05Escape record remain unchanged; no counter reset.",
+      "nextReviewAttempt": 3,
+      "revisionReason": "Human accepted F2-only requirement after successful repairRound1/review2. This is a requirement revision, not an unsuccessful repair or reset; retain all historical operational correction counts."
+    },
+    "basis": "New direct Owner correction set, not a failed independent repair/re-review; no old counter reset."
+  },
+  "findingGroup": "S06-OWNER-4202-CORRECTIONS-01 with inherited S06-FG-DEBUG-HOVER-01 budgets intact",
+  "environment": "Node25.5.0 / Playwright1.62.1 / WindowsChromium151 SwiftShader; report actual profile. Existing services4193..4202 preserved. If sandbox1909 occurs use standard approval route, no bypass/settings change.",
+  "nextRoute": "HUMAN_PREVIEW_FIRST; DO_NOT_START_AI_REVIEW until later explicit Owner go-ahead",
+  "stopConditions": "After exact local submission STOP_WRITING. No publication/merge, second writer, independent review or next batch. Pause only affected branch on real authority/contract/integrity failure.",
+  "outputLocation": "production/evidence/s06/owner-corrections-01/submission-01.json; parent transport receipt under current Coordinator action directory",
+  "provenance": "Direct Human current thread quotes; source messageIDs unavailable. Live Legacy visual data read only. Coordinator has not implemented or independently reviewed products."
+}

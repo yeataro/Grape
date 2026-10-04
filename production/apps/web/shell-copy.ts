@@ -11,7 +11,7 @@ const messages = {
   documentActions: "Document actions",
   hostFree: "Host-free",
   connections:
-    "Click an output port, then an input to connect. Shift-click replaces a connection.",
+    "Click an output port, then an input to connect. Existing connections are replaced by default.",
   navigation: "Scroll to zoom · Drag empty space to pan",
   new: "New document",
   save: "Save",

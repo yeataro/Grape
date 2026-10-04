@@ -1,0 +1,57 @@
+
+Running 15 tests using 1 worker
+
+(node:60020) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › ..\..\..\production\tests\browser\s06-brand-info.spec.ts:5:3 › S06 brand identity and updates stay in one header at 620 (518ms)
+  ok  2 [chromium] › ..\..\..\production\tests\browser\s06-brand-info.spec.ts:5:3 › S06 brand identity and updates stay in one header at 1440 (336ms)
+  ok  3 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover-lifetime.spec.ts:5:1 › S06 diagnostic mount revoke hide move update and late callback cannot revive old object data (572ms)
+  ok  4 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:57:1 › S06 normal debug normal checkbox preserves graph history selection and covers built-in objects (2.2s)
+  ok  5 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:115:1 › S06 scalar and vector committed values stay distinct from unfinished drafts and IME guards (1.4s)
+  ok  6 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:168:1 › S06 hover detail invalidation follows selection stage deletion Undo and same-ID reopen (1.2s)
+  ok  7 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:213:1 › S06 pending connection and held gesture reject preference changes while readonly inspection remains (1.6s)
+  ok  8 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:256:3 › S06 preference malformed visibly falls back without touching other keys (259ms)
+  ok  9 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:256:3 › S06 preference denied visibly falls back without touching other keys (297ms)
+  ok 10 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:256:3 › S06 preference read-denied visibly falls back without touching other keys (276ms)
+  ok 11 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:311:1 › S06 diagnostic preference persists separately and rapid hover performs no per-move capture or serialization (2.2s)
+  ok 12 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:354:1 › S06 keyboard details and bounded long owner data are readable without selection layout changes (1.2s)
+  ok 13 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:404:1 › S06 another field draft cannot mask active composition when reading details (512ms)
+  ok 14 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:439:1 › S06 saving blocks preference changes without discarding current document (887ms)
+  x  15 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:480:1 › S06 debug target follows nested occurrence and independent Canvas navigation (30.1s)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:480:1 › S06 debug target follows nested occurrence and independent Canvas navigation 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('.canvas').nth(1).locator('article[aria-label="Subgraph 2"] h3')
+
+
+      499 |     .getByRole("button", { name: "Enter subgraph", exact: true })
+      500 |     .click();
+    > 501 |   await second.locator('article[aria-label="Subgraph 2"] h3').click();
+          |                                                               ^
+      502 |   await second
+      503 |     .getByRole("button", { name: "Enter subgraph", exact: true })
+      504 |     .click();
+        at C:\Users\user\source\Grape\production\tests\browser\s06-debug-hover.spec.ts:501:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-01\final-focused-01\test-results\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-01\final-focused-01\test-results\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-01\final-focused-01\test-results\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-01\final-focused-01\test-results\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:480:1 › S06 debug target follows nested occurrence and independent Canvas navigation 
+  14 passed (44.5s)

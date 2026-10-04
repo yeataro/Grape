@@ -1,0 +1,1027 @@
+diff --git a/production/tests/browser/create-node.ts b/production/tests/browser/create-node.ts
+index 00d0195..4b80eed 100644
+--- a/production/tests/browser/create-node.ts
++++ b/production/tests/browser/create-node.ts
+@@ -8,6 +8,7 @@ export async function createNode(page: Page, name: string) {
+     fixed = name === "Float (fixed)",
+     label = fixed ? "Float" : name;
+   await browser.getByLabel("Search nodes", { exact: true }).fill(label);
++  await browser.getByLabel("Node source", { exact: true }).selectOption("");
+   if (label === "Float")
+     await browser
+       .getByLabel("Node source", { exact: true })
+@@ -20,7 +21,7 @@ export async function createNode(page: Page, name: string) {
+       v = el.querySelector<HTMLElement>(".viewport")!,
+       m = new DOMMatrix(getComputedStyle(v).transform);
+     return {
+-      x: r.left + m.e + (40 + ((n - 1) % 3) * 205) * m.a,
++      x: r.left + m.e + (40 + ((n - 1) % 3) * 235) * m.a,
+       y: r.top + m.f + (85 + Math.floor((n - 1) / 3) * 225) * m.d,
+     };
+   }, count);
+diff --git a/production/tests/browser/s05-escape-flow.ts b/production/tests/browser/s05-escape-flow.ts
+index 979bebb..53237a8 100644
+--- a/production/tests/browser/s05-escape-flow.ts
++++ b/production/tests/browser/s05-escape-flow.ts
+@@ -80,7 +80,15 @@ export async function naturalEscapeFlow(
+     });
+   const exportDocument = async () => {
+     const downloaded = page.waitForEvent("download");
+-    await app.getByRole("button", { name: "Export JSON", exact: true }).click();
++    const exportButton = app.getByRole("menuitem", {
++      name: "Export JSON",
++      exact: true,
++    });
++    if (!(await exportButton.isVisible()))
++      await app
++        .getByRole("button", { name: "Project actions", exact: true })
++        .click();
++    await exportButton.click();
+     return JSON.parse(
+       fs.readFileSync((await (await downloaded).path())!, "utf8"),
+     );
+diff --git a/production/tests/browser/s06-debug-hover-lifetime.spec.ts b/production/tests/browser/s06-debug-hover-lifetime.spec.ts
+index cca41c4..d3d01ba 100644
+--- a/production/tests/browser/s06-debug-hover-lifetime.spec.ts
++++ b/production/tests/browser/s06-debug-hover-lifetime.spec.ts
+@@ -107,6 +107,7 @@ test("S06 diagnostic mount revoke hide move update and late callback cannot revi
+     ),
+   ).toBe(true);
+   await target.hover();
++  await expect(page.locator(".hover-summary")).toContainText("Lifetime target");
+   await page
+     .getByRole("button", { name: "Read object details", exact: true })
+     .click();
+@@ -121,6 +122,7 @@ test("S06 diagnostic mount revoke hide move update and late callback cannot revi
+   ).toBe(true);
+   await page.mouse.move(1, 1);
+   await target.hover();
++  await expect(page.locator(".hover-summary")).toContainText("Lifetime target");
+   await page
+     .getByRole("button", { name: "Read object details", exact: true })
+     .click();
+@@ -133,12 +135,16 @@ test("S06 diagnostic mount revoke hide move update and late callback cannot revi
+     (window as any).__hoverLifetime.surface.hidden = false;
+     (window as any).__hoverLifetime.move();
+   });
++  await page
++    .getByRole("button", { name: "Shader output", exact: true })
++    .click();
+   await expect(target).toHaveAttribute("data-mount", "2");
+   expect(
+     await page.evaluate(() => (window as any).__hoverLifetime.late()),
+   ).toBe(false);
+   await page.evaluate(() => (window as any).__hoverLifetime.stale());
+   await target.hover();
++  await expect(page.locator(".hover-summary")).toContainText("Lifetime target");
+   await page
+     .getByRole("button", { name: "Read object details", exact: true })
+     .click();
+diff --git a/production/tests/browser/s06-debug-hover.spec.ts b/production/tests/browser/s06-debug-hover.spec.ts
+index 7636336..819314c 100644
+--- a/production/tests/browser/s06-debug-hover.spec.ts
++++ b/production/tests/browser/s06-debug-hover.spec.ts
+@@ -26,6 +26,8 @@ async function documentJSON(p: Page) {
+   return JSON.parse(fs.readFileSync((await (await wait).path())!, "utf8"));
+ }
+ async function read(p: Page) {
++  // Read the settled public hover hint before following its explicit action.
++  await p.waitForTimeout(180);
+   await p
+     .getByRole("button", { name: "Read object details", exact: true })
+     .click();
+@@ -483,6 +485,14 @@ test("S06 debug target follows nested occurrence and independent Canvas navigati
+   await enable(page);
+   for (const name of ["Float", "Multiply", "Compose"])
+     await createNode(page, name);
++  // Keep this multi-port fixture clear of the existing output before connecting.
++  const composeBox = (await page
++    .getByRole("heading", { name: "Compose", exact: true })
++    .boundingBox())!;
++  await page.mouse.move(composeBox.x + 40, composeBox.y + 10);
++  await page.mouse.down();
++  await page.mouse.move(composeBox.x + 40, composeBox.y + 235, { steps: 10 });
++  await page.mouse.up();
+   for (const [a, b] of [
+     ["Float output value", "Multiply input a"],
+     ["Multiply output result", "Compose input x"],
+diff --git a/production/tests/browser/s06-floating.spec.ts b/production/tests/browser/s06-floating.spec.ts
+new file mode 100644
+index 0000000..2e6d726
+--- /dev/null
++++ b/production/tests/browser/s06-floating.spec.ts
+@@ -0,0 +1,224 @@
++import { test, expect } from "@playwright/test";
++import fs from "node:fs";
++import path from "node:path";
++// Public presentation primitive on disposable DOM; not a physical-device qualification.
++test("S06 shared floating consumers bound alignments focus semantics and disposal independently", async ({
++  page,
++}) => {
++  await page.goto("/");
++  await page.evaluate(async () => {
++    const url = "/src/ui/floating.ts",
++      { floatingSurface } = await import(url);
++    const fixture = document.createElement("div");
++    document.body.append(fixture);
++    const consumers = ["start", "end", "modal"].map((kind, i) => {
++      const trigger = document.createElement("button"),
++        content = document.createElement("div");
++      trigger.textContent = "Fixture " + kind;
++      Object.assign(trigger.style, {
++        position: "fixed",
++        left: i * 190 + 20 + "px",
++        bottom: "90px",
++        zIndex: "1000",
++      });
++      fixture.append(trigger);
++      content.tabIndex = 0;
++      content.textContent = "Read-only " + kind;
++      const view = floatingSurface({
++        host: fixture,
++        trigger,
++        content,
++        title: kind + " fixture",
++        closeLabel: "Close " + kind,
++        kind: kind === "modal" ? "modal" : "anchored",
++        align: kind === "end" ? "end" : "start",
++        width: 320,
++        maxHeight: 220,
++        dismissOutside: false,
++      });
++      trigger.onclick = () => view.toggle();
++      return { view, trigger };
++    });
++    (window as any).__floatingFixture = {
++      consumers,
++      dispose: () => {
++        consumers.forEach((c) => c.view.dispose());
++        fixture.remove();
++      },
++    };
++  });
++  await page
++    .getByRole("button", { name: "Fixture start", exact: true })
++    .click();
++  await page.getByRole("button", { name: "Fixture end", exact: true }).click();
++  await expect(
++    page.getByRole("dialog", { name: "start fixture", exact: true }),
++  ).toBeVisible();
++  await page.keyboard.press("Escape");
++  await expect(
++    page.getByRole("button", { name: "Fixture end", exact: true }),
++  ).toBeFocused();
++  await expect(
++    page.getByRole("dialog", { name: "start fixture", exact: true }),
++  ).toBeVisible();
++  const records = [];
++  for (const width of [1440, 620]) {
++    await page.setViewportSize({ width, height: 380 });
++    await expect
++      .poll(async () => {
++        const current = (await page
++          .getByRole("dialog", { name: "start fixture", exact: true })
++          .boundingBox())!;
++        return current.y + current.height;
++      })
++      .toBeLessThanOrEqual(372);
++    const box = await page
++      .getByRole("dialog", { name: "start fixture", exact: true })
++      .boundingBox();
++    const trigger = await page
++      .getByRole("button", { name: "Fixture start", exact: true })
++      .boundingBox();
++    expect(box!.x).toBe(
++      Math.max(8, Math.min(trigger!.x, width - box!.width - 8)),
++    );
++    expect(box!.x).toBeGreaterThanOrEqual(8);
++    expect(box!.x + box!.width).toBeLessThanOrEqual(width - 8);
++    expect(box!.y + box!.height).toBeLessThanOrEqual(372);
++    records.push(box);
++  }
++  await page
++    .getByRole("button", { name: "Fixture modal", exact: true })
++    .click();
++  const modal = page.getByRole("dialog", {
++    name: "modal fixture",
++    exact: true,
++  });
++  for (let i = 0; i < 5; i++) {
++    await page.keyboard.press("Tab");
++    expect(
++      await modal.evaluate((e) => e.contains(document.activeElement)),
++    ).toBe(true);
++  }
++  await page.keyboard.press("Escape");
++  await expect(
++    page.getByRole("button", { name: "Fixture modal", exact: true }),
++  ).toBeFocused();
++  await page.evaluate(() =>
++    (window as any).__floatingFixture.consumers[1].view.dispose(),
++  );
++  await expect(
++    page.getByRole("dialog", { name: "start fixture", exact: true }),
++  ).toBeVisible();
++  await page
++    .getByRole("dialog", { name: "start fixture", exact: true })
++    .getByRole("button", { name: "Close start" })
++    .click();
++  await page
++    .getByRole("button", { name: "Fixture start", exact: true })
++    .click();
++  await expect(
++    page.getByRole("dialog", { name: "start fixture", exact: true }),
++  ).toBeVisible();
++  await page.evaluate(() => (window as any).__floatingFixture.dispose());
++  const late = await page.evaluate(() =>
++    (window as any).__floatingFixture.consumers.map((c: any) => c.view.open()),
++  );
++  expect(late).toEqual([false, false, false]);
++  await expect(page.locator("dialog[aria-label$='fixture']")).toHaveCount(0);
++  fs.writeFileSync(
++    path.join(process.env.GRAPE_EVIDENCE_DIR!, "floating-lifetime.json"),
++    JSON.stringify(
++      {
++        records,
++        late,
++        method:
++          "Multiple real shared consumers; trusted open/Escape/Tab plus explicit synthetic disposal boundary",
++      },
++      null,
++      2,
++    ),
++  );
++});
++
++test("S06 scoped floating presentation is revoked independently across remounts", async ({
++  page,
++}) => {
++  await page.goto("/");
++  const result = await page.evaluate(async () => {
++    const { PresentationSession } = await import("/src/ui/mount.ts");
++    const host = document.createElement("section");
++    document.querySelector("main")!.append(host);
++    const all: any[] = [];
++    const view = {
++      kind: "panel",
++      capture: () => ({}),
++      subscribe: () => () => {},
++      dispose: () => {},
++      mount: (m: any) => {
++        const trigger = document.createElement("button"),
++          content = document.createElement("div");
++        trigger.textContent = "Owned trigger";
++        content.textContent = "Owned content";
++        host.append(trigger);
++        m.scope.own(() => trigger.remove());
++        const options = {
++          host,
++          trigger,
++          content,
++          title: "Owned surface",
++          closeLabel: "Close owned",
++          kind: "anchored",
++          width: 280,
++          maxHeight: 180,
++        };
++        const floating = m.floating(options);
++        all.push({
++          floating,
++          lateCreate: () =>
++            m.floating({ ...options, content: document.createElement("div") }),
++        });
++        return { update: () => {} };
++      },
++    };
++    const s = new PresentationSession(view, {
++      locale: "en",
++      subscribe: () => () => {},
++      resolve: (r: any) => ({ text: r.fallback }),
++    });
++    s.mount({ protocol: "grape.dom.v1", target: host });
++    const opened = all[0].floating.open();
++    s.unmount();
++    const old = all[0].floating.open(),
++      late = all[0].lateCreate().open();
++    s.mount({ protocol: "grape.dom.v1", target: host });
++    const fresh = all[1].floating.open();
++    all[0].floating.close();
++    const independent = all[1].floating.isOpen();
++    s.dispose();
++    const after = all[1].floating.open(),
++      remaining = host.querySelectorAll("dialog").length;
++    host.remove();
++    return { opened, old, late, fresh, independent, after, remaining };
++  });
++  expect(result).toEqual({
++    opened: true,
++    old: false,
++    late: false,
++    fresh: true,
++    independent: true,
++    after: false,
++    remaining: 0,
++  });
++  fs.writeFileSync(
++    path.join(process.env.GRAPE_EVIDENCE_DIR!, "floating-mount-lifetime.json"),
++    JSON.stringify(
++      {
++        method:
++          "Synthetic public PresentationSession lifecycle fixture; no model injection",
++        result,
++      },
++      null,
++      2,
++    ),
++  );
++});
+diff --git a/production/tests/browser/s06-guards.spec.ts b/production/tests/browser/s06-guards.spec.ts
+index 8cc6576..4eb5d9e 100644
+--- a/production/tests/browser/s06-guards.spec.ts
++++ b/production/tests/browser/s06-guards.spec.ts
+@@ -106,7 +106,7 @@ test("S06 Personal search and inspect are readonly, malformed import survives un
+   await page.locator(".nodes [data-direction=input]").click();
+   await page.getByRole("button", { name: "New subgraph", exact: true }).click();
+   await clickAction(page, "Personal Library");
+-  const dialog = page.locator("dialog[open]");
++  const dialog = page.locator("dialog:modal");
+   await page
+     .getByRole("button", { name: "Save selected subgraph", exact: true })
+     .click();
+diff --git a/production/tests/browser/s06-help.spec.ts b/production/tests/browser/s06-help.spec.ts
+index 075d46c..aff05c4 100644
+--- a/production/tests/browser/s06-help.spec.ts
++++ b/production/tests/browser/s06-help.spec.ts
+@@ -2,10 +2,11 @@ import { test, expect, type Page } from "@playwright/test";
+ import fs from "node:fs";
+ import path from "node:path";
+ import { createNode } from "./create-node.ts";
++import { clickAction } from "../fixtures/public-actions.ts";
+ 
+ async function documentOf(page: Page) {
+   const wait = page.waitForEvent("download");
+-  await page.getByRole("button", { name: "Export JSON", exact: true }).click();
++  await clickAction(page, "Export JSON");
+   return JSON.parse(fs.readFileSync((await (await wait).path())!, "utf8"));
+ }
+ test.beforeEach(async ({ page }) => {
+@@ -152,9 +153,7 @@ test("S06 Help Escape Close and reopen consume old gestures and restore usable f
+ test("S06 Help keyboard menu returns focus to Canvas and remains independent across two Canvas contexts", async ({
+   page,
+ }) => {
+-  await page
+-    .getByRole("button", { name: "Second Canvas", exact: true })
+-    .click();
++  await clickAction(page, "Second Canvas");
+   const canvas = page.locator(".canvas").first(),
+     r = (await canvas.boundingBox())!;
+   await page.mouse.click(r.x + 300, r.y + 230);
+@@ -190,15 +189,15 @@ test("S06 Help keyboard menu returns focus to Canvas and remains independent acr
+ test("S06 Help readonly interaction and remounted document retain scoped lifetime", async ({
+   page,
+ }) => {
+-  await page.getByRole("button", { name: "Lock editing", exact: true }).click();
++  await clickAction(page, "Lock editing");
+   const before = await documentOf(page);
+   await page.getByRole("button", { name: "Shortcuts", exact: true }).click();
+   const old = await page.locator("dialog.shortcut-help").elementHandle();
+   await page.keyboard.press("Escape");
+   expect(await documentOf(page)).toEqual(before);
+-  await page.getByRole("button", { name: "Lock editing", exact: true }).click();
++  await clickAction(page, "Lock editing");
+   page.once("dialog", (dialog) => dialog.accept());
+-  await page.getByRole("button", { name: "New document", exact: true }).click();
++  await clickAction(page, "New document");
+   expect(await old!.evaluate((e) => e.isConnected)).toBe(false);
+   await page.getByRole("button", { name: "Shortcuts", exact: true }).click();
+   await old!.evaluate((e) => {
+diff --git a/production/tests/browser/s06-hover-repair.spec.ts b/production/tests/browser/s06-hover-repair.spec.ts
+new file mode 100644
+index 0000000..7d2ef95
+--- /dev/null
++++ b/production/tests/browser/s06-hover-repair.spec.ts
+@@ -0,0 +1,311 @@
++import { test, expect, type Page, type Locator } from "@playwright/test";
++import fs from "node:fs";
++import path from "node:path";
++import { createNode } from "./create-node.ts";
++import { clickAction } from "../fixtures/public-actions.ts";
++const out = process.env.GRAPE_EVIDENCE_DIR!;
++const save = (name: string, value: unknown) =>
++  fs.writeFileSync(
++    path.join(out, name + ".json"),
++    JSON.stringify(value, null, 2),
++  );
++async function enable(p: Page) {
++  await p
++    .getByRole("button", { name: "Experimental features", exact: true })
++    .click();
++  await p
++    .getByRole("checkbox", {
++      name: "Show object information instead of normal hover hints",
++    })
++    .check();
++  await p.keyboard.press("Escape");
++}
++async function exported(p: Page) {
++  const wait = p.waitForEvent("download");
++  await clickAction(p, "Export JSON");
++  return JSON.parse(fs.readFileSync((await (await wait).path())!, "utf8"));
++}
++async function fixture(p: Page) {
++  await p.goto("/");
++  await createNode(p, "Color RGBA");
++  const node = p.locator(".node").filter({
++    has: p.getByRole("heading", { name: "Color RGBA", exact: true }),
++  });
++  await node.getByRole("heading").click();
++  return node;
++}
++async function keyboardFocus(p: Page, target: Locator) {
++  for (let i = 0; i < 160; i++) {
++    if (await target.evaluate((e) => e === document.activeElement)) return;
++    await p.keyboard.press("Shift+Tab");
++  }
++  throw Error("Target unreachable by trusted Tab");
++}
++for (const width of [1440, 1920])
++  for (const kind of ["Node", "Port", "Parameter Widget"]) {
++    test(`S06 repair continuous 80-step ${kind} details ${width}`, async ({
++      page,
++    }) => {
++      await page.setViewportSize({ width, height: 1000 });
++      const node = await fixture(page),
++        before = await exported(page);
++      await enable(page);
++      const target =
++        kind === "Node"
++          ? node.getByRole("heading")
++          : kind === "Port"
++            ? node.locator("[data-port]").first()
++            : page.getByRole("textbox", { name: "R", exact: true });
++      await target.hover();
++      await expect(page.locator(".hover-summary")).toContainText(kind);
++      const read = page.getByRole("button", {
++          name: "Read object details",
++          exact: true,
++        }),
++        to = (await read.boundingBox())!;
++      await page.evaluate(() => {
++        (window as any).__travel = [];
++        for (const type of [
++          "pointerover",
++          "pointermove",
++          "pointerdown",
++          "pointerup",
++          "click",
++        ])
++          document.addEventListener(
++            type,
++            (e) => {
++              const p = e as PointerEvent;
++              (window as any).__travel.push({
++                type,
++                trusted: e.isTrusted,
++                x: p.clientX,
++                y: p.clientY,
++                target: (e.target as Element).tagName,
++              });
++            },
++            true,
++          );
++      });
++      await page.mouse.move(to.x + to.width / 2, to.y + to.height / 2, {
++        steps: 80,
++      });
++      await page.mouse.down();
++      await page.mouse.up();
++      const dialog = page.getByRole("dialog", {
++        name: "Object information",
++        exact: true,
++      });
++      await expect(dialog).toBeVisible();
++      const text = await dialog.getByRole("region").innerText();
++      expect(text.startsWith(kind + ":")).toBeTruthy();
++      await page.screenshot({
++        path: path.join(
++          out,
++          `continuous-${width}-${kind.replaceAll(" ", "-")}.png`,
++        ),
++      });
++      save(`continuous-${width}-${kind.replaceAll(" ", "-")}`, {
++        text,
++        events: await page.evaluate(() => (window as any).__travel),
++      });
++      await page.keyboard.press("Escape");
++      await expect(read).toBeFocused();
++      expect(await exported(page)).toEqual(before);
++    });
++  }
++for (const focusKind of ["control", "node", "port"])
++  for (const hoverKind of ["node", "panel", "control"]) {
++    test(`S06 repair F2 focused ${focusKind} versus hovered ${hoverKind}`, async ({
++      page,
++    }) => {
++      const node = await fixture(page);
++      await enable(page);
++      const focus =
++        focusKind === "control"
++          ? page.getByRole("button", { name: "Generate GLSL", exact: true })
++          : focusKind === "node"
++            ? node
++            : node.locator("[data-port]").first();
++      await keyboardFocus(page, focus);
++      const identity =
++        (await focus.getAttribute("data-node")) ??
++        (await focus.getAttribute("data-node-id"));
++      const other =
++        hoverKind === "node"
++          ? page.getByRole("heading", { name: "Image output", exact: true })
++          : hoverKind === "panel"
++            ? page.locator(".inspector h2")
++            : page.getByRole("button", { name: "Save", exact: true });
++      await other.hover();
++      await expect(focus).toBeFocused();
++      await page.keyboard.press("F2");
++      const dialog = page.getByRole("dialog", {
++        name: "Object information",
++        exact: true,
++      });
++      await expect(dialog).toBeVisible();
++      const text = await dialog.getByRole("region").innerText();
++      expect(text).toContain(
++        focusKind === "control"
++          ? "UI control: Generate GLSL"
++          : focusKind === "node"
++            ? "Node: Color RGBA"
++            : "Port:",
++      );
++      if (identity) expect(text).toContain(identity);
++      await page.keyboard.press("Escape");
++      await expect(focus).toBeFocused();
++      save(`f2-${focusKind}-${hoverKind}`, {
++        identity,
++        text,
++        method:
++          "Trusted Tab to live focus, incidental hover, trusted F2/Escape",
++      });
++    });
++  }
++test("S06 repair compact disclosures share presentation without model changes", async ({
++  page,
++}) => {
++  await page.goto("/");
++  const before = await exported(page);
++  await expect(page.locator("#code")).not.toBeVisible();
++  for (const name of [
++    "Project actions",
++    "Shader output",
++    "Hints",
++    "Experimental features",
++  ]) {
++    const button = page.getByRole("button", { name, exact: true });
++    await button.click();
++    await expect(button).toHaveAttribute("aria-expanded", "true");
++    await page.keyboard.press("Escape");
++    await expect(button).toBeFocused();
++    await expect(button).toHaveAttribute("aria-expanded", "false");
++  }
++  await page
++    .getByRole("button", { name: "Generate GLSL", exact: true })
++    .click();
++  await page
++    .getByRole("button", { name: "Shader output", exact: true })
++    .click();
++  await expect(
++    page.getByRole("list", { name: "Diagnostics", exact: true }),
++  ).toBeVisible();
++  await expect(
++    page.getByRole("button", { name: "Locate node", exact: true }).first(),
++  ).toBeVisible();
++  await page
++    .getByRole("button", { name: "Close shader output", exact: true })
++    .click();
++  expect(await exported(page)).toEqual(before);
++});
++test("S06 grouped project actions preserve nested Personal and saved-dialog focus", async ({
++  page,
++}) => {
++  await page.goto("/");
++  const trigger = page.getByRole("button", {
++    name: "Project actions",
++    exact: true,
++  });
++  await trigger.click();
++  const menu = page.getByRole("menu", { name: "Project actions", exact: true });
++  await expect(menu).toBeVisible();
++  await page.keyboard.press("End");
++  expect(await menu.evaluate((e) => e.contains(document.activeElement))).toBe(
++    true,
++  );
++  await page.keyboard.press("Home");
++  await expect(menu.getByRole("menuitem").first()).toBeFocused();
++  const personal = page.getByRole("menuitem", {
++    name: "Personal Library",
++    exact: true,
++  });
++  await personal.click();
++  const dialog = page.getByRole("dialog").filter({
++    has: page.getByRole("heading", { name: "Personal Library", exact: true }),
++  });
++  await dialog.getByRole("searchbox").fill("unavailable-entry");
++  await dialog
++    .getByRole("button", { name: "Close Personal", exact: true })
++    .click();
++  await expect(personal).toBeVisible();
++  await expect(personal).toBeFocused();
++  await page.keyboard.press("Escape");
++  await expect(trigger).toBeFocused();
++  await trigger.click();
++  const open = page.getByRole("menuitem", { name: "Open saved", exact: true });
++  await open.click();
++  await page.locator("#cancel-open").click();
++  await expect(open).toBeVisible();
++  await expect(open).toBeFocused();
++  const lock = page.getByRole("menuitemcheckbox", {
++    name: "Lock editing",
++    exact: true,
++  });
++  await expect(lock).not.toBeChecked();
++  await lock.click();
++  await trigger.click();
++  await expect(lock).toBeChecked();
++  await lock.click();
++  await trigger.click();
++  await expect(lock).not.toBeChecked();
++});
++
++test("S06 output diagnostics locate current nodes and reject stale detached actions", async ({
++  page,
++}) => {
++  await page.goto("/");
++  const before = await exported(page),
++    c = page.locator(".canvas");
++  await clickAction(page, "Generate GLSL");
++  await page
++    .getByRole("button", { name: "Read full application status" })
++    .click();
++  await expect(
++    page.getByRole("dialog", { name: "Application status details" }),
++  ).toContainText("INPUT_REQUIRED");
++  await page.keyboard.press("Escape");
++  await page
++    .getByRole("button", { name: "Shader output", exact: true })
++    .click();
++  const locate = page
++    .locator("#code")
++    .getByRole("button", { name: "Locate node", exact: true })
++    .first();
++  await expect(locate).toBeVisible();
++  await locate.click();
++  await expect(c).not.toHaveAttribute("data-selection", "");
++  await locate.evaluate((e) => ((window as any).__oldLocate = e));
++  await page.keyboard.press("Escape");
++  const b = (await c.boundingBox())!;
++  await page.mouse.click(b.x + 20, b.y + 180);
++  await expect(c).toHaveAttribute("data-selection", "");
++  const stale = await page.evaluate(() => {
++    const old = (window as any).__oldLocate;
++    old.click();
++    return {
++      connected: old.isConnected,
++      selection: document
++        .querySelector(".canvas")!
++        .getAttribute("data-selection"),
++    };
++  });
++  expect(stale).toEqual({ connected: false, selection: "" });
++  await page.getByRole("button", { name: "Vertex", exact: true }).click();
++  await page
++    .getByRole("button", { name: "Shader output", exact: true })
++    .click();
++  await expect(
++    page
++      .locator("#code")
++      .getByRole("button", { name: "Locate node", exact: true }),
++  ).toHaveCount(0);
++  await page.keyboard.press("Escape");
++  expect(await exported(page)).toEqual(before);
++  save("current-diagnostic-locate", {
++    stale,
++    method:
++      "Trusted current Locate plus explicitly synthetic detached old-button callback; stage mismatch has no Locate. Export/History unchanged.",
++  });
++});
+diff --git a/production/tests/browser/s06-socket-bottom.spec.ts b/production/tests/browser/s06-socket-bottom.spec.ts
+new file mode 100644
+index 0000000..bf94e23
+--- /dev/null
++++ b/production/tests/browser/s06-socket-bottom.spec.ts
+@@ -0,0 +1,219 @@
++import { test, expect, type Page, type Locator } from "@playwright/test";
++import fs from "node:fs";
++import path from "node:path";
++import { createNode } from "./create-node.ts";
++import { clickAction } from "../fixtures/public-actions.ts";
++const out = process.env.GRAPE_EVIDENCE_DIR!;
++const save = (n: string, v: unknown) =>
++  fs.writeFileSync(path.join(out, n + ".json"), JSON.stringify(v, null, 2));
++async function doc(p: Page) {
++  const w = p.waitForEvent("download");
++  await clickAction(p, "Export JSON");
++  return JSON.parse(fs.readFileSync((await (await w).path())!, "utf8"));
++}
++async function center(l: Locator) {
++  const b = (await l.boundingBox())!;
++  return { x: b.x + b.width / 2, y: b.y + b.height / 2 };
++}
++async function geometry(c: Locator) {
++  return c.evaluate((el) => {
++    const r = el.getBoundingClientRect();
++    return [
++      ...el.querySelectorAll(
++        ".node,.node h3,.port-label,.port-row small,.socket,.node-value",
++      ),
++    ].map((e) => {
++      const b = e.getBoundingClientRect();
++      return {
++        tag: e.tagName,
++        box: [b.x - r.x, b.y - r.y, b.width, b.height].map(
++          (x) => Math.round(x * 100) / 100,
++        ),
++      };
++    });
++  });
++}
++for (const zoom of [0.65, 1, 1.25])
++  test(`S06 circle-only type-colored socket states preserve geometry at ${zoom}`, async ({
++    page,
++  }) => {
++    await page.setViewportSize({ width: 1920, height: 1100 });
++    await page.goto("/");
++    for (const name of [
++      "Float (fixed)",
++      "Vector 2",
++      "Vector 3",
++      "Color RGBA",
++      "Multiply",
++    ])
++      await createNode(page, name);
++    const c = page.locator(".canvas").first();
++    await c.hover({ position: { x: 30, y: 90 } });
++    await page.mouse.wheel(
++      0,
++      -Math.log(zoom / Number(await c.getAttribute("data-zoom"))) * 1000,
++    );
++    // Deliberately center the complete fixture before measuring state-only geometry.
++    const offset = await c.evaluate((el) => {
++      const r = el.getBoundingClientRect(),
++        ns = [...el.querySelectorAll(".node")].map((n) =>
++          n.getBoundingClientRect(),
++        );
++      return {
++        x: 40 - Math.min(...ns.map((n) => n.left - r.left)),
++        y: 90 - Math.min(...ns.map((n) => n.top - r.top)),
++        left: r.left,
++        top: r.top,
++      };
++    });
++    await page.mouse.move(offset.left + 10, offset.top + 70);
++    await page.mouse.down();
++    await page.mouse.move(
++      offset.left + 10 + offset.x,
++      offset.top + 70 + offset.y,
++      { steps: 8 },
++    );
++    await page.mouse.up();
++    const before = await doc(page),
++      records = [];
++    for (const n of await c.locator(".node").all()) {
++      const port = n.locator("[data-port]").first(),
++        socket = port.locator(".socket");
++      const idle = await geometry(c);
++      await port.hover();
++      const style = await socket.evaluate((e) => {
++        const s = getComputedStyle(e);
++        return {
++          fill: s.backgroundColor,
++          border: s.borderColor,
++          shadow: s.boxShadow,
++        };
++      });
++      expect(style.fill).toBe(style.border);
++      expect(await geometry(c)).toEqual(idle);
++      const point = await center(port);
++      await page.mouse.down();
++      expect(await geometry(c)).toEqual(idle);
++      await page.mouse.up();
++      await page.keyboard.press("Escape");
++      const label = n.locator(".port-label").first();
++      expect(await port.evaluate((e) => e.textContent)).toBe("");
++      await label.click();
++      await expect(c.locator(".connection-preview path")).toHaveCount(0);
++      expect(await geometry(c)).toEqual(idle);
++      records.push({ name: await n.getAttribute("aria-label"), style, point });
++    }
++    const start = c.getByRole("button", {
++        name: "Color RGBA output out",
++        exact: true,
++      }),
++      end = c.getByRole("button", {
++        name: "Image output input color",
++        exact: true,
++      });
++    // Keyboard focus is reached naturally; Tab on Canvas is the catalog shortcut.
++    for (
++      let i = 0;
++      i < 100 && !(await start.evaluate((e) => e === document.activeElement));
++      i++
++    )
++      await page.keyboard.press("Shift+Tab");
++    await expect(start).toBeFocused();
++    const focused = await geometry(c);
++    await page.keyboard.press("Enter");
++    await expect(start).toHaveClass(/wire-origin/);
++    expect(await geometry(c)).toEqual(focused);
++    await page.keyboard.press("Escape");
++    await end.hover();
++    const hoverShadow = await end
++      .locator(".socket")
++      .evaluate((e) => getComputedStyle(e).boxShadow);
++    await start.click();
++    await end.hover();
++    await expect(end).toHaveClass(/wire-target/);
++    const targetStyle = await end
++      .locator(".socket")
++      .evaluate((e) => ({
++        fill: getComputedStyle(e).backgroundColor,
++        border: getComputedStyle(e).borderColor,
++        shadow: getComputedStyle(e).boxShadow,
++      }));
++    expect(targetStyle.fill).toBe(targetStyle.border);
++    expect(targetStyle.shadow).not.toBe(hoverShadow);
++    const wrong = c.getByRole("button", {
++      name: "Vector 2 output out",
++      exact: true,
++    });
++    await wrong.hover();
++    await expect(wrong).not.toHaveClass(/wire-target/);
++    await page.keyboard.press("Escape");
++    expect(await doc(page)).toEqual(before);
++    await start.click();
++    await end.click();
++    await expect(c.locator(".wires path")).toHaveCount(1);
++    const wired = await geometry(c),
++      wire = await c.locator(".wires").innerHTML();
++    await c.getByRole("heading", { name: "Color RGBA", exact: true }).click();
++    expect(await geometry(c)).toEqual(wired);
++    expect(await c.locator(".wires").innerHTML()).toBe(wire);
++    await page.screenshot({ path: path.join(out, `socket-${zoom}.png`) });
++    await clickAction(page, "Undo");
++    expect(await doc(page)).toEqual(before);
++    await clickAction(page, "Redo");
++    await expect(c.locator(".wires path")).toHaveCount(1);
++    save(`socket-${zoom}`, {
++      records,
++      targetStyle,
++      geometry: wired,
++      wire,
++      comparison:
++        "Idle/hover/pressed/selection have identical relative content/socket bounds. Type-preserving fill and distinct target ring; negative sibling label and same-direction hit.",
++    });
++  });
++for (const [width, height] of [
++  [1920, 1000],
++  [1440, 1000],
++  [620, 800],
++  [620, 380],
++])
++  test(`S06 compact bottom actions and complete output are reachable ${width}x${height}`, async ({
++    page,
++  }) => {
++    await page.setViewportSize({ width: width!, height: height! });
++    await page.goto("/");
++    await expect(page.locator("#code")).not.toBeVisible();
++    const before = await doc(page),
++      records = [];
++    for (const name of [
++      "Project actions",
++      "Shader output",
++      "Hints",
++      "Experimental features",
++    ]) {
++      const trigger = page.getByRole("button", { name, exact: true });
++      await trigger.click();
++      const popup = page.locator(".floating-surface[open]").last();
++      await expect(popup).toBeVisible();
++      const b = (await popup.boundingBox())!,
++        t = (await trigger.boundingBox())!;
++      expect(b.x).toBeGreaterThanOrEqual(0);
++      expect(b.y).toBeGreaterThanOrEqual(0);
++      expect(b.x + b.width).toBeLessThanOrEqual(width!);
++      expect(b.y + b.height).toBeLessThanOrEqual(height!);
++      if (name === "Project actions")
++        expect(
++          Math.abs(b.x - Math.max(8, Math.min(t.x, width! - b.width - 8))),
++        ).toBeLessThan(1);
++      await page.screenshot({
++        path: path.join(
++          out,
++          `bottom-${width}-${height}-${name.replaceAll(" ", "-")}.png`,
++        ),
++      });
++      await page.keyboard.press("Escape");
++      await expect(trigger).toBeFocused();
++      records.push({ name, b });
++    }
++    expect(await doc(page)).toEqual(before);
++    save(`bottom-${width}-${height}`, records);
++  });
+diff --git a/production/tests/browser/s06-status-pointer.spec.ts b/production/tests/browser/s06-status-pointer.spec.ts
+index b5bc0b9..d6d19ce 100644
+--- a/production/tests/browser/s06-status-pointer.spec.ts
++++ b/production/tests/browser/s06-status-pointer.spec.ts
+@@ -98,7 +98,7 @@ test("S06 bottom application error summary opens complete current text without c
+     const r = el.getBoundingClientRect(), footer = document.querySelector("footer")!.getBoundingClientRect();
+     return { y: r.y, height: r.height, footerBottom: footer.bottom, whiteSpace: getComputedStyle(el).whiteSpace };
+   });
+-  expect(bottom.y).toBeGreaterThanOrEqual(bottom.footerBottom); expect(bottom.height).toBe(32); expect(bottom.whiteSpace).toBe("nowrap");
++  expect(bottom.y + bottom.height).toBeLessThanOrEqual(bottom.footerBottom); expect(bottom.height).toBeLessThanOrEqual(32); expect(bottom.whiteSpace).toBe("nowrap");
+   await summary.click();
+   const popup = page.getByRole("dialog", { name: "Application status details", exact: true }), text = popup.getByRole("region", { name: "Full current application status", exact: true });
+   await expect(text).toHaveText(full); await expect(text).toBeFocused();
+diff --git a/production/tests/browser/s06-workspace.spec.ts b/production/tests/browser/s06-workspace.spec.ts
+index d8a0fe9..730e304 100644
+--- a/production/tests/browser/s06-workspace.spec.ts
++++ b/production/tests/browser/s06-workspace.spec.ts
+@@ -2,6 +2,7 @@ import { test, expect, type Page } from "@playwright/test";
+ import fs from "node:fs";
+ import path from "node:path";
+ import { createNode } from "./create-node.ts";
++import { clickAction } from "../fixtures/public-actions.ts";
+ const evidence = () => {
+   const out = process.env.GRAPE_EVIDENCE_DIR!;
+   if (!path.isAbsolute(out) || !out.includes("s06"))
+@@ -10,7 +11,7 @@ const evidence = () => {
+ };
+ async function documentOf(page: Page) {
+   const wait = page.waitForEvent("download");
+-  await page.getByRole("button", { name: "Export JSON", exact: true }).click();
++  await clickAction(page, "Export JSON");
+   return JSON.parse(fs.readFileSync((await (await wait).path())!, "utf8"));
+ }
+ test.beforeEach(async ({ page }) => {
+@@ -118,8 +119,7 @@ test("S06 wired creation is preview-only until snap placement and one Undo resto
+     .filter({ has: page.getByRole("heading", { name: "Float", exact: true }) })
+     .locator("[data-direction=output]");
+   const destination = page
+-    .locator(".nodes [data-direction=input]")
+-    .filter({ hasText: "color" })
++    .locator('.nodes [data-direction=input][data-port="color"]')
+     .first();
+   await source.click();
+   await destination.click();
+@@ -183,7 +183,7 @@ test("S06 help and context menu keyboard, readonly browsing and responsive origi
+   ).toBeFocused();
+   await page.keyboard.press("Escape");
+   await expect(menu).toBeHidden();
+-  await page.getByRole("button", { name: "Lock editing", exact: true }).click();
++  await clickAction(page, "Lock editing");
+   await expect(
+     page.getByRole("button", { name: "Add Node", exact: true }),
+   ).toBeDisabled();
+@@ -198,7 +198,9 @@ test("S06 help and context menu keyboard, readonly browsing and responsive origi
+     .click();
+   await page.keyboard.press("Escape");
+   await page.setViewportSize({ width: 620, height: 850 });
+-  await page.getByText("More actions", { exact: true }).click();
++  await page
++    .getByRole("button", { name: "Project actions", exact: true })
++    .click();
+   await expect(
+     page.getByRole("button", { name: "Save", exact: true }),
+   ).toBeVisible();
+diff --git a/production/tests/fixtures/public-actions.ts b/production/tests/fixtures/public-actions.ts
+index ad26046..5947e4b 100644
+--- a/production/tests/fixtures/public-actions.ts
++++ b/production/tests/fixtures/public-actions.ts
+@@ -2,8 +2,18 @@ import type { Page } from "@playwright/test";
+ 
+ /** Follow the same responsive menu path as a user; never force a hidden control. */
+ export async function clickAction(page: Page, name: string) {
+-  const button = page.getByRole("button", { name, exact: true });
++  const button = page
++    .getByRole("button", { name, exact: true })
++    .or(page.getByRole("menuitem", { name, exact: true }))
++    .or(page.getByRole("menuitemcheckbox", { name, exact: true }));
+   if (!(await button.isVisible())) {
++    const project = page.getByRole("button", {
++      name: "Project actions",
++      exact: true,
++    });
++    if (await project.isVisible()) {
++      await project.click();
++    }
+     const menu = page.locator(".action-overflow");
+     if (
+       (await menu.isVisible()) &&

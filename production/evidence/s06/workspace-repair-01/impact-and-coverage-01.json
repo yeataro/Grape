@@ -1,0 +1,103 @@
+{
+  "implementationI": "11e43c8f3bda995ba017b5a4790ddb461a3ebd62",
+  "scope": "Only LC-UI-072 Help dismissal and its associated Canvas focus/lifetime boundary changed; evidence availability repaired.",
+  "changedSource": {
+    "file": "production/src/features/canvas.ts",
+    "bytes": 60283,
+    "sha256": "23701f3c5a5eb52f03e71269e4e9504f9332669e88182db2f619f96530616a92"
+  },
+  "changedTests": {
+    "file": "production/tests/browser/s06-help.spec.ts",
+    "bytes": 7607,
+    "sha256": "e10156d80a06faab429a4fc022307b3f2e04286f53c3617fda2273d67a9c4b66"
+  },
+  "newCases": [
+    "natural outside-to-inside stays open",
+    "natural inside-to-outside stays open",
+    "natural outside-to-outside closes",
+    "pointercancel and blur disarm; subsequent complete gesture works",
+    "Escape/Close/reopen reset and toolbar focus",
+    "keyboard menu focus and two Canvas contexts",
+    "readonly view operation and disposed old mount cannot close new help"
+  ],
+  "history": "Three natural gesture cases compare document and prove next Undo removes only the preexisting creation; Redo restores it.",
+  "scopeRows": [
+    {
+      "leaf": "LC-UI-034",
+      "priorScopedEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "UNCHANGED_SOURCE_SCOPE: prior evidence retained at original I/R; affected public flows replayed where listed; no whole-leaf claim"
+    },
+    {
+      "leaf": "LC-UI-035",
+      "priorScopedEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "UNCHANGED_SOURCE_SCOPE: prior evidence retained at original I/R; affected public flows replayed where listed; no whole-leaf claim"
+    },
+    {
+      "leaf": "LC-UI-036",
+      "priorScopedEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "UNCHANGED_SOURCE_SCOPE: prior evidence retained at original I/R; affected public flows replayed where listed; no whole-leaf claim"
+    },
+    {
+      "leaf": "LC-UI-072",
+      "priorScopedEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "REPAIRED: new Help matrix plus affected shortcuts; targeted independent review pending"
+    },
+    {
+      "leaf": "LC-UI-073",
+      "priorScopedEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "UNCHANGED_SOURCE_SCOPE: prior evidence retained at original I/R; affected public flows replayed where listed; no whole-leaf claim"
+    },
+    {
+      "leaf": "LC-UI-081",
+      "priorScopedEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "UNCHANGED_SOURCE_SCOPE: prior evidence retained at original I/R; affected public flows replayed where listed; no whole-leaf claim"
+    },
+    {
+      "leaf": "LC-UI-082",
+      "priorScopedEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "UNCHANGED_SOURCE_SCOPE: prior evidence retained at original I/R; affected public flows replayed where listed; no whole-leaf claim"
+    },
+    {
+      "leaf": "LC-UI-083",
+      "priorScopedEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "UNCHANGED_SOURCE_SCOPE: prior evidence retained at original I/R; affected public flows replayed where listed; no whole-leaf claim"
+    },
+    {
+      "leaf": "LC-UI-090",
+      "priorScopedEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "UNCHANGED_SOURCE_SCOPE: prior evidence retained at original I/R; affected public flows replayed where listed; no whole-leaf claim"
+    },
+    {
+      "leaf": "LC-UI-091",
+      "priorScopedEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "UNCHANGED_SOURCE_SCOPE: prior evidence retained at original I/R; affected public flows replayed where listed; no whole-leaf claim"
+    }
+  ],
+  "unchanged": {
+    "Graph": "model/graph.ts and Application editor bytes unchanged; configured creation and all239unit/conformance rerun.",
+    "owners": "Module pins/admission/codecs/Uniform/function/Library/resource/profile unchanged; prior independently checked evidence stays attributed to original I/R, not a new run or verdict.",
+    "numeric": "New archive creation/edit/connect/generate/WebGL2 readback [64,128,191,255] plus save/reopen succeeded; broader prior numeric corpus not redundantly rerun.",
+    "Personal": "Current readonly/import-error/insert/Undo and source-only delayed callback regression rerun; no package-policy change.",
+    "LegacyAssets": "CSS/SVG/reference83 exact bytes unchanged; prior visual comparisons remain bound to unchanged assets. New archived workspace screenshot records repaired build."
+  },
+  "limitations": [
+    "S06 remains active/unaccepted; no full99UI/391catalog, arbitrary layout/preset/Panel, S07-S10/native or globalGate closure.",
+    "Secondary categories, GLSL-name/tag metadata, unified Personal/template catalog and broader shortcuts/submenus are expressly not delivered in this branch-scoped batch.",
+    "G-PD-2 named-preset retention remains OPEN.",
+    "Owner removed LAN/Tailscale requirements; historical denied checks remain NOT_EXECUTED, not PASS.",
+    "Windows Chromium151/SwiftShader desktop and trusted touch emulation only; no physical device/all-IME/platform qualification.",
+    "Prior source-browser seam test for delayed Personal callbacks imports source; all public UI flows additionally verified on static archive.",
+    "No Human preview deployed or existing4193/4194/4195/4196/storage changed. Candidate archive is tested and ready for Coordinator delivery after independent review."
+  ],
+  "retainedFailures": [
+    {
+      "path": "baseline-help-01",
+      "meaning": "Expected reproduction of independent product finding on unchanged prior archive."
+    },
+    {
+      "path": "source-help-01",
+      "meaning": "7 passed; new remount fixture failed because browser auto-dismissed New document confirmation. Fixed test explicitly accepts confirmation and asserts old element detached; no product admission/lifetime relaxed."
+    }
+  ],
+  "scout": "Read-only implementer scout informed impact review; not Fresh Review or an independent PASS."
+}

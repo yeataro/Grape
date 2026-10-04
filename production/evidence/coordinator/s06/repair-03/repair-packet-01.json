@@ -1,0 +1,412 @@
+{
+  "packetVersion": 1,
+  "packetType": "TARGETED_REPAIR_OR_REREVIEW",
+  "mode": "REPAIR",
+  "packetId": "S06-WORKSPACE-REPAIR-03",
+  "actionKey": "yeataro/Grape:S06:repair:workspace-entry:4d99a74:03",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0826de5a9cca7cf200d843435985a7dc624634a2",
+  "recordedAt": "2026-10-04T12:46:35.325Z",
+  "sliceId": "S06",
+  "acceptedMain": "ad31676b555120cf455fc2a7677be38791b62b64",
+  "expectedWorkHead": "4d99a749e9b121acd27a959cb528a77eb425dda4",
+  "currentExpectedHead": "4d99a749e9b121acd27a959cb528a77eb425dda4",
+  "priorI": "a42d4aedd8e33c1fd432c92163db9f9d689e1bcb",
+  "priorR": "4d99a749e9b121acd27a959cb528a77eb425dda4",
+  "PR": "No S06 PR or remote publication/merge authority",
+  "authorizationRef": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/human-authorization-01.json",
+    "bytes": 4537,
+    "sha256": "1fe0f74dd43a6406c21d43fe57fa2d3fa03cee9248feac4f421b852b7b7984ab"
+  },
+  "workflowControl": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/coordinator-consolidation-control-01.json",
+    "bytes": 2241,
+    "sha256": "1d06f3aa977901784bb24fe3fb2937a074b00eb354a67a3df6cac483b0422744"
+  },
+  "networkControl": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/network-delivery-control-01.json",
+    "bytes": 3056,
+    "sha256": "54d4ae2ddc14e205bb679c5dd6b108a0d76308e6066fa298a0886571e9c9c1bd"
+  },
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "displayTitle": "Grape S06 實作與維護",
+    "verifiedStatus": "Original writer idle STOP_WRITING; latest completed turn01a106d7-986f-79d3-be7b-89f39e09b7ed cursor872, parent idle cursor196 directly rechecked before preparation."
+  },
+  "originalReview": {
+    "file": "C:/Users/user/.codex/worktrees/s06-workspace-review-03/Grape/.verification/s06-workspace-review-03/INDEPENDENT_REVIEW_RESULT.json",
+    "bytes": 39230,
+    "sha256": "4df7b8ce8fc68fd29fbc0a40a886cfd3f2496606818199c65444d6d564d253f2"
+  },
+  "supportingManifest": {
+    "file": "C:/Users/user/.codex/worktrees/s06-workspace-review-03/Grape/.verification/s06-workspace-review-03/supporting-evidence-manifest-01.json",
+    "bytes": 69158,
+    "sha256": "6ac68cd04bd68006ffb0174c39d3312ac3b6ad13c78c118fe5eda1cd8383710e"
+  },
+  "priorActionReceipt": {
+    "file": "production/evidence/coordinator/s06/review-03/collection-result-01.json",
+    "bytes": 1942,
+    "sha256": "784e0c1d0b3bd2afda1f4da0f6f5b125fa60e46f6cf2026b75efbc2e60a6b4ca"
+  },
+  "findingGroup": "S06-FG-WORKSPACE-ENTRY-01",
+  "counters": {
+    "initialReviewAttempt": 1,
+    "latestReviewAttempt": 3,
+    "latestReviewVerdict": "FAIL",
+    "repairRound": 3,
+    "unsuccessfulRepairReReviewRounds": 2,
+    "transientRetries": 0,
+    "escapeFindingGroup": "S05-FG-ESCAPE-FOCUS-01",
+    "escapeRepairAttempt": 1,
+    "escapeUnsuccessfulRounds": 0,
+    "noReset": true,
+    "budget": "One further repair/re-review round remains before third unsuccessful round requires technical diagnosis; no renamed group or symptom resets."
+  },
+  "findings": [
+    {
+      "id": "S06-FR-CANVAS-NOTICE-TRUNCATION-001",
+      "severity": "P2",
+      "status": "OPEN",
+      "classification": "PRODUCT_BEHAVIOR_REGRESSION",
+      "findingGroup": "S06-FG-WORKSPACE-ENTRY-01",
+      "introducedByRepair": true,
+      "acceptanceBlocking": true,
+      "summary": "The new60px notice cap clips persistent FUNCTION_CONSTANT_DETACHED receiver/edge details with no visible way to read the remainder.",
+      "affectedScope": "Repair2 notice geometry, persistent status/loss diagnostics, affected accepted S05 function-mode behavior; LC-UI-091/B01.",
+      "expected": "Keep ordinary connection guidance bounded while retaining readable complete persistent errors and precise affected receiver/edge loss details. A height limit must offer a usable route to all required text.",
+      "counterexample": [
+        "Open exact archived build in a fresh1440x1000 context. Load reviewer-public-03/persistent-loss-readability-1440-fixture.grape.json through Open document file → Open in new session. The valid fixture uses exact current module refs and10 ordinary constant-input receivers of shared subgraph output y.",
+        "Select the exposed Shared arithmetic call, Enter subgraph, open Subgraph interface, switch Subgraph emission mode from Expand to Function. No DOM or application state injection is used for the operation.",
+        "The command succeeds and creates10 FUNCTION_CONSTANT_DETACHED losses. The notice contains all receiver/edge IDs in DOM text but only60px are visible; full text needs115px and4 rendered line rectangles extend below its bounds.",
+        "Repeat at620x1000 with the provided4-receiver fixture:60px visible,85px scrollHeight,2 clipped line rectangles. No scroll/disclosure affordance; overflow:hidden and pointer-events:none. Diagnostics list repeats reasons but omits the receiver/edge IDs.",
+        "Save preserves the loss notice. Atomic Undo restores exact graph; Redo restores exact losses. This is a visible diagnostic-access defect, not model/data loss."
+      ],
+      "actual": {
+        "narrow": {
+          "viewport": [
+            620,
+            1000
+          ],
+          "lossCount": 4,
+          "clientHeight": 60,
+          "scrollHeight": 85,
+          "clippedLineRectangles": 2
+        },
+        "desktop": {
+          "viewport": [
+            1440,
+            1000
+          ],
+          "lossCount": 10,
+          "clientHeight": 60,
+          "scrollHeight": 115,
+          "clippedLineRectangles": 4
+        },
+        "noticeRole": "status",
+        "overflow": "hidden",
+        "pointerEvents": "none",
+        "tabindex": null,
+        "title": null,
+        "alternateDiagnostics": "Reason text is present; corresponding receiver and edge identities are not. Export retains canonical loss payloads but is not a readable status disclosure."
+      },
+      "source": [
+        {
+          "file": "production/apps/web/style.css",
+          "line": 712,
+          "detail": "max-height60px, overflow:hidden, pointer-events:none apply to all notice content."
+        },
+        {
+          "file": "production/src/features/canvas.ts",
+          "line": 500,
+          "detail": "Precise receiver/edge loss details are stored in detailNotice and displayed through the height-limited surface."
+        }
+      ],
+      "contract": [
+        "handoff/compatibility/behavior-contracts.md LC-UI-091/B01",
+        "Normalized review packet explicitly requires no inaccessible persistent errors and preservation of FUNCTION_CONSTANT_DETACHED/loss diagnostic behavior",
+        "Legacy reference design/UX_UI_REPORT.md §8.4: express accepted detach/loss warnings and distinguish persistent errors; behavioral reference only"
+      ],
+      "repairBoundary": "Provide a bounded readable access path for full persistent diagnostics while retaining operation-specific recovery and ordinary hint lifecycle. No model/admission/History changes or new status-history product feature are required.",
+      "evidence": [
+        {
+          "file": "reviewer-public-03/results.json",
+          "bytes": 35879,
+          "sha256": "b3679381aaff338a92a8b26800d9a748ac5e8829dcd596c56e062fc590a1bd29"
+        },
+        {
+          "file": "reviewer-public-03/persistent-loss-readability-620-facts.json",
+          "bytes": 10662,
+          "sha256": "6654aabc49726ee7527e46a5257941c0248633e1d4796140a3247ce74a44c80a"
+        },
+        {
+          "file": "reviewer-public-03/persistent-loss-readability-620-loss.png",
+          "bytes": 184226,
+          "sha256": "3152376947573ff980618b02cf3fa98de6da3620b440d9be7f3179d1fab69a34"
+        },
+        {
+          "file": "reviewer-public-03/persistent-loss-readability-620.zip",
+          "bytes": 1230054,
+          "sha256": "8bdc26d16151c6ef41eb37afddfa82940527ff15afc4fe98711155f295631dee"
+        },
+        {
+          "file": "reviewer-public-03/persistent-loss-readability-1440-facts.json",
+          "bytes": 21604,
+          "sha256": "6b4520ce3521a41a1a0c8beb52c9c0eadefa7cd0d3fde3519ea3a10ece310145"
+        },
+        {
+          "file": "reviewer-public-03/persistent-loss-readability-1440-loss.png",
+          "bytes": 366437,
+          "sha256": "fee095d93229ce26aaa319acf154d3ae2006cb24de982797595eacc365dddc56"
+        },
+        {
+          "file": "reviewer-public-03/persistent-loss-readability-1440.zip",
+          "bytes": 924606,
+          "sha256": "771fa2bbbe6be006efb11bb832a1676c4dddce93970d47277877de18f85db7c5"
+        },
+        {
+          "file": "reviewer-public-03/persistent-loss-readability-620-documents.json",
+          "bytes": 56948,
+          "sha256": "19d266c69449c951eb5a0ae465ddcb7df756ca0553308414264501f8002d3274"
+        },
+        {
+          "file": "reviewer-public-03/persistent-loss-readability-1440-documents.json",
+          "bytes": 81498,
+          "sha256": "429c98cce86ceec1a95677b48df2b10e199f7019e265b4ff91dda568ac3aaf49"
+        }
+      ]
+    },
+    {
+      "id": "S06-FR-TEMPORARY-WIRE-RELEASE-001",
+      "severity": "P3",
+      "status": "OPEN",
+      "classification": "PRODUCT_BEHAVIOR",
+      "findingGroup": "S06-FG-WORKSPACE-ENTRY-01",
+      "introducedByRepair": "Visible orphan SVG is newly introduced; underlying root-only portDrag lifetime predates this repair.",
+      "acceptanceBlocking": false,
+      "summary": "A subthreshold port release across the Canvas/Inspector boundary leaves the wire and ring active; returning the mouse with no button held resumes the preview.",
+      "affectedScope": "Authorized temporary wire/ring cleanup and tiny-release variants.",
+      "expected": "An uncommitted physical drag that ends outside Canvas must leave no orphan wire/ring or resumable held-drag state. Pointer return without a pressed button must not resume the finished drag.",
+      "counterexample": [
+        "Fresh exact archive1440x1000: Browse nodes, search Color RGBA, click Add Color RGBA.",
+        "Pan empty Canvas by774px horizontally so its output socket center is(1143.5,399.6875),1.5px inside Canvas right edge x1145.",
+        "Mouse down on socket. Move3px right in six small steps; the first steps occur inside Canvas, the final pointer is in Inspector. Total movement remains below4px capture threshold. Release the button in Inspector.",
+        "The dashed SVG and ring remain. Move the unpressed pointer back to(900,399.6875); the wire follows it. Exported document before/after is identical."
+      ],
+      "actual": {
+        "canvasRight": 1145,
+        "start": [
+          1143.5,
+          399.6875
+        ],
+        "release": [
+          1146.5,
+          399.6875
+        ],
+        "movementPx": 3,
+        "thresholdPx": 4,
+        "pathsAfterRelease": 1,
+        "ringsAfterRelease": 1,
+        "pathsAfterUnpressedReturn": 1,
+        "returnedPath": "M1143.5 223.5 C1213.5 223.5,830 223.5,900 223.5",
+        "graph": "unchanged; no unauthorized commit established"
+      },
+      "source": [
+        {
+          "file": "production/src/features/canvas.ts",
+          "line": 1278,
+          "detail": "Pointer capture begins only after movement>4; continuing portDrag movement does not check buttons."
+        },
+        {
+          "file": "production/src/features/canvas.ts",
+          "line": 1323,
+          "detail": "Port release cleanup listens only on root; Inspector release does not reach it."
+        },
+        {
+          "file": "production/src/features/canvas.ts",
+          "line": 1420,
+          "detail": "pointerleave intentionally retains state whenever portDrag is non-null."
+        }
+      ],
+      "contract": [
+        "Normalized repair2 requirement: pointer preview/cancel/tiny-release variants must clean temporary wire/ring, no precommit Graph/History",
+        "handoff/compatibility/behavior-contracts.md LC-UI-025 and scoped temporary-state semantics"
+      ],
+      "repairBoundary": "Retire uncaptured pending drag state when its actual pointer ends outside the Canvas; preserve click-to-connect and valid captured drag behavior. Keep this view-state repair inside current Application command/lifetime boundaries.",
+      "evidence": [
+        {
+          "file": "reviewer-public-06/results.json",
+          "bytes": 2061,
+          "sha256": "55e5c280a035a077c5289fdf26fca2ec9f539e52b8668b81bc97a4f398822164"
+        },
+        {
+          "file": "reviewer-public-06/tiny-release-crosses-canvas-boundary-facts.json",
+          "bytes": 1076,
+          "sha256": "a812f462e3840c7bbc0722f8c18390a09af83b7a98cba2d26d59787ae0c14371"
+        },
+        {
+          "file": "reviewer-public-06/tiny-release-crosses-canvas-boundary-events.json",
+          "bytes": 9373,
+          "sha256": "12798d133169de44996f50bbffa79399edc3eb4c45cc91f7ce51ccd605c9d92e"
+        },
+        {
+          "file": "reviewer-public-06/tiny-release-crosses-canvas-boundary-released.png",
+          "bytes": 75134,
+          "sha256": "e30e2bd2af0974b083131d0e96ba468998686250291d95f75d807f50021378e7"
+        },
+        {
+          "file": "reviewer-public-06/tiny-release-crosses-canvas-boundary.zip",
+          "bytes": 1234397,
+          "sha256": "38d7ac02b206fb61e88eb08e0845adf4b57d8f51ec90e8ab62133db2d3bc898e"
+        }
+      ]
+    },
+    {
+      "id": "S06-FR-TEMPORARY-WIRE-KEYBOARD-001",
+      "severity": "P3",
+      "status": "OPEN",
+      "classification": "PRODUCT_PRESENTATION",
+      "findingGroup": "S06-FG-WORKSPACE-ENTRY-01",
+      "introducedByRepair": true,
+      "acceptanceBlocking": false,
+      "summary": "Keyboard socket activation draws the new wire toward viewport(0,0), rather than the actual pointer position or a valid keyboard preview position.",
+      "affectedScope": "New temporary preview geometry with trusted keyboard activation.",
+      "expected": "Keyboard activation must not invent a pointer at page origin. Use a defined meaningful endpoint or wait for actual pointer movement, while keeping keyboard connection and Escape semantics.",
+      "counterexample": [
+        "Fresh exact archive1440x1000: Browse-add Color RGBA. Click its output, then natural Escape, leaving focus on that socket and mouse at(321.6328125,399.6875).",
+        "Press Enter. Browser generates its ordinary trusted keyboard click. Pending guidance appears, but wire endpoint becomes local(0,-176.1875), the page origin, and the curve exits the Canvas upper edge.",
+        "Natural Escape clears it and exact exported document remains unchanged."
+      ],
+      "actual": {
+        "originSocketLocal": [
+          369.5,
+          223.5
+        ],
+        "lastPointerLocal": [
+          321.6328125,
+          223.5
+        ],
+        "pathEndpointLocal": [
+          0,
+          -176.1875
+        ],
+        "path": "M369.5 223.5 C439.5 223.5,-70 -176.1875,0 -176.1875",
+        "graph": "unchanged"
+      },
+      "source": [
+        {
+          "file": "production/src/features/canvas.ts",
+          "line": 1451,
+          "detail": "click handler overwrites pointerPoint with MouseEvent clientX/clientY; trusted keyboard clicks provide0,0."
+        }
+      ],
+      "contract": [
+        "Authorized temporary wire reference: curve from actual socket toward pointer, natural mouse/keyboard variants",
+        "handoff/compatibility/behavior-contracts.md LC-UI-025; no new keyboard behavior requested"
+      ],
+      "repairBoundary": "Keep pointer position provenance distinct from keyboard click coordinates; no additional product semantics or single-click mapping change required.",
+      "evidence": [
+        {
+          "file": "reviewer-public-04/results.json",
+          "bytes": 4582,
+          "sha256": "f321d8c1891b93044c58c505f5233e0e890b53a193039d8d7eeffba29667c0b6"
+        },
+        {
+          "file": "reviewer-public-04/keyboard-origin-and-cancel-facts.json",
+          "bytes": 592,
+          "sha256": "f8c4d5abb7ad2b1b5b978e2ff8ba0c6b8fa685799eee0fb287e7590d060a83c6"
+        },
+        {
+          "file": "reviewer-public-04/keyboard-origin-and-cancel-events.json",
+          "bytes": 5234,
+          "sha256": "d1b7505c261833aec469e1103d747c0302c0477da05dc045ccdd92bcfd62b0db"
+        },
+        {
+          "file": "reviewer-public-04/keyboard-origin-and-cancel-keyboard.png",
+          "bytes": 93346,
+          "sha256": "86fa8978111ecc9e7c0727d584995bd243f93a774e569eea68db9da70dd9eee4"
+        },
+        {
+          "file": "reviewer-public-04/keyboard-origin-and-cancel.zip",
+          "bytes": 530351,
+          "sha256": "2afc70e43d8d8e5cb2d930b3d1c5f07f1f0d8bdd08e00e363cb8c4f3b8226e9f"
+        }
+      ]
+    }
+  ],
+  "preservedClosures": [
+    {
+      "id": "S06-FR-EVIDENCE-AVAILABILITY-001",
+      "status": "CLOSED_AT_PRIOR_I_R_RETAINED",
+      "closedAt": {
+        "I": "11e43c8f3bda995ba017b5a4790ddb461a3ebd62",
+        "R": "8d7dc0a4531fe14f7a490ddf025a47595e97ae1d"
+      }
+    },
+    {
+      "id": "S06-FR-HELP-BACKDROP-001",
+      "status": "CLOSED_AT_PRIOR_I_R_RETAINED",
+      "closedAt": {
+        "I": "11e43c8f3bda995ba017b5a4790ddb461a3ebd62",
+        "R": "8d7dc0a4531fe14f7a490ddf025a47595e97ae1d"
+      }
+    },
+    {
+      "id": "S06-FR-CANVAS-CONNECTION-NOTICE-001",
+      "status": "CLOSED_AT_CURRENT_I_R_FOR_ORIGINAL_COUNTEREXAMPLES",
+      "closedAt": {
+        "I": "a42d4aedd8e33c1fd432c92163db9f9d689e1bcb",
+        "R": "4d99a749e9b121acd27a959cb528a77eb425dda4"
+      }
+    }
+  ],
+  "requestedAction": [
+    "Recheck exact head, original writer ownership and untracked work. Preserve original review3 report, manifest and all375 support files byte-for-byte in production/evidence/s06/review-03/independent-review, including failed collector/setup evidence. Preserve original review1/review2 and all accepted evidence.",
+    "Reproduce the three exact public archive counterexamples, then repair notice-readability and pending-wire lifetime/provenance together within the existing presentation boundary. Diagnose event lifecycle before choosing a fix; do not solve only the screenshots or hide required diagnostic text.",
+    "Keep ordinary notices compact and non-occluding while providing a usable way to read all persistent receiver/edge details, including keyboard access and narrow view. Retain unrelated persistent errors and operation-specific matching recovery. This is current diagnostic accessibility, with no model or new history-feature scope.",
+    "Retire uncaptured physical port drag when its actual pointer ends outside Canvas. Pointer return with no held button must not resume a finished drag. Preserve intentional click-to-connect pending state, captured drag, both directions, exact admission and one atomic Undo/Redo.",
+    "Distinguish trusted keyboard activation from real pointer coordinate provenance so no fabricated endpoint at viewport origin. Retain meaningful keyboard connection, focus and natural Escape.",
+    "Add meaningful tests for actual mouse3px boundary crossing into Inspector, no-button re-entry, Enter/Space socket activation, and complete persistent loss text at620/1440. Retain synthetic lifecycle evidence explicitly labeled; no physical-device claim. Run affected source and exact static archive public UI checks and appropriate root/type/pins/boundaries/conformance.",
+    "Produce immutable new I/R, source/build/evidence manifests, changed-path impact/finding mapping and usable localhost-testing guide. Verify every report/evidence object is actually available at newR, including ignored files explicitly preserved. Original maintainer may update state/README current progress only; S06 stays active/unaccepted. STOP_WRITING after complete submission for immediate Coordinator collection and independent targeted review."
+  ],
+  "allowedRepairScope": [
+    "production/src/features/canvas.ts: status disclosure/pointer preview/keyboard and lifetime presentation boundaries only",
+    "production/apps/web/style.css: bounded readable diagnostic and preview presentation",
+    "production/tests/: meaningful scoped regression tests and necessary exact archive public helpers",
+    "production/evidence/s06/review-03/independent-review/: raw original reviewer bytes",
+    "production/evidence/s06/workspace-repair-03/: new candidate evidence",
+    "production/evidence/coordinator/s06/review-03,repair-03,preview-03: preserve existing operational evidence as needed",
+    "implementation-state.json and README.md: original maintainer progress only"
+  ],
+  "contractRefs": [
+    "workflow/COORDINATOR.md",
+    "workflow/RUNBOOK.md",
+    "workflow/PACKETS.md",
+    "handoff/compatibility/behavior-contracts.md LC-UI-025,034,036,072,081,083,091",
+    "decisions/AC-GRAPE-002.md accepted loss diagnostics; immutable S05 evidence"
+  ],
+  "reReviewCoverage": [
+    "Three exact review3 counterexamples and visible complete loss receiver/edge details, Save persistence, atomic Undo/Redo, keyboard read path and narrow view",
+    "Original compact notice complete/cancel, PORT_TARGET/PORT_DIRECTION matching recovery, unrelated errors retained",
+    "Actual pointer click/drag/cross-boundary release/capture cancellation and keyboard Enter/Space, no precommit Graph/History; stage/load/revision/dispose/readonly guards",
+    "Selection/socket/wire geometry, catalog hover/creation, Help and four natural Escape affected regressions; exact source/archive/profile and evidence availability"
+  ],
+  "exclusions": [
+    "No product scope expansion, model/admission/Graph History changes, Legacy DOM/source architecture copying or future Slice.",
+    "No arbitrary status history feature, new panel arrangement or next multi-workspace batch in this repair.",
+    "Create/Browse single-click semantics remain under the existing narrow clarification; do not change them or let that branch block these three fixes.",
+    "No handoff/accepted evidence edits, no old verdict rewriting or counter resets.",
+    "No S06 acceptance, publication, push, PR, merge, next Slice or permanent services.",
+    "No LAN/Tailscale requirement or retry; preserve all existing localhost preview services."
+  ],
+  "outputLocation": "production/evidence/s06/workspace-repair-03/submission-01.json",
+  "stopConditions": [
+    "Unexpected head/writer: preserve and return concrete reconciliation.",
+    "True contract conflict: preserve counterexample and pause only dependent action.",
+    "Exact completed submission: STOP_WRITING; Coordinator directly arranges targeted fresh review."
+  ],
+  "provenance": "Direct independent result and verified375-member manifest; no Coordinator technical verdict authored.",
+  "limitations": "CurrentR remains local/unpublished. GitHub connector fetch_commit(main/work) returned exactM2 in current recovery. New candidate is not accepted; current localhost4199 remains exact old candidate."
+}

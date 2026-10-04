@@ -1,0 +1,44 @@
+
+Running 2 tests using 1 worker
+
+(node:56232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:23:40 › S06 connection notice compact geometry 1280 and successful inverse routes one Undo (659ms)
+(node:46536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:38:28 › S06 selection geometry remains fixed at zoom 1 (874ms)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:23:40 › S06 connection notice compact geometry 1280 and successful inverse routes one Undo 
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 65
+    Received:   513
+
+      26 |   await out.click(); const g=await geometry(c); output(`notice-${width}`,g);
+      27 |   await page.screenshot({path:path.join(process.env.GRAPE_EVIDENCE_DIR!,`notice-${width}.png`)});
+    > 28 |   expect(g.notice.height).toBeLessThan(65); expect(g.notice.pointerEvents).toBe("none");
+         |                           ^
+      29 |   for(const n of g.nodes) expect(n.x+n.width/2>=g.notice.x&&n.x+n.width/2<=g.notice.x+g.notice.width&&n.y+n.height/2>=g.notice.y&&n.y+n.height/2<=g.notice.y+g.notice.height).toBe(false);
+      30 |   await input.click(); await expect(c.locator(".canvas-notice")).toBeEmpty();
+      31 |   const after=await doc(page); expect(after.graph.stages.find((s:any)=>s.key==="pixel").network.edges).toHaveLength(1);
+        at C:\Users\user\source\Grape\production\tests\browser\s06-connection-view.spec.ts:28:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-02\baseline-01\test-results\s06-connection-view-S06-co-a54b4-ful-inverse-routes-one-Undo-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-02\baseline-01\test-results\s06-connection-view-S06-co-a54b4-ful-inverse-routes-one-Undo-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-02\baseline-01\test-results\s06-connection-view-S06-co-a54b4-ful-inverse-routes-one-Undo-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-02\baseline-01\test-results\s06-connection-view-S06-co-a54b4-ful-inverse-routes-one-Undo-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:23:40 › S06 connection notice compact geometry 1280 and successful inverse routes one Undo 
+  1 passed (2.8s)

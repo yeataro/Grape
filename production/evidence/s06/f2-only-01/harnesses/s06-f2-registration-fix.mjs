@@ -1,0 +1,4 @@
+import fs from 'node:fs';
+const edit=(f,fn)=>fs.writeFileSync(f,fn(fs.readFileSync(f,'utf8')));
+edit('production/src/ui/hover.ts',s=>s.replace('if (!owner.live || !root.contains(element)) return;','if (!owner.live) return; // Renderers may register before appending; containment is checked on read.'));
+edit('production/tests/browser/s06-f2-isolation.spec.ts',s=>s.replace("node.locator('[data-port=\"color\"]')","node.locator('[data-direction=\"output\"]')").replace('const button = () => root.querySelector("button")!,','const button = () => root.querySelector<HTMLButtonElement>("button:not(dialog button)")!,').replace('button.textContent = "Fault fixture";','button.textContent = "Fault fixture"; button.dataset.fixture = "reader";').replace('const button = () => root.querySelector<HTMLButtonElement>("button:not(dialog button)")!,','const button = () => root.querySelector<HTMLButtonElement>("button[data-fixture]")!,'));

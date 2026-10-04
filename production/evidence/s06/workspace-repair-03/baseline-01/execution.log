@@ -1,0 +1,180 @@
+
+Running 5 tests using 1 worker
+
+(node:15560) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:33:34 › S06 complete persistent loss details have a keyboard read path at 620 (30.1s)
+(node:47356) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:33:34 › S06 complete persistent loss details have a keyboard read path at 1440 (30.1s)
+(node:30652) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  3 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:87:1 › S06 actual 3px uncaptured port release across Canvas Inspector retires wire and ring (1.1s)
+(node:53356) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  4 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:105:39 › S06 trusted Enter socket activation waits for real pointer and preserves keyboard connection (614ms)
+(node:53844) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  5 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:105:39 › S06 trusted Space socket activation waits for real pointer and preserves keyboard connection (594ms)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:33:34 › S06 complete persistent loss details have a keyboard read path at 620 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('.canvas').first().getByRole('heading', { name: 'Shared arithmetic', exact: true }).last()
+
+
+      37 |   await page.getByRole("button", { name: "Open in new session", exact: true }).click();
+      38 |   const c = page.locator(".canvas").first();
+    > 39 |   await c.getByRole("heading", { name: "Shared arithmetic", exact: true }).last().click();
+         |                                                                                   ^
+      40 |   await c.getByRole("button", { name: "Enter subgraph", exact: true }).click();
+      41 |   await c.getByText("Subgraph interface", { exact: true }).click();
+      42 |   const before = await doc(page);
+        at C:\Users\user\source\Grape\production\tests\browser\s06-status-pointer.spec.ts:39:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:33:34 › S06 complete persistent loss details have a keyboard read path at 1440 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('.canvas').first().getByRole('heading', { name: 'Shared arithmetic', exact: true }).last()
+
+
+      37 |   await page.getByRole("button", { name: "Open in new session", exact: true }).click();
+      38 |   const c = page.locator(".canvas").first();
+    > 39 |   await c.getByRole("heading", { name: "Shared arithmetic", exact: true }).last().click();
+         |                                                                                   ^
+      40 |   await c.getByRole("button", { name: "Enter subgraph", exact: true }).click();
+      41 |   await c.getByText("Subgraph interface", { exact: true }).click();
+      42 |   const before = await doc(page);
+        at C:\Users\user\source\Grape\production\tests\browser\s06-status-pointer.spec.ts:39:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:87:1 › S06 actual 3px uncaptured port release across Canvas Inspector retires wire and ring 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+       98 |   save("tiny-cross-boundary", { start: a, release: { x: a.x + 3, y: a.y }, canvas: cr, during, released, returned });
+       99 |   await page.screenshot({ path: path.join(evidence, "tiny-cross-boundary.png") });
+    > 100 |   expect(released.paths).toBe(0); expect(released.rings).toBe(0); expect(returned.paths).toBe(0); expect(returned.rings).toBe(0);
+          |                          ^
+      101 |   expect(await doc(page)).toEqual(before);
+      102 |   await clickAction(page, "Undo"); await expect(c.getByRole("heading", { name: "Color RGBA", exact: true })).toHaveCount(0);
+      103 | });
+        at C:\Users\user\source\Grape\production\tests\browser\s06-status-pointer.spec.ts:100:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-act-04bca-ector-retires-wire-and-ring-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-act-04bca-ector-retires-wire-and-ring-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-act-04bca-ector-retires-wire-and-ring-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-act-04bca-ector-retires-wire-and-ring-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:105:39 › S06 trusted Enter socket activation waits for real pointer and preserves keyboard connection 
+
+    Error: expect(received).not.toMatch(expected)
+
+    Expected pattern: not /,0 -176.1875$/
+    Received string:      "M261.5 263.5 C331.5 263.5,-70 -176.1875,0 -176.1875"
+
+      110 |   save(`keyboard-${key}`, { pending, canvas: cr });
+      111 |   await expect(c.locator(".canvas-notice")).toContainText("opposite port");
+    > 112 |   if (pending.d) expect(pending.d).not.toMatch(new RegExp(`,0 ${-cr.y}$`));
+          |                                        ^
+      113 |   expect(pending.paths).toBe(0);
+      114 |   await page.mouse.move(cr.x + 450, cr.y + 180, { steps: 5 });
+      115 |   await expect(c.locator(".connection-preview path")).toHaveCount(1);
+        at C:\Users\user\source\Grape\production\tests\browser\s06-status-pointer.spec.ts:112:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-tru-28233-eserves-keyboard-connection-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-tru-28233-eserves-keyboard-connection-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-tru-28233-eserves-keyboard-connection-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-tru-28233-eserves-keyboard-connection-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:105:39 › S06 trusted Space socket activation waits for real pointer and preserves keyboard connection 
+
+    Error: expect(received).not.toMatch(expected)
+
+    Expected pattern: not /,0 -176.1875$/
+    Received string:      "M261.5 263.5 C331.5 263.5,-70 -176.1875,0 -176.1875"
+
+      110 |   save(`keyboard-${key}`, { pending, canvas: cr });
+      111 |   await expect(c.locator(".canvas-notice")).toContainText("opposite port");
+    > 112 |   if (pending.d) expect(pending.d).not.toMatch(new RegExp(`,0 ${-cr.y}$`));
+          |                                        ^
+      113 |   expect(pending.paths).toBe(0);
+      114 |   await page.mouse.move(cr.x + 450, cr.y + 180, { steps: 5 });
+      115 |   await expect(c.locator(".connection-preview path")).toHaveCount(1);
+        at C:\Users\user\source\Grape\production\tests\browser\s06-status-pointer.spec.ts:112:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-tru-3e260-eserves-keyboard-connection-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-tru-3e260-eserves-keyboard-connection-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-tru-3e260-eserves-keyboard-connection-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-03\baseline-01\test-results\s06-status-pointer-S06-tru-3e260-eserves-keyboard-connection-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:33:34 › S06 complete persistent loss details have a keyboard read path at 620 
+    [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:33:34 › S06 complete persistent loss details have a keyboard read path at 1440 
+    [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:87:1 › S06 actual 3px uncaptured port release across Canvas Inspector retires wire and ring 
+    [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:105:39 › S06 trusted Enter socket activation waits for real pointer and preserves keyboard connection 
+    [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:105:39 › S06 trusted Space socket activation waits for real pointer and preserves keyboard connection 

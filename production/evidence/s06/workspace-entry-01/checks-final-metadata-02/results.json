@@ -1,0 +1,37 @@
+{
+  "implementationI": "cc920485e005825fea007863f0815cf7c0a5437b",
+  "state": {
+    "file": "implementation-state.json",
+    "bytes": 26130,
+    "sha256": "6149a2fa3f3fc6a6008f2f97fb506b513610e6e0675d262723159dd656fd2686"
+  },
+  "checks": [
+    {
+      "name": "bootstrap",
+      "args": [
+        "tools/verify-bootstrap.mjs"
+      ],
+      "exitCode": 0,
+      "log": {
+        "file": "production/evidence/s06/workspace-entry-01/checks-final-metadata-02/bootstrap.log",
+        "bytes": 1564,
+        "sha256": "11b02be20103525f59818549774e46b5dc138b17e5b8417046378d7b1e57178a"
+      }
+    },
+    {
+      "name": "state",
+      "args": [
+        "handoff/tools/check-implementation-state.mjs",
+        "--current"
+      ],
+      "exitCode": 0,
+      "log": {
+        "file": "production/evidence/s06/workspace-entry-01/checks-final-metadata-02/state.log",
+        "bytes": 7752,
+        "sha256": "fd12e301d9d816e3ca874fc8245e641a703c784359ca22f434faaa37d6e22618"
+      }
+    }
+  ],
+  "fixtures": "10/10 checks-final-01/root-results.json; verifier unchanged.",
+  "retainedPriorFailure": "checks-final-metadata-01/bootstrap.log failed because README linked to not-yet-written submission. Current README links existing scoped coverage; no validation bypass or product change."
+}

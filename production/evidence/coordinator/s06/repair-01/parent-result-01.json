@@ -1,0 +1,84 @@
+{
+  "packetType": "PARENT_S06_REPAIR_DISPATCH_RESULT",
+  "recordedAt": "2026-10-04T11:48:19.987Z",
+  "actionKey": "yeataro/Grape:S06:repair:workspace-entry:276a427:01",
+  "packetId": "S06-WORKSPACE-REPAIR-01",
+  "status": "DISPATCHED_RUNNING_REPAIR_PACKET_READ",
+  "packet": {
+    "file": "production/evidence/coordinator/s06/repair-01/repair-packet-01.json",
+    "bytes": 23664,
+    "sha256": "2186dc948d9c4d443eaac23ef3f991a10091194d9f0c0c492c13bdabd6886d28"
+  },
+  "intent": {
+    "file": "production/evidence/coordinator/s06/repair-01/parent-intent-01.json",
+    "bytes": 4393,
+    "sha256": "dff285fc1f73a0c8e46ada941d96c82b9972c48ad17399ea1171f824c5ad42bd"
+  },
+  "transport": "collaboration.followup_task",
+  "actualWriterDispatches": 1,
+  "newWriter": false,
+  "duplicateDispatch": false,
+  "expectedStartingHead": "276a427c1e70db05d652488700c361f86e72d3e7",
+  "priorI": "cc920485e005825fea007863f0815cf7c0a5437b",
+  "priorR": "276a427c1e70db05d652488700c361f86e72d3e7",
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "displayTitle": "Grape S06 實作與維護",
+    "verifiedStatus": "Idle / STOP_WRITING at cursor790; parent idle cursor186"
+  },
+  "before": {
+    "threadStatus": "idle",
+    "lastTurnId": "01a1066a-34f6-7651-ab3c-1e6364d62665",
+    "lastTurnStatus": "completed",
+    "result": "Prior I/R submitted; STOP_WRITING"
+  },
+  "actualObservation": {
+    "tools": [
+      "collaboration.list_agents",
+      "mcp__codex_app__read_thread"
+    ],
+    "agentStatus": "running",
+    "threadStatus": "active",
+    "turnId": "01a106bd-b861-7a90-8e3e-b6186355fb36",
+    "turnStatus": "inProgress",
+    "acknowledgementMessageId": "msg_0f7ea6f2d846c6d3016ac23ce0ad9087d08ba9094a2eb3f942",
+    "acknowledgement": "Writer confirms packet/review/current-version verification followed by missing evidence preservation, Help backdrop repair, targeted tests and new I/R for independent re-review.",
+    "packetReadCommandId": "exec-d1fc3ce0-607b-4456-b85c-cc2e22fe9539",
+    "packetReadCommandStatus": "completed",
+    "packetReadExitCode": 0,
+    "packetHashAndHeadActuallyRead": true
+  },
+  "counters": {
+    "initialReviewAttempt": 1,
+    "initialReviewVerdict": "FAIL",
+    "repairRound": 1,
+    "unsuccessfulRepairReReviewRounds": 0,
+    "transientRetries": 0,
+    "escapeFindingGroup": "S05-FG-ESCAPE-FOCUS-01",
+    "escapeRepairAttempt": 1,
+    "escapeUnsuccessfulRounds": 0,
+    "escapeDisposition": "Independent current report passes all four at priorI; historical S05 FAIL remains unchanged; affected regressions only if touched"
+  },
+  "verifiedBeforeDispatch": {
+    "originalReport": true,
+    "supportingManifest": true,
+    "supportingManifestEntries": 347,
+    "supportingBytes": 26879460,
+    "reportIncludedInManifest": true,
+    "primaryMissingOriginalsMatched": 14,
+    "authorizationAndControls": true,
+    "trackedAndIndexClean": true
+  },
+  "preservation": "Original packet/review/evidence and all prior receipts unchanged by parent. Same writer must persist exact review bytes and fourteen missing originals with narrow Git allowlist.",
+  "parentProductWrites": false,
+  "parentStateWrites": false,
+  "parentGitMutations": [],
+  "parentRemoteActions": [],
+  "parentServiceActions": [],
+  "preview": "4197 unchanged by parent; Coordinator owns preview version",
+  "completionClaim": "Only actual running dispatch and completed packet read confirmed. Repair, new I/R/build/evidence and independent verdict remain pending.",
+  "outputLocation": "production/evidence/s06/workspace-repair-01/submission-01.json",
+  "nextRoute": "Same writer completes bounded repair and STOP_WRITING; Coordinator immediately routes targeted independent re-review; no Human pre-review, PM takeover or LAN/Tailscale gate."
+}

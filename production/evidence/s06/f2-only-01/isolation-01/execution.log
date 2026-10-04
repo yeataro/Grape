@@ -1,0 +1,382 @@
+
+Running 16 tests using 1 worker
+
+(node:55652) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   1 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:53:1 › S06 F2-only all built-in readonly kinds and ordinary hints preserve document selection History Redo (988ms)
+(node:59988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  2 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:109:3 › S06 F2 ignores obsolete preference true (516ms)
+  ok  3 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:109:3 › S06 F2 ignores obsolete preference false (456ms)
+  ok  4 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:109:3 › S06 F2 ignores obsolete preference {broken} (446ms)
+  ok  5 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:109:3 › S06 F2 ignores obsolete preference denied (426ms)
+  ok  6 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:147:1 › S06 F2 scalar vector draft and multifield IME guards preserve current text (1.0s)
+  x   7 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:185:1 › S06 F2 stage deletion Undo same-ID document reopen discards old target (785ms)
+(node:49184) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   8 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:225:1 › S06 F2 pending wire held drag readonly and natural Escape remain guarded (1.0s)
+(node:50404) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   9 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:258:1 › S06 F2 no inspection serialization or clone during 80 trusted pointer moves or focus navigation (2.1s)
+(node:57544) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 10 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:295:1 › S06 F2 complete long data narrow keyboard close and unchanged geometry (1.0s)
+  ok 11 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:326:1 › S06 F2 busy Save acknowledgement does not intercept or corrupt save (710ms)
+  x  12 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:362:1 › S06 debug target follows nested occurrence and independent Canvas navigation (2.3s)
+(node:24980) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  13 [chromium] › ..\..\..\production\tests\browser\s06-f2-isolation.spec.ts:8:3 › S06 optional inspection absent preserves normal public editing save ACK generation Undo Redo (30.1s)
+(node:11228) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  14 [chromium] › ..\..\..\production\tests\browser\s06-f2-isolation.spec.ts:8:3 › S06 optional inspection disposed preserves normal public editing save ACK generation Undo Redo (30.2s)
+(node:29424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  15 [chromium] › ..\..\..\production\tests\browser\s06-f2-isolation.spec.ts:8:3 › S06 optional inspection failed-construction preserves normal public editing save ACK generation Undo Redo (30.2s)
+(node:50492) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  16 [chromium] › ..\..\..\production\tests\browser\s06-f2-isolation.spec.ts:97:1 › S06 readonly owner fault registration serialization invalidation and multi-instance disposal stay local (224ms)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:53:1 › S06 F2-only all built-in readonly kinds and ordinary hints preserve document selection History Redo 
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "Node:"
+    Received string:    "Panel: Canvas
+    Identity: canvas-1
+    State: UI-only · visible·
+    {
+      \"type\": \"grape.panel.canvas\",
+      \"viewState\": {
+        \"x\": 24,
+        \"y\": 104,
+        \"zoom\": 1
+      }
+    }"
+
+      81 |   ] as const) {
+      82 |     const text = await read(page, t);
+    > 83 |     expect(text).toContain(k + ":");
+         |                  ^
+      84 |     expect(text).not.toMatch(/editToken|TargetLease|MountTicket|"lease"/);
+      85 |     if (k === "UI control") expect(text).toContain("未提供");
+      86 |     records.push({ kind: k, text });
+        at C:\Users\user\source\Grape\production\tests\browser\s06-debug-hover.spec.ts:83:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-onl-b79a7-ment-selection-History-Redo-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-onl-b79a7-ment-selection-History-Redo-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-onl-b79a7-ment-selection-History-Redo-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-onl-b79a7-ment-selection-History-Redo-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:185:1 › S06 F2 stage deletion Undo same-ID document reopen discards old target 
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "35df48e9-42c9-4f85-bfa2-a175f076579e"
+    Received string:    "Panel: Canvas
+    Identity: canvas-1
+    State: UI-only · visible·
+    {
+      \"type\": \"grape.panel.canvas\",
+      \"viewState\": {
+        \"x\": 24,
+        \"y\": 104,
+        \"zoom\": 1
+      }
+    }"
+
+      189 |     original = await doc(page),
+      190 |     id = await n.getAttribute("data-node");
+    > 191 |   expect(await read(page, n)).toContain(id!);
+          |                               ^
+      192 |   await close(page, n);
+      193 |   await c.getByRole("button", { name: "Vertex", exact: true }).click();
+      194 |   await expect(n).toHaveCount(0);
+        at C:\Users\user\source\Grape\production\tests\browser\s06-debug-hover.spec.ts:191:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-sta-bbcb4--reopen-discards-old-target-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-sta-bbcb4--reopen-discards-old-target-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-sta-bbcb4--reopen-discards-old-target-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-sta-bbcb4--reopen-discards-old-target-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:225:1 › S06 F2 pending wire held drag readonly and natural Escape remain guarded 
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "Node:"
+    Received string:    "Panel: Canvas
+    Identity: canvas-1
+    State: UI-only · visible·
+    {
+      \"type\": \"grape.panel.canvas\",
+      \"viewState\": {
+        \"x\": 24,
+        \"y\": 104,
+        \"zoom\": 1
+      }
+    }"
+
+      233 |   await page.keyboard.press("Escape");
+      234 |   await clickAction(page, "Lock editing");
+    > 235 |   expect(await read(page, n)).toContain("Node:");
+          |                               ^
+      236 |   await close(page, n);
+      237 |   await n.getByRole("heading").click();
+      238 |   const r = page.getByRole("textbox", { name: "R", exact: true });
+        at C:\Users\user\source\Grape\production\tests\browser\s06-debug-hover.spec.ts:235:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-pen-60845-tural-Escape-remain-guarded-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-pen-60845-tural-Escape-remain-guarded-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-pen-60845-tural-Escape-remain-guarded-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-pen-60845-tural-Escape-remain-guarded-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:258:1 › S06 F2 no inspection serialization or clone during 80 trusted pointer moves or focus navigation 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 2
+
+      284 |   await expect(dialog(page)).toBeVisible();
+      285 |   const counts = await page.evaluate(() => (window as any).__counts);
+    > 286 |   expect(counts.stringify).toBe(1);
+          |                            ^
+      287 |   save("f2-on-demand-counts", {
+      288 |     moves: 80,
+      289 |     before: { clone: 0, stringify: 0 },
+        at C:\Users\user\source\Grape\production\tests\browser\s06-debug-hover.spec.ts:286:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-no--d8a6c-r-moves-or-focus-navigation-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-no--d8a6c-r-moves-or-focus-navigation-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-no--d8a6c-r-moves-or-focus-navigation-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-F2-no--d8a6c-r-moves-or-focus-navigation-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:362:1 › S06 debug target follows nested occurrence and independent Canvas navigation 
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "\"occurrence\""
+    Received string:    "Panel: Canvas
+    Identity: canvas-1
+    State: UI-only · visible·
+    {
+      \"type\": \"grape.panel.canvas\",
+      \"viewState\": {
+        \"x\": 24,
+        \"y\": 104,
+        \"zoom\": 1
+      }
+    }"
+
+      410 |       });
+      411 |     const text = await read(page, target);
+    > 412 |     expect(text).toContain('"occurrence"');
+          |                  ^
+      413 |     records.push(text);
+      414 |     await close(page, target);
+      415 |   }
+        at C:\Users\user\source\Grape\production\tests\browser\s06-debug-hover.spec.ts:412:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium] › ..\..\..\production\tests\browser\s06-f2-isolation.spec.ts:8:3 › S06 optional inspection absent preserves normal public editing save ACK generation Undo Redo 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('article').filter({ has: getByRole('heading', { name: 'Color RGBA', exact: true }) }).locator('[data-port="color"]')
+
+
+      53 |       await r.fill("0.25");
+      54 |       await r.press("Enter");
+    > 55 |       await node.locator('[data-port="color"]').click();
+         |                                                 ^
+      56 |       await page
+      57 |         .locator('.canvas [data-direction="input"][data-port="color"]')
+      58 |         .click();
+        at C:\Users\user\source\Grape\production\tests\browser\s06-f2-isolation.spec.ts:55:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-optio-615aa-ve-ACK-generation-Undo-Redo-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-optio-615aa-ve-ACK-generation-Undo-Redo-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-optio-615aa-ve-ACK-generation-Undo-Redo-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-optio-615aa-ve-ACK-generation-Undo-Redo-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [chromium] › ..\..\..\production\tests\browser\s06-f2-isolation.spec.ts:8:3 › S06 optional inspection disposed preserves normal public editing save ACK generation Undo Redo 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('article').filter({ has: getByRole('heading', { name: 'Color RGBA', exact: true }) }).locator('[data-port="color"]')
+
+
+      53 |       await r.fill("0.25");
+      54 |       await r.press("Enter");
+    > 55 |       await node.locator('[data-port="color"]').click();
+         |                                                 ^
+      56 |       await page
+      57 |         .locator('.canvas [data-direction="input"][data-port="color"]')
+      58 |         .click();
+        at C:\Users\user\source\Grape\production\tests\browser\s06-f2-isolation.spec.ts:55:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-optio-af691-ve-ACK-generation-Undo-Redo-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-optio-af691-ve-ACK-generation-Undo-Redo-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-optio-af691-ve-ACK-generation-Undo-Redo-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-optio-af691-ve-ACK-generation-Undo-Redo-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [chromium] › ..\..\..\production\tests\browser\s06-f2-isolation.spec.ts:8:3 › S06 optional inspection failed-construction preserves normal public editing save ACK generation Undo Redo 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('article').filter({ has: getByRole('heading', { name: 'Color RGBA', exact: true }) }).locator('[data-port="color"]')
+
+
+      53 |       await r.fill("0.25");
+      54 |       await r.press("Enter");
+    > 55 |       await node.locator('[data-port="color"]').click();
+         |                                                 ^
+      56 |       await page
+      57 |         .locator('.canvas [data-direction="input"][data-port="color"]')
+      58 |         .click();
+        at C:\Users\user\source\Grape\production\tests\browser\s06-f2-isolation.spec.ts:55:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-optio-e9cff-ve-ACK-generation-Undo-Redo-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-optio-e9cff-ve-ACK-generation-Undo-Redo-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-optio-e9cff-ve-ACK-generation-Undo-Redo-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-optio-e9cff-ve-ACK-generation-Undo-Redo-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) [chromium] › ..\..\..\production\tests\browser\s06-f2-isolation.spec.ts:97:1 › S06 readonly owner fault registration serialization invalidation and multi-instance disposal stay local 
+
+    Error: expect(received).toMatchObject(expected)
+
+    - Expected  - 3
+    + Received  + 3
+
+      Object {
+        "alive": true,
+        "before": 0,
+        "events": 1,
+    -   "fresh": true,
+    +   "fresh": false,
+        "guardBlocked": true,
+        "noStale": true,
+    -   "normal": true,
+    +   "normal": false,
+        "refreshClosed": true,
+        "serialBlocked": true,
+    -   "unavailable": true,
+    +   "unavailable": false,
+      }
+
+      255 |     };
+      256 |   });
+    > 257 |   expect(result).toMatchObject({
+          |                  ^
+      258 |     before: 0,
+      259 |     normal: true,
+      260 |     unavailable: true,
+        at C:\Users\user\source\Grape\production\tests\browser\s06-f2-isolation.spec.ts:257:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-reado-509dd-nstance-disposal-stay-local-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-reado-509dd-nstance-disposal-stay-local-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-reado-509dd-nstance-disposal-stay-local-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\f2-only-01\isolation-01\test-results\s06-f2-isolation-S06-reado-509dd-nstance-disposal-stay-local-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:53:1 › S06 F2-only all built-in readonly kinds and ordinary hints preserve document selection History Redo 
+    [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:185:1 › S06 F2 stage deletion Undo same-ID document reopen discards old target 
+    [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:225:1 › S06 F2 pending wire held drag readonly and natural Escape remain guarded 
+    [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:258:1 › S06 F2 no inspection serialization or clone during 80 trusted pointer moves or focus navigation 
+    [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:362:1 › S06 debug target follows nested occurrence and independent Canvas navigation 
+    [chromium] › ..\..\..\production\tests\browser\s06-f2-isolation.spec.ts:8:3 › S06 optional inspection absent preserves normal public editing save ACK generation Undo Redo 
+    [chromium] › ..\..\..\production\tests\browser\s06-f2-isolation.spec.ts:8:3 › S06 optional inspection disposed preserves normal public editing save ACK generation Undo Redo 
+    [chromium] › ..\..\..\production\tests\browser\s06-f2-isolation.spec.ts:8:3 › S06 optional inspection failed-construction preserves normal public editing save ACK generation Undo Redo 
+    [chromium] › ..\..\..\production\tests\browser\s06-f2-isolation.spec.ts:97:1 › S06 readonly owner fault registration serialization invalidation and multi-instance disposal stay local 
+  7 passed (1.8m)

@@ -1,0 +1,66 @@
+{
+  "packetVersion": 1,
+  "packetType": "HUMAN_SCOPED_REQUIREMENT",
+  "packetId": "S06-HUMAN-DEBUG-HOVER-01",
+  "actionKey": "yeataro/Grape:S06:human-decision:debug-hover:01",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0826de5a9cca7cf200d843435985a7dc624634a2",
+  "acceptedMain": "ad31676b555120cf455fc2a7677be38791b62b64",
+  "expectedWorkHead": "95a9260f35dd2ad4cdf7bba93d53c35bd5c7170f",
+  "PR": "No S06 PR",
+  "recordedAt": "2026-10-04T13:18:19.522Z",
+  "authority": "Human Owner",
+  "sliceId": "S06",
+  "source": {
+    "threadId": "01a1010f-2b35-7861-bb35-0e7e9b0b42a9",
+    "threadTitle": "Grape PM",
+    "turnId": "01a1070f-7f8d-73a3-91c9-d2151569f58b",
+    "messageId": "01a1070f-7ff0-7582-b261-95df26777cb9",
+    "quote": "非常好，就这样搞。",
+    "directlyReadByCoordinator": true,
+    "acceptedExplanation": {
+      "messageId": "msg_0031750789a18f6e016ac251a9e78087d086c48eb0fc9dad32",
+      "text": "就是在「實驗性功能」裡放一個勾選項：没勾显示平常操作说明；勾起來顯示物件、名稱、狀態與能顯示的資料。只讀不改圖，長資料另行展開。",
+      "kind": "Normalized from directly read PM explanation immediately before Human acceptance."
+    },
+    "acceptedArchitectureBoundary": {
+      "messageId": "msg_0031750789a18f6e016ac251bf386487d08f5910ab33e56ca2",
+      "quote": "它只是多一個「查看現有資料」的方式：不改物件、不另外維護一份狀態，也不繞過原本的讀取規則。有些資料目前讀不到，就先明確顯示「未提供」，不用為了這個功能重做核心。"
+    }
+  },
+  "acceptedRequirements": [
+    "One experimental checkbox toggles normal hover operation hints and diagnostic object information; not a standalone action button or requirement to hold keyboard Alt.",
+    "Unchecked retains original operation hints. Checked shows kind, name/identity and current state plus readable data already formally exposed.",
+    "Long details can be expanded separately without covering the workspace with a giant hover.",
+    "Use existing official read-only projections; do not mutate model, duplicate canonical state or bypass read/lifetime authority.",
+    "Unavailable information explicitly says 未提供. No core redesign, private-state traversal, general reflection or serialization framework."
+  ],
+  "engineeringConstraints": [
+    "Separate committed model data, field draft and UI state; serializable preview is not a product-save contract.",
+    "Do not serialize DOM, functions, writable capabilities or live leases.",
+    "Target switch/delete/reload invalidates old information. Hover does not change selection or steal drag/wire/focus/IME and never adds Graph History.",
+    "Do not capture or serialize the entire Graph on every pointer move. Read current target on demand via existing projection.",
+    "Initial scope is existing built-in objects and public information. No universal third-party internals guarantee.",
+    "Default and persistence follow existing Preferences policy as documented engineering choices, not automatic adoption of Legacy footer."
+  ],
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "stateMaintainer": "same original Implementer"
+  },
+  "requestedAction": "Coordinator to sequence a bounded S06 implementation/review handoff after current repair04 result. Designated maintainer persists this receipt and registers accepted requirement as unimplemented until delivered. Do not mutate fixed I4/R4 or original evidence.",
+  "outputLocation": "This immutable Coordinator receipt; product/state maintenance by original writer only.",
+  "stopConditions": [
+    "Genuine contract conflict: preserve counterexample and route scoped analysis.",
+    "Do not start second writer or modify repair03/review04 scope."
+  ],
+  "separateControls": {
+    "productAcceptance": "NOT_GRANTED for S06",
+    "publication": "NOT_GRANTED",
+    "merge": "NOT_GRANTED",
+    "nextSlice": "NOT_GRANTED"
+  },
+  "provenance": "PM delivered the normalized decision; Coordinator independently read the Human acceptance and preceding concise explanations. Registration timestamp is not an invented Human message timestamp.",
+  "limitations": "Accepted requirements, not delivered implementation or technical PASS."
+}

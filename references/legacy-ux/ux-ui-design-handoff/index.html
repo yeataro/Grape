@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Grape · UI evidence browser · LIVE-001</title>
+<style>
+:root{color-scheme:dark;--app:#121218;--header:#19191f;--canvas:#14141c;--sidebar:#1b1b23;--node:#2e2c3a;--field:#191920;--control:#24242e;--hover:#35333f;--line:#30303b;--accent:#b39cfb;--text:rgba(255,255,255,.88);--secondary:rgba(255,255,255,.72);--muted:rgba(255,255,255,.54);--family:Inter,"Segoe UI","Microsoft JhengHei",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--app);color:var(--text);font-family:var(--family);font-size:13px;line-height:1.6}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}button,input,select{font:inherit}button,select,input{color:var(--text);background:var(--control);border:1px solid var(--line);border-radius:6px}button,select{padding:8px 11px}button{cursor:pointer}button:hover{background:var(--hover)}input{padding:10px 12px;min-width:180px;width:100%;background:var(--field)}input:focus-visible,button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}code{font-family:Consolas,"SFMono-Regular",monospace;font-size:12px;overflow-wrap:anywhere}h1,h2,h3,p{margin:0}h1{font-size:30px;line-height:1.25;font-weight:600;letter-spacing:-.7px}h2{font-size:18px;font-weight:600}h3{font-size:13px;font-weight:600}.topbar{position:sticky;top:0;z-index:5;background:var(--header);border-bottom:1px solid var(--line);padding:13px max(24px,calc((100vw - 1360px)/2));display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:11px;font-size:15px;font-weight:600;white-space:nowrap}.brand-mark{display:grid;grid-template-columns:repeat(2,6px);gap:3px;transform:rotate(-12deg)}.brand-mark i{width:6px;height:6px;background:var(--accent);border-radius:50%}.topbar nav{display:flex;flex-wrap:wrap;gap:20px}.topbar nav a{font-size:12px;color:var(--secondary)}.wrap{max-width:1360px;padding:36px 24px 50px;margin:auto}.hero{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:start;margin-bottom:26px}.eyebrow{font-size:11px;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}.lead{max-width:720px;color:var(--secondary);margin-top:14px;line-height:1.8}.stamp{border:1px solid var(--line);background:var(--header);border-radius:10px;min-width:210px;padding:17px}.stamp strong{font-size:18px;font-weight:500;display:block}.stamp small{display:block;color:var(--muted);margin-top:4px}.badge{display:inline-flex;align-items:center;border:1px solid var(--line);padding:3px 8px;border-radius:5px;font-size:10px;line-height:1.4;color:var(--secondary);white-space:nowrap}.badge.unverified{color:var(--accent);background:var(--node)}.note{border-left:2px solid var(--accent);background:var(--sidebar);padding:13px 16px;color:var(--secondary);line-height:1.8}.note strong{color:var(--text)}.config{display:flex;flex-wrap:wrap;gap:10px 22px;margin:22px 0 32px;padding-bottom:22px;border-bottom:1px solid var(--line)}.config div{display:flex;gap:8px}.label{color:var(--muted)}.section{margin-top:34px}.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;margin-bottom:15px}.section-head p{font-size:12px;color:var(--muted)}.legend{display:flex;gap:13px;align-items:center;flex-wrap:wrap;margin:13px 0 20px;color:var(--secondary);font-size:12px}.filters{position:sticky;top:55px;z-index:3;display:grid;grid-template-columns:1fr auto auto;gap:9px;padding:12px;background:var(--header);border:1px solid var(--line);border-radius:10px;margin-top:24px}.filter-count{color:var(--muted);align-self:center;padding:0 8px;font-variant-numeric:tabular-nums}.token-group{margin-top:27px}.group-title{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}.group-title span{color:var(--muted);font-size:12px}.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}.token-card{background:var(--sidebar);border:1px solid var(--line);border-radius:9px;overflow:hidden;min-width:0}.sample{height:62px;border-bottom:1px solid var(--line);position:relative;isolation:isolate;background-image:conic-gradient(var(--checker-light) 25%,var(--checker-dark) 0 50%,var(--checker-light) 0 75%,var(--checker-dark) 0);background-size:16px 16px}.sample::after{content:"";position:absolute;inset:0;background:var(--sample)}.sample .raw{position:absolute;right:8px;bottom:7px;z-index:1;padding:2px 6px;background:var(--header);color:var(--text);border-radius:4px;font-size:11px}.card-body{padding:12px}.token-name{font-size:12px;margin-bottom:6px}.token-value{display:block;color:var(--text);margin:7px 0 4px;line-height:1.6}.token-meta{color:var(--muted);font-size:11px;line-height:1.6;overflow-wrap:anywhere;margin-top:5px}.role-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}.compare-box{background:var(--canvas);border:1px solid var(--line);border-radius:10px;padding:19px}.compare-box p{color:var(--secondary);margin-top:8px;font-size:12px}.specimens{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px 0 12px}.mini-node{border:1px solid var(--node-border);background:var(--node);border-radius:var(--node-radius);box-shadow:var(--node-shadow);overflow:hidden}.mini-title{padding:10px 12px;font-size:var(--node-title-size);font-weight:var(--node-title-weight);line-height:var(--node-title-line);color:var(--title-text)}.mini-body{padding:16px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px}.port{display:inline-block;width:var(--port-diameter);height:var(--port-diameter);border:var(--port-ring) solid var(--port-color);border-radius:50%;flex:none}.port.filled{background:var(--port-color)}.port-label{display:flex;align-items:center;gap:7px;color:var(--secondary)}.port-label code{color:var(--port-color)}.caption{font-size:11px;color:var(--muted);line-height:1.7}.type-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.type-chip{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:6px;padding:5px 8px;font-size:11px}.type-chip i{display:block;width:11px;height:11px;border-radius:50%;background:var(--sample)}.tables{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.table-box{border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--sidebar)}.table-box h3{padding:13px 15px;background:var(--header);border-bottom:1px solid var(--line)}table{border-collapse:collapse;width:100%;font-size:12px}td,th{text-align:left;padding:10px 15px;border-bottom:1px solid var(--line);vertical-align:top}tr:last-child td{border-bottom:0}th{font-weight:500;color:var(--muted);font-size:11px}td.value{font-family:Consolas,monospace;white-space:nowrap;color:var(--text);font-variant-numeric:tabular-nums}.text-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:12px}.text-card{padding:16px;background:var(--sidebar);border:1px solid var(--line);border-radius:9px}.text-sample{font-size:20px;line-height:1.6;margin-bottom:12px}.text-card .token-meta{color:var(--secondary)}.shadow-list{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:16px}.shadow-box{border:1px solid var(--line);background:var(--node);border-radius:9px;padding:18px}.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:10px;margin-top:16px}.link-card{display:block;border:1px solid var(--line);border-radius:8px;background:var(--sidebar);padding:14px 16px}.link-card small{display:block;color:var(--muted);margin-top:4px}.limitations{color:var(--secondary);padding-left:20px;line-height:1.9}.source-details{margin-top:22px;border:1px solid var(--line);border-radius:8px;padding:12px 15px}summary{cursor:pointer;color:var(--secondary)}pre{font-size:11px;line-height:1.65;overflow:auto;max-height:450px;color:var(--secondary);white-space:pre-wrap;overflow-wrap:anywhere}.footer{color:var(--muted);font-size:11px;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}.empty{padding:30px;color:var(--muted);text-align:center;border:1px dashed var(--line);border-radius:9px}[hidden]{display:none!important}@media(max-width:760px){.hero{grid-template-columns:1fr}.stamp{min-width:0}.topbar{position:static;padding:15px 20px;align-items:flex-start;flex-direction:column;gap:12px}.topbar nav{gap:16px}.wrap{padding:25px 18px}.filters{top:0;grid-template-columns:1fr auto}.filter-count{grid-column:1/-1;padding:0}.role-compare,.tables,.shadow-list{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column;gap:5px}h1{font-size:26px}.swatches{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}}
+</style>
+</head>
+<body><p style="padding:12px 24px;background:#25202f;color:#ddd"><a href="atlas/index.html" style="color:#c5b2e2">新版可見 UI/UX 圖冊 → 工作區、Group、節點排列、Link、Panel 與色彩面板</a> · 本頁保留色碼／尺寸查閱用途。</p>
+<header class="topbar"><a class="brand" href="#top"><svg class="brand-mark" style="display:block;width:28px;height:28px" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><circle cx="20" cy="23" r="11" fill="#bfa5f4"/><circle cx="44" cy="23" r="11" fill="#a98be2"/><circle cx="32" cy="44" r="11" fill="#b499ef"/></svg>Grape <span class="label">/ UI Evidence</span></a><nav aria-label="Evidence sections"><a href="#palette">色彩</a><a href="#semantics">語意分工</a><a href="#typography">文字</a><a href="#metrics">尺寸</a><a href="#sources">來源與限制</a></nav></header>
+<main class="wrap" id="top">
+<section class="hero"><div><p class="eyebrow">Measured subset · current product</p><h1>Dark / Cool / Standard</h1><p class="lead">目前產品的視覺證據查閱頁。用色票與資料表閱讀已採樣的值，並分清楚「取得 token」與「驗證互動狀態」。這不是完整主題規格，也不是新版產品介面提案。</p></div><aside class="stamp"><span class="badge" id="evidence-id">LIVE-001</span><strong id="snapshot-date"></strong><small id="version"></small><small>離線快照 · 不讀取 live page</small></aside></section>
+<div class="note"><strong>證據界線</strong>　DOM computed-style 讀值，不等於所有元件都已驗證使用該值。<span class="badge unverified">Token only · state unverified</span> 特別標示選取、hover、struct 等尚未實際呈現確認的項目。其餘項目同樣不構成完整元件驗收。</div>
+<div class="config" id="configuration"></div>
+<section id="palette" class="section"><div class="section-head"><h2>色彩索引</h2><p>來源值完整保留；透明度不轉成估計的合成色。</p></div><div class="filters"><input id="search" type="search" autocomplete="off" placeholder="搜尋 token、hex、來源 property…" aria-label="搜尋色彩 token"><select id="evidence-filter" aria-label="篩選證據狀態"><option value="all">全部證據狀態</option><option value="unverified">Token only / state unverified</option><option value="sampled">Computed token / 無額外 state 標記</option></select><span class="filter-count" id="filter-count" aria-live="polite"></span></div><div id="color-groups"></div><p class="empty" id="empty" hidden>沒有符合條件的色彩。可搜尋名稱或完整色碼。</p></section>
+<section id="semantics" class="section"><div class="section-head"><h2>Node role ≠ Data type</h2><p>分類軸不同；不要用標題列顏色推斷輸出型別。</p></div><div class="role-compare"><div class="compare-box"><h3>Node role · 標題列角色色</h3><p>Math、Uniform、Sampler、Output 等使用各自標題 token。下方兩個 Math 標題相同，輸出型別不同。</p><div class="specimens" id="specimens"></div><p class="caption">Illustrative specimens, not screenshots. 只展示現有 token 的關係；節點排列、文字與示意寬度不是產品量測。未模擬選取／hover／編輯行為。</p></div><div class="compare-box"><h3>Data type · 型別識別色</h3><p>Scalar、vector、matrix、sampler 與 struct 是另一組 token。Struct 有漸層值，但此狀態的實際元件呈現尚未驗證。</p><div class="type-row" id="type-chips"></div><p class="caption" style="margin-top:18px">色票展示完整 CSS gradient；不因此推定文字、接口或連線應全部套用漸層。實際套用規則仍需元件觀察證據。</p></div></div></section>
+<section id="typography" class="section"><div class="section-head"><h2>文字與透明度</h2><p>Base RGB 與 alpha 分開呈現。</p></div><div class="text-list" id="text-list"></div><div class="note" style="margin-top:16px" id="font-note"></div></section>
+<section id="metrics" class="section"><div class="section-head"><h2>尺寸與陰影</h2><p>CSS px 與 graph-space px 分欄，避免混用。</p></div><div class="tables"><div class="table-box"><h3>UI / CSS metrics</h3><table><thead><tr><th scope="col">來源名稱</th><th scope="col">值</th></tr></thead><tbody id="css-metrics"></tbody></table></div><div class="table-box"><h3>Graph-space metrics</h3><table><thead><tr><th scope="col">來源名稱</th><th scope="col">值</th></tr></thead><tbody id="graph-metrics"></tbody></table><p class="caption" style="padding:13px 15px">Graph-space 尺寸不是觀察畫面中的 screen px。Canvas zoom 0.25 與 1280 × 720 viewport 是該次觀察狀態，不是產品預設值。</p></div></div><div class="shadow-list" id="shadow-list"></div><p class="caption" style="margin-top:18px">名稱帶 Default / Min / Max 的值來自原始資料欄位；本頁未重新量測 layout constraints。此 evidence browser 的響應式排列也不是產品 responsive 驗證。</p></section>
+<section id="sources" class="section"><div class="section-head"><h2>來源、設計筆記與限制</h2><p>先讀 ownership／行為契約，再解讀視覺證據。</p></div><div class="links"><a class="link-card" href="design/UX_UI_REPORT.md">UX/UI 設計報告<small>能力、入口、Widget、Style 分開描述</small></a><a class="link-card" href="design/DESIGN_PREMISES.md">Owner 設計前提<small>Node 外觀必保留；配置與實驗功能分類</small></a><a class="link-card" href="visual-reference/index.html">舊產品視覺參考<small>五張原尺寸歷史圖片，不是本輪即時截圖</small></a><a class="link-card" href="research/live-observations-002.md">Live observation · 002<small>實際編輯、動態接口、日文與窄視窗</small></a><a class="link-card" href="research/live-observations-003.md">Live observation · 003<small>浮動視窗、匯出與 Host 狀態</small></a><a class="link-card" href="research/live-observations-004.md">Live observation · 004<small>情境工具列、搜尋、來源 Tag</small></a><a class="link-card" href="research/source-tags.tokens.json">Source Tag 色碼<small>後續 rendered-state 樣本</small></a><a class="link-card" href="README.md">工作資料說明<small>範圍、來源順位與交接方式</small></a><a class="link-card" href="research/current-dark-cool.tokens.partial.json">原始 token JSON<small>current-dark-cool.tokens.partial.json</small></a><a class="link-card" href="research/live-observations-001.md">Live observation · 001<small>當次產品觀察記錄</small></a><a class="link-card" href="research/state-and-host-boundaries.md">狀態與 Host 邊界<small>保存、套用、讀回、Undo 與生命期</small></a><a class="link-card" href="research/extension-boundaries.md">擴充與 UI 邊界<small>Panel / Widget / localization</small></a><a class="link-card" href="research/ui-evidence-scope.md">UI evidence scope<small>已知缺口與觀察範圍</small></a></div><ul class="limitations" id="limitations"></ul><details class="source-details"><summary>檢視此 HTML 內嵌的原始快照（JSON）</summary><pre id="embedded-json"></pre></details><p class="footer" id="footer"></p></section>
+<noscript><p class="note">此頁用本機 JavaScript 整理內嵌資料；不需要網路。未啟用 JavaScript 時，請直接閱讀 <a href="research/current-dark-cool.tokens.partial.json">原始 token JSON</a>。</p></noscript>
+</main>
+<script id="evidence-snapshot" type="application/json">{
+  "schema": "grape-ui-design-observation/1",
+  "status": "partial-observation-not-production-theme-contract",
+  "evidenceId": "LIVE-001",
+  "date": "2026-10-02",
+  "productVersion": "0.8.272 DEV",
+  "configuration": {
+    "locale": "en",
+    "theme": "dark",
+    "style": "cool",
+    "uiSize": "standard",
+    "uiScale": 1,
+    "viewportCssPixels": [
+      1280,
+      720
+    ],
+    "canvasZoom": 0.25
+  },
+  "method": "Read-only DOM computed-style sampling; no legacy source or runtime store introspection. Legacy properties/selectors below are evidence locators, not production API recommendations.",
+  "colors": {
+    "surface.application": {
+      "value": "#121218",
+      "legacyProperty": "--ui-tone-app-bg"
+    },
+    "surface.header": {
+      "value": "#19191f",
+      "legacyProperty": "--ui-tone-header"
+    },
+    "surface.canvas": {
+      "value": "#14141c",
+      "legacyProperty": "--ui-tone-canvas"
+    },
+    "surface.sidebar": {
+      "value": "#1b1b23",
+      "legacyProperty": "--ui-tone-sidebar"
+    },
+    "surface.node": {
+      "value": "#2e2c3a",
+      "legacyProperty": "--ui-tone-node"
+    },
+    "surface.field": {
+      "value": "#191920",
+      "legacyProperty": "--ui-tone-field"
+    },
+    "surface.nodeValue": {
+      "value": "#42404f",
+      "legacyProperty": "--node-value-bg"
+    },
+    "surface.dialog": {
+      "value": "#1d1b26",
+      "legacyProperty": "--ui-tone-dialog"
+    },
+    "surface.menu": {
+      "value": "#24232c",
+      "legacyProperty": "--ui-tone-menu"
+    },
+    "surface.menuHover": {
+      "value": "#393741",
+      "legacyProperty": "--ui-tone-menu-hover"
+    },
+    "surface.footer": {
+      "value": "#1c1c25",
+      "legacyProperty": "--ui-tone-footer"
+    },
+    "surface.panelHeader": {
+      "value": "#22212b",
+      "legacyProperty": "--panel-header-bg"
+    },
+    "surface.panelHeaderInactive": {
+      "value": "#14141c",
+      "legacyProperty": "--panel-header-inactive-bg"
+    },
+    "surface.control": {
+      "value": "#24242e",
+      "legacyProperty": "--ui-tone-control"
+    },
+    "surface.controlHover": {
+      "value": "#35333f",
+      "legacyProperty": "--ui-tone-control-hover"
+    },
+    "surface.stageActive": {
+      "value": "#393047",
+      "legacyProperty": "--ui-tone-stage-active"
+    },
+    "surface.grid": {
+      "value": "#34303f",
+      "legacyProperty": "--ui-tone-grid"
+    },
+    "border.node": {
+      "value": "#60576e",
+      "legacyProperty": "--ui-tone-node-border"
+    },
+    "border.divider": {
+      "value": "#30303b",
+      "legacyProperty": "--line"
+    },
+    "accent.primary": {
+      "value": "#b39cfb",
+      "legacyProperty": "--purple"
+    },
+    "selection.node": {
+      "value": "#70dc69",
+      "legacyProperty": "--selection",
+      "renderedStateVerified": false
+    },
+    "selection.nodeGlow": {
+      "value": "#70dc6940",
+      "legacyProperty": "--selection-glow",
+      "renderedStateVerified": false
+    },
+    "wire.selected": {
+      "value": "#fff2d2",
+      "legacyProperty": "--wire-selected",
+      "renderedStateVerified": false
+    },
+    "wire.hover": {
+      "value": "#ede5ff",
+      "legacyProperty": "--wire-hover",
+      "renderedStateVerified": false
+    },
+    "wire.ready": {
+      "value": "#e5d9f5",
+      "legacyProperty": "--wire-ready",
+      "renderedStateVerified": false
+    },
+    "type.scalar": {
+      "value": "#c4c1bc",
+      "legacyProperty": "--type-float"
+    },
+    "type.vec2": {
+      "value": "#8fc5ee",
+      "legacyProperty": "--type-vec2"
+    },
+    "type.vec3": {
+      "value": "#87ceb7",
+      "legacyProperty": "--type-vec3"
+    },
+    "type.vec4": {
+      "value": "#c5b2e2",
+      "legacyProperty": "--type-vec4"
+    },
+    "type.matrix": {
+      "value": "#a1adb7",
+      "legacyProperty": "--type-matrix"
+    },
+    "type.sampler": {
+      "value": "#cab08b",
+      "legacyProperty": "--type-sampler"
+    },
+    "type.struct": {
+      "value": "linear-gradient(135deg,#bc9c85,#b690ac 33%,#949fc4 67%,#83b4a7)",
+      "legacyProperty": "--type-struct-gradient",
+      "renderedStateVerified": false
+    },
+    "node.math.title": {
+      "value": "#43345c",
+      "legacyProperty": "--node-function-bg"
+    },
+    "node.uniform.title": {
+      "value": "#2a5e6b",
+      "legacyProperty": "--node-uniform-bg"
+    },
+    "node.sampler.title": {
+      "value": "#6e4c2e",
+      "legacyProperty": "--node-sampler-bg"
+    },
+    "node.output.title": {
+      "value": "#38524a",
+      "legacyProperty": "--node-output-bg"
+    },
+    "node.runtimeInfo.title": {
+      "value": "#62414f",
+      "legacySelector": "#cards > article[data-color-role=runtime-info] .node-title",
+      "sample": "Vertex Inputs"
+    },
+    "node.constant.title": {
+      "value": "#384d73",
+      "legacyProperty": "--node-constant-bg",
+      "renderedStateVerified": false
+    },
+    "node.attribute.title": {
+      "value": "#565141",
+      "legacyProperty": "--node-attribute-bg",
+      "renderedStateVerified": false
+    },
+    "preview.checkerDark": {
+      "value": "#292931",
+      "legacyProperty": "--preview-checker-dark"
+    },
+    "preview.checkerLight": {
+      "value": "#3b3b44",
+      "legacyProperty": "--preview-checker-light"
+    },
+    "scroll.thumb": {
+      "value": "#51465f",
+      "legacyProperty": "--scroll-thumb"
+    },
+    "scroll.hover": {
+      "value": "#79638e",
+      "legacyProperty": "--scroll-hover"
+    },
+    "field.sliderFill": {
+      "value": "#c4c0df24",
+      "legacyProperty": "--numeric-slider-fill"
+    }
+  },
+  "text": {
+    "baseRgb": [
+      255,
+      255,
+      255
+    ],
+    "primaryAlpha": 0.88,
+    "titleAlpha": 0.85,
+    "valueAlpha": 0.74,
+    "secondaryAlpha": 0.72,
+    "softAlpha": 0.62,
+    "mutedAlpha": 0.54,
+    "faintAlpha": 0.32,
+    "familyCss": "Inter, \"Segoe UI\", \"Microsoft JhengHei\", sans-serif",
+    "baseCssPixels": 13,
+    "nodeTitle": {
+      "weight": 600,
+      "fontSize": 12,
+      "lineHeight": 16
+    },
+    "fontFaceActuallyUsed": "UNVERIFIED"
+  },
+  "metricsCssPixels": {
+    "headerHeight": 52,
+    "panelHeaderHeight": 32,
+    "panelDivider": 6,
+    "sidebarDivider": 6,
+    "leftSidebarDefault": 300,
+    "leftSidebarMin": 180,
+    "leftSidebarMax": 520,
+    "rightSidebarDefault": 340,
+    "rightSidebarMin": 300,
+    "rightSidebarMax": 640,
+    "canvasMin": 280,
+    "nodeRadius": 9,
+    "popupRadius": 10,
+    "popupRowHeight": 32,
+    "popupRowRadius": 6,
+    "toolbarRadius": 8,
+    "portDiameterGraphSpace": 11,
+    "portRingGraphSpace": 2,
+    "numericFieldHeightGraphSpace": 24,
+    "numericFieldRadiusGraphSpace": 4
+  },
+  "shadows": {
+    "node": "0 6px 20px #0004",
+    "inputDepthToken": "0 2px 6px #0003"
+  },
+  "limitations": [
+    "Subset of active computed tokens, not every CSS property.",
+    "No alternate theme/style, responsive, hover, selected, error or editing state qualification yet.",
+    "A computed token does not prove every component consumes that token correctly.",
+    "The observed viewport dimensions and restored zoom are not product defaults.",
+    "Semantic field names here classify design evidence; no production ThemeService API is introduced."
+  ]
+}</script>
+<script>
+'use strict';
+const data=JSON.parse(document.getElementById('evidence-snapshot').textContent);
+const $=id=>document.getElementById(id);
+const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
+const styles=document.documentElement.style;
+const variables={app:'surface.application',header:'surface.header',canvas:'surface.canvas',sidebar:'surface.sidebar',node:'surface.node',field:'surface.field',control:'surface.control',hover:'surface.controlHover',line:'border.divider',accent:'accent.primary','node-border':'border.node','checker-light':'preview.checkerLight','checker-dark':'preview.checkerDark'};
+Object.entries(variables).forEach(([variable,key])=>styles.setProperty('--'+variable,data.colors[key].value));
+styles.setProperty('--family',data.text.familyCss);styles.setProperty('--node-radius',data.metricsCssPixels.nodeRadius+'px');styles.setProperty('--port-diameter',data.metricsCssPixels.portDiameterGraphSpace+'px');styles.setProperty('--port-ring',data.metricsCssPixels.portRingGraphSpace+'px');styles.setProperty('--node-shadow',data.shadows.node);styles.setProperty('--node-title-size',data.text.nodeTitle.fontSize+'px');styles.setProperty('--node-title-weight',data.text.nodeTitle.weight);styles.setProperty('--node-title-line',data.text.nodeTitle.lineHeight+'px');
+const rgba=a=>'rgba('+data.text.baseRgb.join(',')+','+a+')';
+styles.setProperty('--text',rgba(data.text.primaryAlpha));styles.setProperty('--secondary',rgba(data.text.secondaryAlpha));styles.setProperty('--muted',rgba(data.text.mutedAlpha));styles.setProperty('--title-text',rgba(data.text.titleAlpha));
+$('evidence-id').textContent=data.evidenceId;$('snapshot-date').textContent=data.date;$('version').textContent='Product '+data.productVersion;
+const config=data.configuration;
+[['Theme',config.theme],['Style',config.style],['Size',config.uiSize],['Locale',config.locale],['UI scale',config.uiScale],['Viewport',config.viewportCssPixels.join(' × ')+' CSS px'],['Observed zoom',config.canvasZoom]].forEach(([label,value])=>{const n=el('div');n.append(el('span','label',label),el('span','',String(value)));$('configuration').append(n);});
+const groupDefinitions=[['surface.','Surfaces','層級與承載區'],['border.','Borders','邊界與分隔'],['node.','Node roles','標題列角色'],['type.','Data types','接口／資料型別 token'],['other','Interaction & utility','accent、selection、wire、preview、scroll、field']];
+const cards=[];const groups=[];
+function alphaDetails(value){const hex=value.match(/^#([0-9a-f]{6})([0-9a-f]{2})?$/i);if(!hex)return 'CSS gradient · stops / angles preserved';const a=hex[2]||'ff';return 'RGB #'+hex[1]+' · alpha 0x'+a+' = '+parseInt(a,16)+'/255'+(hex[2]?' ≈ '+(parseInt(a,16)/255).toFixed(6):' (opaque)');}
+for(const [prefix,title,description] of groupDefinitions){const entries=Object.entries(data.colors).filter(([key])=>prefix==='other'?!['surface.','border.','node.','type.'].some(p=>key.startsWith(p)):key.startsWith(prefix));const group=el('div','token-group');const head=el('div','group-title');head.append(el('h3','',title),el('span','',description));const grid=el('div','swatches');group.append(head,grid);$('color-groups').append(group);groups.push({group,grid});for(const [name,item] of entries){const card=el('article','token-card');const sample=el('div','sample');sample.style.setProperty('--sample',item.value);sample.append(el('code','raw',item.value.startsWith('#')?item.value:'gradient'));const body=el('div','card-body');body.append(el('h3','token-name',name),el('span','badge'+(item.renderedStateVerified===false?' unverified':''),item.renderedStateVerified===false?'Token only · state unverified':'Measured computed token'),el('code','token-value',item.value),el('div','token-meta',alphaDetails(item.value)),el('div','token-meta','Source '+(item.legacyProperty||item.legacySelector||'unspecified')));if(item.sample)body.append(el('div','token-meta','Observed sample: '+item.sample));card.append(sample,body);grid.append(card);cards.push({card,name,item,search:[name,item.value,item.legacyProperty,item.legacySelector,item.sample].filter(Boolean).join(' ').toLowerCase()});}}
+function filter(){const query=$('search').value.trim().toLowerCase(),mode=$('evidence-filter').value;let count=0;cards.forEach(({card,item,search})=>{const pass=search.includes(query)&&(mode==='all'||(mode==='unverified'?item.renderedStateVerified===false:item.renderedStateVerified!==false));card.hidden=!pass;if(pass)count++;});groups.forEach(({group,grid})=>group.hidden=!Array.from(grid.children).some(n=>!n.hidden));$('filter-count').textContent=count+' / '+cards.length+' colors';$('empty').hidden=count!==0;}
+$('search').addEventListener('input',filter);$('evidence-filter').addEventListener('change',filter);filter();
+for(const type of ['vec3','vec4']){const node=el('div','mini-node');const title=el('div','mini-title','Math role');title.style.background=data.colors['node.math.title'].value;const body=el('div','mini-body');body.append(el('span','label','output'));const line=el('span','port-label');line.style.setProperty('--port-color',data.colors['type.'+type].value);line.append(el('code','',type),el('i','port filled'));body.append(line);node.append(title,body);$('specimens').append(node);}
+Object.entries(data.colors).filter(([key])=>key.startsWith('type.')).forEach(([key,item])=>{const chip=el('span','type-chip');const dot=el('i');dot.style.setProperty('--sample',item.value);chip.append(dot,el('code','',key.slice(5)));if(item.renderedStateVerified===false)chip.title='Token only; rendered state unverified';$('type-chips').append(chip);});
+Object.entries(data.text).filter(([key])=>key.endsWith('Alpha')).forEach(([key,alpha])=>{const box=el('div','text-card');const sample=el('div','text-sample','Grape · 文字樣本');sample.style.color=rgba(alpha);box.append(sample,el('h3','token-name',key),el('code','token-value',rgba(alpha)),el('div','token-meta','alpha '+alpha+' · '+(alpha*100).toFixed(0)+'%'));$('text-list').append(box);});
+$('font-note').append(el('strong','','Font evidence'),document.createTextNode('　CSS family: '+data.text.familyCss+'；base '+data.text.baseCssPixels+' CSS px；node title '+data.text.nodeTitle.fontSize+' / '+data.text.nodeTitle.lineHeight+' px, weight '+data.text.nodeTitle.weight+'。Actual rendered font: '+data.text.fontFaceActuallyUsed+'。本機看到的字型可能因安裝情況而不同。'));
+Object.entries(data.metricsCssPixels).forEach(([key,value])=>{const tr=el('tr');const name=el('td');name.append(el('code','',key));tr.append(name,el('td','value',value+' '+(key.includes('GraphSpace')?'graph px':'CSS px')));$(key.includes('GraphSpace')?'graph-metrics':'css-metrics').append(tr);});
+Object.entries(data.shadows).forEach(([key,value])=>{const box=el('div','shadow-box');box.style.boxShadow=value;box.append(el('h3','',key),el('code','token-value',value),el('p','caption','Token specimen · not a verified interaction state'));$('shadow-list').append(box);});
+data.limitations.forEach(text=>$('limitations').append(el('li','',text)));
+$('embedded-json').textContent=JSON.stringify(data,null,2);
+$('footer').textContent=data.evidenceId+' · '+data.date+' · '+data.status+' · This evidence browser is not the production UI. Rebuild this HTML snapshot when the source JSON changes; there is no automatic file fetch.';
+</script>
+</body>
+</html>

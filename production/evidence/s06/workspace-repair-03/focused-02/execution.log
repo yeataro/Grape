@@ -1,0 +1,84 @@
+
+Running 5 tests using 1 worker
+
+(node:22136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 620 (30.2s)
+(node:23820) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 1440 (30.2s)
+(node:57116) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 3 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:88:1 › S06 actual 3px uncaptured port release across Canvas Inspector retires wire and ring (1.2s)
+  ok 4 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:106:39 › S06 trusted Enter socket activation waits for real pointer and preserves keyboard connection (1.3s)
+  ok 5 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:106:39 › S06 trusted Space socket activation waits for real pointer and preserves keyboard connection (1.4s)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 620 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })
+
+
+      80 |   await clickAction(page, "Redo");
+      81 |   expect((await doc(page)).graph).toEqual(after.graph);
+    > 82 |   await read.click();
+         |              ^
+      83 |   await expect(text).toHaveText(full);
+      84 |   await dialog.getByRole("button", { name: "Close status details", exact: true }).click();
+      85 |   expect((await doc(page)).graph).toEqual(after.graph);
+        at C:\Users\user\source\Grape\production\tests\browser\s06-status-pointer.spec.ts:82:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\focused-02\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-03\focused-02\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\focused-02\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-03\focused-02\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 1440 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })
+
+
+      80 |   await clickAction(page, "Redo");
+      81 |   expect((await doc(page)).graph).toEqual(after.graph);
+    > 82 |   await read.click();
+         |              ^
+      83 |   await expect(text).toHaveText(full);
+      84 |   await dialog.getByRole("button", { name: "Close status details", exact: true }).click();
+      85 |   expect((await doc(page)).graph).toEqual(after.graph);
+        at C:\Users\user\source\Grape\production\tests\browser\s06-status-pointer.spec.ts:82:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\focused-02\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-03\focused-02\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\focused-02\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-03\focused-02\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 620 
+    [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 1440 
+  3 passed (1.1m)

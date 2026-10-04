@@ -1,0 +1,507 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+      "s06-socket-bottom.spec.ts",
+      "s06-floating.spec.ts",
+      "--output",
+      "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-01\\test-results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/debug-hover-repair-01/presentation-01/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-01\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s06-floating.spec.ts",
+      "file": "s06-floating.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 shared floating consumers bound alignments focus semantics and disposal independently",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 546,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-floating.spec.ts:36:131",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-floating.spec.ts",
+                      "column": 131,
+                      "line": 36
+                    },
+                    "snippet": "  34 |   await page.getByRole(\"button\", {name:\"Fixture modal\",exact:true}).click();\n  35 |   const modal = page.getByRole(\"dialog\", {name:\"modal fixture\",exact:true});\n> 36 |   for (let i=0;i<5;i++) { await page.keyboard.press(\"Tab\"); expect(await modal.evaluate(e => e.contains(document.activeElement))).toBe(true); }\n     |                                                                                                                                   ^\n  37 |   await page.keyboard.press(\"Escape\"); await expect(page.getByRole(\"button\",{name:\"Fixture modal\",exact:true})).toBeFocused();\n  38 |   await page.evaluate(() => (window as any).__floatingFixture.dispose());\n  39 |   const late = await page.evaluate(() => (window as any).__floatingFixture.consumers.map((c:any) => c.view.open()));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-floating.spec.ts",
+                        "column": 131,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  34 |   await page.getByRole(\"button\", {name:\"Fixture modal\",exact:true}).click();\n  35 |   const modal = page.getByRole(\"dialog\", {name:\"modal fixture\",exact:true});\n> 36 |   for (let i=0;i<5;i++) { await page.keyboard.press(\"Tab\"); expect(await modal.evaluate(e => e.contains(document.activeElement))).toBe(true); }\n     |                                                                                                                                   ^\n  37 |   await page.keyboard.press(\"Escape\"); await expect(page.getByRole(\"button\",{name:\"Fixture modal\",exact:true})).toBeFocused();\n  38 |   await page.evaluate(() => (window as any).__floatingFixture.dispose());\n  39 |   const late = await page.evaluate(() => (window as any).__floatingFixture.consumers.map((c:any) => c.view.open()));\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-floating.spec.ts:36:131"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:31:38.114Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-01\\test-results\\s06-floating-S06-shared-fl-ef54b--and-disposal-independently-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-01\\test-results\\s06-floating-S06-shared-fl-ef54b--and-disposal-independently-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-01\\test-results\\s06-floating-S06-shared-fl-ef54b--and-disposal-independently-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-floating.spec.ts",
+                    "column": 131,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "9a58ca68391d0e581fd7-473183e691fa63e52f08",
+          "file": "s06-floating.spec.ts",
+          "line": 5,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "s06-socket-bottom.spec.ts",
+      "file": "s06-socket-bottom.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 circle-only type-colored socket states preserve geometry at 0.65",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30140,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts",
+                        "column": 6,
+                        "line": 17
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Vector2', exact: true })\u001b[22m\n\n\n   at create-node.ts:17\n\n  15 |   await browser\n  16 |     .getByRole(\"button\", { name: \"Add \" + label, exact: true })\n> 17 |     .click();\n     |      ^\n  18 |   const point = await canvas.evaluate((el, n) => {\n  19 |     const r = el.getBoundingClientRect(),\n  20 |       v = el.querySelector<HTMLElement>(\".viewport\")!,\n    at createNode (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts:17:6)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:16:84"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:31:39.336Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-01\\test-results\\s06-socket-bottom-S06-circ-65b08-s-preserve-geometry-at-0-65-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-01\\test-results\\s06-socket-bottom-S06-circ-65b08-s-preserve-geometry-at-0-65-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-01\\test-results\\s06-socket-bottom-S06-circ-65b08-s-preserve-geometry-at-0-65-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c966e79978f139dcd927-e0998c2bd0bedecd1523",
+          "file": "s06-socket-bottom.spec.ts",
+          "line": 14,
+          "column": 35
+        },
+        {
+          "title": "S06 circle-only type-colored socket states preserve geometry at 1",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30108,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts",
+                        "column": 6,
+                        "line": 17
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Vector2', exact: true })\u001b[22m\n\n\n   at create-node.ts:17\n\n  15 |   await browser\n  16 |     .getByRole(\"button\", { name: \"Add \" + label, exact: true })\n> 17 |     .click();\n     |      ^\n  18 |   const point = await canvas.evaluate((el, n) => {\n  19 |     const r = el.getBoundingClientRect(),\n  20 |       v = el.querySelector<HTMLElement>(\".viewport\")!,\n    at createNode (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts:17:6)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:16:84"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:32:10.201Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-01\\test-results\\s06-socket-bottom-S06-circ-7be5b-ates-preserve-geometry-at-1-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-01\\test-results\\s06-socket-bottom-S06-circ-7be5b-ates-preserve-geometry-at-1-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-01\\test-results\\s06-socket-bottom-S06-circ-7be5b-ates-preserve-geometry-at-1-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c966e79978f139dcd927-75f73c00c8bfdf40575c",
+          "file": "s06-socket-bottom.spec.ts",
+          "line": 14,
+          "column": 35
+        },
+        {
+          "title": "S06 circle-only type-colored socket states preserve geometry at 1.25",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30147,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts",
+                        "column": 6,
+                        "line": 17
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Vector2', exact: true })\u001b[22m\n\n\n   at create-node.ts:17\n\n  15 |   await browser\n  16 |     .getByRole(\"button\", { name: \"Add \" + label, exact: true })\n> 17 |     .click();\n     |      ^\n  18 |   const point = await canvas.evaluate((el, n) => {\n  19 |     const r = el.getBoundingClientRect(),\n  20 |       v = el.querySelector<HTMLElement>(\".viewport\")!,\n    at createNode (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts:17:6)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:16:84"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:32:40.937Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-01\\test-results\\s06-socket-bottom-S06-circ-19f04-s-preserve-geometry-at-1-25-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-01\\test-results\\s06-socket-bottom-S06-circ-19f04-s-preserve-geometry-at-1-25-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-01\\test-results\\s06-socket-bottom-S06-circ-19f04-s-preserve-geometry-at-1-25-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c966e79978f139dcd927-e909df7281df8ff3e9a4",
+          "file": "s06-socket-bottom.spec.ts",
+          "line": 14,
+          "column": 35
+        },
+        {
+          "title": "S06 compact bottom actions and complete output are reachable 1920x1000",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1191,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:33:11.724Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c966e79978f139dcd927-74a58f6045c8ba14f640",
+          "file": "s06-socket-bottom.spec.ts",
+          "line": 45,
+          "column": 76
+        },
+        {
+          "title": "S06 compact bottom actions and complete output are reachable 1440x1000",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 920,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:33:13.180Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c966e79978f139dcd927-1982085bfc0969d9e33a",
+          "file": "s06-socket-bottom.spec.ts",
+          "line": 45,
+          "column": 76
+        },
+        {
+          "title": "S06 compact bottom actions and complete output are reachable 620x800",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 902,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:33:14.106Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c966e79978f139dcd927-520293a3eef4e6b86447",
+          "file": "s06-socket-bottom.spec.ts",
+          "line": 45,
+          "column": 76
+        },
+        {
+          "title": "S06 compact bottom actions and complete output are reachable 620x380",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 878,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:33:15.014Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c966e79978f139dcd927-b10438866f756a38a57c",
+          "file": "s06-socket-bottom.spec.ts",
+          "line": 45,
+          "column": 76
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T14:31:37.729Z",
+    "duration": 98235.856,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "packetType": "PARENT_S06_USAGE_RECOVERY_RESULT",
+  "recordedAt": "2026-10-04T08:45:14.5233167Z",
+  "actionKey": "yeataro/Grape:S06:workspace-entry:ad31676:01",
+  "packetId": "S06-WORKSPACE-ENTRY-01",
+  "status": "RECOVERED_RUNNING_CONTROL_READ",
+  "intent": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/parent-resume-intent-01.json",
+    "sha256": "0004138ac6174b30dfb207719b174b9fda7bee52be1c4010cd3d487ab80f55c6"
+  },
+  "priorResult": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/parent-result-01.json",
+    "sha256": "57169490cf5877702b622c5235b38d32e5e7ce8b03ec8506e2a68ac4714ad3f5",
+    "remainsHistorical": true
+  },
+  "priorTurn": {
+    "id": "01a10610-c2d3-7450-b86e-bfc6ef7e05d8",
+    "status": "failed",
+    "cause": "Usage limit reached after packet read",
+    "technicalFail": false
+  },
+  "usageRestored": {
+    "directTool": "mcp__codex_app__get_usage_limits",
+    "ordinaryUsageAllowed": true,
+    "usedPercent": 0
+  },
+  "sameWriter": {
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "displayTitle": "Grape S06 實作與維護",
+    "cwd": "C:\\Users\\user\\source\\Grape"
+  },
+  "recoveryTransport": "collaboration.followup_task",
+  "actualRecoveryDispatches": 1,
+  "totalActualFollowupsForThisAction": 2,
+  "originalProductAttempt": 1,
+  "originalFindingRepairCountersUnchanged": true,
+  "observation": {
+    "tools": [
+      "collaboration.list_agents",
+      "mcp__codex_app__read_thread"
+    ],
+    "agentStatus": "running",
+    "threadStatus": "active",
+    "turnId": "01a10615-fa19-7c92-bf85-cdca950b69a1",
+    "turnStatus": "inProgress",
+    "acknowledgementMessageId": "msg_0f7ea6f2d846c6d3016ac211ef5c7087d08da90fa810afc6c9",
+    "acknowledgement": "Same S06 work resumed; reads new network delivery control then continues sync, activation and workspace implementation.",
+    "controlReadCommandId": "exec-86b3429d-065d-4f89-a5b3-0fa9e6faab56",
+    "controlReadCommandStatus": "completed",
+    "controlReadExitCode": 0,
+    "controlAndRecoveryIntentActuallyRead": true
+  },
+  "networkControl": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/network-delivery-control-01.json",
+    "sha256": "54d4ae2ddc14e205bb679c5dd6b108a0d76308e6066fa298a0886571e9c9c1bd",
+    "bytes": 3056,
+    "forwardedToSameWriter": true,
+    "currentDisposition": "OWNER_REMOVED_REQUIREMENT",
+    "historicalGap": "NOT_EXECUTED",
+    "noNewPermissionOrDeniedRetry": true
+  },
+  "parentProductWrites": false,
+  "parentStateWrites": false,
+  "parentGitMutations": [],
+  "parentRemoteActions": [],
+  "parentServiceActions": [],
+  "newWriter": false,
+  "completionClaim": "Only actual running recovery and control read are confirmed; writer owns subsequent activation, implementation and exact submission.",
+  "nextRoute": "Continue existing packet, then STOP_WRITING for Coordinator fresh independent review."
+}

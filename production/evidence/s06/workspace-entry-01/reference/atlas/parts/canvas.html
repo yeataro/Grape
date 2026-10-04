@@ -1,0 +1,222 @@
+<section id="canvas-operations" class="ca-section" aria-labelledby="ca-title">
+  <header class="section-head">
+    <p class="kicker">CANVAS OPERATIONS · VIEW, SELECTION &amp; GESTURES</p>
+    <h2 id="ca-title">移動視角、選取內容、完成一次手勢。</h2>
+    <p class="lede">畫布操作要讓使用者始終知道：現在移動的是觀看位置、選取範圍，還是節點本身。這章以相同的節點、接線與選取語彙，交接 Pan、Zoom、框選、節點移動，以及 Home／Frame／Focus 的行為。</p>
+  </header>
+  <p class="ca-evidence-line"><span class="ca-badge">SOURCE-DERIVED</span><span class="ca-badge">STATIC ILLUSTRATIONS</span> 以下是依 Legacy 原始碼整理的靜態圖解，尺寸與位置為說明用途；沒有可執行手勢，也不代表產品回歸測試。完整規則與證據界線見 <a href="../design/CANVAS_INTERACTION_SPEC.md">Canvas interaction specification</a>。</p>
+
+  <svg class="ca-symbols" xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <marker id="ca-arrow-purple" viewBox="0 0 8 8" markerWidth="6" markerHeight="6" refX="7" refY="4" orient="auto"><path d="M1 1 7 4 1 7" fill="none" stroke="#b59ccf" stroke-width="1.4"/></marker>
+      <marker id="ca-arrow-light" viewBox="0 0 8 8" markerWidth="6" markerHeight="6" refX="7" refY="4" orient="auto"><path d="M1 1 7 4 1 7" fill="none" stroke="#c3d1e4" stroke-width="1.4"/></marker>
+      <g id="ca-float-node">
+        <rect class="ca-node-shell" width="160" height="100" rx="8"/>
+        <path class="ca-node-head-source" d="M8 1h144a7 7 0 0 1 7 7v27H1V8a7 7 0 0 1 7-7Z"/>
+        <text class="ca-node-title" x="12" y="23">Float A</text><text class="ca-node-type" x="115" y="23">float</text>
+        <rect class="ca-field" x="12" y="48" width="136" height="22" rx="4"/><text class="ca-field-text" x="22" y="63">0.500</text>
+        <text class="ca-node-text" x="116" y="88">out</text><circle class="ca-port ca-port-connected" cx="160" cy="84" r="5"/>
+      </g>
+      <g id="ca-add-node">
+        <rect class="ca-node-shell" width="160" height="100" rx="8"/>
+        <path class="ca-node-head" d="M8 1h144a7 7 0 0 1 7 7v27H1V8a7 7 0 0 1 7-7Z"/>
+        <text class="ca-node-title" x="12" y="23">Add B</text><text class="ca-node-type" x="115" y="23">float</text>
+        <circle class="ca-port ca-port-connected" cx="0" cy="59" r="5"/><text class="ca-node-text" x="13" y="63">a</text>
+        <text class="ca-node-type" x="34" y="63">Float A</text>
+        <circle class="ca-port" cx="0" cy="84" r="5"/><text class="ca-node-text" x="13" y="88">b</text>
+        <rect class="ca-field" x="32" y="73" width="59" height="20" rx="4"/><text class="ca-field-text" x="39" y="87">0.000</text>
+        <text class="ca-node-text" x="116" y="63">out</text><circle class="ca-port" cx="160" cy="59" r="5"/>
+      </g>
+      <g id="ca-vector-node">
+        <rect class="ca-node-shell" width="160" height="100" rx="8"/>
+        <path class="ca-node-head-source" d="M8 1h144a7 7 0 0 1 7 7v27H1V8a7 7 0 0 1 7-7Z"/>
+        <text class="ca-node-title" x="12" y="23">Vector C</text><text class="ca-node-type" x="116" y="23">vec3</text>
+        <rect class="ca-field" x="12" y="48" width="136" height="22" rx="4"/><text class="ca-field-text" x="22" y="63">0.2  0.5  0.8</text>
+        <text class="ca-node-text" x="116" y="88">out</text><circle class="ca-port ca-port-vector" cx="160" cy="84" r="5"/>
+      </g>
+      <g id="ca-pointer"><path class="ca-cursor" d="M0 0 3 23 8 17 13 27 18 24 13 15 22 14Z"/></g>
+    </defs>
+  </svg>
+
+  <div class="ca-principles">
+    <article><h3>視角改變</h3><p>Pan、Zoom、Home、Frame 重新安排<strong>眼前的觀看範圍</strong>。節點在圖中的位置與接線保留。</p></article>
+    <article><h3>選取改變</h3><p>綠色輪廓表示<strong>哪些節點被選中</strong>。主要選取是目前操作的焦點；它不是新增的一種節點狀態色。</p></article>
+    <article><h3>位置改變</h3><p>拖曳節點的可移動區域，先顯示預覽。正常釋放後，<strong>實際改變的位置</strong>才成為一次可 Undo 的佈局編輯。</p></article>
+  </div>
+
+  <article id="ca-camera-space" class="ca-artboard">
+    <div class="ca-caption"><div><span class="ca-number">圖01</span><h3>Pan 移動觀看位置；拖節點改變圖的位置。</h3></div><span class="ca-tag">虛線 = 操作前的畫面位置</span></div>
+    <p>兩者都會讓節點在螢幕上移動，但結果不同。Pan 讓整張圖與網格一起移動；節點拖曳只移動目前選取，線的端點隨節點更新。</p>
+    <div class="ca-pair">
+      <figure>
+        <div class="ca-figure-head"><h4>空白處拖曳 · Pan</h4><span>觀看位置改變</span></div>
+        <div class="ca-stage"><svg viewBox="0 0 520 350" role="img" aria-labelledby="ca-pan-title ca-pan-desc">
+          <title id="ca-pan-title">畫布平移：兩個節點與網格向右下移動</title><desc id="ca-pan-desc">Float A 與 Add B 保持相對位置和連線，虛線是兩個節點在平移之前的螢幕位置。圖中的節點座標沒有改變。</desc>
+          <defs><pattern id="ca-grid-pan" width="24" height="24" x="0" y="14" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="1" fill="#37313f"/></pattern></defs>
+          <rect width="520" height="350" fill="#14141c"/><rect width="520" height="350" fill="url(#ca-grid-pan)"/>
+          <text class="ca-scene-label" x="22" y="28">PAN / SAME GRAPH COORDINATES</text>
+          <rect class="ca-ghost" x="35" y="80" width="160" height="100" rx="8"/><rect class="ca-ghost" x="285" y="80" width="160" height="100" rx="8"/>
+          <path class="ca-wire" d="M243 202 C285 202 290 177 333 177"/>
+          <use href="#ca-float-node" x="83" y="118"/><use href="#ca-add-node" x="333" y="118"/>
+          <path class="ca-motion" d="M37 208 77 238"/><path class="ca-motion" d="M284 208 324 238"/>
+          <use href="#ca-pointer" x="243" y="254"/>
+          <text class="ca-scene-emphasis" x="22" y="294">A、B、網格一起移動</text><text class="ca-scene-note" x="22" y="320">圖內座標、節點間距與連線都保留。</text>
+        </svg></div>
+        <figcaption><strong>在空白畫布上用左鍵拖曳</strong>，且目前未啟用框選模式，也未按 Shift。拖曳方向就是內容在畫面上的移動方向。</figcaption>
+      </figure>
+      <figure>
+        <div class="ca-figure-head"><h4>節點標題拖曳 · Move nodes</h4><span>選取節點的位置改變</span></div>
+        <div class="ca-stage"><svg viewBox="0 0 520 350" role="img" aria-labelledby="ca-move-title ca-move-desc">
+          <title id="ca-move-title">移動節點：選中的 Float A 向右下移動</title><desc id="ca-move-desc">只有選中的 Float A 離開虛線標示的原位置，未選中的 Add B 與網格不動。連到 Add B 的線跟著 A 更新。</desc>
+          <defs><pattern id="ca-grid-move" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="1" fill="#37313f"/></pattern></defs>
+          <rect width="520" height="350" fill="#14141c"/><rect width="520" height="350" fill="url(#ca-grid-move)"/>
+          <text class="ca-scene-label" x="22" y="28">NODE MOVE / SELECTED POSITIONS</text>
+          <rect class="ca-ghost" x="35" y="80" width="160" height="100" rx="8"/>
+          <path class="ca-wire" d="M243 202 C290 202 289 139 333 139"/>
+          <use href="#ca-float-node" x="83" y="118" class="ca-selected"/><use href="#ca-add-node" x="333" y="80"/>
+          <path class="ca-motion" d="M36 208 77 238"/><use href="#ca-pointer" x="184" y="139"/>
+          <text class="ca-scene-small" x="351" y="211">B 與網格不動</text>
+          <text class="ca-scene-emphasis" x="22" y="294">只移動被選取的 A</text><text class="ca-scene-note" x="22" y="320">釋放後保留新位置；Undo 可回復。</text>
+        </svg></div>
+        <figcaption><strong>拖曳已選節點時，整組選取一起移動。</strong>所有成員套用同一位移，保持彼此距離；未選節點留在原處。吸附依被拖節點的基準計算。</figcaption>
+      </figure>
+    </div>
+    <div class="ca-type-key" aria-label="圖例"><span><i class="ca-key-selection"></i>已選取</span><span><i class="ca-key-dot ca-filled"></i>已接線</span><span><i class="ca-key-dot"></i>未接線</span><span><i class="ca-key-line"></i>接口與資料線使用型別色</span></div>
+    <p class="spec-note">接口空心／實心沿用本圖冊已指定的「連線狀態」語意，Input 與 Output 相同；不是方向的區分。此圖未加入新的控制列或節點樣式。證據：<code>graph_ui.js:96–135, 2401–2420</code>。</p>
+  </article>
+
+  <article id="ca-cursor-zoom" class="ca-artboard">
+    <div class="ca-caption"><div><span class="ca-number">圖02</span><h3>縮放以游標下的圖中位置為錨點。</h3></div><span class="ca-tag">BEFORE / AFTER · 相同錨點</span></div>
+    <p>在畫布捲動滑鼠滾輪時，縮放圍繞游標所在位置進行。圖中的節點變大或變小；使用者指著的同一個圖中位置，留在同一個畫面位置。</p>
+    <div class="ca-pair">
+      <figure>
+        <div class="ca-figure-head"><h4>Before · 75%</h4><span>先指向 Add B 的輸入 a</span></div>
+        <div class="ca-stage"><svg viewBox="0 0 520 320" role="img" aria-labelledby="ca-zoom-before-title ca-zoom-before-desc">
+          <title id="ca-zoom-before-title">百分之七十五縮放的圖</title><desc id="ca-zoom-before-desc">游標和紫色十字位於 Add B 的輸入 a，右圖縮放後這個錨點保留同一個螢幕位置。</desc>
+          <defs><pattern id="ca-grid-zoom-before" width="18" height="18" x="50" y="65" patternUnits="userSpaceOnUse"><circle cx="9" cy="9" r=".9" fill="#37313f"/></pattern></defs>
+          <rect width="520" height="320" fill="#14141c"/><rect width="520" height="320" fill="url(#ca-grid-zoom-before)"/>
+          <text class="ca-scene-label" x="22" y="28">75% / POINTER ANCHOR</text>
+          <g transform="translate(50 65) scale(.75)"><path class="ca-wire" d="M160 154 C220 154 225 94 285 94"/><use href="#ca-float-node" y="70"/><use href="#ca-add-node" x="285" y="35"/></g>
+          <path class="ca-guide" d="M263.75 50V225M30 135.5H485"/>
+          <circle class="ca-anchor" cx="263.75" cy="135.5" r="9"/><circle class="ca-anchor-core" cx="263.75" cy="135.5" r="2.5"/><use href="#ca-pointer" x="263.75" y="135.5"/>
+          <text class="ca-scene-emphasis" x="22" y="267">游標指著圖中的同一個點</text><text class="ca-scene-note" x="22" y="293">紫色十字是圖冊註記，不是新的產品標記。</text>
+        </svg></div>
+        <figcaption>錨點來自<strong>游標位置</strong>。縮放比例改變時，同步調整觀看位置，避免內容從游標下滑走。</figcaption>
+      </figure>
+      <figure>
+        <div class="ca-figure-head"><h4>After · 125%</h4><span>輸入 a 仍在十字交點</span></div>
+        <div class="ca-stage"><svg viewBox="0 0 520 320" role="img" aria-labelledby="ca-zoom-after-title ca-zoom-after-desc">
+          <title id="ca-zoom-after-title">百分之一百二十五縮放的圖</title><desc id="ca-zoom-after-desc">節點和網格變大，部分 Float A 移出畫面，但 Add B 的輸入 a 仍與左圖同一個螢幕位置的游標重合。節點的圖中位置保持不變。</desc>
+          <defs><pattern id="ca-grid-zoom-after" width="30" height="30" x="-92.5" y="18" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.1" fill="#37313f"/></pattern></defs>
+          <rect width="520" height="320" fill="#14141c"/><rect width="520" height="320" fill="url(#ca-grid-zoom-after)"/>
+          <g transform="translate(-92.5 18) scale(1.25)"><path class="ca-wire" d="M160 154 C220 154 225 94 285 94"/><use href="#ca-float-node" y="70"/><use href="#ca-add-node" x="285" y="35"/></g>
+          <path class="ca-guide" d="M263.75 50V225M30 135.5H485"/>
+          <circle class="ca-anchor" cx="263.75" cy="135.5" r="9"/><circle class="ca-anchor-core" cx="263.75" cy="135.5" r="2.5"/><use href="#ca-pointer" x="263.75" y="135.5"/>
+          <rect x="0" y="0" width="520" height="42" fill="#14141c"/><text class="ca-scene-label" x="22" y="28">125% / SAME POINTER ANCHOR</text>
+          <text class="ca-scene-emphasis" x="22" y="267">觀看尺度改變，錨點不變</text><text class="ca-scene-note" x="22" y="293">放大可能裁掉圖的其他部分；節點位置沒有被改寫。</text>
+        </svg></div>
+        <figcaption><strong>節點間的圖中距離保持不變。</strong>圖例顯示縮放到達的結果；若開啟阻尼，過程有平滑過渡，但目標仍以同一個錨點計算。</figcaption>
+      </figure>
+    </div>
+    <div class="ca-readout"><span><b>滾輪</b> 向上放大／向下縮小</span><span><b>空白處中鍵拖曳</b> 右／上放大；左／下縮小 <i>· Dolly</i></span><span><b>雙指</b> 以兩指中點與距離調整觀看範圍</span></div>
+    <p class="spec-note">Dolly 保留按下時的錨點；不是用中鍵平移。比例上下限與較低倍率的 Overview 受目前設定控制。本圖的 75%／125% 是兩個示意倍率，不是限制值。證據：<code>app.js:1420–1422, 1570</code>；<code>graph_ui.js:2352–2384, 2543–2549, 2584–2592</code>。</p>
+  </article>
+
+  <article id="ca-selection" class="ca-artboard">
+    <div class="ca-caption"><div><span class="ca-number">圖03</span><h3>一組選取，可以有一個主要操作焦點。</h3></div><span class="ca-tag">SELECTION / PRIMARY / MARQUEE</span></div>
+    <div class="ca-selection-intro">
+      <div class="ca-stage"><svg viewBox="0 0 650 260" role="img" aria-labelledby="ca-primary-title ca-primary-desc">
+        <title id="ca-primary-title">Float A 與 Add B 同時選中，Add B 是主要選取</title><desc id="ca-primary-desc">兩個節點共用綠色選取輪廓。右側未選取的 Vector C 保留原輪廓。指向 Add B 的主要選取文字只是圖冊註記，並不另定主要選取的樣式。</desc>
+        <defs><pattern id="ca-grid-selection" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="1" fill="#37313f"/></pattern></defs>
+        <rect width="650" height="260" fill="#14141c"/><rect width="650" height="260" fill="url(#ca-grid-selection)"/>
+        <rect class="ca-selection-frame" x="23" y="65" width="385" height="128" rx="6"/>
+        <path class="ca-wire" d="M195 161 C220 161 222 136 247 136"/>
+        <use href="#ca-float-node" x="35" y="77" class="ca-selected"/><use href="#ca-add-node" x="247" y="77" class="ca-selected"/><use href="#ca-vector-node" x="460" y="77"/>
+        <text class="ca-scene-label" x="24" y="32">SELECTED: A + B</text><text class="ca-scene-small" x="462" y="220">未選取</text>
+        <path class="ca-guide" d="M327 77V45"/><text class="ca-scene-emphasis" x="251" y="33">Primary：B</text>
+        <text class="ca-scene-note" x="24" y="231">相同綠框表示被選取；Primary 註記只說明操作焦點。</text>
+      </svg></div>
+      <div class="ca-selection-copy">
+        <h4>單選、加選與主要選取</h4>
+        <p>一般點選會取代選取。按住 <kbd>Shift</kbd>、<kbd>Ctrl</kbd> 或 <kbd>Cmd</kbd> 點節點，可將該節點加入或移出選取。</p>
+        <p>新加入的節點成為<strong>主要選取</strong>；移除時，主要選取改為選取集合最後一個仍保留的節點。拖曳已選節點時，該節點成為主要選取，整組仍一起移動。</p>
+        <p>主要選取影響目前的檢視與導航焦點。本章不額外設計另一種 primary 邊框；選取綠框也不改接口或接線的型別色。</p>
+      </div>
+    </div>
+    <p class="ca-callout"><strong>框選方向不切換命中規則。</strong>Legacy 的滑鼠與 Touch 框選，都是「節點的顯示矩形與選取框相交就選入」，包含碰到邊界。下面兩個方向的結果相同：完整在框內的 A 與只重疊一部分的 B 都選中，框外的 C 不選中。</p>
+    <div class="ca-pair">
+      <figure>
+        <div class="ca-figure-head"><h4>由左往右框選</h4><span>交集命中 → A + B</span></div>
+        <div class="ca-stage"><svg viewBox="0 0 520 350" role="img" aria-labelledby="ca-marquee-right-title ca-marquee-right-desc">
+          <title id="ca-marquee-right-title">向右拖曳的框選也選入部分相交的節點</title><desc id="ca-marquee-right-desc">起點位於左上角，終點在右下角。A 完全位於選取框內，B 跨過選取框右邊界，兩者都被選中；C 完全在框外。</desc>
+          <defs><pattern id="ca-grid-marquee-right" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="1" fill="#37313f"/></pattern></defs>
+          <rect width="520" height="350" fill="#14141c"/><rect width="520" height="350" fill="url(#ca-grid-marquee-right)"/>
+          <text class="ca-scene-label" x="22" y="28">LEFT → RIGHT / INTERSECTION</text>
+          <path class="ca-wire" d="M218 161 C260 161 265 136 302 136"/>
+          <use href="#ca-float-node" x="58" y="77" class="ca-selected"/><use href="#ca-add-node" x="302" y="77" class="ca-selected"/>
+          <g transform="translate(302 226) scale(.85)"><use href="#ca-vector-node"/></g>
+          <rect class="ca-marquee" x="32" y="53" width="325" height="148"/>
+          <circle class="ca-marquee-start" cx="32" cy="53" r="4"/><path class="ca-marquee-path" d="M43 56 348 197"/><use href="#ca-pointer" x="357" y="201"/>
+          <text class="ca-scene-note" x="40" y="239">A：完整在框內</text><text class="ca-scene-note" x="40" y="264">B：部分相交，也選入</text><text class="ca-scene-small" x="40" y="297">不是「完全包含」條件。</text>
+        </svg></div>
+        <figcaption>由左往右不會要求完整包住節點。看見節點矩形與框重疊，就應呈現選取回饋。</figcaption>
+      </figure>
+      <figure>
+        <div class="ca-figure-head"><h4>由右往左框選</h4><span>交集命中 → A + B</span></div>
+        <div class="ca-stage"><svg viewBox="0 0 520 350" role="img" aria-labelledby="ca-marquee-left-title ca-marquee-left-desc">
+          <title id="ca-marquee-left-title">向左拖曳的框選採用相同交集規則</title><desc id="ca-marquee-left-desc">起點位於右下角，終點在左上角。選取框和左圖相同，選取結果也相同，A 與 B 被選中，C 不被選中。</desc>
+          <defs><pattern id="ca-grid-marquee-left" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="1" fill="#37313f"/></pattern></defs>
+          <rect width="520" height="350" fill="#14141c"/><rect width="520" height="350" fill="url(#ca-grid-marquee-left)"/>
+          <text class="ca-scene-label" x="22" y="28">RIGHT → LEFT / INTERSECTION</text>
+          <path class="ca-wire" d="M218 161 C260 161 265 136 302 136"/>
+          <use href="#ca-float-node" x="58" y="77" class="ca-selected"/><use href="#ca-add-node" x="302" y="77" class="ca-selected"/>
+          <g transform="translate(302 226) scale(.85)"><use href="#ca-vector-node"/></g>
+          <rect class="ca-marquee" x="32" y="53" width="325" height="148"/>
+          <circle class="ca-marquee-start" cx="357" cy="201" r="4"/><path class="ca-marquee-path" d="M347 196 40 58"/><use href="#ca-pointer" x="32" y="53"/>
+          <text class="ca-scene-note" x="40" y="239">A：完整在框內</text><text class="ca-scene-note" x="40" y="264">B：部分相交，也選入</text><text class="ca-scene-small" x="40" y="297">同一個範圍，同一組結果。</text>
+        </svg></div>
+        <figcaption>方向只改變拖曳路徑，不改命中條件。圖中的斜線與起點是手勢註記，並非產品的框選外觀。</figcaption>
+      </figure>
+    </div>
+    <div class="ca-readout"><span><b>開始框選</b> 空白處右鍵拖曳／Shift 拖曳／啟用框選後左鍵拖曳</span><span><b>保留原選取</b> 框選開始時按住 Ctrl / Cmd</span><span><b>一般框選</b> 以目前命中的節點取代選取</span></div>
+    <p class="spec-note">Shift 可啟動框選；單靠 Shift 不會保留先前選取。滑鼠框選釋放後，以選取集合最後一個成員作為主要選取，不保證是游標最接近的節點。框選的是節點顯示矩形，並非只看中心點。證據：<code>graph_ui.js:1435–1442, 2409–2420, 2602–2604, 2671</code>。</p>
+  </article>
+
+  <article id="ca-gesture-lifecycle" class="ca-artboard">
+    <div class="ca-caption"><div><span class="ca-number">圖04</span><h3>按下 → 預覽 → 釋放；取消走另一條路。</h3></div><span class="ca-tag">以一般節點移動為例</span></div>
+    <p>拖曳過程先讓使用者看見新位置，正常釋放才完成編輯。取消時回到這次拖曳開始的位置；取消不應被當成一次已完成的移動。</p>
+    <div class="ca-lifecycle">
+      <div class="ca-phase"><div class="ca-phase-heading"><span>01</span><h4>Begin · 按下</h4></div><svg viewBox="0 0 250 170" role="img" aria-label="在原位置按下已選節點的標題"><g transform="translate(25 36) scale(.8)"><use href="#ca-float-node" class="ca-selected"/></g><use href="#ca-pointer" x="87" y="52"/><text class="ca-scene-small" x="25" y="149">保留本次移動的起點</text></svg><p>確認拖曳的節點與整組選取。<strong>尚未移動</strong>時只是按下，不產生位置編輯。</p></div>
+      <div class="ca-phase"><div class="ca-phase-heading"><span>02</span><h4>Preview · 拖曳</h4></div><svg viewBox="0 0 250 170" role="img" aria-label="節點暫時移到新位置，原位置以虛線標記"><rect class="ca-ghost" x="25" y="36" width="128" height="80" rx="6"/><g transform="translate(80 66) scale(.8)"><use href="#ca-float-node" class="ca-selected"/></g><path class="ca-motion" d="M172 40 199 56"/><use href="#ca-pointer" x="142" y="82"/></svg><p>節點與接線跟著手勢更新。整組使用<strong>同一個吸附位移</strong>，先看見結果，尚未完成此次佈局編輯。</p></div>
+      <div class="ca-phase"><div class="ca-phase-heading"><span>03A</span><h4>Release · 完成</h4></div><svg viewBox="0 0 250 170" role="img" aria-label="放開後節點保留新位置"><g transform="translate(80 66) scale(.8)"><use href="#ca-float-node" class="ca-selected"/></g><path d="m38 89 9 9 18-21" fill="none" stroke="#70dc69" stroke-width="2.3"/><text class="ca-scene-small" x="25" y="28">一次有效的位置變更</text></svg><p>正常釋放且仍可編輯時，<strong>有改變才完成一次編輯</strong>。Undo 可還原；回到原位的拖曳不新增位置變更。</p></div>
+      <div class="ca-phase ca-phase-cancel"><div class="ca-phase-heading"><span>03B</span><h4>Cancel · 還原</h4></div><svg viewBox="0 0 250 170" role="img" aria-label="取消拖曳後節點回到起點"><rect class="ca-ghost" x="80" y="66" width="128" height="80" rx="6"/><g transform="translate(25 36) scale(.8)"><use href="#ca-float-node" class="ca-selected"/></g><path class="ca-motion" d="M204 43 Q211 20 177 22"/><text class="ca-scene-small" x="25" y="158">恢復起點，不留下位置編輯</text></svg><p><kbd>Escape</kbd>、指標取消／失去擷取、視窗失焦或尺寸改變，會<strong>還原此次位置預覽</strong>。</p></div>
+    </div>
+    <p class="ca-branch-label">03A 與 03B 是互斥的結束方式，不是依序執行。此圖只描述一般畫布上的節點移動；拖到垃圾區或資料庫的結果另有規則。</p>
+    <div class="ca-boundary-grid">
+      <div><h4>選取不等於位置草稿</h4><p>拖曳開始時可能改變主要選取或選取集合；還原位置不表示一併還原拖曳前的選取。使用者應看見兩種狀態的差別。</p></div>
+      <div><h4>Dolly 有自己的取消邊界</h4><p>中鍵 Dolly 在 Escape、指標取消、失去擷取、失焦或視窗尺寸改變時，只在圖、當前子圖 scope、圖層與 UI scale 仍相同的情況還原開始視角。滾輪中斷 Dolly 則結束目前 Dolly。</p></div>
+      <div><h4>框選取消仍有來源差異</h4><p>Touch 取消框選會回復開始時的選取。滑鼠的 pointercancel 分支只清掉手勢與框，不明確還原選取；不能把兩者都宣稱為完整 rollback。</p></div>
+    </div>
+    <p class="spec-note">此時間線不是所有手勢共用的保證。一般 Pan、滑鼠框選、Touch、接線與欄位各有取消條件，完整區分見 <a href="../design/CANVAS_INTERACTION_SPEC.md">Canvas interaction specification</a>。本圖不模擬事件擷取、裝置中斷、Host 或 History。證據：<code>graph_ui.js:96–135, 2359–2384, 2420, 2553–2567</code>。</p>
+  </article>
+
+  <article id="ca-navigation" class="ca-artboard">
+    <div class="ca-caption"><div><span class="ca-number">圖05</span><h3>找回整張圖、框住選取、專注畫布。</h3></div><span class="ca-tag">既有命令的圖冊索引</span></div>
+    <p>三個入口解決不同的觀看問題。Home 立即調整到全圖；Frame 使用獨立動畫設定，目前預設開啟、333 ms；Focus 切換畫布專注模式。它們不執行節點排列。</p>
+    <div class="ca-shortcut-strip">
+      <article class="ca-shortcut-card"><header><h4>Home · 看整張圖</h4><kbd>H</kbd></header><svg viewBox="0 0 300 148" role="img" aria-label="Home 以目前圖層所有節點的範圍取景"><rect x="14" y="14" width="272" height="120" rx="5" fill="#191720" stroke="#4e445a"/><path class="ca-mini-wire" d="M81 50C114 50 109 58 140 58M177 58C198 58 190 105 224 105"/><rect class="ca-mini-node" x="43" y="35" width="40" height="31" rx="3"/><rect class="ca-mini-node" x="138" y="43" width="40" height="31" rx="3"/><rect class="ca-mini-node" x="221" y="91" width="40" height="31" rx="3"/><rect class="ca-mini-node" x="59" y="90" width="40" height="31" rx="3"/><path d="M25 35V25h10M265 25h10v10M275 113v10h-10M35 123H25v-10" stroke="#bda4d3" stroke-width="1.7" fill="none"/></svg><p>依<strong>目前圖層的全部節點</strong>調整觀看範圍。Home 是命令名稱；這裡的快捷鍵是字母 H。</p></article>
+      <article class="ca-shortcut-card"><header><h4>Frame · 看選取</h4><kbd>F</kbd></header><svg viewBox="0 0 300 148" role="img" aria-label="Frame 以選中的兩個節點為觀看範圍"><rect x="14" y="14" width="272" height="120" rx="5" fill="#191720" stroke="#4e445a"/><path class="ca-mini-wire" d="M118 62C140 62 146 85 169 85"/><rect class="ca-mini-node ca-mini-selected" x="51" y="36" width="70" height="53" rx="4"/><rect class="ca-mini-node ca-mini-selected" x="166" y="57" width="70" height="53" rx="4"/><path d="M36 42V27h15M239 27h15v15M254 110v15h-15M51 125H36v-15" stroke="#bda4d3" stroke-width="1.7" fill="none"/></svg><p>優先框住<strong>目前選取的節點</strong>；沒有選取節點時改看全部。它不建立 Group Frame，也不改節點位置。</p></article>
+      <article class="ca-shortcut-card"><header><h4>Focus · 專注畫布</h4><kbd>Ctrl / Cmd + Enter</kbd></header><svg viewBox="0 0 300 148" role="img" aria-label="Focus 模式放大畫布可用空間，示意面板讓出空間"><rect x="14" y="14" width="272" height="120" rx="5" fill="#191720" stroke="#4e445a"/><rect class="ca-mini-sidebar" x="21" y="22" width="40" height="103" rx="3" opacity=".35"/><rect class="ca-mini-sidebar" x="239" y="22" width="40" height="103" rx="3" opacity=".35"/><path class="ca-mini-wire" d="M131 70C150 70 150 88 169 88"/><rect class="ca-mini-node" x="85" y="51" width="48" height="39" rx="4"/><rect class="ca-mini-node" x="166" y="69" width="48" height="39" rx="4"/><path d="M91 36H48m11-7-12 7 12 7M209 36h43m-11-7 12 7-12 7" stroke="#bda4d3" stroke-width="1.7" fill="none"/></svg><p>切換<strong>Canvas focus mode</strong>，讓畫布取得更多工作空間；同一組快捷鍵切回。瀏覽器全螢幕是另一個入口。</p></article>
+    </div>
+    <p class="ca-shortcut-scope">快捷鍵在圖的操作範圍內使用。輸入文字、IME、選單／對話框或進行中的手勢會阻擋部分圖命令；不同命令的實際條件依規格逐項列出。Escape 不會離開 Focus；以同一個 Focus 入口切回。本索引不在圖冊中攔截快捷鍵。</p>
+    <p class="spec-note">圖中小視窗是功能示意，不指定面板位置或新工具列。Home／Frame 依目前節點與完整包含的群組框範圍取景，取景倍率上限 100%；最低倍率限制可能使很大的圖仍超出畫面。空圖不變。證據：<code>app.js:827–855, 1469–1481</code>；<code>selection_ui.js:92</code>；<code>graph_ui.js:2433–2468</code>。</p>
+  </article>
+
+  <details id="ca-evidence" class="ca-evidence"><summary>證據範圍與仍需驗證的操作</summary>
+    <p><strong>Source-derived：</strong>本章只讀 Legacy 的 <code>src/editor/graph_ui.js</code>、<code>app.js</code> 與 <code>selection_ui.js</code>，據此整理滑鼠 Pan、錨點縮放、Dolly、節點選取、雙向交集框選、節點拖曳，以及 Home／Frame／Focus。可交接的完整行為與證據指向見 <a href="../design/CANVAS_INTERACTION_SPEC.md">CANVAS_INTERACTION_SPEC.md</a> 與 <a href="../research/canvas-navigation-evidence-005.md">Canvas navigation evidence 005</a>。</p>
+    <p><strong>Bounded live observation：</strong><a href="../research/canvas-live-005.md">CANVAS-LIVE-005</a> 另記錄一次有界的 Pan、游標錨定、單選／加選、兩方向部分相交框選、Frame、Home、Focus 與節點拖動／Undo／Redo。這些樣本支持相應行為，不把未做的裝置與取消矩陣標為通過。</p>
+    <p><strong>視覺語意：</strong>延續既有深色 Cool 節點、型別色接口與線、綠色選取輪廓；接口空心／實心採本圖冊指定的未接線／已接線規則。虛線舊位置、箭頭、十字、Primary 註記與時間線都是圖冊註解，不是新增產品控件。</p>
+    <p><strong>Artifact-only：</strong>這些靜態 SVG 沒有載入產品資料、套用 UI 設定或接收真實手勢。圖冊檢查只能確認章節結構與圖稿完整性，不建立 CEF、觸控板、觸控、筆、瀏覽器縮放或不同 UI scale 的操作通過證據。</p>
+    <p><strong>後續實機驗證：</strong>需驗證不同縮放與 UI scale 的錨點／命中、阻尼過程、跨畫布邊界與遮罩、失去焦點／指標擷取、選取與編輯 guard 的連續操作。特別保留滑鼠框選取消與 Touch 取消之間的來源差異，不以統一示意取代證據。</p>
+  </details>
+</section>

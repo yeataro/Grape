@@ -1,3 +1,5 @@
+import { createNode } from "../browser/create-node.ts";
+import { clickAction } from "./public-actions.ts";
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { expect, type Page } from "@playwright/test";
@@ -39,14 +41,8 @@ export async function replacementFlow(
 ) {
   if (mode !== "default") {
     await openValidFile(page, "legacy-owner.grape.json", bytes);
-    if (mode === "upgraded")
-      await page
-        .getByRole("button", { name: "Upgrade subgraph owners", exact: true })
-        .click();
-    else
-      await page
-        .getByRole("button", { name: "Add Float", exact: true })
-        .click();
+    if (mode === "upgraded") await clickAction(page, "Upgrade subgraph owners");
+    else await createNode(page, "Float");
   }
   await page
     .getByRole("button", { name: "Second Canvas", exact: true })
@@ -76,9 +72,7 @@ export async function replacementFlow(
       .click();
     await expect(page.locator("#recovery")).not.toBeVisible();
     assert.deepEqual(await exportDocument(page), JSON.parse(bytes.toString()));
-    await page
-      .getByRole("button", { name: "Upgrade subgraph owners", exact: true })
-      .click();
+    await clickAction(page, "Upgrade subgraph owners");
     const upgraded = await exportDocument(page);
     assert.equal(upgraded.graph.resources[0].data.emissionMode, "expand");
     assert.deepEqual(

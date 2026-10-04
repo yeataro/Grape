@@ -1,0 +1,127 @@
+<section id="arrange" class="ar-section" aria-labelledby="ar-title">
+  <header class="section-head">
+    <p class="kicker">NODE ARRANGEMENT · POSITIONS, NOT PANES</p>
+    <h2 id="ar-title">把節點整理成可讀的圖</h2>
+    <p class="lede">排列改變選取節點的位置，保留它們的大小、值與接線。這章交接現有能力、操作入口與可選設定；不涉及工作區面板佈局。</p>
+  </header>
+  <p class="ar-evidence-line"><span class="ar-badge">SOURCE-VERIFIED · e005f08</span> 行為依 Legacy 原始碼核對；視覺是 dark / Cool 語彙的重繪，非實測像素。互動僅改此頁的有限示例，不連 Graph、Host、儲存空間或網路。</p>
+
+  <div class="ar-summary">
+    <article><h3>能力</h3><p>六種對齊、水平／垂直等距、格狀排列、兩種自動排列，以及多選框的間距拖曳。</p><small>排列至少 2 個節點；等距至少 3 個。</small></article>
+    <article><h3>入口</h3><p>選取工具列的 Arrange、圖的右鍵選單，以及 <kbd>L</kbd>／<kbd>Shift + L</kbd>。多選框邊緣另有八個間距控制點。</p><small>入口共用同一套排列能力，不是不同的演算法版本。</small></article>
+    <article><h3>設定</h3><p>浮動工具列與常態多選框目前預設開啟，屬於交接必須保留的基準。關閉、僅複選等模式是使用者選項。</p><small>設定改變入口的呈現，不移除排列能力。</small></article>
+  </div>
+
+  <article id="ar-entry" class="ar-artboard">
+    <div class="ar-caption"><div><span class="ar-number">A01</span><h3>Arrange 的入口與命令</h3></div><span class="ar-tag">現有行為 · 靜態入口示意</span></div>
+    <div class="ar-entry-grid">
+      <div class="ar-menu-specimen">
+        <div class="ar-mini-toolbar" aria-label="Selection toolbar excerpt">
+          <span class="ar-icon-cell" title="Arrange"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v18M8 5h12v4H8zM8 11h8v3H8zM8 16h10v3H8z"/><path class="ar-fill" d="M18.5 20h5L21 23Z"/></svg></span><strong>Arrange</strong><span class="ar-tag">2+ selected</span>
+        </div>
+        <div class="ar-command-list" aria-label="Existing arrangement commands">
+          <div data-ar-command="auto"><svg class="ar-command-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h5v6H3zM16 3h5v6h-5zM16 15h5v6h-5zM8 12h4M12 6v12M12 6h4M12 18h4"/></svg><span>Auto arrange: from sources</span><kbd>L</kbd></div>
+          <div data-ar-command="autoReverse"><svg class="ar-command-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h5v6H3zM3 15h5v6H3zM16 9h5v6h-5zM8 6h4M8 18h4M12 6v12M12 12h4"/></svg><span>Auto arrange: from outputs</span><kbd>Shift + L</kbd></div>
+          <hr>
+          <div data-ar-command="left"><svg class="ar-command-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v18M8 6h12v4H8zM8 14h8v4H8z"/></svg><span>Align left</span></div>
+          <div data-ar-command="centerX"><svg class="ar-command-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M4 6h16v4H4zM7 14h10v4H7z"/></svg><span>Align horizontal centers</span></div>
+          <div data-ar-command="right"><svg class="ar-command-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 3v18M4 6h12v4H4zM8 14h8v4H8z"/></svg><span>Align right</span></div>
+          <hr>
+          <div data-ar-command="top"><svg class="ar-command-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18M6 8h4v12H6zM14 8h4v8h-4z"/></svg><span>Align top</span></div>
+          <div data-ar-command="centerY"><svg class="ar-command-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h20M6 4h4v16H6zM14 7h4v10h-4z"/></svg><span>Align vertical centers</span></div>
+          <div data-ar-command="bottom"><svg class="ar-command-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18M6 4h4v12H6zM14 8h4v8h-4z"/></svg><span>Align bottom</span></div>
+          <hr>
+          <div data-ar-command="spaceX"><svg class="ar-command-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18M21 3v18M7 6h3v12H7zM14 6h3v12h-3z"/></svg><span>Equal horizontal gaps</span><small>3+</small></div>
+          <div data-ar-command="spaceY"><svg class="ar-command-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18M3 21h18M6 7h12v3H6zM6 14h12v3H6z"/></svg><span>Equal vertical gaps</span><small>3+</small></div>
+          <div data-ar-command="grid"><svg class="ar-command-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg><span>Arrange in grid</span></div>
+        </div>
+        <p class="ar-dark-note">這是可讀的選單摘錄，不是假裝可執行的產品選單。下方圖例才有本頁互動。</p>
+      </div>
+      <div class="ar-entry-notes">
+        <h4>目前預設的位置</h4>
+        <p>選取工具列跟隨選取範圍，優先放在上方；空間不足時放下方，再限制在畫布內。Arrange 只在複選時出現。</p>
+        <h4>相同命令的其他入口</h4>
+        <p>圖的右鍵選單也提供 Arrange 子選單。關閉浮動選取工具列後，原有選取工具回到畫布上方；鍵盤命令仍保留。</p>
+        <h4>快捷鍵只在圖的操作範圍內生效</h4>
+        <p>輸入文字、IME、開啟選單或對話框、正在拖曳／接線，以及唯讀或忙碌時不執行排列。<kbd>Ctrl / Cmd + L</kbd> 留給瀏覽器。</p>
+        <p class="ar-callout"><strong>Frame 是另一件事。</strong><kbd>F</kbd>／Frame 改變觀看範圍；Arrange 移動節點並可 Undo。不要把兩者混成同一種 Layout 功能。</p>
+      </div>
+    </div>
+    <p class="spec-note">證據：<code>selection_ui.js:72–89, 106–175, 394–440</code>；<code>graph_ui.js:2438–2465, 2932–2951</code>。Arrange 及全部 11 項命令的 SVG 路徑摘自現有程式；選單圖示沿用 <code>style.css:445</code> 的 16 px、1.75 線寬與圓角筆畫。圖稿尺寸與選單間距是重繪。</p>
+  </article>
+
+  <article id="ar-auto" class="ar-artboard">
+    <div class="ar-caption"><div><span class="ar-number">A02</span><h3>Auto arrange：由來源，或由結果</h3></div><span class="ar-tag">固定圖例 · 真實演算法產生的座標</span></div>
+    <p>兩種方法都維持左至右的資料流。差異在層級的起算方向：由結果排列時，短支線會靠近使用它的節點。本例只有 <strong>Short source</strong> 的層級改變；Note 沒有接線，排在下方。</p>
+    <details class="ar-before" open><summary>Before — 同一批節點、同一套接線</summary><div class="ar-graph"><svg data-ar-auto-before="" viewBox="0 0 1060 620" role="img" aria-label="Before automatic arrangement: selected chain, short source and loose note"></svg></div></details>
+    <div class="ar-controls" data-ar-auto-controls="">
+      <span class="ar-control-label">After</span>
+      <button type="button" data-ar-auto="source" aria-pressed="true">From sources · L</button>
+      <button type="button" data-ar-auto="output" aria-pressed="false">From outputs · Shift + L</button>
+      <button type="button" data-ar-auto-undo="" disabled>Undo demo</button>
+    </div>
+    <div class="ar-graph"><svg data-ar-auto-after="" viewBox="0 0 1060 540" role="img" aria-label="After automatic arrangement"></svg></div>
+    <p class="ar-status" data-ar-auto-status="" aria-live="polite">由來源排列。圖例座標已由 Legacy 純排列函式計算核對。</p>
+    <div class="ar-rule-grid">
+      <div><h4>範圍</h4><p>只處理目前圖層的選取節點。只有兩端都在選取內的接線參與自動排列；未選節點不移動，也不作為避障物。</p></div>
+      <div><h4>結構與尺寸</h4><p>依實際節點尺寸留空隙；相互獨立的連通區塊分開上下排列。邏輯接口順序參與減少交叉，折疊節點仍沿用該順序。</p></div>
+      <div><h4>循環與孤立節點</h4><p>循環先合併為排列層級單位，避免演算法卡住；這不代表 Shader 循環變成合法。未接線節點在下方依圖內順序排成可換行的區域。</p></div>
+    </div>
+    <p class="spec-note">此固定圖例不接受任意圖資料，並未重做產品演算法。來源／結果兩組座標來自 <code>selection_ui.js:266–363</code> 的原函式；同層垂直空隙 48、層間 96 graph units（<code>GRID=24</code>）。「減少交叉」不保證零交叉，也不保證避開選取外的內容。端口填色沿用本圖冊的 connected solid / disconnected hollow 方向，並非 Legacy 實測結果。</p>
+  </article>
+
+  <article id="ar-manual" class="ar-artboard">
+    <div class="ar-caption"><div><span class="ar-number">A03</span><h3>對齊、等距與格狀排列</h3></div><span class="ar-tag">有限示例 · 可 Apply / Undo</span></div>
+    <p>四張不同尺寸的佈局卡，用來直接觀察位置規則。這些卡不是新的節點種類。綠框表示選取，未選卡的位置會保留。</p>
+    <div class="ar-controls">
+      <label>Selected <select data-ar-count="" aria-label="Selected cards in layout demo"><option value="2">2 nodes</option><option value="3">3 nodes</option><option value="4" selected>4 nodes</option></select></label>
+      <label>Arrange <select data-ar-operation="" aria-label="Layout operation"><option value="left">Align left</option><option value="centerX">Align horizontal centers</option><option value="right">Align right</option><option value="top">Align top</option><option value="centerY">Align vertical centers</option><option value="bottom">Align bottom</option><option value="spaceX" selected>Equal horizontal gaps</option><option value="spaceY">Equal vertical gaps</option><option value="grid">Arrange in grid</option></select></label>
+      <button type="button" data-ar-apply="">Apply demo</button><button type="button" data-ar-undo="" disabled>Undo demo</button><button type="button" data-ar-reset="">Reset demo</button>
+      <label class="ar-check"><input type="checkbox" data-ar-readonly=""> Read-only demo</label>
+    </div>
+    <div class="ar-graph ar-manual-graph"><svg data-ar-manual-svg="" viewBox="0 0 1120 760" role="img" aria-label="Four layout cards with different dimensions"></svg></div>
+    <p class="ar-status" data-ar-manual-status="" aria-live="polite">Before：選擇操作後 Apply。所有操作只移動圖例卡片。</p>
+    <div class="ar-rule-grid">
+      <div><h4>對齊看選取外框</h4><p>左／右／上／下以整批選取的邊界為準，置中以整批外框的中心為準。另一個方向的位置不變；沒有額外自動防重疊。</p></div>
+      <div><h4>等距是邊緣之間的空隙</h4><p>依目前 X 或 Y 位置排序。空隙至少 48 graph units；第一張不動，空間不夠時最後一張會向外延伸，並非固定兩端。</p></div>
+      <div><h4>格狀保留尺寸</h4><p>依原本 Y、再 X 排序；每列欄數為節點數平方根向上取整。每欄用該欄最寬卡、每列用該列最高卡，再留 48 的空隙。</p></div>
+    </div>
+    <p class="spec-note">公式依 <code>selection_ui.js:365–392</code>，僅用於此四卡範例。Undo 是圖冊的一格本地回復，不存取產品 History；相同位置不增加示例操作。示例保留原比例與可捲動視窗，不把縮放視角當成排列結果。</p>
+  </article>
+
+  <article id="ar-spread" class="ar-artboard">
+    <div class="ar-caption"><div><span class="ar-number">A04</span><h3>拉開多選框，調整的是間距</h3></div><span class="ar-tag">右側控制點 · 有界公式示例</span></div>
+    <p>既有多選框有八個控制點。拖曳時改變節點中心的間隔，再把相反側外緣固定住；不縮放每張節點。以下用圖冊滑桿代替拖曳右側控制點，方便比較。</p>
+    <div class="ar-controls"><label class="ar-range">Demo: right handle delta <input type="range" min="-180" max="220" step="1" value="0" data-ar-spread="" aria-label="Illustrative movement of right selection handle"><output data-ar-spread-value="">0</output></label><button type="button" data-ar-spread-reset="">Reset demo</button></div>
+    <div class="ar-graph"><svg data-ar-spread-svg="" viewBox="0 0 1000 310" role="img" aria-label="Selection outline spacing demo; left outer edge remains fixed"></svg></div>
+    <p class="ar-status" data-ar-spread-status="" aria-live="polite">節點尺寸不變，左側外緣固定。</p>
+    <p class="ar-callout">收緊時停在第一次新增碰撞之前，最多保留原有空隙中的 8 graph units；本來已經重疊的卡仍可向外拉開。產品拖曳只有放開時記錄一次修改；<kbd>Esc</kbd>、失去焦點、縮放或選取內容改變會取消預覽。</p>
+    <p class="spec-note">間距公式：<code>selection_ui.js:179–227</code>。產品手勢與取消：<code>228–263</code>。八個控制點：<code>418–420</code>。本頁滑桿是說明控制器，不是新增的產品 UI 或新的快捷鍵。</p>
+  </article>
+
+  <article id="ar-settings" class="ar-artboard">
+    <div class="ar-caption"><div><span class="ar-number">A05</span><h3>預設基準與可選配置</h3></div><span class="ar-tag">Experimental 不代表可省略</span></div>
+    <div class="ar-table-wrap"><table class="ar-table"><thead><tr><th>設定／能力</th><th>目前預設 · 必須保留</th><th>可選配置及界線</th></tr></thead><tbody>
+      <tr><td>Selection toolbar</td><td><strong>Single and multiple</strong><br><code>selectionToolbar: 'all'</code></td><td>Multiple only 保留上方編輯工具；Off 把選取工具移回上方。Arrange 一直需要複選。</td></tr>
+      <tr><td>Always show multiple-selection outline</td><td><strong>On</strong><br><code>persistentSelectionBounds: true</code></td><td>關閉後只在操作選取工具列時顯示。開啟時即使浮動工具列關閉，多選框仍可出現。</td></tr>
+      <tr><td>Hide selection outline for a group</td><td><strong>Off</strong><br><code>hideGroupedSelectionBounds: false</code></td><td>選用 On 時，選取剛好等於一個完整 Group Frame 才隱藏框及其控制點；部分或多組選取沿用一般規則。</td></tr>
+      <tr><td>Edit toolbar / Selection collapse tools</td><td><strong>On / On</strong><br><code>editToolbar / selectionCollapseTools: true</code></td><td>既有相鄰功能與入口也須保留；不是排列公式的開關。折疊／展開不屬於本章的排列動作。</td></tr>
+    </tbody></table></div>
+    <p class="spec-note">預設值證據：<code>graph_ui.js:2</code>；呈現依設定：<code>selection_ui.js:106–160</code>。以上是此版本的預設，不宣稱使用者目前儲存的瀏覽器偏好必然相同。此表不可操作，不寫入設定。</p>
+  </article>
+
+  <article id="ar-boundaries" class="ar-artboard">
+    <div class="ar-caption"><div><span class="ar-number">A06</span><h3>取消、Undo 與不能誤認的保證</h3></div><span class="ar-tag">行為界線</span></div>
+    <ul class="ar-boundary-list">
+      <li><strong>不夠節點時不執行：</strong>少於 2 個不排列，等距少於 3 個會停用。唯讀／忙碌不修改；選單開啟後若圖層或選取變了，舊命令取消。</li>
+      <li><strong>每次有效排列是一個 Undo：</strong>僅寫入選取節點的 X／Y。結果完全相同時不新增 History；提交失敗會恢復前一份狀態，並沿用現有 edit failed 訊息。</li>
+      <li><strong>外框與群組不等於布局障礙物：</strong>完整 Group Frame 可參與選取外框範圍，但排列公式處理的是節點尺寸，不把群組當成獨立、不可拆開的排列單位。</li>
+      <li><strong>視覺整理不是語意修復：</strong>不更改數值、型別、線路或運算次序。不要把循環的可排列性、布局間距或示例線路的整齊度，解讀成編譯有效或零交叉保證。</li>
+    </ul>
+    <details class="ar-evidence"><summary>證據、檢查範圍與仍待實際 UI review 的部分</summary>
+      <p>完整自含紀錄：<a href="../research/arrange-evidence-004.md">arrange-evidence-004.md</a>。行號以 Legacy commit <code>e005f08</code> 為準；本章未修改或重新驗證產品。</p>
+      <p>已核對能力、命令、預設值、公式、取消與 History 接入。選單實際大小、觸控碰撞區、各種 UI scale 的重疊，以及極大圖的排列品質，需在產品環境另行 review；這些不由離線圖冊的互動測試代替。</p>
+    </details>
+  </article>
+  <noscript><p class="ar-callout">JavaScript 未啟用。上方能力與規則仍可閱讀；圖例與本地 Undo 需要本頁的 arrange.js。</p></noscript>
+</section>

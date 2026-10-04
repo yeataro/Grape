@@ -1,0 +1,148 @@
+{
+  "implementationI": "a42d4aedd8e33c1fd432c92163db9f9d689e1bcb",
+  "changedPaths": [
+    {
+      "file": "production/apps/web/style.css",
+      "bytes": 16134,
+      "sha256": "685c2e346285b81496a5b53cf64148e396a52213fd41866e29bd63f23388a90a"
+    },
+    {
+      "file": "production/src/features/canvas.ts",
+      "bytes": 64411,
+      "sha256": "ee5b531b3fe4e0984e80be3ae8e4e649a1e4b18d7e9eb5599dec94c126450b43"
+    },
+    {
+      "file": "production/src/features/node-browser.ts",
+      "bytes": 26947,
+      "sha256": "fba5efa696fb0f9f96d97514ca07762af328e0decd47b96720f836f21763c723"
+    },
+    {
+      "file": "production/tests/browser/s06-connection-view.spec.ts",
+      "bytes": 16164,
+      "sha256": "83bce711da817fd663c2fe172f584bd979ffeee6f20ad32bf11d171a22dfabb8"
+    }
+  ],
+  "scope": "LC-UI-091 scoped connection status; LC-UI-025 selection geometry; LC-UI-034/035/036/081 scoped hover/temporary feedback. No new leaves or new catalog capabilities.",
+  "cases": [
+    {
+      "file": "s05-escape-focus.spec.ts",
+      "title": "s05-escape-focus.spec.ts"
+    },
+    {
+      "file": "s06-connection-view.spec.ts",
+      "title": "s06-connection-view.spec.ts"
+    },
+    {
+      "file": "s06-creation.spec.ts",
+      "title": "s06-creation.spec.ts"
+    },
+    {
+      "file": "s06-guards.spec.ts",
+      "title": "s06-guards.spec.ts"
+    },
+    {
+      "file": "s06-help.spec.ts",
+      "title": "s06-help.spec.ts"
+    },
+    {
+      "file": "s06-workspace.spec.ts",
+      "title": "s06-workspace.spec.ts"
+    }
+  ],
+  "scopeRows": [
+    {
+      "leaf": "LC-UI-034",
+      "priorEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "Affected presentation/status branch tested in source and exact archive; targeted independent review pending"
+    },
+    {
+      "leaf": "LC-UI-035",
+      "priorEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "Affected presentation/status branch tested in source and exact archive; targeted independent review pending"
+    },
+    {
+      "leaf": "LC-UI-036",
+      "priorEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "Affected presentation/status branch tested in source and exact archive; targeted independent review pending"
+    },
+    {
+      "leaf": "LC-UI-072",
+      "priorEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "Unchanged source scope; inherited evidence bound to original I/R. Relevant Help/Escape/keyboard/Personal/nested guards replayed as listed; no whole-leaf claim."
+    },
+    {
+      "leaf": "LC-UI-073",
+      "priorEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "Unchanged source scope; inherited evidence bound to original I/R. Relevant Help/Escape/keyboard/Personal/nested guards replayed as listed; no whole-leaf claim."
+    },
+    {
+      "leaf": "LC-UI-081",
+      "priorEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "Affected presentation/status branch tested in source and exact archive; targeted independent review pending"
+    },
+    {
+      "leaf": "LC-UI-082",
+      "priorEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "Unchanged source scope; inherited evidence bound to original I/R. Relevant Help/Escape/keyboard/Personal/nested guards replayed as listed; no whole-leaf claim."
+    },
+    {
+      "leaf": "LC-UI-083",
+      "priorEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "Unchanged source scope; inherited evidence bound to original I/R. Relevant Help/Escape/keyboard/Personal/nested guards replayed as listed; no whole-leaf claim."
+    },
+    {
+      "leaf": "LC-UI-090",
+      "priorEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "Unchanged source scope; inherited evidence bound to original I/R. Relevant Help/Escape/keyboard/Personal/nested guards replayed as listed; no whole-leaf claim."
+    },
+    {
+      "leaf": "LC-UI-091",
+      "priorEvidence": "production/evidence/s06/workspace-entry-01/coverage-final-01.json",
+      "disposition": "Affected presentation/status branch tested in source and exact archive; targeted independent review pending"
+    }
+  ],
+  "invariants": {
+    "model": "Graph/Application/editor/owner/generator/dependencies untouched;239unit/conformance passed. Preview is separate SVG and transient view state, not document, network or History.",
+    "history": "Both direct click directions and primary port drags produce exactly one edge with full Undo/Redo; cancel/subthreshold/stale/readonly preserve document and prior History.",
+    "errorRecovery": "PORT_TARGET and direction errors survive Save/Escape/unrelated actions, recover on actual compatible connection; external INPUT_REQUIRED compile error remains until matching generation.",
+    "lifetime": "Blur, pointercancel, competing pointer, hidden visibility, new load/revision/scope/readonly and menu/help/catalog cleanup retain existing scoped lease wrappers.",
+    "priorHelpEscape": "Eight Help and four natural Escape source+exact archive cases pass without programmatic focus before Escape.",
+    "affectedHistorical": "S01 17 and S03 19 affected source-browser cases passed in82 suite. Prior S04 Personal, S05 function/Uniform/numeric source and module bytes unchanged; current239unit includes their regressions. No relabeling prior independent PASS as a new run."
+  },
+  "retainedFailures": [
+    {
+      "run": "baseline-01",
+      "meaning": "Expected prior archive513px notice failure; selection case lacked confirmed selection precondition."
+    },
+    {
+      "run": "baseline-selection-02",
+      "meaning": "Test fixture blank point hit toolbar; no product conclusion."
+    },
+    {
+      "run": "baseline-selection-03",
+      "meaning": "Confirmed actual prior79→81px selection displacement."
+    },
+    {
+      "run": "notice-geometry-01",
+      "meaning": "5pass; PORT_TARGET test used nonexistent #errors instead of actual #message; corrected fixture only."
+    },
+    {
+      "run": "checks-01/typecheck.log",
+      "meaning": "SVG namespace expression inferred Element; changed to exact SVG namespace. Final typecheck passes."
+    },
+    {
+      "run": "subthreshold-before-01",
+      "meaning": "New implementation transient SVG cleanup counterexample reproduced; repaired and source/archive negative pass."
+    }
+  ],
+  "limits": [
+    "S06 remains active/unaccepted; no full99UI/391catalog, arbitrary layout/preset/Panel, S07-S10/native or globalGate closure.",
+    "Secondary categories, GLSL-name/tag metadata, unified Personal/template catalog and broader shortcuts/submenus are expressly not delivered in this branch-scoped batch.",
+    "G-PD-2 named-preset retention remains OPEN.",
+    "Owner removed LAN/Tailscale requirements; historical denied checks remain NOT_EXECUTED, not PASS.",
+    "Windows Chromium151/SwiftShader desktop and trusted touch emulation only; no physical device/all-IME/platform qualification.",
+    "Prior source-browser seam test for delayed Personal callbacks imports source; all public UI flows additionally verified on static archive.",
+    "No Human preview deployed or existing4193/4194/4195/4196/storage changed. Candidate archive is tested and ready for Coordinator delivery after independent review."
+  ],
+  "scout": "Read-only implementation assistance only; no independent PASS."
+}

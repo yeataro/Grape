@@ -1,0 +1,220 @@
+{
+  "reports": [
+    {
+      "run": "focused-01",
+      "stats": {
+        "startTime": "2026-10-04T13:33:08.637Z",
+        "duration": 21271.799,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "failures": [
+        {
+          "title": "S06 scalar and vector committed values stay distinct from unfinished drafts and IME guards",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 35,
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'A', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'A', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input type=\"text\" aria-label=\"A\" data-draft=\"true\" data-parameter=\"a\" inputmode=\"decimal\" data-composing=\"false\"/>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n",
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'A', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'A', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input type=\"text\" aria-label=\"A\" data-draft=\"true\" data-parameter=\"a\" inputmode=\"decimal\" data-composing=\"false\"/>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n\n  38 |   await input.fill(\"7.25\"); await input.hover(); const text = await read(page); expect(text).toContain('\"value\": 1'); expect(text).toContain('\"text\": \"7.25\"'); await close(page);\n  39 |   // Refusal is tested through an actual click, not a check() retry that hides rejection.\n> 40 |   await page.getByText(\"Experimental features\", { exact: true }).click(); await input.click(); await checkbox(page).click(); await expect(checkbox(page)).toBeChecked(); await expect(input).toHaveValue(\"7.25\"); await expect(input).toBeFocused();\n     |                                                                                                                                                                                                                                       ^\n  41 |   await input.dispatchEvent(\"compositionstart\"); await checkbox(page).click(); await expect(input).toBeFocused(); await expect(page.locator(\".experimental-issue\")).toContainText(\"composition\");\n  42 |   await input.dispatchEvent(\"compositionend\"); await input.press(\"Escape\"); await expect(input).toHaveValue(\"1\"); expect(await documentJSON(page)).toEqual(before);\n  43 |   await page.getByText(\"Experimental features\", { exact: true }).click(); await createNode(page, \"Color RGBA\"); await c.getByRole(\"heading\", { name: \"Color RGBA\", exact: true }).click();\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:40:231"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "S06 hover detail invalidation follows selection stage deletion Undo and same-ID reopen",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 48,
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEmpty\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.hover-summary')\nExpected: empty\nReceived: notEmpty\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeEmpty\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.hover-summary')\u001b[22m\n\u001b[2m    14 × locator resolved to <span aria-live=\"off\" class=\"hover-summary\">Panel · Shader output · UI-only · visible</span>\u001b[22m\n\u001b[2m       - unexpected value \"notEmpty\"\u001b[22m\n",
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEmpty\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.hover-summary')\nExpected: empty\nReceived: notEmpty\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeEmpty\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.hover-summary')\u001b[22m\n\u001b[2m    14 × locator resolved to <span aria-live=\"off\" class=\"hover-summary\">Panel · Shader output · UI-only · visible</span>\u001b[22m\n\u001b[2m       - unexpected value \"notEmpty\"\u001b[22m\n\n\n  55 |   await page.getByLabel(\"Open document file\").setInputFiles({ name: \"same-id.grape.json\", mimeType: \"application/json\", buffer: Buffer.from(JSON.stringify(original)) });\n  56 |   await page.getByRole(\"button\", { name: \"Open in new session\", exact: true }).click(); expect(await old!.evaluate(e => e.isConnected)).toBe(false);\n> 57 |   await expect(page.locator(\".hover-summary\")).toBeEmpty(); const fresh = page.locator(`article[data-node=\"${id}\"]`); await fresh.getByRole(\"heading\").hover(); expect(await read(page)).toContain(id!); await close(page); expect(await documentJSON(page)).toEqual(original);\n     |                                                ^\n  58 |   save(\"lifetime-public\", { id, samePersistentIdDifferentMount: true, stageDeletionUndoReopen: \"passed\" });\n  59 | });\n  60 |\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:57:48"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "S06 keyboard details and bounded long owner data are readable without selection layout changes",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 89,
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"\\\"committed\\\"\"\u001b[39m\nReceived string:    \u001b[31m\"UI control: Read full application status\u001b[39m\n\u001b[31mIdentity: message\u001b[39m\n\u001b[31mState: UI-only · available·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"modelData\\\": \\\"未提供\\\",\u001b[39m\n\u001b[31m  \\\"role\\\": \\\"button\\\"\u001b[39m\n\u001b[31m}\"\u001b[39m",
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"\\\"committed\\\"\"\u001b[39m\nReceived string:    \u001b[31m\"UI control: Read full application status\u001b[39m\n\u001b[31mIdentity: message\u001b[39m\n\u001b[31mState: UI-only · available·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"modelData\\\": \\\"未提供\\\",\u001b[39m\n\u001b[31m  \\\"role\\\": \\\"button\\\"\u001b[39m\n\u001b[31m}\"\u001b[39m\n\n   96 |   await n.getByRole(\"heading\").hover(); await expect(button).toBeFocused(); await page.keyboard.press(\"Enter\"); await expect(dialog(page)).toBeVisible();\n   97 |   await page.setViewportSize({ width: 620, height: 380 }); const text = dialog(page).getByRole(\"region\"); await page.keyboard.press(\"Control+End\"); await page.keyboard.press(\"End\");\n>  98 |   const facts = await text.evaluate(el => ({ width: el.clientWidth, scrollWidth: el.scrollWidth, height: el.clientHeight, scrollHeight: el.scrollHeight, text: el.textContent })); expect(facts.scrollWidth).toBeLessThanOrEqual(facts.width + 1); expect(facts.text).toContain('\"committed\"');\n      |                                                                                                                                                                                                                                                                       ^\n   99 |   await page.screenshot({ path: path.join(out, \"debug-details-narrow.png\") }); await close(page); await page.setViewportSize({ width: 1440, height: 1000 }); expect(await n.boundingBox()).toEqual(geometry); expect(await documentJSON(page)).toEqual(before); save(\"keyboard-long-details\", facts);\n  100 | });\n  101 |\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:98:263"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run": "focused-02",
+      "stats": {
+        "startTime": "2026-10-04T13:34:35.509Z",
+        "duration": 11131.747000000001,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "failures": []
+    },
+    {
+      "run": "focused-03",
+      "stats": {
+        "startTime": "2026-10-04T13:36:20.085Z",
+        "duration": 40936.239,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "failures": [
+        {
+          "title": "S06 pending connection and held gesture reject preference changes while readonly inspection remains",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 62,
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "timedOut",
+              "error": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+              "errors": [
+                "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                "Error: locator.dispatchEvent: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('checkbox', { name: 'Show object information instead of normal hover hints' })\u001b[22m\n\n\n  68 |   await clickAction(page, \"Lock editing\"); await n.getByRole(\"heading\").click(); const b = (await n.getByRole(\"heading\").boundingBox())!;\n  69 |   await page.mouse.move(b.x + 20, b.y + 10); await page.mouse.down(); await page.mouse.move(b.x + 60, b.y + 40, { steps: 5 });\n> 70 |   await checkbox(page).dispatchEvent(\"click\"); await expect(checkbox(page)).toBeChecked(); // synthetic concurrent UI event while real mouse gesture is held\n     |                        ^\n  71 |   await page.keyboard.press(\"Escape\"); await page.mouse.up(); expect(await documentJSON(page)).toEqual(before);\n  72 |   save(\"gesture-preference-guard\", { actualMouseDrag: true, concurrentCheckbox: \"Synthetic click while held; no second physical pointer claim\", naturalEscape: true });\n  73 | });\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:70:24"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run": "focused-04",
+      "stats": {
+        "startTime": "2026-10-04T13:40:12.324Z",
+        "duration": 12406.893,
+        "expected": 10,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "failures": []
+    },
+    {
+      "run": "source-public-01",
+      "stats": {
+        "startTime": "2026-10-04T13:41:45.207Z",
+        "duration": 155652.32200000001,
+        "expected": 103,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "failures": [
+        {
+          "title": "S06 brand identity and updates stay in one header at 620",
+          "file": "s06-brand-info.spec.ts",
+          "line": 5,
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('header')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('header')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n",
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('header')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('header')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n\n  10 |     const brand = page.locator(\"header .brand\"),\n  11 |       button = brand.getByRole(\"button\", { name: \"本輪更新\", exact: true });\n> 12 |     await expect(page.locator(\"header\")).toHaveCount(1);\n     |                                          ^\n  13 |     await expect(button).toBeVisible();\n  14 |     const identity = await brand.locator(\".build-identity\").innerText();\n  15 |     expect(identity).toMatch(\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-brand-info.spec.ts:12:42"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "S06 brand identity and updates stay in one header at 1440",
+          "file": "s06-brand-info.spec.ts",
+          "line": 5,
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('header')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('header')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n",
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('header')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('header')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n\n  10 |     const brand = page.locator(\"header .brand\"),\n  11 |       button = brand.getByRole(\"button\", { name: \"本輪更新\", exact: true });\n> 12 |     await expect(page.locator(\"header\")).toHaveCount(1);\n     |                                          ^\n  13 |     await expect(button).toBeVisible();\n  14 |     const identity = await brand.locator(\".build-identity\").innerText();\n  15 |     expect(identity).toMatch(\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-brand-info.spec.ts:12:42"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run": "final-focused-01",
+      "stats": {
+        "startTime": "2026-10-04T13:44:43.907Z",
+        "duration": 44461.344,
+        "expected": 14,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "failures": [
+        {
+          "title": "S06 debug target follows nested occurrence and independent Canvas navigation",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 480,
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "timedOut",
+              "error": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+              "errors": [
+                "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').nth(1).locator('article[aria-label=\"Subgraph 2\"] h3')\u001b[22m\n\n\n  499 |     .getByRole(\"button\", { name: \"Enter subgraph\", exact: true })\n  500 |     .click();\n> 501 |   await second.locator('article[aria-label=\"Subgraph 2\"] h3').click();\n      |                                                               ^\n  502 |   await second\n  503 |     .getByRole(\"button\", { name: \"Enter subgraph\", exact: true })\n  504 |     .click();\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:501:63"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run": "final-nested-02",
+      "stats": {
+        "startTime": "2026-10-04T13:46:00.210Z",
+        "duration": 2724.218,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "failures": []
+    },
+    {
+      "run": "archive-public-01",
+      "stats": {
+        "startTime": "2026-10-04T13:46:57.988Z",
+        "duration": 104180.522,
+        "expected": 69,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "failures": []
+    }
+  ],
+  "protectedKeys": [
+    "baseR",
+    "tracked",
+    "originalUntracked"
+  ],
+  "protectedCounts": {
+    "tracked": 7773,
+    "originalUntracked": 298
+  }
+}

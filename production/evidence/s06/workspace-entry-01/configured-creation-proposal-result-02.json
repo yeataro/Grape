@@ -1,0 +1,82 @@
+{
+  "positive": {
+    "status": "DISPOSABLE_PROPOSAL_ONLY",
+    "good": true,
+    "preview": {
+      "mode": "vec2"
+    },
+    "actual": {
+      "mode": "vec2"
+    },
+    "ports": [
+      {
+        "key": "x",
+        "direction": "input",
+        "type": "glsl.float",
+        "supply": "local",
+        "defaultValue": 0
+      },
+      {
+        "key": "y",
+        "direction": "input",
+        "type": "glsl.float",
+        "supply": "local",
+        "defaultValue": 0
+      },
+      {
+        "key": "result",
+        "direction": "output",
+        "type": "glsl.vec2"
+      }
+    ],
+    "edge": {
+      "id": "id-27",
+      "from": {
+        "nodeId": "id-26",
+        "portKey": "result"
+      },
+      "to": {
+        "nodeId": "id-21",
+        "portKey": "value"
+      },
+      "adaptation": {
+        "schema": "grape.edge-adaptation",
+        "version": 1,
+        "sourceType": "glsl.vec2",
+        "targetType": "glsl.vec2",
+        "operation": "identity",
+        "extensions": {}
+      },
+      "extensions": {}
+    },
+    "oneUndo": true
+  },
+  "negatives": [
+    {
+      "parameters": {
+        "mode": "bogus"
+      },
+      "error": "PARAMETER_VALUE",
+      "events": 0,
+      "unchanged": true
+    },
+    {
+      "parameters": {
+        "unknown": "vec2"
+      },
+      "error": "PARAMETER_MISSING",
+      "events": 0,
+      "unchanged": true
+    },
+    {
+      "parameters": {
+        "x": 1
+      },
+      "error": "PARAMETER_VALUE",
+      "events": 0,
+      "unchanged": true
+    }
+  ],
+  "productionModelUnmodified": true,
+  "productClaim": false
+}

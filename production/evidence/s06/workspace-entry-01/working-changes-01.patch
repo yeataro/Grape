@@ -1,0 +1,2892 @@
+diff --git a/production/apps/web/main.ts b/production/apps/web/main.ts
+index 3b725bd..113e952 100644
+--- a/production/apps/web/main.ts
++++ b/production/apps/web/main.ts
+@@ -1,3 +1,4 @@
++import { icon } from "../../src/features/node-browser.ts";
+ import { currentSources } from "../../src/modules/sources-current.ts";
+ import {
+   fixedValues,
+@@ -112,7 +113,7 @@ const application = new EditorApplication(
+ );
+ const app = document.querySelector<HTMLElement>("#app")!;
+ app.innerHTML =
+-  '<header><div class="brand"><span class="grape-mark">●</span> Grape <small>SHADER WORKSPACE</small></div><nav aria-label="Document actions"></nav><div class="status"><span id="save-state"></span><span class="host">Host-free</span></div></header><div id="message" role="status"></div><div id="actions"></div><main><section id="canvases"></section><aside id="inspector"></aside></main><section id="code"></section><footer><span>Click an output port, then an input to connect. Shift-click replaces a connection.</span><span>Scroll to zoom · Drag empty space to pan</span></footer><dialog id="open-dialog"><h2>Open saved document</h2><div id="saved-list"></div><button id="cancel-open">Cancel</button></dialog><dialog id="recovery"><h2>Document retained</h2><p id="recovery-message"></p><button id="export-original">Export original</button><button id="close-recovery">Close</button></dialog>';
++  '<header><div class="brand"><svg class="grape-mark" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><circle cx="20" cy="23" r="11" fill="#bfa5f4"/><circle cx="44" cy="23" r="11" fill="#a98be2"/><circle cx="32" cy="44" r="11" fill="#b499ef"/></svg> Grape <small>SHADER WORKSPACE</small></div><nav aria-label="Document actions"></nav><div class="status"><span id="save-state"></span><span class="host">Host-free</span></div></header><div id="message" role="status"></div><div id="actions"></div><main><section id="canvases"></section><aside id="inspector"></aside></main><section id="code"></section><footer><span>Click an output port, then an input to connect. Shift-click replaces a connection.</span><span>Scroll to zoom · Drag empty space to pan</span></footer><dialog id="open-dialog"><h2>Open saved document</h2><div id="saved-list"></div><button id="cancel-open">Cancel</button></dialog><dialog id="recovery"><h2>Document retained</h2><p id="recovery-message"></p><button id="export-original">Export original</button><button id="close-recovery">Close</button></dialog>';
+ const staticText = [
+   [".brand small", "subtitle"],
+   [".host", "hostFree"],
+@@ -134,26 +135,52 @@ locale.subscribe(renderShell);
+ const message = document.querySelector<HTMLElement>("#message")!,
+   nav = app.querySelector("nav")!,
+   saveState = document.querySelector<HTMLElement>("#save-state")!;
+-const report = (error: unknown) => {
+-  message.textContent = error instanceof Error ? error.message : String(error);
+-  message.classList.add("error");
++const errors = new Map<string, string>();
++const success = (text: string) => {
++  if (!errors.size) message.textContent = text;
++};
++const renderErrors = () => {
++  message.textContent = [...errors.values()].join(" · ");
++  message.classList.toggle("error", !!errors.size);
++  message.setAttribute("role", errors.size ? "alert" : "status");
++};
++const report = (error: unknown, key = "operation") => {
++  errors.set(key, error instanceof Error ? error.message : String(error));
++  renderErrors();
+ };
+ const action = (
+   key: Parameters<typeof shellText>[0],
+   fn: () => void | Promise<void>,
+ ) => {
+   const button = document.createElement("button");
+-  button.textContent = text(key);
+-  locale.subscribe(() => {
+-    button.textContent = text(key);
+-  });
++  button.dataset.action = key;
++  const symbol: Record<string, string> = {
++    new: "add",
++    save: "save",
++    open: "folder",
++    file: "folder",
++    export: "download",
++    png: "image",
++    generate: "code",
++    second: "panels",
++    lock: "lock",
++  };
++  const renderAction = () =>
++    button.replaceChildren(
++      icon(symbol[key] ?? "folder"),
++      document.createTextNode(text(key)),
++    );
++  renderAction();
++  locale.subscribe(renderAction);
+   button.addEventListener("click", () => {
+-    message.textContent = "";
+-    message.classList.remove("error");
+     try {
+-      Promise.resolve(fn()).catch(report);
++      Promise.resolve(fn())
++        .then(() => {
++          if (errors.delete(key)) renderErrors();
++        })
++        .catch((error) => report(error, key));
+     } catch (error) {
+-      report(error);
++      report(error, key);
+     }
+   });
+   nav.append(button);
+@@ -174,24 +201,22 @@ function buildWorkspace() {
+   workspace.register(inspectorType(widgets, locale));
+   workspace.register(
+     actionsType(
+-      application
+-        .catalog()
+-        .map((item) =>
+-          item.ref.moduleId === FIXED_VALUES_PIN.moduleId &&
+-          item.ref.typeId === "float"
+-            ? {
+-                ...item,
+-                presentation: {
+-                  ...item.presentation,
+-                  label: {
+-                    ...item.presentation.label,
+-                    key: "float.authoring",
+-                    fallback: "Float (fixed)",
+-                  },
++      application.catalog().map((item) =>
++        item.ref.moduleId === FIXED_VALUES_PIN.moduleId &&
++        item.ref.typeId === "float"
++          ? {
++              ...item,
++              presentation: {
++                ...item.presentation,
++                label: {
++                  ...item.presentation.label,
++                  key: "float.authoring",
++                  fallback: "Float (fixed)",
+                 },
+-              }
+-            : item,
+-        ),
++              },
++            }
++          : item,
++      ),
+       () => ({
+         undo: application.canUndo,
+         redo: application.canRedo,
+@@ -310,7 +335,7 @@ upgradeButton.onclick = () => {
+ nav.append(upgradeButton);
+ const saveButton = action("save", async () => {
+   await application.save();
+-  message.textContent = text("stored");
++  success(text("stored"));
+ });
+ action("open", async () => {
+   const list = document.querySelector("#saved-list")!;
+@@ -336,7 +361,7 @@ action("open", async () => {
+ });
+ action("export", async () => {
+   await application.download();
+-  message.textContent = text("exported");
++  success(text("exported"));
+ });
+ const pngDialog = document.createElement("dialog");
+ const pngTitle = document.createElement("h2"),
+@@ -479,7 +504,11 @@ input.addEventListener("change", () => {
+   })().catch(report);
+ });
+ action("generate", () => {
+-  application.generate();
++  const result = application.generate();
++  if (result.status !== "success")
++    throw Error(
++      result.diagnostics.map((d) => d.code + ": " + d.message).join(" · "),
++    );
+ });
+ action("second", () => {
+   addCanvas();
+@@ -631,5 +660,56 @@ mountPersonal(
+     functionProfile,
+     probeDefinitions,
+   ),
+-  report,
++  (error, operation) => {
++    const key = "personal:" + operation;
++    if (error === undefined) {
++      if (errors.delete(key)) renderErrors();
++    } else report(error, key);
++  },
+ );
++
++const overflow = document.createElement("details"),
++  overflowLabel = document.createElement("summary"),
++  overflowItems = document.createElement("div");
++overflow.className = "action-overflow";
++overflowLabel.textContent = "More actions";
++overflowLabel.prepend(icon("more"));
++overflowItems.className = "overflow-items";
++overflow.append(overflowLabel, overflowItems);
++const actionGroups = [
++  document.createElement("div"),
++  document.createElement("div"),
++  document.createElement("div"),
++];
++actionGroups.forEach((g) => (g.className = "action-group"));
++for (const child of Array.from(nav.children)) {
++  const key = (child as HTMLElement).dataset.action;
++  const index = key
++    ? ["new", "save", "open", "file", "export", "png"].includes(key)
++      ? 0
++      : 1
++    : 2;
++  actionGroups[index]!.append(child);
++}
++nav.append(...actionGroups, overflow);
++const groupWidths = actionGroups.map((g) => g.getBoundingClientRect().width);
++const fitActions = () => {
++  const capacity = nav.clientWidth;
++  let used = 130;
++  let hidden = 0;
++  for (let i = 0; i < actionGroups.length; i++) {
++    const g = actionGroups[i]!;
++    const width = groupWidths[i]! + 8;
++    if (used + width > capacity) {
++      overflowItems.append(g);
++      hidden++;
++    } else {
++      nav.insertBefore(g, overflow);
++      used += width;
++    }
++  }
++  overflow.hidden = !hidden;
++  if (!hidden) overflow.open = false;
++};
++new ResizeObserver(fitActions).observe(nav);
++fitActions();
+diff --git a/production/apps/web/personal.ts b/production/apps/web/personal.ts
+index ed99746..1330fe5 100644
+--- a/production/apps/web/personal.ts
++++ b/production/apps/web/personal.ts
+@@ -14,42 +14,65 @@ export function mountPersonal(
+   application: EditorApplication,
+   context: () => EditorContext,
+   library: PersonalLibrary,
+-  report: (e: unknown) => void,
++  report: (e: unknown, operation: string) => void,
+ ) {
+   const dialog = document.createElement("dialog"),
+     heading = document.createElement("h2"),
+     note = document.createElement("p"),
+     list = document.createElement("div"),
+     status = document.createElement("p");
++  const search = document.createElement("input"),
++    detail = document.createElement("pre");
++  search.type = "search";
++  search.ariaLabel = "Search Personal Library";
++  search.placeholder = "Search saved subgraphs…";
++  detail.hidden = true;
+   heading.textContent = "Personal Library";
+   note.textContent =
+     "Saved in this browser. Export a package to keep a file copy. Select a subgraph to save it.";
+   status.setAttribute("role", "status");
+-  dialog.append(heading, note, status, list);
++  dialog.append(heading, note, search, status, list, detail);
+   parent.append(dialog);
+-  let activity = 0;
++  let activity = 0,
++    openedContext: EditorContext | null = null,
++    openedScope = "";
++  const destination = () => {
++    if (
++      !dialog.open ||
++      !openedContext ||
++      context() !== openedContext ||
++      JSON.stringify(openedContext.capture().scope) !== openedScope
++    )
++      throw Error("PERSONAL_STALE: Reopen the Library for the current Canvas.");
++    return openedContext;
++  };
+   const button = (
+     label: string,
+-    fn: () => void | Promise<void>,
++    fn: (ticket: number) => void | Promise<void>,
+     target: HTMLElement = dialog,
+   ) => {
+     const b = document.createElement("button");
+     b.textContent = label;
+     b.onclick = () => {
+-      activity++;
++      const ticket = ++activity;
+       void Promise.resolve()
+-        .then(fn)
++        .then(() => {
++          if (ticket === activity) return fn(ticket);
++        })
++        .then(() => {
++          if (ticket === activity) report(undefined, label);
++        })
+         .catch((e) => {
++          if (ticket !== activity) return;
+           status.textContent = e instanceof Error ? e.message : String(e);
+-          report(e);
++          report(e, label);
+         });
+     };
+     target.append(b);
+     return b;
+   };
+-  const refresh = async () => {
+-    const ticket = activity,
+-      result = await library.list();
++  const refresh = async (ticket = activity) => {
++    const result = await library.list();
+     if (ticket !== activity) return;
+     list.replaceChildren();
+     for (const item of result.items) {
+@@ -58,17 +81,51 @@ export function mountPersonal(
+       const name = document.createElement("span");
+       name.textContent = item.asset.name + " — " + item.name;
+       row.append(name);
++      row.dataset.search = (item.asset.name + " " + item.name)
++        .normalize("NFKC")
++        .toLowerCase();
+       button(
++        "Inspect " + item.asset.name,
++        () => {
++          detail.hidden = false;
++          const entry = item.asset.resources.find(
++              (r) => r.id === item.asset.entry,
++            )!,
++            data = entry.data as unknown as {
++              interface: {
++                name: string;
++                key: string;
++                direction: string;
++                type: string;
++              }[];
++            };
++          detail.textContent = [
++            item.asset.name,
++            "Personal subgraph",
++            ...data.interface.map(
++              (p) => `${p.direction} ${p.name || p.key}: ${p.type}`,
++            ),
++            "Stages: " +
++              item.asset.stageKindIds
++                .map((s) => s.replace("grape.stage.", ""))
++                .join(", "),
++          ].join("\n");
++        },
++        row,
++      );
++      const insert = button(
+         "Insert " + item.asset.name,
+-        async () => {
++        async (ticket) => {
+           await application.insertPersonal(
+-            context(),
++            destination(),
+             JSON.stringify(item.asset),
+           );
+-          dialog.close();
++          if (ticket === activity && dialog.open) dialog.close();
+         },
+         row,
+       );
++      insert.dataset.libraryInsert = "true";
++      insert.disabled = application.readonly || application.busy;
+       button(
+         "Export " + item.asset.name,
+         () => downloadBytes(item.name, JSON.stringify(item.asset)),
+@@ -79,23 +136,44 @@ export function mountPersonal(
+     status.textContent =
+       result.issues.map((i) => i.name + ": " + i.code).join("\n") ||
+       `${result.items.length} saved subgraphs`;
++    filter();
+   };
++  const filter = () => {
++    const terms = search.value
++      .normalize("NFKC")
++      .toLowerCase()
++      .trim()
++      .split(/\s+/);
++    for (const row of list.children)
++      (row as HTMLElement).hidden = !terms.every((t) =>
++        (row as HTMLElement).dataset.search!.includes(t),
++      );
++  };
++  search.oninput = filter;
+   const open = button(
+     "Personal Library",
+     async () => {
++      openedContext = context();
++      openedScope = JSON.stringify(openedContext.capture().scope);
+       dialog.showModal();
++      search.value = "";
++      detail.hidden = true;
+       await refresh();
+     },
+     parent,
+   );
+-  button("Save selected subgraph", async () => {
+-    const asset = await application.exportPersonal(context());
++  button("Save selected subgraph", async (ticket) => {
++    const asset = await application.exportPersonal(destination());
++    if (ticket !== activity) return;
+     const saved = await library.save(asset);
+-    await refresh();
++    if (ticket !== activity) return;
++    await refresh(ticket);
++    if (ticket !== activity) return;
+     status.textContent = (saved.reused ? "Reused " : "Saved ") + saved.name;
+   });
+-  button("Export selected subgraph", async () => {
+-    const asset = await application.exportPersonal(context());
++  button("Export selected subgraph", async (ticket) => {
++    const asset = await application.exportPersonal(destination());
++    if (ticket !== activity) return;
+     await downloadBytes(personalFilename(asset.name), JSON.stringify(asset));
+   });
+   const input = document.createElement("input");
+@@ -103,7 +181,7 @@ export function mountPersonal(
+   input.accept = ".json,.sgrape-function.json";
+   input.setAttribute("aria-label", "Import Personal package");
+   input.onchange = () => {
+-    activity++;
++    const ticket = ++activity;
+     void (async () => {
+       const file = input.files?.[0];
+       if (!file) return;
+@@ -113,19 +191,39 @@ export function mountPersonal(
+         library.profile,
+         library.probeProvider,
+       );
++      if (ticket !== activity) return;
+       await library.save(asset);
+-      await refresh();
++      if (ticket !== activity) return;
++      await refresh(ticket);
++      if (ticket !== activity) return;
++      report(undefined, "Import Personal package");
+     })()
+       .catch((e) => {
++        if (ticket !== activity) return;
+         status.textContent = e instanceof Error ? e.message : String(e);
+-        report(e);
++        report(e, "Import Personal package");
+       })
+       .finally(() => {
+-        input.value = "";
++        if (ticket === activity) input.value = "";
+       });
+   };
+   dialog.append(input);
+   button("Refresh Personal", refresh);
+   button("Close Personal", () => dialog.close());
++  button("Close Personal details", () => {
++    detail.hidden = true;
++  });
++  application.subscribe(() => {
++    for (const insert of dialog.querySelectorAll<HTMLButtonElement>(
++      "[data-library-insert]",
++    ))
++      insert.disabled = application.readonly || application.busy;
++  });
++  dialog.addEventListener("close", () => {
++    activity++;
++    openedContext = null;
++    openedScope = "";
++    open.focus();
++  });
+   return { open, dialog };
+ }
+diff --git a/production/apps/web/style.css b/production/apps/web/style.css
+index dc93334..d9901d0 100644
+--- a/production/apps/web/style.css
++++ b/production/apps/web/style.css
+@@ -415,3 +415,519 @@ select:focus-visible {
+   vertical-align: middle;
+   max-width: 100%;
+ }
++:root {
++  --canvas: #14141c;
++  --panel: #1b1b23;
++  --node: #2e2c3a;
++  --field: #42404f;
++  --accent: #b39cfb;
++  --selection: #70dc69;
++}
++.action-icon {
++  width: 16px;
++  height: 16px;
++  flex: none;
++  vertical-align: middle;
++  margin-right: 6px;
++}
++button {
++  display: inline-flex;
++  align-items: center;
++  justify-content: center;
++}
++[hidden] {
++  display: none !important;
++}
++button:focus-visible,
++summary:focus-visible,
++input:focus-visible,
++article:focus-visible {
++  outline: 2px solid var(--accent);
++  outline-offset: 3px;
++}
++body > #app > header {
++  padding: 12px 18px;
++  display: grid;
++  grid-template-columns: 1fr auto;
++  gap: 10px;
++  background: #19191f;
++}
++.brand {
++  font-size: 20px;
++  display: flex;
++  align-items: center;
++  gap: 8px;
++}
++.grape-mark {
++  width: 28px;
++  height: 28px;
++}
++header nav {
++  grid-row: 2;
++  grid-column: 1/-1;
++  min-width: 0;
++  display: flex;
++  flex-wrap: nowrap;
++  align-items: center;
++  gap: 8px;
++}
++.action-group {
++  display: flex;
++  flex-wrap: nowrap;
++  gap: 5px;
++  padding-right: 8px;
++  border-right: 1px solid #35313f;
++}
++.action-group button {
++  white-space: nowrap;
++  font-size: 12px;
++  padding: 7px 9px;
++}
++.action-overflow {
++  position: relative;
++  margin-left: auto;
++}
++.action-overflow summary {
++  cursor: pointer;
++  white-space: nowrap;
++  padding: 8px;
++  list-style: none;
++  border: 1px solid #51465f;
++  border-radius: 5px;
++}
++.overflow-items {
++  position: absolute;
++  z-index: 50;
++  right: 0;
++  top: 100%;
++  min-width: 250px;
++  max-width: 90vw;
++  max-height: 70vh;
++  overflow: auto;
++  background: var(--panel);
++  padding: 12px;
++  box-shadow: 0 10px 40px #000a;
++  border: 1px solid #60576e;
++  border-radius: 7px;
++}
++.overflow-items .action-group {
++  flex-direction: column;
++  border: 0;
++  padding: 6px 0;
++}
++.editing-actions {
++  padding: 6px 18px;
++  gap: 5px;
++  border-bottom: 1px solid #30303b;
++  background: var(--panel);
++}
++main {
++  gap: 5px;
++  padding: 0;
++  background: #30303b;
++  grid-template-columns: minmax(0, 1fr) 290px;
++}
++.canvas-pane {
++  min-height: 620px;
++  border-radius: 0;
++}
++.canvas {
++  background-color: var(--canvas);
++  background-size: 24px 24px;
++}
++.canvas-pane > h2 {
++  margin: 0;
++  padding: 7px 12px;
++  font-size: 12px;
++  background: var(--panel);
++}
++.canvas-entry-actions {
++  position: absolute;
++  z-index: 5;
++  top: 10px;
++  right: 12px;
++  display: flex;
++  gap: 5px;
++}
++.canvas-entry-actions button {
++  font-size: 11px;
++  padding: 7px 9px;
++}
++.stage-switch {
++  position: absolute;
++  top: 10px;
++  left: 12px;
++  z-index: 5;
++  display: flex;
++  gap: 3px;
++  padding: 3px;
++  background: #1d1b24;
++  border-radius: 7px;
++}
++.stage-switch button {
++  padding: 7px 10px;
++  background: transparent;
++  border: 0;
++  font-size: 11px;
++}
++.stage-switch button[aria-pressed="true"] {
++  background: #393047;
++  color: #d7c7f0;
++}
++.canvas-breadcrumb {
++  top: 54px;
++  left: 12px;
++  z-index: 4;
++}
++.canvas-breadcrumb button {
++  font-size: 11px;
++  padding: 4px 8px;
++}
++.node {
++  width: 190px;
++  border: 1px solid #60576e;
++  border-radius: 9px;
++  background: var(--node);
++  color: #ffffffbd;
++  box-shadow: 0 6px 20px #0004;
++}
++.node h3 {
++  background: #43345c;
++  padding: 12px 13px;
++  min-height: 41px;
++  border-radius: 8px 8px 0 0;
++  font-size: 12px;
++  line-height: 16px;
++  font-weight: 600;
++  margin: 0 0 7px;
++}
++.node[data-role="boundary"] h3,
++.node[data-role="network-output"] h3 {
++  background: #38524a;
++}
++.node[data-role="network-input"] h3 {
++  background: #62414f;
++}
++.node.selected {
++  border-color: var(--selection);
++  outline: none;
++  box-shadow:
++    0 0 0 1px var(--selection),
++    0 0 16px #70dc6940;
++}
++.node:focus-visible {
++  outline: 2px solid var(--accent);
++  outline-offset: 4px;
++}
++.port-row {
++  position: relative;
++  justify-content: flex-start;
++  min-height: 29px;
++  height: 29px;
++  padding: 0 12px 0 13px;
++  gap: 6px;
++}
++.port-row.output {
++  flex-direction: row;
++  justify-content: flex-end;
++}
++.port-row .port {
++  color: #ffffffbd;
++}
++.node-value {
++  flex: 1;
++  min-width: 0;
++  height: 24px;
++  line-height: 24px;
++  border-radius: 4px;
++  background: #42404f;
++  padding: 0 5px;
++  font-size: 11px;
++  white-space: nowrap;
++  overflow: hidden;
++  text-overflow: ellipsis;
++}
++.port-row small {
++  font-size: 9px;
++  color: var(--port-color, #c4c1bc);
++}
++.port {
++  padding: 0;
++  min-height: 29px;
++  font-size: 11px;
++  border: 0;
++  background: transparent;
++}
++.socket {
++  position: absolute;
++  left: -6px;
++  top: calc(50% - 5.5px);
++  width: 11px;
++  height: 11px;
++  border: 2px solid var(--port-color, #c4c1bc);
++  border-radius: 50%;
++  background: #181822;
++}
++.output .socket {
++  right: -6px;
++  left: auto;
++}
++.socket.connected {
++  background: var(--port-color, #c4c1bc);
++}
++.wires path {
++  stroke-width: 2;
++  pointer-events: stroke;
++  cursor: context-menu;
++}
++.network-toolbar {
++  padding: 7px 12px;
++  gap: 5px;
++  max-height: 38%;
++  overflow: auto;
++  background: #1b1b23ef;
++}
++.network-toolbar > button {
++  font-size: 11px;
++  padding: 5px 8px;
++}
++.network-toolbar details {
++  background: #24222e;
++  border: 1px solid #3a3445;
++  border-radius: 5px;
++  padding: 5px 8px;
++}
++.network-toolbar details:not([open]) {
++  width: auto;
++}
++.network-toolbar details summary {
++  font-size: 11px;
++  cursor: pointer;
++}
++.canvas-notice {
++  top: 92px;
++  left: 12px;
++  right: 12px;
++  pointer-events: none;
++}
++.node-browser {
++  position: absolute;
++  z-index: 20;
++  width: 350px;
++  max-width: calc(100% - 8px);
++  max-height: calc(100% - 8px);
++  display: flex;
++  flex-direction: column;
++  border: 1px solid #60576e;
++  border-radius: 8px;
++  background: var(--panel);
++  box-shadow: 0 12px 36px #0009;
++  overflow: hidden;
++}
++.node-browser header {
++  display: flex;
++  justify-content: space-between;
++  align-items: center;
++  padding: 9px 12px;
++  cursor: move;
++  user-select: none;
++  background: #282430;
++}
++.node-browser header button {
++  padding: 2px;
++  background: none;
++  border: 0;
++}
++.node-browser input {
++  margin: 10px;
++  width: calc(100% - 20px);
++  padding: 9px;
++  color: inherit;
++  background: #191920;
++  border: 1px solid #51465f;
++  border-radius: 5px;
++}
++.catalog-filters {
++  display: flex;
++  gap: 5px;
++  margin: 0 10px 9px;
++}
++.catalog-filters select {
++  width: 50%;
++  min-width: 0;
++  font-size: 10px;
++}
++.catalog-list {
++  min-height: 80px;
++  overflow: auto;
++  max-height: 320px;
++  padding: 0 8px 8px;
++}
++.catalog-list summary {
++  padding: 8px;
++  font-size: 11px;
++  cursor: pointer;
++}
++.catalog-row {
++  display: flex;
++  align-items: center;
++  gap: 4px;
++  border-radius: 4px;
++}
++.catalog-row.current {
++  background: #43345c;
++}
++.catalog-row > button:first-child {
++  flex: 1;
++  align-items: flex-start;
++  flex-direction: column;
++  background: none;
++  border: 0;
++  text-align: left;
++  font-size: 12px;
++  padding: 7px;
++}
++.catalog-row small {
++  font-size: 9px;
++  color: #b6a9c5;
++  padding-top: 3px;
++}
++.catalog-row > button:last-child {
++  padding: 7px;
++  background: none;
++  border: 0;
++}
++.catalog-detail {
++  border-top: 1px solid #51465f;
++  padding: 12px;
++  overflow: auto;
++  max-height: 180px;
++  font-size: 11px;
++}
++.catalog-detail p {
++  white-space: pre-line;
++}
++.catalog-detail pre {
++  white-space: pre-wrap;
++  font-size: 10px;
++}
++.creation-preview {
++  width: 190px;
++  border-radius: 9px;
++  background: var(--node);
++  position: absolute;
++  pointer-events: none;
++  z-index: 9;
++  opacity: 0.75;
++  border: 2px dashed var(--selection);
++}
++.creation-preview h3 {
++  margin: 0 0 7px;
++  padding: 12px 13px;
++  min-height: 41px;
++  font-size: 12px;
++  line-height: 16px;
++  background: #43345c;
++  border-radius: 8px 8px 0 0;
++}
++.node {
++  overflow: visible;
++}
++.creation-preview .port {
++  display: flex;
++}
++.creation-preview .output {
++  justify-content: flex-end;
++}
++.creation-wire {
++  position: absolute;
++  inset: 0;
++  width: 100%;
++  height: 100%;
++  z-index: 8;
++  pointer-events: none;
++}
++.creation-wire path {
++  fill: none;
++  stroke: var(--accent);
++  stroke-width: 2;
++  stroke-dasharray: 5 4;
++}
++.canvas-menu {
++  position: absolute;
++  z-index: 25;
++  padding: 6px;
++  min-width: 190px;
++  background: #25222e;
++  border: 1px solid #60576e;
++  border-radius: 6px;
++  box-shadow: 0 8px 24px #0009;
++}
++.canvas-menu button {
++  display: flex;
++  width: 100%;
++  min-height: 44px;
++  justify-content: flex-start;
++  background: transparent;
++  border: 0;
++}
++.canvas-menu button:focus {
++  background: #43345c;
++}
++.shortcut-help {
++  max-height: 90vh;
++  padding: 0;
++  width: min(650px, 90vw);
++}
++.shortcut-help h2 {
++  font-size: 18px;
++  padding: 20px;
++  margin: 0;
++}
++.shortcut-grid {
++  display: grid;
++  grid-template-columns: minmax(140px, 1fr) 1.5fr;
++  gap: 16px;
++  padding: 20px;
++  overflow: auto;
++  max-height: 60vh;
++  font-size: 13px;
++  border-block: 1px solid #51465f;
++}
++.shortcut-help > button {
++  margin: 12px 20px;
++}
++* {
++  scrollbar-width: thin;
++  scrollbar-color: #51465f #1b1b23;
++}
++@media (max-width: 900px) {
++  main {
++    grid-template-columns: minmax(0, 1fr) 240px;
++  }
++  .canvas-entry-actions button {
++    font-size: 0;
++    padding: 8px;
++  }
++  .canvas-entry-actions .action-icon {
++    margin: 0;
++  }
++  .brand small {
++    display: none;
++  }
++}
++@media (max-width: 620px) {
++  main {
++    display: block;
++  }
++  .canvas-pane {
++    min-height: 650px;
++  }
++  #inspector {
++    max-height: 340px;
++    overflow: auto;
++  }
++  .brand {
++    font-size: 18px;
++  }
++}
+diff --git a/production/conformance/ownership.json b/production/conformance/ownership.json
+index 1b18b10..0830260 100644
+--- a/production/conformance/ownership.json
++++ b/production/conformance/ownership.json
+@@ -4,6 +4,16 @@
+   "base": "..",
+   "roots": ["src", "apps"],
+   "files": {
++    "src/features/node-browser.ts": {
++      "owner": "feature-canvas",
++      "role": "ui",
++      "exports": {
++        "catalogRank": "contract",
++        "icon": "command",
++        "mountNodeBrowser": "command",
++        "nodePortRow": "command"
++      }
++    },
+     "src/modules/fixed-values.ts": {
+       "owner": "basic-modules",
+       "role": "module",
+@@ -16,7 +26,9 @@
+     "src/features/vector-control.ts": {
+       "owner": "feature-controls",
+       "role": "ui",
+-      "exports": { "vectorWidget": "command" }
++      "exports": {
++        "vectorWidget": "command"
++      }
+     },
+     "src/adapters/browser/presentation.ts": {
+       "owner": "browser-adapters",
+@@ -329,6 +341,8 @@
+         "PanelUpdate": "contract",
+         "ContextQuery": "contract",
+         "PanelServices": "contract",
++        "CatalogWire": "contract",
++        "CatalogEntry": "contract",
+         "Panel": "contract",
+         "PanelType": "contract",
+         "SavedPanel": "contract",
+diff --git a/production/src/application/editor.ts b/production/src/application/editor.ts
+index 26eac90..a908916 100644
+--- a/production/src/application/editor.ts
++++ b/production/src/application/editor.ts
+@@ -54,6 +54,7 @@ import { upgradeDocument } from "./document-upgrade.ts";
+ import { buildPersonal, readPersonal, packagePacket } from "./personal.ts";
+ import type { PersonalPackage, PackageProbe } from "../sdk/library.ts";
+ import type { DocumentInspection } from "./inspection.ts";
++import type { CatalogEntry, CatalogWire } from "../sdk/ui.ts";
+ 
+ export class EditorContext {
+   #selection: string[] = [];
+@@ -162,11 +163,7 @@ export class EditorContext {
+         })),
+       ],
+       network,
+-      frames: frames(
+-        graph.document,
+-        this.graph.definitionSet,
+-        network.id,
+-      ),
++      frames: frames(graph.document, this.graph.definitionSet, network.id),
+       portLabels: Object.fromEntries(
+         network.nodes.map((n) => {
+           const role = this.graph.definitionSet.node(n.type)?.modelRole;
+@@ -186,7 +183,9 @@ export class EditorContext {
+       nodeRoles: Object.fromEntries(
+         network.nodes.map((n) => [
+           n.id,
+-          this.graph.definitionSet.node(n.type)?.modelRole ?? "operation",
++          this.graph.definitionSet.node(n.type)?.modelRole ??
++            this.graph.definitionSet.node(n.type)?.role ??
++            "operation",
+         ]),
+       ),
+       structures: graph.document.graph.resources
+@@ -484,6 +483,283 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
+       .filter((n) => n.role === "operation" && !n.modelRole)
+       .map((n) => ({ ref: n.ref, presentation: n.presentation }));
+   }
++  /** Once per creator opening, never per search keystroke. Probes own disposable IDs/History. */
++  creationCatalog(
++    context: EditorContext,
++    wire?: CatalogWire,
++  ): readonly CatalogEntry[] {
++    const current = context.capture(),
++      snapshot = current.graph,
++      network = current.network;
++    const defs = this.definitions.pin(snapshot.document.graph.modules);
++    const stage = snapshot.document.graph.stages.find(
++      (s) => s.id === current.scope.stageId,
++    )!;
++    if (
++      stage.implementation !== "network" ||
++      this.busy ||
++      !this.profile.graphKindIds.includes(
++        snapshot.document.graph.kind.kindId,
++      ) ||
++      !this.profile.stageKindIds.includes(stage.stageKindId)
++    )
++      return [];
++    const result: CatalogEntry[] = [];
++    type Seed = {
++      definition: NonNullable<ReturnType<typeof defs.node>>;
++      presentation: CatalogEntry["presentation"];
++      creation?: CatalogEntry["creation"];
++      libraryScope: "builtin" | "project";
++    };
++    const seeds: Seed[] = this.definitions
++      .nodeTypes()
++      .filter((d) => d.role === "operation" && !d.modelRole)
++      .map((definition) => ({
++        definition,
++        presentation: definition.presentation,
++        libraryScope: "builtin",
++      }));
++    for (const resource of snapshot.document.graph.resources) {
++      const model = defs.resource(resource.type)?.model,
++        role =
++          model === "network"
++            ? "call"
++            : model === "source"
++              ? "source"
++              : model === "structure"
++                ? "structure"
++                : null;
++      if (!role) continue;
++      const definition = defs.nodeByRole(role);
++      if (!definition) continue;
++      const data = resource.data as { name?: string },
++        category =
++          role === "call"
++            ? "Project / Subgraphs"
++            : role === "source"
++              ? "Project / Sources"
++              : "Project / Structures";
++      const name = data.name ?? definition.presentation.label.fallback;
++      seeds.push({
++        definition,
++        libraryScope: "project",
++        creation: { kind: "reference", role, resourceId: resource.id },
++        presentation: {
++          ...definition.presentation,
++          label: { ...definition.presentation.label, fallback: name },
++          category: {
++            id: category,
++            label: { ...definition.presentation.label, fallback: category },
++          },
++          description: {
++            ...definition.presentation.label,
++            fallback:
++              role === "source"
++                ? "Existing source · reuses its current value and identity"
++                : role === "call"
++                  ? "Existing subgraph · shared definition and inputs/outputs"
++                  : "Existing Structure · current declared fields",
++          },
++        },
++      });
++    }
++    const sourceDefinition = defs.nodeByRole("source");
++    if (sourceDefinition) {
++      const usedNames = new Set(
++        snapshot.document.graph.resources
++          .filter((r) => defs.resource(r.type)?.model === "source")
++          .map((r) => (r.data as { name: string }).name),
++      );
++      let name = "Source",
++        suffix = 2;
++      while (usedNames.has(name)) name = "Source " + suffix++;
++      seeds.push({
++        definition: sourceDefinition,
++        libraryScope: "builtin",
++        creation: { kind: "source", name, type: "glsl.float", value: 0 },
++        presentation: {
++          ...sourceDefinition.presentation,
++          label: {
++            ...sourceDefinition.presentation.label,
++            fallback: "Float source (new)",
++          },
++          description: {
++            ...sourceDefinition.presentation.label,
++            fallback: "New constant source · independent value, initially 0",
++          },
++          category: {
++            id: "sources",
++            label: {
++              ...sourceDefinition.presentation.label,
++              fallback: "Sources",
++            },
++          },
++        },
++      });
++    }
++    const occupiedIds = new Set<string>();
++    const collectIds = (v: unknown): void => {
++      if (v && typeof v === "object") {
++        if (!Array.isArray(v) && typeof (v as { id?: unknown }).id === "string")
++          occupiedIds.add((v as { id: string }).id);
++        for (const child of Object.values(v)) collectIds(child);
++      }
++    };
++    collectIds(snapshot.document);
++    for (const seed of seeds) {
++      const { definition } = seed;
++      if (
++        !defs.node(definition.ref) ||
++        definition.role !== "operation" ||
++        !definition.eligibility.stageKindIds.includes(stage.stageKindId) ||
++        (definition.eligibility.graphKindIds &&
++          !definition.eligibility.graphKindIds.includes(
++            snapshot.document.graph.kind.kindId,
++          )) ||
++        definition.eligibility.requiredGeneratorCapabilities?.some(
++          (c) => !this.profile.capabilities.includes(c),
++        )
++      )
++        continue;
++      const state = definition.initialize(),
++        choices = seed.creation
++          ? []
++          : definition
++              .parameters(state, modelContext(snapshot.document, defs))
++              .filter(
++                (p) => p.target === "state" && p.type === "choice" && p.choices,
++              );
++      const variants: Record<string, Json>[] = [{}];
++      if (wire)
++        for (const p of choices)
++          for (const value of p.choices!) variants.push({ [p.key]: value });
++      let best: CatalogEntry | undefined;
++      for (const parameters of variants) {
++        let probe: Graph | undefined;
++        try {
++          let sequence = 0;
++          probe = new Graph(snapshot.document, defs, {
++            next: () => {
++              let id: string;
++              do {
++                id = `catalog-probe-${++sequence}`;
++              } while (occupiedIds.has(id));
++              return id;
++            },
++          });
++          let id = "";
++          probe.change("Preview node", (d) => {
++            if (seed.creation?.kind === "reference")
++              id = d.addReferenceNode(
++                network.id,
++                seed.creation.role,
++                seed.creation.resourceId,
++                undefined,
++                definition.ref,
++              );
++            else if (seed.creation?.kind === "source") {
++              const c = seed.creation;
++              const resource = d.createSource(c.name, c.type, c.value);
++              id = d.addReferenceNode(
++                network.id,
++                "source",
++                resource,
++                undefined,
++                definition.ref,
++              );
++            } else id = d.add(network.id, definition.ref, [0, 0]);
++          });
++          if (Object.keys(parameters).length)
++            probe.change("Preview variant", (d) => {
++              for (const [key, value] of Object.entries(parameters))
++                d.parameter(network.id, id, key, value);
++            });
++          const candidateNetwork = resolveOccurrence(
++            probe.capture().document,
++            defs,
++            current.scope.stageId,
++            current.scope.networkPath,
++          ).network;
++          const ports = candidateNetwork.nodes.find((n) => n.id === id)!.ports;
++          if (
++            ports.some((p) =>
++              this.profile
++                .validateType(p.type)
++                .some((i) => i.severity === "error"),
++            )
++          )
++            continue;
++          const endpoint =
++            wire &&
++            network.nodes
++              .find((n) => n.id === wire.nodeId)
++              ?.ports.find(
++                (p) => p.key === wire.portKey && p.direction === wire.direction,
++              );
++          if (wire && !endpoint) continue;
++          const matches = wire
++            ? ports
++                .filter((p) => p.direction !== wire.direction)
++                .sort(
++                  (a, b) =>
++                    Number(b.type === endpoint!.type) -
++                    Number(a.type === endpoint!.type),
++                )
++            : [undefined];
++          for (const port of matches) {
++            try {
++              if (wire && port)
++                probe.change("Preview connection", (d) =>
++                  d.connect(
++                    network.id,
++                    wire.direction === "output"
++                      ? { nodeId: wire.nodeId, portKey: wire.portKey }
++                      : { nodeId: id, portKey: port.key },
++                    wire.direction === "input"
++                      ? { nodeId: wire.nodeId, portKey: wire.portKey }
++                      : { nodeId: id, portKey: port.key },
++                    true,
++                  ),
++                );
++              const item: CatalogEntry = {
++                key: JSON.stringify([definition.ref, seed.creation ?? null]),
++                ref: definition.ref,
++                presentation: seed.presentation,
++                libraryScope: seed.libraryScope,
++                ...(seed.creation ? { creation: seed.creation } : {}),
++                source: definition.ref.moduleId,
++                ports,
++                parameters,
++                exactMatch: !wire || port?.type === endpoint?.type,
++                scope: current.scope,
++                revision: snapshot.revision,
++                ...(port ? { matchingPort: port.key } : {}),
++              };
++              if (!best || (item.exactMatch && !best.exactMatch)) best = item;
++              break;
++            } catch {
++              /* An inadmissible owner/type/constant variant is not a candidate. */
++            }
++          }
++        } catch {
++          /* Missing owner or rejected initial state remains unavailable. */
++        } finally {
++          probe?.dispose();
++        }
++      }
++      if (best) result.push(best);
++    }
++    return detached(
++      result.sort(
++        (a, b) =>
++          Number(b.exactMatch) - Number(a.exactMatch) ||
++          a.presentation.label.fallback.localeCompare(
++            b.presentation.label.fallback,
++          ) ||
++          a.key.localeCompare(b.key),
++      ),
++    );
++  }
+   private install(graph: Graph, saved: CanonicalGraphDocument | null): void {
+     demand(!this.busy, "HISTORY_BUSY");
+     for (const c of this.#contexts.values()) c.dispose();
+@@ -730,7 +1006,16 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
+     this.#grants.set(typeId, new Set(commands));
+   }
+   allows(typeId: string, commandId: string): boolean {
+-    return !this.#readonly && !!this.#grants.get(typeId)?.has(commandId);
++    return (
++      (!this.#readonly ||
++        [
++          "grape.network.enter",
++          "grape.network.up",
++          "grape.network.navigate",
++          "grape.stage.navigate",
++        ].includes(commandId)) &&
++      !!this.#grants.get(typeId)?.has(commandId)
++    );
+   }
+   originBusy(panelId?: string, contextId?: string): boolean {
+     return [...this.#origins.entries()].some(
+@@ -760,6 +1045,11 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
+       demand(typeof args.id === "string", "COMMAND_ARGS");
+       return args.id;
+     };
++    if (intent.commandId === "grape.stage.navigate") {
++      demand(typeof args.stageId === "string", "COMMAND_ARGS");
++      context.navigate(args.stageId);
++      return;
++    }
+     if (intent.commandId === "grape.network.frame") {
+       graph.change("Frame selection", (d) =>
+         d.frameSelection(network, context.capture().selection),
+@@ -909,12 +1199,71 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
+         "COMMAND_ARGS",
+       );
+       let created = "";
+-      graph.change("Add node", (d) => {
+-        created = d.add(
+-          network,
+-          args.ref as unknown as NodeTypeRef,
+-          args.position as [number, number],
++      if (args.scope)
++        demand(
++          equal(args.scope, context.capture().scope) &&
++            args.revision === this.snapshot.revision,
++          "STALE_PROPOSAL",
+         );
++      const candidate =
++        args.scope || args.creation || args.wire || args.parameters
++          ? this.creationCatalog(
++              context,
++              args.wire as unknown as CatalogWire | undefined,
++            ).find(
++              (e) =>
++                equal(e.ref, args.ref) &&
++                equal(e.creation ?? null, args.creation ?? null) &&
++                equal(e.parameters, args.parameters ?? {}) &&
++                e.matchingPort === (args.matchingPort ?? undefined),
++            )
++          : undefined;
++      if (args.scope || args.creation || args.wire || args.parameters)
++        demand(candidate, "CREATION_UNAVAILABLE");
++      graph.change("Add node", (d) => {
++        if (candidate?.creation?.kind === "reference") {
++          const c = candidate.creation;
++          created = d.addReferenceNode(
++            network,
++            c.role,
++            c.resourceId,
++            undefined,
++            candidate.ref,
++          );
++          d.move(network, created, args.position as [number, number]);
++        } else if (candidate?.creation?.kind === "source") {
++          const c = candidate.creation,
++            resource = d.createSource(c.name, c.type, c.value);
++          created = d.addReferenceNode(
++            network,
++            "source",
++            resource,
++            undefined,
++            candidate.ref,
++          );
++          d.move(network, created, args.position as [number, number]);
++        } else
++          created = d.add(
++            network,
++            args.ref as unknown as NodeTypeRef,
++            args.position as [number, number],
++          );
++        if (args.wire) {
++          const wire = args.wire as unknown as CatalogWire;
++          demand(typeof args.matchingPort === "string", "COMMAND_ARGS");
++          const own = { nodeId: created, portKey: args.matchingPort },
++            other = { nodeId: wire.nodeId, portKey: wire.portKey };
++          demand(
++            wire.direction === "input" || wire.direction === "output",
++            "COMMAND_ARGS",
++          );
++          d.connect(
++            network,
++            wire.direction === "output" ? other : own,
++            wire.direction === "input" ? other : own,
++            true,
++          );
++        }
+       });
+       context.select([created]);
+       return;
+diff --git a/production/src/features/actions.ts b/production/src/features/actions.ts
+index a17606b..dfb89b1 100644
+--- a/production/src/features/actions.ts
++++ b/production/src/features/actions.ts
+@@ -95,21 +95,6 @@ export function actionsType(
+                 buttons.push(button);
+                 return button;
+               };
+-              catalog.forEach((item) =>
+-                add(item.presentation.label, "grape.node.add", () => {
+-                  const count = Math.max(
+-                    0,
+-                    services.context(update.lease).network().nodes.length - 1,
+-                  );
+-                  return {
+-                    ref: { ...item.ref },
+-                    position: [
+-                      40 + (count % 3) * 205,
+-                      85 + Math.floor(count / 3) * 225,
+-                    ],
+-                  };
+-                }),
+-              );
+               const undo = add("Undo", "grape.undo", () => ({})),
+                 redo = add("Redo", "grape.redo", () => ({}));
+               add("Delete selected", "grape.node.delete", () => ({}));
+@@ -118,11 +103,20 @@ export function actionsType(
+                 if (
+                   e.defaultPrevented ||
+                   e.isComposing ||
++                  e.repeat ||
++                  e.altKey ||
++                  document.querySelector("dialog[open]") ||
+                   !(e.ctrlKey || e.metaKey) ||
+                   e.key.toLowerCase() !== "z"
+                 )
+                   return;
+                 const target = e.target as HTMLElement;
++                if (
++                  target.closest(
++                    "[contenteditable=true],.node-browser,.canvas-menu",
++                  )
++                )
++                  return;
+                 if (
+                   target.matches("input,textarea,select") &&
+                   (target.dataset.draft === "true" ||
+@@ -155,6 +149,35 @@ export function actionsType(
+                   frame: import("../sdk/view-mount.ts").ViewFrame,
+                 ) => {
+                   labels.forEach((render) => render(frame));
++                  for (const [b, name] of [
++                    [undo, "undo"],
++                    [redo, "redo"],
++                  ] as const) {
++                    const svg = document.createElementNS(
++                        "http://www.w3.org/2000/svg",
++                        "svg",
++                      ),
++                      p = document.createElementNS(svg.namespaceURI, "path");
++                    svg.setAttribute("viewBox", "0 0 24 24");
++                    svg.setAttribute("aria-hidden", "true");
++                    svg.classList.add("action-icon");
++                    p.setAttribute(
++                      "d",
++                      name === "undo"
++                        ? "m8 4-5 5 5 5M3 9h10a7 7 0 0 1 0 14"
++                        : "m16 4 5 5-5 5M21 9h-10a7 7 0 0 0 0 14",
++                    );
++                    p.setAttribute("fill", "none");
++                    p.setAttribute("stroke", "currentColor");
++                    p.setAttribute("stroke-width", "1.6");
++                    svg.append(p);
++                    b.prepend(svg);
++                    b.title =
++                      b.textContent! +
++                      " · Ctrl/⌘ " +
++                      (name === "redo" ? "Shift+" : "") +
++                      "Z";
++                  }
+                   buttons.forEach(
+                     (b) => (b.disabled = !p.target || p.editing === false),
+                   );
+diff --git a/production/src/features/canvas.ts b/production/src/features/canvas.ts
+index b88639d..0fa9825 100644
+--- a/production/src/features/canvas.ts
++++ b/production/src/features/canvas.ts
+@@ -9,6 +9,7 @@ import { parseType, formatType } from "../sdk/type-tokens.ts";
+ import type { ContextSnapshot } from "../sdk/editing.ts";
+ import type { PanelGestureCommands } from "../sdk/panel-commands.ts";
+ import { Signal, detached, demand } from "../sdk/kernel.ts";
++import { mountNodeBrowser, icon, nodePortRow } from "./node-browser.ts";
+ const owner = {
+   moduleId: "grape.ui.canvas",
+   version: "0.1.0",
+@@ -32,6 +33,7 @@ export const canvasCommands = [
+   "grape.network.enter",
+   "grape.network.up",
+   "grape.network.navigate",
++  "grape.stage.navigate",
+   "grape.network.interface",
+   "grape.network.mode",
+   "grape.node.add",
+@@ -54,7 +56,8 @@ export const canvasType: PanelType = {
+         lease: { panelId: _id, generation: 0 },
+         target: null,
+       },
+-      camera = { x: 0, y: 0, zoom: 1 };
++      // View-only margin keeps imported origin nodes clear of the stage/header controls.
++      camera = { x: 24, y: 104, zoom: 1 };
+     const signal = new Signal<void>();
+     const capture = () =>
+       detached({
+@@ -142,6 +145,10 @@ function mountCanvas(
+   viewport.append(frameLayer, wires, nodes);
+   root.append(viewport, breadcrumb, notice);
+   const toolbar = document.createElement("div");
++  const noticeErrors = new Map<string, string>();
++  const showNoticeErrors = () => {
++    notice.textContent = [...noticeErrors.values()].join(" · ");
++  };
+   toolbar.className = "network-toolbar";
+   root.append(toolbar);
+   toolbar.addEventListener("click", (event) => event.stopPropagation());
+@@ -150,14 +157,249 @@ function mountCanvas(
+     run(() => {
+       services.activate();
+       mount.commands?.execute(lease().lease, { commandId, args });
++    }, commandId);
++  const browser = mountNodeBrowser(
++    root,
++    mount,
++    services,
++    lease,
++    camera,
++    (error) => {
++      if (error === undefined) noticeErrors.delete("creation");
++      else noticeErrors.set("creation", String(error));
++      showNoticeErrors();
++    },
++  );
++  const stageBar = document.createElement("div"),
++    entryBar = document.createElement("div");
++  stageBar.className = "stage-switch";
++  entryBar.className = "canvas-entry-actions";
++  root.append(stageBar, entryBar);
++  const entry = (label: string, symbol: string, callback: () => void) => {
++    const b = document.createElement("button");
++    b.type = "button";
++    b.ariaLabel = label;
++    b.title = label;
++    b.append(icon(symbol), document.createTextNode(label));
++    b.onclick = mount.scope.event(callback);
++    entryBar.append(b);
++    return b;
++  };
++  const openCreator = (mode: "create" | "browse" = "create") => {
++    const r = root.getBoundingClientRect();
++    browser.open(r.left + r.width / 2, r.top + r.height / 3, mode);
++  };
++  const addNode = entry("Add Node", "add", () => openCreator());
++  addNode.title = "Add Node · Tab or double-click blank canvas";
++  entry("Browse nodes", "search", () => openCreator("browse"));
++  const upNode = entry("Up", "up", () => execute("grape.network.up"));
++  const helpDialog = document.createElement("dialog"),
++    helpTitle = document.createElement("h2"),
++    helpContent = document.createElement("div"),
++    helpClose = document.createElement("button");
++  helpDialog.className = "shortcut-help";
++  helpDialog.ariaLabel = "Keyboard shortcuts";
++  helpTitle.textContent = "Keyboard shortcuts";
++  helpContent.className = "shortcut-grid";
++  helpClose.textContent = "Close shortcuts";
++  helpDialog.append(helpTitle, helpContent, helpClose);
++  root.append(helpDialog);
++  helpDialog.addEventListener(
++    "keydown",
++    mount.scope.event((e: KeyboardEvent) => {
++      if (e.key === "Tab" && !e.isComposing) {
++        e.preventDefault();
++        helpClose.focus();
++      }
++    }),
++  );
++  const mod = navigator.platform.includes("Mac") ? "⌘" : "Ctrl";
++  for (const [key, text] of [
++    ["Tab", "Create node at canvas center"],
++    ["Double-click blank canvas", "Create node at pointer"],
++    ["↑ / ↓ / Enter", "Choose a creation result"],
++    ["Escape", "Cancel placement, menu or active drag"],
++    [`${mod}+Z / ${mod}+Shift+Z`, "Undo / Redo graph edit"],
++    ["Delete / Backspace", "Delete selected nodes"],
++    ["H / F", "Frame graph / selected nodes"],
++    ["Shift+F10", "Open canvas or node menu"],
++    ["?", "Keyboard shortcuts"],
++  ]) {
++    const k = document.createElement("kbd"),
++      d = document.createElement("span");
++    k.textContent = key!;
++    d.textContent = text!;
++    helpContent.append(k, d);
++  }
++  let helpOpener: HTMLElement | null = null,
++    backdropDown = false;
++  const closeHelp = () => {
++    helpDialog.close();
++    (helpOpener?.isConnected ? helpOpener : root).focus({
++      preventScroll: true,
+     });
++  };
++  const showHelp = () => {
++    browser.cancel(false);
++    helpOpener = document.activeElement as HTMLElement;
++    helpDialog.showModal();
++  };
++  entry("Shortcuts", "help", showHelp);
++  helpClose.onclick = mount.scope.event(closeHelp);
++  helpDialog.addEventListener(
++    "cancel",
++    mount.scope.event((e) => {
++      e.preventDefault();
++      closeHelp();
++    }),
++  );
++  helpDialog.addEventListener(
++    "pointerdown",
++    mount.scope.event((e) => {
++      backdropDown =
++        e.target === helpDialog &&
++        !(
++          e.clientX >= helpDialog.getBoundingClientRect().left &&
++          e.clientX <= helpDialog.getBoundingClientRect().right &&
++          e.clientY >= helpDialog.getBoundingClientRect().top &&
++          e.clientY <= helpDialog.getBoundingClientRect().bottom
++        );
++    }),
++  );
++  helpDialog.addEventListener(
++    "click",
++    mount.scope.event((e) => {
++      if (backdropDown && e.target === helpDialog) closeHelp();
++      backdropDown = false;
++    }),
++  );
++  const menu = document.createElement("div");
++  menu.className = "canvas-menu";
++  menu.hidden = true;
++  menu.setAttribute("role", "menu");
++  root.append(menu);
++  let menuBase = "",
++    menuRevision = -1,
++    menuSelection = "",
++    menuOpener: HTMLElement | null = null;
++  const closeMenu = (focus = false) => {
++    menu.hidden = true;
++    if (focus)
++      (menuOpener?.isConnected ? menuOpener : root).focus({
++        preventScroll: true,
++      });
++  };
++  const showMenu = (target: Element, x: number, y: number) => {
++    const port = target.closest<HTMLElement>("[data-port]");
++    if (
++      !port &&
++      target.closest(
++        "button,input,textarea,select,summary,.network-toolbar,.node-browser,dialog,.canvas-entry-actions,.stage-switch",
++      )
++    )
++      return;
++    browser.cancel(false);
++    services.activate();
++    const c = services.context(lease().lease),
++      node = target.closest<HTMLElement>("[data-node]"),
++      edge = target.closest<SVGElement>("[data-edge]");
++    if (node && !c.capture().selection.includes(node.dataset.node!))
++      c.select([node.dataset.node!]);
++    const captured = c.capture();
++    menuBase = JSON.stringify(captured.scope);
++    menuRevision = captured.graph.revision;
++    menuSelection = JSON.stringify(captured.selection);
++    menuOpener = document.activeElement as HTMLElement;
++    menu.replaceChildren();
++    const item = (label: string, fn: () => void, enabled = true) => {
++      const b = document.createElement("button");
++      b.setAttribute("role", "menuitem");
++      b.textContent = label;
++      b.disabled = !enabled;
++      b.onclick = mount.scope.event(() => {
++        const now = c.capture();
++        if (
++          menuBase !== JSON.stringify(now.scope) ||
++          menuRevision !== now.graph.revision ||
++          menuSelection !== JSON.stringify(now.selection)
++        ) {
++          closeMenu();
++          return;
++        }
++        closeMenu();
++        fn();
++      });
++      menu.append(b);
++    };
++    const editing = services.editing?.(lease().lease) !== false;
++    if (port)
++      item(
++        "Create connected node",
++        () =>
++          browser.open(x, y, "create", {
++            nodeId: port.dataset.nodeId!,
++            portKey: port.dataset.port!,
++            direction: port.dataset.direction as "input" | "output",
++          }),
++        editing,
++      );
++    else if (edge)
++      item(
++        "Disconnect edge",
++        () => execute("grape.edge.disconnect", { id: edge.dataset.edge! }),
++        editing,
++      );
++    else if (node) {
++      item("Delete selected", () => execute("grape.node.delete"), editing);
++      item(
++        "Enter subgraph",
++        () => execute("grape.network.enter", { id: node.dataset.node! }),
++        captured.nodeRoles[node.dataset.node!] === "call",
++      );
++      item("Encapsulate", () => execute("grape.network.encapsulate"), editing);
++    } else item("Add Node", () => browser.open(x, y), editing);
++    item("Browse nodes", () => browser.open(x, y, "browse"));
++    item("Keyboard shortcuts", showHelp);
++    const r = root.getBoundingClientRect();
++    menu.hidden = false;
++    menu.style.left =
++      Math.max(0, Math.min(x - r.left, root.clientWidth - menu.offsetWidth)) +
++      "px";
++    menu.style.top =
++      Math.max(0, Math.min(y - r.top, root.clientHeight - menu.offsetHeight)) +
++      "px";
++    menu.querySelector<HTMLButtonElement>("button:not(:disabled)")?.focus();
++  };
++  menu.addEventListener(
++    "keydown",
++    mount.scope.event((e: KeyboardEvent) => {
++      e.stopPropagation();
++      const items = Array.from(
++          menu.querySelectorAll<HTMLButtonElement>("button:not(:disabled)"),
++        ),
++        i = items.indexOf(document.activeElement as HTMLButtonElement);
++      if (["ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) {
++        e.preventDefault();
++        items[
++          e.key === "Home"
++            ? 0
++            : e.key === "End"
++              ? items.length - 1
++              : (i + (e.key === "ArrowDown" ? 1 : -1) + items.length) %
++                items.length
++        ]?.focus();
++      } else if (e.key === "Escape") {
++        e.preventDefault();
++        closeMenu(true);
++      } else if (e.key === "Tab") closeMenu();
++    }),
++  );
+   for (const [name, command, args] of [
+     ["New subgraph", "grape.network.create", {}],
+     ["Library subgraph", "grape.network.create", { library: true }],
+     ["Encapsulate", "grape.network.encapsulate", {}],
+     ["Make independent", "grape.network.independent", {}],
+     ["Enter subgraph", "grape.network.enter", null],
+-    ["Up", "grape.network.up", {}],
+   ] as const) {
+     const b = document.createElement("button");
+     b.textContent = name;
+@@ -218,15 +460,18 @@ function mountCanvas(
+           !c.graph.document.graph.losses.some((old) => old.id === l.id),
+       );
+       if (losses.length)
+-        notice.textContent = losses
+-          .map(
+-            (l) =>
+-              l.reason +
+-              (l.payload.kind === "edge"
+-                ? ` Receiver ${l.payload.edge.to.nodeId}/${l.payload.edge.to.portKey}; edge ${l.payload.edge.id}.`
+-                : ""),
+-          )
+-          .join(" ");
++        notice.textContent =
++          [...noticeErrors.values()].join(" · ") +
++          (noticeErrors.size ? " · " : "") +
++          losses
++            .map(
++              (l) =>
++                l.reason +
++                (l.payload.kind === "edge"
++                  ? ` Receiver ${l.payload.edge.to.nodeId}/${l.payload.edge.to.portKey}; edge ${l.payload.edge.id}.`
++                  : ""),
++            )
++            .join(" ");
+     }),
+   );
+   addDirection.ariaLabel = "New port direction";
+@@ -714,29 +959,142 @@ function mountCanvas(
+       pan: boolean;
+       camera: ReturnType<typeof camera>;
+     } | null = null;
+-  const run = (fn: () => void) => {
++  const run = (fn: () => void, action?: string) => {
+     try {
+-      notice.textContent = "";
+       fn();
++      if (action && noticeErrors.delete(action)) showNoticeErrors();
+       return true;
+     } catch (error) {
+-      notice.textContent = String(error);
++      noticeErrors.set(action ?? "interaction", String(error));
++      showNoticeErrors();
+       return false;
+     }
+   };
+-  const listen = (
++  const listen = <T extends Event = Event>(
+     target: EventTarget,
+     name: string,
+-    fn: (event: Event) => void,
++    fn: (event: T) => void,
+     options?: AddEventListenerOptions,
+   ) => {
+     const handler = mount.scope.event(fn);
+-    target.addEventListener(name, handler, options);
+-    mount.scope.own(() => target.removeEventListener(name, handler, options));
++    target.addEventListener(name, handler as EventListener, options);
++    mount.scope.own(() =>
++      target.removeEventListener(name, handler as EventListener, options),
++    );
+   };
++  listen(root, "dblclick", (e: MouseEvent) => {
++    const t = e.target as Element;
++    if (
++      t.closest(
++        ".node,button,input,select,textarea,summary,.network-toolbar,.node-browser,.canvas-menu,dialog",
++      )
++    )
++      return;
++    e.preventDefault();
++    end(true);
++    browser.open(e.clientX, e.clientY);
++  });
++  listen(root, "contextmenu", (e: MouseEvent) => {
++    if (
++      (e.target as Element).closest(
++        "input,textarea,select,[contenteditable=true]",
++      )
++    )
++      return;
++    if (browser.isOpen()) {
++      browser.cancel();
++      e.preventDefault();
++      return;
++    }
++    e.preventDefault();
++    end(true);
++    showMenu(e.target as Element, e.clientX, e.clientY);
++  });
++  listen(document, "pointerdown", (e: PointerEvent) => {
++    if (!menu.hidden && !menu.contains(e.target as Node)) closeMenu();
++  });
++  listen(window, "blur", () => {
++    clearHold();
++    closeMenu();
++    end(true);
++  });
++  listen(document, "visibilitychange", () => {
++    if (document.hidden) {
++      clearHold();
++      closeMenu();
++      end(true);
++    }
++  });
++  listen(window, "resize", () => closeMenu());
++  let hold: ReturnType<typeof setTimeout> | undefined,
++    holdToken: { id: number; scope: string; revision: number } | null = null,
++    holdPoint: [number, number] = [0, 0];
++  listen(
++    document,
++    "pointerdown",
++    (e: PointerEvent) => {
++      if (holdToken && e.pointerId !== holdToken.id) clearHold();
++    },
++    { capture: true },
++  );
++  listen(root, "pointerdown", (e: PointerEvent) => {
++    if (e.pointerType !== "touch") return;
++    clearHold();
++    if (!e.isPrimary) return;
++    if (
++      (e.target as Element).closest(
++        "button,input,textarea,select,[contenteditable=true],.node-browser,dialog,.network-toolbar",
++      )
++    )
++      return;
++    holdPoint = [e.clientX, e.clientY];
++    const c = services.context(lease().lease).capture(),
++      token = {
++        id: e.pointerId,
++        scope: JSON.stringify(c.scope),
++        revision: c.graph.revision,
++      };
++    holdToken = token;
++    hold = setTimeout(
++      mount.scope.event(() => {
++        const now = services.context(lease().lease).capture();
++        if (
++          holdToken !== token ||
++          document.hidden ||
++          JSON.stringify(now.scope) !== token.scope ||
++          now.graph.revision !== token.revision
++        )
++          return;
++        clearHold();
++        end(true);
++        showMenu(e.target as Element, e.clientX, e.clientY);
++      }),
++      550,
++    );
++  });
++  const clearHold = () => {
++    clearTimeout(hold);
++    hold = undefined;
++    holdToken = null;
++  };
++  mount.scope.own(clearHold);
++  listen(root, "pointermove", (e: PointerEvent) => {
++    if (Math.hypot(e.clientX - holdPoint[0], e.clientY - holdPoint[1]) > 4)
++      clearHold();
++  });
++  listen(root, "pointerup", clearHold);
++  listen(root, "pointercancel", clearHold);
+   listen(root, "pointerdown", (event) =>
+     run(() => {
+       const e = event as PointerEvent;
++      if (browser.isOpen() || !menu.hidden || helpDialog.open) return;
++      if (!e.isPrimary) {
++        if (portDrag && root.hasPointerCapture(portDrag.id))
++          root.releasePointerCapture(portDrag.id);
++        portDrag = null;
++        end(true);
++        return;
++      }
+       if (e.button !== 0) return;
+       const socket = (e.target as HTMLElement).closest<HTMLElement>(
+         "[data-port]",
+@@ -761,6 +1119,8 @@ function mountCanvas(
+         )
+       )
+         return;
++      // Keep native mousedown from removing Canvas focus after selection redraw.
++      e.preventDefault();
+       services.activate();
+       root.focus();
+       const context = services.context(lease().lease),
+@@ -856,9 +1216,22 @@ function mountCanvas(
+         root.releasePointerCapture(drag.id);
+       drag = null;
+     });
++  let lastBlankTap: { time: number; x: number; y: number } | null = null;
+   listen(root, "pointerup", (event) => {
+     const e = event as PointerEvent,
+       pending = portDrag;
++    if (
++      !e.isPrimary ||
++      (pending && pending.id !== e.pointerId) ||
++      (drag && drag.id !== e.pointerId)
++    )
++      return;
++    const blankTap =
++      e.pointerType === "touch" &&
++      drag?.pan &&
++      Math.hypot(e.clientX - drag.startX, e.clientY - drag.startY) < 8 &&
++      menu.hidden &&
++      !browser.isOpen();
+     portDrag = null;
+     if (pending) {
+       if (root.hasPointerCapture(pending.id))
+@@ -872,9 +1245,23 @@ function mountCanvas(
+               pending.revision === c.graph.revision,
+             "STALE_SCOPE",
+           );
+-          const target = document
+-            .elementFromPoint(e.clientX, e.clientY)
+-            ?.closest<HTMLElement>("[data-spare],[data-port]");
++          const hit = document.elementFromPoint(e.clientX, e.clientY);
++          const target = hit?.closest<HTMLElement>("[data-spare],[data-port]");
++          if (
++            !target &&
++            hit &&
++            root.contains(hit) &&
++            !hit.closest(
++              ".node,.network-toolbar,button,input,select,textarea,dialog",
++            )
++          ) {
++            browser.open(e.clientX, e.clientY, "create", {
++              nodeId: pending.nodeId,
++              portKey: pending.portKey,
++              direction: pending.direction as "input" | "output",
++            });
++            return;
++          }
+           demand(target && root.contains(target), "PORT_TARGET");
+           if (target.dataset.spare) {
+             execute("grape.network.spare", {
+@@ -901,6 +1288,17 @@ function mountCanvas(
+       }
+     }
+     if (!pending) end(false);
++    if (blankTap) {
++      const time = performance.now();
++      if (
++        lastBlankTap &&
++        time - lastBlankTap.time < 350 &&
++        Math.hypot(e.clientX - lastBlankTap.x, e.clientY - lastBlankTap.y) < 24
++      ) {
++        lastBlankTap = null;
++        browser.open(e.clientX, e.clientY);
++      } else lastBlankTap = { time, x: e.clientX, y: e.clientY };
++    } else lastBlankTap = null;
+   });
+   listen(root, "pointercancel", () => {
+     portDrag = null;
+@@ -924,35 +1322,77 @@ function mountCanvas(
+       };
+       if (!selectedPort) {
+         selectedPort = port;
+-        notice.textContent = connectionHint;
++        if (!noticeErrors.size) notice.textContent = connectionHint;
+         return;
+       }
+       const source = selectedPort.direction === "output" ? selectedPort : port,
+         target = selectedPort.direction === "output" ? port : selectedPort;
+       selectedPort = null;
+-      demand(
+-        source.direction === "output" && target.direction === "input",
+-        "PORT_DIRECTION",
+-      );
+-      demand(mount.commands, "COMMAND_DENIED");
+-      mount.commands.execute(lease().lease, {
+-        commandId: "grape.edge.connect",
+-        args: {
+-          from: { nodeId: source.nodeId, portKey: source.portKey },
+-          to: { nodeId: target.nodeId, portKey: target.portKey },
+-          replace: (event as MouseEvent).shiftKey,
+-        },
+-      });
++      run(() => {
++        demand(
++          source.direction === "output" && target.direction === "input",
++          "PORT_DIRECTION",
++        );
++        demand(mount.commands, "COMMAND_DENIED");
++        mount.commands.execute(lease().lease, {
++          commandId: "grape.edge.connect",
++          args: {
++            from: { nodeId: source.nodeId, portKey: source.portKey },
++            to: { nodeId: target.nodeId, portKey: target.portKey },
++            replace: (event as MouseEvent).shiftKey,
++          },
++        });
++      }, "grape.edge.connect");
+     }),
+   );
+   listen(root, "keydown", (event) =>
+     run(() => {
+       const e = event as KeyboardEvent;
+       if (
++        e.defaultPrevented ||
+         e.isComposing ||
+-        (e.target as HTMLElement).matches("input,textarea,select")
++        e.repeat ||
++        document.querySelector("dialog[open]") ||
++        (e.target as HTMLElement).closest(
++          "input,textarea,select,[contenteditable=true],.node-browser,.canvas-menu",
++        )
+       )
+         return;
++      if ((drag || portDrag) && e.key !== "Escape") return;
++      if (
++        e.key === "Tab" &&
++        !e.ctrlKey &&
++        !e.metaKey &&
++        !e.altKey &&
++        !e.shiftKey &&
++        e.target === root
++      ) {
++        e.preventDefault();
++        openCreator();
++        return;
++      }
++      if (e.key === "?" && !e.ctrlKey && !e.metaKey && !e.altKey) {
++        e.preventDefault();
++        showHelp();
++        return;
++      }
++      if (
++        !e.altKey &&
++        !e.ctrlKey &&
++        !e.metaKey &&
++        (e.key === "ContextMenu" || (e.key === "F10" && e.shiftKey))
++      ) {
++        e.preventDefault();
++        const r = root.getBoundingClientRect();
++        showMenu(
++          e.target as Element,
++          r.left + r.width / 2,
++          r.top + r.height / 3,
++        );
++        return;
++      }
++      if (e.altKey || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() !== "z"))
++        return;
+       if (e.key === "Escape") {
+         selectedPort = null;
+         portDrag = null;
+@@ -996,9 +1436,9 @@ function mountCanvas(
+         if (items.length) {
+           const x = Math.min(...items.map((n) => n.position[0])),
+             y = Math.min(...items.map((n) => n.position[1])),
+-            right = Math.max(...items.map((n) => n.position[0] + 180)),
++            right = Math.max(...items.map((n) => n.position[0] + 190)),
+             bottom = Math.max(
+-              ...items.map((n) => n.position[1] + 46 + n.ports.length * 31),
++              ...items.map((n) => n.position[1] + 48 + n.ports.length * 29),
+             );
+           const zoom = Math.min(
+             1.5,
+@@ -1019,6 +1459,12 @@ function mountCanvas(
+     "wheel",
+     (event) => {
+       const e = event as WheelEvent;
++      if (
++        (e.target as Element).closest(
++          ".node-browser,.network-toolbar,dialog,.canvas-menu",
++        )
++      )
++        return;
+       e.preventDefault();
+       const current = camera(),
+         rect = root.getBoundingClientRect(),
+@@ -1038,6 +1484,40 @@ function mountCanvas(
+   );
+   return {
+     update: (projection: ReturnType<typeof capture>, _frame: ViewFrame) => {
++      if (projection.context) {
++        const c = projection.context;
++        browser.update(c);
++        if (
++          !menu.hidden &&
++          (menuBase !== JSON.stringify(c.scope) ||
++            menuRevision !== c.graph.revision ||
++            menuSelection !== JSON.stringify(c.selection))
++        )
++          closeMenu();
++        const stages = c.graph.document.graph.stages;
++        const stageKey = stages.map((s) => s.id + ":" + s.key).join("|");
++        if (stageBar.dataset.key !== stageKey) {
++          stageBar.dataset.key = stageKey;
++          stageBar.replaceChildren();
++          for (const stage of stages) {
++            const b = document.createElement("button");
++            b.textContent = stage.key[0]!.toUpperCase() + stage.key.slice(1);
++            b.dataset.stageId = stage.id;
++            b.title = b.textContent + " Stage";
++            b.onclick = mount.scope.event(() =>
++              execute("grape.stage.navigate", { stageId: stage.id }),
++            );
++            stageBar.append(b);
++          }
++        }
++        for (const b of stageBar.querySelectorAll<HTMLButtonElement>("button"))
++          b.setAttribute(
++            "aria-pressed",
++            String(b.dataset.stageId === c.scope.stageId),
++          );
++        addNode.disabled = services.editing?.(lease().lease) === false;
++        upNode.disabled = !c.scope.networkPath.length;
++      }
+       root.setAttribute(
+         "aria-label",
+         _frame.text({
+@@ -1059,6 +1539,12 @@ function mountCanvas(
+         return;
+       }
+       const scopeKey = JSON.stringify(c.scope);
++      if (
++        holdToken &&
++        (holdToken.scope !== scopeKey ||
++          holdToken.revision !== c.graph.revision)
++      )
++        clearHold();
+       if (renderedScope && renderedScope !== scopeKey) {
+         selectedPort = null;
+         suppressPortClick = false;
+@@ -1066,6 +1552,7 @@ function mountCanvas(
+         structureDraft = null;
+         editor.open = false;
+         structs.open = false;
++        noticeErrors.clear();
+         notice.textContent = "";
+         if (drag && root.hasPointerCapture(drag.id))
+           root.releasePointerCapture(drag.id);
+@@ -1172,6 +1659,7 @@ function mountCanvas(
+           card.className =
+             "node" + (c.selection.includes(n.id) ? " selected" : "");
+           card.dataset.node = n.id;
++          card.dataset.role = c.nodeRoles[n.id];
+           card.tabIndex = 0;
+           card.setAttribute("aria-label", n.name);
+           card.setAttribute(
+@@ -1215,29 +1703,20 @@ function mountCanvas(
+             card.append(spare);
+           }
+           for (const p of n.ports) {
+-            const row = document.createElement("div"),
+-              button = document.createElement("button");
+-            row.className = "port-row " + p.direction;
+-            button.type = "button";
+-            button.className = "port";
+-            button.dataset.port = p.key;
+-            button.dataset.nodeId = n.id;
+-            button.dataset.direction = p.direction;
+-            button.setAttribute(
+-              "aria-label",
+-              `${n.name} ${p.direction} ${c.portLabels[n.id]?.[p.key] ?? p.key}`,
++            const connected = network.edges.some((e) =>
++              p.direction === "output"
++                ? e.from.nodeId === n.id && e.from.portKey === p.key
++                : e.to.nodeId === n.id && e.to.portKey === p.key,
++            );
++            card.append(
++              nodePortRow(
++                p,
++                c.portLabels[n.id]?.[p.key] ?? p.key,
++                { id: n.id, name: n.name },
++                connected,
++                n.inputValues[p.key],
++              ),
+             );
+-            const socket = document.createElement("span");
+-            socket.className = "socket";
+-            socket.textContent = "●";
+-            const caption = document.createElement("span");
+-            caption.textContent = c.portLabels[n.id]?.[p.key] ?? p.key;
+-            if (p.direction === "output") button.append(caption, socket);
+-            else button.append(socket, caption);
+-            const type = document.createElement("small");
+-            type.textContent = p.type.replace("glsl.", "");
+-            row.append(button, type);
+-            card.append(row);
+           }
+           return card;
+         }),
+@@ -1279,6 +1758,17 @@ function mountCanvas(
+             `M ${a[0]} ${a[1]} C ${a[0] + 70} ${a[1]}, ${b[0] - 70} ${b[1]}, ${b[0]} ${b[1]}`,
+           );
+           path.classList.toggle("invalid", !!e.invalid);
++          const sourcePort = network.nodes
++            .find((n) => n.id === e.from.nodeId)
++            ?.ports.find((p) => p.key === e.from.portKey);
++          path.style.stroke =
++            sourcePort?.type === "glsl.float"
++              ? "#c4c1bc"
++              : sourcePort?.type === "glsl.vec2"
++                ? "#8fc5ee"
++                : sourcePort?.type === "glsl.vec3"
++                  ? "#87ceb7"
++                  : "#c5b2e2";
+           path.dataset.edge = e.id;
+           return path;
+         }),
+diff --git a/production/src/sdk/ui.ts b/production/src/sdk/ui.ts
+index bc78914..86fb703 100644
+--- a/production/src/sdk/ui.ts
++++ b/production/src/sdk/ui.ts
+@@ -20,6 +20,11 @@ export interface ContextQuery {
+   subscribe(fn: () => void): () => void;
+ }
+ export interface PanelServices {
++  catalog?(
++    lease: PanelCommandLease,
++    wire?: CatalogWire,
++  ): readonly CatalogEntry[];
++  editing?(lease: PanelCommandLease): boolean;
+   identifier?(): string;
+   clipboard?(): string;
+   reshape?(lease: PanelCommandLease, type: string, value: Json): Json;
+@@ -30,6 +35,37 @@ export interface PanelServices {
+   accept(lease: PanelCommandLease, callback: () => void): boolean;
+   activate(): void;
+ }
++/** Detached, exact-owner creation proposals. Presentation never owns a model. */
++export interface CatalogWire {
++  readonly nodeId: string;
++  readonly portKey: string;
++  readonly direction: "input" | "output";
++}
++export interface CatalogEntry {
++  readonly key: string;
++  readonly ref: import("./public-surface.ts").NodeTypeRef;
++  readonly presentation: import("./public-surface.ts").NodePresentation;
++  readonly source: string;
++  readonly ports: readonly import("./document.ts").PortSnapshot[];
++  readonly parameters: Readonly<Record<string, Json>>;
++  readonly libraryScope?: "builtin" | "project";
++  readonly creation?:
++    | {
++        readonly kind: "reference";
++        readonly role: "call" | "source" | "structure";
++        readonly resourceId: string;
++      }
++    | {
++        readonly kind: "source";
++        readonly name: string;
++        readonly type: string;
++        readonly value: Json;
++      };
++  readonly matchingPort?: string;
++  readonly exactMatch: boolean;
++  readonly scope: ScopeRef;
++  readonly revision: number;
++}
+ export interface Panel {
+   restoreViewState(state: Json): void;
+   exportViewState(): Json;
+diff --git a/production/src/ui/workspace.ts b/production/src/ui/workspace.ts
+index c0956e9..a7b47bc 100644
+--- a/production/src/ui/workspace.ts
++++ b/production/src/ui/workspace.ts
+@@ -104,6 +104,18 @@ export class Workspace {
+         "PANEL_UNAVAILABLE",
+       );
+       const services: PanelServices = {
++        catalog: (lease, wire) => {
++          this.assertLease(r, lease);
++          demand(r.update.target, "TARGET_MISSING");
++          return this.application.creationCatalog(
++            this.application.context(r.update.target.scope.contextId),
++            wire,
++          );
++        },
++        editing: (lease) => {
++          this.assertLease(r, lease);
++          return !this.application.readonly && !this.application.busy;
++        },
+         identifier: () => this.application.identifier(),
+         clipboard: () => this.application.clipboardText,
+         reshape: (lease, type, value) => {
+diff --git a/production/tests/browser/s01.spec.ts b/production/tests/browser/s01.spec.ts
+index d8fc296..7d3ef0a 100644
+--- a/production/tests/browser/s01.spec.ts
++++ b/production/tests/browser/s01.spec.ts
+@@ -1,9 +1,10 @@
++import { createNode } from "./create-node.ts";
+ import { openLegacyDocument } from "./legacy-document.ts";
+ import { test, expect } from "@playwright/test";
+ async function fullFlow(page: any) {
+-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
+-  await page.getByRole("button", { name: "Add Multiply", exact: true }).click();
+-  await page.getByRole("button", { name: "Add Compose", exact: true }).click();
++  await createNode(page, "Float");
++  await createNode(page, "Multiply");
++  await createNode(page, "Compose");
+   await page
+     .getByRole("button", { name: "Float output value", exact: true })
+     .click();
+@@ -142,7 +143,7 @@ test("AT-S01-02 browser: occupied and incompatible connections preserve wires an
+ test("AT-S01-04 browser: draft cancel, IME guard, keyboard commit, pointer gesture Undo and cancel", async ({
+   page,
+ }) => {
+-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
++  await createNode(page, "Float");
+   const input = page.getByRole("textbox", { name: "Value", exact: true }),
+     canvas = page.locator(".canvas");
+   const before = await canvas.getAttribute("data-revision");
+@@ -184,8 +185,8 @@ test("AT-S01-04 browser: draft cancel, IME guard, keyboard commit, pointer gestu
+ test("AT-S01-06 browser: two Canvas contexts keep independent selections and camera while sharing edits", async ({
+   page,
+ }) => {
+-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
+-  await page.getByRole("button", { name: "Add Multiply", exact: true }).click();
++  await createNode(page, "Float");
++  await createNode(page, "Multiply");
+   await page
+     .locator("#canvas-1 .node h3")
+     .filter({ hasText: /^Float$/ })
+@@ -243,7 +244,7 @@ test("AT-S01-06 browser: two Canvas contexts keep independent selections and cam
+ test("AT-S01-07 browser: delayed storage completion cannot clear a newer edit; rejection and export preserve dirty", async ({
+   page,
+ }) => {
+-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
++  await createNode(page, "Float");
+   await page.evaluate(() => {
+     const descriptor = Object.getOwnPropertyDescriptor(
+       IDBTransaction.prototype,
+@@ -318,14 +319,14 @@ test("recovery browser: future structural document stays read-only and original
+ test("readonly browser: fields, actions and keyboard cannot edit; unlocking restores the same value", async ({
+   page,
+ }) => {
+-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
++  await createNode(page, "Float");
+   const field = page.getByRole("textbox", { name: "Value", exact: true }),
+     canvas = page.locator(".canvas");
+   const revision = await canvas.getAttribute("data-revision");
+   await page.getByRole("button", { name: "Lock editing", exact: true }).click();
+   await expect(field).toHaveAttribute("readonly", "");
+   await expect(
+-    page.getByRole("button", { name: "Add Float", exact: true }),
++    page.getByRole("button", { name: "Add Node", exact: true }),
+   ).toBeDisabled();
+   await canvas.focus();
+   await canvas.press("Control+z");
+@@ -415,7 +416,7 @@ test("view failure shows shared retry placeholder and releases the failed mount"
+   await page.getByRole("button", { name: "Retry view", exact: true }).click();
+   await expect(page.locator(".canvas")).toHaveCount(1);
+   await expect(page.locator(".view-placeholder")).toHaveCount(0);
+-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
++  await createNode(page, "Float");
+   await expect(
+     page.getByRole("textbox", { name: "Value", exact: true }),
+   ).toHaveValue("0.25");
+@@ -534,7 +535,7 @@ for (const source of ["Float", "Multiply"] as const) {
+ test("N1 browser: middle/right movement cannot edit nodes; primary drag still groups into one Undo", async ({
+   page,
+ }) => {
+-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
++  await createNode(page, "Float");
+   await page.getByRole("button", { name: "Save", exact: true }).click();
+   await expect(page.locator("#save-state")).toHaveText("Saved");
+   const card = page
+diff --git a/production/tests/browser/s02.spec.ts b/production/tests/browser/s02.spec.ts
+index 0006af7..9be9e6f 100644
+--- a/production/tests/browser/s02.spec.ts
++++ b/production/tests/browser/s02.spec.ts
+@@ -89,7 +89,7 @@ test("AT-S02-01 browser: readonly and intervening edit fence publication", async
+   await choose(page, fixture());
+   // Simulate a command from another view while the modal review owns focus.
+   await page
+-    .getByRole("button", { name: "Add Float", exact: true })
++    .getByRole("button", { name: "New subgraph", exact: true })
+     .evaluate((button: HTMLButtonElement) => button.click());
+   await expect(
+     page.getByRole("button", { name: "Accept replacement (one Undo)" }),
+diff --git a/production/tests/browser/s03-repair.spec.ts b/production/tests/browser/s03-repair.spec.ts
+index 42d4f30..e7c4e97 100644
+--- a/production/tests/browser/s03-repair.spec.ts
++++ b/production/tests/browser/s03-repair.spec.ts
+@@ -1,3 +1,4 @@
++import { createNode } from "./create-node.ts";
+ import { openLegacyDocument } from "./legacy-document.ts";
+ import { test, expect } from "@playwright/test";
+ import fs from "node:fs/promises";
+@@ -103,7 +104,7 @@ test("S03 EG01 browser clipboard imports TOP declarations with one slot and show
+ }) => {
+   await page.goto("/");
+   await openLegacyDocument(page);
+-  await page.getByRole("button", { name: "Add Compose", exact: true }).click();
++  await createNode(page, "Compose");
+   await page
+     .getByRole("button", { name: "Compose output result", exact: true })
+     .click();
+diff --git a/production/tests/browser/s03-repair2.spec.ts b/production/tests/browser/s03-repair2.spec.ts
+index 7c98ac6..8810d41 100644
+--- a/production/tests/browser/s03-repair2.spec.ts
++++ b/production/tests/browser/s03-repair2.spec.ts
+@@ -1,3 +1,4 @@
++import { createNode } from "./create-node.ts";
+ import { test, expect } from "@playwright/test";
+ import fs from "node:fs/promises";
+ const evidence = process.env.GRAPE_EVIDENCE_DIR!;
+@@ -11,16 +12,14 @@ for (const element of ["glsl.float", "glsl.vec2"])
+     page,
+   }) => {
+     await page.goto("/");
+-    await page
+-      .getByRole("button", { name: "Add Compose", exact: true })
+-      .click();
++    await createNode(page, "Compose");
+     await page
+       .getByRole("button", { name: "Compose output result", exact: true })
+       .click();
+     await page
+       .getByRole("button", { name: "Image output input color", exact: true })
+       .click();
+-    await page.getByRole("button", { name: "Add Float", exact: true }).click();
++    await createNode(page, "Float");
+     await page.getByRole("button", { name: "Undo", exact: true }).click();
+     const packet = await page.evaluate(async (element) => {
+       const { flow } = await import("/tests/fixtures/setup.ts"),
+diff --git a/production/tests/browser/s03.spec.ts b/production/tests/browser/s03.spec.ts
+index 7435206..e07f8e2 100644
+--- a/production/tests/browser/s03.spec.ts
++++ b/production/tests/browser/s03.spec.ts
+@@ -1,11 +1,10 @@
++import { createNode } from "./create-node.ts";
+ import { test, expect } from "@playwright/test";
+ import fs from "node:fs/promises";
+ const evidence = process.env.GRAPE_EVIDENCE_DIR!;
+ async function flow(page: any) {
+   for (const name of ["Float", "Multiply", "Compose"])
+-    await page
+-      .getByRole("button", { name: "Add " + name, exact: true })
+-      .click();
++    await createNode(page, name);
+   let edgeCount = 0;
+   for (const [a, b] of [
+     ["Float output value", "Multiply input a"],
+@@ -153,7 +152,7 @@ test("AT-S03-04 nested IME/cancel/focus and navigation cleanup use the real Insp
+   await page
+     .getByRole("button", { name: "Enter subgraph", exact: true })
+     .click();
+-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
++  await createNode(page, "Float");
+   const field = page.getByRole("textbox", { name: "Value", exact: true });
+   await field.fill("0.75");
+   await field.dispatchEvent("compositionstart");
+diff --git a/production/tests/browser/s04.spec.ts b/production/tests/browser/s04.spec.ts
+index bbe820c..6e44b7e 100644
+--- a/production/tests/browser/s04.spec.ts
++++ b/production/tests/browser/s04.spec.ts
+@@ -1,3 +1,5 @@
++import { clickAction } from "../fixtures/public-actions.ts";
++import { createNode } from "./create-node.ts";
+ import { test, expect } from "@playwright/test";
+ import fs from "node:fs/promises";
+ const evidence = process.env.GRAPE_EVIDENCE_DIR!;
+@@ -311,9 +313,7 @@ test("S04 DEC002 actual Canvas four shapes to current ImageOutput and edge ident
+   for (const shape of ["float", "vec2", "vec3", "vec4"]) {
+     await page.goto("/");
+     const name = shape === "float" ? "Float" : "Compose";
+-    await page
+-      .getByRole("button", { name: "Add " + name, exact: true })
+-      .click();
++    await createNode(page, name);
+     if (shape === "vec2" || shape === "vec3")
+       await page.locator('[data-parameter="mode"]').selectOption(shape);
+     await page
+@@ -358,7 +358,7 @@ test("S04 actual Personal UI saves relists imports downloads and inserts indepen
+   page,
+ }) => {
+   await page.goto("/");
+-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
++  await createNode(page, "Float");
+   await page
+     .getByRole("button", { name: "Float output value", exact: true })
+     .click();
+@@ -366,9 +366,7 @@ test("S04 actual Personal UI saves relists imports downloads and inserts indepen
+     .getByRole("button", { name: "Image output input color", exact: true })
+     .click();
+   await page.getByRole("button", { name: "New subgraph", exact: true }).click();
+-  await page
+-    .getByRole("button", { name: "Personal Library", exact: true })
+-    .click();
++  await clickAction(page, "Personal Library");
+   await page
+     .getByRole("button", { name: "Save selected subgraph", exact: true })
+     .click();
+@@ -380,22 +378,18 @@ test("S04 actual Personal UI saves relists imports downloads and inserts indepen
+     .getByRole("button", { name: "Export Subgraph", exact: true })
+     .click();
+   const text = await fs.readFile((await (await download).path())!, "utf8");
+-  await page
+-    .getByLabel("Import Personal package")
+-    .setInputFiles({
+-      name: "again.sgrape-function.json",
+-      mimeType: "application/json",
+-      buffer: Buffer.from(text),
+-    });
++  await page.getByLabel("Import Personal package").setInputFiles({
++    name: "again.sgrape-function.json",
++    mimeType: "application/json",
++    buffer: Buffer.from(text),
++  });
+   await expect(page.locator("[data-personal-file]")).toHaveCount(1);
+   await page
+     .getByRole("button", { name: "Insert Subgraph", exact: true })
+     .click();
+   await expect(page.locator("dialog[open]")).toHaveCount(0);
+   const once = await exported(page);
+-  await page
+-    .getByRole("button", { name: "Personal Library", exact: true })
+-    .click();
++  await clickAction(page, "Personal Library");
+   await page
+     .getByRole("button", { name: "Insert Subgraph", exact: true })
+     .click();
+@@ -410,16 +404,12 @@ test("S04 actual Personal UI saves relists imports downloads and inserts indepen
+   );
+   await page.getByRole("button", { name: "Undo", exact: true }).click();
+   expect((await exported(page)).graph).toEqual(twice.graph);
+-  await page
+-    .getByRole("button", { name: "Personal Library", exact: true })
+-    .click();
+-  await page
+-    .getByLabel("Import Personal package")
+-    .setInputFiles({
+-      name: "bad.sgrape-function.json",
+-      mimeType: "application/json",
+-      buffer: Buffer.from('{"bad":true}'),
+-    });
++  await clickAction(page, "Personal Library");
++  await page.getByLabel("Import Personal package").setInputFiles({
++    name: "bad.sgrape-function.json",
++    mimeType: "application/json",
++    buffer: Buffer.from('{"bad":true}'),
++  });
+   await expect(page.locator('dialog[open] [role="status"]')).toContainText(
+     "PERSONAL_FORMAT",
+   );
+@@ -429,9 +419,7 @@ test("S04 actual Personal UI saves relists imports downloads and inserts indepen
+     .click();
+   expect((await exported(page)).graph).toEqual(twice.graph);
+   await page.reload();
+-  await page
+-    .getByRole("button", { name: "Personal Library", exact: true })
+-    .click();
++  await clickAction(page, "Personal Library");
+   await expect(page.locator("[data-personal-file]")).toHaveCount(1);
+   await page.screenshot({
+     path: evidence + "/s04-personal-ui.png",
+diff --git a/production/tests/browser/s05-delivered.spec.ts b/production/tests/browser/s05-delivered.spec.ts
+index 8b0aa9f..74e57d9 100644
+--- a/production/tests/browser/s05-delivered.spec.ts
++++ b/production/tests/browser/s05-delivered.spec.ts
+@@ -1,3 +1,5 @@
++import { clickAction } from "../fixtures/public-actions.ts";
++import { fileURLToPath } from "node:url";
+ import { test, expect } from "@playwright/test";
+ import fs from "node:fs";
+ import path from "node:path";
+@@ -17,7 +19,11 @@ test.beforeAll(() => {
+   if (!fs.existsSync(samples)) {
+     const log = execFileSync(
+       process.execPath,
+-      ["--experimental-transform-types", "tools/s05-samples.ts", samples],
++      [
++        "--experimental-transform-types",
++        fileURLToPath(new URL("../../tools/s05-samples.ts", import.meta.url)),
++        samples,
++      ],
+       { encoding: "utf8" },
+     );
+     fs.writeFileSync(path.join(evidence, "sample-producer.log"), log, {
+@@ -120,7 +126,10 @@ test("S05-OWNER-001 exact owner and malformed admission stay strict; original er
+     records.push({ kind, review, graphAndHistoryUnchanged: true });
+   }
+   const original = fs.readFileSync(
+-    "evidence/s05/repair-01/samples/legacy-owner.grape.json",
++    new URL(
++      "../../evidence/s05/repair-01/samples/legacy-owner.grape.json",
++      import.meta.url,
++    ),
+   );
+   const review = await reviewFile(page, "original-legacy.grape.json", original);
+   expect(review.message).toContain("IMPORT_ERRORS");
+@@ -137,9 +146,7 @@ test("S05-OWNER-001 exact owner and malformed admission stay strict; original er
+     .getByRole("button", { name: "Open in new session", exact: true })
+     .click();
+   expect(await exportDocument(page)).toEqual(JSON.parse(original.toString()));
+-  await page
+-    .getByRole("button", { name: "Upgrade subgraph owners", exact: true })
+-    .click();
++  await clickAction(page, "Upgrade subgraph owners");
+   const upgraded = await exportDocument(page);
+   expect(upgraded.graph.resources[0].data.emissionMode).toBe("expand");
+   expect(upgraded.graph.resources[0].data.network).toEqual(
+diff --git a/production/tests/browser/s05-replacement.spec.ts b/production/tests/browser/s05-replacement.spec.ts
+index 4a1bfe1..0c6794a 100644
+--- a/production/tests/browser/s05-replacement.spec.ts
++++ b/production/tests/browser/s05-replacement.spec.ts
+@@ -72,7 +72,7 @@ test("S05 Replace separates kind-only mismatch, preserves original and rechecks
+   ).toBeEnabled();
+   // A second view issues an existing public command while the first view reviews.
+   await page
+-    .getByRole("button", { name: "Add Float", exact: true })
++    .getByRole("button", { name: "New subgraph", exact: true })
+     .evaluate((b: HTMLButtonElement) => b.click());
+   await expect(
+     page.getByRole("button", {
+diff --git a/production/tests/browser/s05-uniforms.spec.ts b/production/tests/browser/s05-uniforms.spec.ts
+index 15f4147..bf18f39 100644
+--- a/production/tests/browser/s05-uniforms.spec.ts
++++ b/production/tests/browser/s05-uniforms.spec.ts
+@@ -7,7 +7,7 @@ test("S05-FR-001 exact preserved reviewer document links distinct vertex and pix
+ }) => {
+   const original = JSON.parse(
+     await fs.readFile(
+-      "tests/fixtures/s05-review-crossstage.json",
++      new URL("../fixtures/s05-review-crossstage.json", import.meta.url),
+       "utf8",
+     ),
+   );
+diff --git a/production/tests/browser/s05-values.spec.ts b/production/tests/browser/s05-values.spec.ts
+index 8cc62a3..98eaf3f 100644
+--- a/production/tests/browser/s05-values.spec.ts
++++ b/production/tests/browser/s05-values.spec.ts
+@@ -1,3 +1,4 @@
++import { createNode } from "./create-node.ts";
+ import { test, expect } from "@playwright/test";
+ import fs from "node:fs/promises";
+ import { valueCases, valueFixture } from "../fixtures/s05-values.ts";
+@@ -187,9 +188,7 @@ for (const item of valueCases)
+         );
+       }
+       const canvas = page.locator(".canvas").first();
+-      await page
+-        .getByRole("button", { name: "Add " + item.button, exact: true })
+-        .click();
++      await createNode(page, item.button);
+       await canvas
+         .getByRole("heading", { name: item.label, exact: true })
+         .last()
+diff --git a/production/tests/browser/s05.spec.ts b/production/tests/browser/s05.spec.ts
+index 36b2a05..a0781ce 100644
+--- a/production/tests/browser/s05.spec.ts
++++ b/production/tests/browser/s05.spec.ts
+@@ -1,3 +1,5 @@
++import { clickAction } from "../fixtures/public-actions.ts";
++import { createNode } from "./create-node.ts";
+ import { test, expect } from "@playwright/test";
+ import fs from "node:fs/promises";
+ const evidence = process.env.GRAPE_EVIDENCE_DIR!;
+@@ -111,9 +113,7 @@ test("S05 AT07 legacy mode UI requires explicit owner upgrade preserving origina
+   await canvas.getByText("Subgraph interface", { exact: true }).click();
+   await expect(canvas.getByLabel("Subgraph emission mode")).toBeDisabled();
+   const before = await exported(page);
+-  await page
+-    .getByRole("button", { name: "Upgrade subgraph owners", exact: true })
+-    .click();
++  await clickAction(page, "Upgrade subgraph owners");
+   canvas = page.locator(".canvas").first();
+   await canvas.getByRole("heading", { name: "Subgraph", exact: true }).click();
+   await canvas
+@@ -334,7 +334,9 @@ for (const host of ["127.0.0.1", "192.168.1.105", "100.83.88.97"])
+     browser,
+   }) => {
+     await page.goto(
+-      `http://${host}:${process.env.GRAPE_TEST_HTTP_PORT ?? "4195"}`,
++      host === "127.0.0.1" && process.env.GRAPE_BASE_URL
++        ? process.env.GRAPE_BASE_URL
++        : `http://${host}:${process.env.GRAPE_TEST_HTTP_PORT ?? "4195"}`,
+     );
+     await expect(page.locator(".canvas").first()).toBeVisible();
+     const result = await page.evaluate(async () => {
+@@ -397,7 +399,7 @@ for (const host of ["127.0.0.1", "192.168.1.105", "100.83.88.97"])
+       expect(result.subtle).toBe("undefined");
+     }
+     const canvas = page.locator(".canvas").first();
+-    await page.getByRole("button", { name: "Add Float", exact: true }).click();
++    await createNode(page, "Float");
+     await canvas
+       .getByRole("button", { name: "Float output value", exact: true })
+       .click();
+@@ -423,9 +425,7 @@ for (const host of ["127.0.0.1", "192.168.1.105", "100.83.88.97"])
+     await canvas
+       .getByRole("heading", { name: "Subgraph", exact: true })
+       .click();
+-    await page
+-      .getByRole("button", { name: "Personal Library", exact: true })
+-      .click();
++    await clickAction(page, "Personal Library");
+     await page
+       .getByRole("button", { name: "Save selected subgraph", exact: true })
+       .click();
+@@ -457,9 +457,7 @@ for (const host of ["127.0.0.1", "192.168.1.105", "100.83.88.97"])
+     await page.locator("#saved-list button").first().click();
+     const afterOpen = await exported(page);
+     expect(afterOpen.graph).toEqual(beforeSave.graph);
+-    await page
+-      .getByRole("button", { name: "Personal Library", exact: true })
+-      .click();
++    await clickAction(page, "Personal Library");
+     await expect(page.locator("[data-personal-file]")).toHaveCount(1);
+     await fs.writeFile(
+       evidence + `/s05-origin-${host}.json`,
+diff --git a/production/tests/fixtures/s05-delivered-flows.ts b/production/tests/fixtures/s05-delivered-flows.ts
+index 129384a..6099df4 100644
+--- a/production/tests/fixtures/s05-delivered-flows.ts
++++ b/production/tests/fixtures/s05-delivered-flows.ts
+@@ -1,3 +1,4 @@
++import { clickAction } from "./public-actions.ts";
+ import fs from "node:fs/promises";
+ import assert from "node:assert/strict";
+ import { createHash } from "node:crypto";
+@@ -91,9 +92,7 @@ export async function deliveredFlow(
+     upgrade: unknown = null;
+   if (name.endsWith(".personal.json")) {
+     review = await openValidFile(page, "seed.grape.json", validSeed);
+-    await page
+-      .getByRole("button", { name: "Personal Library", exact: true })
+-      .click();
++    await clickAction(page, "Personal Library");
+     await page
+       .getByLabel("Import Personal package")
+       .setInputFiles({ name, mimeType: "application/json", buffer: bytes });
+@@ -125,9 +124,7 @@ export async function deliveredFlow(
+       const before = await exportDocument(page);
+       let canvas = await enter(page, "Subgraph");
+       await expect(canvas.getByLabel("Subgraph emission mode")).toBeDisabled();
+-      await page
+-        .getByRole("button", { name: "Upgrade subgraph owners", exact: true })
+-        .click();
++      await clickAction(page, "Upgrade subgraph owners");
+       const after = await exportDocument(page);
+       const expected = structuredClone(before);
+       expected.graph.resources.forEach((r: any) => {
+diff --git a/production/tests/fixtures/s05-replacement-flows.ts b/production/tests/fixtures/s05-replacement-flows.ts
+index 082e680..ac09a68 100644
+--- a/production/tests/fixtures/s05-replacement-flows.ts
++++ b/production/tests/fixtures/s05-replacement-flows.ts
+@@ -1,3 +1,5 @@
++import { createNode } from "../browser/create-node.ts";
++import { clickAction } from "./public-actions.ts";
+ import assert from "node:assert/strict";
+ import fs from "node:fs/promises";
+ import { expect, type Page } from "@playwright/test";
+@@ -39,14 +41,8 @@ export async function replacementFlow(
+ ) {
+   if (mode !== "default") {
+     await openValidFile(page, "legacy-owner.grape.json", bytes);
+-    if (mode === "upgraded")
+-      await page
+-        .getByRole("button", { name: "Upgrade subgraph owners", exact: true })
+-        .click();
+-    else
+-      await page
+-        .getByRole("button", { name: "Add Float", exact: true })
+-        .click();
++    if (mode === "upgraded") await clickAction(page, "Upgrade subgraph owners");
++    else await createNode(page, "Float");
+   }
+   await page
+     .getByRole("button", { name: "Second Canvas", exact: true })
+@@ -76,9 +72,7 @@ export async function replacementFlow(
+       .click();
+     await expect(page.locator("#recovery")).not.toBeVisible();
+     assert.deepEqual(await exportDocument(page), JSON.parse(bytes.toString()));
+-    await page
+-      .getByRole("button", { name: "Upgrade subgraph owners", exact: true })
+-      .click();
++    await clickAction(page, "Upgrade subgraph owners");
+     const upgraded = await exportDocument(page);
+     assert.equal(upgraded.graph.resources[0].data.emissionMode, "expand");
+     assert.deepEqual(

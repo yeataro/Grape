@@ -1,0 +1,273 @@
+{
+  "implementationI": "30c867945c992d25956a2a32825de34571f7749e",
+  "authority": {
+    "file": "production/evidence/coordinator/s06/owner-corrections-01/implementer-packet-02.json",
+    "bytes": 17282,
+    "sha256": "86c624f0951e15866c3d20a36c701ee4f93de6063f2240640b5b7d7835a96404"
+  },
+  "focusSupplement": {
+    "file": "production/evidence/coordinator/s06/owner-corrections-01/parent-oc10-focus-intent-01.json",
+    "bytes": 2383,
+    "sha256": "12ed7d07a46d49a320cf8aca13eadf8f95de480c3836f857fccc64d1c6a070d0"
+  },
+  "requirements": [
+    {
+      "id": "OC01",
+      "name": "Unconnected Image Output",
+      "quote": "當 image output 沒接任何東西的時候，它沒有任何錯誤，因為它輸出的就是零零零零嘛。",
+      "required": "Image Output/color unconnected is valid and emits vec4(0,0,0,0), including alpha zero. No INPUT_REQUIRED for that missing color input. Connected conversion table and mandatory vec4 boundary output remain. Other required inputs and Vertex output do not change.",
+      "contractDelta": "Supersedes only required-connection wording in DEC-GRAPE-002 line44 and AC-GRAPE-001 line67 for the newly versioned adopted Image Output definition. Preserve accepted documents and old exact pins. Record external accepted addendum, use new exact module identity and existing explicit upgrade boundary; never silently repin older documents.",
+      "status": "IMPLEMENTED_SELF_CHECKED_NOT_INDEPENDENTLY_REVIEWED",
+      "evidence": [
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/oc01-zero-upgrade.json",
+          "bytes": 15087,
+          "sha256": "7085af7e1bda5ed7af3021f52a9e20e542192c28e5f6346b59d611aef47b83e2"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/oc01-conversions.json",
+          "bytes": 2215,
+          "sha256": "e0f9bc5930ea53a90eb3a9aab13b6c83a0d66c9a2ca187d411e5c5bc73a43c90"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/checks-final-01/unit-conformance.log",
+          "bytes": 27314,
+          "sha256": "20b67665d86c4e89a3ddb710795e935455e32affec953e5ef12489031558e9d1"
+        }
+      ]
+    },
+    {
+      "id": "OC02",
+      "name": "Full-width compact footer",
+      "quote": "下面的功能狀態列，它就不能佔滿整個螢幕自動排版嘛。就是，會不會覺得很彆扭嗎？下面多一塊東西。",
+      "required": "Single compact functional/status footer spans available viewport width and sits at bottom. Collapsed content reserves no extra blank/shader-output block; remaining height belongs to canvas. Responsive wide/narrow layout, anchored disclosures and existing Locate remain usable in direct and wrapped preview.",
+      "status": "IMPLEMENTED_SELF_CHECKED_NOT_INDEPENDENTLY_REVIEWED",
+      "evidence": [
+        {
+          "file": "production/evidence/s06/owner-corrections-01/delivery-01/result.json",
+          "bytes": 19377,
+          "sha256": "0ac4c4d3fa1b3cd6b47ff32f2492d298d020aab3b4f409b238ecbb7a31e69b0c"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/oc02-footer-620.json",
+          "bytes": 348,
+          "sha256": "bb0fc3eeada1c275bee159a05f31431129302efcc8cc2d954071afc293c6a7ec"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/oc02-footer-1440.json",
+          "bytes": 356,
+          "sha256": "9fd6ec1cb6bfd7f3cfa938c40101b6f7ccff9558dd20163346de364fbdc5e58e"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/oc02-footer-1920.json",
+          "bytes": 356,
+          "sha256": "36263a9ecadbd5c364a46e88079aef19ed00d91aebd892d45b837821309e2d9e"
+        }
+      ]
+    },
+    {
+      "id": "OC03",
+      "name": "Wire-drop single-click create in place",
+      "quote": "拖拉線再放開的新增節點的意思就是原地新增節點。",
+      "required": "Output port wire released over blank canvas opens compatible creation. A SINGLE click on a node entry creates at the captured wire-release graph coordinate, retaining the existing create/connect transaction. No extra drag or second placement click. Coordinate remains correct under pan/zoom and menu movement/clamping. Abort/invalid target has no partial node/edge/history. Limit this change to this wire-drop route; general Add/Browse modes remain shared and unchanged.",
+      "status": "IMPLEMENTED_SELF_CHECKED_NOT_INDEPENDENTLY_REVIEWED",
+      "evidence": [
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/oc03-single-click.json",
+          "bytes": 15039,
+          "sha256": "5e9dd90e1baac111f709088426778ff8e6711f9e829435f109fe8c381e3259c1"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/oc03-cancel-stale-readonly.json",
+          "bytes": 12730,
+          "sha256": "3ec2c4d0e2b01ecc039c5981ed807c7cfaea0ed03e0911ca0206904da48c6084"
+        }
+      ]
+    },
+    {
+      "id": "OC04",
+      "name": "Input-drop disconnect",
+      "quote": "從 input 拉線到別地方，空的地方再放開是斷線的意思。",
+      "required": "Dragging a CONNECTED input to blank canvas and releasing disconnects that input in one Graph operation/Undo; do not open Create. Escape/cancel/outside-window/invalid-lifetime do not become disconnect. Preserve LC-UI-026 default behavior and other connections.",
+      "status": "IMPLEMENTED_SELF_CHECKED_NOT_INDEPENDENTLY_REVIEWED",
+      "evidence": [
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/oc04-disconnect.json",
+          "bytes": 13544,
+          "sha256": "dd2f3d069bac0d86d12495c208cc69b6313bb3ef48a1c816b1d5c8c0fdf21812"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/browser-results.json",
+          "bytes": 102196,
+          "sha256": "c542eca1661ba731ac94026efc1650b5d497de535ea13a8a1f304b3c14aa5641"
+        }
+      ]
+    },
+    {
+      "id": "OC05",
+      "name": "Replace enabled by default but configurable",
+      "quote": "我們預設接線的 replace 是啟開的，好不好？但這個終究是一個參數。",
+      "required": "Default connection replacement is enabled without Shift. Retain an explicit configurable parameter and the disabled/reject-existing behavior, via existing application/view configuration seam. Do not hardcode replace true into every model command or invent a global settings subsystem. Validation, atomicity and single Undo remain.",
+      "status": "IMPLEMENTED_SELF_CHECKED_NOT_INDEPENDENTLY_REVIEWED",
+      "evidence": [
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/oc05-replace-feedback.json",
+          "bytes": 16668,
+          "sha256": "d05ee0a541a68f640551e6c61963ddf9d278688764538fabdad1e805f1b26998"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/final-source-01/config-false.json",
+          "bytes": 8219,
+          "sha256": "5d81b5c99abd851fb712bb86d82c5e45b0eea90c8baa5013cc8bc0a5a2c9ca63"
+        }
+      ]
+    },
+    {
+      "id": "OC06",
+      "name": "No extra replace ring",
+      "quote": "在 replace 上面，你現在有額外的視覺顯示這件事情就不用了。現在外面會多一個圈圈。",
+      "required": "Remove extra replace-specific outer ring. Keep normal port hover and valid wire-target feedback.",
+      "status": "IMPLEMENTED_SELF_CHECKED_NOT_INDEPENDENTLY_REVIEWED",
+      "evidence": [
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/oc05-replace-feedback.json",
+          "bytes": 16668,
+          "sha256": "d05ee0a541a68f640551e6c61963ddf9d278688764538fabdad1e805f1b26998"
+        }
+      ]
+    },
+    {
+      "id": "OC07",
+      "name": "Legacy purple socket feedback",
+      "quote": "我覺得就用Legacy的紫色球球就可以了。就完全模仿它就還蠻好的。",
+      "required": "Use observed Legacy soft translucent purple circular origin/target feedback, preserving solid type-colored socket bodies and distinct ordinary hover versus wire-hit states. This supersedes the earlier tentative blanket50% backdrop instruction. Minimum reusable primitive/state reference only, no copying Legacy rendering architecture, no node geometry shift.",
+      "status": "IMPLEMENTED_SELF_CHECKED_NOT_INDEPENDENTLY_REVIEWED",
+      "evidence": [
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/oc05-replace-feedback.json",
+          "bytes": 16668,
+          "sha256": "d05ee0a541a68f640551e6c61963ddf9d278688764538fabdad1e805f1b26998"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/socket-0.65.json",
+          "bytes": 6890,
+          "sha256": "8012c269ec3ea35e99f7ab286a03f8c1aadc0205887ff0f3b0c709cf5e0fe089"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/socket-1.json",
+          "bytes": 6403,
+          "sha256": "a5ea5848a3db7f132b0c93b24756ff2d17e84e29199411f773c5b7faf76d586f"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/socket-1.25.json",
+          "bytes": 6770,
+          "sha256": "4391973710d8c81a8ac5a8262dc6975e204b7b1df8962dc3cc56da615f0e4a96"
+        }
+      ]
+    },
+    {
+      "id": "OC08",
+      "name": "Legacy-like wire curves",
+      "quote": "現在接線的弧線很不好看，你要參考 Legacy的弧線的感覺。",
+      "required": "Use smooth Legacy-like cubic curves with horizontal endpoint tangents and distance-aware control extent, shared across real/temporary/creation-preview wires where applicable. Preserve endpoint identities, hit paths and zoom/pan correctness. Read observed SVG/CSS only; implement in our own shared geometry primitive.",
+      "status": "IMPLEMENTED_SELF_CHECKED_NOT_INDEPENDENTLY_REVIEWED",
+      "evidence": [
+        {
+          "file": "production/evidence/s06/owner-corrections-01/checks-final-01/unit-conformance.log",
+          "bytes": 27314,
+          "sha256": "20b67665d86c4e89a3ddb710795e935455e32affec953e5ef12489031558e9d1"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/wire-input.json",
+          "bytes": 784,
+          "sha256": "e75e51b60387618b365727f26cfb4a8b49018ef930b755a77cf82c3cc7416247"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/wire-output.json",
+          "bytes": 784,
+          "sha256": "9802c1bb652e7faa0f26c94758e5a132f742d193faf447c90bcad006aa1a4757"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/oc03-single-click.json",
+          "bytes": 15039,
+          "sha256": "5e9dd90e1baac111f709088426778ff8e6711f9e829435f109fe8c381e3259c1"
+        }
+      ]
+    },
+    {
+      "id": "OC10",
+      "name": "F2 capture before modal",
+      "quote": "物件資訊因為那個彈出視窗因為有黑底的關係，應該是因為這樣變成 Canvas。它應該是捕捉按下去的那一刻吧。",
+      "required": "Capture the intended current inspection target and readonly data once at F2 keydown BEFORE opening the modal. Modal/backdrop/focus movement cannot retarget or substitute Canvas. Reproduce physical Node/Port/F2 route and Canvas fallback to distinguish target-selection from capture-timing defect. Preserve F2-only/current keyboard-focus policy and focusA-hoverB guard; do not silently substitute global hovered target. If a distinct target policy question remains, return exact counterexample while finishing unaffected items. Keep optional core-isolated helper and all F2-only lifetime/IME/gesture/readonly guards.",
+      "status": "IMPLEMENTED_SELF_CHECKED_NOT_INDEPENDENTLY_REVIEWED",
+      "evidence": [
+        {
+          "file": "production/evidence/s06/owner-corrections-01/baseline-01/focus-routes.json",
+          "bytes": 1708,
+          "sha256": "4a409364d3f954c274f234dcccb800d5393fee5d8a57d19967ead1e5a9f2cb2b"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/focus-routes.json",
+          "bytes": 2253,
+          "sha256": "c6075e0e0344eff39c6cf4de66e8dc35dd1dca49553b15f179bf9563d472f592"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/oc10-target-captured.json",
+          "bytes": 835,
+          "sha256": "7cea72a98502ad7a6bed04816fbc769c124dcc0012b9750cde9050061c5f483c"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/archive-public-01/f2-on-demand-counts.json",
+          "bytes": 210,
+          "sha256": "231ae1d6c89d09da1636973f2c118696bb5a3c827c1c19df7cc34f1e2b912b70"
+        },
+        {
+          "file": "production/evidence/s06/owner-corrections-01/final-source-01/owner-faults.json",
+          "bytes": 419,
+          "sha256": "8911c3080f3fad3e2a8532353077d861a0d48e3dc3ead705ba382468c400b423"
+        }
+      ]
+    }
+  ],
+  "exclusions": [
+    "No automatic code generation/Updates/incremental compiler; withdrawnOC09 stays withdrawn.",
+    "No new right-click socket pointer-follow second-click creation route; deferred only. Existing general Add/Browse behavior/shared panel retained except explicit wire-drop immediate-placement route.",
+    "No broad multi-workspace/new catalog/Host/publish/merge/newSlice.",
+    "No AI independent review now; do not spawn/request reviewer or label independentPASS.",
+    "No global high-water z-index counter, selection model duplication, Graph presentation fields, hidden core devtool dependency.",
+    "OC11 layering changes are deferred by latest Human instruction; preserve current stacking behavior. No temporary-selected-tier or persistent raise implementation this round."
+  ],
+  "counters": {
+    "ownerCorrectionRound": 1,
+    "inheritedCounters": {
+      "implementationAttempt": 2,
+      "transientRetries": 0,
+      "unsuccessfulRepairReReviewRounds": 0,
+      "distinctIdentityBasis": "New Human-authorized debug-hover feature after all three workspace-entry review3 findings closed at I4/R4. This does not rename or reset the old group.",
+      "retainedPriorGroup": {
+        "id": "S06-FG-WORKSPACE-ENTRY-01",
+        "reviewAttempt": 4,
+        "repairRound": 3,
+        "unsuccessfulRepairReReviewRounds": 2,
+        "currentScopedVerdict": "PASS"
+      },
+      "retainedEscape": {
+        "id": "S05-FG-ESCAPE-FOCUS-01",
+        "repairAttempt": 1,
+        "unsuccessfulRepairReReviewRounds": 0
+      },
+      "policy": "Two transient retries maximum; third unsuccessful repair/re-review routes technical diagnosis, no restart reset.",
+      "reviewAttempt": 2,
+      "repairRound": 1,
+      "automaticBrowserRetries": 0,
+      "explanation": "This is the first independent review of the new debug-hover feature. Initial technical FAIL does not count as an unsuccessful repair/re-review. Diagnosed reviewer runtime/launcher corrections above are explicitly retained, not resets of product repair counters.",
+      "reviewerOperationalCorrections": 2,
+      "comment": "SameS06-FG-DEBUG-HOVER-01 repairRound1/reviewAttempt2. Both original findings close here. Retained prior group unsuccessful rounds2 and originalS05Escape record remain unchanged; no counter reset.",
+      "nextReviewAttempt": 3,
+      "revisionReason": "Human accepted F2-only requirement after successful repairRound1/review2. This is a requirement revision, not an unsuccessful repair or reset; retain all historical operational correction counts."
+    },
+    "basis": "New direct Owner correction set, not a failed independent repair/re-review; no old counter reset."
+  },
+  "humanAcceptance": "NOT_GRANTED",
+  "nextRoute": "HUMAN_PREVIEW_FIRST; DO_NOT_START_AI_REVIEW until later explicit Owner go-ahead"
+}

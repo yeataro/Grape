@@ -1,0 +1,49 @@
+
+Running 1 test using 1 worker
+
+(node:42536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:38:28 › S06 selection geometry remains fixed at zoom 1 (5.5s)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:38:28 › S06 selection geometry remains fixed at zoom 1 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.canvas').last()
+    Expected: ""
+    Received: "7a973ac2-ae7c-455a-bd22-c5c316af6a92"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('.canvas').last()
+        14 × locator resolved to <div tabindex="0" data-path="" class="canvas" data-revision="2" data-definition="" data-panel="canvas-1" data-definition-kind="root" data-zoom="1.3446969696969697" aria-label="Shader graph canvas" data-network="fb614d22-e9d5-4ff1-84c3-3c3df19257d3" data-selection="7a973ac2-ae7c-455a-bd22-c5c316af6a92">…</div>
+           - unexpected value "7a973ac2-ae7c-455a-bd22-c5c316af6a92"
+
+
+      40 |   if(zoom===1.2){await c.hover({position:{x:330,y:330}});await page.mouse.wheel(0,-182.3215567939546);}
+      41 |   const r=(await c.boundingBox())!; await page.mouse.click(r.x+r.width-15,r.y+r.height-20);
+    > 42 |   await expect(c).toHaveAttribute("data-selection", "");
+         |                   ^
+      43 |   const before=await doc(page),unselected=await geometry(c);
+      44 |   await c.getByRole("heading",{name:"Color RGBA",exact:true}).click();const selected=await geometry(c);
+      45 |   await expect(c).not.toHaveAttribute("data-selection", "");
+        at C:\Users\user\source\Grape\production\tests\browser\s06-connection-view.spec.ts:42:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-02\baseline-selection-02\test-results\s06-connection-view-S06-se-6da2c-try-remains-fixed-at-zoom-1-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-02\baseline-selection-02\test-results\s06-connection-view-S06-se-6da2c-try-remains-fixed-at-zoom-1-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-02\baseline-selection-02\test-results\s06-connection-view-S06-se-6da2c-try-remains-fixed-at-zoom-1-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-02\baseline-selection-02\test-results\s06-connection-view-S06-se-6da2c-try-remains-fixed-at-zoom-1-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:38:28 › S06 selection geometry remains fixed at zoom 1 

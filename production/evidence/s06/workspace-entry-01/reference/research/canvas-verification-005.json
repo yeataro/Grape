@@ -1,0 +1,72 @@
+{
+  "revision": "ATLAS-005",
+  "date": "2026-10-03",
+  "status": "PASS_FOR_MATERIAL_AND_LOCAL_DEMO_CHECKS_ONLY",
+  "checks": [
+    {
+      "command": "python atlas/check.py",
+      "result": "PASS",
+      "output": "{\r\n  \"scope\": \"Static atlas integrity, links, SVG and syntax only; not visual/product qualification\",\r\n  \"status\": \"PASS\",\r\n  \"htmlIds\": 119,\r\n  \"artboards\": 42,\r\n  \"localReferences\": 70,\r\n  \"svgCount\": 113,\r\n  \"errors\": []\r\n}\r\n"
+    },
+    {
+      "command": "python check-material.py",
+      "result": "PASS",
+      "output": "{\r\n  \"scope\": \"Portable material JSON, Markdown locators, original screenshot hashes, design supplement mappings; not runtime or architecture qualification\",\r\n  \"status\": \"PASS\",\r\n  \"jsonFilesParsed\": 18,\r\n  \"markdownLocalTargetsChecked\": 115,\r\n  \"historicalImageHashesChecked\": 5,\r\n  \"existingUXEntries\": 65,\r\n  \"designSupplements\": 5,\r\n  \"errors\": []\r\n}\r\n"
+    },
+    {
+      "command": "python check-canvas.py",
+      "result": "PASS",
+      "output": "{\r\n  \"status\": \"PASS\",\r\n  \"checks\": 354,\r\n  \"scope\": \"Canvas material schema, traceability, live-evidence boundaries and static illustration index; not product runtime tests\",\r\n  \"errors\": []\r\n}\r\n",
+      "initialFailure": {
+        "output": "{\r\n  \"status\": \"FAIL\",\r\n  \"checks\": 354,\r\n  \"scope\": \"Canvas material schema, traceability, live-evidence boundaries and static illustration index; not product runtime tests\",\r\n  \"errors\": [\r\n    \"Missing behavior distinctions\"\r\n  ]\r\n}\r\n",
+        "repair": "Checker expected the English term intersection in the Chinese illustration. Corrected to the actual explicit Chinese rule without changing behavior."
+      }
+    },
+    {
+      "command": "node atlas/check-atlas.cjs",
+      "result": "PASS",
+      "output": "PASS Fit scales board and height coherently\nPASS Layout controls change only local composition and active selection\nPASS One-to-one toggle restores fit on second click\nPASS 3D F1 does not show W\nPASS 4D F1 adds W input/output\nPASS Edge mode removes feature outputs while preserving 4D input\nPASS Return to 3D F1 restores visible interface\nPASS Review export carries current revision and only local review notes\n{\"status\":\"PASS\",\"checks\":8,\"scope\":\"Local atlas DOM-double tests only; no browser or product\"}\n"
+    },
+    {
+      "command": "node atlas/check-fields.cjs",
+      "result": "PASS",
+      "output": "PASS Static field IDs unique and manifest boards present\nPASS Inline field, state and host range references retained\nPASS Superseded picker and rejected numeric lab absent from field references\nPASS Current static references do not introduce native picker or product writes\n{\"status\":\"PASS\",\"checks\":4,\"scope\":\"Static field reference checks only; color moved to check-color.cjs\"}\n"
+    },
+    {
+      "command": "node atlas/check-links.cjs",
+      "result": "PASS",
+      "output": "PASS Source arrow includes exactly two direct Link peers, excludes ordinary Wire\nPASS Input arrow selects only the source\nPASS Hidden lines retain functioning peer navigation\nPASS Right-click menu resolves a single peer\nPASS Explicit menu entrance and Escape restore arrow focus\nPASS Reset clears selection and restores visible lines\n{\"status\":\"PASS\",\"checks\":6,\"scope\":\"Offline diagram DOM doubles, not product navigation/runtime\"}\n"
+    },
+    {
+      "command": "node atlas/check-groups.cjs",
+      "result": "PASS",
+      "output": "{\n  \"part\": \"groups\",\n  \"method\": \"pure Node VM with DOM and event doubles\",\n  \"checks\": 46,\n  \"result\": \"PASS\",\n  \"assertions\": [\n    \"fixture initializes three demo nodes\",\n    \"C starts outside explicit member set\",\n    \"computed SVG coordinates enclose nonmember C (not rendered geometry)\",\n    \"frame selection excludes nonmember\",\n    \"member move excludes nonmember\",\n    \"local move undo restores position\",\n    \"member plus incoming selection enables join\",\n    \"join updates explicit member\",\n    \"detach keeps position\",\n    \"member collapse recomputes coordinates and retains wire\",\n    \"rename Enter submits\",\n    \"rename Escape preserves prior name\",\n    \"rename blur submits\",\n    \"invalid name preserves previous value\",\n    \"color opens twelve presets\",\n    \"preset updates frame and closes palette\",\n    \"frame removal preserves nodes and wire\",\n    \"remove undo restores frame\",\n    \"corner preference hides entry\",\n    \"corner preference restores entry\",\n    \"readonly marks mutations unavailable\",\n    \"readonly still selects\",\n    \"readonly handler refuses removal\",\n    \"below-threshold drag creates no history\",\n    \"multiple drag previews commit one local edit\",\n    \"drag undo restores basis\",\n    \"drag Escape restores basis without history\",\n    \"window blur cancels drag\",\n    \"node modifier keyboard adds selection\",\n    \"frame modifier keyboard adds members\",\n    \"frame modifier keyboard toggles members off\",\n    \"one member frame survives\",\n    \"last member detach removes empty frame\",\n    \"two unframed nodes enable create\",\n    \"create uses selected members then renames\",\n    \"reinitialization guard avoids duplicate nodes/listeners\",\n    \"manifest artboard gf-frame-vs-subgraph\",\n    \"evidence path ../../research/groups-evidence-004.md\",\n    \"manifest artboard gf-membership-demo\",\n    \"evidence path ../../research/groups-evidence-004.md\",\n    \"manifest artboard gf-frame-rules\",\n    \"evidence path ../../research/groups-evidence-004.md\",\n    \"manifest artboard gf-entries\",\n    \"evidence path ../../research/groups-evidence-004.md\",\n    \"manifest artboard gf-evidence\",\n    \"evidence path ../../research/groups-evidence-004.md\"\n  ],\n  \"limits\": [\n    \"No browser or CSS/layout engine\",\n    \"No rendered geometry, hit testing, native focus/event propagation or device gestures verified\",\n    \"No screenshot/visual/CUA acceptance\",\n    \"No Legacy product, Host, network or storage operations\"\n  ]\n}\n"
+    },
+    {
+      "command": "node atlas/check-arrange.cjs",
+      "result": "PASS",
+      "output": "{\n  \"status\": \"pass\",\n  \"checks\": 29,\n  \"names\": [\n    \"all manifest artboard IDs exist\",\n    \"unique IDs\",\n    \"11 command inventory\",\n    \"source-first fixture\",\n    \"output-first short branch\",\n    \"auto local undo\",\n    \"equal horizontal edge gaps\",\n    \"manual local undo\",\n    \"equal-gap guard below 3\",\n    \"only selected cards move\",\n    \"dimensions preserved\",\n    \"read-only guards\",\n    \"grid actual dimensions\",\n    \"stable repeat no new demo edit\",\n    \"vertical gap minimum extends span\",\n    \"sequential layout expands scrollable drawing bounds\",\n    \"spread source golden -180\",\n    \"spread source golden -150\",\n    \"spread source golden -100\",\n    \"spread source golden -30\",\n    \"spread source golden 0\",\n    \"spread source golden 80\",\n    \"spread source golden 160\",\n    \"spread source golden 220\",\n    \"spread reset\",\n    \"self-contained evidence paths resolve\",\n    \"no external resource markup\",\n    \"no network or persistence APIs\",\n    \"read-only VM surfaces suffice\"\n  ],\n  \"mode\": \"Node built-ins + minimal DOM double; no browser/server/product\",\n  \"limits\": \"No CSS geometry, actual focus, pointer lifecycle or accessibility qualification\"\n}\n"
+    },
+    {
+      "command": "node atlas/check-color.cjs",
+      "result": "PASS",
+      "output": "# Scope: actual color files + local model transitions + selector-aware DOM/canvas doubles; NOT browser/visual/CEF/product acceptance.\n✔ 01 actual fragment/selectors, simultaneous seven channels and 44 reference swatches (9.5707ms)\n✔ 02 100px preview, minimum16px palette and 320px panel are structural declarations, not layout proof (0.2668ms)\n✔ 03 six saved swatches, add-to-front, duplicate elimination and cap (11.5526ms)\n✔ 04 RGB target hides Alpha, emits six HEX digits and ignores hidden Alpha edits (9.1271ms)\n✔ 05 RGBA target exposes Alpha and always emits eight digits including opaque FF (13.6902ms)\n✔ 06 RGBA six-digit paste preserves Alpha and normalizes on blur (5.9735ms)\n✔ 07 RGBA six-digit paste preserves Alpha and normalizes on change (5.8903ms)\n✔ 08 RGBA six-digit paste preserves Alpha and normalizes on Enter (5.8898ms)\n✔ 09 RGB rejects eight-digit HEX and Escape cancels the opening (14.7801ms)\n✔ 10 HSV and RGB controls synchronize with known non-achromatic colors (9.6038ms)\n✔ 11 displayed color and Alpha remain stable across unrelated renders (1172.3631ms)\n✔ 12 invalid component fences other components, HEX, palette, shape/view and add (12.8853ms)\n✔ 13 invalid HEX fences sliders/plane and Escape cancels the opening (80.2923ms)\n✔ 14 view and all shape choices project visibility/pressed state without changing color (237.9486ms)\n✔ 15 circle raster is round at fake surface 260x100 (not browser proof) (134.79ms)\n✔ 16 circle raster is round at fake surface 140x212 (not browser proof) (219.0006ms)\n✔ 17 circle raster is round at fake surface 300x140 (not browser proof) (247.8551ms)\n✔ 18 circle and triangle outside-start does not capture or change state (172.8603ms)\n✔ 19 pointer cancellation restores the gesture basis; late movement/up cannot reapply (77.8146ms)\n✔ 20 target switch during drag cancels old gesture and fences late events (78.5884ms)\n✔ 21 changing top view during drag cancels it without retaining its transient value (75.1728ms)\n✔ 22 invalid draft during drag survives pointerup; Escape cancels the whole opening (78.8765ms)\n✔ 23 late cancellation for an old pointer cannot cancel a new gesture (76.2338ms)\n✔ 24 center trio and independent right actions; demo controls remain outside specimen (9.2318ms)\n✔ 25 constant draft changes preview only; Enter normalizes; Apply commits once and fences late edits (10.9945ms)\n✔ 26 constant outside, X and Escape each discard the entire draft without model writes (30.1402ms)\n✔ 27 live edits immediately update the local model; outside accepts and next opening uses it (15.0128ms)\n✔ 28 live X and Escape restore the whole opening after several edits, including an invalid final draft (39.2051ms)\n✔ 29 invalid constant draft disables Apply, does not commit, and remains cancellable (12.7675ms)\n✔ 30 live pointercancel restores its gesture basis; X later restores the opening basis (77.9358ms)\n✔ 31 HDR and exact RGB/Alpha survive reopen, projection controls, no-op Apply and live cancel (244.8055ms)\n✔ 32 RGB and RGBA local targets keep their exact shape and independent accepted values (18.4778ms)\n✔ 33 session swatches survive draft cancellation; demo eyedropper writes no model value (10.0732ms)\nℹ tests 33\nℹ suites 0\nℹ pass 33\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 3227.199\n"
+    }
+  ],
+  "localDemoChecks": 126,
+  "canvasTraceabilityChecks": 354,
+  "productRegressionRun": false,
+  "liveEvidence": "canvas-live-005.md",
+  "boundedRealProductSequences": 7,
+  "liveGraphResult": "Node positions restored via Undo; empty selection; Box Select off; Focus off; Home view. No Apply/value edits; normal layout history/autosave occurred.",
+  "browserVisualQA": {
+    "status": "NOT_QUALIFIED",
+    "reason": "Existing file:// atlas tab access rejected by browser URL policy; no workaround attempted."
+  },
+  "openCases": "../design/CANVAS_ACCEPTANCE.json",
+  "rewrittenRepositoryWritten": false,
+  "legacySourceWritten": false,
+  "architectureChanged": false,
+  "humanReview": "READY_FOR_OWNER_REVIEW_NOT_ACCEPTED",
+  "peerReview": "Independent navigation and selection source reviews plus final spec/acceptance/artwork cross-check; corrected specific inconsistencies before delivery."
+}

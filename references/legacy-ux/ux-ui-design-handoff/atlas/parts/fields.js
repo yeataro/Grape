@@ -1,0 +1,1 @@
+/* Current field specimens are static references. Color interaction lives in color.js. */

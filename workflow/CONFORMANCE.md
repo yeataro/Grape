@@ -1,5 +1,7 @@
 # Coordinator v1 workflow conformance
 
+**Policy scope:** the cases below remain the v1 per-Slice and historical installation expectations. The [continuous-delivery routing cases](CONTINUOUS_DELIVERY.md#minimal-bindings-and-verification) cover the new conditional mode; do not report old fixture results as validation of its changed authorization, multi-Slice readiness or checkpoint behavior. Unchanged integrity, isolation and replay protections still apply.
+
 These scenarios test workflow rules, not Grape product acceptance. They do not reopen S01/S02, authorize S03, create real Gates or inject product defects. Run them read-only against immutable historical Git objects and explicitly synthetic events. A policy tabletop/model result is not proof of a deployed Coordinator or an isolated dispatch adapter.
 
 ## Common execution contract

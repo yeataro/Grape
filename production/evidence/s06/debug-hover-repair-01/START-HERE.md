@@ -1,0 +1,15 @@
+# S06 物件資訊與緊湊底部列
+
+候選 **S06-debug-528c4f7**，實作 **528c4f76149fad6da53c3c4da701cf1e8e121750**。這是本輪修復候選，等待新的獨立審查；S06 尚未接受。Coordinator 收件後才提供對應 localhost 入口；本次沒有替換既有4201等服務。
+
+- 左上 Grape 品牌列應顯示 **S06-debug-528c4f7**。按「本輪更新」看變更，Close／Escape 關閉並返回按鈕。直接入口與包裝入口都沒有額外頂部橫條。
+- 底部 **Project actions** 分組既有文件／Library 與工作區操作；Save、Generate GLSL 和圖形編輯仍可直接使用。選單可再按觸發鈕關閉；方向鍵／Home／End 選項，Escape 關閉返回。Lock editing 有可讀勾選狀態。這些操作保留既有未儲存變更與唯讀保護。
+- **Shader output** 預設收合，按下看完整GLSL和目前診斷，再按或Escape收合。錯誤摘要可省略，按摘要閱讀完整換行／捲動內容；關閉不會清除錯誤。具有效目前節點的輸出診斷提供 **Locate node**；舊／不同Stage／已失效的訊息不能定位錯誤物件。沒有新增歷史訊息清單。
+- 按 **Experimental features**，勾選 **Show object information instead of normal hover hints**。預設未勾。停在節點、圓形插孔、連線、Inspector欄位、Panel或一般控制項，短摘要先顯示kind／name／state。從該物件連續移到 **Read object details** 可讀全文；停留另一物件會換成新的目標。鍵盤正常到某物件後按 **F2**，讀取當前焦點，與游標停在哪裡無關。Close／Escape返回。
+- [下載Color範例](samples/workspace-color.grape.json)，以 **Project actions → Open file → Review document → Open in new session** 載入。選Color RGBA顯示Inspector，停在R欄位讀committed值；未提交draft會分開標示。組字、拖曳、接線與儲存等待時不會因偏好切換丟失工作。取消勾選回一般提示；設定僅用專用瀏覽器偏好key，不進Graph、layout或Undo。儲存拒絕／壞值有明示fallback，不動其他key。
+- 真正接線按鈕是圓形socket，旁邊name/type只是label。滑過／按住／鍵盤焦點保留type色實心；目前來源與方向相符的接線目標強度不同。最後是否可連仍由既有Graph admission決定。選取、hover或焦點不移動節點／欄位／端點；可用Undo／Redo檢查一次接線。
+- Hints保留一般操作說明。全部浮動內容使用同一小型presentation入口；caller供內容與大小／對齊，model與commands仍由原owner負責。
+
+自動驗證與人工操作不同：原始獨立FAIL／先前PASS保持原I/R。新source、archive、直接／包裝、lifetime、storage、IME、selection和實際WebGL結果在submission及execution-summary記錄；不同組有重疊，不能相加。Windows Chromium151／SwiftShader限定環境，合成composition／storage／latecallback明標，不代表所有實體裝置、第三方private資料或通用FPS。沒有multi-workspace、全catalog、native／Host或S06完成承諾。LAN／Tailscale義務由Owner移除，歷史NOT_EXECUTED不改PASS。
+
+重建：Node25.5.0，在production用 tools/build-candidate.mjs，傳入全新絕對輸出目錄與build-01/build-metadata.json的絕對路徑；核對153項source/config和3份build bytes。測試用harnesses/s06-dhr-browser.mjs複製至repo .verification，以archive模式、新run名稱與build manifest執行；每次指定GRAPE_EVIDENCE_DIR及--output絕對新S06路徑、隔離瀏覽器，不使用Human storage。完整可重現參數記於各execution.json。

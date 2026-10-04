@@ -80,6 +80,13 @@ export interface StageSlotDefinition {
   readonly boundaries: readonly BoundaryDeclaration[];
 }
 export interface GraphKindDefinition {
+  /** Explicit owner-supplied migration, never applied by document reading. */
+  readonly upgrades?: readonly {
+    readonly from: GraphKindRef;
+    upgrade(
+      document: import("./document.ts").CanonicalGraphDocument,
+    ): import("./document.ts").CanonicalGraphDocument;
+  }[];
   readonly ref: GraphKindRef;
   readonly stages: readonly StageSlotDefinition[];
   /** Graph-owned settings. Future pass descriptors live here; Pass never becomes Stage's parent. */

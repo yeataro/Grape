@@ -1,0 +1,149 @@
+{
+  "author": "/root/s06_ui_repair_review_02",
+  "method": "Independent source reading of actual candidate files and diff, conformance command execution, and fresh browser replay. Submitted source-structure-01 is a claim cross-checked here, not accepted as an independent result.",
+  "source": [
+    {
+      "file": "production/apps/web/main.ts",
+      "bytes": 27266,
+      "sha256": "7c933116d8a564331f949ba5372a7479472356ed600e35ddd2645c261bc1fe7e"
+    },
+    {
+      "file": "production/apps/web/style.css",
+      "bytes": 21019,
+      "sha256": "ddc9e5e76ccb3847472e5cbabe1ffda1af24a48dd9020896e39f3c89c1629b31"
+    },
+    {
+      "file": "production/apps/web/build-info.ts",
+      "bytes": 2927,
+      "sha256": "fed2f19c87ba9089b7560a42d937bfcebdb7da3bec4add796e8fc26cbb52a5af"
+    },
+    {
+      "file": "production/src/ui/floating.ts",
+      "bytes": 6541,
+      "sha256": "9e2ce4ffca9552b7afc4352a3ac6dff75d23bb31c328e9c1ee9169346796f634"
+    },
+    {
+      "file": "production/src/ui/hover.ts",
+      "bytes": 13348,
+      "sha256": "4ce930f8f26aa9659de08c0fb383f25ee2379e981567630f5425c22187b640ff"
+    },
+    {
+      "file": "production/src/ui/mount.ts",
+      "bytes": 14293,
+      "sha256": "0dd84651aa22e409fc537c8a1fc30d398fa35ccb14775fa99b018db8ab359524"
+    },
+    {
+      "file": "production/src/sdk/view-mount.ts",
+      "bytes": 5270,
+      "sha256": "26753a0f15993ee120d004a845a4e7dd9a9e95b22e144f7f8bae6ecc6f1a441f"
+    },
+    {
+      "file": "production/src/features/canvas.ts",
+      "bytes": 69969,
+      "sha256": "025dcbd3eb76f735b168bbfdc7660dd2d30c21f57a226e2c9a5eaef31d365dba"
+    },
+    {
+      "file": "production/src/features/code.ts",
+      "bytes": 6822,
+      "sha256": "b2c362dc509abbacd97305f8dca6340da3ca2b39d4e41f843540198a6aaa214a"
+    },
+    {
+      "file": "production/src/features/node-browser.ts",
+      "bytes": 26911,
+      "sha256": "4dff9c0ee4c5eea87d1854a47e60c4bb1fa5ee2df9ee93a30c32497eb9a4df26"
+    }
+  ],
+  "assessments": [
+    {
+      "id": "shared-surface",
+      "status": "PASS",
+      "sources": [
+        "production/src/ui/floating.ts:3",
+        "production/src/ui/floating.ts:19"
+      ],
+      "finding": "FloatingOptions carries caller-owned host, trigger, content, title, close label, semantic kind, width/maxHeight and alignment. Small shared helper handles only dialog presentation, viewport clamping, focus and listener/observer cleanup. Branches use anchored/modal/menu semantics; no feature-name, Panel type or Graph branches. No model import/capture/mutation or mirrored value store."
+    },
+    {
+      "id": "consumers",
+      "status": "PASS",
+      "sources": [
+        "production/apps/web/main.ts:159",
+        "production/apps/web/main.ts:245",
+        "production/apps/web/main.ts:782",
+        "production/apps/web/main.ts:806",
+        "production/src/ui/hover.ts:135",
+        "production/src/features/canvas.ts:165"
+      ],
+      "finding": "Application status/output/project-menu/hints, preference/object details, and Canvas status are separate real consumers. Existing shell application error map and command handlers remain at their owner. Code feature owns GLSL and diagnostics. Canvas receives optional mount.floating rather than importing a concrete shell feature. Native modal behavior differs explicitly from nonmodal disclosures/menu navigation."
+    },
+    {
+      "id": "mount-lifetime",
+      "status": "PASS",
+      "sources": [
+        "production/src/ui/mount.ts:134",
+        "production/src/ui/floating.ts:194"
+      ],
+      "finding": "PresentationSession validates borrowed DOM containment/protocol and immediately registers each disposer in MountScope. After revocation late creation is disposed immediately by scope.own; old returned wrappers cannot reopen/close fresh instances. Each primitive owns one cleanup list and ResizeObserver; dispose disconnects/removes listeners/removes dialog. Fresh source tests exercise multiple instances, resize and independent disposal, late open and remount."
+    },
+    {
+      "id": "hover-targeting",
+      "status": "PASS",
+      "sources": [
+        "production/src/ui/hover.ts:17",
+        "production/src/ui/hover.ts:171",
+        "production/src/ui/hover.ts:281",
+        "production/src/ui/hover.ts:422"
+      ],
+      "finding": "Registry stores owner-bound read closures in WeakMap, not synchronized model copies. Active target stores element and entry only; full detail is read on action. Continuous travel resets a bounded 140ms dwell, footer reader cancels pending retarget, and settling another object legitimately resolves it. Focus F2 explicitly reads document.activeElement. Scope invalidation, input/composition/pointerdown, visibility, blur, DOM visibility/removal and dispose cancel current view and pending timer. Explicit F2/pointer operations do not receive command authority."
+    },
+    {
+      "id": "socket-primitive",
+      "status": "PASS",
+      "sources": [
+        "production/src/features/node-browser.ts:73",
+        "production/src/features/node-browser.ts:344",
+        "production/src/features/canvas.ts:1971",
+        "production/apps/web/style.css:611"
+      ],
+      "finding": "nodePortRow is reused for live nodes and catalog previews. Actual button owns only its socket span; adjacent caption/type are separate siblings. Live button retains direction/port/node provenance and accessible name. The 20px circular hit region fits 29px row spacing; type-color fill/glow rules alter paint, not geometry. Stronger wire-target is a direction/readonly visual cue; final connection admission stays with existing Graph/Application validation. New styling does not promise all opposite-direction hits will be admitted."
+    },
+    {
+      "id": "locate",
+      "status": "PASS",
+      "sources": [
+        "production/src/features/code.ts:62",
+        "production/src/features/code.ts:132"
+      ],
+      "finding": "Diagnostics with current stage/subject/revision create Locate through scope.event and services.context(target.lease). Render generation and connected-button checks reject detached callbacks; current context network must still contain node ID before select. No Graph write or private Graph access. Source/archive tests check current location, stale detached callback and stage mismatch; additional reviewer probe covers same-ID document replacement and deletion invalidation."
+    },
+    {
+      "id": "scope-and-authority",
+      "status": "PASS",
+      "finding": "Diff remains within authorized UI seam/consumers/tests and ownership manifest. Model, Application command authority, persistence codec, source type/admission, receipts/CAS and History implementations are unchanged from the previous candidate. Root boundary/unit checks and full affected browser replay provide fresh regression evidence. No frozen Handoff write or architecture change was required."
+    }
+  ],
+  "visualReview": {
+    "files": [
+      "independent-probes-02/wrapped-620-380-Project-actions.png",
+      "independent-probes-02/direct-1920-1000-closed.png",
+      "archive-01/socket-1.png"
+    ],
+    "observations": "Inspected actual pixels: narrow menu bounds and scrolling preserve Close/action reachability; collapsed output removes its permanent panel; wide canvas and footer controls remain readable; socket labels and colored solid connected sockets remain separate with unchanged node layout."
+  },
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "node": "v25.5.0",
+    "osType": "Windows_NT",
+    "osRelease": "10.0.26200",
+    "osVersion": "Windows 11 Pro",
+    "playwright": "1.62.1",
+    "dependencyProvision": "Copied already available declared production/node_modules into isolated checkout; no install/frozen write; lockfile bytes validated."
+  },
+  "priorEvidenceDisposition": {
+    "protectedTracked": "8390/8390 preserved",
+    "originalReviewer": "report + 312 listed supporting entries + manifest bytes validated; 313 relocation copies validated",
+    "acceptedEvidence": "ten records semantically identical to priorR, and protected acceptance evidence bytes unchanged",
+    "originalUntracked": "319-record baseline inventories primary-workspace untracked items. 27 exist at original path in exact R; remaining 292 are not claimed as all delivered. Required normalized Coordinator inputs and original reviewer evidence are available/verified in their submitted locations; unrelated scratch/Legacy reference inventories are not runtime prerequisites."
+  }
+}

@@ -1,3 +1,14 @@
+import {
+  zeroOutputModule,
+  zeroGraphKinds,
+  zeroImageKind,
+  zeroSources,
+  zeroOutputText,
+} from "../../src/modules/image-zero.ts";
+import { floatingSurface } from "../../src/ui/floating.ts";
+import { mountBuildInfo } from "./build-info.ts";
+import { icon } from "../../src/features/node-browser.ts";
+import { mountHover } from "../../src/ui/hover.ts";
 import { currentSources } from "../../src/modules/sources-current.ts";
 import {
   fixedValues,
@@ -74,11 +85,16 @@ definitions.registerKind(imageKind);
 definitions.register(currentOutputModule);
 definitions.register(currentGraphKinds);
 definitions.registerKind(currentImageKind);
+definitions.register(zeroOutputModule);
+definitions.register(zeroGraphKinds);
+definitions.registerKind(zeroImageKind);
+definitions.register(zeroSources);
 const locale = new Localization();
 locale.registerModule(shellPresentation, shellDefaults);
 for (const contribution of [
   nodeText,
   currentOutputText,
+  zeroOutputText,
   canvasText,
   inspectorText,
   actionsText,
@@ -104,7 +120,7 @@ widgets.register(
 const application = new EditorApplication(
   definitions,
   browserIdentity(),
-  currentImageKind.ref,
+  zeroImageKind.ref,
   functionProfile,
   new BrowserStorage(),
   browserOutput,
@@ -112,12 +128,12 @@ const application = new EditorApplication(
 );
 const app = document.querySelector<HTMLElement>("#app")!;
 app.innerHTML =
-  '<header><div class="brand"><span class="grape-mark">●</span> Grape <small>SHADER WORKSPACE</small></div><nav aria-label="Document actions"></nav><div class="status"><span id="save-state"></span><span class="host">Host-free</span></div></header><div id="message" role="status"></div><div id="actions"></div><main><section id="canvases"></section><aside id="inspector"></aside></main><section id="code"></section><footer><span>Click an output port, then an input to connect. Shift-click replaces a connection.</span><span>Scroll to zoom · Drag empty space to pan</span></footer><dialog id="open-dialog"><h2>Open saved document</h2><div id="saved-list"></div><button id="cancel-open">Cancel</button></dialog><dialog id="recovery"><h2>Document retained</h2><p id="recovery-message"></p><button id="export-original">Export original</button><button id="close-recovery">Close</button></dialog>';
+  '<header><div class="brand"><svg class="grape-mark" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><circle cx="20" cy="23" r="11" fill="#bfa5f4"/><circle cx="44" cy="23" r="11" fill="#a98be2"/><circle cx="32" cy="44" r="11" fill="#b499ef"/></svg> Grape <small>SHADER WORKSPACE</small></div><nav aria-label="Document actions"></nav><div class="status"><span id="save-state"></span><span class="host">Host-free</span></div></header><div id="message" role="status"></div><div id="actions"></div><main><section id="canvases"></section><aside id="inspector"></aside></main><section id="code"></section><footer><span data-hint="connections">Click an output port, then an input to connect. Shift-click replaces a connection.</span><span data-hint="navigation">Scroll to zoom · Drag empty space to pan</span></footer><dialog id="open-dialog"><h2>Open saved document</h2><div id="saved-list"></div><button id="cancel-open">Cancel</button></dialog><dialog id="recovery"><h2>Document retained</h2><p id="recovery-message"></p><button id="export-original">Export original</button><button id="close-recovery">Close</button></dialog>';
 const staticText = [
   [".brand small", "subtitle"],
   [".host", "hostFree"],
-  ["footer span:first-child", "connections"],
-  ["footer span:last-child", "navigation"],
+  ["[data-hint=connections]", "connections"],
+  ["[data-hint=navigation]", "navigation"],
   ["#open-dialog h2", "openTitle"],
   ["#cancel-open", "cancel"],
   ["#recovery h2", "recoveryTitle"],
@@ -131,29 +147,97 @@ const renderShell = () => {
 };
 renderShell();
 locale.subscribe(renderShell);
-const message = document.querySelector<HTMLElement>("#message")!,
+mountBuildInfo(app.querySelector<HTMLElement>(".brand")!);
+const oldMessage = document.querySelector<HTMLElement>("#message")!,
+  message = document.createElement("button"),
+  statusBar = document.createElement("div"),
   nav = app.querySelector("nav")!,
   saveState = document.querySelector<HTMLElement>("#save-state")!;
-const report = (error: unknown) => {
-  message.textContent = error instanceof Error ? error.message : String(error);
-  message.classList.add("error");
+message.id = "message";
+message.type = "button";
+message.ariaLabel = "Read full application status";
+message.setAttribute("aria-haspopup", "dialog");
+statusBar.className = "application-status";
+statusBar.setAttribute("role", "status");
+oldMessage.replaceWith(statusBar);
+statusBar.append(message);
+app.querySelector("footer")!.append(statusBar);
+const statusText = document.createElement("div");
+statusText.className = "status-details-text";
+statusText.tabIndex = 0;
+statusText.setAttribute("role", "region");
+statusText.ariaLabel = "Full current application status";
+const statusView = floatingSurface({
+  host: app,
+  trigger: message,
+  content: statusText,
+  title: "Application status details",
+  closeLabel: "Close status details",
+  kind: "anchored",
+  width: 680,
+  maxHeight: 420,
+  beforeOpen: () => !!message.textContent,
+  fallbackFocus: () =>
+    nav.querySelector<HTMLButtonElement>("button:not(:disabled)"),
+});
+const closeStatus = () => statusView.close();
+message.onclick = () => {
+  statusText.textContent = message.textContent;
+  statusView.toggle();
+};
+const setMessage = (text: string) => {
+  message.textContent = text;
+  message.disabled = !text;
+  statusText.textContent = text;
+  if (!text) closeStatus();
+};
+setMessage("");
+const errors = new Map<string, string>();
+const success = (text: string) => {
+  if (!errors.size) setMessage(text);
+};
+const renderErrors = () => {
+  setMessage([...errors.values()].join(" · "));
+  message.classList.toggle("error", !!errors.size);
+  statusBar.setAttribute("role", errors.size ? "alert" : "status");
+};
+const report = (error: unknown, key = "operation") => {
+  errors.set(key, error instanceof Error ? error.message : String(error));
+  renderErrors();
 };
 const action = (
   key: Parameters<typeof shellText>[0],
   fn: () => void | Promise<void>,
 ) => {
   const button = document.createElement("button");
-  button.textContent = text(key);
-  locale.subscribe(() => {
-    button.textContent = text(key);
-  });
+  button.dataset.action = key;
+  const symbol: Record<string, string> = {
+    new: "add",
+    save: "save",
+    open: "folder",
+    file: "folder",
+    export: "download",
+    png: "image",
+    generate: "code",
+    second: "panels",
+    lock: "lock",
+  };
+  const renderAction = () =>
+    button.replaceChildren(
+      icon(symbol[key] ?? "folder"),
+      document.createTextNode(text(key)),
+    );
+  renderAction();
+  locale.subscribe(renderAction);
   button.addEventListener("click", () => {
-    message.textContent = "";
-    message.classList.remove("error");
     try {
-      Promise.resolve(fn()).catch(report);
+      Promise.resolve(fn())
+        .then(() => {
+          if (errors.delete(key)) renderErrors();
+        })
+        .catch((error) => report(error, key));
     } catch (error) {
-      report(error);
+      report(error, key);
     }
   });
   nav.append(button);
@@ -162,7 +246,29 @@ const action = (
 let workspace: Workspace | null = null,
   renderer: PanelRenderer | null = null,
   canvasCount = 0;
+const footer = app.querySelector<HTMLElement>("footer")!;
+const outputTrigger = document.createElement("button"),
+  output = app.querySelector<HTMLElement>("#code")!;
+outputTrigger.type = "button";
+outputTrigger.textContent = "Shader output";
+footer.append(outputTrigger);
+output.tabIndex = 0;
+const outputView = floatingSurface({
+  host: app,
+  trigger: outputTrigger,
+  content: output,
+  title: "Shader output and diagnostics",
+  closeLabel: "Close shader output",
+  kind: "anchored",
+  width: 860,
+  maxHeight: 550,
+  align: "end",
+  dismissOutside: false,
+});
+outputTrigger.onclick = () => outputView.toggle();
+const hover = mountHover(app, () => application.busy || application.saving);
 function buildWorkspace() {
+  hover.invalidate();
   renderer?.dispose();
   workspace?.dispose();
   document.querySelector("#canvases")!.replaceChildren();
@@ -174,24 +280,22 @@ function buildWorkspace() {
   workspace.register(inspectorType(widgets, locale));
   workspace.register(
     actionsType(
-      application
-        .catalog()
-        .map((item) =>
-          item.ref.moduleId === FIXED_VALUES_PIN.moduleId &&
-          item.ref.typeId === "float"
-            ? {
-                ...item,
-                presentation: {
-                  ...item.presentation,
-                  label: {
-                    ...item.presentation.label,
-                    key: "float.authoring",
-                    fallback: "Float (fixed)",
-                  },
+      application.catalog().map((item) =>
+        item.ref.moduleId === FIXED_VALUES_PIN.moduleId &&
+        item.ref.typeId === "float"
+          ? {
+              ...item,
+              presentation: {
+                ...item.presentation,
+                label: {
+                  ...item.presentation.label,
+                  key: "float.authoring",
+                  fallback: "Float (fixed)",
                 },
-              }
-            : item,
-        ),
+              },
+            }
+          : item,
+      ),
       () => ({
         undo: application.canUndo,
         redo: application.canRedo,
@@ -301,16 +405,33 @@ upgradeButton.onclick = () => {
     prepareReplace();
     application.upgradeOwners();
     buildWorkspace();
-    message.textContent =
-      "Subgraph owners upgraded explicitly; existing definitions remain expanded. Save to retain the upgraded document.";
+    setMessage(
+      "Subgraph owners upgraded explicitly; existing definitions remain expanded. Save to retain the upgraded document.",
+    );
   } catch (error) {
     report(error);
   }
 };
 nav.append(upgradeButton);
+const imageUpgrade = document.createElement("button");
+imageUpgrade.textContent = "Upgrade Image Output";
+imageUpgrade.onclick = () => {
+  try {
+    if (!replacing()) return;
+    prepareReplace();
+    application.upgradeGraphKind(zeroImageKind.ref);
+    buildWorkspace();
+    setMessage(
+      "Image Output and compatible image source owners explicitly upgraded to 0.3.0 in a new session. Unconnected color is transparent zero. Save to retain this version.",
+    );
+  } catch (error) {
+    report(error);
+  }
+};
+nav.append(imageUpgrade);
 const saveButton = action("save", async () => {
   await application.save();
-  message.textContent = text("stored");
+  success(text("stored"));
 });
 action("open", async () => {
   const list = document.querySelector("#saved-list")!;
@@ -336,7 +457,7 @@ action("open", async () => {
 });
 action("export", async () => {
   await application.download();
-  message.textContent = text("exported");
+  success(text("exported"));
 });
 const pngDialog = document.createElement("dialog");
 const pngTitle = document.createElement("h2"),
@@ -479,7 +600,11 @@ input.addEventListener("change", () => {
   })().catch(report);
 });
 action("generate", () => {
-  application.generate();
+  const result = application.generate();
+  if (result.status !== "success")
+    throw Error(
+      result.diagnostics.map((d) => d.code + ": " + d.message).join(" · "),
+    );
 });
 action("second", () => {
   addCanvas();
@@ -487,7 +612,7 @@ action("second", () => {
 const lockButton = action("lock", () =>
   application.setReadonly(!application.readonly),
 );
-lockButton.setAttribute("aria-pressed", "false");
+lockButton.setAttribute("aria-checked", "false");
 let original: string | ArrayBuffer | Blob = "";
 let currentReview: DocumentInspection | null = null,
   reviewTicket = 0;
@@ -605,6 +730,7 @@ document
     (document.querySelector("#open-dialog") as HTMLDialogElement).close(),
   );
 application.subscribe(() => {
+  hover.invalidate();
   refreshReplacement();
   saveState.textContent = application.saving
     ? text("saving")
@@ -612,7 +738,7 @@ application.subscribe(() => {
       ? text("dirty")
       : text("saved");
   saveButton.disabled = application.saving;
-  lockButton.setAttribute("aria-pressed", String(application.readonly));
+  lockButton.setAttribute("aria-checked", String(application.readonly));
 });
 application.newDocument();
 buildWorkspace();
@@ -631,5 +757,87 @@ mountPersonal(
     functionProfile,
     probeDefinitions,
   ),
-  report,
+  (error, operation) => {
+    const key = "personal:" + operation;
+    if (error === undefined) {
+      if (errors.delete(key)) renderErrors();
+    } else report(error, key);
+  },
 );
+
+// Existing document commands keep their own handlers and guards; only their
+// presentation moves into the shared owned disclosure.
+const menuTrigger = document.createElement("button"),
+  menuContent = document.createElement("div"),
+  hintsTrigger = document.createElement("button"),
+  hintsContent = document.createElement("div");
+menuTrigger.type = "button";
+menuTrigger.textContent = "Project actions";
+menuTrigger.className = "project-actions";
+menuContent.className = "function-actions";
+menuContent.tabIndex = -1;
+const documentGroup = document.createElement("div"),
+  workspaceGroup = document.createElement("div");
+for (const [group, label] of [
+  [documentGroup, "Documents and library"],
+  [workspaceGroup, "Workspace"],
+] as const) {
+  group.setAttribute("role", "group");
+  group.ariaLabel = label;
+  menuContent.append(group);
+}
+for (const child of Array.from(nav.children)) {
+  const key = (child as HTMLElement).dataset.action;
+  if (!(child instanceof HTMLButtonElement)) app.append(child);
+  else if (key !== "save" && key !== "generate") {
+    child.setAttribute(
+      "role",
+      key === "lock" ? "menuitemcheckbox" : "menuitem",
+    );
+    (key === "second" || key === "lock"
+      ? workspaceGroup
+      : documentGroup
+    ).append(child);
+  }
+}
+footer.prepend(menuTrigger);
+const projectMenu = floatingSurface({
+  host: app,
+  trigger: menuTrigger,
+  content: menuContent,
+  title: "Project actions",
+  closeLabel: "Close project actions",
+  kind: "menu",
+  width: 310,
+  maxHeight: 520,
+});
+menuTrigger.onclick = () => projectMenu.toggle();
+menuContent.addEventListener("click", (event) => {
+  const action = (event.target as Element).closest<HTMLButtonElement>("button")
+    ?.dataset.action;
+  // Dialog-opening callers retain their visible opener until their own Close.
+  if (action && ["new", "export", "file", "second", "lock"].includes(action))
+    projectMenu.close(false);
+});
+hintsTrigger.type = "button";
+hintsTrigger.textContent = "Hints";
+hintsContent.tabIndex = 0;
+for (const hint of Array.from(footer.querySelectorAll(":scope > span")))
+  hintsContent.append(hint);
+const inspectHint = document.createElement("span");
+inspectHint.textContent =
+  "F2 · Read the focused object information (read-only). Close or Escape returns focus.";
+hintsContent.append(inspectHint);
+footer.append(hintsTrigger);
+const hintsView = floatingSurface({
+  host: app,
+  trigger: hintsTrigger,
+  content: hintsContent,
+  title: "Workspace hints",
+  closeLabel: "Close hints",
+  kind: "anchored",
+  width: 370,
+  maxHeight: 300,
+  align: "end",
+});
+hintsTrigger.onclick = () => hintsView.toggle();

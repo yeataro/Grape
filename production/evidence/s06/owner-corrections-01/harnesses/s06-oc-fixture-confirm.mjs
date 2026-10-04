@@ -1,0 +1,1 @@
+import fs from 'node:fs';const f='production/tests/fixtures/required-output.ts';let s=fs.readFileSync(f,'utf8');s=s.replace("await page.getByRole('button',{name:'Open in new session',exact:true}).click()","page.once('dialog',d=>void d.accept().catch(()=>{}));await page.getByRole('button',{name:'Open in new session',exact:true}).click()");fs.writeFileSync(f,s);

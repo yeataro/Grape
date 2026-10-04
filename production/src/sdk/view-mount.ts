@@ -34,10 +34,47 @@ export interface ViewFrame {
 export interface MountContext {
   readonly surface: MountSurface;
   readonly scope: MountScope;
+  /** Optional renderer presentation only; owner-selected JSON, no edit or reflection authority. */
+  readonly hover?: (
+    target: unknown,
+    blocked?: () => HoverBlock | null,
+  ) => HoverReadView;
+}
+export interface HoverBlock {
+  readonly kind: "draft" | "composition" | "gesture";
+  readonly message: string;
+}
+export interface HoverInfo {
+  readonly kind: string;
+  readonly name: string;
+  readonly identity: string;
+  readonly state: string;
+  readonly data?: Json;
+}
+export interface HoverReadView {
+  set(target: unknown, read: () => HoverInfo): void;
+  invalidate(): void;
 }
 /** Read-only Panels receive no command capability. Commands are application-owned and Panel-bound. */
 export interface PanelMountContext extends MountContext {
   readonly commands?: import("./panel-commands.ts").PanelCommands;
+  /** Optional platform presentation only; no Graph or command authority. */
+  readonly floating?: (options: FloatingPresentation) => {
+    isOpen(): boolean;
+    open(): boolean;
+    close(focus?: boolean): void;
+  };
+}
+export interface FloatingPresentation {
+  readonly host: unknown;
+  readonly trigger: unknown;
+  readonly content: unknown;
+  readonly title: string;
+  readonly closeLabel: string;
+  readonly kind: "anchored" | "modal";
+  readonly width: number;
+  readonly maxHeight: number;
+  readonly align?: "start" | "end";
 }
 export interface MountedView<P = unknown> {
   /** Synchronous projection delivery. Async work must use scope.ticket/accept and scope.own. */

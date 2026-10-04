@@ -1,3 +1,5 @@
+import { clickAction } from "../fixtures/public-actions.ts";
+import { createNode } from "./create-node.ts";
 import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 const evidence = process.env.GRAPE_EVIDENCE_DIR!;
@@ -111,9 +113,7 @@ test("S05 AT07 legacy mode UI requires explicit owner upgrade preserving origina
   await canvas.getByText("Subgraph interface", { exact: true }).click();
   await expect(canvas.getByLabel("Subgraph emission mode")).toBeDisabled();
   const before = await exported(page);
-  await page
-    .getByRole("button", { name: "Upgrade subgraph owners", exact: true })
-    .click();
+  await clickAction(page, "Upgrade subgraph owners");
   canvas = page.locator(".canvas").first();
   await canvas.getByRole("heading", { name: "Subgraph", exact: true }).click();
   await canvas
@@ -334,7 +334,9 @@ for (const host of ["127.0.0.1", "192.168.1.105", "100.83.88.97"])
     browser,
   }) => {
     await page.goto(
-      `http://${host}:${process.env.GRAPE_TEST_HTTP_PORT ?? "4195"}`,
+      host === "127.0.0.1" && process.env.GRAPE_BASE_URL
+        ? process.env.GRAPE_BASE_URL
+        : `http://${host}:${process.env.GRAPE_TEST_HTTP_PORT ?? "4195"}`,
     );
     await expect(page.locator(".canvas").first()).toBeVisible();
     const result = await page.evaluate(async () => {
@@ -397,7 +399,7 @@ for (const host of ["127.0.0.1", "192.168.1.105", "100.83.88.97"])
       expect(result.subtle).toBe("undefined");
     }
     const canvas = page.locator(".canvas").first();
-    await page.getByRole("button", { name: "Add Float", exact: true }).click();
+    await createNode(page, "Float");
     await canvas
       .getByRole("button", { name: "Float output value", exact: true })
       .click();
@@ -423,9 +425,7 @@ for (const host of ["127.0.0.1", "192.168.1.105", "100.83.88.97"])
     await canvas
       .getByRole("heading", { name: "Subgraph", exact: true })
       .click();
-    await page
-      .getByRole("button", { name: "Personal Library", exact: true })
-      .click();
+    await clickAction(page, "Personal Library");
     await page
       .getByRole("button", { name: "Save selected subgraph", exact: true })
       .click();
@@ -457,9 +457,7 @@ for (const host of ["127.0.0.1", "192.168.1.105", "100.83.88.97"])
     await page.locator("#saved-list button").first().click();
     const afterOpen = await exported(page);
     expect(afterOpen.graph).toEqual(beforeSave.graph);
-    await page
-      .getByRole("button", { name: "Personal Library", exact: true })
-      .click();
+    await clickAction(page, "Personal Library");
     await expect(page.locator("[data-personal-file]")).toHaveCount(1);
     await fs.writeFile(
       evidence + `/s05-origin-${host}.json`,

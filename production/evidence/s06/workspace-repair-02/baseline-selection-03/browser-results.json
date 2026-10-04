@@ -1,0 +1,166 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+      "s06-connection-view.spec.ts",
+      "--grep",
+      "geometry remains fixed at zoom 1$",
+      "--output",
+      "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\baseline-selection-03\\test-results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/workspace-repair-02/baseline-selection-03/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\baseline-selection-03\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s06-connection-view.spec.ts",
+      "file": "s06-connection-view.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 selection geometry remains fixed at zoom 1",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 839,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[33m@@ -5,11 +5,11 @@\u001b[39m\n\u001b[2m      \"width\": 190,\u001b[22m\n\u001b[2m      \"x\": 716.3380126953125,\u001b[22m\n\u001b[2m      \"y\": 448.2535400390625,\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[32m-     \"height\": 79,\u001b[39m\n\u001b[31m+     \"height\": 81,\u001b[39m\n\u001b[2m      \"name\": \"Color RGBA\",\u001b[22m\n\u001b[2m      \"width\": 190,\u001b[22m\n\u001b[2m      \"x\": 114.3380355834961,\u001b[22m\n\u001b[2m      \"y\": 364.2535400390625,\u001b[22m\n\u001b[2m    },\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[33m@@ -5,11 +5,11 @@\u001b[39m\n\u001b[2m      \"width\": 190,\u001b[22m\n\u001b[2m      \"x\": 716.3380126953125,\u001b[22m\n\u001b[2m      \"y\": 448.2535400390625,\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[32m-     \"height\": 79,\u001b[39m\n\u001b[31m+     \"height\": 81,\u001b[39m\n\u001b[2m      \"name\": \"Color RGBA\",\u001b[22m\n\u001b[2m      \"width\": 190,\u001b[22m\n\u001b[2m      \"x\": 114.3380355834961,\u001b[22m\n\u001b[2m      \"y\": 364.2535400390625,\u001b[22m\n\u001b[2m    },\u001b[22m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts:49:26",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts",
+                      "column": 26,
+                      "line": 49
+                    },
+                    "snippet": "  47 |   await page.mouse.click(r.x+20,r.y+150);const restored=await geometry(c);\n  48 |   output(`selection-${zoom}`,{unselected,selected,restored});\n> 49 |   expect(selected.nodes).toEqual(unselected.nodes);expect(selected.sockets).toEqual(unselected.sockets);expect(selected.wires).toEqual(unselected.wires);\n     |                          ^\n  50 |   expect(restored.nodes).toEqual(unselected.nodes);expect(await doc(page)).toEqual(before);\n  51 | });\n  52 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts",
+                        "column": 26,
+                        "line": 49
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[33m@@ -5,11 +5,11 @@\u001b[39m\n\u001b[2m      \"width\": 190,\u001b[22m\n\u001b[2m      \"x\": 716.3380126953125,\u001b[22m\n\u001b[2m      \"y\": 448.2535400390625,\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[32m-     \"height\": 79,\u001b[39m\n\u001b[31m+     \"height\": 81,\u001b[39m\n\u001b[2m      \"name\": \"Color RGBA\",\u001b[22m\n\u001b[2m      \"width\": 190,\u001b[22m\n\u001b[2m      \"x\": 114.3380355834961,\u001b[22m\n\u001b[2m      \"y\": 364.2535400390625,\u001b[22m\n\u001b[2m    },\u001b[22m\n\n  47 |   await page.mouse.click(r.x+20,r.y+150);const restored=await geometry(c);\n  48 |   output(`selection-${zoom}`,{unselected,selected,restored});\n> 49 |   expect(selected.nodes).toEqual(unselected.nodes);expect(selected.sockets).toEqual(unselected.sockets);expect(selected.wires).toEqual(unselected.wires);\n     |                          ^\n  50 |   expect(restored.nodes).toEqual(unselected.nodes);expect(await doc(page)).toEqual(before);\n  51 | });\n  52 |\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts:49:26"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:18:28.933Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\baseline-selection-03\\test-results\\s06-connection-view-S06-se-6da2c-try-remains-fixed-at-zoom-1-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\baseline-selection-03\\test-results\\s06-connection-view-S06-se-6da2c-try-remains-fixed-at-zoom-1-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\baseline-selection-03\\test-results\\s06-connection-view-S06-se-6da2c-try-remains-fixed-at-zoom-1-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts",
+                    "column": 26,
+                    "line": 49
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-ae8e912ad451ac87cc61",
+          "file": "s06-connection-view.spec.ts",
+          "line": 38,
+          "column": 28
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T12:18:28.612Z",
+    "duration": 1494.5819999999999,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

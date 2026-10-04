@@ -1,0 +1,69 @@
+{
+  "recordType": "LEGACY_AND_CANDIDATE_VISIBLE_ZOOM_COMPARISON",
+  "recordedAt": "2026-10-04T13:01:23.722Z",
+  "source": "Human explicitly requested zooming current Legacy and comparing background dots with Grape.",
+  "legacy": {
+    "url": "http://127.0.0.1:64961/shader/c574e2c5c37d41648cc38210974c5d59/",
+    "version": "TD-Grape0.8.276 DEV",
+    "beforeZoomPercent": 43,
+    "afterZoomPercent": 118,
+    "evidence": [
+      {
+        "file": "production/evidence/coordinator/s06/legacy-live-observation-01/legacy-dots-43.jpg",
+        "bytes": 103531,
+        "sha256": "953a81aa7ed4eb0eab02bd70c9bc288f68ebbbad9f405b1bc337fbb27ea2d7b3"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/legacy-live-observation-01/legacy-dots-118.jpg",
+        "bytes": 101513,
+        "sha256": "1d21b7f90036ca65b94d18e4a54c771b5ee89695061054e91928307a2ad131c7"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/legacy-live-observation-01/legacy-dots-before-state.txt",
+        "bytes": 22494,
+        "sha256": "955ef7d15e7cb9c74925e9b8536cdd17c40f356a99a3f49effa21f7a75f5c95f"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/legacy-live-observation-01/legacy-dots-after-state.txt",
+        "bytes": 837,
+        "sha256": "ad8711e95afd599654527dda74ea27e3a61ef9b71d61556ad8e9d6efa4a2f1d2"
+      }
+    ]
+  },
+  "grape": {
+    "url": "http://127.0.0.1:4199/review.html",
+    "I": "a42d4aedd8e33c1fd432c92163db9f9d689e1bcb",
+    "R": "4d99a749e9b121acd27a959cb528a77eb425dda4",
+    "build": "S06-repair2-a42d4ae",
+    "evidence": [
+      {
+        "file": "production/evidence/coordinator/s06/legacy-live-observation-01/grape-dots-before.jpg",
+        "bytes": 57809,
+        "sha256": "de5f38250f832a12357e889daa5a6ee67bcd2892ef1b0f1544a4164a294c7281"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/legacy-live-observation-01/grape-dots-after.jpg",
+        "bytes": 59930,
+        "sha256": "a2c46cba1c94cb0d699b859bdee484a1435b2dea68b8d6143866e07bc398ab6b"
+      }
+    ]
+  },
+  "method": "Actual browser wheel zoom at empty Canvas areas, screenshots and rendered Legacy zoom percentage. No Legacy implementation/source/DOM architecture copied. No graph node/parameter/edge mutation performed by this comparison.",
+  "observed": [
+    "Legacy background dot pitch and visible prominence change with43%→118% zoom.",
+    "Grape nodes/edges enlarge, but background dot pitch and screen positions remain fixed."
+  ],
+  "limits": [
+    "No quantitative dot radius/pitch or exact density-switch algorithm claimed.",
+    "Pan behavior not separately exercised in this comparison.",
+    "Current live reference and old deployed candidate observations only, not a verdict for in-progress repair03."
+  ],
+  "nextUse": "Include visible zoom/background coherence in next already-authorized workspace/visual engineering handoff, not an unsolicited expansion of running narrow repair03.",
+  "relatedNodeFieldObservation": {
+    "revision": "4d99a749e9b121acd27a959cb528a77eb425dda4",
+    "file": "production/src/features/node-browser.ts",
+    "symbol": "nodePortRow",
+    "actual": "Disconnected input local values render as display-only spans; tooltip says Current local value; edit in Inspector. Displayed values are real but node-body inline editing is not implemented by this row.",
+    "classification": "User asked current fact; not a new implementation dispatch or claim of completion."
+  }
+}

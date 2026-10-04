@@ -1,0 +1,420 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+      "s06-status-pointer.spec.ts",
+      "--output",
+      "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-01\\test-results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/workspace-repair-03/focused-01/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-01\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s06-status-pointer.spec.ts",
+      "file": "s06-status-pointer.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 complete persistent loss details have a keyboard read path at 620",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7283,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" aria-haspopup=\"dialog\" aria-label=\"Read full Canvas status\">Function mode of definition id-22 makes this rece…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" aria-haspopup=\"dialog\" aria-label=\"Read full Canvas status\">Function mode of definition id-22 makes this rece…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:55:22",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                      "column": 22,
+                      "line": 55
+                    },
+                    "snippet": "  53 |   // Reach the actual control using keyboard navigation, without programmatic focus.\n  54 |   for (let i = 0; i < 100 && !(await read.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press(\"Tab\");\n> 55 |   await expect(read).toBeFocused();\n     |                      ^\n  56 |   await page.keyboard.press(\"Enter\");\n  57 |   const dialog = page.getByRole(\"dialog\", { name: \"Canvas status details\", exact: true }), text = dialog.getByRole(\"region\", { name: \"Full current Canvas status\", exact: true });\n  58 |   await expect(dialog).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                        "column": 22,
+                        "line": 55
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" aria-haspopup=\"dialog\" aria-label=\"Read full Canvas status\">Function mode of definition id-22 makes this rece…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n\n  53 |   // Reach the actual control using keyboard navigation, without programmatic focus.\n  54 |   for (let i = 0; i < 100 && !(await read.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press(\"Tab\");\n> 55 |   await expect(read).toBeFocused();\n     |                      ^\n  56 |   await page.keyboard.press(\"Enter\");\n  57 |   const dialog = page.getByRole(\"dialog\", { name: \"Canvas status details\", exact: true }), text = dialog.getByRole(\"region\", { name: \"Full current Canvas status\", exact: true });\n  58 |   await expect(dialog).toBeVisible();\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:55:22"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:52:32.313Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-01\\test-results\\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-01\\test-results\\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-01\\test-results\\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                    "column": 22,
+                    "line": 55
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-b0805a555fd463f6023d",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 34,
+          "column": 34
+        },
+        {
+          "title": "S06 complete persistent loss details have a keyboard read path at 1440",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7193,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" aria-haspopup=\"dialog\" aria-label=\"Read full Canvas status\">Function mode of definition id-22 makes this rece…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" aria-haspopup=\"dialog\" aria-label=\"Read full Canvas status\">Function mode of definition id-22 makes this rece…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:55:22",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                      "column": 22,
+                      "line": 55
+                    },
+                    "snippet": "  53 |   // Reach the actual control using keyboard navigation, without programmatic focus.\n  54 |   for (let i = 0; i < 100 && !(await read.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press(\"Tab\");\n> 55 |   await expect(read).toBeFocused();\n     |                      ^\n  56 |   await page.keyboard.press(\"Enter\");\n  57 |   const dialog = page.getByRole(\"dialog\", { name: \"Canvas status details\", exact: true }), text = dialog.getByRole(\"region\", { name: \"Full current Canvas status\", exact: true });\n  58 |   await expect(dialog).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                        "column": 22,
+                        "line": 55
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" aria-haspopup=\"dialog\" aria-label=\"Read full Canvas status\">Function mode of definition id-22 makes this rece…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n\n  53 |   // Reach the actual control using keyboard navigation, without programmatic focus.\n  54 |   for (let i = 0; i < 100 && !(await read.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press(\"Tab\");\n> 55 |   await expect(read).toBeFocused();\n     |                      ^\n  56 |   await page.keyboard.press(\"Enter\");\n  57 |   const dialog = page.getByRole(\"dialog\", { name: \"Canvas status details\", exact: true }), text = dialog.getByRole(\"region\", { name: \"Full current Canvas status\", exact: true });\n  58 |   await expect(dialog).toBeVisible();\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:55:22"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:52:40.303Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-01\\test-results\\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-01\\test-results\\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-01\\test-results\\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                    "column": 22,
+                    "line": 55
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-07afa74c943b601bb29e",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 34,
+          "column": 34
+        },
+        {
+          "title": "S06 actual 3px uncaptured port release across Canvas Inspector retires wire and ring",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1199,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:52:48.235Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-b426a004c4317647ca96",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 88,
+          "column": 1
+        },
+        {
+          "title": "S06 trusted Enter socket activation waits for real pointer and preserves keyboard connection",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6804,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').last().locator('[data-direction=\"input\"][data-port=\"color\"]')\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').last().locator('[data-direction=\"input\"][data-port=\"color\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"port\" type=\"button\" data-port=\"color\" data-direction=\"input\" aria-label=\"Image output input color\" data-node-id=\"86a2e167-1aed-49dc-a16d-b0514d2f6108\">…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').last().locator('[data-direction=\"input\"][data-port=\"color\"]')\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').last().locator('[data-direction=\"input\"][data-port=\"color\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"port\" type=\"button\" data-port=\"color\" data-direction=\"input\" aria-label=\"Image output input color\" data-node-id=\"86a2e167-1aed-49dc-a16d-b0514d2f6108\">…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:121:23",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                      "column": 23,
+                      "line": 121
+                    },
+                    "snippet": "  119 |   await out.click(); await page.keyboard.press(\"Escape\"); await page.keyboard.press(key);\n  120 |   for (let i = 0; i < 100 && !(await input.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press(\"Tab\");\n> 121 |   await expect(input).toBeFocused(); await page.keyboard.press(key);\n      |                       ^\n  122 |   await expect(c.locator(\".canvas-notice\")).toBeEmpty();\n  123 |   const after = await doc(page); expect(after.graph.stages.find((s: any) => s.key === \"pixel\").network.edges).toHaveLength(1);\n  124 |   await clickAction(page, \"Undo\"); expect(await doc(page)).toEqual(before);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                        "column": 23,
+                        "line": 121
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').last().locator('[data-direction=\"input\"][data-port=\"color\"]')\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').last().locator('[data-direction=\"input\"][data-port=\"color\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"port\" type=\"button\" data-port=\"color\" data-direction=\"input\" aria-label=\"Image output input color\" data-node-id=\"86a2e167-1aed-49dc-a16d-b0514d2f6108\">…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n\n  119 |   await out.click(); await page.keyboard.press(\"Escape\"); await page.keyboard.press(key);\n  120 |   for (let i = 0; i < 100 && !(await input.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press(\"Tab\");\n> 121 |   await expect(input).toBeFocused(); await page.keyboard.press(key);\n      |                       ^\n  122 |   await expect(c.locator(\".canvas-notice\")).toBeEmpty();\n  123 |   const after = await doc(page); expect(after.graph.stages.find((s: any) => s.key === \"pixel\").network.edges).toHaveLength(1);\n  124 |   await clickAction(page, \"Undo\"); expect(await doc(page)).toEqual(before);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:121:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:52:49.683Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-01\\test-results\\s06-status-pointer-S06-tru-28233-eserves-keyboard-connection-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-01\\test-results\\s06-status-pointer-S06-tru-28233-eserves-keyboard-connection-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-01\\test-results\\s06-status-pointer-S06-tru-28233-eserves-keyboard-connection-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                    "column": 23,
+                    "line": 121
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-546b82f73f21e4b338e9",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 106,
+          "column": 39
+        },
+        {
+          "title": "S06 trusted Space socket activation waits for real pointer and preserves keyboard connection",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6890,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').last().locator('[data-direction=\"input\"][data-port=\"color\"]')\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').last().locator('[data-direction=\"input\"][data-port=\"color\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"port\" type=\"button\" data-port=\"color\" data-direction=\"input\" aria-label=\"Image output input color\" data-node-id=\"a6225001-2b56-4cc8-8764-b9f94f08cf92\">…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').last().locator('[data-direction=\"input\"][data-port=\"color\"]')\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').last().locator('[data-direction=\"input\"][data-port=\"color\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"port\" type=\"button\" data-port=\"color\" data-direction=\"input\" aria-label=\"Image output input color\" data-node-id=\"a6225001-2b56-4cc8-8764-b9f94f08cf92\">…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:121:23",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                      "column": 23,
+                      "line": 121
+                    },
+                    "snippet": "  119 |   await out.click(); await page.keyboard.press(\"Escape\"); await page.keyboard.press(key);\n  120 |   for (let i = 0; i < 100 && !(await input.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press(\"Tab\");\n> 121 |   await expect(input).toBeFocused(); await page.keyboard.press(key);\n      |                       ^\n  122 |   await expect(c.locator(\".canvas-notice\")).toBeEmpty();\n  123 |   const after = await doc(page); expect(after.graph.stages.find((s: any) => s.key === \"pixel\").network.edges).toHaveLength(1);\n  124 |   await clickAction(page, \"Undo\"); expect(await doc(page)).toEqual(before);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                        "column": 23,
+                        "line": 121
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').last().locator('[data-direction=\"input\"][data-port=\"color\"]')\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').last().locator('[data-direction=\"input\"][data-port=\"color\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"port\" type=\"button\" data-port=\"color\" data-direction=\"input\" aria-label=\"Image output input color\" data-node-id=\"a6225001-2b56-4cc8-8764-b9f94f08cf92\">…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n\n  119 |   await out.click(); await page.keyboard.press(\"Escape\"); await page.keyboard.press(key);\n  120 |   for (let i = 0; i < 100 && !(await input.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press(\"Tab\");\n> 121 |   await expect(input).toBeFocused(); await page.keyboard.press(key);\n      |                       ^\n  122 |   await expect(c.locator(\".canvas-notice\")).toBeEmpty();\n  123 |   const after = await doc(page); expect(after.graph.stages.find((s: any) => s.key === \"pixel\").network.edges).toHaveLength(1);\n  124 |   await clickAction(page, \"Undo\"); expect(await doc(page)).toEqual(before);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:121:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:52:56.918Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-01\\test-results\\s06-status-pointer-S06-tru-3e260-eserves-keyboard-connection-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-01\\test-results\\s06-status-pointer-S06-tru-3e260-eserves-keyboard-connection-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-01\\test-results\\s06-status-pointer-S06-tru-3e260-eserves-keyboard-connection-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                    "column": 23,
+                    "line": 121
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-09a2810c05fb1e2d8096",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 106,
+          "column": 39
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T12:52:32.035Z",
+    "duration": 32215.713,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

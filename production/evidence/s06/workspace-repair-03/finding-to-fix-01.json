@@ -1,0 +1,106 @@
+{
+  "implementationI": "40af6555f475d37c2da12a630655831f73ef9e33",
+  "priorI": "a42d4aedd8e33c1fd432c92163db9f9d689e1bcb",
+  "priorR": "4d99a749e9b121acd27a959cb528a77eb425dda4",
+  "originalReviewVerdict": "FAIL preserved verbatim",
+  "counters": {
+    "initialReviewAttempt": 1,
+    "latestReviewAttempt": 3,
+    "latestReviewVerdict": "FAIL",
+    "repairRound": 3,
+    "unsuccessfulRepairReReviewRounds": 2,
+    "transientRetries": 0,
+    "escapeFindingGroup": "S05-FG-ESCAPE-FOCUS-01",
+    "escapeRepairAttempt": 1,
+    "escapeUnsuccessfulRounds": 0,
+    "noReset": true,
+    "budget": "One further repair/re-review round remains before third unsuccessful round requires technical diagnosis; no renamed group or symptom resets."
+  },
+  "humanPresentation": {
+    "file": "production/evidence/coordinator/s06/repair-03/human-presentation-clarification-01.json",
+    "bytes": 4211,
+    "sha256": "d4eadb9a954e5295f0463f9dd97b078987ad46aa7d58f430d986719babe7b11a"
+  },
+  "humanSelection": {
+    "file": "production/evidence/coordinator/s06/repair-03/human-selection-geometry-reaffirmation-01.json",
+    "bytes": 3533,
+    "sha256": "69f71d86fe4824fa35be9318cb198476914b207e06f1097b530e72fe3c513baa"
+  },
+  "findings": [
+    {
+      "id": "S06-FR-CANVAS-NOTICE-TRUNCATION-001",
+      "status": "IMPLEMENTER_REPAIRED_PENDING_INDEPENDENT_REVIEW",
+      "change": "Reserve bottom Canvas status row and bottom application status summary. Single line may truncate as explicitly authorized; native keyboard-operable current-details popup wraps every receiver/edge, scrolls at short viewport, closes with Close/Escape and returns focus. Reading/closing is view-only. Current loss text derives from existing detached Graph snapshot, not event history, so Undo/Redo reprojects current loss facts. Existing operation errors retain matching recovery and priority. Async matching Save recovery closes obsolete popup and focuses an enabled current control.",
+      "before": "baseline-loss-02: valid4/10receiver old archive has85/115px content in60px cap and no complete-read affordance.",
+      "after": [
+        "archive-public-01/loss-620-full.json",
+        "archive-public-01/loss-1440-full.json",
+        "archive-public-01: bottom application current error popup and delayed matching Save recovery",
+        "archive-public-01: original compact notice/PORT_TARGET/PORT_DIRECTION/unrelated INPUT_REQUIRED cases"
+      ]
+    },
+    {
+      "id": "S06-FR-TEMPORARY-WIRE-RELEASE-001",
+      "status": "IMPLEMENTER_REPAIRED_PENDING_INDEPENDENT_REVIEW",
+      "change": "Mount-owned document capture pointerup/pointercancel cleans only matching physical portDrag ending outside root; no-button matching move defensively retires ended physical state. Intentional click-selected port is distinct and survives unpressed movement. Existing captured drag and command admission remain.",
+      "before": "baseline-01 actual mouse3px crossing Canvas into Inspector reproduced orphan path/ring and no-button revival.",
+      "after": [
+        "archive-public-01: actual3px cross-boundary release and unpressed return",
+        "archive-public-01: explicitly synthetic matching/wrong-pointer cancellation and click-pending preservation",
+        "archive-public-01: both-direction direct/captured oneUndoRedo, readonly/stale/load/cancel"
+      ]
+    },
+    {
+      "id": "S06-FR-TEMPORARY-WIRE-KEYBOARD-001",
+      "status": "IMPLEMENTER_REPAIRED_PENDING_INDEPENDENT_REVIEW",
+      "change": "Keyboard-generated detail0 click arms selection without inventing pointer coordinates. Wait for actual pointer movement before drawing a wire; retain native socket focus and Enter/Space connection.",
+      "before": "baseline-01 Enter and Space reproduce old origin-directed preview.",
+      "after": [
+        "archive-public-01/keyboard-Enter.json",
+        "archive-public-01/keyboard-Space.json",
+        "archive-public-01: natural Escape and oneUndoRedo keyboard connection"
+      ]
+    }
+  ],
+  "selectionGeometry": {
+    "status": "CURRENT_CANDIDATE_REGRESSION_VERIFIED",
+    "productChange": "No additional geometry change was needed; prior fixed1px border retained.",
+    "after": "archive-public-01/selection-geometry-current.json",
+    "nodes": "Color RGBA and Float fixed values, arithmetic Multiply with displayed local-value field, Image output, two real edges",
+    "inputs": "Trusted pointer select/Shift toggle; Shift+Tab traversal, Enter/Space select and selecting another article to deselect target",
+    "scales": [
+      0.65,
+      1,
+      1.25
+    ],
+    "invariant": "Body, title/text/local-value spans, port/socket bounds, real path data/bounds, camera transform and revision exactly equal within each camera baseline. Exported document unchanged. Undo removes prior edge directly and Redo restores, proving no selection History entry.",
+    "limit": "Inspector contents intentionally follow selected node; display-only node fields are not claimed inline editors."
+  },
+  "preservedClosures": [
+    {
+      "id": "S06-FR-EVIDENCE-AVAILABILITY-001",
+      "status": "CLOSED_AT_PRIOR_I_R_RETAINED",
+      "closedAt": {
+        "I": "11e43c8f3bda995ba017b5a4790ddb461a3ebd62",
+        "R": "8d7dc0a4531fe14f7a490ddf025a47595e97ae1d"
+      }
+    },
+    {
+      "id": "S06-FR-HELP-BACKDROP-001",
+      "status": "CLOSED_AT_PRIOR_I_R_RETAINED",
+      "closedAt": {
+        "I": "11e43c8f3bda995ba017b5a4790ddb461a3ebd62",
+        "R": "8d7dc0a4531fe14f7a490ddf025a47595e97ae1d"
+      }
+    },
+    {
+      "id": "S06-FR-CANVAS-CONNECTION-NOTICE-001",
+      "status": "CLOSED_AT_CURRENT_I_R_FOR_ORIGINAL_COUNTEREXAMPLES",
+      "closedAt": {
+        "I": "a42d4aedd8e33c1fd432c92163db9f9d689e1bcb",
+        "R": "4d99a749e9b121acd27a959cb528a77eb425dda4"
+      }
+    }
+  ],
+  "pending": "Single-click Create/Browse clarification and initial double-click placement remain unchanged/deferred."
+}

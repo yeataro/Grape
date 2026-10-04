@@ -1,3 +1,4 @@
+import { createNode } from "./create-node.ts";
 import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 import { valueCases, valueFixture } from "../fixtures/s05-values.ts";
@@ -187,9 +188,7 @@ for (const item of valueCases)
         );
       }
       const canvas = page.locator(".canvas").first();
-      await page
-        .getByRole("button", { name: "Add " + item.button, exact: true })
-        .click();
+      await createNode(page, item.button);
       await canvas
         .getByRole("heading", { name: item.label, exact: true })
         .last()

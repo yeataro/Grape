@@ -1,0 +1,69 @@
+<section id="color" class="fd-section" aria-labelledby="fd-color-title">
+  <header class="section-head">
+    <p class="kicker">06 / SHARED COLOR EDITING</p>
+    <h2 id="fd-color-title">同一個面板，依色值決定 Alpha。</h2>
+    <p class="lede">共用色彩面板已在功能預覽版 0.8.273 交付。這份本地圖稿同步其呈現與提交規則：Uniform 即時更新，常數保留草稿至 Apply；RGB／RGBA 語意決定是否出現 A。</p>
+  </header>
+  <article id="fd-color-candidate" class="fd-artboard" aria-labelledby="fd-picker-title">
+    <div class="fd-artboard-label"><span class="fd-tag fd-tag-proposed">OWNER-ACCEPTED DESIGN · LOCAL DEMO</span><span class="fd-tag">ALIGNED WITH LEGACY 0.8.273</span></div>
+    <div class="color-atlas-layout">
+      <div class="color-atlas-context">
+        <h3 id="fd-picker-title">顏色直接看，數值直接改。</h3>
+        <p>選擇下方示範型別，比較同一面板的兩種呈現。這是圖冊的檢視控制，不是產品裡讓使用者隨意改變 Parameter 型別的按鈕。</p>
+        <div class="color-target-demo" role="group" aria-label="圖冊示範目標型別"><button type="button" data-color-target="RGB" aria-pressed="false">RGB</button><button type="button" data-color-target="RGBA" aria-pressed="true">RGBA</button></div>
+        <div class="color-mode-demo" role="group" aria-label="圖冊示範寫入模式"><button type="button" data-color-mode="constant" aria-pressed="true">Constant · 草稿</button><button type="button" data-color-mode="live" aria-pressed="false">Uniform · 本地即時</button></div>
+        <div class="color-demo-model"><span class="color-demo-model-swatch" aria-hidden="true"></span><div><span>本地模型值</span><output data-color-model>#AD7FFFE1</output></div><button type="button" data-color-open>重新開啟</button></div>
+        <p class="color-demo-result" data-color-result role="status">常數草稿：Apply 才改模型值。</p>
+        <dl class="color-atlas-rules">
+          <div><dt>RGB</dt><dd>H／S／V、R／G／B；沒有 A。<br><code>#RRGGBB</code> · 6 位 HEX</dd></div>
+          <div><dt>RGBA</dt><dd>同樣六列，加上 A。<br><code>#RRGGBBAA</code> · 8 位 HEX，完全不透明也保留 FF。</dd></div>
+          <div><dt>HEX</dt><dd>可直接輸入並連動數值。RGBA 貼上 6 位時保留原 Alpha，完成編輯後補齊 8 位；RGB 不接受 8 位。</dd></div>
+        </dl>
+        <p class="color-atlas-note">以上是圖冊控制。可在面板內改色，再點外面、Apply 或 ×，觀察本地模型值。Uniform 的 ×／Escape 還原整個面板開啟前的值；常數的 ×／Escape／外部點擊取消草稿。</p>
+      </div>
+      <div id="grape-compact-color" class="color-atlas-preview">
+  <div class="gcp-window" role="dialog" tabindex="-1" aria-label="Grape 精簡色彩面板本地示範">
+    <div class="gcp-header"><span class="gcp-title">Color</span><div class="gcp-header-tools" role="group" aria-label="色彩控制"><button type="button" class="gcp-view-button" data-view="swatches" aria-label="顯示目前顏色與常用色" title="色票" aria-pressed="true"><i data-lucide="swatch-book" aria-hidden="true"></i></button><button type="button" class="gcp-view-button" data-view="plane" aria-label="顯示色面" title="色面" aria-pressed="false"><i data-lucide="palette" aria-hidden="true"></i></button><button type="button" class="gcp-eyedropper" aria-label="畫面取色滴管，僅本地入口示意" title="畫面取色 · 本地入口示意"><i data-lucide="pipette" aria-hidden="true"></i></button></div><div class="gcp-header-actions"><button type="button" class="gcp-apply" aria-label="套用草稿">Apply</button><button type="button" class="gcp-close" aria-label="取消本次色彩編輯" title="取消 · Escape"><i data-lucide="close" aria-hidden="true"></i></button></div></div>
+    <div class="gcp-top-region">
+    <div id="gcp-optional-plane" hidden><div class="gcp-shapes" role="group" aria-label="選色形式">
+      <button type="button" class="cursor-interaction" data-shape="square" aria-label="方形：飽和度與明度" aria-pressed="true" title="方形"><i data-lucide="square" aria-hidden="true"></i></button>
+      <button type="button" class="cursor-interaction" data-shape="circle" aria-label="圓盤：色相與飽和度" aria-pressed="false" title="圓盤"><i data-lucide="circle" aria-hidden="true"></i></button>
+      <button type="button" class="cursor-interaction" data-shape="triangle" aria-label="三角形：飽和度與明度" aria-pressed="false" title="三角形"><i data-lucide="triangle" aria-hidden="true"></i></button>
+    </div>
+    <button type="button" class="gcp-surface" aria-label="選色面，方向鍵調整飽和度與明度"><canvas width="512" height="360" aria-hidden="true"></canvas></button>
+    </div>
+    <div class="gcp-top">
+      <div class="gcp-preview-checker"><div class="gcp-preview" role="img" aria-label="目前顏色"></div><button type="button" class="gcp-add" aria-label="將目前顏色加入色票" title="加入目前顏色"><i data-lucide="plus" aria-hidden="true"></i></button></div>
+      <div class="gcp-palette"><div class="gcp-swatches" role="group" aria-label="TD 參考常用色票，十一欄四列"></div></div>
+    </div>
+    </div>
+    <div class="gcp-hex-row"><div class="gcp-hex-control"><label for="gcp-hex-value">HEX</label><input id="gcp-hex-value" class="gcp-hex" type="text" value="#AD7FFFE1" spellcheck="false" autocomplete="off" aria-label="Hex 色碼，可輸入六或八位"></div><div class="gcp-saved" role="group" aria-label="本次加入的色票" hidden></div></div>
+    <div class="gcp-channels gcp-hsv" role="group" aria-label="HSV，Hue 使用角度，Saturation 和 Value 使用 0 到 1">
+      <label class="gcp-channel"><span>H</span><input type="range" min="0" max="360" step="0.1" value="210.7" aria-label="H 色相滑桿"><input type="number" min="0" max="360" step="0.1" value="210.7" aria-label="H 色相數值"></label>
+      <label class="gcp-channel"><span>S</span><input type="range" min="0" max="1" step="0.001" value="0.547" aria-label="S 飽和度滑桿"><input type="number" min="0" max="1" step="0.001" value="0.547" aria-label="S 飽和度數值"></label>
+      <label class="gcp-channel"><span>V</span><input type="range" min="0" max="1" step="0.001" value="0.91" aria-label="V 明度滑桿"><input type="number" min="0" max="1" step="0.001" value="0.91" aria-label="V 明度數值"></label>
+    </div>
+    <div class="gcp-channels gcp-rgb" role="group" aria-label="RGB，正規化單位；數值欄保留 HDR 與負值">
+      <label class="gcp-channel"><span>R</span><input type="range" min="0" max="1" step="0.001" value="0.412" aria-label="R 紅滑桿"><input type="number" min="0" max="1" step="0.001" value="0.412" aria-label="R 紅數值"></label>
+      <label class="gcp-channel"><span>G</span><input type="range" min="0" max="1" step="0.001" value="0.655" aria-label="G 綠滑桿"><input type="number" min="0" max="1" step="0.001" value="0.655" aria-label="G 綠數值"></label>
+      <label class="gcp-channel"><span>B</span><input type="range" min="0" max="1" step="0.001" value="0.91" aria-label="B 藍滑桿"><input type="number" min="0" max="1" step="0.001" value="0.91" aria-label="B 藍數值"></label>
+    </div>
+    <div class="gcp-alpha-row">
+      <label class="gcp-channel"><span>A</span><input type="range" min="0" max="1" step="0.001" value="1" aria-label="A 透明度滑桿"><input type="number" min="0" max="1" step="0.001" value="1" aria-label="A 透明度數值"></label>
+    </div>
+    <span class="gcp-notice" role="status" hidden>滴管入口示意；此稿不擷取螢幕。</span>
+    <span class="gcp-sr gcp-status" role="status" aria-live="polite"></span>
+  </div>
+  <p class="color-demo-closed" hidden>面板已關閉。可從左側重新開啟。</p>
+</div>
+    </div>
+    <p class="color-atlas-boundary">本頁使用獨立的本地模型示範已定案的 Apply／取消／即時規則；重新整理會還原，滴管只顯示入口。沒有連線 TD，也不模擬 Host CAS、receipt 或 Undo。Legacy 0.8.273 的產品證據為 39 項單元、35 項瀏覽器、6 項 TD 驗證，與本圖稿的本地檢查分開記錄。</p>
+  </article>
+  <dl class="fd-metadata">
+    <div><dt>固定設計意圖</dt><dd>100 × 100 目前色、角落「＋」、TD 11 × 4 色票、HEX 右側自存色、同時可見的 HSV／RGB、依目標決定 Alpha。</dd></div>
+    <div><dt>可配置</dt><dd>呈現入口、面板位置、Style 與可用寬度。桌面色票最小寬 16px；不足時重排，不持續縮小。</dd></div>
+    <div><dt>來源</dt><dd>本轮人類審閱與 <a href="assets/td-color-reference.png">TD 原圖</a>。44 色由原圖像素取樣，不聲稱是 TD 內部浮點色彩值。</dd></div>
+    <div><dt>實作邊界</dt><dd>所有色彩入口共用此意圖；一般 vec3／vec4 不自動變成色彩。Legacy 已交付條件式 EyeDropper 與精度保留；本頁不驗證原生取色、CEF、實體觸控或色彩管理，也不是重構版的執行程式。</dd></div>
+  </dl>
+  <p class="note"><a href="COLOR_PICKER_SPEC.md">色彩面板設計與互動說明</a> · <a href="parts/color-manifest.json">機器可讀索引</a> · <a href="verification.json">實際執行的檢查</a></p>
+</section>

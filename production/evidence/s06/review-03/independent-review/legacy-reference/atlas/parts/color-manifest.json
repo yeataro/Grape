@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "partId": "shared-color-picker",
+  "status": "DESIGN_ACCEPTED_LOCAL_DEMO_ALIGNED_WITH_LEGACY_0_8_273",
+  "revision": "ATLAS-004",
+  "sections": [
+    "color"
+  ],
+  "assets": {
+    "html": "color.html",
+    "css": "color.css",
+    "js": "color.js"
+  },
+  "artboards": [
+    {
+      "id": "fd-color-candidate",
+      "section": "color",
+      "title": "Shared compact picker: constant draft and Uniform live editing, RGB/RGBA",
+      "kind": "owner-accepted-design-local-demonstration",
+      "gapId": "UX-DESIGN-GAP-COLOR-001",
+      "sourceReferences": [
+        {
+          "path": "../COLOR_PICKER_SPEC.md"
+        },
+        {
+          "path": "../assets/td-color-reference.png"
+        },
+        {
+          "type": "owner-review",
+          "statement": "Owner-approved compact layout and editing policy, delivered in Legacy 0.8.273. RGB omits A and formats6 HEX; RGBA includes A and formats8 HEX including FF."
+        },
+        {
+          "type": "product-evidence-read-only",
+          "repository": "Legacy TD Grape",
+          "version": "0.8.273",
+          "document": "docs/features/CUSTOM_COLOR_PICKER.md",
+          "statement": "Evidence reference only; atlas does not import or execute product source."
+        }
+      ],
+      "interactions": [
+        "Simultaneous H/S/V and R/G/B; A only for RGBA.",
+        "Centered swatches/plane/eyedropper trio; right Apply only in constant mode, X always cancels.",
+        "Constant edits are draft-only; Apply writes once; outside/X/Escape cancel.",
+        "Uniform demo updates a local model live; outside accepts, X/Escape restore the whole opening value.",
+        "Enter normalizes the field only; unchanged Apply does not write.",
+        "RGB/RGBA and live/constant demo controls, model value and reopen live outside the product specimen.",
+        "RGB #RRGGBB; RGBA #RRGGBBAA including opaque FF.",
+        "RGBA6-digit paste preserves Alpha; blur/change/Enter normalizes8. RGB rejects8.",
+        "44 TD reference swatches, corner add, six session swatches beside HEX.",
+        "Top-region palette/plane swap; square/circle/triangle.",
+        "Pointer/keyboard edits; pointer cancel restores gesture basis; stale events fenced.",
+        "Invalid draft retained until corrected or whole-opening cancellation; Apply disabled, X remains available.",
+        "Exact raw RGB/HDR/Alpha survive projection, reopen and no-op Apply; only explicit edits modify the local color.",
+        "Eyedropper entrance only, not operational screen capture."
+      ],
+      "preserve": [
+        "Shared design at color-valued entry points",
+        "Square100px current color",
+        "No separate plus row",
+        "Normalized numeric fields",
+        "Direct HEX",
+        "Round circle"
+      ],
+      "limits": [
+        "No product, Graph, History or Host writes",
+        "Local demonstration of delivered product commit/cancel policy; no TD, CAS, receipt, external-writer or Undo simulation",
+        "No screen capture or browser/CEF/device qualification",
+        "CSS sRGB0–1 is not shader-wide clamp",
+        "No persistent palette policy"
+      ],
+      "targetVariants": {
+        "RGB": {
+          "numericRows": [
+            "H",
+            "S",
+            "V",
+            "R",
+            "G",
+            "B"
+          ],
+          "alphaVisible": false,
+          "formattedHexDigits": 6
+        },
+        "RGBA": {
+          "numericRows": [
+            "H",
+            "S",
+            "V",
+            "R",
+            "G",
+            "B",
+            "A"
+          ],
+          "alphaVisible": true,
+          "formattedHexDigits": 8,
+          "opaqueAlphaSuffix": "FF"
+        }
+      }
+    }
+  ],
+  "palette": {
+    "source": "../assets/td-color-reference.png",
+    "evidenceKind": "owner-supplied-image-pixel-samples-not-internal-TD-float-values",
+    "columns": 11,
+    "rows": 4,
+    "sampleRegion": {
+      "x": 174,
+      "y": 71,
+      "cellWidth": 14,
+      "cellHeight": 16
+    },
+    "displayMinimumCellCssPx": {
+      "width": 16,
+      "height": 20
+    },
+    "colors": [
+      "#FF0000",
+      "#FF8B00",
+      "#E9FF00",
+      "#5DFF00",
+      "#00FF2D",
+      "#00FFB9",
+      "#00BBFF",
+      "#002FFF",
+      "#5B00FF",
+      "#E700FF",
+      "#FF008D",
+      "#FF7F80",
+      "#FFC57F",
+      "#F4FF7F",
+      "#AEFF7F",
+      "#7FFF96",
+      "#7FFFDC",
+      "#7FDDFF",
+      "#7F97FF",
+      "#AD7FFF",
+      "#F37FFF",
+      "#FF7FC6",
+      "#7F0000",
+      "#7F4500",
+      "#747F00",
+      "#2E7F00",
+      "#007F16",
+      "#007F5C",
+      "#005D7F",
+      "#00177F",
+      "#2D007F",
+      "#73007F",
+      "#7F0046",
+      "#000000",
+      "#191919",
+      "#333333",
+      "#4C4C4C",
+      "#666666",
+      "#7F7F7F",
+      "#999999",
+      "#B2B2B2",
+      "#CCCCCC",
+      "#E5E5E5",
+      "#FFFFFF"
+    ],
+    "sourceSha256": "071bd9fe62e6a13303fb06951419957fa53a514ea13a1fb3d41bcb729c90b30b"
+  },
+  "validation": {
+    "command": "node check-color.cjs",
+    "checks": 33,
+    "scope": "Local model transitions and DOM/canvas-double behavior, not browser or product acceptance"
+  },
+  "productEvidence": {
+    "version": "Legacy 0.8.273",
+    "unitChecks": 39,
+    "browserChecks": 35,
+    "tdChecks": 6,
+    "scope": "Previously delivered product results, recorded separately; not rerun by atlas and not refactor acceptance",
+    "limits": "Windows TD 2025.32820 and Edge results do not qualify every CEF, Safari, iPad, operating system, EyeDropper availability or color profile"
+  },
+  "supersedes": {
+    "revision": "ATLAS-002",
+    "artboard": "fd-color-candidate",
+    "oldTests": 27,
+    "status": "SUPERSEDED_NOT_COUNTED_AS_CURRENT_PASS"
+  }
+}

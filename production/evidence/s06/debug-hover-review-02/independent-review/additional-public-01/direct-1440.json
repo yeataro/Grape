@@ -1,0 +1,54 @@
+{
+  "name": "direct-1440",
+  "routes": [
+    {
+      "before": "Node · Color RGBA · Committed · selected (UI-only)",
+      "text": "Node: Color RGBA\nIdentity: c92e7c5a-5b1b-40db-81a0-6b240c28f59a\nState: Committed · selected (UI-only)\n\n{\n  \"committed\": {\n    \"type\": {\n      \"moduleId\": \"grape.nodes.fixed-values\",\n      \"version\": \"0.1.0\",\n      \"fingerprint\": \"sha256:0d75d254ae4654e672001bc326252ab9775c87b581b79c15e6e8d44fee59a6ba\",\n      \"typeId\": \"color\"\n    },\n    \"state\": {\n      \"value\": [\n        0.25,\n        0.5,\n        0.75,\n        1\n      ]\n    },\n    \"inputValues\": {},\n    \"position\": [\n      48,\n      96\n    ],\n    \"references\": []\n  },\n  \"uiOnly\": {\n    \"selected\": true,\n    \"stage\": \"bd36d16b-0f7e-4b37-bc60-fd199806375a\",\n    \"occurrence\": []\n  }\n}",
+      "slow": true,
+      "haltAtActionMs": 300,
+      "steps": 80,
+      "from": {
+        "x": 167,
+        "y": 363.5
+      },
+      "to": {
+        "x": 604.7890625,
+        "y": 780
+      }
+    },
+    {
+      "before": "Port · out · Committed · connected",
+      "text": "Port: out\nIdentity: c92e7c5a-5b1b-40db-81a0-6b240c28f59a/output/out\nState: Committed · connected\n\n{\n  \"committed\": {\n    \"key\": \"out\",\n    \"direction\": \"output\",\n    \"type\": \"glsl.vec4\",\n    \"requireConstant\": false,\n    \"value\": \"未提供\"\n  },\n  \"uiOnly\": {\n    \"stage\": \"bd36d16b-0f7e-4b37-bc60-fd199806375a\",\n    \"occurrence\": []\n  }\n}",
+      "slow": true,
+      "haltAtActionMs": 300,
+      "steps": 80,
+      "from": {
+        "x": 261,
+        "y": 405.5
+      },
+      "to": {
+        "x": 584.1171875,
+        "y": 780
+      }
+    },
+    {
+      "before": "Parameter Widget · Value / R · Writable · committed",
+      "text": "Parameter Widget: Value / R\nIdentity: c92e7c5a-5b1b-40db-81a0-6b240c28f59a/value/R\nState: Writable · committed\n\n{\n  \"widget\": \"grape.widget.vector\",\n  \"committed\": {\n    \"value\": [\n      0.25,\n      0.5,\n      0.75,\n      1\n    ],\n    \"type\": \"json\",\n    \"links\": []\n  },\n  \"draft\": null,\n  \"uiOnly\": {\n    \"component\": \"R\",\n    \"editing\": false,\n    \"composing\": false\n  }\n}",
+      "slow": true,
+      "haltAtActionMs": 300,
+      "steps": 80,
+      "from": {
+        "x": 1295.5,
+        "y": 324.5
+      },
+      "to": {
+        "x": 604.7890625,
+        "y": 780
+      }
+    }
+  ],
+  "lifetime": [],
+  "generated": "// vertex\n#version 300 es\nlayout(location=0) in vec2 position;\nvoid main() { gl_Position = vec4(position, 0.0, 1.0); }\n\n// pixel\n#version 300 es\nprecision highp float;\nout vec4 fragColor;\n\nvoid main() {\n  const vec4 n_1_p0 = vec4(0.25, 0.5, 0.75, 1.0);\n  fragColor = n_1_p0;\n}\n",
+  "status": "FAIL",
+  "error": "page.waitForEvent: Timeout 30000ms exceeded while waiting for event \"download\"\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n    at exp (C:\\Users\\user\\.codex\\worktrees\\s06-debug-hover-review-02\\Grape\\.verification\\s06-debug-hover-review-02\\additional-public.mjs:7:69)\n    at C:\\Users\\user\\.codex\\worktrees\\s06-debug-hover-review-02\\Grape\\.verification\\s06-debug-hover-review-02\\additional-public.mjs:18:667"
+}

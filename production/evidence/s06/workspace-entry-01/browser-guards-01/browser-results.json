@@ -1,0 +1,296 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config=C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+      "s06-guards.spec.ts",
+      "--output=C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-guards-01\\artifacts"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/workspace-entry-01/browser-guards-01/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-guards-01\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s06-guards.spec.ts",
+      "file": "s06-guards.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 Canvas connection failure persists across movement and unrelated successful actions until matching recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1146,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T09:26:38.812Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4f827f537a877e208594-10be4b607f7dbcf81095",
+          "file": "s06-guards.spec.ts",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "title": "S06 category collapse survives query changes and whitespace uses the tree without a Graph edit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5491,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Node catalog' }).locator('details').filter({ has: getByRole('dialog', { name: 'Node catalog' }).locator('summary').filter({ hasText: 'Nodes' }) }).first()\nExpected: not have attribute\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"not toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Node catalog' }).locator('details').filter({ has: getByRole('dialog', { name: 'Node catalog' }).locator('summary').filter({ hasText: 'Nodes' }) }).first()\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Node catalog' }).locator('details').filter({ has: getByRole('dialog', { name: 'Node catalog' }).locator('summary').filter({ hasText: 'Nodes' }) }).first()\nExpected: not have attribute\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"not toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Node catalog' }).locator('details').filter({ has: getByRole('dialog', { name: 'Node catalog' }).locator('summary').filter({ hasText: 'Nodes' }) }).first()\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts:18:145",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts",
+                      "column": 145,
+                      "line": 18
+                    },
+                    "snippet": "  16 |  const label=await group.locator(':scope > summary').textContent();await group.locator(':scope > summary').click();await expect(group).not.toHaveAttribute('open');\n  17 |  await search.fill('Multiply');await expect(catalog.getByRole('button',{name:'Inspect Multiply',exact:true})).toBeVisible();await search.fill('   ');\n> 18 |  const restored=catalog.locator('details').filter({has:catalog.locator('summary').filter({hasText:label!})}).first();await expect(restored).not.toHaveAttribute('open');await page.keyboard.press('Escape');expect(await doc(page)).toEqual(before);\n     |                                                                                                                                                 ^\n  19 | });\n  20 | test('S06 Personal search and inspect are readonly, malformed import survives unrelated success, and insert restores one Undo',async({page})=>{\n  21 |  await page.getByRole('button',{name:'New subgraph',exact:true}).click();await clickAction(page,'Personal Library');const dialog=page.locator('dialog[open]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts",
+                        "column": 145,
+                        "line": 18
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Node catalog' }).locator('details').filter({ has: getByRole('dialog', { name: 'Node catalog' }).locator('summary').filter({ hasText: 'Nodes' }) }).first()\nExpected: not have attribute\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"not toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Node catalog' }).locator('details').filter({ has: getByRole('dialog', { name: 'Node catalog' }).locator('summary').filter({ hasText: 'Nodes' }) }).first()\u001b[22m\n\n\n  16 |  const label=await group.locator(':scope > summary').textContent();await group.locator(':scope > summary').click();await expect(group).not.toHaveAttribute('open');\n  17 |  await search.fill('Multiply');await expect(catalog.getByRole('button',{name:'Inspect Multiply',exact:true})).toBeVisible();await search.fill('   ');\n> 18 |  const restored=catalog.locator('details').filter({has:catalog.locator('summary').filter({hasText:label!})}).first();await expect(restored).not.toHaveAttribute('open');await page.keyboard.press('Escape');expect(await doc(page)).toEqual(before);\n     |                                                                                                                                                 ^\n  19 | });\n  20 | test('S06 Personal search and inspect are readonly, malformed import survives unrelated success, and insert restores one Undo',async({page})=>{\n  21 |  await page.getByRole('button',{name:'New subgraph',exact:true}).click();await clickAction(page,'Personal Library');const dialog=page.locator('dialog[open]');\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts:18:145"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T09:26:40.180Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-guards-01\\artifacts\\s06-guards-S06-category-co-b04ab-e-tree-without-a-Graph-edit-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-guards-01\\artifacts\\s06-guards-S06-category-co-b04ab-e-tree-without-a-Graph-edit-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-guards-01\\artifacts\\s06-guards-S06-category-co-b04ab-e-tree-without-a-Graph-edit-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts",
+                    "column": 145,
+                    "line": 18
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4f827f537a877e208594-d3d54c2577131731ad67",
+          "file": "s06-guards.spec.ts",
+          "line": 14,
+          "column": 1
+        },
+        {
+          "title": "S06 Personal search and inspect are readonly, malformed import survives unrelated success, and insert restores one Undo",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30097,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\fixtures\\public-actions.ts",
+                        "column": 16,
+                        "line": 11
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Enable editing', exact: true })\u001b[22m\n\n\n   at ..\\fixtures\\public-actions.ts:11\n\n   9 |       await menu.locator(\"summary\").click();\n  10 |   }\n> 11 |   await button.click();\n     |                ^\n  12 | }\n  13 |\n    at clickAction (C:\\Users\\user\\source\\Grape\\production\\tests\\fixtures\\public-actions.ts:11:16)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts:26:2"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T09:26:46.035Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-guards-01\\artifacts\\s06-guards-S06-Personal-se-97897-nd-insert-restores-one-Undo-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-guards-01\\artifacts\\s06-guards-S06-Personal-se-97897-nd-insert-restores-one-Undo-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-guards-01\\artifacts\\s06-guards-S06-Personal-se-97897-nd-insert-restores-one-Undo-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4f827f537a877e208594-79a228905c5a89731a41",
+          "file": "s06-guards.spec.ts",
+          "line": 20,
+          "column": 1
+        },
+        {
+          "title": "S06 native field context menu remains unprevented and touch hold never opens an object menu from a control",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1159,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T09:27:16.677Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4f827f537a877e208594-42d4c53292c92153ca95",
+          "file": "s06-guards.spec.ts",
+          "line": 29,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T09:26:38.472Z",
+    "duration": 39626.691999999995,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

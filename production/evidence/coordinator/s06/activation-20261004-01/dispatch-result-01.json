@@ -1,0 +1,50 @@
+{
+  "recordType": "COORDINATOR_S06_DISPATCH_RECONCILIATION",
+  "recordedAt": "2026-10-04 08:45:41 UTC",
+  "actionKey": "yeataro/Grape:S06:workspace-entry:ad31676:01",
+  "packetId": "S06-WORKSPACE-ENTRY-01",
+  "packet": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/implementer-packet-01.json",
+    "bytes": 14605,
+    "sha256": "f1780732ae23680a21ac8602d4eeffb861e8988541cda3d703f67258b12fd082"
+  },
+  "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "displayTitle": "Grape S06 實作與維護",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "sameLogicalWriter": true
+  },
+  "firstDispatch": {
+    "receipt": "production/evidence/coordinator/s06/activation-20261004-01/parent-result-01.json",
+    "turnId": "01a10610-c2d3-7450-b86e-bfc6ef7e05d8",
+    "observed": "Running and packet read, then failed because account usage limit. No activation or product completion inferred."
+  },
+  "resume": {
+    "trigger": "Human reported reset to PM; PM conveyed resume instruction. Root independently read ordinaryUsageAllowed=true and usedPercent0 before normal continuation.",
+    "transport": "Existing parent, PM wake request; root did not issue duplicate wake.",
+    "turnId": "01a10615-fa19-7c92-bf85-cdca950b69a1",
+    "startedAtUnix": 1791103466,
+    "observedThreadStatus": "active",
+    "observedTurnStatus": "inProgress",
+    "error": null,
+    "toolMarker": "exec-6c15994c-21b4-44c8-8b65-0a81bfc8018e completed",
+    "acknowledgement": "已恢復同一輪 S06 工作。我會先讀取新的網路交付控制，保留歷史未執行紀錄，再接續基準同步、S06 登記與 workspace 入口實作；不重做已完成結案，也不重試遭拒的網路操作。"
+  },
+  "networkControl": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/network-delivery-control-01.json",
+    "bytes": 3056,
+    "sha256": "54d4ae2ddc14e205bb679c5dd6b108a0d76308e6066fa298a0886571e9c9c1bd",
+    "currentDisposition": "Human removed LAN/Tailscale mandatory delivery. Local delivery and unaffected main work continue; historical NOT_EXECUTED remains."
+  },
+  "status": "RUNNING_AFTER_USAGE_RECOVERY",
+  "observedRepository": {
+    "head": "d72da515c53dd026ddb0338b2e911bbea86f1919",
+    "activeSlices": [],
+    "meaning": "Writer local FF and activation registration still in progress at this observation; not claimed complete."
+  },
+  "scope": "Transport and recovery receipt only; sole mutable project state remains implementation-state.json",
+  "nextAction": "Original maintainer safely syncs accepted merged M2, activates S06 and implements exact workspace batch; Coordinator collects exact readiness and dispatches Fresh Review. No new Slice or remote publication authorization.",
+  "coordinatorProductWrites": false,
+  "coordinatorStateWrites": false
+}

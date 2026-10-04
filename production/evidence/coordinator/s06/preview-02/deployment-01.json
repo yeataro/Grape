@@ -1,0 +1,118 @@
+{
+  "packetVersion": 1,
+  "packetType": "COORDINATOR_LOCAL_PREVIEW_DELIVERY",
+  "recordedAt": "2026-10-04T12:03:27.519Z",
+  "implementationI": "11e43c8f3bda995ba017b5a4790ddb461a3ebd62",
+  "submittedR": "8d7dc0a4531fe14f7a490ddf025a47595e97ae1d",
+  "buildId": "S06-repair-11e43c8",
+  "service": {
+    "pid": 60216,
+    "execSession": 15202,
+    "startedAt": "2026-10-04T12:01:06.829Z",
+    "address": "127.0.0.1",
+    "port": 4198,
+    "lifetime": "Existing authorized temporary localhost delivery, no permanent service"
+  },
+  "urls": {
+    "application": "http://127.0.0.1:4198/review.html",
+    "guide": "http://127.0.0.1:4198/START-HERE.html",
+    "samples": "http://127.0.0.1:4198/s06-repair-11e43c8-samples.zip"
+  },
+  "httpChecks": [
+    {
+      "file": "assets/index-DyD0rYIG.css",
+      "status": 200,
+      "bytes": 12634,
+      "sha256": "09e172d29a17f8236a425ecd1ca1f69f5148f0d84dedbab75115fa99a85bf830",
+      "matches": true
+    },
+    {
+      "file": "assets/index-ilurjhcz.js",
+      "status": 200,
+      "bytes": 261517,
+      "sha256": "d3004bf2ed7f0b56f312d66e7648f2843ee8273f18860358f9b29a298db6eeb1",
+      "matches": true
+    },
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes": 404,
+      "sha256": "34ab2d0de70996807262954cf45e5fda697908353f068911a0f0dc5d836173d0",
+      "matches": true
+    },
+    {
+      "file": "START-HERE.html",
+      "status": 200,
+      "bytes": 3940,
+      "sha256": "c9a291e89877b06e14b13931d95093e03e75a00fc42e0afff8fc8ed967271d34",
+      "matches": true
+    },
+    {
+      "file": "START-HERE.txt",
+      "status": 200,
+      "bytes": 1157,
+      "sha256": "c0a08a8df889929a3345011f9d9c43ce68ce2ca98d3575a00d7ca63cfc13d629",
+      "matches": true
+    },
+    {
+      "file": "s06-repair-11e43c8-samples.zip",
+      "status": 200,
+      "bytes": 6894,
+      "sha256": "6fcdcac57eccd878b659165cc5a8230e509c14fb959dc7fd728e1fa0ba2ccfb7",
+      "matches": true
+    },
+    {
+      "file": "samples/workspace-color.grape.json",
+      "status": 200,
+      "bytes": 5810,
+      "sha256": "9dfea7734f1529af689799d0bb9a73c903cb223645e2e646c9cfe4d874f32b70",
+      "matches": true
+    },
+    {
+      "file": "samples/vec2-destination.grape.json",
+      "status": 200,
+      "bytes": 10594,
+      "sha256": "7199f65e4642bfc95e91b35bfcc06b4a76529ae495fe50f0e9d12ee6259918ff",
+      "matches": true
+    },
+    {
+      "file": "samples/vec2-connected.grape.json",
+      "status": 200,
+      "bytes": 12676,
+      "sha256": "e743b10e2ec1254c4c23863f61e705bbb319a9b4759a99e4ecbef275b05ca3a2",
+      "matches": true
+    }
+  ],
+  "wrapper": {
+    "status": 200,
+    "bytes": 772,
+    "sha256": "a64fa19c70673d7c5d994103431eec198c06a3f25ef7ea7634a8f031c38a2f7c"
+  },
+  "browserQA": {
+    "browser": "Codex in-app browser",
+    "tab": "2",
+    "executed": [
+      "Actual deployed wrapper loads exact build identity",
+      "Shortcuts opens; natural Escape returns focus to Shortcuts",
+      "Browse nodes -> Add Color RGBA inserts node",
+      "Click Color RGBA output then Image output color connects and clears INPUT_REQUIRED",
+      "Generate GLSL displays success and vec4(0.55,0.28,0.9,1.0)"
+    ],
+    "unexpectedObservation": {
+      "status": "REFERRED_TO_INDEPENDENT_REVIEWER_NOT_COORDINATOR_VERDICT",
+      "summary": "Choose the opposite port prompt remains after successful connect/generate and appears as a large dark rectangle covering Canvas nodes",
+      "naturalEscapeAfterGenerate": "No visible change; focus remains Generate GLSL",
+      "reportRecipient": "/root/s06_workspace_review_02"
+    },
+    "screenshot": {
+      "file": "production/evidence/coordinator/s06/preview-02/local-preview-01.jpg",
+      "bytes": 50595,
+      "sha256": "b7e7125917584dc0477ee0e2d25a618ac3ff5f6b014ebdb79ccfb296cd1a6f06"
+    },
+    "claim": "Deployed exact candidate with known UI observation pending independent assessment; no overall product PASS"
+  },
+  "independentReview": "RUNNING S06-WORKSPACE-TARGETED-REVIEW-02",
+  "productAcceptance": "NOT_GRANTED",
+  "networkScope": "Owner removed LAN/Tailscale requirement; no retry or delivery gate",
+  "setupObservation": "Initial tar listing parser rejected CRLF before extraction; corrected line splitting, exact archive SHA and only regular files/directories verified before extraction."
+}

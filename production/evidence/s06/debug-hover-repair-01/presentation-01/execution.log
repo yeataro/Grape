@@ -1,0 +1,164 @@
+
+Running 8 tests using 1 worker
+
+(node:48568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 [chromium] › ..\..\..\production\tests\browser\s06-floating.spec.ts:5:1 › S06 shared floating consumers bound alignments focus semantics and disposal independently (546ms)
+(node:46916) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 0.65 (30.1s)
+(node:46540) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  3 [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 1 (30.1s)
+(node:57856) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  4 [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 1.25 (30.1s)
+(node:46284) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 5 [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 1920x1000 (1.2s)
+  ok 6 [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 1440x1000 (920ms)
+  ok 7 [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 620x800 (902ms)
+  ok 8 [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 620x380 (878ms)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-floating.spec.ts:5:1 › S06 shared floating consumers bound alignments focus semantics and disposal independently 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      34 |   await page.getByRole("button", {name:"Fixture modal",exact:true}).click();
+      35 |   const modal = page.getByRole("dialog", {name:"modal fixture",exact:true});
+    > 36 |   for (let i=0;i<5;i++) { await page.keyboard.press("Tab"); expect(await modal.evaluate(e => e.contains(document.activeElement))).toBe(true); }
+         |                                                                                                                                   ^
+      37 |   await page.keyboard.press("Escape"); await expect(page.getByRole("button",{name:"Fixture modal",exact:true})).toBeFocused();
+      38 |   await page.evaluate(() => (window as any).__floatingFixture.dispose());
+      39 |   const late = await page.evaluate(() => (window as any).__floatingFixture.consumers.map((c:any) => c.view.open()));
+        at C:\Users\user\source\Grape\production\tests\browser\s06-floating.spec.ts:36:131
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-floating-S06-shared-fl-ef54b--and-disposal-independently-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-floating-S06-shared-fl-ef54b--and-disposal-independently-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-floating-S06-shared-fl-ef54b--and-disposal-independently-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-floating-S06-shared-fl-ef54b--and-disposal-independently-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 0.65 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Vector2', exact: true })
+
+
+       at create-node.ts:17
+
+      15 |   await browser
+      16 |     .getByRole("button", { name: "Add " + label, exact: true })
+    > 17 |     .click();
+         |      ^
+      18 |   const point = await canvas.evaluate((el, n) => {
+      19 |     const r = el.getBoundingClientRect(),
+      20 |       v = el.querySelector<HTMLElement>(".viewport")!,
+        at createNode (C:\Users\user\source\Grape\production\tests\browser\create-node.ts:17:6)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-socket-bottom.spec.ts:16:84
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-socket-bottom-S06-circ-65b08-s-preserve-geometry-at-0-65-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-socket-bottom-S06-circ-65b08-s-preserve-geometry-at-0-65-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-socket-bottom-S06-circ-65b08-s-preserve-geometry-at-0-65-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-socket-bottom-S06-circ-65b08-s-preserve-geometry-at-0-65-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 1 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Vector2', exact: true })
+
+
+       at create-node.ts:17
+
+      15 |   await browser
+      16 |     .getByRole("button", { name: "Add " + label, exact: true })
+    > 17 |     .click();
+         |      ^
+      18 |   const point = await canvas.evaluate((el, n) => {
+      19 |     const r = el.getBoundingClientRect(),
+      20 |       v = el.querySelector<HTMLElement>(".viewport")!,
+        at createNode (C:\Users\user\source\Grape\production\tests\browser\create-node.ts:17:6)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-socket-bottom.spec.ts:16:84
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-socket-bottom-S06-circ-7be5b-ates-preserve-geometry-at-1-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-socket-bottom-S06-circ-7be5b-ates-preserve-geometry-at-1-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-socket-bottom-S06-circ-7be5b-ates-preserve-geometry-at-1-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-socket-bottom-S06-circ-7be5b-ates-preserve-geometry-at-1-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 1.25 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Vector2', exact: true })
+
+
+       at create-node.ts:17
+
+      15 |   await browser
+      16 |     .getByRole("button", { name: "Add " + label, exact: true })
+    > 17 |     .click();
+         |      ^
+      18 |   const point = await canvas.evaluate((el, n) => {
+      19 |     const r = el.getBoundingClientRect(),
+      20 |       v = el.querySelector<HTMLElement>(".viewport")!,
+        at createNode (C:\Users\user\source\Grape\production\tests\browser\create-node.ts:17:6)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-socket-bottom.spec.ts:16:84
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-socket-bottom-S06-circ-19f04-s-preserve-geometry-at-1-25-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-socket-bottom-S06-circ-19f04-s-preserve-geometry-at-1-25-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-socket-bottom-S06-circ-19f04-s-preserve-geometry-at-1-25-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-01\test-results\s06-socket-bottom-S06-circ-19f04-s-preserve-geometry-at-1-25-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-floating.spec.ts:5:1 › S06 shared floating consumers bound alignments focus semantics and disposal independently 
+    [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 0.65 
+    [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 1 
+    [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 1.25 
+  4 passed (1.6m)

@@ -7,7 +7,7 @@ test("S05-FR-001 exact preserved reviewer document links distinct vertex and pix
 }) => {
   const original = JSON.parse(
     await fs.readFile(
-      "tests/fixtures/s05-review-crossstage.json",
+      new URL("../fixtures/s05-review-crossstage.json", import.meta.url),
       "utf8",
     ),
   );

@@ -1,0 +1,132 @@
+[
+  {
+    "label": "root-bootstrap",
+    "start": "2026-10-04T15:04:33.099Z",
+    "args": [
+      "tools/verify-bootstrap.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-debug-hover-review-02\\Grape",
+    "exit": 0
+  },
+  {
+    "label": "root-state",
+    "start": "2026-10-04T15:04:34.044Z",
+    "args": [
+      "handoff/tools/check-implementation-state.mjs",
+      "--current"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-debug-hover-review-02\\Grape",
+    "exit": 0
+  },
+  {
+    "label": "root-tests",
+    "start": "2026-10-04T15:04:34.108Z",
+    "args": [
+      "--test",
+      "--test-isolation=none",
+      "tools/verify-bootstrap.test.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-debug-hover-review-02\\Grape",
+    "exit": 0
+  },
+  {
+    "label": "typecheck",
+    "start": "2026-10-04T15:04:39.811Z",
+    "args": [
+      "node_modules/typescript/bin/tsc",
+      "--noEmit"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-debug-hover-review-02\\Grape\\production",
+    "exit": 0
+  },
+  {
+    "label": "module-pins",
+    "start": "2026-10-04T15:04:41.141Z",
+    "args": [
+      "tools/module-pins.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-debug-hover-review-02\\Grape\\production",
+    "exit": 0
+  },
+  {
+    "label": "boundaries",
+    "start": "2026-10-04T15:04:41.195Z",
+    "args": [
+      "tools/boundaries.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-debug-hover-review-02\\Grape\\production",
+    "exit": 0
+  },
+  {
+    "label": "unit-conformance",
+    "start": "2026-10-04T15:04:41.884Z",
+    "args": [
+      "--experimental-transform-types",
+      "--test",
+      "--test-isolation=none",
+      "tests/unit/hover-preferences.test.ts",
+      "tests/unit/model.test.ts",
+      "tests/unit/numeric-literals.test.ts",
+      "tests/unit/persistence.test.ts",
+      "tests/unit/png.test.ts",
+      "tests/unit/s02.test.ts",
+      "tests/unit/s03-limits.test.ts",
+      "tests/unit/s03-repair.test.ts",
+      "tests/unit/s03-repair2.test.ts",
+      "tests/unit/s03-transfer.test.ts",
+      "tests/unit/s03.test.ts",
+      "tests/unit/s04-closure.test.ts",
+      "tests/unit/s04.test.ts",
+      "tests/unit/s05-drag-capture.test.ts",
+      "tests/unit/s05-replacement.test.ts",
+      "tests/unit/s05-uniforms.test.ts",
+      "tests/unit/s05-values.test.ts",
+      "tests/unit/s05.test.ts",
+      "tests/unit/s06-workspace.test.ts",
+      "tests/unit/save-limits.test.ts",
+      "tests/conformance/boundaries.test.ts",
+      "tests/conformance/import.test.ts",
+      "tests/conformance/localization.test.ts",
+      "tests/conformance/ui.test.ts"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-debug-hover-review-02\\Grape\\production",
+    "exit": 0
+  },
+  {
+    "label": "rebuild",
+    "start": "2026-10-04T15:04:51.259Z",
+    "args": [
+      "tools/build-candidate.mjs",
+      "C:\\Users\\user\\.codex\\worktrees\\s06-debug-hover-review-02\\Grape\\.verification\\s06-debug-hover-review-02\\rebuild",
+      "C:\\Users\\user\\.codex\\worktrees\\s06-debug-hover-review-02\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\build-01\\build-metadata.json"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-debug-hover-review-02\\Grape\\production",
+    "exit": 0
+  },
+  {
+    "label": "rebuilt bytes",
+    "files": [
+      {
+        "file": "assets/index-B58C0h31.js",
+        "bytes": 283946,
+        "sha256": "ceb24962e41bae19ae531b7c23ae414dacf916d3effeef9cf7a4ac2b113e0158",
+        "actualBytes": 283946,
+        "actualSha256": "ceb24962e41bae19ae531b7c23ae414dacf916d3effeef9cf7a4ac2b113e0158"
+      },
+      {
+        "file": "assets/index-Ccy1Zpgb.css",
+        "bytes": 16710,
+        "sha256": "2ec33382187f3084427bc4eb9303132f1a558dbac97d167dbf1f4ba384c44673",
+        "actualBytes": 16710,
+        "actualSha256": "2ec33382187f3084427bc4eb9303132f1a558dbac97d167dbf1f4ba384c44673"
+      },
+      {
+        "file": "index.html",
+        "bytes": 404,
+        "sha256": "5127cd2a43a11fdfbe7e87c47dd78999cfc426a4e1c5523e6a01475d51899ee0",
+        "actualBytes": 404,
+        "actualSha256": "5127cd2a43a11fdfbe7e87c47dd78999cfc426a4e1c5523e6a01475d51899ee0"
+      }
+    ]
+  }
+]

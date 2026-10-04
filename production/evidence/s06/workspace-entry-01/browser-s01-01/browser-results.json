@@ -1,0 +1,1028 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:/Users/user/source/Grape/production/tools/s06-playwright.config.ts",
+      "s01.spec.ts",
+      "--output",
+      "C:/Users/user/source/Grape/production/evidence/s06/workspace-entry-01/browser-s01-01/test-output"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/workspace-entry-01/browser-s01-01/test-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s01.spec.ts",
+      "file": "s01.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "AT-S01-01 browser: user creates connected shader, edits and sees generated GLSL",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1140,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T08:59:26.445Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-1e93141ef961589dbdc1",
+          "file": "s01.spec.ts",
+          "line": 31,
+          "column": 1
+        },
+        {
+          "title": "AT-S01-03 browser: dynamic shape errors are visible, Undo restores and Redo repeats",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1015,
+                  "error": {
+                    "message": "Error: locator.click: Error: strict mode violation: locator('.node h3').filter({ hasText: /^Compose$/ }) resolved to 2 elements:\n    1) <h3>Compose</h3> aka getByRole('heading', { name: 'Compose' })\n    2) <h3>Compose</h3> aka locator('article').filter({ hasText: 'ComposeR / X · glsl.floatG /' }).locator('h3')\n\nCall log:\n\u001b[2m  - waiting for locator('.node h3').filter({ hasText: /^Compose$/ })\u001b[22m\n",
+                    "stack": "Error: locator.click: Error: strict mode violation: locator('.node h3').filter({ hasText: /^Compose$/ }) resolved to 2 elements:\n    1) <h3>Compose</h3> aka getByRole('heading', { name: 'Compose' })\n    2) <h3>Compose</h3> aka locator('article').filter({ hasText: 'ComposeR / X · glsl.floatG /' }).locator('h3')\n\nCall log:\n\u001b[2m  - waiting for locator('.node h3').filter({ hasText: /^Compose$/ })\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:64:6",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                      "column": 6,
+                      "line": 64
+                    },
+                    "snippet": "  62 |     .locator(\".node h3\")\n  63 |     .filter({ hasText: /^Compose$/ })\n> 64 |     .click();\n     |      ^\n  65 |   await page\n  66 |     .getByRole(\"combobox\", { name: \"Shape\" })\n  67 |     .selectOption({ label: \"vec2\" });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                        "column": 6,
+                        "line": 64
+                      },
+                      "message": "Error: locator.click: Error: strict mode violation: locator('.node h3').filter({ hasText: /^Compose$/ }) resolved to 2 elements:\n    1) <h3>Compose</h3> aka getByRole('heading', { name: 'Compose' })\n    2) <h3>Compose</h3> aka locator('article').filter({ hasText: 'ComposeR / X · glsl.floatG /' }).locator('h3')\n\nCall log:\n\u001b[2m  - waiting for locator('.node h3').filter({ hasText: /^Compose$/ })\u001b[22m\n\n\n  62 |     .locator(\".node h3\")\n  63 |     .filter({ hasText: /^Compose$/ })\n> 64 |     .click();\n     |      ^\n  65 |   await page\n  66 |     .getByRole(\"combobox\", { name: \"Shape\" })\n  67 |     .selectOption({ label: \"vec2\" });\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:64:6"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T08:59:27.832Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-AT-S01-03-browser-dyna-7546f-o-restores-and-Redo-repeats-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-AT-S01-03-browser-dyna-7546f-o-restores-and-Redo-repeats-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-AT-S01-03-browser-dyna-7546f-o-restores-and-Redo-repeats-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                    "column": 6,
+                    "line": 64
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-ffd5b7a99f713074e892",
+          "file": "s01.spec.ts",
+          "line": 57,
+          "column": 1
+        },
+        {
+          "title": "AT-S01-05 browser: IndexedDB ACK save/reopen and independent JSON download/file open",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6510,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.node')\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.node')\u001b[22m\n\u001b[2m    - locator resolved to 2 elements\u001b[22m\n\u001b[2m    - unexpected value \"2\"\u001b[22m\n\u001b[2m    13 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.node')\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.node')\u001b[22m\n\u001b[2m    - locator resolved to 2 elements\u001b[22m\n\u001b[2m    - unexpected value \"2\"\u001b[22m\n\u001b[2m    13 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:100:39",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                      "column": 39,
+                      "line": 100
+                    },
+                    "snippet": "   98 |   page.once(\"dialog\", (dialog) => dialog.accept());\n   99 |   await page.locator(\"#saved-list button\").click();\n> 100 |   await expect(page.locator(\".node\")).toHaveCount(4);\n      |                                       ^\n  101 |   await page.getByRole(\"button\", { name: \"Generate GLSL\" }).click();\n  102 |   await expect(\n  103 |     page.getByText(\"Generated successfully · Host-free GLSL\"),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                        "column": 39,
+                        "line": 100
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.node')\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.node')\u001b[22m\n\u001b[2m    - locator resolved to 2 elements\u001b[22m\n\u001b[2m    - unexpected value \"2\"\u001b[22m\n\u001b[2m    13 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n\n\n   98 |   page.once(\"dialog\", (dialog) => dialog.accept());\n   99 |   await page.locator(\"#saved-list button\").click();\n> 100 |   await expect(page.locator(\".node\")).toHaveCount(4);\n      |                                       ^\n  101 |   await page.getByRole(\"button\", { name: \"Generate GLSL\" }).click();\n  102 |   await expect(\n  103 |     page.getByText(\"Generated successfully · Host-free GLSL\"),\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:100:39"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T08:59:29.269Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-AT-S01-05-browser-Inde-826e0-ent-JSON-download-file-open-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-AT-S01-05-browser-Inde-826e0-ent-JSON-download-file-open-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-AT-S01-05-browser-Inde-826e0-ent-JSON-download-file-open-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                    "column": 39,
+                    "line": 100
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-2b5c3566afd02659fbe8",
+          "file": "s01.spec.ts",
+          "line": 86,
+          "column": 1
+        },
+        {
+          "title": "AT-S01-02 browser: occupied and incompatible connections preserve wires and revision",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1228,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T08:59:36.427Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-dd7dc0b41feef6642081",
+          "file": "s01.spec.ts",
+          "line": 118,
+          "column": 1
+        },
+        {
+          "title": "AT-S01-04 browser: draft cancel, IME guard, keyboard commit, pointer gesture Undo and cancel",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 652,
+                  "error": {
+                    "message": "Error: locator.getAttribute: Error: strict mode violation: locator('.node').filter({ has: locator('h3').filter({ hasText: /^Float$/ }) }) resolved to 2 elements:\n    1) <article tabindex=\"0\" role=\"group\" aria-label=\"Float\" class=\"node selected\" aria-description=\"Selected\" data-node=\"ae92ea1f-b285-4cb6-be26-8e92b5dc9416\">…</article> aka getByRole('group', { name: 'Float' })\n    2) <article hidden=\"\" class=\"node creation-preview\">…</article> aka getByText('FloatValue · glsl.float')\n\nCall log:\n\u001b[2m  - waiting for locator('.node').filter({ has: locator('h3').filter({ hasText: /^Float$/ }) })\u001b[22m\n",
+                    "stack": "Error: locator.getAttribute: Error: strict mode violation: locator('.node').filter({ has: locator('h3').filter({ hasText: /^Float$/ }) }) resolved to 2 elements:\n    1) <article tabindex=\"0\" role=\"group\" aria-label=\"Float\" class=\"node selected\" aria-description=\"Selected\" data-node=\"ae92ea1f-b285-4cb6-be26-8e92b5dc9416\">…</article> aka getByRole('group', { name: 'Float' })\n    2) <article hidden=\"\" class=\"node creation-preview\">…</article> aka getByText('FloatValue · glsl.float')\n\nCall log:\n\u001b[2m  - waiting for locator('.node').filter({ has: locator('h3').filter({ hasText: /^Float$/ }) })\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:166:27",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                      "column": 27,
+                      "line": 166
+                    },
+                    "snippet": "  164 |       .locator(\".node\")\n  165 |       .filter({ has: page.locator(\"h3\", { hasText: /^Float$/ }) }),\n> 166 |     position = await card.getAttribute(\"style\");\n      |                           ^\n  167 |   const title = card.locator(\"h3\"),\n  168 |     box = await title.boundingBox();\n  169 |   await page.mouse.move(box!.x + 60, box!.y + 15);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                        "column": 27,
+                        "line": 166
+                      },
+                      "message": "Error: locator.getAttribute: Error: strict mode violation: locator('.node').filter({ has: locator('h3').filter({ hasText: /^Float$/ }) }) resolved to 2 elements:\n    1) <article tabindex=\"0\" role=\"group\" aria-label=\"Float\" class=\"node selected\" aria-description=\"Selected\" data-node=\"ae92ea1f-b285-4cb6-be26-8e92b5dc9416\">…</article> aka getByRole('group', { name: 'Float' })\n    2) <article hidden=\"\" class=\"node creation-preview\">…</article> aka getByText('FloatValue · glsl.float')\n\nCall log:\n\u001b[2m  - waiting for locator('.node').filter({ has: locator('h3').filter({ hasText: /^Float$/ }) })\u001b[22m\n\n\n  164 |       .locator(\".node\")\n  165 |       .filter({ has: page.locator(\"h3\", { hasText: /^Float$/ }) }),\n> 166 |     position = await card.getAttribute(\"style\");\n      |                           ^\n  167 |   const title = card.locator(\"h3\"),\n  168 |     box = await title.boundingBox();\n  169 |   await page.mouse.move(box!.x + 60, box!.y + 15);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:166:27"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T08:59:37.925Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-AT-S01-04-browser-draf-55913-ter-gesture-Undo-and-cancel-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-AT-S01-04-browser-draf-55913-ter-gesture-Undo-and-cancel-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-AT-S01-04-browser-draf-55913-ter-gesture-Undo-and-cancel-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                    "column": 27,
+                    "line": 166
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-3de42f1dcf311499c189",
+          "file": "s01.spec.ts",
+          "line": 143,
+          "column": 1
+        },
+        {
+          "title": "AT-S01-06 browser: two Canvas contexts keep independent selections and camera while sharing edits",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6059,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#canvas-1 .node')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#canvas-1 .node')\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#canvas-1 .node')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#canvas-1 .node')\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:241:49",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                      "column": 49,
+                      "line": 241
+                    },
+                    "snippet": "  239 |     \"\",\n  240 |   );\n> 241 |   await expect(page.locator(\"#canvas-1 .node\")).toHaveCount(2);\n      |                                                 ^\n  242 |   await expect(page.locator(\"#canvas-2 .node\")).toHaveCount(2);\n  243 | });\n  244 | test(\"AT-S01-07 browser: delayed storage completion cannot clear a newer edit; rejection and export preserve dirty\", async ({"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                        "column": 49,
+                        "line": 241
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#canvas-1 .node')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#canvas-1 .node')\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n\n  239 |     \"\",\n  240 |   );\n> 241 |   await expect(page.locator(\"#canvas-1 .node\")).toHaveCount(2);\n      |                                                 ^\n  242 |   await expect(page.locator(\"#canvas-2 .node\")).toHaveCount(2);\n  243 | });\n  244 | test(\"AT-S01-07 browser: delayed storage completion cannot clear a newer edit; rejection and export preserve dirty\", async ({\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:241:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T08:59:38.941Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-AT-S01-06-browser-two--855fc--camera-while-sharing-edits-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-AT-S01-06-browser-two--855fc--camera-while-sharing-edits-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-AT-S01-06-browser-two--855fc--camera-while-sharing-edits-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                    "column": 49,
+                    "line": 241
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-e91847358b81a9c9e259",
+          "file": "s01.spec.ts",
+          "line": 185,
+          "column": 1
+        },
+        {
+          "title": "AT-S01-07 browser: delayed storage completion cannot clear a newer edit; rejection and export preserve dirty",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 676,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T08:59:45.614Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-4a83f3ff80ea548e7789",
+          "file": "s01.spec.ts",
+          "line": 244,
+          "column": 1
+        },
+        {
+          "title": "recovery browser: future structural document stays read-only and original can be exported",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5339,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.node')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.node')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.node')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.node')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:309:39",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                      "column": 39,
+                      "line": 309
+                    },
+                    "snippet": "  307 |     \"UNSUPPORTED_VERSION\",\n  308 |   );\n> 309 |   await expect(page.locator(\".node\")).toHaveCount(1);\n      |                                       ^\n  310 |   const next = page.waitForEvent(\"download\");\n  311 |   await page\n  312 |     .getByRole(\"button\", { name: \"Export original\", exact: true })"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                        "column": 39,
+                        "line": 309
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.node')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.node')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n\n  307 |     \"UNSUPPORTED_VERSION\",\n  308 |   );\n> 309 |   await expect(page.locator(\".node\")).toHaveCount(1);\n      |                                       ^\n  310 |   const next = page.waitForEvent(\"download\");\n  311 |   await page\n  312 |     .getByRole(\"button\", { name: \"Export original\", exact: true })\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:309:39"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T08:59:46.541Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-recovery-browser-futur-0a058-nd-original-can-be-exported-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-recovery-browser-futur-0a058-nd-original-can-be-exported-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-recovery-browser-futur-0a058-nd-original-can-be-exported-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                    "column": 39,
+                    "line": 309
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-e5e317ba261c6cbbb011",
+          "file": "s01.spec.ts",
+          "line": 292,
+          "column": 1
+        },
+        {
+          "title": "readonly browser: fields, actions and keyboard cannot edit; unlocking restores the same value",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5539,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Add Float', exact: true })\nExpected: disabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Add Float', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Add Float', exact: true })\nExpected: disabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Add Float', exact: true })\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:330:5",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                      "column": 5,
+                      "line": 330
+                    },
+                    "snippet": "  328 |   await expect(\n  329 |     page.getByRole(\"button\", { name: \"Add Float\", exact: true }),\n> 330 |   ).toBeDisabled();\n      |     ^\n  331 |   await canvas.focus();\n  332 |   await canvas.press(\"Control+z\");\n  333 |   await canvas.press(\"Delete\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                        "column": 5,
+                        "line": 330
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Add Float', exact: true })\nExpected: disabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Add Float', exact: true })\u001b[22m\n\n\n  328 |   await expect(\n  329 |     page.getByRole(\"button\", { name: \"Add Float\", exact: true }),\n> 330 |   ).toBeDisabled();\n      |     ^\n  331 |   await canvas.focus();\n  332 |   await canvas.press(\"Control+z\");\n  333 |   await canvas.press(\"Delete\");\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:330:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T08:59:52.208Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-readonly-browser-field-c0073-ing-restores-the-same-value-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-readonly-browser-field-c0073-ing-restores-the-same-value-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-readonly-browser-field-c0073-ing-restores-the-same-value-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                    "column": 5,
+                    "line": 330
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-c7f7fad9a966d4354816",
+          "file": "s01.spec.ts",
+          "line": 319,
+          "column": 1
+        },
+        {
+          "title": "diagnostics locate the affected node through the active Context without adding History",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1031,
+                  "error": {
+                    "message": "Error: locator.click: Error: strict mode violation: locator('.node h3').filter({ hasText: /^Compose$/ }) resolved to 2 elements:\n    1) <h3>Compose</h3> aka getByRole('heading', { name: 'Compose' })\n    2) <h3>Compose</h3> aka locator('article').filter({ hasText: 'ComposeR / X · glsl.floatG /' }).locator('h3')\n\nCall log:\n\u001b[2m  - waiting for locator('.node h3').filter({ hasText: /^Compose$/ })\u001b[22m\n",
+                    "stack": "Error: locator.click: Error: strict mode violation: locator('.node h3').filter({ hasText: /^Compose$/ }) resolved to 2 elements:\n    1) <h3>Compose</h3> aka getByRole('heading', { name: 'Compose' })\n    2) <h3>Compose</h3> aka locator('article').filter({ hasText: 'ComposeR / X · glsl.floatG /' }).locator('h3')\n\nCall log:\n\u001b[2m  - waiting for locator('.node h3').filter({ hasText: /^Compose$/ })\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:348:6",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                      "column": 6,
+                      "line": 348
+                    },
+                    "snippet": "  346 |     .locator(\".node h3\")\n  347 |     .filter({ hasText: /^Compose$/ })\n> 348 |     .click();\n      |      ^\n  349 |   await page\n  350 |     .getByRole(\"combobox\", { name: \"Shape\" })\n  351 |     .selectOption({ label: \"vec2\" });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                        "column": 6,
+                        "line": 348
+                      },
+                      "message": "Error: locator.click: Error: strict mode violation: locator('.node h3').filter({ hasText: /^Compose$/ }) resolved to 2 elements:\n    1) <h3>Compose</h3> aka getByRole('heading', { name: 'Compose' })\n    2) <h3>Compose</h3> aka locator('article').filter({ hasText: 'ComposeR / X · glsl.floatG /' }).locator('h3')\n\nCall log:\n\u001b[2m  - waiting for locator('.node h3').filter({ hasText: /^Compose$/ })\u001b[22m\n\n\n  346 |     .locator(\".node h3\")\n  347 |     .filter({ hasText: /^Compose$/ })\n> 348 |     .click();\n      |      ^\n  349 |   await page\n  350 |     .getByRole(\"combobox\", { name: \"Shape\" })\n  351 |     .selectOption({ label: \"vec2\" });\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:348:6"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T08:59:58.320Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-diagnostics-locate-the-e5bef-text-without-adding-History-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-diagnostics-locate-the-e5bef-text-without-adding-History-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-diagnostics-locate-the-e5bef-text-without-adding-History-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                    "column": 6,
+                    "line": 348
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-c2adbc3823a2546e7e34",
+          "file": "s01.spec.ts",
+          "line": 341,
+          "column": 1
+        },
+        {
+          "title": "invalid UTF-8 recovery retains original bytes; closing recovery and cancelling open preserve the graph",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 631,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T08:59:59.938Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-1270323dc4ff00e2af6e",
+          "file": "s01.spec.ts",
+          "line": 365,
+          "column": 1
+        },
+        {
+          "title": "view failure shows shared retry placeholder and releases the failed mount",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 522,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T09:00:00.810Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-b947f3b4f756974b3ef4",
+          "file": "s01.spec.ts",
+          "line": 391,
+          "column": 1
+        },
+        {
+          "title": "keyboard node selection and connection buttons preserve focus; wires meet sockets after fractional zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1062,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T09:00:01.339Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-f759f79bf1b1236091cb",
+          "file": "s01.spec.ts",
+          "line": 425,
+          "column": 1
+        },
+        {
+          "title": "error-bearing dynamic document saves and reopens with loss evidence and generation still blocked",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 956,
+                  "error": {
+                    "message": "Error: locator.click: Error: strict mode violation: locator('.node h3').filter({ hasText: /^Compose$/ }) resolved to 2 elements:\n    1) <h3>Compose</h3> aka getByRole('heading', { name: 'Compose' })\n    2) <h3>Compose</h3> aka locator('article').filter({ hasText: 'ComposeR / X · glsl.floatG /' }).locator('h3')\n\nCall log:\n\u001b[2m  - waiting for locator('.node h3').filter({ hasText: /^Compose$/ })\u001b[22m\n",
+                    "stack": "Error: locator.click: Error: strict mode violation: locator('.node h3').filter({ hasText: /^Compose$/ }) resolved to 2 elements:\n    1) <h3>Compose</h3> aka getByRole('heading', { name: 'Compose' })\n    2) <h3>Compose</h3> aka locator('article').filter({ hasText: 'ComposeR / X · glsl.floatG /' }).locator('h3')\n\nCall log:\n\u001b[2m  - waiting for locator('.node h3').filter({ hasText: /^Compose$/ })\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:466:6",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                      "column": 6,
+                      "line": 466
+                    },
+                    "snippet": "  464 |     .locator(\".node h3\")\n  465 |     .filter({ hasText: /^Compose$/ })\n> 466 |     .click();\n      |      ^\n  467 |   await page\n  468 |     .getByRole(\"combobox\", { name: \"Shape\" })\n  469 |     .selectOption({ label: \"vec2\" });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                        "column": 6,
+                        "line": 466
+                      },
+                      "message": "Error: locator.click: Error: strict mode violation: locator('.node h3').filter({ hasText: /^Compose$/ }) resolved to 2 elements:\n    1) <h3>Compose</h3> aka getByRole('heading', { name: 'Compose' })\n    2) <h3>Compose</h3> aka locator('article').filter({ hasText: 'ComposeR / X · glsl.floatG /' }).locator('h3')\n\nCall log:\n\u001b[2m  - waiting for locator('.node h3').filter({ hasText: /^Compose$/ })\u001b[22m\n\n\n  464 |     .locator(\".node h3\")\n  465 |     .filter({ hasText: /^Compose$/ })\n> 466 |     .click();\n      |      ^\n  467 |   await page\n  468 |     .getByRole(\"combobox\", { name: \"Shape\" })\n  469 |     .selectOption({ label: \"vec2\" });\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:466:6"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T09:00:02.408Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-error-bearing-dynamic--4a030-nd-generation-still-blocked-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-error-bearing-dynamic--4a030-nd-generation-still-blocked-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-error-bearing-dynamic--4a030-nd-generation-still-blocked-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                    "column": 6,
+                    "line": 466
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-6842b6f3457b353546c7",
+          "file": "s01.spec.ts",
+          "line": 459,
+          "column": 1
+        },
+        {
+          "title": "M1 browser: Float 1e21 commits and generates a valid exponent literal",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1158,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T09:00:03.718Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-cd720daf796ca0b3f8b6",
+          "file": "s01.spec.ts",
+          "line": 500,
+          "column": 3
+        },
+        {
+          "title": "M1 browser: Multiply 1e21 commits and generates a valid exponent literal",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1110,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T09:00:05.122Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-a0747e9657fffc688e99",
+          "file": "s01.spec.ts",
+          "line": 500,
+          "column": 3
+        },
+        {
+          "title": "N1 browser: middle/right movement cannot edit nodes; primary drag still groups into one Undo",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 517,
+                  "error": {
+                    "message": "Error: locator.getAttribute: Error: strict mode violation: locator('.node').filter({ has: locator('h3').filter({ hasText: /^Float$/ }) }) resolved to 2 elements:\n    1) <article tabindex=\"0\" role=\"group\" aria-label=\"Float\" class=\"node selected\" aria-description=\"Selected\" data-node=\"f1de1a29-ad4d-44d6-9600-eb769be9350b\">…</article> aka getByRole('group', { name: 'Float' })\n    2) <article hidden=\"\" class=\"node creation-preview\">…</article> aka getByText('FloatValue · glsl.float')\n\nCall log:\n\u001b[2m  - waiting for locator('.node').filter({ has: locator('h3').filter({ hasText: /^Float$/ }) })\u001b[22m\n",
+                    "stack": "Error: locator.getAttribute: Error: strict mode violation: locator('.node').filter({ has: locator('h3').filter({ hasText: /^Float$/ }) }) resolved to 2 elements:\n    1) <article tabindex=\"0\" role=\"group\" aria-label=\"Float\" class=\"node selected\" aria-description=\"Selected\" data-node=\"f1de1a29-ad4d-44d6-9600-eb769be9350b\">…</article> aka getByRole('group', { name: 'Float' })\n    2) <article hidden=\"\" class=\"node creation-preview\">…</article> aka getByText('FloatValue · glsl.float')\n\nCall log:\n\u001b[2m  - waiting for locator('.node').filter({ has: locator('h3').filter({ hasText: /^Float$/ }) })\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:544:31",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                      "column": 31,
+                      "line": 544
+                    },
+                    "snippet": "  542 |     .locator(\".node\")\n  543 |     .filter({ has: page.locator(\"h3\", { hasText: /^Float$/ }) });\n> 544 |   const position = await card.getAttribute(\"style\"),\n      |                               ^\n  545 |     revision = await page.locator(\".canvas\").getAttribute(\"data-revision\");\n  546 |   for (const button of [\"middle\", \"right\"] as const) {\n  547 |     const box = (await card.locator(\"h3\").boundingBox())!;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                        "column": 31,
+                        "line": 544
+                      },
+                      "message": "Error: locator.getAttribute: Error: strict mode violation: locator('.node').filter({ has: locator('h3').filter({ hasText: /^Float$/ }) }) resolved to 2 elements:\n    1) <article tabindex=\"0\" role=\"group\" aria-label=\"Float\" class=\"node selected\" aria-description=\"Selected\" data-node=\"f1de1a29-ad4d-44d6-9600-eb769be9350b\">…</article> aka getByRole('group', { name: 'Float' })\n    2) <article hidden=\"\" class=\"node creation-preview\">…</article> aka getByText('FloatValue · glsl.float')\n\nCall log:\n\u001b[2m  - waiting for locator('.node').filter({ has: locator('h3').filter({ hasText: /^Float$/ }) })\u001b[22m\n\n\n  542 |     .locator(\".node\")\n  543 |     .filter({ has: page.locator(\"h3\", { hasText: /^Float$/ }) });\n> 544 |   const position = await card.getAttribute(\"style\"),\n      |                               ^\n  545 |     revision = await page.locator(\".canvas\").getAttribute(\"data-revision\");\n  546 |   for (const button of [\"middle\", \"right\"] as const) {\n  547 |     const box = (await card.locator(\"h3\").boundingBox())!;\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts:544:31"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T09:00:06.239Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-N1-browser-middle-righ-f80fc--still-groups-into-one-Undo-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-N1-browser-middle-righ-f80fc--still-groups-into-one-Undo-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-s01-01\\test-output\\s01-N1-browser-middle-righ-f80fc--still-groups-into-one-Undo-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s01.spec.ts",
+                    "column": 31,
+                    "line": 544
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59c052e9f8b496b8db5-fd6df26998248d93d62d",
+          "file": "s01.spec.ts",
+          "line": 535,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T08:59:26.098Z",
+    "duration": 40762.698,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 9,
+    "flaky": 0
+  }
+}

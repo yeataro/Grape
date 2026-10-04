@@ -54,6 +54,7 @@ import { upgradeDocument } from "./document-upgrade.ts";
 import { buildPersonal, readPersonal, packagePacket } from "./personal.ts";
 import type { PersonalPackage, PackageProbe } from "../sdk/library.ts";
 import type { DocumentInspection } from "./inspection.ts";
+import type { CatalogEntry, CatalogWire } from "../sdk/ui.ts";
 
 export class EditorContext {
   #selection: string[] = [];
@@ -162,11 +163,7 @@ export class EditorContext {
         })),
       ],
       network,
-      frames: frames(
-        graph.document,
-        this.graph.definitionSet,
-        network.id,
-      ),
+      frames: frames(graph.document, this.graph.definitionSet, network.id),
       portLabels: Object.fromEntries(
         network.nodes.map((n) => {
           const role = this.graph.definitionSet.node(n.type)?.modelRole;
@@ -186,7 +183,9 @@ export class EditorContext {
       nodeRoles: Object.fromEntries(
         network.nodes.map((n) => [
           n.id,
-          this.graph.definitionSet.node(n.type)?.modelRole ?? "operation",
+          this.graph.definitionSet.node(n.type)?.modelRole ??
+            this.graph.definitionSet.node(n.type)?.role ??
+            "operation",
         ]),
       ),
       structures: graph.document.graph.resources
@@ -484,6 +483,278 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
       .filter((n) => n.role === "operation" && !n.modelRole)
       .map((n) => ({ ref: n.ref, presentation: n.presentation }));
   }
+  /** Once per creator opening, never per search keystroke. Probes own disposable IDs/History. */
+  creationCatalog(
+    context: EditorContext,
+    wire?: CatalogWire,
+  ): readonly CatalogEntry[] {
+    const current = context.capture(),
+      snapshot = current.graph,
+      network = current.network;
+    const defs = this.definitions.pin(snapshot.document.graph.modules);
+    const stage = snapshot.document.graph.stages.find(
+      (s) => s.id === current.scope.stageId,
+    )!;
+    if (
+      stage.implementation !== "network" ||
+      this.busy ||
+      !this.profile.graphKindIds.includes(
+        snapshot.document.graph.kind.kindId,
+      ) ||
+      !this.profile.stageKindIds.includes(stage.stageKindId)
+    )
+      return [];
+    const result: CatalogEntry[] = [];
+    type Seed = {
+      definition: NonNullable<ReturnType<typeof defs.node>>;
+      presentation: CatalogEntry["presentation"];
+      creation?: CatalogEntry["creation"];
+      libraryScope: "builtin" | "project";
+    };
+    const seeds: Seed[] = this.definitions
+      .nodeTypes()
+      .filter((d) => d.role === "operation" && !d.modelRole)
+      .map((definition) => ({
+        definition,
+        presentation: definition.presentation,
+        libraryScope: "builtin",
+      }));
+    for (const resource of snapshot.document.graph.resources) {
+      const model = defs.resource(resource.type)?.model,
+        role =
+          model === "network"
+            ? "call"
+            : model === "source"
+              ? "source"
+              : model === "structure"
+                ? "structure"
+                : null;
+      if (!role) continue;
+      const definition = defs.nodeByRole(role);
+      if (!definition) continue;
+      const data = resource.data as { name?: string },
+        category =
+          role === "call"
+            ? "Project / Subgraphs"
+            : role === "source"
+              ? "Project / Sources"
+              : "Project / Structures";
+      const name = data.name ?? definition.presentation.label.fallback;
+      seeds.push({
+        definition,
+        libraryScope: "project",
+        creation: { kind: "reference", role, resourceId: resource.id },
+        presentation: {
+          ...definition.presentation,
+          label: { ...definition.presentation.label, fallback: name },
+          category: {
+            id: category,
+            label: { ...definition.presentation.label, fallback: category },
+          },
+          description: {
+            ...definition.presentation.label,
+            fallback:
+              role === "source"
+                ? "Existing source · reuses its current value and identity"
+                : role === "call"
+                  ? "Existing subgraph · shared definition and inputs/outputs"
+                  : "Existing Structure · current declared fields",
+          },
+        },
+      });
+    }
+    const sourceDefinition = defs.nodeByRole("source");
+    if (sourceDefinition) {
+      const usedNames = new Set(
+        snapshot.document.graph.resources
+          .filter((r) => defs.resource(r.type)?.model === "source")
+          .map((r) => (r.data as { name: string }).name),
+      );
+      let name = "Source",
+        suffix = 2;
+      while (usedNames.has(name)) name = "Source " + suffix++;
+      seeds.push({
+        definition: sourceDefinition,
+        libraryScope: "builtin",
+        creation: { kind: "source", name, type: "glsl.float", value: 0 },
+        presentation: {
+          ...sourceDefinition.presentation,
+          label: {
+            ...sourceDefinition.presentation.label,
+            fallback: "Float source (new)",
+          },
+          description: {
+            ...sourceDefinition.presentation.label,
+            fallback: "New constant source · independent value, initially 0",
+          },
+          category: {
+            id: "sources",
+            label: {
+              ...sourceDefinition.presentation.label,
+              fallback: "Sources",
+            },
+          },
+        },
+      });
+    }
+    const occupiedIds = new Set<string>();
+    const collectIds = (v: unknown): void => {
+      if (v && typeof v === "object") {
+        if (!Array.isArray(v) && typeof (v as { id?: unknown }).id === "string")
+          occupiedIds.add((v as { id: string }).id);
+        for (const child of Object.values(v)) collectIds(child);
+      }
+    };
+    collectIds(snapshot.document);
+    for (const seed of seeds) {
+      const { definition } = seed;
+      if (
+        !defs.node(definition.ref) ||
+        definition.role !== "operation" ||
+        !definition.eligibility.stageKindIds.includes(stage.stageKindId) ||
+        (definition.eligibility.graphKindIds &&
+          !definition.eligibility.graphKindIds.includes(
+            snapshot.document.graph.kind.kindId,
+          )) ||
+        definition.eligibility.requiredGeneratorCapabilities?.some(
+          (c) => !this.profile.capabilities.includes(c),
+        )
+      )
+        continue;
+      const state = definition.initialize(),
+        choices = seed.creation
+          ? []
+          : definition
+              .parameters(state, modelContext(snapshot.document, defs))
+              .filter(
+                (p) => p.target === "state" && p.type === "choice" && p.choices,
+              );
+      const variants: Record<string, Json>[] = [{}];
+      if (wire)
+        for (const p of choices)
+          for (const value of p.choices!) variants.push({ [p.key]: value });
+      let best: CatalogEntry | undefined;
+      for (const parameters of variants) {
+        let probe: Graph | undefined;
+        try {
+          let sequence = 0;
+          probe = new Graph(snapshot.document, defs, {
+            next: () => {
+              let id: string;
+              do {
+                id = `catalog-probe-${++sequence}`;
+              } while (occupiedIds.has(id));
+              return id;
+            },
+          });
+          let id = "";
+          probe.change("Preview node", (d) => {
+            if (seed.creation?.kind === "reference")
+              id = d.addReferenceNode(
+                network.id,
+                seed.creation.role,
+                seed.creation.resourceId,
+                undefined,
+                definition.ref,
+              );
+            else if (seed.creation?.kind === "source") {
+              const c = seed.creation;
+              const resource = d.createSource(c.name, c.type, c.value);
+              id = d.addReferenceNode(
+                network.id,
+                "source",
+                resource,
+                undefined,
+                definition.ref,
+              );
+            } else id = d.add(network.id, definition.ref, [0, 0], parameters);
+          });
+          const candidateNetwork = resolveOccurrence(
+            probe.capture().document,
+            defs,
+            current.scope.stageId,
+            current.scope.networkPath,
+          ).network;
+          const ports = candidateNetwork.nodes.find((n) => n.id === id)!.ports;
+          if (
+            ports.some((p) =>
+              this.profile
+                .validateType(p.type)
+                .some((i) => i.severity === "error"),
+            )
+          )
+            continue;
+          const endpoint =
+            wire &&
+            network.nodes
+              .find((n) => n.id === wire.nodeId)
+              ?.ports.find(
+                (p) => p.key === wire.portKey && p.direction === wire.direction,
+              );
+          if (wire && !endpoint) continue;
+          const matches = wire
+            ? ports
+                .filter((p) => p.direction !== wire.direction)
+                .sort(
+                  (a, b) =>
+                    Number(b.type === endpoint!.type) -
+                    Number(a.type === endpoint!.type),
+                )
+            : [undefined];
+          for (const port of matches) {
+            try {
+              if (wire && port)
+                probe.change("Preview connection", (d) =>
+                  d.connect(
+                    network.id,
+                    wire.direction === "output"
+                      ? { nodeId: wire.nodeId, portKey: wire.portKey }
+                      : { nodeId: id, portKey: port.key },
+                    wire.direction === "input"
+                      ? { nodeId: wire.nodeId, portKey: wire.portKey }
+                      : { nodeId: id, portKey: port.key },
+                    true,
+                  ),
+                );
+              const item: CatalogEntry = {
+                key: JSON.stringify([definition.ref, seed.creation ?? null]),
+                ref: definition.ref,
+                presentation: seed.presentation,
+                libraryScope: seed.libraryScope,
+                ...(seed.creation ? { creation: seed.creation } : {}),
+                source: definition.ref.moduleId,
+                ports,
+                parameters,
+                exactMatch: !wire || port?.type === endpoint?.type,
+                scope: current.scope,
+                revision: snapshot.revision,
+                ...(port ? { matchingPort: port.key } : {}),
+              };
+              if (!best || (item.exactMatch && !best.exactMatch)) best = item;
+              break;
+            } catch {
+              /* An inadmissible owner/type/constant variant is not a candidate. */
+            }
+          }
+        } catch {
+          /* Missing owner or rejected initial state remains unavailable. */
+        } finally {
+          probe?.dispose();
+        }
+      }
+      if (best) result.push(best);
+    }
+    return detached(
+      result.sort(
+        (a, b) =>
+          Number(b.exactMatch) - Number(a.exactMatch) ||
+          a.presentation.label.fallback.localeCompare(
+            b.presentation.label.fallback,
+          ) ||
+          a.key.localeCompare(b.key),
+      ),
+    );
+  }
   private install(graph: Graph, saved: CanonicalGraphDocument | null): void {
     demand(!this.busy, "HISTORY_BUSY");
     for (const c of this.#contexts.values()) c.dispose();
@@ -574,6 +845,42 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
         this.snapshot.revision === source.revision,
       "STALE_PROPOSAL",
     );
+    this.install(graph, null);
+  }
+  /** Explicit kind migration creates a new load, not a content-replacement Undo. */
+  upgradeGraphKind(destination: GraphKindRef): void {
+    demand(
+      !this.#readonly && !this.busy && !this.saving,
+      "UPGRADE_UNAVAILABLE",
+    );
+    const source = this.snapshot;
+    const owner = this.definitions
+      .kinds()
+      .find((k) => equal(k.ref, destination));
+    demand(owner, "UPGRADE_OWNER_MISSING");
+    if (equal(source.document.graph.kind, destination)) return;
+    const choices = (owner.upgrades ?? []).filter((u) =>
+      equal(u.from, source.document.graph.kind),
+    );
+    demand(choices.length === 1, "UPGRADE_UNSUPPORTED");
+    const candidate = detached(choices[0].upgrade(detached(source.document)));
+    demand(equal(candidate.graph.kind, destination), "UPGRADE_KIND");
+    const graph = new Graph(
+      candidate,
+      this.definitions.pin(candidate.graph.modules),
+      this.identity,
+    );
+    if (
+      this.snapshot.loadId !== source.loadId ||
+      this.snapshot.revision !== source.revision ||
+      !equal(this.snapshot.document, source.document) ||
+      this.#readonly ||
+      this.busy ||
+      this.saving
+    ) {
+      graph.dispose();
+      throw new Fault("STALE_PROPOSAL");
+    }
     this.install(graph, null);
   }
   inspectText(raw: string): DocumentInspection {
@@ -730,7 +1037,16 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     this.#grants.set(typeId, new Set(commands));
   }
   allows(typeId: string, commandId: string): boolean {
-    return !this.#readonly && !!this.#grants.get(typeId)?.has(commandId);
+    return (
+      (!this.#readonly ||
+        [
+          "grape.network.enter",
+          "grape.network.up",
+          "grape.network.navigate",
+          "grape.stage.navigate",
+        ].includes(commandId)) &&
+      !!this.#grants.get(typeId)?.has(commandId)
+    );
   }
   originBusy(panelId?: string, contextId?: string): boolean {
     return [...this.#origins.entries()].some(
@@ -760,6 +1076,11 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
       demand(typeof args.id === "string", "COMMAND_ARGS");
       return args.id;
     };
+    if (intent.commandId === "grape.stage.navigate") {
+      demand(typeof args.stageId === "string", "COMMAND_ARGS");
+      context.navigate(args.stageId);
+      return;
+    }
     if (intent.commandId === "grape.network.frame") {
       graph.change("Frame selection", (d) =>
         d.frameSelection(network, context.capture().selection),
@@ -909,12 +1230,72 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
         "COMMAND_ARGS",
       );
       let created = "";
-      graph.change("Add node", (d) => {
-        created = d.add(
-          network,
-          args.ref as unknown as NodeTypeRef,
-          args.position as [number, number],
+      if (args.scope)
+        demand(
+          equal(args.scope, context.capture().scope) &&
+            args.revision === this.snapshot.revision,
+          "STALE_PROPOSAL",
         );
+      const candidate =
+        args.scope || args.creation || args.wire || args.parameters
+          ? this.creationCatalog(
+              context,
+              args.wire as unknown as CatalogWire | undefined,
+            ).find(
+              (e) =>
+                equal(e.ref, args.ref) &&
+                equal(e.creation ?? null, args.creation ?? null) &&
+                equal(e.parameters, args.parameters ?? {}) &&
+                e.matchingPort === (args.matchingPort ?? undefined),
+            )
+          : undefined;
+      if (args.scope || args.creation || args.wire || args.parameters)
+        demand(candidate, "CREATION_UNAVAILABLE");
+      graph.change("Add node", (d) => {
+        if (candidate?.creation?.kind === "reference") {
+          const c = candidate.creation;
+          created = d.addReferenceNode(
+            network,
+            c.role,
+            c.resourceId,
+            undefined,
+            candidate.ref,
+          );
+          d.move(network, created, args.position as [number, number]);
+        } else if (candidate?.creation?.kind === "source") {
+          const c = candidate.creation,
+            resource = d.createSource(c.name, c.type, c.value);
+          created = d.addReferenceNode(
+            network,
+            "source",
+            resource,
+            undefined,
+            candidate.ref,
+          );
+          d.move(network, created, args.position as [number, number]);
+        } else
+          created = d.add(
+            network,
+            args.ref as unknown as NodeTypeRef,
+            args.position as [number, number],
+            candidate?.parameters ?? {},
+          );
+        if (args.wire) {
+          const wire = args.wire as unknown as CatalogWire;
+          demand(typeof args.matchingPort === "string", "COMMAND_ARGS");
+          const own = { nodeId: created, portKey: args.matchingPort },
+            other = { nodeId: wire.nodeId, portKey: wire.portKey };
+          demand(
+            wire.direction === "input" || wire.direction === "output",
+            "COMMAND_ARGS",
+          );
+          d.connect(
+            network,
+            wire.direction === "output" ? other : own,
+            wire.direction === "input" ? other : own,
+            true,
+          );
+        }
       });
       context.select([created]);
       return;

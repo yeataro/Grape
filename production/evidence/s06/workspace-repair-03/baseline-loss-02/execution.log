@@ -1,0 +1,74 @@
+
+Running 2 tests using 1 worker
+
+(node:56052) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 620 (827ms)
+(node:51976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 1440 (873ms)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 620 
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 60
+    Received:    85
+
+      50 |   expect(facts.clientHeight).toBeLessThanOrEqual(60);
+      51 |   const read = c.getByRole("button", { name: "Read full Canvas status", exact: true });
+    > 52 |   if (!(await read.isVisible())) expect(facts.scrollHeight).toBeLessThanOrEqual(facts.clientHeight);
+         |                                                             ^
+      53 |   // Reach the actual control using keyboard navigation, without programmatic focus.
+      54 |   for (let i = 0; i < 100 && !(await read.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press("Tab");
+      55 |   await expect(read).toBeFocused();
+        at C:\Users\user\source\Grape\production\tests\browser\s06-status-pointer.spec.ts:52:61
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\baseline-loss-02\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-03\baseline-loss-02\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\baseline-loss-02\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-03\baseline-loss-02\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 1440 
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 60
+    Received:    115
+
+      50 |   expect(facts.clientHeight).toBeLessThanOrEqual(60);
+      51 |   const read = c.getByRole("button", { name: "Read full Canvas status", exact: true });
+    > 52 |   if (!(await read.isVisible())) expect(facts.scrollHeight).toBeLessThanOrEqual(facts.clientHeight);
+         |                                                             ^
+      53 |   // Reach the actual control using keyboard navigation, without programmatic focus.
+      54 |   for (let i = 0; i < 100 && !(await read.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press("Tab");
+      55 |   await expect(read).toBeFocused();
+        at C:\Users\user\source\Grape\production\tests\browser\s06-status-pointer.spec.ts:52:61
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\baseline-loss-02\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-03\baseline-loss-02\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\baseline-loss-02\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-03\baseline-loss-02\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 620 
+    [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 1440 

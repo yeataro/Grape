@@ -1,0 +1,1 @@
+import {currentSetup}from '../production/tests/fixtures/s04.ts';import{writeDocument}from '../production/src/persistence/codec.ts';import fs from 'node:fs';const s=currentSetup();fs.writeFileSync('production/tests/fixtures/required-image-output.grape.json',writeDocument(s.graph.capture().document,s.fixed),{flag:'wx'});

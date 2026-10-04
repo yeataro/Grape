@@ -1,0 +1,512 @@
+Browser tab: 3, Title: "TD-Grape · Refactor.toe · /grape_refactor_compiler_final/Frontend_TOP", URL: "http://127.0.0.1:64961/shader/c574e2c5c37d41648cc38210974c5d59/".
+0 AXWebArea TD-Grape · Refactor.toe · /grape_refactor_compiler_final/Frontend_TOP, URL: 127.0.0.1:64961/shader/c574e2c5c37d41648cc38210974c5d59/
+	1 container editorheader
+		2 text TD-Grape
+		3 text A Shader Editor for TouchDesigner · 0.8.276 DEV
+		4 button About, ID: about
+		5 pop up button (collapsed, settable) Description: Language, Value: English, ID: language, Secondary Actions: Expand
+			6 menu
+				7 繁體中文
+				8 (selected) English
+				9 日本語
+				10 Français
+				11 한국어
+		12 button Import graph, ID: import
+		13 button Export graph, ID: export
+		14 button Save TD project, ID: save
+		15 button Apply Shader, ID: apply
+	16 button (expanded) Description: Hide left sidebar, ID: togglelibrary, Secondary Actions: Collapse
+	1034 text Refactor.toe
+	18 pop up button (collapsed) Description: Switch TD Shader, ID: shaderpicker, Secondary Actions: Expand
+		1035 text /grape_refactor_compiler_final/Frontend_TOP
+	20 button (expanded) Description: Show or hide header, Help: Hide header, ID: toggleheader, Secondary Actions: Collapse
+	21 pop up button (collapsed) Layout, ID: workspacelayout, Secondary Actions: Expand
+	22 button (expanded) Description: Hide right sidebar, ID: toggledetails, Secondary Actions: Collapse
+	373 container
+		884 container
+			885 tab group
+				886 tab (selectable, expanded, settable, boolean) Add Node, Value: 0, ID: browsertoggle, Secondary Actions: Collapse
+				887 tab (selected, expanded, settable, boolean) Sources, Value: 1, ID: uniformstoggle, Secondary Actions: Collapse
+			888 container Description: Sources, ID: pane-uniforms
+				889 container uniformsbody
+					890 search text field (settable) Description: Search Sources…, ID: inputsearch
+					891 pop up button (collapsed, settable) Description: Common source names: TD Names / Common Names, Value: TD Names, ID: sourcenames, Secondary Actions: Expand
+						892 menu
+							893 (selected) TD Names
+							894 Common Names
+					895 container
+						896 checkbox (settable, integer) Description: Notes, Value: 1, ID: sourcenotes
+						897 text Notes
+					898 container
+						899 checkbox (settable, integer) Description: Minimal, Value: 0, ID: sourceminimal
+						900 text Minimal
+					901 container nativeuniforms
+						902 button (collapsed) Common Sources Attribute · Available sources: 2 Runtime Info · Available sources: 7 ⋮, Secondary Actions: Expand
+							903 text Common Sources
+							904 container Attribute · Available sources: 2
+								905 text 2
+							906 container Runtime Info · Available sources: 7
+								907 text 7
+							950 text ⋮
+						909 button (collapsed) TD Built In Runtime Info · Available sources: 3 Texture · Available sources: 2 ⋮, Secondary Actions: Expand
+							910 text TD Built In
+							911 container Runtime Info · Available sources: 3
+								912 text 3
+							913 container Texture · Available sources: 2
+								914 text 2
+							951 text ⋮
+						916 container
+							917 button (collapsed) Custom Uniforms Uniforms · Available sources: 3 ⋮, Secondary Actions: Expand
+								918 text Custom Uniforms
+								919 container Uniforms · Available sources: 3
+									920 text 3
+								1036 text ⋮
+							922 button Add source: Custom Uniforms
+						923 button (collapsed) Secondary Actions: Expand, Texture Inputs Runtime Info · Available sources: 4 Texture · Available sources: 4 Compile-time Info · Available sources: 4 ⋮
+							924 text Texture Inputs
+							925 container Runtime Info · Available sources: 4
+								926 text 4
+							927 container Texture · Available sources: 4
+								928 text 4
+							929 container Compile-time Info · Available sources: 4
+								930 text 4
+							1037 text ⋮
+						932 container
+							933 button (collapsed) Spec Constants ⋮, Secondary Actions: Expand
+								934 text Spec Constants
+								954 text ⋮
+							936 button Add source: Spec Constants
+						937 container
+							938 button (collapsed) Graph Constants ⋮, Secondary Actions: Expand
+								939 text Graph Constants
+								955 text ⋮
+							941 button Add source: Graph Constants
+						942 container
+							943 button (collapsed) POP Buffers ⋮, Secondary Actions: Expand
+								944 text POP Buffers
+								956 text ⋮
+							946 button Add source: POP Buffers
+		443 splitter Description: Resize node library; arrow keys adjust, double-click resets, Value: 300, ID: libraryresize
+		444 container Shader graph workspace
+			445 container Description: Node canvas, ID: canvas
+				446 container
+					447 button Pixel
+					448 button Description: Undo　Ctrl＋Z, ID: undo
+					449 button (disabled) Description: Redo　Ctrl＋Shift＋Z, ID: redo
+					450 checkbox Description: Box Select, Value: 0, ID: boxselect
+					451 checkbox Show Custom Names, Value: 0, ID: customnames
+					452 checkbox Description: Show straight dashed Link lines. Port navigation arrows remain available when hidden.　X, Value: 1, ID: showlinklines
+					1022 pop up button (collapsed) Description: Network Editor tools, ID: graphmore, Secondary Actions: Expand
+				454 container
+					455 pop up button (collapsed) Description: Canvas zoom · 43%, ID: zoom, Secondary Actions: Expand
+					456 button Description: Home: show all nodes　H, ID: fit
+					457 checkbox Description: Show only the graph and toolbar　Ctrl＋Enter, Value: 0, ID: graphfocus
+				458 container world
+					459 image wires
+						1038 image
+						1039 image
+						1040 image
+						1041 image
+						1042 image
+						1043 image
+					466 container cards
+						467 container Float
+							468 text Float
+							469 container
+								470 button Description: constant output out, Help: Float output: out (float)
+								471 text out float
+							472 stepper (settable, float) Description: Initial value, Value: 7.119999885559082, Details: 7.12, Help: Click to edit (touch: double-tap); drag horizontally to adjust. Drag follows the slider range; Ctrl ×10, Shift ÷10, Ctrl+Shift ÷100. Middle mouse, Alt+right mouse or long-press: Value Ladder. Choose a step vertically; adjust horizontally. Release applies; Esc cancels. Right-click: quick presets.
+							473 button Resize node width
+						474 container uGain
+							475 text uGain
+							476 text Uniform · float
+							477 container
+								478 button Description: gainNode output out, Help: uGain output: out (float)
+								479 text out float
+							480 stepper (settable, float) Description: uGain, Help: Value, Value: 0.6370000243186951, Details: 0.637
+							481 button Resize node width
+						482 container Multiply
+							483 text Multiply
+							484 pop up button (collapsed, settable) Description: Operation Type, Value: float, Secondary Actions: Expand
+								485 menu
+									486 Auto · float
+									487 vec4
+									488 (selected) float
+									489 vec2
+									490 vec3
+									491 int
+									492 ivec2
+									493 ivec3
+									494 ivec4
+									495 uint
+									496 uvec2
+									497 uvec3
+									498 uvec4
+									499 double
+									500 dvec2
+									501 dvec3
+									502 dvec4
+									503 mat2
+									504 mat2x3
+									505 mat2x4
+									506 mat3x2
+									507 mat3
+									508 mat3x4
+									509 mat4x2
+									510 mat4x3
+									511 mat4
+									512 dmat2
+									513 dmat2x3
+									514 dmat2x4
+									515 dmat3x2
+									516 dmat3
+									517 dmat3x4
+									518 dmat4x2
+									519 dmat4x3
+									520 dmat4
+							521 container
+								522 button Description: product input a, Help: Multiply input: a (float)
+								523 text a float
+							524 container
+								525 button Description: product input b, Help: Multiply input: b (float)
+								526 text b float
+							527 container
+								528 button Description: product output out, Help: Multiply output: out (float)
+								529 text out float
+							530 button Resize node width
+						531 container Color Output
+							532 text Color Output
+							533 container
+								534 button Description: out input color, Help: Color Output input: color (vec4)
+								535 text color
+								536 container The source float value is repeated in every component of vec4. The node keeps its selected operation type.
+									537 text float vec4
+							538 button Resize node width
+						539 container vUV
+							540 text vUV
+							541 container
+								542 button Description: n917817e86ead output out, Help: vUV output: out (vec3)
+								543 text out vec3
+								544 button Description: Add Split for these components · out, Help: Add Split for these components
+							545 button Resize node width
+						546 container Multiply
+							547 text Multiply
+							548 pop up button (collapsed, settable) Description: Operation Type, Value: float, Secondary Actions: Expand
+								549 menu
+									550 Auto · float
+									551 vec4
+									552 (selected) float
+									553 vec2
+									554 vec3
+									555 int
+									556 ivec2
+									557 ivec3
+									558 ivec4
+									559 uint
+									560 uvec2
+									561 uvec3
+									562 uvec4
+									563 double
+									564 dvec2
+									565 dvec3
+									566 dvec4
+									567 mat2
+									568 mat2x3
+									569 mat2x4
+									570 mat3x2
+									571 mat3
+									572 mat3x4
+									573 mat4x2
+									574 mat4x3
+									575 mat4
+									576 dmat2
+									577 dmat2x3
+									578 dmat2x4
+									579 dmat3x2
+									580 dmat3
+									581 dmat3x4
+									582 dmat4x2
+									583 dmat4x3
+									584 dmat4
+							585 container
+								586 button Description: n94a1f531f50e input a, Help: Multiply input: a (float)
+								587 text a float
+							588 container
+								589 button Description: n94a1f531f50e input b, Help: Multiply input: b (float)
+								590 text b float
+								591 stepper (settable, integer) Description: b, Value: 1, Help: Click to edit (touch: double-tap); drag horizontally to adjust. Drag follows the slider range; Ctrl ×10, Shift ÷10, Ctrl+Shift ÷100. Middle mouse, Alt+right mouse or long-press: Value Ladder. Choose a step vertically; adjust horizontally. Release applies; Esc cancels. Right-click: quick presets.
+							592 container
+								593 button Description: n94a1f531f50e output out, Help: Multiply output: out (float)
+								594 text out float
+							595 button Resize node width
+						596 container Multiply
+							597 text Multiply
+							598 pop up button (collapsed, settable) Description: Operation Type, Value: float, Secondary Actions: Expand
+								599 menu
+									600 Auto · float
+									601 vec4
+									602 (selected) float
+									603 vec2
+									604 vec3
+									605 int
+									606 ivec2
+									607 ivec3
+									608 ivec4
+									609 uint
+									610 uvec2
+									611 uvec3
+									612 uvec4
+									613 double
+									614 dvec2
+									615 dvec3
+									616 dvec4
+									617 mat2
+									618 mat2x3
+									619 mat2x4
+									620 mat3x2
+									621 mat3
+									622 mat3x4
+									623 mat4x2
+									624 mat4x3
+									625 mat4
+									626 dmat2
+									627 dmat2x3
+									628 dmat2x4
+									629 dmat3x2
+									630 dmat3
+									631 dmat3x4
+									632 dmat4x2
+									633 dmat4x3
+									634 dmat4
+							635 container
+								636 button Description: ne08559a9d3da input a, Help: Multiply input: a (float)
+								637 text a float
+							638 container
+								639 button Description: ne08559a9d3da input b, Help: Multiply input: b (float)
+								640 text b float
+								641 stepper (settable, integer) Description: b, Value: 1, Help: Click to edit (touch: double-tap); drag horizontally to adjust. Drag follows the slider range; Ctrl ×10, Shift ÷10, Ctrl+Shift ÷100. Middle mouse, Alt+right mouse or long-press: Value Ladder. Choose a step vertically; adjust horizontally. Release applies; Esc cancels. Right-click: quick presets.
+							642 container
+								643 button Description: ne08559a9d3da output out, Help: Multiply output: out (float)
+								644 text out float
+							645 button Resize node width
+						646 container Multiply
+							647 text Multiply
+							648 pop up button (collapsed, settable) Description: Operation Type, Value: float, Secondary Actions: Expand
+								649 menu
+									650 Auto · float
+									651 vec4
+									652 (selected) float
+									653 vec2
+									654 vec3
+									655 int
+									656 ivec2
+									657 ivec3
+									658 ivec4
+									659 uint
+									660 uvec2
+									661 uvec3
+									662 uvec4
+									663 double
+									664 dvec2
+									665 dvec3
+									666 dvec4
+									667 mat2
+									668 mat2x3
+									669 mat2x4
+									670 mat3x2
+									671 mat3
+									672 mat3x4
+									673 mat4x2
+									674 mat4x3
+									675 mat4
+									676 dmat2
+									677 dmat2x3
+									678 dmat2x4
+									679 dmat3x2
+									680 dmat3
+									681 dmat3x4
+									682 dmat4x2
+									683 dmat4x3
+									684 dmat4
+							685 container
+								686 button Description: n6534b7a46b64 input a, Help: Multiply input: a (float)
+								687 text a float
+							688 container
+								689 button Description: n6534b7a46b64 input b, Help: Multiply input: b (float)
+								690 text b float
+								691 stepper (settable, integer) Description: b, Value: 1, Help: Click to edit (touch: double-tap); drag horizontally to adjust. Drag follows the slider range; Ctrl ×10, Shift ÷10, Ctrl+Shift ÷100. Middle mouse, Alt+right mouse or long-press: Value Ladder. Choose a step vertically; adjust horizontally. Release applies; Esc cancels. Right-click: quick presets.
+							692 container
+								693 button Description: n6534b7a46b64 output out, Help: Multiply output: out (float)
+								694 text out float
+							695 button Resize node width
+						696 container uValue
+							697 text uValue
+							698 text Uniform · float
+							699 container
+								700 button Description: ncdbe799fc6fa output out, Help: uValue output: out (float)
+								701 text out float
+							702 stepper (settable, integer) Description: uValue, Help: Value, Value: 0
+							703 button Resize node width
+				857 container
+					858 text PIXEL STAGE
+					859 text 9 nodes
+					860 text Build your Shader from left to right.
+			713 container Parameter, ID: floatingparameters
+				947 text Parameter
+				715 button Description: Close, Help: Close · P
+				716 splitter Description: Resize panel heights, Value: 320
+				717 container Parameter, ID: pane-parameters
+					718 container Parameter, ID: parameterbody
+						719 container inspector
+							720 container
+								721 button (expanded) Description: Collapse nodes · Parameter, Help: Collapse nodes, Secondary Actions: Collapse
+								722 heading Multiply, Value: 3
+									723 text Multiply
+								724 text field (settable) Description: Node name, Value: Multiply_5
+							725 tab group Parameters
+								726 tab (selected, settable, boolean) Parameters, Value: 1
+								727 tab (selectable, settable, boolean) Settings, Value: 0
+								728 tab (selectable, settable, boolean) Notes, Value: 0
+							729 container
+								730 text Operation Type
+								731 pop up button (collapsed, settable) Operation Type, Help: Type is locked; connections do not change the selected type., Value: float, Secondary Actions: Expand
+									732 menu
+										733 Auto · float
+										734 vec4
+										735 (selected) float
+										736 vec2
+										737 vec3
+										738 int
+										739 ivec2
+										740 ivec3
+										741 ivec4
+										742 uint
+										743 uvec2
+										744 uvec3
+										745 uvec4
+										746 double
+										747 dvec2
+										748 dvec3
+										749 dvec4
+										750 mat2
+										751 mat2x3
+										752 mat2x4
+										753 mat3x2
+										754 mat3
+										755 mat3x4
+										756 mat4x2
+										757 mat4x3
+										758 mat4
+										759 dmat2
+										760 dmat2x3
+										761 dmat2x4
+										762 dmat3x2
+										763 dmat3
+										764 dmat3x4
+										765 dmat4x2
+										766 dmat4x3
+										767 dmat4
+							768 container
+								948 button Multiply input: a (float)
+								770 heading a float, Value: 4
+									771 text a
+									772 text float
+								773 button Select source · Multiply · out
+								774 button Disconnect a
+							775 container
+								949 button Multiply input: b (float)
+								777 text b
+								778 text float
+								779 stepper (settable, integer) Description: b, Value: 1, Help: Click to edit (touch: double-tap); drag horizontally to adjust. Drag follows the slider range; Ctrl ×10, Shift ÷10, Ctrl+Shift ÷100. Middle mouse, Alt+right mouse or long-press: Value Ladder. Choose a step vertically; adjust horizontally. Release applies; Esc cancels. Right-click: quick presets.
+			864 container Collapse nodes · Output Preview, ID: floatinglive
+				865 button Close
+				866 splitter Description: Resize panel heights · Output Preview, Value: 320
+				867 splitter Description: Resize panel heights · Output Preview, Value: 276
+				868 button Resize panel heights · Output Preview
+				869 button (expanded) Description: Collapse nodes · Output Preview, Help: Collapse nodes, ID: livetoggle, Secondary Actions: Collapse
+					870 text Output Preview
+				871 container Collapse nodes · Output Preview, ID: pane-live
+					872 container livebody
+						873 button (collapsed) Description: Preview source path · /grape_refactor_compiler_final/Frontend_TOP/shader, Help: /grape_refactor_compiler_final/Frontend_TOP/shader, ID: previewpath, Secondary Actions: Expand
+							874 text /grape_refactor_compiler_final
+							875 text /Frontend_TOP/shader
+						876 button Description: Connect / take control, ID: refreshpreview
+						877 checkbox Description: Live preview, Help: Stop live preview, Value: 1, ID: autopreview
+						1029 container Description: Another browser has taken control. Connect again to take control here., ID: previewactivity
+							1030 text Taken over by another page
+						879 container
+							1031 container preview
+								1032 container 無法播放媒體。
+								1033 text Another browser has taken control. Connect again to take control here.
+							881 text 284 × 178
+		963 splitter Description: Resize parameter sidebar; arrow keys adjust, double-click resets, Value: 340, ID: detailsresize
+		964 container parameter-sidebar
+			965 container
+				966 tab group
+					967 tab (selected, expanded, settable, boolean) OP Parameter, Value: 1, ID: controlstoggle, Secondary Actions: Collapse
+					968 button Float panel · OP Parameter
+					969 button (expanded) Description: Collapse panel, Secondary Actions: Collapse
+				970 container Description: OP Parameter, ID: pane-controls
+					971 container controlsbody
+						1044 text Frontend_TOP
+						1045 text /grape_refactor_compiler_final/Frontend_TOP
+						974 pop up button Description: Customize Parameters, ID: customizeparameters
+						975 tab group custompage
+							976 tab (selected, settable, boolean) Output, Value: 1
+							977 tab (selectable, settable, boolean) Grape TOP, Value: 0
+						978 container customcontrols
+							979 container
+								980 text Resolution
+								981 pop up button (collapsed, settable) Description: Resolution value, Help: Resolution, Value: Match Input, Secondary Actions: Expand
+									982 menu
+										983 (selected) Match Input
+										984 Custom
+							985 container
+								986 text Width
+								987 stepper (settable, integer) Description: Width value, Help: Width, Value: 512
+							988 container
+								989 text Height
+								990 stepper (settable, integer) Description: Height value, Help: Height, Value: 512
+							991 container
+								992 text Pixel Format
+								993 pop up button (collapsed, settable) Description: Pixel Format value, Help: Pixelformat, Value: RGBA 16-bit float, Secondary Actions: Expand
+									994 menu
+										995 RGBA 8-bit
+										996 (selected) RGBA 16-bit float
+										997 RGBA 32-bit float
+							998 container
+								999 text Input Extend UV
+								1000 pop up button (collapsed, settable) Description: Input Extend UV value, Help: Extenduv, Value: Hold, Secondary Actions: Expand
+									1001 menu
+										1002 (selected) Hold
+										1003 Zero
+										1004 Repeat
+										1005 Mirror
+			1006 splitter Description: Resize panel heights, Value: 616, ID: resize-help
+			1007 container
+				1008 tab group
+					1009 tab (selected, expanded, settable, boolean) Help, Value: 1, ID: helptoggle, Secondary Actions: Collapse
+					1010 button Float panel · Help
+					1011 button (expanded) Description: Collapse panel, Secondary Actions: Collapse
+				1012 container Description: Help, ID: pane-help
+					1013 container Help, ID: helpbody
+						1014 container nodehelp
+							1015 container
+								1016 text Calculates  a * b . Multiply a texture by an RGBA value to tint it.
+							1017 text Matrix/matrix and matrix/vector products use linear algebra. Auto infers the result shape from both operands. Scalars scale every element. Use Matrix Comp Mult for element-wise matrix multiplication.
+							1018 link Description: GLSL · Multiplication and component-wise operations ↗, Value: registry.khronos.org/OpenGL/specs/gl/GLSLangSpec.4.60.html#vector-and-matrix-operations
+							1019 link Description: The Book of Shaders: Shaping functions, Value: thebookofshaders.com/05/
+	359 container
+		360 pop up button (collapsed) Description: Project and graph actions, ID: editormenu, Secondary Actions: Expand
+		361 container Description: Graph save revision (not a Shader compilation count) · r170, ID: dirty
+			362 text Graph saved
+		1046 text Uniform live
+		364 container Interface size and appearance
+			365 pop up button (collapsed) Description: Experimental features, ID: uiexperiments, Secondary Actions: Expand
+			366 pop up button (collapsed) Description: Keyboard shortcuts, ID: uishortcuts, Secondary Actions: Expand
+			367 pop up button (collapsed) Description: Open on another device, ID: uishare, Secondary Actions: Expand
+			368 pop up button (collapsed) Description: Appearance: Dark. Open appearance adjustments, ID: uitheme, Secondary Actions: Expand
+			369 pop up button (collapsed) Description: Interface size: Standard. Open size adjustments, ID: uisize, Secondary Actions: Expand
+			370 checkbox Description: Fullscreen　Alt＋Enter, Value: 0, ID: uifullscreen
+
+The focused UI element is 0 AXWebArea TD-Grape · Refactor.toe · /grape_refactor_compiler_final/Frontend_TOP, URL: 127.0.0.1:64961/shader/c574e2c5c37d41648cc38210974c5d59/

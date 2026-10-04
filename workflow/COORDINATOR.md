@@ -1,5 +1,7 @@
 # Coordinator v1 repository policy
 
+**Workflow mode:** the [checkpoint and continuous-delivery policy](CONTINUOUS_DELIVERY.md) records the Owner-directed transition. Its explicit overrides apply only after a verified checkpoint and recorded Human end-to-end execution instruction. Until then, the per-Slice route below and existing explicit controls remain in force. Installing the policy does not resume dispatch or authorize publication. Preserve all role separation, evidence and IH-005 protections not explicitly overridden.
+
 This policy supplements [AGENTS](../AGENTS.md) and accepted IH-005; it cannot rewrite either. It installs workflow rules only, introduces no product requirement, and authorizes no Slice. S03+ requires a separate explicit Human authorization. Operational procedures are in [RUNBOOK](RUNBOOK.md), normalized contracts in [PACKETS](PACKETS.md), and workflow dry runs in [CONFORMANCE](CONFORMANCE.md).
 
 ## Authority and truth

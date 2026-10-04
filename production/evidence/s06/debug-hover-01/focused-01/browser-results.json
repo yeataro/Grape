@@ -1,0 +1,482 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+      "s06-debug-hover.spec.ts",
+      "--output",
+      "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-01\\focused-01\\test-results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/debug-hover-01/focused-01/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-01\\focused-01\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s06-debug-hover.spec.ts",
+      "file": "s06-debug-hover.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 normal debug normal checkbox preserves graph history selection and covers built-in objects",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2252,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T13:33:08.970Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-b4402a80d76392281447",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 15,
+          "column": 1
+        },
+        {
+          "title": "S06 scalar and vector committed values stay distinct from unfinished drafts and IME guards",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5863,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'A', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'A', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input type=\"text\" aria-label=\"A\" data-draft=\"true\" data-parameter=\"a\" inputmode=\"decimal\" data-composing=\"false\"/>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'A', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'A', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input type=\"text\" aria-label=\"A\" data-draft=\"true\" data-parameter=\"a\" inputmode=\"decimal\" data-composing=\"false\"/>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:40:231",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                      "column": 231,
+                      "line": 40
+                    },
+                    "snippet": "  38 |   await input.fill(\"7.25\"); await input.hover(); const text = await read(page); expect(text).toContain('\"value\": 1'); expect(text).toContain('\"text\": \"7.25\"'); await close(page);\n  39 |   // Refusal is tested through an actual click, not a check() retry that hides rejection.\n> 40 |   await page.getByText(\"Experimental features\", { exact: true }).click(); await input.click(); await checkbox(page).click(); await expect(checkbox(page)).toBeChecked(); await expect(input).toHaveValue(\"7.25\"); await expect(input).toBeFocused();\n     |                                                                                                                                                                                                                                       ^\n  41 |   await input.dispatchEvent(\"compositionstart\"); await checkbox(page).click(); await expect(input).toBeFocused(); await expect(page.locator(\".experimental-issue\")).toContainText(\"composition\");\n  42 |   await input.dispatchEvent(\"compositionend\"); await input.press(\"Escape\"); await expect(input).toHaveValue(\"1\"); expect(await documentJSON(page)).toEqual(before);\n  43 |   await page.getByText(\"Experimental features\", { exact: true }).click(); await createNode(page, \"Color RGBA\"); await c.getByRole(\"heading\", { name: \"Color RGBA\", exact: true }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                        "column": 231,
+                        "line": 40
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'A', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'A', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input type=\"text\" aria-label=\"A\" data-draft=\"true\" data-parameter=\"a\" inputmode=\"decimal\" data-composing=\"false\"/>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n\n  38 |   await input.fill(\"7.25\"); await input.hover(); const text = await read(page); expect(text).toContain('\"value\": 1'); expect(text).toContain('\"text\": \"7.25\"'); await close(page);\n  39 |   // Refusal is tested through an actual click, not a check() retry that hides rejection.\n> 40 |   await page.getByText(\"Experimental features\", { exact: true }).click(); await input.click(); await checkbox(page).click(); await expect(checkbox(page)).toBeChecked(); await expect(input).toHaveValue(\"7.25\"); await expect(input).toBeFocused();\n     |                                                                                                                                                                                                                                       ^\n  41 |   await input.dispatchEvent(\"compositionstart\"); await checkbox(page).click(); await expect(input).toBeFocused(); await expect(page.locator(\".experimental-issue\")).toContainText(\"composition\");\n  42 |   await input.dispatchEvent(\"compositionend\"); await input.press(\"Escape\"); await expect(input).toHaveValue(\"1\"); expect(await documentJSON(page)).toEqual(before);\n  43 |   await page.getByText(\"Experimental features\", { exact: true }).click(); await createNode(page, \"Color RGBA\"); await c.getByRole(\"heading\", { name: \"Color RGBA\", exact: true }).click();\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:40:231"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T13:33:11.485Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-01\\focused-01\\test-results\\s06-debug-hover-S06-scalar-f6697-ished-drafts-and-IME-guards-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-01\\focused-01\\test-results\\s06-debug-hover-S06-scalar-f6697-ished-drafts-and-IME-guards-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-01\\focused-01\\test-results\\s06-debug-hover-S06-scalar-f6697-ished-drafts-and-IME-guards-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                    "column": 231,
+                    "line": 40
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-2646b0f9ff57c5eb025a",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 35,
+          "column": 1
+        },
+        {
+          "title": "S06 hover detail invalidation follows selection stage deletion Undo and same-ID reopen",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6151,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEmpty\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.hover-summary')\nExpected: empty\nReceived: notEmpty\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeEmpty\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.hover-summary')\u001b[22m\n\u001b[2m    14 × locator resolved to <span aria-live=\"off\" class=\"hover-summary\">Panel · Shader output · UI-only · visible</span>\u001b[22m\n\u001b[2m       - unexpected value \"notEmpty\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEmpty\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.hover-summary')\nExpected: empty\nReceived: notEmpty\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeEmpty\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.hover-summary')\u001b[22m\n\u001b[2m    14 × locator resolved to <span aria-live=\"off\" class=\"hover-summary\">Panel · Shader output · UI-only · visible</span>\u001b[22m\n\u001b[2m       - unexpected value \"notEmpty\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:57:48",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                      "column": 48,
+                      "line": 57
+                    },
+                    "snippet": "  55 |   await page.getByLabel(\"Open document file\").setInputFiles({ name: \"same-id.grape.json\", mimeType: \"application/json\", buffer: Buffer.from(JSON.stringify(original)) });\n  56 |   await page.getByRole(\"button\", { name: \"Open in new session\", exact: true }).click(); expect(await old!.evaluate(e => e.isConnected)).toBe(false);\n> 57 |   await expect(page.locator(\".hover-summary\")).toBeEmpty(); const fresh = page.locator(`article[data-node=\"${id}\"]`); await fresh.getByRole(\"heading\").hover(); expect(await read(page)).toContain(id!); await close(page); expect(await documentJSON(page)).toEqual(original);\n     |                                                ^\n  58 |   save(\"lifetime-public\", { id, samePersistentIdDifferentMount: true, stageDeletionUndoReopen: \"passed\" });\n  59 | });\n  60 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                        "column": 48,
+                        "line": 57
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEmpty\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.hover-summary')\nExpected: empty\nReceived: notEmpty\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeEmpty\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.hover-summary')\u001b[22m\n\u001b[2m    14 × locator resolved to <span aria-live=\"off\" class=\"hover-summary\">Panel · Shader output · UI-only · visible</span>\u001b[22m\n\u001b[2m       - unexpected value \"notEmpty\"\u001b[22m\n\n\n  55 |   await page.getByLabel(\"Open document file\").setInputFiles({ name: \"same-id.grape.json\", mimeType: \"application/json\", buffer: Buffer.from(JSON.stringify(original)) });\n  56 |   await page.getByRole(\"button\", { name: \"Open in new session\", exact: true }).click(); expect(await old!.evaluate(e => e.isConnected)).toBe(false);\n> 57 |   await expect(page.locator(\".hover-summary\")).toBeEmpty(); const fresh = page.locator(`article[data-node=\"${id}\"]`); await fresh.getByRole(\"heading\").hover(); expect(await read(page)).toContain(id!); await close(page); expect(await documentJSON(page)).toEqual(original);\n     |                                                ^\n  58 |   save(\"lifetime-public\", { id, samePersistentIdDifferentMount: true, stageDeletionUndoReopen: \"passed\" });\n  59 | });\n  60 |\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:57:48"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T13:33:17.722Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-01\\focused-01\\test-results\\s06-debug-hover-S06-hover--98b54-ion-Undo-and-same-ID-reopen-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-01\\focused-01\\test-results\\s06-debug-hover-S06-hover--98b54-ion-Undo-and-same-ID-reopen-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-01\\focused-01\\test-results\\s06-debug-hover-S06-hover--98b54-ion-Undo-and-same-ID-reopen-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                    "column": 48,
+                    "line": 57
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-7eb2e9acc0f9902c4f53",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 48,
+          "column": 1
+        },
+        {
+          "title": "S06 pending connection and held gesture reject preference changes while readonly inspection remains",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1400,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T13:33:24.459Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-4186aa633b2e803d4321",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 61,
+          "column": 1
+        },
+        {
+          "title": "S06 preference malformed visibly falls back without touching other keys",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 256,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T13:33:26.107Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-01e8f170869f7f01c955",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 70,
+          "column": 44
+        },
+        {
+          "title": "S06 preference denied visibly falls back without touching other keys",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 292,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T13:33:26.368Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-0eef8c833cbc09d2227f",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 70,
+          "column": 44
+        },
+        {
+          "title": "S06 diagnostic preference persists separately and rapid hover performs no per-move capture or serialization",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2244,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T13:33:26.666Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-c708c3f7fe274ad17ad9",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 78,
+          "column": 1
+        },
+        {
+          "title": "S06 keyboard details and bounded long owner data are readable without selection layout changes",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 875,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"\\\"committed\\\"\"\u001b[39m\nReceived string:    \u001b[31m\"UI control: Read full application status\u001b[39m\n\u001b[31mIdentity: message\u001b[39m\n\u001b[31mState: UI-only · available·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"modelData\\\": \\\"未提供\\\",\u001b[39m\n\u001b[31m  \\\"role\\\": \\\"button\\\"\u001b[39m\n\u001b[31m}\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"\\\"committed\\\"\"\u001b[39m\nReceived string:    \u001b[31m\"UI control: Read full application status\u001b[39m\n\u001b[31mIdentity: message\u001b[39m\n\u001b[31mState: UI-only · available·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"modelData\\\": \\\"未提供\\\",\u001b[39m\n\u001b[31m  \\\"role\\\": \\\"button\\\"\u001b[39m\n\u001b[31m}\"\u001b[39m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:98:263",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                      "column": 263,
+                      "line": 98
+                    },
+                    "snippet": "   96 |   await n.getByRole(\"heading\").hover(); await expect(button).toBeFocused(); await page.keyboard.press(\"Enter\"); await expect(dialog(page)).toBeVisible();\n   97 |   await page.setViewportSize({ width: 620, height: 380 }); const text = dialog(page).getByRole(\"region\"); await page.keyboard.press(\"Control+End\"); await page.keyboard.press(\"End\");\n>  98 |   const facts = await text.evaluate(el => ({ width: el.clientWidth, scrollWidth: el.scrollWidth, height: el.clientHeight, scrollHeight: el.scrollHeight, text: el.textContent })); expect(facts.scrollWidth).toBeLessThanOrEqual(facts.width + 1); expect(facts.text).toContain('\"committed\"');\n      |                                                                                                                                                                                                                                                                       ^\n   99 |   await page.screenshot({ path: path.join(out, \"debug-details-narrow.png\") }); await close(page); await page.setViewportSize({ width: 1440, height: 1000 }); expect(await n.boundingBox()).toEqual(geometry); expect(await documentJSON(page)).toEqual(before); save(\"keyboard-long-details\", facts);\n  100 | });\n  101 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                        "column": 263,
+                        "line": 98
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"\\\"committed\\\"\"\u001b[39m\nReceived string:    \u001b[31m\"UI control: Read full application status\u001b[39m\n\u001b[31mIdentity: message\u001b[39m\n\u001b[31mState: UI-only · available·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"modelData\\\": \\\"未提供\\\",\u001b[39m\n\u001b[31m  \\\"role\\\": \\\"button\\\"\u001b[39m\n\u001b[31m}\"\u001b[39m\n\n   96 |   await n.getByRole(\"heading\").hover(); await expect(button).toBeFocused(); await page.keyboard.press(\"Enter\"); await expect(dialog(page)).toBeVisible();\n   97 |   await page.setViewportSize({ width: 620, height: 380 }); const text = dialog(page).getByRole(\"region\"); await page.keyboard.press(\"Control+End\"); await page.keyboard.press(\"End\");\n>  98 |   const facts = await text.evaluate(el => ({ width: el.clientWidth, scrollWidth: el.scrollWidth, height: el.clientHeight, scrollHeight: el.scrollHeight, text: el.textContent })); expect(facts.scrollWidth).toBeLessThanOrEqual(facts.width + 1); expect(facts.text).toContain('\"committed\"');\n      |                                                                                                                                                                                                                                                                       ^\n   99 |   await page.screenshot({ path: path.join(out, \"debug-details-narrow.png\") }); await close(page); await page.setViewportSize({ width: 1440, height: 1000 }); expect(await n.boundingBox()).toEqual(geometry); expect(await documentJSON(page)).toEqual(before); save(\"keyboard-long-details\", facts);\n  100 | });\n  101 |\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:98:263"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T13:33:28.916Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-01\\focused-01\\test-results\\s06-debug-hover-S06-keyboa-dd50d-ut-selection-layout-changes-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-01\\focused-01\\test-results\\s06-debug-hover-S06-keyboa-dd50d-ut-selection-layout-changes-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-01\\focused-01\\test-results\\s06-debug-hover-S06-keyboa-dd50d-ut-selection-layout-changes-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                    "column": 263,
+                    "line": 98
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-94c86952f1718c1e6d25",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 89,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T13:33:08.637Z",
+    "duration": 21271.799,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

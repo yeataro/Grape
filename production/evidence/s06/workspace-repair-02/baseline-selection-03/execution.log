@@ -1,0 +1,54 @@
+
+Running 1 test using 1 worker
+
+(node:21700) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:38:28 › S06 selection geometry remains fixed at zoom 1 (839ms)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:38:28 › S06 selection geometry remains fixed at zoom 1 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -5,11 +5,11 @@
+          "width": 190,
+          "x": 716.3380126953125,
+          "y": 448.2535400390625,
+        },
+        Object {
+    -     "height": 79,
+    +     "height": 81,
+          "name": "Color RGBA",
+          "width": 190,
+          "x": 114.3380355834961,
+          "y": 364.2535400390625,
+        },
+
+      47 |   await page.mouse.click(r.x+20,r.y+150);const restored=await geometry(c);
+      48 |   output(`selection-${zoom}`,{unselected,selected,restored});
+    > 49 |   expect(selected.nodes).toEqual(unselected.nodes);expect(selected.sockets).toEqual(unselected.sockets);expect(selected.wires).toEqual(unselected.wires);
+         |                          ^
+      50 |   expect(restored.nodes).toEqual(unselected.nodes);expect(await doc(page)).toEqual(before);
+      51 | });
+      52 |
+        at C:\Users\user\source\Grape\production\tests\browser\s06-connection-view.spec.ts:49:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-02\baseline-selection-03\test-results\s06-connection-view-S06-se-6da2c-try-remains-fixed-at-zoom-1-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-02\baseline-selection-03\test-results\s06-connection-view-S06-se-6da2c-try-remains-fixed-at-zoom-1-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-02\baseline-selection-03\test-results\s06-connection-view-S06-se-6da2c-try-remains-fixed-at-zoom-1-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-02\baseline-selection-03\test-results\s06-connection-view-S06-se-6da2c-try-remains-fixed-at-zoom-1-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:38:28 › S06 selection geometry remains fixed at zoom 1 

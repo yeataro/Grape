@@ -1,0 +1,59 @@
+{
+  "packetVersion": 1,
+  "packetType": "HUMAN_MERGE_CONTROL",
+  "packetId": "S05-PR6-MERGE-CONTROL-01",
+  "actionKey": "yeataro/Grape:S05:PR6:merge:d72da51:01",
+  "recordedAt": "2026-10-04 08:28:13 UTC",
+  "repository": "https://github.com/yeataro/Grape",
+  "PR": "https://github.com/yeataro/Grape/pull/6",
+  "authority": "Human Owner",
+  "authorizationSources": [
+    "production/evidence/coordinator/s05/closeout-20261004-01/human-control-01.json (direct PR/merge, S06 after closeout)",
+    "production/evidence/coordinator/s05/closeout-20261004-01/remote-publication-01.json (direct exact B1 payload/destination/PR/conditional merge reply)"
+  ],
+  "publisher": "Grape PM; original product/state writer remains STOP_WRITING",
+  "status": "TECHNICAL_BOOKKEEPING_READY_PENDING_PM_NEW_PAYLOAD_PERMISSION_AND_REMOTE_GUARDS",
+  "expectedMain": "6aa6abbdc46d55753111d5ef5ca9899870a8805a",
+  "expectedRemoteWorkBeforeUpdate": "ed7683de5c8836afe6142bab7be46a5cb0a8f389",
+  "expectedWorkHeadB": "d72da515c53dd026ddb0338b2e911bbea86f1919",
+  "I": "aa4c86e20b0b4b54218b9992921578e7f24a28a2",
+  "R": "6c3a734325d0db2d924356a9614e971d80a966c8",
+  "build": "S05-drag-aa4c86e",
+  "acceptanceRef": "production/evidence/acceptance/s05/closeout-20261004-01/human-acceptance-01.json",
+  "independentReport": {
+    "file": "production/evidence/s05/closeout-20261004-01/independent-review/SCOPED_CLOSEOUT_ASSESSMENT-01.json",
+    "sha256": "2799350c47ed934ad0b2c4576218f612d2b6d4c12d21ad72c7914d0172da7e15",
+    "verdict": "PASS only declared local selectedscope"
+  },
+  "bookkeepingIntegrity": {
+    "receipt": "production/evidence/coordinator/s05/closeout-20261004-01/bookkeeping-result-01.json",
+    "sha256": "41583e863828da883e19cc556dd0616097164d127443928be4145af8a09be3a0",
+    "deltaManifest": "production/evidence/s05/closeout-20261004-01/postcommit-path-hash-manifest-01.json",
+    "deltaManifestSha256": "aeaf5d6b44c2b3b988fc9c2088fb5768f80dff441d7bb1874f8ccc111ab84248",
+    "changedPaths": 55,
+    "totalCurrentBytes": 1956890,
+    "productSourceConfigTestsBuildFrozenChanged": false,
+    "oldAcceptedEvidenceUnchanged": true,
+    "reviewedSourceConfigBlobs": 131,
+    "activeSlices": [],
+    "completed": "S05 only within accepted declared scope",
+    "checks": "473 root integrity + 10 maintenance tests + current state validation PASS; metadata-only product checks not rerun",
+    "rootIndependentBookkeepingChecks": "ParentB1,55allowlistedpaths,product/frozen diffnone,oldacceptedEvidenceequal,newacceptedEvidencehashes+I,HEAD all verified"
+  },
+  "addedPayloadMeaning": "B2 adds only necessary scoped-review/supporting evidence, Human acceptance/closeout/publication receipts, README/state completion records and their verification. No Escape repair or S06 product. Original exact B1 grant does not literally name B2; PM must reconcile this concrete delta with current direct Human authority and normal tool approval before exporting. Root does not claim a new permission or substitute actor after rejection.",
+  "updatedPRBody": {
+    "file": "production/evidence/acceptance/s05/closeout-20261004-01/PR-BODY-01.md",
+    "bytes": 3005,
+    "sha256": "9616784d381806841e2b55ce16a0937d7d6efb1e88041d0a686f7f1be7e05213"
+  },
+  "requestedAction": "After new-payload permission and live guards are satisfied, normal non-force push exactB2 towork, update samePR6 body, recheckhead/base/requiredchecks, markready and merge using merge commit preserving I/R/B ancestry. Never squash/reset/force/deletework or change source. Query merged fact after any ambiguous result. If actualtool approval rejects, stop and report exact reason; no alternative transport.",
+  "postMerge": "Verify actual merge commitM2 and B2 ancestor, accepted content/state at main. If work still exactB2 with no concurrent changes, safely fast-forward remote work to already-published acceptedM2 as synchronization for explicitly authorized S06; read back refs. Leave local dirty workingtree intact; original writer performs local safe synchronization/activation from observedM2.",
+  "knownLimits": [
+    "Original review6 BLOCKED unchanged",
+    "NaturalEscape OPEN/FAIL explicitlydeferred",
+    "TwoLAN/Tailscalechecks OPEN/NOT_EXECUTED, no three-originclaim",
+    "Noall391/native/physicalGPU/otherbrowser claim"
+  ],
+  "nextSliceAuthority": "Explicit Human start S06 after this closeout/merge verified. This control does not itself activate S06.",
+  "changedHeadBehavior": "Stop dependent remote mutation and reconcile actualrefchanges; no stale controlreuse."
+}

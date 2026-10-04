@@ -104,6 +104,18 @@ export class Workspace {
         "PANEL_UNAVAILABLE",
       );
       const services: PanelServices = {
+        catalog: (lease, wire) => {
+          this.assertLease(r, lease);
+          demand(r.update.target, "TARGET_MISSING");
+          return this.application.creationCatalog(
+            this.application.context(r.update.target.scope.contextId),
+            wire,
+          );
+        },
+        editing: (lease) => {
+          this.assertLease(r, lease);
+          return !this.application.readonly && !this.application.busy;
+        },
         identifier: () => this.application.identifier(),
         clipboard: () => this.application.clipboardText,
         reshape: (lease, type, value) => {

@@ -1,0 +1,138 @@
+
+Running 8 tests using 1 worker
+
+(node:16760) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:15:1 › S06 normal debug normal checkbox preserves graph history selection and covers built-in objects (2.3s)
+  x  2 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:35:1 › S06 scalar and vector committed values stay distinct from unfinished drafts and IME guards (5.9s)
+(node:11036) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  3 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:48:1 › S06 hover detail invalidation follows selection stage deletion Undo and same-ID reopen (6.2s)
+(node:50168) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 4 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:61:1 › S06 pending connection and held gesture reject preference changes while readonly inspection remains (1.4s)
+  ok 5 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:70:44 › S06 preference malformed visibly falls back without touching other keys (256ms)
+  ok 6 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:70:44 › S06 preference denied visibly falls back without touching other keys (292ms)
+  ok 7 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:78:1 › S06 diagnostic preference persists separately and rapid hover performs no per-move capture or serialization (2.2s)
+  x  8 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:89:1 › S06 keyboard details and bounded long owner data are readable without selection layout changes (875ms)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:35:1 › S06 scalar and vector committed values stay distinct from unfinished drafts and IME guards 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  getByRole('textbox', { name: 'A', exact: true })
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for getByRole('textbox', { name: 'A', exact: true })
+        14 × locator resolved to <input type="text" aria-label="A" data-draft="true" data-parameter="a" inputmode="decimal" data-composing="false"/>
+           - unexpected value "inactive"
+
+
+      38 |   await input.fill("7.25"); await input.hover(); const text = await read(page); expect(text).toContain('"value": 1'); expect(text).toContain('"text": "7.25"'); await close(page);
+      39 |   // Refusal is tested through an actual click, not a check() retry that hides rejection.
+    > 40 |   await page.getByText("Experimental features", { exact: true }).click(); await input.click(); await checkbox(page).click(); await expect(checkbox(page)).toBeChecked(); await expect(input).toHaveValue("7.25"); await expect(input).toBeFocused();
+         |                                                                                                                                                                                                                                       ^
+      41 |   await input.dispatchEvent("compositionstart"); await checkbox(page).click(); await expect(input).toBeFocused(); await expect(page.locator(".experimental-issue")).toContainText("composition");
+      42 |   await input.dispatchEvent("compositionend"); await input.press("Escape"); await expect(input).toHaveValue("1"); expect(await documentJSON(page)).toEqual(before);
+      43 |   await page.getByText("Experimental features", { exact: true }).click(); await createNode(page, "Color RGBA"); await c.getByRole("heading", { name: "Color RGBA", exact: true }).click();
+        at C:\Users\user\source\Grape\production\tests\browser\s06-debug-hover.spec.ts:40:231
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-01\focused-01\test-results\s06-debug-hover-S06-scalar-f6697-ished-drafts-and-IME-guards-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-01\focused-01\test-results\s06-debug-hover-S06-scalar-f6697-ished-drafts-and-IME-guards-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-01\focused-01\test-results\s06-debug-hover-S06-scalar-f6697-ished-drafts-and-IME-guards-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-01\focused-01\test-results\s06-debug-hover-S06-scalar-f6697-ished-drafts-and-IME-guards-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:48:1 › S06 hover detail invalidation follows selection stage deletion Undo and same-ID reopen 
+
+    Error: expect(locator).toBeEmpty() failed
+
+    Locator:  locator('.hover-summary')
+    Expected: empty
+    Received: notEmpty
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeEmpty" with timeout 5000ms
+      - waiting for locator('.hover-summary')
+        14 × locator resolved to <span aria-live="off" class="hover-summary">Panel · Shader output · UI-only · visible</span>
+           - unexpected value "notEmpty"
+
+
+      55 |   await page.getByLabel("Open document file").setInputFiles({ name: "same-id.grape.json", mimeType: "application/json", buffer: Buffer.from(JSON.stringify(original)) });
+      56 |   await page.getByRole("button", { name: "Open in new session", exact: true }).click(); expect(await old!.evaluate(e => e.isConnected)).toBe(false);
+    > 57 |   await expect(page.locator(".hover-summary")).toBeEmpty(); const fresh = page.locator(`article[data-node="${id}"]`); await fresh.getByRole("heading").hover(); expect(await read(page)).toContain(id!); await close(page); expect(await documentJSON(page)).toEqual(original);
+         |                                                ^
+      58 |   save("lifetime-public", { id, samePersistentIdDifferentMount: true, stageDeletionUndoReopen: "passed" });
+      59 | });
+      60 |
+        at C:\Users\user\source\Grape\production\tests\browser\s06-debug-hover.spec.ts:57:48
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-01\focused-01\test-results\s06-debug-hover-S06-hover--98b54-ion-Undo-and-same-ID-reopen-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-01\focused-01\test-results\s06-debug-hover-S06-hover--98b54-ion-Undo-and-same-ID-reopen-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-01\focused-01\test-results\s06-debug-hover-S06-hover--98b54-ion-Undo-and-same-ID-reopen-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-01\focused-01\test-results\s06-debug-hover-S06-hover--98b54-ion-Undo-and-same-ID-reopen-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:89:1 › S06 keyboard details and bounded long owner data are readable without selection layout changes 
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "\"committed\""
+    Received string:    "UI control: Read full application status
+    Identity: message
+    State: UI-only · available·
+    {
+      \"modelData\": \"未提供\",
+      \"role\": \"button\"
+    }"
+
+       96 |   await n.getByRole("heading").hover(); await expect(button).toBeFocused(); await page.keyboard.press("Enter"); await expect(dialog(page)).toBeVisible();
+       97 |   await page.setViewportSize({ width: 620, height: 380 }); const text = dialog(page).getByRole("region"); await page.keyboard.press("Control+End"); await page.keyboard.press("End");
+    >  98 |   const facts = await text.evaluate(el => ({ width: el.clientWidth, scrollWidth: el.scrollWidth, height: el.clientHeight, scrollHeight: el.scrollHeight, text: el.textContent })); expect(facts.scrollWidth).toBeLessThanOrEqual(facts.width + 1); expect(facts.text).toContain('"committed"');
+          |                                                                                                                                                                                                                                                                       ^
+       99 |   await page.screenshot({ path: path.join(out, "debug-details-narrow.png") }); await close(page); await page.setViewportSize({ width: 1440, height: 1000 }); expect(await n.boundingBox()).toEqual(geometry); expect(await documentJSON(page)).toEqual(before); save("keyboard-long-details", facts);
+      100 | });
+      101 |
+        at C:\Users\user\source\Grape\production\tests\browser\s06-debug-hover.spec.ts:98:263
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-01\focused-01\test-results\s06-debug-hover-S06-keyboa-dd50d-ut-selection-layout-changes-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-01\focused-01\test-results\s06-debug-hover-S06-keyboa-dd50d-ut-selection-layout-changes-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-01\focused-01\test-results\s06-debug-hover-S06-keyboa-dd50d-ut-selection-layout-changes-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-01\focused-01\test-results\s06-debug-hover-S06-keyboa-dd50d-ut-selection-layout-changes-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:35:1 › S06 scalar and vector committed values stay distinct from unfinished drafts and IME guards 
+    [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:48:1 › S06 hover detail invalidation follows selection stage deletion Undo and same-ID reopen 
+    [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:89:1 › S06 keyboard details and bounded long owner data are readable without selection layout changes 
+  5 passed (21.3s)

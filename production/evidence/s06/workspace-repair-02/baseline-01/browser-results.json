@@ -1,0 +1,200 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+      "s06-connection-view.spec.ts",
+      "--grep",
+      "geometry 1280|geometry remains fixed at zoom 1$",
+      "--output",
+      "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\baseline-01\\test-results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/workspace-repair-02/baseline-01/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\baseline-01\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s06-connection-view.spec.ts",
+      "file": "s06-connection-view.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 connection notice compact geometry 1280 and successful inverse routes one Undo",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 659,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m65\u001b[39m\nReceived:   \u001b[31m513\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m65\u001b[39m\nReceived:   \u001b[31m513\u001b[39m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts:28:27",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts",
+                      "column": 27,
+                      "line": 28
+                    },
+                    "snippet": "  26 |   await out.click(); const g=await geometry(c); output(`notice-${width}`,g);\n  27 |   await page.screenshot({path:path.join(process.env.GRAPE_EVIDENCE_DIR!,`notice-${width}.png`)});\n> 28 |   expect(g.notice.height).toBeLessThan(65); expect(g.notice.pointerEvents).toBe(\"none\");\n     |                           ^\n  29 |   for(const n of g.nodes) expect(n.x+n.width/2>=g.notice.x&&n.x+n.width/2<=g.notice.x+g.notice.width&&n.y+n.height/2>=g.notice.y&&n.y+n.height/2<=g.notice.y+g.notice.height).toBe(false);\n  30 |   await input.click(); await expect(c.locator(\".canvas-notice\")).toBeEmpty();\n  31 |   const after=await doc(page); expect(after.graph.stages.find((s:any)=>s.key===\"pixel\").network.edges).toHaveLength(1);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts",
+                        "column": 27,
+                        "line": 28
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m65\u001b[39m\nReceived:   \u001b[31m513\u001b[39m\n\n  26 |   await out.click(); const g=await geometry(c); output(`notice-${width}`,g);\n  27 |   await page.screenshot({path:path.join(process.env.GRAPE_EVIDENCE_DIR!,`notice-${width}.png`)});\n> 28 |   expect(g.notice.height).toBeLessThan(65); expect(g.notice.pointerEvents).toBe(\"none\");\n     |                           ^\n  29 |   for(const n of g.nodes) expect(n.x+n.width/2>=g.notice.x&&n.x+n.width/2<=g.notice.x+g.notice.width&&n.y+n.height/2>=g.notice.y&&n.y+n.height/2<=g.notice.y+g.notice.height).toBe(false);\n  30 |   await input.click(); await expect(c.locator(\".canvas-notice\")).toBeEmpty();\n  31 |   const after=await doc(page); expect(after.graph.stages.find((s:any)=>s.key===\"pixel\").network.edges).toHaveLength(1);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts:28:27"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:17:38.653Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\baseline-01\\test-results\\s06-connection-view-S06-co-a54b4-ful-inverse-routes-one-Undo-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\baseline-01\\test-results\\s06-connection-view-S06-co-a54b4-ful-inverse-routes-one-Undo-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\baseline-01\\test-results\\s06-connection-view-S06-co-a54b4-ful-inverse-routes-one-Undo-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts",
+                    "column": 27,
+                    "line": 28
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-e21214e545e55b6aa3ff",
+          "file": "s06-connection-view.spec.ts",
+          "line": 23,
+          "column": 40
+        },
+        {
+          "title": "S06 selection geometry remains fixed at zoom 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 874,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:17:39.918Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-ae8e912ad451ac87cc61",
+          "file": "s06-connection-view.spec.ts",
+          "line": 38,
+          "column": 28
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T12:17:38.328Z",
+    "duration": 2762.301,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

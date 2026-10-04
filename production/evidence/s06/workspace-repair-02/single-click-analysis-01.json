@@ -1,0 +1,54 @@
+{
+  "status": "PENDING_OWNER_MAPPING_UNCHANGED",
+  "scope": "Only ambiguous single-click Create vs Browse branch is held. Does not block notice/selection/hover/wire submission.",
+  "current": {
+    "Browse": "Single label click inspects details only. Plus/Add inserts at captured creation point; double-click and row drag remain existing creation routes.",
+    "Create": "Single label click inspects details. Plus/Add or Enter selects a measured preview; canvas placement commits. Wired selection retains two-phase atomic create+connect.",
+    "plus": "The existing explicit Add affordance chooses the candidate in Create and inserts in Browse; no button removed or redesigned."
+  },
+  "canonical": [
+    {
+      "id": "LC-UI-034",
+      "trigger": "Tab／空白doubleclick/doubletap／右鍵Add／落線空白",
+      "behavior": "以graph座標記住建立點，搜尋重置，category路徑/source/type篩選；顯示標籤、來源badge及匹配port。wired模式列真正可規劃的連線變體，精確型別優先，每node顯示最佳變體；新source和已存在source有不同標示。",
+      "edgeCases": [
+        "readonly不開；拖線遇不相容目標不改成Add。",
+        "來源CRUD／library內容由LC-DATA域描述，本項只描述選取入口。",
+        "鍵盤UpDown/Enter選擇，Esc回canvas。"
+      ]
+    },
+    {
+      "id": "LC-UI-036",
+      "trigger": "port context Create候選，移cursor再左擊canvas",
+      "behavior": "先測量候選真實port與卡尺寸，顯示輪廓/預覽線，不實際加node/source。位置snap24；左擊有效canvas處一次提交節點+連線。Escape/Tab/右擊/外部點/換圖/版本變更取消。",
+      "edgeCases": [
+        "singleton、dynamictyped節點使用preview投影，不可為測量偷改source。",
+        "拖面板位置與落點不同；確認後尾隨click被吞避免重複選取／連線。"
+      ]
+    },
+    {
+      "id": "LC-UI-081",
+      "trigger": "左側Add Node Categories/Library accordion；branch展開；點entry",
+      "behavior": "分類樹使用primary與secondarycategory（同一路徑去重），沿預定category/branch順序，再字串排序。branch展開狀態跨filter/render保留於會話；單擊只inspect signature/categorypath/help/aliases，不建立。subgraph列inputs/outputs而非假裝GLSL函數。",
+      "edgeCases": [
+        "readonly仍inspect，+禁插；detail關閉不改graphselection。",
+        "只sourcefilter影響visibleentries，不改實際graph；Library可選all/project/personal/builtin並有獨立template區。"
+      ]
+    }
+  ],
+  "reference": {
+    "file": "production/evidence/coordinator/s06/preparation-01/legacy-reference-manifest-01.json",
+    "bytes": 15264,
+    "sha256": "68dfb96df5b69f8337eaaf413bcc9009be8edb60bf7fafd7dfecece6453748b5"
+  },
+  "ownerCorrection": {
+    "file": "production/evidence/coordinator/s06/owner-feedback-01/human-correction-02.json",
+    "bytes": 2660,
+    "sha256": "2405932bf8171d49cf779fedc526c7f4e723edf2007b19d913789afa5110ae96"
+  },
+  "tests": [
+    "archive-public-01 catalog pointer hover keeps Browse inspect view-only",
+    "archive-public-01 row drag works, Create preview remains two-phase and measured Compose vec2 schema matches committed graph"
+  ],
+  "deferred": "Placement at original blank double-click point remains explicitly deferred."
+}

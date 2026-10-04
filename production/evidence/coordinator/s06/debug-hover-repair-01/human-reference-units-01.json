@@ -1,0 +1,58 @@
+{
+  "packetVersion": 1,
+  "packetType": "HUMAN_OWNER_FEEDBACK_SUPPLEMENT",
+  "packetId": "S06-LEGACY-REFERENCE-UNITS-01",
+  "recordedAt": "2026-10-04T14:14:37.091Z",
+  "repository": "https://github.com/yeataro/Grape",
+  "sliceId": "S06",
+  "authority": {
+    "role": "Human Owner",
+    "source": "Direct current messages in Coordinator thread",
+    "threadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "messageIds": null,
+    "limitation": "Exact direct quotes preserved; message IDs are not exposed.",
+    "quotes": [
+      "算了，我覺得你先模仿 Legacy 的做法，允許你偷看他的 CSS 狀態。",
+      "尤其是他的 Hoover跟命中是不同的。",
+      "應該說我之後都允許你看它的 DOM 跟 CSS 狀態，但不要參考它怎麼畫 UI 的，你要自己實現。",
+      "當然如果有些跟動態SVG之類的相關的，你也可以直接看它的SVG。",
+      "就是現在 CSS 的 style 存在著某種程度的混亂跟沒有重用。你要以最小單元的參考去參考，而不是它在哪裡就去參考哪裡。",
+      "後面我們要分開的時候再分開。比如說，按鈕就應該按鈕，下拉就是應該下拉，然後數字輸入的地方就是數字輸入，slider的地方就是 slider。如果它有存在第二種版本，它是存在別地方的話，它還有道理是不一樣的。但它如果不存在別地方的話，那單純就是 Legacy 的實做混亂。"
+    ]
+  },
+  "priorRefs": [
+    {
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-feedback-01.json",
+      "bytes": 5733,
+      "sha256": "d0e16600b45d3f439a12533f19a2632f3bf022bc63e505b25b590b8d67aeab0f"
+    },
+    {
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-solid-socket-01.json",
+      "bytes": 2798,
+      "sha256": "c676c126dc1d7483a06c66b9f062bd7a01abb5538bf0cfe4249de15945323027"
+    },
+    {
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-type-color-01.json",
+      "bytes": 1852,
+      "sha256": "16eaf5e2c50f892efdbd4d91a5cf6cf71727cc0ab965b4175f6d1a6713308742"
+    }
+  ],
+  "referencePermission": "Standing permission to inspect Legacy DOM, computed/rule CSS states and rendered/dynamic SVG as visual and interaction evidence. New production UI construction, drawing and event implementation must be independent. This does not authorize modifying the live Legacy document or copying its rendering/event architecture.",
+  "requiredOutcomes": [
+    "Reference the smallest meaningful control or interaction primitive, not the panel/location-specific accumulated implementation. Extract only required visual properties and state differences.",
+    "Unify button, select/dropdown, numeric input and slider presentation/behavior through the current owned reusable UI components/styles. A location difference alone is not a reason for a duplicate control implementation.",
+    "Retain a second variant only when a real separately used visual/interaction need justifies it. Document concrete need; do not invent variants or an unsolicited general design system. Split later when justified.",
+    "Ordinary pointer hover and an eligible wire-hit target are separate states. Legacy .port:hover and .port.wire-target demonstrate this distinction; wire-target is not synonymous with CSS :active or a wider hit area.",
+    "Preserve latest solid-fill and existing type-color requirements. Mimic Legacy state hierarchy, not its hardcoded universal purple or accumulated location selectors.",
+    "Apply the reuse rule to this authorized changed scope and touched controls. No wholesale unrelated Legacy cleanup, whole catalog or new Slice."
+  ],
+  "supersedes": "Earlier broad prohibition against merely inspecting DOM/CSS/SVG is relaxed. Prohibition on adopting Legacy rendering/DOM/event architecture remains. Old receipts remain immutable; latest explicit Human control governs.",
+  "routing": "Original designated Implementer; include in pending S06 bounded repair and subsequent independent review.",
+  "separateControls": {
+    "productAcceptance": "NOT_GRANTED",
+    "remotePublication": "NOT_GRANTED",
+    "merge": "NOT_GRANTED",
+    "nextSlice": "NOT_GRANTED"
+  },
+  "counterHandling": "No retry reset."
+}

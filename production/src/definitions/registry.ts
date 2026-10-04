@@ -131,6 +131,9 @@ export class Definitions {
   nodeTypes(): readonly NodeDefinition[] {
     return Object.freeze([...this.#nodes.values()]);
   }
+  resourceTypes(): readonly ResourceDefinition[] {
+    return Object.freeze([...this.#resources.values()]);
+  }
   kinds(): readonly GraphKindDefinition[] {
     return Object.freeze([...this.#kinds.values()]);
   }

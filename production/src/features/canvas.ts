@@ -33,6 +33,7 @@ export const canvasCommands = [
   "grape.network.up",
   "grape.network.navigate",
   "grape.network.interface",
+  "grape.network.mode",
   "grape.node.add",
   "grape.node.delete",
   "grape.node.move",
@@ -192,6 +193,42 @@ function mountCanvas(
   const definitionName = document.createElement("input"),
     addDirection = document.createElement("select");
   definitionName.ariaLabel = "Subgraph name";
+  const emissionMode = document.createElement("select"),
+    modeNote = document.createElement("span");
+  emissionMode.ariaLabel = "Subgraph emission mode";
+  for (const value of ["expand", "function"]) {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = value === "expand" ? "Expand" : "Function";
+    emissionMode.append(option);
+  }
+  emissionMode.addEventListener(
+    "change",
+    mount.scope.event(() => {
+      const c = capture().context!;
+      execute("grape.network.mode", {
+        mode: emissionMode.value,
+        revision: c.graph.revision,
+      });
+      const after = capture().context!;
+      emissionMode.value = after.definition?.emissionMode ?? "expand";
+      const losses = after.graph.document.graph.losses.filter(
+        (l) =>
+          l.code === "FUNCTION_CONSTANT_DETACHED" &&
+          !c.graph.document.graph.losses.some((old) => old.id === l.id),
+      );
+      if (losses.length)
+        notice.textContent = losses
+          .map(
+            (l) =>
+              l.reason +
+              (l.payload.kind === "edge"
+                ? ` Receiver ${l.payload.edge.to.nodeId}/${l.payload.edge.to.portKey}; edge ${l.payload.edge.id}.`
+                : ""),
+          )
+          .join(" ");
+    }),
+  );
   addDirection.ariaLabel = "New port direction";
   for (const d of ["input", "output"]) {
     const o = document.createElement("option");
@@ -202,6 +239,8 @@ function mountCanvas(
   editor.append(
     summary,
     definitionName,
+    emissionMode,
+    modeNote,
     rows,
     addDirection,
     add,
@@ -349,7 +388,14 @@ function mountCanvas(
         "INTERFACE_PORT_LIMIT",
       );
       interfaceDraft!.push({
-        key: "port-" + crypto.randomUUID(),
+        key:
+          "port-" +
+          (
+            services.identifier ??
+            (() => {
+              throw Error("IDENTITY_UNAVAILABLE");
+            })
+          )(),
         name: "Port " + (interfaceDraft!.length + 1),
         direction: addDirection.value as "input" | "output",
         type: "glsl.float",
@@ -552,7 +598,14 @@ function mountCanvas(
         name: "Structure",
         fields: [
           {
-            id: "field-" + crypto.randomUUID(),
+            id:
+              "field-" +
+              (
+                services.identifier ??
+                (() => {
+                  throw Error("IDENTITY_UNAVAILABLE");
+                })
+              )(),
             name: "value",
             type: "glsl.float",
           },
@@ -586,7 +639,14 @@ function mountCanvas(
     if (!structureDraft) beginStructure();
     if (structureDraft!.fields.length >= 64) return;
     structureDraft!.fields.push({
-      id: "field-" + crypto.randomUUID(),
+      id:
+        "field-" +
+        (
+          services.identifier ??
+          (() => {
+            throw Error("IDENTITY_UNAVAILABLE");
+          })
+        )(),
       name: "field" + (structureDraft!.fields.length + 1),
       type: "glsl.float",
     });
@@ -1055,6 +1115,12 @@ function mountCanvas(
         }),
       );
       editor.hidden = !c.definition;
+      emissionMode.value = c.definition?.emissionMode ?? "expand";
+      emissionMode.disabled = !c.definition?.emissionMode;
+      modeNote.textContent =
+        c.definition && !c.definition.emissionMode
+          ? "Use Upgrade subgraph owners to enable this mode."
+          : "Shared by all references. Use Make independent for a separate choice.";
       const selectedStructure = choose.value;
       choose.replaceChildren();
       for (const item of [

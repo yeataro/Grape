@@ -53,6 +53,8 @@ import {
 } from "../sdk/kernel.ts";
 import type { IdentitySource } from "../sdk/kernel.ts";
 import type { TypeSystem } from "../sdk/editing.ts";
+import { analyzeConstants } from "../definitions/constant-analysis.ts";
+import type { GLSLProfile } from "../sdk/public-surface.ts";
 export interface Operation {
   readonly token: object;
   readonly label: string;
@@ -1073,6 +1075,31 @@ export class Graph {
             );
           }
       }
+    try {
+      out.push(...analyzeConstants(document, this.definitions).diagnostics);
+    } catch (error) {
+      out.push(issue("CONSTANT_ANALYSIS_UNAVAILABLE", String(error)));
+    }
+    for (const loss of g.losses.filter(
+      (l) => l.code === "FUNCTION_CONSTANT_DETACHED",
+    ))
+      out.push(
+        issue(
+          loss.code,
+          loss.reason,
+          {
+            lossId: loss.id,
+            ...(loss.payload.kind === "edge"
+              ? {
+                  edgeId: loss.payload.edge.id,
+                  nodeId: loss.payload.edge.to.nodeId,
+                  portKey: loss.payload.edge.to.portKey,
+                }
+              : {}),
+          },
+          "warning",
+        ),
+      );
     return detached(out);
   }
 }
@@ -1323,6 +1350,15 @@ export class Draft {
         extensions: {},
       });
       demand(!cycle(network), "CYCLE");
+      if (b.requireConstant) {
+        const edge = network.edges.at(-1)!;
+        demand(
+          analyzeConstants(this.document, this.definitions).edges.get(
+            network.id + ":" + edge.id,
+          ) === true,
+          "CONSTANT_REQUIRED",
+        );
+      }
     });
   }
 
@@ -1625,6 +1661,7 @@ export class Draft {
     role: "call" | "source" | "structure" | "field",
     resourceId: string,
     field?: string,
+    exactNode?: NodeTypeRef,
   ): string {
     return this.run(() => {
       this.fork(networkId);
@@ -1637,8 +1674,10 @@ export class Draft {
         this.stage(networkId).implementation === "network",
         "NODE_ELIGIBILITY",
       );
-      const def = this.definitions.nodeByRole(role);
-      demand(def, "NODE_TYPE");
+      const def = exactNode
+        ? this.definitions.node(exactNode)
+        : this.definitions.nodeByRole(role);
+      demand(def && def.modelRole === role, "NODE_TYPE");
       const key =
         role === "call"
           ? "definition"
@@ -1876,6 +1915,102 @@ export class Draft {
       );
     });
   }
+  emissionMode(
+    networkId: string,
+    mode: "expand" | "function",
+    profile: GLSLProfile,
+  ): void {
+    this.run(() => {
+      demand(mode === "expand" || mode === "function", "NETWORK_EMISSION_MODE");
+      let resource = this.document.graph.resources.find(
+        (r) => asNetwork(r, this.definitions)?.network.id === networkId,
+      );
+      demand(resource, "DEFINITION_MISSING");
+      const semantics = this.definitions.resource(
+        resource.type,
+      )?.networkEmission;
+      demand(
+        semantics,
+        "NETWORK_UPGRADE_REQUIRED",
+        "Explicitly upgrade this document's subgraph owner before selecting a mode.",
+      );
+      if (semantics.mode(resource.data) === mode) return;
+      const before = analyzeConstants(this.document, this.definitions, profile);
+      // Qualification precedes localization and loss repair, on this fixed candidate.
+      resource.data = structuredClone(semantics.setMode(resource.data, mode));
+      if (mode === "function") {
+        demand(
+          profile.capabilities.includes("grape.glsl.functions"),
+          "PROFILE_FUNCTION_UNSUPPORTED",
+        );
+        const failures =
+          analyzeConstants(
+            this.document,
+            this.definitions,
+            profile,
+          ).functions.get(resource.id) ?? [];
+        demand(
+          !failures.length,
+          "FUNCTION_INELIGIBLE",
+          JSON.stringify(failures),
+        );
+      }
+      this.fork(networkId);
+      resource = this.document.graph.resources.find(
+        (r) => asNetwork(r, this.definitions)?.network.id === networkId,
+      )!;
+      if (mode === "function") {
+        const after = analyzeConstants(
+          this.document,
+          this.definitions,
+          profile,
+        );
+        const affected = networks(this.document, this.definitions).flatMap(
+          ({ network }) =>
+            network.edges
+              .filter(
+                (e) =>
+                  before.edges.get(network.id + ":" + e.id) === true &&
+                  after.edges.get(network.id + ":" + e.id) === false,
+              )
+              .map((edge) => ({
+                networkId: network.id,
+                edge: structuredClone(edge),
+              })),
+        );
+        for (const affectedEdge of affected) {
+          this.fork(affectedEdge.networkId);
+          const network = findNetwork(
+            this.document,
+            affectedEdge.networkId,
+            this.definitions,
+          );
+          network.edges = network.edges.filter(
+            (e) => e.id !== affectedEdge.edge.id,
+          );
+          this.document.graph.losses.push({
+            schema: "grape.loss",
+            version: 1,
+            id: this.ids.next(),
+            code: "FUNCTION_CONSTANT_DETACHED",
+            reason: `Function mode of definition ${resource.id} makes this receiving input nonconstant.`,
+            payload: {
+              kind: "edge",
+              networkId: network.id,
+              edge: affectedEdge.edge,
+            },
+            extensions: {
+              "grape.function-mode": {
+                initiatingDefinition: resource.id,
+                initiatingNetwork: networkId,
+                mode,
+              },
+            },
+          });
+        }
+      }
+    });
+  }
   createSubgraph(
     networkId: string,
     name = "Subgraph",
@@ -1936,7 +2071,9 @@ export class Draft {
       this.document.graph.resources.push({
         id,
         type: { ...spec.ref },
-        data: data as unknown as Json,
+        data:
+          spec.networkEmission?.initialize(data as unknown as Json) ??
+          (data as unknown as Json),
         references: [],
         referencesComplete: true,
         extensions: {},

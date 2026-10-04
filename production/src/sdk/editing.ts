@@ -38,6 +38,8 @@ export interface EmissionContext extends ModelContext {
   readonly boundaryInputs: Readonly<Record<string, GLSLExpression>>;
   literal(type: string, value: Json): string;
   typeName(type: string): string;
+  /** Job-owned resource binding; unavailable profiles fail rather than inline a default. */
+  uniform?(resourceId: string, type: string, value: Json): GLSLExpression;
   emitNetwork(
     id: string,
     inputs: Readonly<Record<string, GLSLExpression>>,
@@ -53,6 +55,8 @@ export interface StateReferences {
   ): Json;
 }
 export interface NodeDefinition {
+  /** Authored effects are roots even when none of this node's values is consumed. */
+  readonly effectful?: boolean;
   readonly modelRole?:
     | "call"
     | "network-input"
@@ -98,6 +102,17 @@ export interface ResourceDefinition {
   readonly codec: DataCodec;
   readonly model?: "network" | "structure" | "source" | "frame";
   readonly referencePolicy?: "declared";
+  /** Exact network owner semantics. Old owners without this contract retain expansion. */
+  readonly networkEmission?: {
+    initialize(data: Json): Json;
+    mode(data: Json): "expand" | "function";
+    setMode(data: Json, mode: "expand" | "function"): Json;
+  };
+  /** Explicit application upgrade, never a reader fallback or mutation of an old pin. */
+  readonly upgrades?: readonly {
+    from: NodeTypeRef;
+    upgrade(data: Json): Json;
+  }[];
   readonly library?: {
     readonly origin: string;
     readonly nodes: readonly {
@@ -113,6 +128,10 @@ export interface ResourceDefinition {
     resources: readonly import("./document.ts").ResourceDocument[],
     networks?: readonly import("./document.ts").NetworkDocument[],
   ): number | undefined;
+  /** Owner-declared value dependencies used to resolve a type's symbolic extent. */
+  extentInputs?(
+    data: Json,
+  ): readonly { networkId: string; nodeId: string; portKey: string }[];
   /** Pure owner admission and preparation; never resolves live native resources. */
   readonly sourcePolicy?: {
     validate(
@@ -265,6 +284,7 @@ export interface ContextSnapshot {
   }[];
   readonly definition: {
     id: string;
+    emissionMode?: "expand" | "function" | null;
     data: import("./networks.ts").NetworkData;
   } | null;
   readonly graph: GraphSnapshot;

@@ -34,6 +34,8 @@ export interface ContractIssue {
   /** Default/external fallback. Never infer a translation key from this string. */
   readonly message: string;
   readonly messageRef?: import("./localization.ts").TextRef;
+  /** A shared-body issue may relate to many occurrences; none is a fictitious sole origin. */
+  readonly related?: readonly Readonly<{ networkId: string; nodeId: string }>[];
   readonly subject?: Readonly<{
     graphId?: string;
     stageId?: string;

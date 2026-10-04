@@ -37,7 +37,14 @@ import type {
   PanelCommandTarget,
   PanelCommandIntent,
 } from "../sdk/panel-commands.ts";
-import { Signal, detached, equal, demand, plain } from "../sdk/kernel.ts";
+import {
+  Signal,
+  detached,
+  equal,
+  demand,
+  plain,
+  exact,
+} from "../sdk/kernel.ts";
 import type { IdentitySource } from "../sdk/kernel.ts";
 import { compile } from "../generation/compiler.ts";
 import { readDocument, writeDocument } from "../persistence/codec.ts";
@@ -230,6 +237,20 @@ export class EditorContext {
       definition: this.#chain.length
         ? {
             id: this.#chain.at(-1)!,
+            emissionMode: (() => {
+              const r = graph.document.graph.resources.find(
+                (r) => r.id === this.#chain.at(-1),
+              )!;
+              try {
+                return (
+                  this.graph.definitionSet
+                    .resource(r.type)
+                    ?.networkEmission?.mode(r.data) ?? null
+                );
+              } catch {
+                return null;
+              }
+            })(),
             data: graph.document.graph.resources.find(
               (r) => r.id === this.#chain.at(-1),
             )!.data as unknown as NetworkData,
@@ -425,6 +446,9 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     demand(this.#graph, "NO_DOCUMENT");
     return this.#graph.capture();
   }
+  identifier(): string {
+    return this.identity.next();
+  }
   get dirty(): boolean {
     return !!this.#graph && !equal(this.snapshot.document, this.#saved);
   }
@@ -498,6 +522,56 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
       this.install(graph, saved ? parsed.document : null);
     }
     return parsed;
+  }
+  /** User-requested owner upgrade. The original snapshot and old pins remain immutable. */
+  upgradeOwners(): void {
+    demand(!this.#readonly && !this.busy, "UPGRADE_UNAVAILABLE");
+    const source = this.snapshot,
+      candidate = structuredClone(source.document);
+    let changed = false;
+    for (const resource of candidate.graph.resources) {
+      const destinations = this.definitions
+        .resourceTypes()
+        .flatMap((owner) =>
+          (owner.upgrades ?? [])
+            .filter(
+              (u) =>
+                exact(u.from, resource.type) &&
+                u.from.typeId === resource.type.typeId,
+            )
+            .map((upgrade) => ({ owner, upgrade })),
+        );
+      demand(destinations.length <= 1, "UPGRADE_AMBIGUOUS");
+      if (!destinations.length) continue;
+      const { owner, upgrade } = destinations[0];
+      resource.data = structuredClone(upgrade.upgrade(detached(resource.data)));
+      demand(
+        !owner.codec
+          .validate(resource.data)
+          .some((i) => i.severity === "error"),
+        "UPGRADE_PAYLOAD",
+      );
+      resource.type = { ...owner.ref };
+      if (!candidate.graph.modules.some((p) => exact(p, owner.ref)))
+        candidate.graph.modules.push({
+          moduleId: owner.ref.moduleId,
+          version: owner.ref.version,
+          fingerprint: owner.ref.fingerprint,
+        });
+      changed = true;
+    }
+    if (!changed) return;
+    const graph = new Graph(
+      candidate,
+      this.definitions.pin(candidate.graph.modules),
+      this.identity,
+    );
+    demand(
+      this.snapshot.loadId === source.loadId &&
+        this.snapshot.revision === source.revision,
+      "STALE_PROPOSAL",
+    );
+    this.install(graph, null);
   }
   inspectText(raw: string): DocumentInspection {
     const base = this.snapshot;
@@ -765,10 +839,19 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
         "grape.network.encapsulate",
         "grape.network.independent",
         "grape.network.interface",
+        "grape.network.mode",
       ].includes(intent.commandId)
     ) {
       let created = "";
       graph.change("Edit subgraph", (d) => {
+        if (intent.commandId === "grape.network.mode") {
+          demand(args.revision === this.snapshot.revision, "STALE_PROPOSAL");
+          demand(
+            args.mode === "expand" || args.mode === "function",
+            "COMMAND_ARGS",
+          );
+          d.emissionMode(network, args.mode, this.profile);
+        }
         if (intent.commandId === "grape.network.create")
           created = d.createSubgraph(
             network,

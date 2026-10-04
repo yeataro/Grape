@@ -1,4 +1,10 @@
 import { currentSources } from "../../src/modules/sources-current.ts";
+import { browserIdentity } from "../../src/adapters/browser/identity.ts";
+import { functionNetworks } from "../../src/modules/function-networks.ts";
+import {
+  functionOperations,
+  functionProfile,
+} from "../../src/modules/function-operations.ts";
 import { networkModule } from "../../src/modules/networks.ts";
 import { probeDefinitions } from "../../src/modules/package-probe.ts";
 import { extentModule } from "../../src/modules/extents.ts";
@@ -55,6 +61,8 @@ definitions.register(basicNodes);
 definitions.register(networkModule);
 definitions.register(extentModule);
 definitions.register(currentSources);
+definitions.register(functionNetworks);
+definitions.register(functionOperations);
 definitions.register(graphKinds);
 definitions.registerKind(imageKind);
 definitions.register(currentOutputModule);
@@ -83,9 +91,9 @@ widgets.register(numberWidget, (p) => p.spec.type === "number");
 widgets.register(choiceWidget, (p) => p.spec.type === "choice");
 const application = new EditorApplication(
   definitions,
-  { next: () => crypto.randomUUID() },
+  browserIdentity(),
   currentImageKind.ref,
-  esProfile,
+  functionProfile,
   new BrowserStorage(),
   browserOutput,
   probeDefinitions,
@@ -253,6 +261,21 @@ action("new", () => {
   application.newDocument();
   buildWorkspace();
 });
+const upgradeButton = document.createElement("button");
+upgradeButton.textContent = "Upgrade subgraph owners";
+upgradeButton.onclick = () => {
+  try {
+    if (!replacing()) return;
+    prepareReplace();
+    application.upgradeOwners();
+    buildWorkspace();
+    message.textContent =
+      "Subgraph owners upgraded explicitly; existing definitions remain expanded. Save to retain the upgraded document.";
+  } catch (error) {
+    report(error);
+  }
+};
+nav.append(upgradeButton);
 const saveButton = action("save", async () => {
   await application.save();
   message.textContent = text("stored");
@@ -540,7 +563,7 @@ mountPersonal(
   new PersonalLibrary(
     new BrowserLibraryStore(),
     definitions.pin(definitions.pins()),
-    esProfile,
+    functionProfile,
     probeDefinitions,
   ),
   report,

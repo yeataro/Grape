@@ -104,6 +104,7 @@ export class Workspace {
         "PANEL_UNAVAILABLE",
       );
       const services: PanelServices = {
+        identifier: () => this.application.identifier(),
         clipboard: () => this.application.clipboardText,
         reshape: (lease, type, value) => {
           this.assertLease(r, lease);

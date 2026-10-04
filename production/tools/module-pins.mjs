@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import crypto from "node:crypto";
 const entries = [
+  "src/modules/function-networks.ts",
+  "src/modules/function-operations.ts",
   "src/modules/nodes.ts",
   "src/modules/image.ts",
   "src/modules/networks.ts",

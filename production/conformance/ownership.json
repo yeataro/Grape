@@ -197,7 +197,8 @@
         "ContextSnapshot": "contract",
         "ModelContext": "contract",
         "StateReferences": "contract",
-        "TypeResource": "contract"
+        "TypeResource": "contract",
+        "EmissionContext": "contract"
       }
     },
     "src/sdk/kernel.ts": {
@@ -572,8 +573,56 @@
         "currentSourceRef": "contract",
         "currentSources": "contract"
       }
+    },
+    "src/definitions/constant-analysis.ts": {
+      "owner": "definitions",
+      "role": "definitions",
+      "exports": {
+        "ConstantAnalysis": "contract",
+        "analyzeConstants": "contract"
+      }
+    },
+    "src/modules/function-networks.ts": {
+      "owner": "basic-modules",
+      "role": "module",
+      "exports": {
+        "FUNCTION_PIN": "contract",
+        "functionNetworkRef": "contract",
+        "functionExtentRef": "contract",
+        "functionNetworks": "contract"
+      }
+    },
+    "src/modules/function-operations.ts": {
+      "owner": "basic-modules",
+      "role": "module",
+      "exports": {
+        "FUNCTION_OPS_PIN": "contract",
+        "functionOperationRef": "contract",
+        "functionOperations": "contract",
+        "functionProfile": "contract"
+      }
+    },
+    "src/application/digest.ts": {
+      "owner": "application",
+      "role": "application",
+      "exports": {
+        "sha256Digest": "service"
+      }
+    },
+    "src/adapters/browser/identity.ts": {
+      "owner": "browser-adapters",
+      "role": "adapter",
+      "exports": {
+        "browserIdentity": "environment"
+      }
     }
   },
-  "externals": {},
+  "externals": {
+    "@noble/hashes/sha2.js": {
+      "runtimeRoles": ["application"],
+      "version": "2.0.1",
+      "purpose": "Pure SHA-256 over canonical package bytes; no native or network imports"
+    }
+  },
   "registrationFiles": ["apps/web/main.ts"]
 }

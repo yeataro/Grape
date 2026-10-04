@@ -1,0 +1,180 @@
+
+Running 5 tests using 1 worker
+
+(node:45608) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 620 (7.3s)
+(node:55904) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 1440 (7.2s)
+(node:2012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 3 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:88:1 › S06 actual 3px uncaptured port release across Canvas Inspector retires wire and ring (1.2s)
+  x  4 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:106:39 › S06 trusted Enter socket activation waits for real pointer and preserves keyboard connection (6.8s)
+(node:46420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  5 [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:106:39 › S06 trusted Space socket activation waits for real pointer and preserves keyboard connection (6.9s)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 620 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })
+        14 × locator resolved to <button type="button" aria-haspopup="dialog" aria-label="Read full Canvas status">Function mode of definition id-22 makes this rece…</button>
+           - unexpected value "inactive"
+
+
+      53 |   // Reach the actual control using keyboard navigation, without programmatic focus.
+      54 |   for (let i = 0; i < 100 && !(await read.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press("Tab");
+    > 55 |   await expect(read).toBeFocused();
+         |                      ^
+      56 |   await page.keyboard.press("Enter");
+      57 |   const dialog = page.getByRole("dialog", { name: "Canvas status details", exact: true }), text = dialog.getByRole("region", { name: "Full current Canvas status", exact: true });
+      58 |   await expect(dialog).toBeVisible();
+        at C:\Users\user\source\Grape\production\tests\browser\s06-status-pointer.spec.ts:55:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 1440 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })
+        14 × locator resolved to <button type="button" aria-haspopup="dialog" aria-label="Read full Canvas status">Function mode of definition id-22 makes this rece…</button>
+           - unexpected value "inactive"
+
+
+      53 |   // Reach the actual control using keyboard navigation, without programmatic focus.
+      54 |   for (let i = 0; i < 100 && !(await read.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press("Tab");
+    > 55 |   await expect(read).toBeFocused();
+         |                      ^
+      56 |   await page.keyboard.press("Enter");
+      57 |   const dialog = page.getByRole("dialog", { name: "Canvas status details", exact: true }), text = dialog.getByRole("region", { name: "Full current Canvas status", exact: true });
+      58 |   await expect(dialog).toBeVisible();
+        at C:\Users\user\source\Grape\production\tests\browser\s06-status-pointer.spec.ts:55:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:106:39 › S06 trusted Enter socket activation waits for real pointer and preserves keyboard connection 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  locator('.canvas').last().locator('[data-direction="input"][data-port="color"]')
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for locator('.canvas').last().locator('[data-direction="input"][data-port="color"]')
+        14 × locator resolved to <button class="port" type="button" data-port="color" data-direction="input" aria-label="Image output input color" data-node-id="86a2e167-1aed-49dc-a16d-b0514d2f6108">…</button>
+           - unexpected value "inactive"
+
+
+      119 |   await out.click(); await page.keyboard.press("Escape"); await page.keyboard.press(key);
+      120 |   for (let i = 0; i < 100 && !(await input.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press("Tab");
+    > 121 |   await expect(input).toBeFocused(); await page.keyboard.press(key);
+          |                       ^
+      122 |   await expect(c.locator(".canvas-notice")).toBeEmpty();
+      123 |   const after = await doc(page); expect(after.graph.stages.find((s: any) => s.key === "pixel").network.edges).toHaveLength(1);
+      124 |   await clickAction(page, "Undo"); expect(await doc(page)).toEqual(before);
+        at C:\Users\user\source\Grape\production\tests\browser\s06-status-pointer.spec.ts:121:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-tru-28233-eserves-keyboard-connection-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-tru-28233-eserves-keyboard-connection-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-tru-28233-eserves-keyboard-connection-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-tru-28233-eserves-keyboard-connection-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:106:39 › S06 trusted Space socket activation waits for real pointer and preserves keyboard connection 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  locator('.canvas').last().locator('[data-direction="input"][data-port="color"]')
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for locator('.canvas').last().locator('[data-direction="input"][data-port="color"]')
+        14 × locator resolved to <button class="port" type="button" data-port="color" data-direction="input" aria-label="Image output input color" data-node-id="a6225001-2b56-4cc8-8764-b9f94f08cf92">…</button>
+           - unexpected value "inactive"
+
+
+      119 |   await out.click(); await page.keyboard.press("Escape"); await page.keyboard.press(key);
+      120 |   for (let i = 0; i < 100 && !(await input.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press("Tab");
+    > 121 |   await expect(input).toBeFocused(); await page.keyboard.press(key);
+          |                       ^
+      122 |   await expect(c.locator(".canvas-notice")).toBeEmpty();
+      123 |   const after = await doc(page); expect(after.graph.stages.find((s: any) => s.key === "pixel").network.edges).toHaveLength(1);
+      124 |   await clickAction(page, "Undo"); expect(await doc(page)).toEqual(before);
+        at C:\Users\user\source\Grape\production\tests\browser\s06-status-pointer.spec.ts:121:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-tru-3e260-eserves-keyboard-connection-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-tru-3e260-eserves-keyboard-connection-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-tru-3e260-eserves-keyboard-connection-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-03\focused-01\test-results\s06-status-pointer-S06-tru-3e260-eserves-keyboard-connection-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 620 
+    [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:34:34 › S06 complete persistent loss details have a keyboard read path at 1440 
+    [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:106:39 › S06 trusted Enter socket activation waits for real pointer and preserves keyboard connection 
+    [chromium] › ..\..\..\production\tests\browser\s06-status-pointer.spec.ts:106:39 › S06 trusted Space socket activation waits for real pointer and preserves keyboard connection 
+  1 passed (32.2s)

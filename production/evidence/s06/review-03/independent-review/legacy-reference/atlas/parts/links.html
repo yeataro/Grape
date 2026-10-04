@@ -1,0 +1,33 @@
+<section id="links" class="lk-section">
+  <div class="section-head"><div><div class="kicker">Link / Relationship & navigation</div><h2>讓關係退後，讓目的地容易找到</h2><p class="lede">Wire 保留型別色與曲線；Link 用淡灰虛線降低視覺負擔，接孔旁的箭頭把導航留在節點身上。線的顯示、關係的存在與節點選取，是三件不同的事。</p></div><span class="badge evidence">現況參考＋局部互動圖解</span></div>
+  <div id="LINK-01" data-artboard="LINK-01">
+    <div class="review-controls"><button id="lk-visibility" aria-pressed="true">顯示 Link 線</button><button id="lk-menu-toggle" aria-expanded="false" aria-controls="lk-menu">查看來源端箭頭選單</button><button id="lk-reset">重設圖解</button></div>
+    <div class="specimen lk-scroll"><div class="lk-board dot-surface" id="lk-board">
+      <svg class="lk-lines" viewBox="0 0 950 400" aria-hidden="true"><g id="lk-link-lines"><path class="lk-link" d="M290 111L575 95"/><path class="lk-link" d="M290 111L575 215"/><polygon class="lk-direction" points="6,0 -4,-4 -4,4" transform="translate(432.5 103) rotate(-3.213)"/><polygon class="lk-direction" points="6,0 -4,-4 -4,4" transform="translate(432.5 163) rotate(20.047)"/></g><path class="lk-wire" d="M270 111C420 111 418 335 595 335"/></svg>
+      <article class="lk-node lk-source" id="lk-source"><header>Coordinates</header><div class="lk-row out">world <small>vec3</small><span class="lk-port"></span><button class="lk-arrow" id="lk-source-arrow" aria-label="前往此輸出所連的所有 Link 節點；右鍵可選其中一個" aria-haspopup="menu" aria-expanded="false" aria-controls="lk-menu"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M8 3l5 5-5 5"/></svg></button></div><p class="lk-node-note">同一輸出：2 Link ＋ 1 Wire</p></article>
+      <article class="lk-node lk-peer-one" id="lk-peer-one"><header>Normalize</header><div class="lk-row input"><button class="lk-arrow" id="lk-peer-one-arrow" aria-label="前往 Normalize 的 Link 來源"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M8 3l5 5-5 5"/></svg></button><span class="lk-port"></span>value <small>vec3</small></div></article>
+      <article class="lk-node lk-peer-two" id="lk-peer-two"><header>Length</header><div class="lk-row input"><button class="lk-arrow" id="lk-peer-two-arrow" aria-label="前往 Length 的 Link 來源"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M8 3l5 5-5 5"/></svg></button><span class="lk-port"></span>value <small>vec3</small></div></article>
+      <article class="lk-node lk-wire-peer" id="lk-wire-peer"><header>Multiply</header><div class="lk-row input"><span class="lk-port"></span>a <small>vec3</small></div><p class="lk-node-note">普通 Wire：不在 Link 導航集合</p></article>
+      <div class="lk-menu" id="lk-menu" role="menu" aria-label="Coordinates world 的 Link 目的地" hidden><button role="menuitem" id="lk-choose-one"><span></span>Normalize</button><button role="menuitem" id="lk-choose-two"><span></span>Length</button><div class="lk-menu-note">產品另有 All to Wire。此圖解不模擬編輯。</div></div>
+      <span class="lk-board-caption">點擊接孔旁箭頭，或右鍵來源箭頭選一個目的地</span>
+    </div></div>
+    <p id="lk-status" class="note" aria-live="polite">局部图解：來源箭頭會選取 Normalize、Length；Multiply 不包含在內。這裡以綠框表達目的地，不執行真正的 Canvas Frame／平移。</p>
+    <div class="meta-grid"><div><strong>畫面意圖</strong>正常 Link 為 #8E8E96 / 60%、1 CSS px、dash 4/5；選取為 #FFF2D2 / 2px。線寬不隨 Canvas zoom 放大。中間小三角才是資料流向。</div><div><strong>箭頭入口</strong>20×22 graph-space button；16×16 SVG、2.5px 型別色筆畫，平常 opacity .6、hover/focus 為1。接孔外側保留空間，不把 arrow 塞入值欄。圖稿節點尺寸為示意。</div><div><strong>保真界線</strong>接孔在此採 owner 已要求的「已接實心」。線條及導航規則來自現況；實機的反向輸入 hover、選單、聚合與快捷規則完整列在下方，不冒稱此小圖已實作全部。</div></div>
+  </div>
+  <div id="LINK-02" data-artboard="LINK-02" class="lk-protocol">
+    <h3>快捷互動：同一關係，多個入口</h3>
+    <div class="lk-table-scroll"><table class="lk-table"><thead><tr><th>入口／動作</th><th>真正的作用範圍</th><th>結果與狀態邊界</th></tr></thead><tbody>
+      <tr><td>左鍵 Link 接孔箭頭</td><td>該接孔直接相連的 Link 對端；不包含 Wire，也不遞迴追蹤。</td><td>選取並 Frame 全部對端，重複節點只列一次。輸入端前往來源、輸出端前往目的地。</td></tr>
+      <tr><td>右鍵 Link 箭頭 → 某個項目</td><td>該接孔的 Link 對端清單；摺疊節點則為該側各接口的集合。</td><td>選取並 Frame 單一對端。每項保留分類色線、節點名稱與可用的自訂名稱；接口資訊在箭頭 tooltip。</td></tr>
+      <tr><td>右鍵 Link 箭頭 → All to Wire</td><td>這個箭頭代表的 Links。</td><td>只轉為 Wire；不斷開關係。一次 Undo。唯讀／失效目標不能改圖。</td></tr>
+      <tr><td>選取一條或多條 Edge → <kbd>←</kbd> / <kbd>→</kbd></td><td>← 所有來源、→ 所有目的地；依資料方向，不依螢幕左右。</td><td>去重後選取並 Frame；不改接線。文字編輯、modal、其他 gesture 期間不搶按鍵；修飾鍵不觸發這個快捷。</td></tr>
+      <tr><td><kbd>X</kbd> / Show Link lines</td><td>Link 線及其 hit area；Wire 不受影響。</td><td>隱藏線仍保有連接與箭頭導航。瀏覽器偏好，不進 Graph Undo。輸入欄／dialog／gesture／按鍵 repeat 有 guard。</td></tr>
+      <tr><td>Edge 選取浮動工具列</td><td>目前有效的選取 Edge；也支援多選。</td><td>Wire / Link、前往來源、前往目的地、Disconnect。顯示形式與關係刪除分開；工具列是能力入口。</td></tr>
+      <tr><td>Edge 右鍵 → Source → all Link</td><td>同一來源的<strong>同一輸出孔</strong>的 outgoing edges。</td><td>不是整個節點、也不是向下游遞迴。一次 Undo。</td></tr>
+      <tr><td>Node 右鍵 → Convert wires</td><td>選取節點直接 incoming 或 outgoing 的 edges。</td><td>Inputs→Link/Wire、Outputs→Link/Wire，四項。空集合／唯讀時禁用；不走遞迴。</td></tr>
+    </tbody></table></div>
+    <div class="lk-defaults"><div><span class="badge required">預設啟用 · 保留能力</span><p>Link arrows <strong>Always</strong>、Input arrow hover 反向、Wire quick actions、Frame wire endpoint，都是目前開啟的實驗入口。箭頭永遠顯示的模式以箭頭中心作 Link 端點。</p></div><div><span class="badge proposed">備選顯示方式</span><p>Hover / Hidden 可調整<strong>線顯示時</strong>的箭頭；線一旦隱藏，箭頭仍出現。Hover 模式保持線端點不跳動。入口可以另行配置，不能因此失去導航能力。</p></div></div>
+    <p class="note">摺疊節點會聚合該側 Link 對端，混合型別以箭頭漸層提示。這個真實型別提示仍保留；本輪拿掉的是舊比較稿中獨立的「Structure gradient」欄位。Hover 不得偷偷顯示被隱藏的線。Input 箭頭 hover 反向是導航提示，不代表反轉資料流。右鍵「選來源／目的地」是否 Frame 可受偏好控制；Link 箭頭與上述 ←/→ 本身仍會 Frame。</p>
+    <p class="note">Wire / Link 樣式跟圖保存，轉換可 Undo；只改顯示樣式不改 GLSL 運算意義。選取／Frame 是視圖行為，隱藏線是偏好。更多证據與未驗範圍：<a href="../research/link-evidence-004.md">LINK-EVIDENCE-004</a>。</p>
+  </div>
+</section>

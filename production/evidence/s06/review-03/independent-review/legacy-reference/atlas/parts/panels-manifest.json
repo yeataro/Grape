@@ -1,0 +1,53 @@
+{
+  "schema": "grape-ux-atlas-part/1",
+  "part": "panels-and-overlays",
+  "date": "2026-10-02",
+  "status": "illustrative-design-evidence-draft-not-production-ui",
+  "files": ["panels.html", "panels.css", "panels.js"],
+  "sections": ["panels", "overlays"],
+  "configuration": "dark / Cool / standard reference; atlas reflows for reading, not a measured production breakpoint",
+  "sourceBase": "ux-ui-design-handoff/",
+  "globalLimits": [
+    "HTML fragment has no head/body; CSS and JS need ordinary local loading by atlas shell.",
+    "No product API, network, localStorage, Host, Graph, History or file mutation.",
+    "All interactions are local illustration, not Legacy qualification or production behavior.",
+    "Ordinary node appearance is owned by the separate Node artboards; no alternate Node design is introduced here.",
+    "Uniform source-card simplification is owner-required; this does not extend to other Source kinds. Existing cards are Legacy reference only; compact-list candidate remains proposed.",
+    "Toolbar Panel remains a distinct evidence gap, not satisfied by selection quickbars.",
+    "No static controls pretend to execute unimplemented commands: write/export/connect/add commands are disabled or noninteractive text.",
+    "No actual DOM/browser runtime validation was executed by this part author."
+  ],
+  "ownerProposedDirection": {
+    "socketFill": "Connected solid / disconnected hollow for both inputs and outputs; pending owner review in this atlas, not Legacy-observed behavior.",
+    "direction": "Preserved through location and label; fill no longer claims direction.",
+    "invalid": "Separate state, not inferred from fill.",
+    "scope": "Inspector linked input and illustrative local/disconnected input; no product or architecture change."
+  },
+  "ownerRequiredDirection": {
+    "uniformSourceCards": "Simplify Uniform source cards. Requirement accepted in current owner review; exact compact presentation remains a design candidate.",
+    "scope": "Uniform only. No product/architecture change or simplification decision for all Sources."
+  },
+  "presentationNotes": {
+    "selection": "Search result selection uses reconstruction fill only, not an added selection stroke. Existing Parameter subtab underline is retained. Node selection borders belong to the separate Node artboards.",
+    "frames": "Atlas artboard/pane frames are structural presentation, not product selection highlights.",
+    "sourceBackground": "Legacy structure sketch only; Uniform card background is unapproved. A neutral #2e2c3a header is a design candidate, not a measured Uniform card background. Previous full-header #2a5e6b wrongly extrapolated a measured category badge and has been removed. Teal is used only in the measured Uniform category tag. Current live source editing was blocked by unapplied/reload state; no Apply was performed for sampling.",
+    "icons": {
+      "format": "Inline SVG replaces Unicode control pictographs and dynamically generated result icons. No icon font, external sprite or request.",
+      "dropdown": "Filled down triangle; selection/checkbox state remains separate. Details disclosure uses a right triangle rotating down when open.",
+      "sizesCssPx": {"standard":16,"search":14,"close":14,"dropdownAndDisclosure":12,"viewerPlaceholder":28},
+      "evidence": "Control purposes reference LIVE-001–004; exact paths and 12–16px control sizes are inferred atlas reconstructions, not measured Legacy SVG assets. Viewer placeholder is illustrative, not runtime output.",
+      "textNotIcons": "Dimension multiplication and signature arrows remain text; these are semantic notation, not control glyphs."
+    }
+  },
+  "artboards": [
+    {"id":"pn-add-node","title":"Add Node pane","kind":"reference-composition-with-local-filter","sourceReferences":["design/DESIGN_PREMISES.md#7","research/live-observations-001.md","research/live-observations-002.md#O02-01"],"interactions":["Search input filters finite specimen catalog","Source select filters","Result selection changes explanatory detail only"],"limits":["Not complete catalog","No add operation","Ranking is a draft finite illustration; empty list begins Preview"]},
+    {"id":"pn-create-node","title":"Create node search","kind":"reference-composition-with-local-filter","sourceReferences":["research/live-observations-004.md#O04-03"],"interactions":["Independent query/source/port-type filtering","Empty query All types and vec3 both begin Preview","Selecting result updates source/category/signature/help"],"limits":["No global Tab handler","No node creation","Does not claim to reproduce actual ranking algorithm"]},
+    {"id":"pn-sources","title":"Sources — Legacy structure sketch; background unapproved","kind":"measured-tag-colors-with-unapproved-card-background","sourceReferences":["research/live-observations-004.md#O04-04","research/source-tags.tokens.json","design/DESIGN_PREMISES.md#7"],"interactions":["Expand/collapse Custom Uniforms group","Expand/collapse component values"],"limits":["Counts/names/values are labeled sample data","Only badge colors are measured; neutral full-header background is an explicit candidate","Tag colors describe category, not data type","No source edit or Add reference","Uniform source cards must be simplified; legacy cards are not the new required form","No simplification decision for all other Sources"]},
+    {"id":"pn-uniform-simplified","title":"Uniform compact-list candidate","kind":"owner-required-simplification-proposed-presentation","sourceReferences":["design/DESIGN_PREMISES.md#7","research/live-observations-004.md#O04-04"],"interactions":["Expand/collapse illustrative values through details"],"limits":["Exact row composition is proposed, not approved","Uniform only","Add Reference disabled","Values read only and illustrative","No canonical, Host or History state change"]},
+    {"id":"pn-inspector","title":"Docked Inspector","kind":"reference-projection-specimen","sourceReferences":["research/live-observations-002.md#O02-03","research/live-observations-002.md#O02-04","design/ARCHITECTURE_COMPATIBILITY.md"],"interactions":["Source name yields explicit local-only navigation feedback","Disconnect replaces local specimen projection","Reset sketch returns same linked projection"],"limits":["No model state mutation or source traversal","Disconnected 0,0,0 is illustrative, not claimed Legacy default","Parameter values/modes are static read-only sample displays"]},
+    {"id":"pn-help-viewer","title":"Viewer and contextual Help","kind":"observed-takeover-with-alternate-unavailable-specimen","sourceReferences":["research/live-observations-003.md#O03-02","design/UX_UI_REPORT.md#8"],"interactions":["Switch local takeover/offline specimen","Expand Chinese design note"],"limits":["No live image","No Host connection or reclaim","Offline is explicitly illustrative","No two-client arbitration test","Help text is an explanatory excerpt"]},
+    {"id":"pn-canvas-floating","title":"Canvas floating Inspector","kind":"reference-composition-with-illustrative-relocation","sourceReferences":["research/live-observations-002.md#O02-04","design/DESIGN_PREMISES.md#7"],"interactions":["Dock/Float toggle repositions same specimen element"],"limits":["320 CSS px observed reference only","Does not qualify production mount identity, close guards, drafts or lifecycle"]},
+    {"id":"pn-custom-parameter","title":"Custom parameter draggable window","kind":"observed-fields-with-proposed-drag-demonstration","sourceReferences":["research/live-observations-003.md#O03-04","design/DESIGN_PREMISES.md#4"],"interactions":["Pointer-drag title within artboard bounds","Close/Show and Escape while focused","Viewport resize resets illustration position"],"limits":["440x540 is reference; narrow atlas adapts width","Actual Legacy drag/resize not qualified","Fields remain readonly/disabled","No Host writes, page creation, native Undo or clamp effects","No production close guard claimed"]},
+    {"id":"pn-export","title":"Export task dialog","kind":"reference-dialog-with-local-backdrop","sourceReferences":["research/live-observations-003.md#O03-05","design/DESIGN_PREMISES.md#7"],"interactions":["Close/Open local overlay","Escape while focused closes local overlay"],"limits":["460x377 observed reference","Local artboard backdrop is not page modality or focus trap","aria-modal=false intentionally avoids a false global-modal assertion","All output actions disabled","No download, project-folder write, or new canonical document format decision"]}
+  ]
+}

@@ -1,0 +1,324 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+      "s06-status-pointer.spec.ts",
+      "--output",
+      "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-02\\test-results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/workspace-repair-03/focused-02/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-02\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s06-status-pointer.spec.ts",
+      "file": "s06-status-pointer.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 complete persistent loss details have a keyboard read path at 620",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30158,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                        "column": 14,
+                        "line": 82
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })\u001b[22m\n\n\n  80 |   await clickAction(page, \"Redo\");\n  81 |   expect((await doc(page)).graph).toEqual(after.graph);\n> 82 |   await read.click();\n     |              ^\n  83 |   await expect(text).toHaveText(full);\n  84 |   await dialog.getByRole(\"button\", { name: \"Close status details\", exact: true }).click();\n  85 |   expect((await doc(page)).graph).toEqual(after.graph);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:82:14"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:53:25.274Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-02\\test-results\\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-02\\test-results\\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-02\\test-results\\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-b0805a555fd463f6023d",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 34,
+          "column": 34
+        },
+        {
+          "title": "S06 complete persistent loss details have a keyboard read path at 1440",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30202,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                        "column": 14,
+                        "line": 82
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').first().getByRole('button', { name: 'Read full Canvas status', exact: true })\u001b[22m\n\n\n  80 |   await clickAction(page, \"Redo\");\n  81 |   expect((await doc(page)).graph).toEqual(after.graph);\n> 82 |   await read.click();\n     |              ^\n  83 |   await expect(text).toHaveText(full);\n  84 |   await dialog.getByRole(\"button\", { name: \"Close status details\", exact: true }).click();\n  85 |   expect((await doc(page)).graph).toEqual(after.graph);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:82:14"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:53:56.097Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-02\\test-results\\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-02\\test-results\\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-03\\focused-02\\test-results\\s06-status-pointer-S06-com-24740--keyboard-read-path-at-1440-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-07afa74c943b601bb29e",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 34,
+          "column": 34
+        },
+        {
+          "title": "S06 actual 3px uncaptured port release across Canvas Inspector retires wire and ring",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1171,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:54:26.964Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-b426a004c4317647ca96",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 88,
+          "column": 1
+        },
+        {
+          "title": "S06 trusted Enter socket activation waits for real pointer and preserves keyboard connection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1331,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:54:28.392Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-546b82f73f21e4b338e9",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 106,
+          "column": 39
+        },
+        {
+          "title": "S06 trusted Space socket activation waits for real pointer and preserves keyboard connection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1417,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:54:29.728Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-09a2810c05fb1e2d8096",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 106,
+          "column": 39
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T12:53:24.920Z",
+    "duration": 66304.57400000001,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

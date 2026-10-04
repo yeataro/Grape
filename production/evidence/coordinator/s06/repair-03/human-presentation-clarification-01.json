@@ -1,0 +1,64 @@
+{
+  "packetVersion": 1,
+  "packetType": "TARGETED_REPAIR_OR_REREVIEW",
+  "mode": "REPAIR",
+  "packetId": "S06-WORKSPACE-REPAIR-03-PRESENTATION-CLARIFICATION-01",
+  "actionKey": "yeataro/Grape:S06:repair:workspace-entry:4d99a74:03",
+  "recordedAt": "2026-10-04T12:49:49.682Z",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0826de5a9cca7cf200d843435985a7dc624634a2",
+  "acceptedMain": "ad31676b555120cf455fc2a7677be38791b62b64",
+  "expectedStartingHead": "4d99a749e9b121acd27a959cb528a77eb425dda4",
+  "sliceId": "S06",
+  "parentPacket": {
+    "file": "production/evidence/coordinator/s06/repair-03/repair-packet-01.json",
+    "bytes": 22927,
+    "sha256": "6c3a64553dac16d05a31e85c0a825b548ad08ff06a2f57c3264cfbff957e45ef"
+  },
+  "authority": {
+    "role": "Human Owner",
+    "source": "Direct new message in Coordinator chat; not inferred from Legacy contents",
+    "threadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "messageId": null,
+    "messageIdLimit": "Not exposed in the current direct message",
+    "quote": "你看喔，如果點一下錯誤訊息就會彈出來，它就可以換行了。然後在單列的時候，在單行的時候它被遮掩也沒有關係。",
+    "classification": "Explicit current repair presentation direction. Compact single-line summary may truncate when clicking opens complete wrapped current error details. Earlier request places status in the bottom bar. No new Slice or acceptance."
+  },
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "sameRunningRepair": true
+  },
+  "findingGroup": "S06-FG-WORKSPACE-ENTRY-01",
+  "counters": {
+    "reviewAttemptCompleted": 3,
+    "repairRound": 3,
+    "unsuccessfulRepairReReviewRounds": 2,
+    "noReset": true
+  },
+  "requiredBehavior": [
+    "Use one-line compact current status/error summary; visually truncated summary is explicitly acceptable.",
+    "Clicking the error summary opens a popup with wrapped full current diagnostic text, including all affected receiver/edge identities. Long content stays completely reachable with appropriate scrolling.",
+    "Maintain keyboard activation, focus return and Escape/Close; closing the details presentation is not matching error recovery and must not erase the persistent error.",
+    "Keep status presentation in the bottom status area and avoid ordinary notice overlays obscuring Canvas. Preserve existing kind/operation-specific priority and matching recovery.",
+    "No Graph/History mutations for opening/closing/reading details; no weakening model/admission."
+  ],
+  "allowedPathSupplement": [
+    "production/apps/web/main.ts or existing shell status composition only if necessary to mount the bottom status/details access; no unrelated panel arrangement or redesign."
+  ],
+  "reviewInterpretation": "Summary truncation alone is not a failure when the full current error text is readily accessible through the Owner-specified popup. The original review3 FAIL remains true at its I/R because that candidate offered no disclosure. Re-review new implementation, do not edit old findings or verdict.",
+  "exclusions": [
+    "No chronological status log/history feature; earlier future idea remains unimplemented.",
+    "No second writer or second repair action; deliver this unchanged supplement to the running original writer.",
+    "No new Slice, acceptance, publication or counter reset."
+  ],
+  "legacyObservation": {
+    "url": "http://127.0.0.1:64961/shader/c574e2c5c37d41648cc38210974c5d59/",
+    "actual": "Current connected tab shows a download-success status. One click did not open a disclosure. Coordinator has not observed an error popup in this tab and does not claim a runtime pass; direct Human direction is sufficient for implementation."
+  },
+  "requestedAction": "Apply within ongoing repair03; preserve this source receipt and include it with subsequent targeted reviewer packet. Other two temporary-wire repairs continue.",
+  "outputLocation": "Existing repair03 submission and evidence; no independent state database",
+  "stopConditions": [
+    "Original repair03 expected-head/writer guards and STOP_WRITING at exact submission remain."
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "packetType": "PARENT_S05_CLOSEOUT_MAINTAINER_RESULT",
+  "recordedAt": "2026-10-04T08:22:04.4217526Z",
+  "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+  "actionKey": "yeataro/Grape:S05:bounded-closeout:ed7683d:01",
+  "packetId": "S05-BOUNDED-CLOSEOUT-BOOKKEEPING-01",
+  "packet": {
+    "file": "production/evidence/coordinator/s05/closeout-20261004-01/maintainer-packet-01.json",
+    "sha256": "10d6b9c7bf7892fa372ec7c247f3d828f1280fb05dac3b3f390f9bca621ed47d",
+    "bytes": 9293
+  },
+  "intent": {
+    "file": "production/evidence/coordinator/s05/closeout-20261004-01/maintainer-parent-intent-01.json",
+    "sha256": "05d26e653889276cac8ec33faca3c47fa7ae44f43d8372dfb34d7a9bbe4068ed"
+  },
+  "expectedStartingHead": "ed7683de5c8836afe6142bab7be46a5cb0a8f389",
+  "observedHeadAfterDispatch": "ed7683de5c8836afe6142bab7be46a5cb0a8f389",
+  "PR": "https://github.com/yeataro/Grape/pull/6",
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "status": "STOP_WRITING after B and rejected publication; PM subsequently pushed exact B and created PR6"
+  },
+  "status": "DISPATCHED_RUNNING_PACKET_READ_ACKNOWLEDGED",
+  "attempt": 1,
+  "retriesUsed": 0,
+  "actualMaintainerDispatches": 1,
+  "dispatch": {
+    "tool": "collaboration.followup_task",
+    "target": "/root/s03_implementer_resume",
+    "calls": 1,
+    "outcome": "Returned successfully with no text payload",
+    "replacementWriterCreated": false
+  },
+  "postDispatchObservation": {
+    "tool": "collaboration.list_agents",
+    "agentName": "/root/s03_implementer_resume",
+    "agentStatus": "running",
+    "staleHelperFinalExcluded": true
+  },
+  "consumptionEvidence": {
+    "tool": "mcp__codex_app__read_thread",
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "turnId": "01a10601-0b9d-7253-92aa-069a8a2ae133",
+    "turnStatus": "inProgress",
+    "messageId": "msg_0f7ea6f2d846c6d3016ac20c9044e887d0884a36959320aa06",
+    "quote": "我會核對新的結案 packet、限定範圍的 PASS 與 Human 驗收紀錄，僅完成本機狀態及證據提交。遠端發布由「Grape PM」負責；待續 Escape 修復、原始審查結論與既有服務都會保留。",
+    "packetReadCommandId": "exec-df169474-c008-4bd5-9fa7-b350ab72ac18",
+    "packetReadStatus": "completed",
+    "packetReadExitCode": 0
+  },
+  "verification": {
+    "packetAndAcceptanceReportManifestHashesMatched": true,
+    "newManifestObjects": 20,
+    "existingReferencedObjects": 18,
+    "all38HashesBytesMatched": true,
+    "pathsContained": true,
+    "pendingEscapeFiles": 3,
+    "indexEmpty": true,
+    "trackedDirty": [
+      "production/src/features/canvas.ts"
+    ]
+  },
+  "preserveDirtyAtDispatch": [
+    {
+      "file": "production/src/features/canvas.ts",
+      "bytes": 43694,
+      "sha256": "c5d15f9d08f693f5a30b1cedef983280a7053c850e48ca308389f230a9968dbf"
+    },
+    {
+      "file": "production/tests/browser/s05-escape-flow.ts",
+      "bytes": 6070,
+      "sha256": "026dfcde6cb0d52ecadbff8dbd98568c7ba225fb32b912d0c8b3c9c35e7c336b"
+    },
+    {
+      "file": "production/tests/browser/s05-escape-focus.spec.ts",
+      "bytes": 1068,
+      "sha256": "782ff1c3d15ace69184b19f27b771f9481d04b936ae49b342525739e8560a370"
+    }
+  ],
+  "requiredHistoricalPreservation": [
+    "Original review6 remains BLOCKED/WF_PERMISSION",
+    "Escape original remains OPEN/FAIL, expressly deferred by Owner and independently nonblocking for local scoped closeout",
+    "LAN/Tailscale two checks remain OPEN/NOT_EXECUTED and still block three-origin/full original review claims",
+    "All historical reviews/acceptances and raw hashes unchanged",
+    "All uncommitted Escape source/tests/evidence unchanged and excluded from this commit",
+    "Other untracked Human/reference/debug data preserved"
+  ],
+  "remoteBoundary": "PM is sole remote publisher/merger; original maintainer local metadata only, no push/PRedit/merge",
+  "parentActions": {
+    "newFiles": [
+      "production/evidence/coordinator/s05/closeout-20261004-01/maintainer-parent-intent-01.json",
+      "production/evidence/coordinator/s05/closeout-20261004-01/maintainer-parent-result-01.json"
+    ],
+    "productWrites": [],
+    "stateWrites": [],
+    "gitMutations": [],
+    "networkActions": [],
+    "serviceActions": [],
+    "remoteActions": []
+  },
+  "bookkeepingCompletion": "NOT_CLAIMED; dispatch/consumption are not completed B2 or S05 registration",
+  "S06": "No activation under this packet; subsequent explicit packet only after merged baseline",
+  "nextRoute": "Same maintainer returns local B2, concrete metadata delta, checks and preservation/relocation receipts then STOP_WRITING; Coordinator supplies delta to PM for guarded publication/merge."
+}

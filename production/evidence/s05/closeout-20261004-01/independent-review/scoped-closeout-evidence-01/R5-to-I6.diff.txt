@@ -1,0 +1,98 @@
+diff --git a/production/src/application/editor.ts b/production/src/application/editor.ts
+index 8eb790d..26eac90 100644
+--- a/production/src/application/editor.ts
++++ b/production/src/application/editor.ts
+@@ -121,7 +121,8 @@ export class EditorContext {
+   }
+   capture(): ContextSnapshot {
+     demand(this.#live, "CONTEXT_DISPOSED");
+-    const graph = this.graph.capture();
++    const graph = this.graph.capture(),
++      network = this.networkFrom(graph);
+     return detached({
+       scope: {
+         graphId: graph.document.graph.id,
+@@ -135,7 +136,7 @@ export class EditorContext {
+       primary: this.#primary,
+       navigation: this.#navigation,
+       definitionNames: Object.fromEntries(
+-        this.network().nodes.flatMap((n) => {
++        network.nodes.flatMap((n) => {
+           if (this.graph.definitionSet.node(n.type)?.modelRole !== "call")
+             return [];
+           const id = (n.state as { definition: string }).definition;
+@@ -160,14 +161,14 @@ export class EditorContext {
+           ).name,
+         })),
+       ],
+-      network: this.network(),
++      network,
+       frames: frames(
+         graph.document,
+         this.graph.definitionSet,
+-        this.network().id,
++        network.id,
+       ),
+       portLabels: Object.fromEntries(
+-        this.network().nodes.map((n) => {
++        network.nodes.map((n) => {
+           const role = this.graph.definitionSet.node(n.type)?.modelRole;
+           const id = (n.state as { definition?: string }).definition;
+           const d = graph.document.graph.resources.find((r) => r.id === id)
+@@ -183,7 +184,7 @@ export class EditorContext {
+         }),
+       ),
+       nodeRoles: Object.fromEntries(
+-        this.network().nodes.map((n) => [
++        network.nodes.map((n) => [
+           n.id,
+           this.graph.definitionSet.node(n.type)?.modelRole ?? "operation",
+         ]),
+@@ -262,12 +263,13 @@ export class EditorContext {
+   }
+   network() {
+     demand(this.#live, "CONTEXT_DISPOSED");
+-    const stage = this.graph
+-      .capture()
+-      .document.graph.stages.find((s) => s.id === this.#stage);
++    return this.networkFrom(this.graph.capture());
++  }
++  private networkFrom(graph: GraphSnapshot) {
++    const stage = graph.document.graph.stages.find((s) => s.id === this.#stage);
+     demand(stage, "STAGE_MISSING");
+     return resolveOccurrence(
+-      this.graph.capture().document,
++      graph.document,
+       this.graph.definitionSet,
+       this.#stage,
+       this.#path,
+@@ -1064,7 +1066,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
+   ): FieldTarget {
+     const original = context.capture();
+     demand(equal(scope, original.scope), "STALE_SCOPE");
+-    const type = context.network().nodes.find((n) => n.id === nodeId)?.type;
++    const type = original.network.nodes.find((n) => n.id === nodeId)?.type;
+     demand(type, "NODE_MISSING");
+     let live = true,
+       epoch = 0,
+@@ -1079,7 +1081,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
+           equal(c.scope, scope) && c.navigation === original.navigation,
+           "STALE_SCOPE",
+         );
+-        const node = context.network().nodes.find((n) => n.id === nodeId);
++        const node = c.network.nodes.find((n) => n.id === nodeId);
+         demand(node && equal(node.type, type), "NODE_MISSING");
+         const def = this.definitions
+           .pin(c.graph.document.graph.modules)
+@@ -1101,9 +1103,8 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
+           spec.target === "input"
+             ? node.ports.find((p) => p.key === key && p.direction === "input")
+             : undefined;
+-        const links = context
+-          .network()
+-          .edges.filter((e) => e.to.nodeId === nodeId && e.to.portKey === key)
++        const links = c.network.edges
++          .filter((e) => e.to.nodeId === nodeId && e.to.portKey === key)
+           .map((e) => ({
+             edgeId: e.id,
+             sourceNodeId: e.from.nodeId,

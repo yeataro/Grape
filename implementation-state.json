@@ -3,7 +3,7 @@
   "recordRole": "current",
   "handoffRevision": "IH-005",
   "currentRecord": "../implementation-state.json",
-  "status": "active",
+  "status": "complete",
   "project": {
     "id": "grape",
     "root": "production"
@@ -25,9 +25,7 @@
     "profile": "static-web/win32-x64/chromium-151.0.7922.34/GLSL-ES300-WebGL2-functions",
     "artifact": "production/evidence/s05/drag-performance-repair-01/candidate-web-01.tar.gz"
   },
-  "activeSlices": [
-    "S05"
-  ],
+  "activeSlices": [],
   "completedSlices": [
     {
       "sliceId": "S01",
@@ -63,6 +61,15 @@
       "evidenceIds": [
         "S04-ARCHITECTURE-0c13932",
         "S04-PRODUCT-0c13932"
+      ]
+    },
+    {
+      "sliceId": "S05",
+      "scope": "Current bounded S05 delivery on the recorded Windows Chromium151/SwiftShader portable GLSL ES3.00 profile: all ten DEC003/AC002 function-mode acceptance criteria with supporting shared/nested/constant/Uniform/type/stage/effect/Personal/exact-owner and import/replacement corrections; exactly fixed Float/Vector2/Vector3/ColorRGBA leaves LC-NODE-011..014; synchronous editor snapshot-reuse drag-performance repair and actually executed affected regressions.",
+      "implementationRevision": "aa4c86e20b0b4b54218b9992921578e7f24a28a2",
+      "evidenceIds": [
+        "S05-ARCHITECTURE-aa4c86e",
+        "S05-PRODUCT-aa4c86e"
       ]
     }
   ],
@@ -208,10 +215,38 @@
         "S04"
       ],
       "gateIds": []
+    },
+    {
+      "id": "S05-ARCHITECTURE-aa4c86e",
+      "kind": "architecture-conformance",
+      "file": "production/evidence/s05/closeout-20261004-01/independent-review/SCOPED_CLOSEOUT_ASSESSMENT-01.json",
+      "sha256": "2799350c47ed934ad0b2c4576218f612d2b6d4c12d21ad72c7914d0172da7e15",
+      "scope": "Current bounded S05 delivery on the recorded Windows Chromium151/SwiftShader portable GLSL ES3.00 profile: all ten DEC003/AC002 function-mode acceptance criteria with supporting shared/nested/constant/Uniform/type/stage/effect/Personal/exact-owner and import/replacement corrections; exactly fixed Float/Vector2/Vector3/ColorRGBA leaves LC-NODE-011..014; synchronous editor snapshot-reuse drag-performance repair and actually executed affected regressions.",
+      "implementationRevision": "aa4c86e20b0b4b54218b9992921578e7f24a28a2",
+      "acceptedBy": "Human Owner (explicit bounded local acceptance following exact-scope independent PASS; registration timestamp from acceptance control)",
+      "acceptedAt": "2026-10-04T08:18:57.000Z",
+      "sliceIds": [
+        "S05"
+      ],
+      "gateIds": []
+    },
+    {
+      "id": "S05-PRODUCT-aa4c86e",
+      "kind": "product-behavior",
+      "file": "production/evidence/acceptance/s05/closeout-20261004-01/human-acceptance-01.json",
+      "sha256": "5aecd3c1c2406b07d4f29115cc0a77fc040cdac0926c74e9716ffa7aeb8e7cd9",
+      "scope": "Current bounded S05 delivery on the recorded Windows Chromium151/SwiftShader portable GLSL ES3.00 profile: all ten DEC003/AC002 function-mode acceptance criteria with supporting shared/nested/constant/Uniform/type/stage/effect/Personal/exact-owner and import/replacement corrections; exactly fixed Float/Vector2/Vector3/ColorRGBA leaves LC-NODE-011..014; synchronous editor snapshot-reuse drag-performance repair and actually executed affected regressions.",
+      "implementationRevision": "aa4c86e20b0b4b54218b9992921578e7f24a28a2",
+      "acceptedBy": "Human Owner (explicit bounded local acceptance following exact-scope independent PASS; registration timestamp from acceptance control)",
+      "acceptedAt": "2026-10-04T08:18:57.000Z",
+      "sliceIds": [
+        "S05"
+      ],
+      "gateIds": []
     }
   ],
-  "latestAcceptedEvidenceId": "S04-PRODUCT-0c13932",
-  "updatedAt": "2026-10-04T07:15:55.550Z",
+  "latestAcceptedEvidenceId": "S05-PRODUCT-aa4c86e",
+  "updatedAt": "2026-10-04T08:23:58.522Z",
   "decisionReferences": [
     {
       "id": "DEC-GRAPE-002",
@@ -249,7 +284,7 @@
       "id": "DEC-GRAPE-003",
       "kind": "product-decision",
       "status": "accepted",
-      "scope": "Active bounded S05 drag-performance repair at I aa4c86e20b0b4b54218b9992921578e7f24a28a2 reuses one call-local detached snapshot/network without changing function-mode, fixed-value semantics or notifications. Fixed-value LC-NODE-011..014 independent PASS remains bound to I 8ffbea96bdc76e307d59eaa8514f3c6432a7d34d / Rbc74bd9aa7f2d357815cd0dfd0afa0b6088eee3a; original review and clarification are preserved. Performance diagnosis and bounded repair self-checks are complete. Original Fresh Reviewer /root/s05_drag_review_01 report S05-DRAG-PERFORMANCE-FR-6c3a734-01 at I aa4c86e20b0b4b54218b9992921578e7f24a28a2 / R 6c3a734325d0db2d924356a9614e971d80a966c8 is BLOCKED / WF_PERMISSION; S05-DRAG-FR-GAP-001 remains OPEN because two exact LAN/Tailscale static-archive checks were not executed after automatic approval rejected the claimed payload/destination authorization. No product defect was found in the original review6 executed scope; completed probes are not independent PASS. The subsequent independent natural Escape finding S05-FR-ESCAPE-FOCUS-001 is FAIL and remains open; its working repair is deferred to the next round and excluded from this publication. Network authorization question is pending; no answer inferred. The Human Owner confirmed the tested I6 round and explicitly requested a draft PR (message 01a105ed-87bc-7f81-8a10-b17498092110). This bounded confirmation does not change either independent verdict or register whole-S05 acceptance. RepairAttempt1 / unsuccessfulTechnicalReviewRounds0 / globalReviewSequence6 are retained. Earlier function/import/Uniform PASS identities remain in immutable historical evidence. S05 remains active; its exact remaining delivery boundary is being reconciled separately. No whole-S05 completion, global Gate closure, merge or next Slice authorization is inferred.",
+      "scope": "Implemented and Human Owner accepted within bounded S05 local selected scope at I aa4c86e20b0b4b54218b9992921578e7f24a28a2, independently assessed R 6c3a734325d0db2d924356a9614e971d80a966c8 by S05-SCOPED-CLOSEOUT-FR-6c3a734-01 (PASS). All ten DEC003/AC002 function-mode criteria and supporting corrected local behavior, exactly fixed Float/Vector2/Vector3/ColorRGBA LC-NODE-011..014, and synchronous editor snapshot reuse are registered in production/evidence/acceptance/s05/closeout-20261004-01/accepted-scope-01.json. Original broader review6 remains BLOCKED/WF_PERMISSION; S05-DRAG-FR-GAP-001 remains OPEN/NOT_EXECUTED for two LAN/Tailscale archive checks. S05-FR-ESCAPE-FOCUS-001 remains OPEN/FAIL, explicitly Owner-deferred and independently nonblocking only for this local scope; pending repair is excluded. No full catalog/CQ/native/physical-GPU/second-device or global Gate completion. Earlier review and accepted-evidence identities and all finding counters remain unchanged. S06 is separately authorized after closeout and actual merge, but is not activated here.",
       "reason": "Human Owner accepted the bounded semantic amendment; original writer registers only the exact authorized S04 initialMaintenance projection. Authority production/evidence/coordinator/decisions/dec003-intake-20261004-01/human-authority.json; recordedAt is registration time, not an invented Human timestamp.",
       "file": "decisions/DEC-GRAPE-003.md",
       "sha256": "9a0acb74ee0bac36f23784db7743c45e2b3f36023ca329400b7f65711ee4428e",
@@ -265,7 +300,7 @@
       "id": "AC-GRAPE-002",
       "kind": "architecture-change",
       "status": "accepted",
-      "scope": "Active bounded S05 drag-performance repair at I aa4c86e20b0b4b54218b9992921578e7f24a28a2 reuses one call-local detached snapshot/network without changing function-mode, fixed-value semantics or notifications. Fixed-value LC-NODE-011..014 independent PASS remains bound to I 8ffbea96bdc76e307d59eaa8514f3c6432a7d34d / Rbc74bd9aa7f2d357815cd0dfd0afa0b6088eee3a; original review and clarification are preserved. Performance diagnosis and bounded repair self-checks are complete. Original Fresh Reviewer /root/s05_drag_review_01 report S05-DRAG-PERFORMANCE-FR-6c3a734-01 at I aa4c86e20b0b4b54218b9992921578e7f24a28a2 / R 6c3a734325d0db2d924356a9614e971d80a966c8 is BLOCKED / WF_PERMISSION; S05-DRAG-FR-GAP-001 remains OPEN because two exact LAN/Tailscale static-archive checks were not executed after automatic approval rejected the claimed payload/destination authorization. No product defect was found in the original review6 executed scope; completed probes are not independent PASS. The subsequent independent natural Escape finding S05-FR-ESCAPE-FOCUS-001 is FAIL and remains open; its working repair is deferred to the next round and excluded from this publication. Network authorization question is pending; no answer inferred. The Human Owner confirmed the tested I6 round and explicitly requested a draft PR (message 01a105ed-87bc-7f81-8a10-b17498092110). This bounded confirmation does not change either independent verdict or register whole-S05 acceptance. RepairAttempt1 / unsuccessfulTechnicalReviewRounds0 / globalReviewSequence6 are retained. Earlier function/import/Uniform PASS identities remain in immutable historical evidence. S05 remains active; its exact remaining delivery boundary is being reconciled separately. No whole-S05 completion, global Gate closure, merge or next Slice authorization is inferred.",
+      "scope": "Implemented and Human Owner accepted within bounded S05 local selected scope at I aa4c86e20b0b4b54218b9992921578e7f24a28a2, independently assessed R 6c3a734325d0db2d924356a9614e971d80a966c8 by S05-SCOPED-CLOSEOUT-FR-6c3a734-01 (PASS). All ten DEC003/AC002 function-mode criteria and supporting corrected local behavior, exactly fixed Float/Vector2/Vector3/ColorRGBA LC-NODE-011..014, and synchronous editor snapshot reuse are registered in production/evidence/acceptance/s05/closeout-20261004-01/accepted-scope-01.json. Original broader review6 remains BLOCKED/WF_PERMISSION; S05-DRAG-FR-GAP-001 remains OPEN/NOT_EXECUTED for two LAN/Tailscale archive checks. S05-FR-ESCAPE-FOCUS-001 remains OPEN/FAIL, explicitly Owner-deferred and independently nonblocking only for this local scope; pending repair is excluded. No full catalog/CQ/native/physical-GPU/second-device or global Gate completion. Earlier review and accepted-evidence identities and all finding counters remain unchanged. S06 is separately authorized after closeout and actual merge, but is not activated here.",
       "reason": "Human Owner accepted the bounded semantic amendment; original writer registers only the exact authorized S04 initialMaintenance projection. Authority production/evidence/coordinator/decisions/dec003-intake-20261004-01/human-authority.json; recordedAt is registration time, not an invented Human timestamp.",
       "file": "decisions/AC-GRAPE-002.md",
       "sha256": "ab1e4067f479f640c2fd59c3bc994413475a0dfc2b0e8259c4b5319f03c60c4a",

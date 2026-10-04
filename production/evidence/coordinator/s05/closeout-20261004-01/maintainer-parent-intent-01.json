@@ -1,0 +1,113 @@
+{
+  "packetType": "PARENT_S05_CLOSEOUT_MAINTAINER_INTENT",
+  "recordedAt": "2026-10-04T08:21:14.4053522Z",
+  "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+  "actionKey": "yeataro/Grape:S05:bounded-closeout:ed7683d:01",
+  "packetId": "S05-BOUNDED-CLOSEOUT-BOOKKEEPING-01",
+  "packet": {
+    "file": "production/evidence/coordinator/s05/closeout-20261004-01/maintainer-packet-01.json",
+    "sha256": "10d6b9c7bf7892fa372ec7c247f3d828f1280fb05dac3b3f390f9bca621ed47d",
+    "bytes": 9293
+  },
+  "expectedWorkHead": "ed7683de5c8836afe6142bab7be46a5cb0a8f389",
+  "observedHead": "ed7683de5c8836afe6142bab7be46a5cb0a8f389",
+  "PR": "https://github.com/yeataro/Grape/pull/6",
+  "remoteFacts": "Packet/Coordinator records main6aa6abb/worked7683d/PR6; writer rechecks read-only before dependent local bookkeeping. PM is sole current remote publisher/merger.",
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "status": "STOP_WRITING after B and rejected publication; PM subsequently pushed exact B and created PR6"
+  },
+  "writerObservation": {
+    "tool": "mcp__codex_app__read_thread",
+    "status": "idle",
+    "lastTurnId": "01a105f2-854e-7f51-afff-3f1a13efc7fe",
+    "lastTurnStatus": "completed",
+    "finalMessageId": "msg_0f7ea6f2d846c6d3016ac20a84d6c087d09268854cdb810266",
+    "historicResult": "B1 prepared, writer publication rejected and STOP_WRITING; laterPM authorized publication independently recorded, no retry requested here"
+  },
+  "status": "PREPARED_NOT_SENT",
+  "attempt": 1,
+  "retriesUsed": 0,
+  "actualMaintainerDispatchesBefore": 0,
+  "authorizationRef": {
+    "file": "production/evidence/coordinator/s05/closeout-20261004-01/human-acceptance-01.json",
+    "bytes": 4793,
+    "sha256": "5aecd3c1c2406b07d4f29115cc0a77fc040cdac0926c74e9716ffa7aeb8e7cd9"
+  },
+  "review": {
+    "sourceRoot": "C:/Users/user/.codex/worktrees/s05-drag-performance-review-01/Grape/.verification/s05-drag-performance-review-01",
+    "report": {
+      "file": "SCOPED_CLOSEOUT_ASSESSMENT-01.json",
+      "bytes": 46889,
+      "sha256": "2799350c47ed934ad0b2c4576218f612d2b6d4c12d21ad72c7914d0172da7e15"
+    },
+    "manifest": {
+      "file": "scoped-closeout-supporting-manifest-01.json",
+      "bytes": 7440,
+      "sha256": "ab0ca11b09d2820373211b2d250d923c14186f232a3c79fce48fe35eb8790f79"
+    },
+    "newManifestObjects": 20,
+    "existingReferencedObjects": 18,
+    "coordinatorHashByteChecks": "All38 entries and manifest/report identities match; 354 historicalsupport verified by reviewer",
+    "verdict": "PASS scoped local selected delivery; no blocking prerequisites within assessed scope"
+  },
+  "verification": {
+    "packetAndAcceptanceReportManifestHashesMatched": true,
+    "newManifestObjects": 20,
+    "existingReferencedObjects": 18,
+    "all38HashesBytesMatched": true,
+    "pathsContained": true,
+    "pendingEscapeFiles": 3,
+    "indexEmpty": true,
+    "trackedDirty": [
+      "production/src/features/canvas.ts"
+    ]
+  },
+  "preserveDirty": [
+    {
+      "file": "production/src/features/canvas.ts",
+      "bytes": 43694,
+      "sha256": "c5d15f9d08f693f5a30b1cedef983280a7053c850e48ca308389f230a9968dbf"
+    },
+    {
+      "file": "production/tests/browser/s05-escape-flow.ts",
+      "bytes": 6070,
+      "sha256": "026dfcde6cb0d52ecadbff8dbd98568c7ba225fb32b912d0c8b3c9c35e7c336b"
+    },
+    {
+      "file": "production/tests/browser/s05-escape-focus.spec.ts",
+      "bytes": 1068,
+      "sha256": "782ff1c3d15ace69184b19f27b771f9481d04b936ae49b342525739e8560a370"
+    }
+  ],
+  "duplicateCheck": "Action matches only Coordinator packet/prepared intent; no parent intent/result, bookkeeping result or target closeout evidence yet",
+  "sourceSearchLimit": "Initial rg included absent acceptance/s05 path; other paths searched successfully, explicit target absence verified",
+  "requestedAction": "One followup to original writer for bounded local completion bookkeeping and metadata-only B2; no remote actions, noS06",
+  "parentAllowedPaths": [
+    "production/evidence/coordinator/s05/closeout-20261004-01/maintainer-parent-intent-01.json",
+    "production/evidence/coordinator/s05/closeout-20261004-01/maintainer-parent-result-01.json"
+  ],
+  "requiredHistoricalPreservation": [
+    "Original review6 remains BLOCKED/WF_PERMISSION",
+    "Escape original remains OPEN/FAIL, expressly deferred by Owner and independently nonblocking for local scoped closeout",
+    "LAN/Tailscale two checks remain OPEN/NOT_EXECUTED and still block three-origin/full original review claims",
+    "All historical reviews/acceptances and raw hashes unchanged",
+    "All uncommitted Escape source/tests/evidence unchanged and excluded from this commit",
+    "Other untracked Human/reference/debug data preserved"
+  ],
+  "findingCounters": {
+    "performance": "repair1 unsuccessful0 globalreview6 retained",
+    "escape": "repair1 unsuccessful0 deferred, unreviewed repair remains",
+    "publication": "writer attempt1 rejected; PM same-gate reevaluation1 rejected then explicitHuman reply and allowed push. Keep all outcomes, no budget reset.",
+    "bookkeepingAttempt": 1
+  },
+  "parentProductWrites": false,
+  "parentStateWrites": false,
+  "parentGitMutations": [],
+  "parentRemoteActions": [],
+  "maintainerRemoteWritesAuthorized": false,
+  "completion": "NOT_CLAIMED",
+  "nextRoute": "Local B2 and delta/checks/relocation/preservation receipt then STOP_WRITING; Coordinator gives concrete delta to PM for guarded publication/merge"
+}

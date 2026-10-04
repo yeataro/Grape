@@ -1,0 +1,497 @@
+{
+  "packetVersion": 1,
+  "packetType": "INDEPENDENT_COUNTEREXAMPLE_RESULT",
+  "resultId": "S05-DRAG-ESCAPE-FOCUS-REVIEW-01",
+  "authoredAt": "2026-10-04T07:54:21.706Z",
+  "reviewerRole": "Original Fresh Reviewer",
+  "reviewerIdentity": {
+    "canonicalAgent": "/root/s05_drag_review_01",
+    "threadId": null,
+    "turnId": null,
+    "modelId": null
+  },
+  "reviewedI": "aa4c86e20b0b4b54218b9992921578e7f24a28a2",
+  "reviewedR": "6c3a734325d0db2d924356a9614e971d80a966c8",
+  "buildId": "S05-drag-aa4c86e",
+  "archive": {
+    "file": "production/evidence/s05/drag-performance-repair-01/candidate-web-01.tar.gz",
+    "sha256": "8fefd2e02eb9d78610ae68c553926bd7ba6604769d306e810c2fc8dda5279a62",
+    "bytes": 73186
+  },
+  "originalReport": {
+    "file": "INDEPENDENT_REVIEW_RESULT.json",
+    "bytes": 45612,
+    "sha256": "a86ed934efee560b71584e6f85cddf50ed0e1c8cea9e7e8418b5df4b2dc64077"
+  },
+  "originalLocalPreviewAssessment": {
+    "file": "LOCAL_PREVIEW_ASSESSMENT-01.json",
+    "bytes": 7992,
+    "sha256": "32db39509cb0628b997f7f0225012b896073fbeb3aa10c0b3d8146a7e9c734ab"
+  },
+  "originalSupportingManifest": {
+    "file": "supporting-evidence-manifest-01.json",
+    "bytes": 60963,
+    "sha256": "5a779e3c6978a4310f7418d79d83dea1a72d8b1c4ae89f49a11a4736c82fcdc4"
+  },
+  "newSupportingManifest": {
+    "file": "escape-focus-supporting-manifest-01.json",
+    "bytes": 5013,
+    "sha256": "5b7b2c676d8fe49eacdf43a4f2035129713434bb8f59a45dba368011c3dcb239"
+  },
+  "inputSourceRefs": [
+    {
+      "original": "C:/Users/user/source/Grape/.verification/s05-preview05-local-smoke-01/result.json",
+      "copied": {
+        "file": "escape-focus-source-01/coordinator-failure-result-01.json",
+        "bytes": 552,
+        "sha256": "243dbb7921740e6a8465bbea3d924189dbf5df0daf68fecd30b7b70d5efa02d8"
+      }
+    },
+    {
+      "original": "C:/Users/user/source/Grape/.verification/s05-preview05-local-smoke-01/failure.png",
+      "copied": {
+        "file": "escape-focus-source-01/coordinator-failure-01.png",
+        "bytes": 111207,
+        "sha256": "53d9a4eb390411164d244e435b88fda480c140275e025fe2fd6336923a931278"
+      }
+    },
+    {
+      "original": "C:/Users/user/source/Grape/.verification/s05-preview05-local-smoke-02/result.json",
+      "copied": {
+        "file": "escape-focus-source-01/coordinator-focused-result-02.json",
+        "bytes": 948,
+        "sha256": "75ae6c90737980e62e8a57f336beb0d9372bce6d9d797f36d395dec8a7d8511a"
+      }
+    },
+    {
+      "original": "C:/Users/user/source/Grape/.verification/s05-preview05-local-smoke-02/focus-before-escape.json",
+      "copied": {
+        "file": "escape-focus-source-01/coordinator-focus-before-escape-02.json",
+        "bytes": 21593,
+        "sha256": "c9104e1f366798d84e9383854786a251727d3ac5f7d9047bc90a5dbdfbccae98"
+      }
+    },
+    {
+      "original": "C:/Users/user/source/Grape/production/evidence/coordinator/s05/preview-05/local-only-01/verify-delivery.mjs",
+      "copied": {
+        "file": "escape-focus-source-01/coordinator-verify-delivery-01.mjs",
+        "bytes": 6677,
+        "sha256": "a862782bbf2a364ea0ee4171694f18fdedbdedfa28a30478354cdd371da194f7"
+      }
+    },
+    {
+      "original": "C:/Users/user/source/Grape/production/evidence/coordinator/s05/preview-05/local-only-01/verify-delivery-focus-02.mjs",
+      "copied": {
+        "file": "escape-focus-source-01/coordinator-verify-delivery-focus-02.mjs",
+        "bytes": 6924,
+        "sha256": "c7e08807ae4beb5dc9ccec5a69b8eab05539938003279f15f60223e64b74be30"
+      }
+    }
+  ],
+  "scope": "Bounded original-author follow-up of Coordinator-reported dragEscape counterexample; fresh public keyboard-event trace using only existingloopbackservice. No general implementation review or newnetworkoriginchecks.",
+  "executed": {
+    "origin": "http://127.0.0.1:4196",
+    "newServerStarted": false,
+    "lanOrTailscaleAttempted": false,
+    "contexts": "4fresh isolated Chromium151.0.7922.34 contexts,1600x1050, noHumanstorage/context",
+    "servedManifestFilesIndependentlyHashVerified": 39,
+    "cases": [
+      {
+        "label": "iframe-export",
+        "naturalStatus": "NOT_CANCELLED",
+        "explicitFocusStatus": "CANCELLED",
+        "beforeEscape": {
+          "top": {
+            "tag": "IFRAME",
+            "id": "",
+            "className": ""
+          },
+          "frame": {
+            "tag": "BODY",
+            "id": "",
+            "className": ""
+          }
+        },
+        "baseline": [
+          420,
+          160
+        ],
+        "actual": [
+          490,
+          190
+        ],
+        "errors": [],
+        "raw": {
+          "file": "escape-focus-review-02/iframe-export.json",
+          "bytes": 66719,
+          "sha256": "8bc2b6964109a62fa1c2222bf8878bc4defa52245143a54ac7b6e65842b0ece3"
+        },
+        "escapeTarget": {
+          "tag": "BODY",
+          "id": null,
+          "className": "",
+          "node": null
+        },
+        "escapeComposedPath": [
+          {
+            "tag": "BODY",
+            "id": null,
+            "className": "",
+            "node": null
+          },
+          {
+            "tag": "HTML",
+            "id": null,
+            "className": "",
+            "node": null
+          },
+          {
+            "id": null,
+            "className": null,
+            "node": null
+          },
+          {
+            "id": null,
+            "className": null,
+            "node": null
+          }
+        ],
+        "afterPointerDown": {
+          "top": {
+            "tag": "IFRAME",
+            "id": "",
+            "className": ""
+          },
+          "frame": {
+            "tag": "BODY",
+            "id": "",
+            "className": ""
+          }
+        }
+      },
+      {
+        "label": "iframe-no-export",
+        "naturalStatus": "NOT_CANCELLED",
+        "explicitFocusStatus": "CANCELLED",
+        "beforeEscape": {
+          "top": {
+            "tag": "IFRAME",
+            "id": "",
+            "className": ""
+          },
+          "frame": {
+            "tag": "BODY",
+            "id": "",
+            "className": ""
+          }
+        },
+        "baseline": [
+          420,
+          160
+        ],
+        "actual": [
+          490,
+          190
+        ],
+        "errors": [],
+        "raw": {
+          "file": "escape-focus-review-02/iframe-no-export.json",
+          "bytes": 38700,
+          "sha256": "520b84a2abfc7ccbb9205cc8258dd5b4430a0447c1e040eeef7e91dbfe7f232c"
+        },
+        "escapeTarget": {
+          "tag": "BODY",
+          "id": null,
+          "className": "",
+          "node": null
+        },
+        "escapeComposedPath": [
+          {
+            "tag": "BODY",
+            "id": null,
+            "className": "",
+            "node": null
+          },
+          {
+            "tag": "HTML",
+            "id": null,
+            "className": "",
+            "node": null
+          },
+          {
+            "id": null,
+            "className": null,
+            "node": null
+          },
+          {
+            "id": null,
+            "className": null,
+            "node": null
+          }
+        ],
+        "afterPointerDown": {
+          "top": {
+            "tag": "IFRAME",
+            "id": "",
+            "className": ""
+          },
+          "frame": {
+            "tag": "BODY",
+            "id": "",
+            "className": ""
+          }
+        }
+      },
+      {
+        "label": "direct-export",
+        "naturalStatus": "NOT_CANCELLED",
+        "explicitFocusStatus": "CANCELLED",
+        "beforeEscape": {
+          "top": {
+            "tag": "BODY",
+            "id": "",
+            "className": ""
+          },
+          "frame": {
+            "tag": "BODY",
+            "id": "",
+            "className": ""
+          }
+        },
+        "baseline": [
+          420,
+          160
+        ],
+        "actual": [
+          490,
+          190
+        ],
+        "errors": [],
+        "raw": {
+          "file": "escape-focus-review-02/direct-export.json",
+          "bytes": 66671,
+          "sha256": "90286f9cf77a8f83139a032d69f5074b91df5f191eb81c21335279643a94e4d8"
+        },
+        "escapeTarget": {
+          "tag": "BODY",
+          "id": null,
+          "className": "",
+          "node": null
+        },
+        "escapeComposedPath": [
+          {
+            "tag": "BODY",
+            "id": null,
+            "className": "",
+            "node": null
+          },
+          {
+            "tag": "HTML",
+            "id": null,
+            "className": "",
+            "node": null
+          },
+          {
+            "id": null,
+            "className": null,
+            "node": null
+          },
+          {
+            "id": null,
+            "className": null,
+            "node": null
+          }
+        ],
+        "afterPointerDown": {
+          "top": {
+            "tag": "BODY",
+            "id": "",
+            "className": ""
+          },
+          "frame": {
+            "tag": "BODY",
+            "id": "",
+            "className": ""
+          }
+        }
+      },
+      {
+        "label": "direct-no-export",
+        "naturalStatus": "NOT_CANCELLED",
+        "explicitFocusStatus": "CANCELLED",
+        "beforeEscape": {
+          "top": {
+            "tag": "BODY",
+            "id": "",
+            "className": ""
+          },
+          "frame": {
+            "tag": "BODY",
+            "id": "",
+            "className": ""
+          }
+        },
+        "baseline": [
+          420,
+          160
+        ],
+        "actual": [
+          490,
+          190
+        ],
+        "errors": [],
+        "raw": {
+          "file": "escape-focus-review-02/direct-no-export.json",
+          "bytes": 38646,
+          "sha256": "a93ed9149655ca72c95a081d629b684537c10b796b65abffa99c65e74b00f7eb"
+        },
+        "escapeTarget": {
+          "tag": "BODY",
+          "id": null,
+          "className": "",
+          "node": null
+        },
+        "escapeComposedPath": [
+          {
+            "tag": "BODY",
+            "id": null,
+            "className": "",
+            "node": null
+          },
+          {
+            "tag": "HTML",
+            "id": null,
+            "className": "",
+            "node": null
+          },
+          {
+            "id": null,
+            "className": null,
+            "node": null
+          },
+          {
+            "id": null,
+            "className": null,
+            "node": null
+          }
+        ],
+        "afterPointerDown": {
+          "top": {
+            "tag": "BODY",
+            "id": "",
+            "className": ""
+          },
+          "frame": {
+            "tag": "BODY",
+            "id": "",
+            "className": ""
+          }
+        }
+      }
+    ],
+    "naturalCancelFailures": 4,
+    "explicitRefocusControlsCancelled": 4,
+    "browserErrors": [],
+    "initialHarnessFailure": {
+      "type": "relative locator timeout before diagnostic drag",
+      "evidence": [
+        "escape-focus-review-01.log",
+        "escape-focus-review-01/harness-error.json"
+      ],
+      "repair": "Changed only reviewer position-reading locator to title.closest(.node); freshoutput02; originalfailedattemptretained."
+    }
+  },
+  "verdict": "FAIL",
+  "verdictScope": "Natural active-drag Escape cancellation onI6/R6 only. It is a productevent/focus defect reproduced independently; not an iframe/download-only harness issue.",
+  "finding": {
+    "id": "S05-FR-ESCAPE-FOCUS-001",
+    "severity": "P2",
+    "status": "OPEN",
+    "scope": "Natural Escape cancellation during an active primary-pointer node drag on the current exact candidate.",
+    "summary": "Canvas loses keyboard focus after node pointerdown; Escape targets BODY and misses the Canvas listener, so pointerup commits movement instead of cancelling.",
+    "expected": "After starting a node drag and pressing Escape normally, restore the pre-gesture position and leave no committed drag entry; a hidden programmatic refocus must not be required.",
+    "actual": "In all4fresh cases, baseline[420,160] becomes[490,190] after natural Escape and pointerup. BeforeEscape activeElement is BODY. The keydown trace targetsBODY with noCanvas in composedPath. Explicit canvas.press(Escape) then cancels in4/4controls.",
+    "reproduction": [
+      "Open exactR6candidate at existing127.0.0.1:4196, either direct/ or wrapper/review.html, in a fresh isolated browser context.",
+      "Open the supplied immutable14-nodeMultiply fixture; select Multiply.",
+      "Drag by[100,60], release, Undo, Redo; optionally ExportJSON at the same steps as original smoke. The baseline is[420,160].",
+      "Start another drag by[70,30], then send ordinary page.keyboard.press(Escape) without locator.focus/press. Release pointer.",
+      "Observe actual position[490,190] and BODY-targetedEscape. The same failure occurs withoutExport and withoutiframe."
+    ],
+    "contractBasis": [
+      {
+        "file": "handoff/17_PANEL_COMMAND_CONTRACT.md",
+        "section": "Callable semantics; Ordering, render and event authority; Close, move, hide and cleanup",
+        "requirement": "Explicit cancellation acts on the application-ownedOperation and compensates withoutHistory; authority remains the live mountedevent path."
+      },
+      {
+        "file": "production/src/features/canvas.ts",
+        "lines": [
+          737,
+          765,
+          948,
+          956,
+          959
+        ],
+        "requirement": "Current product explicitly implements node pointerdown focus and Escape end(true); ordinary drag input must reach that advertised local control."
+      }
+    ],
+    "sourceEvidence": {
+      "file": {
+        "file": "production/src/features/canvas.ts",
+        "bytes": 43586,
+        "sha256": "fdb2a7828c1b55578b73c4c9710239be461ba9c71af6e1c50cff85299b3be8b3"
+      },
+      "unchangedComparedWithR5": true,
+      "reviewLocations": [
+        {
+          "line": 765,
+          "observation": "pointerdown callsroot.focus() beforecontext.select() and its synchronousprojection updates."
+        },
+        {
+          "line": 1170,
+          "observation": "Canvas redraw replaces node DOM children; actual trace later mousedown target is.nodes."
+        },
+        {
+          "line": 948,
+          "observation": "Escape handler is attached toCanvas root; BODY keydown does not traverse it."
+        }
+      ]
+    },
+    "rootCauseAssessment": {
+      "observed": "pointerdownH3 -> Canvasfocusin -> mousedown.nodes -> Canvasfocusout -> BODYactive -> EscapekeydownBODY -> pointerupCanvas.",
+      "inference": "Synchronous node replacement plus native mousedown focusing appears to remove the focus assigned duringpointerdown. The exact minimal production repair remains Implementer work; no code change tested here.",
+      "notEstablished": "The issue was introduced by snapshot reuse. canvas.ts is byte-unchanged fromR5; no priorR5browser replay was performed in this bounded follow-up."
+    }
+  },
+  "requiresOriginalWriterRepair": true,
+  "requiredRepairScope": [
+    "Repair Canvas focus/event routing for naturalEscape during its own activeprimarypointergesture, through existingmount/Applicationcommandauthority.",
+    "Keep global/crossPanel/history/readonly/lifetime guards intact; no arbitrary global edit authority, privateGraph mutation or hidden testrefocus substitute.",
+    "Add meaningful browser regression using ordinary mouse drag plus page.keyboard.press(Escape), on direct andiframe surfaces, with andwithout priorExportJSON. Verify cancel restores pregesture position, no dragHistorycommit, existingUndo/Redo andIMEdraft semantics.",
+    "Run bounded affectedCanvas/gesture/focus/lease cleanup regressions; no unrelated catalogue/architecture change."
+  ],
+  "priorEvidenceInterpretation": {
+    "originalFullReviewVerdict": "BLOCKED/WF_PERMISSION remains immutable historical result; do not rewrite.",
+    "currentTechnicalFollowupVerdict": "FAIL forS05-FR-ESCAPE-FOCUS-001; bothproductrepair and existingWF_PERMISSION evidence gap now require tracking.",
+    "localPreviewAssessment": "The earlier statement that no productfinding prevents thelocalpreview was based on then-known evidence. This newly confirmed finding qualifies that statement: naturalEscape cancellation must no longer be presented as verified or reliable. Existing engineeringpreview may be used to inspect the known issue with explicitdisclosure; this report grants no acceptance and orders no servicechange.",
+    "coordinatorFocusedSmoke": "The focused retry proves cancellation works after test-inducedrefocus; it does not demonstrate natural userEscape routing.",
+    "coverageGap": "Original227tests prove model/commandcancel and thebrowserAT-S01-04 uses syntheticpointercancel; it does not cover this primarydrag naturalEscape path. No originaltest count or recordedPASS is rewritten."
+  },
+  "remainingNetworkGap": {
+    "id": "S05-DRAG-FR-GAP-001",
+    "status": "OPEN",
+    "classification": "WF_PERMISSION",
+    "notRetried": true
+  },
+  "limitations": [
+    "CurrentWindowsheadlessChromium/SwiftShader testprofile only; no physicalkeyboard/device test.",
+    "NoR5runtimecounterexample replay; cannot attribute introduction toI6optimization.",
+    "No productionfix attempted. Exact minimalmechanism remains Implementer decision within acceptedauthority."
+  ],
+  "nextAction": "Route the concrete focus/Escape counterexample to the original designated Implementer in a boundedrepairpacket; require new revision-bound submission and FreshReview of repair/affectedregressions. Preserve originalBLOCKEDreport, localassessment, bothCoordinator smoke results and thisFAIL. Keep networkpermission gap separate.",
+  "productAcceptance": "NOT_GRANTED",
+  "merge": "NOT_GRANTED",
+  "publication": "NOT_GRANTED",
+  "status": "STOP_WRITING"
+}

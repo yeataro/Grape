@@ -1,0 +1,15 @@
+This PR delivers the accepted bounded S05 local scope: all ten DEC-GRAPE-003 / AC-GRAPE-002 function-mode criteria and their supporting corrected behavior, exactly four fixed-value nodes (Float, Vector2, Vector3 and ColorRGBA), and synchronous editor snapshot reuse for dragging. The shader, document, History and lifetime protections remain tied to the reviewed product.
+
+The implementation is `aa4c86e20b0b4b54218b9992921578e7f24a28a2` (I6), reviewed submission `6c3a734325d0db2d924356a9614e971d80a966c8` (R6), build `S05-drag-aa4c86e`. The original independent reviewer issued a new **PASS for this explicitly selected local scope**, `S05-SCOPED-CLOSEOUT-FR-6c3a734-01`; the Human Owner accepted that same scope. Subsequent closeout commits contain only evidence, acceptance registration and status documentation, with reviewed source, tests, configuration and build bytes unchanged. Those commits are not new independently reviewed product candidates.
+
+Validation is limited to the recorded Windows Chromium 151 / SwiftShader portable GLSL ES 3.00 environment. The scoped assessment reconciles the existing exact-I6 evidence: 227 unit/conformance checks, 106 distinct passing local browser cases (the original failed environment attempt and corrected replay are both preserved), actual shader link/numeric results, archive public flows, and measured drag input throughput. It ran no new product tests. Local metadata bookkeeping separately verifies frozen integrity, state validity, maintenance fixtures, Git blob identity and evidence preservation.
+
+Known limitations remain explicit:
+
+- Original review6 remains **BLOCKED / WF_PERMISSION**. The two exact LAN/Tailscale archive checks remain **OPEN / NOT_EXECUTED**; this local scoped PASS does not claim three-origin availability or waive tool permissions.
+- Natural Escape during node dragging remains **OPEN / FAIL** (`S05-FR-ESCAPE-FOCUS-001`). The Owner explicitly deferred it, and the independent scoped assessment judges it nonblocking only for this closeout. The unfinished Escape repair, tests and repair evidence remain outside the committed candidate.
+- This is not all-391 catalog parity, full CQ01-CQ23 qualification, native TouchDesigner, physical-GPU, second-device or all-browser qualification, a universal frame-rate guarantee, or global Gate closure. Existing S01-S04 acceptance and residual limitations are unchanged.
+
+The accepted scope and exact evidence are in `production/evidence/acceptance/s05/closeout-20261004-01/` and `production/evidence/s05/closeout-20261004-01/independent-review/`. Original BLOCKED and FAIL reports remain unchanged under `production/evidence/s05/review-06/`.
+
+The Human separately authorized S05 publication/merge and S06 after closeout and merge. Grape PM is the sole remote publisher/merger and must reconcile the final bookkeeping payload and live refs before acting. This locally prepared description does not itself update the PR, authorize a different payload, establish a merge, or start S06.

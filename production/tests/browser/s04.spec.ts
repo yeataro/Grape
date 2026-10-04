@@ -1,3 +1,5 @@
+import { clickAction } from "../fixtures/public-actions.ts";
+import { createNode } from "./create-node.ts";
 import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 const evidence = process.env.GRAPE_EVIDENCE_DIR!;
@@ -311,9 +313,7 @@ test("S04 DEC002 actual Canvas four shapes to current ImageOutput and edge ident
   for (const shape of ["float", "vec2", "vec3", "vec4"]) {
     await page.goto("/");
     const name = shape === "float" ? "Float" : "Compose";
-    await page
-      .getByRole("button", { name: "Add " + name, exact: true })
-      .click();
+    await createNode(page, name);
     if (shape === "vec2" || shape === "vec3")
       await page.locator('[data-parameter="mode"]').selectOption(shape);
     await page
@@ -358,7 +358,7 @@ test("S04 actual Personal UI saves relists imports downloads and inserts indepen
   page,
 }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
+  await createNode(page, "Float");
   await page
     .getByRole("button", { name: "Float output value", exact: true })
     .click();
@@ -366,9 +366,7 @@ test("S04 actual Personal UI saves relists imports downloads and inserts indepen
     .getByRole("button", { name: "Image output input color", exact: true })
     .click();
   await page.getByRole("button", { name: "New subgraph", exact: true }).click();
-  await page
-    .getByRole("button", { name: "Personal Library", exact: true })
-    .click();
+  await clickAction(page, "Personal Library");
   await page
     .getByRole("button", { name: "Save selected subgraph", exact: true })
     .click();
@@ -380,22 +378,18 @@ test("S04 actual Personal UI saves relists imports downloads and inserts indepen
     .getByRole("button", { name: "Export Subgraph", exact: true })
     .click();
   const text = await fs.readFile((await (await download).path())!, "utf8");
-  await page
-    .getByLabel("Import Personal package")
-    .setInputFiles({
-      name: "again.sgrape-function.json",
-      mimeType: "application/json",
-      buffer: Buffer.from(text),
-    });
+  await page.getByLabel("Import Personal package").setInputFiles({
+    name: "again.sgrape-function.json",
+    mimeType: "application/json",
+    buffer: Buffer.from(text),
+  });
   await expect(page.locator("[data-personal-file]")).toHaveCount(1);
   await page
     .getByRole("button", { name: "Insert Subgraph", exact: true })
     .click();
   await expect(page.locator("dialog[open]")).toHaveCount(0);
   const once = await exported(page);
-  await page
-    .getByRole("button", { name: "Personal Library", exact: true })
-    .click();
+  await clickAction(page, "Personal Library");
   await page
     .getByRole("button", { name: "Insert Subgraph", exact: true })
     .click();
@@ -410,16 +404,12 @@ test("S04 actual Personal UI saves relists imports downloads and inserts indepen
   );
   await page.getByRole("button", { name: "Undo", exact: true }).click();
   expect((await exported(page)).graph).toEqual(twice.graph);
-  await page
-    .getByRole("button", { name: "Personal Library", exact: true })
-    .click();
-  await page
-    .getByLabel("Import Personal package")
-    .setInputFiles({
-      name: "bad.sgrape-function.json",
-      mimeType: "application/json",
-      buffer: Buffer.from('{"bad":true}'),
-    });
+  await clickAction(page, "Personal Library");
+  await page.getByLabel("Import Personal package").setInputFiles({
+    name: "bad.sgrape-function.json",
+    mimeType: "application/json",
+    buffer: Buffer.from('{"bad":true}'),
+  });
   await expect(page.locator('dialog[open] [role="status"]')).toContainText(
     "PERSONAL_FORMAT",
   );
@@ -429,9 +419,7 @@ test("S04 actual Personal UI saves relists imports downloads and inserts indepen
     .click();
   expect((await exported(page)).graph).toEqual(twice.graph);
   await page.reload();
-  await page
-    .getByRole("button", { name: "Personal Library", exact: true })
-    .click();
+  await clickAction(page, "Personal Library");
   await expect(page.locator("[data-personal-file]")).toHaveCount(1);
   await page.screenshot({
     path: evidence + "/s04-personal-ui.png",

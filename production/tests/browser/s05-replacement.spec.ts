@@ -72,7 +72,7 @@ test("S05 Replace separates kind-only mismatch, preserves original and rechecks 
   ).toBeEnabled();
   // A second view issues an existing public command while the first view reviews.
   await page
-    .getByRole("button", { name: "Add Float", exact: true })
+    .getByRole("button", { name: "New subgraph", exact: true })
     .evaluate((b: HTMLButtonElement) => b.click());
   await expect(
     page.getByRole("button", {

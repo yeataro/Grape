@@ -1,3 +1,4 @@
+import { createNode } from "./create-node.ts";
 import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 const evidence = process.env.GRAPE_EVIDENCE_DIR!;
@@ -11,16 +12,14 @@ for (const element of ["glsl.float", "glsl.vec2"])
     page,
   }) => {
     await page.goto("/");
-    await page
-      .getByRole("button", { name: "Add Compose", exact: true })
-      .click();
+    await createNode(page, "Compose");
     await page
       .getByRole("button", { name: "Compose output result", exact: true })
       .click();
     await page
       .getByRole("button", { name: "Image output input color", exact: true })
       .click();
-    await page.getByRole("button", { name: "Add Float", exact: true }).click();
+    await createNode(page, "Float");
     await page.getByRole("button", { name: "Undo", exact: true }).click();
     const packet = await page.evaluate(async (element) => {
       const { flow } = await import("/tests/fixtures/setup.ts"),

@@ -1,3 +1,5 @@
+import { clickAction } from "../fixtures/public-actions.ts";
+import { fileURLToPath } from "node:url";
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
@@ -17,7 +19,11 @@ test.beforeAll(() => {
   if (!fs.existsSync(samples)) {
     const log = execFileSync(
       process.execPath,
-      ["--experimental-transform-types", "tools/s05-samples.ts", samples],
+      [
+        "--experimental-transform-types",
+        fileURLToPath(new URL("../../tools/s05-samples.ts", import.meta.url)),
+        samples,
+      ],
       { encoding: "utf8" },
     );
     fs.writeFileSync(path.join(evidence, "sample-producer.log"), log, {
@@ -120,7 +126,10 @@ test("S05-OWNER-001 exact owner and malformed admission stay strict; original er
     records.push({ kind, review, graphAndHistoryUnchanged: true });
   }
   const original = fs.readFileSync(
-    "evidence/s05/repair-01/samples/legacy-owner.grape.json",
+    new URL(
+      "../../evidence/s05/repair-01/samples/legacy-owner.grape.json",
+      import.meta.url,
+    ),
   );
   const review = await reviewFile(page, "original-legacy.grape.json", original);
   expect(review.message).toContain("IMPORT_ERRORS");
@@ -137,9 +146,7 @@ test("S05-OWNER-001 exact owner and malformed admission stay strict; original er
     .getByRole("button", { name: "Open in new session", exact: true })
     .click();
   expect(await exportDocument(page)).toEqual(JSON.parse(original.toString()));
-  await page
-    .getByRole("button", { name: "Upgrade subgraph owners", exact: true })
-    .click();
+  await clickAction(page, "Upgrade subgraph owners");
   const upgraded = await exportDocument(page);
   expect(upgraded.graph.resources[0].data.emissionMode).toBe("expand");
   expect(upgraded.graph.resources[0].data.network).toEqual(

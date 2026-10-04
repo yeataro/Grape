@@ -89,7 +89,7 @@ test("AT-S02-01 browser: readonly and intervening edit fence publication", async
   await choose(page, fixture());
   // Simulate a command from another view while the modal review owns focus.
   await page
-    .getByRole("button", { name: "Add Float", exact: true })
+    .getByRole("button", { name: "New subgraph", exact: true })
     .evaluate((button: HTMLButtonElement) => button.click());
   await expect(
     page.getByRole("button", { name: "Accept replacement (one Undo)" }),

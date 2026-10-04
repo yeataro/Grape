@@ -9,6 +9,7 @@ import { parseType, formatType } from "../sdk/type-tokens.ts";
 import type { ContextSnapshot } from "../sdk/editing.ts";
 import type { PanelGestureCommands } from "../sdk/panel-commands.ts";
 import { Signal, detached, demand } from "../sdk/kernel.ts";
+import { mountNodeBrowser, icon, nodePortRow } from "./node-browser.ts";
 const owner = {
   moduleId: "grape.ui.canvas",
   version: "0.1.0",
@@ -32,6 +33,7 @@ export const canvasCommands = [
   "grape.network.enter",
   "grape.network.up",
   "grape.network.navigate",
+  "grape.stage.navigate",
   "grape.network.interface",
   "grape.network.mode",
   "grape.node.add",
@@ -54,7 +56,8 @@ export const canvasType: PanelType = {
         lease: { panelId: _id, generation: 0 },
         target: null,
       },
-      camera = { x: 0, y: 0, zoom: 1 };
+      // View-only margin keeps imported origin nodes clear of the stage/header controls.
+      camera = { x: 24, y: 104, zoom: 1 };
     const signal = new Signal<void>();
     const capture = () =>
       detached({
@@ -142,6 +145,10 @@ function mountCanvas(
   viewport.append(frameLayer, wires, nodes);
   root.append(viewport, breadcrumb, notice);
   const toolbar = document.createElement("div");
+  const noticeErrors = new Map<string, string>();
+  const showNoticeErrors = () => {
+    notice.textContent = [...noticeErrors.values()].join(" · ");
+  };
   toolbar.className = "network-toolbar";
   root.append(toolbar);
   toolbar.addEventListener("click", (event) => event.stopPropagation());
@@ -150,14 +157,249 @@ function mountCanvas(
     run(() => {
       services.activate();
       mount.commands?.execute(lease().lease, { commandId, args });
+    }, commandId);
+  const browser = mountNodeBrowser(
+    root,
+    mount,
+    services,
+    lease,
+    camera,
+    (error) => {
+      if (error === undefined) noticeErrors.delete("creation");
+      else noticeErrors.set("creation", String(error));
+      showNoticeErrors();
+    },
+  );
+  const stageBar = document.createElement("div"),
+    entryBar = document.createElement("div");
+  stageBar.className = "stage-switch";
+  entryBar.className = "canvas-entry-actions";
+  root.append(stageBar, entryBar);
+  const entry = (label: string, symbol: string, callback: () => void) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.ariaLabel = label;
+    b.title = label;
+    b.append(icon(symbol), document.createTextNode(label));
+    b.onclick = mount.scope.event(callback);
+    entryBar.append(b);
+    return b;
+  };
+  const openCreator = (mode: "create" | "browse" = "create") => {
+    const r = root.getBoundingClientRect();
+    browser.open(r.left + r.width / 2, r.top + r.height / 3, mode);
+  };
+  const addNode = entry("Add Node", "add", () => openCreator());
+  addNode.title = "Add Node · Tab or double-click blank canvas";
+  entry("Browse nodes", "search", () => openCreator("browse"));
+  const upNode = entry("Up", "up", () => execute("grape.network.up"));
+  const helpDialog = document.createElement("dialog"),
+    helpTitle = document.createElement("h2"),
+    helpContent = document.createElement("div"),
+    helpClose = document.createElement("button");
+  helpDialog.className = "shortcut-help";
+  helpDialog.ariaLabel = "Keyboard shortcuts";
+  helpTitle.textContent = "Keyboard shortcuts";
+  helpContent.className = "shortcut-grid";
+  helpClose.textContent = "Close shortcuts";
+  helpDialog.append(helpTitle, helpContent, helpClose);
+  root.append(helpDialog);
+  helpDialog.addEventListener(
+    "keydown",
+    mount.scope.event((e: KeyboardEvent) => {
+      if (e.key === "Tab" && !e.isComposing) {
+        e.preventDefault();
+        helpClose.focus();
+      }
+    }),
+  );
+  const mod = navigator.platform.includes("Mac") ? "⌘" : "Ctrl";
+  for (const [key, text] of [
+    ["Tab", "Create node at canvas center"],
+    ["Double-click blank canvas", "Create node at pointer"],
+    ["↑ / ↓ / Enter", "Choose a creation result"],
+    ["Escape", "Cancel placement, menu or active drag"],
+    [`${mod}+Z / ${mod}+Shift+Z`, "Undo / Redo graph edit"],
+    ["Delete / Backspace", "Delete selected nodes"],
+    ["H / F", "Frame graph / selected nodes"],
+    ["Shift+F10", "Open canvas or node menu"],
+    ["?", "Keyboard shortcuts"],
+  ]) {
+    const k = document.createElement("kbd"),
+      d = document.createElement("span");
+    k.textContent = key!;
+    d.textContent = text!;
+    helpContent.append(k, d);
+  }
+  let helpOpener: HTMLElement | null = null,
+    backdropDown = false;
+  const closeHelp = () => {
+    helpDialog.close();
+    (helpOpener?.isConnected ? helpOpener : root).focus({
+      preventScroll: true,
     });
+  };
+  const showHelp = () => {
+    browser.cancel(false);
+    helpOpener = document.activeElement as HTMLElement;
+    helpDialog.showModal();
+  };
+  entry("Shortcuts", "help", showHelp);
+  helpClose.onclick = mount.scope.event(closeHelp);
+  helpDialog.addEventListener(
+    "cancel",
+    mount.scope.event((e) => {
+      e.preventDefault();
+      closeHelp();
+    }),
+  );
+  helpDialog.addEventListener(
+    "pointerdown",
+    mount.scope.event((e) => {
+      backdropDown =
+        e.target === helpDialog &&
+        !(
+          e.clientX >= helpDialog.getBoundingClientRect().left &&
+          e.clientX <= helpDialog.getBoundingClientRect().right &&
+          e.clientY >= helpDialog.getBoundingClientRect().top &&
+          e.clientY <= helpDialog.getBoundingClientRect().bottom
+        );
+    }),
+  );
+  helpDialog.addEventListener(
+    "click",
+    mount.scope.event((e) => {
+      if (backdropDown && e.target === helpDialog) closeHelp();
+      backdropDown = false;
+    }),
+  );
+  const menu = document.createElement("div");
+  menu.className = "canvas-menu";
+  menu.hidden = true;
+  menu.setAttribute("role", "menu");
+  root.append(menu);
+  let menuBase = "",
+    menuRevision = -1,
+    menuSelection = "",
+    menuOpener: HTMLElement | null = null;
+  const closeMenu = (focus = false) => {
+    menu.hidden = true;
+    if (focus)
+      (menuOpener?.isConnected ? menuOpener : root).focus({
+        preventScroll: true,
+      });
+  };
+  const showMenu = (target: Element, x: number, y: number) => {
+    const port = target.closest<HTMLElement>("[data-port]");
+    if (
+      !port &&
+      target.closest(
+        "button,input,textarea,select,summary,.network-toolbar,.node-browser,dialog,.canvas-entry-actions,.stage-switch",
+      )
+    )
+      return;
+    browser.cancel(false);
+    services.activate();
+    const c = services.context(lease().lease),
+      node = target.closest<HTMLElement>("[data-node]"),
+      edge = target.closest<SVGElement>("[data-edge]");
+    if (node && !c.capture().selection.includes(node.dataset.node!))
+      c.select([node.dataset.node!]);
+    const captured = c.capture();
+    menuBase = JSON.stringify(captured.scope);
+    menuRevision = captured.graph.revision;
+    menuSelection = JSON.stringify(captured.selection);
+    menuOpener = document.activeElement as HTMLElement;
+    menu.replaceChildren();
+    const item = (label: string, fn: () => void, enabled = true) => {
+      const b = document.createElement("button");
+      b.setAttribute("role", "menuitem");
+      b.textContent = label;
+      b.disabled = !enabled;
+      b.onclick = mount.scope.event(() => {
+        const now = c.capture();
+        if (
+          menuBase !== JSON.stringify(now.scope) ||
+          menuRevision !== now.graph.revision ||
+          menuSelection !== JSON.stringify(now.selection)
+        ) {
+          closeMenu();
+          return;
+        }
+        closeMenu();
+        fn();
+      });
+      menu.append(b);
+    };
+    const editing = services.editing?.(lease().lease) !== false;
+    if (port)
+      item(
+        "Create connected node",
+        () =>
+          browser.open(x, y, "create", {
+            nodeId: port.dataset.nodeId!,
+            portKey: port.dataset.port!,
+            direction: port.dataset.direction as "input" | "output",
+          }),
+        editing,
+      );
+    else if (edge)
+      item(
+        "Disconnect edge",
+        () => execute("grape.edge.disconnect", { id: edge.dataset.edge! }),
+        editing,
+      );
+    else if (node) {
+      item("Delete selected", () => execute("grape.node.delete"), editing);
+      item(
+        "Enter subgraph",
+        () => execute("grape.network.enter", { id: node.dataset.node! }),
+        captured.nodeRoles[node.dataset.node!] === "call",
+      );
+      item("Encapsulate", () => execute("grape.network.encapsulate"), editing);
+    } else item("Add Node", () => browser.open(x, y), editing);
+    item("Browse nodes", () => browser.open(x, y, "browse"));
+    item("Keyboard shortcuts", showHelp);
+    const r = root.getBoundingClientRect();
+    menu.hidden = false;
+    menu.style.left =
+      Math.max(0, Math.min(x - r.left, root.clientWidth - menu.offsetWidth)) +
+      "px";
+    menu.style.top =
+      Math.max(0, Math.min(y - r.top, root.clientHeight - menu.offsetHeight)) +
+      "px";
+    menu.querySelector<HTMLButtonElement>("button:not(:disabled)")?.focus();
+  };
+  menu.addEventListener(
+    "keydown",
+    mount.scope.event((e: KeyboardEvent) => {
+      e.stopPropagation();
+      const items = Array.from(
+          menu.querySelectorAll<HTMLButtonElement>("button:not(:disabled)"),
+        ),
+        i = items.indexOf(document.activeElement as HTMLButtonElement);
+      if (["ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) {
+        e.preventDefault();
+        items[
+          e.key === "Home"
+            ? 0
+            : e.key === "End"
+              ? items.length - 1
+              : (i + (e.key === "ArrowDown" ? 1 : -1) + items.length) %
+                items.length
+        ]?.focus();
+      } else if (e.key === "Escape") {
+        e.preventDefault();
+        closeMenu(true);
+      } else if (e.key === "Tab") closeMenu();
+    }),
+  );
   for (const [name, command, args] of [
     ["New subgraph", "grape.network.create", {}],
     ["Library subgraph", "grape.network.create", { library: true }],
     ["Encapsulate", "grape.network.encapsulate", {}],
     ["Make independent", "grape.network.independent", {}],
     ["Enter subgraph", "grape.network.enter", null],
-    ["Up", "grape.network.up", {}],
   ] as const) {
     const b = document.createElement("button");
     b.textContent = name;
@@ -218,15 +460,18 @@ function mountCanvas(
           !c.graph.document.graph.losses.some((old) => old.id === l.id),
       );
       if (losses.length)
-        notice.textContent = losses
-          .map(
-            (l) =>
-              l.reason +
-              (l.payload.kind === "edge"
-                ? ` Receiver ${l.payload.edge.to.nodeId}/${l.payload.edge.to.portKey}; edge ${l.payload.edge.id}.`
-                : ""),
-          )
-          .join(" ");
+        notice.textContent =
+          [...noticeErrors.values()].join(" · ") +
+          (noticeErrors.size ? " · " : "") +
+          losses
+            .map(
+              (l) =>
+                l.reason +
+                (l.payload.kind === "edge"
+                  ? ` Receiver ${l.payload.edge.to.nodeId}/${l.payload.edge.to.portKey}; edge ${l.payload.edge.id}.`
+                  : ""),
+            )
+            .join(" ");
     }),
   );
   addDirection.ariaLabel = "New port direction";
@@ -714,29 +959,142 @@ function mountCanvas(
       pan: boolean;
       camera: ReturnType<typeof camera>;
     } | null = null;
-  const run = (fn: () => void) => {
+  const run = (fn: () => void, action?: string) => {
     try {
-      notice.textContent = "";
       fn();
+      if (action && noticeErrors.delete(action)) showNoticeErrors();
       return true;
     } catch (error) {
-      notice.textContent = String(error);
+      noticeErrors.set(action ?? "interaction", String(error));
+      showNoticeErrors();
       return false;
     }
   };
-  const listen = (
+  const listen = <T extends Event = Event>(
     target: EventTarget,
     name: string,
-    fn: (event: Event) => void,
+    fn: (event: T) => void,
     options?: AddEventListenerOptions,
   ) => {
     const handler = mount.scope.event(fn);
-    target.addEventListener(name, handler, options);
-    mount.scope.own(() => target.removeEventListener(name, handler, options));
+    target.addEventListener(name, handler as EventListener, options);
+    mount.scope.own(() =>
+      target.removeEventListener(name, handler as EventListener, options),
+    );
   };
+  listen(root, "dblclick", (e: MouseEvent) => {
+    const t = e.target as Element;
+    if (
+      t.closest(
+        ".node,button,input,select,textarea,summary,.network-toolbar,.node-browser,.canvas-menu,dialog",
+      )
+    )
+      return;
+    e.preventDefault();
+    end(true);
+    browser.open(e.clientX, e.clientY);
+  });
+  listen(root, "contextmenu", (e: MouseEvent) => {
+    if (
+      (e.target as Element).closest(
+        "input,textarea,select,[contenteditable=true]",
+      )
+    )
+      return;
+    if (browser.isOpen()) {
+      browser.cancel();
+      e.preventDefault();
+      return;
+    }
+    e.preventDefault();
+    end(true);
+    showMenu(e.target as Element, e.clientX, e.clientY);
+  });
+  listen(document, "pointerdown", (e: PointerEvent) => {
+    if (!menu.hidden && !menu.contains(e.target as Node)) closeMenu();
+  });
+  listen(window, "blur", () => {
+    clearHold();
+    closeMenu();
+    end(true);
+  });
+  listen(document, "visibilitychange", () => {
+    if (document.hidden) {
+      clearHold();
+      closeMenu();
+      end(true);
+    }
+  });
+  listen(window, "resize", () => closeMenu());
+  let hold: ReturnType<typeof setTimeout> | undefined,
+    holdToken: { id: number; scope: string; revision: number } | null = null,
+    holdPoint: [number, number] = [0, 0];
+  listen(
+    document,
+    "pointerdown",
+    (e: PointerEvent) => {
+      if (holdToken && e.pointerId !== holdToken.id) clearHold();
+    },
+    { capture: true },
+  );
+  listen(root, "pointerdown", (e: PointerEvent) => {
+    if (e.pointerType !== "touch") return;
+    clearHold();
+    if (!e.isPrimary) return;
+    if (
+      (e.target as Element).closest(
+        "button,input,textarea,select,[contenteditable=true],.node-browser,dialog,.network-toolbar",
+      )
+    )
+      return;
+    holdPoint = [e.clientX, e.clientY];
+    const c = services.context(lease().lease).capture(),
+      token = {
+        id: e.pointerId,
+        scope: JSON.stringify(c.scope),
+        revision: c.graph.revision,
+      };
+    holdToken = token;
+    hold = setTimeout(
+      mount.scope.event(() => {
+        const now = services.context(lease().lease).capture();
+        if (
+          holdToken !== token ||
+          document.hidden ||
+          JSON.stringify(now.scope) !== token.scope ||
+          now.graph.revision !== token.revision
+        )
+          return;
+        clearHold();
+        end(true);
+        showMenu(e.target as Element, e.clientX, e.clientY);
+      }),
+      550,
+    );
+  });
+  const clearHold = () => {
+    clearTimeout(hold);
+    hold = undefined;
+    holdToken = null;
+  };
+  mount.scope.own(clearHold);
+  listen(root, "pointermove", (e: PointerEvent) => {
+    if (Math.hypot(e.clientX - holdPoint[0], e.clientY - holdPoint[1]) > 4)
+      clearHold();
+  });
+  listen(root, "pointerup", clearHold);
+  listen(root, "pointercancel", clearHold);
   listen(root, "pointerdown", (event) =>
     run(() => {
       const e = event as PointerEvent;
+      if (browser.isOpen() || !menu.hidden || helpDialog.open) return;
+      if (!e.isPrimary) {
+        if (portDrag && root.hasPointerCapture(portDrag.id))
+          root.releasePointerCapture(portDrag.id);
+        portDrag = null;
+        end(true);
+        return;
+      }
       if (e.button !== 0) return;
       const socket = (e.target as HTMLElement).closest<HTMLElement>(
         "[data-port]",
@@ -761,6 +1119,8 @@ function mountCanvas(
         )
       )
         return;
+      // Keep native mousedown from removing Canvas focus after selection redraw.
+      e.preventDefault();
       services.activate();
       root.focus();
       const context = services.context(lease().lease),
@@ -856,9 +1216,22 @@ function mountCanvas(
         root.releasePointerCapture(drag.id);
       drag = null;
     });
+  let lastBlankTap: { time: number; x: number; y: number } | null = null;
   listen(root, "pointerup", (event) => {
     const e = event as PointerEvent,
       pending = portDrag;
+    if (
+      !e.isPrimary ||
+      (pending && pending.id !== e.pointerId) ||
+      (drag && drag.id !== e.pointerId)
+    )
+      return;
+    const blankTap =
+      e.pointerType === "touch" &&
+      drag?.pan &&
+      Math.hypot(e.clientX - drag.startX, e.clientY - drag.startY) < 8 &&
+      menu.hidden &&
+      !browser.isOpen();
     portDrag = null;
     if (pending) {
       if (root.hasPointerCapture(pending.id))
@@ -872,9 +1245,23 @@ function mountCanvas(
               pending.revision === c.graph.revision,
             "STALE_SCOPE",
           );
-          const target = document
-            .elementFromPoint(e.clientX, e.clientY)
-            ?.closest<HTMLElement>("[data-spare],[data-port]");
+          const hit = document.elementFromPoint(e.clientX, e.clientY);
+          const target = hit?.closest<HTMLElement>("[data-spare],[data-port]");
+          if (
+            !target &&
+            hit &&
+            root.contains(hit) &&
+            !hit.closest(
+              ".node,.network-toolbar,button,input,select,textarea,dialog",
+            )
+          ) {
+            browser.open(e.clientX, e.clientY, "create", {
+              nodeId: pending.nodeId,
+              portKey: pending.portKey,
+              direction: pending.direction as "input" | "output",
+            });
+            return;
+          }
           demand(target && root.contains(target), "PORT_TARGET");
           if (target.dataset.spare) {
             execute("grape.network.spare", {
@@ -901,6 +1288,17 @@ function mountCanvas(
       }
     }
     if (!pending) end(false);
+    if (blankTap) {
+      const time = performance.now();
+      if (
+        lastBlankTap &&
+        time - lastBlankTap.time < 350 &&
+        Math.hypot(e.clientX - lastBlankTap.x, e.clientY - lastBlankTap.y) < 24
+      ) {
+        lastBlankTap = null;
+        browser.open(e.clientX, e.clientY);
+      } else lastBlankTap = { time, x: e.clientX, y: e.clientY };
+    } else lastBlankTap = null;
   });
   listen(root, "pointercancel", () => {
     portDrag = null;
@@ -924,34 +1322,76 @@ function mountCanvas(
       };
       if (!selectedPort) {
         selectedPort = port;
-        notice.textContent = connectionHint;
+        if (!noticeErrors.size) notice.textContent = connectionHint;
         return;
       }
       const source = selectedPort.direction === "output" ? selectedPort : port,
         target = selectedPort.direction === "output" ? port : selectedPort;
       selectedPort = null;
-      demand(
-        source.direction === "output" && target.direction === "input",
-        "PORT_DIRECTION",
-      );
-      demand(mount.commands, "COMMAND_DENIED");
-      mount.commands.execute(lease().lease, {
-        commandId: "grape.edge.connect",
-        args: {
-          from: { nodeId: source.nodeId, portKey: source.portKey },
-          to: { nodeId: target.nodeId, portKey: target.portKey },
-          replace: (event as MouseEvent).shiftKey,
-        },
-      });
+      run(() => {
+        demand(
+          source.direction === "output" && target.direction === "input",
+          "PORT_DIRECTION",
+        );
+        demand(mount.commands, "COMMAND_DENIED");
+        mount.commands.execute(lease().lease, {
+          commandId: "grape.edge.connect",
+          args: {
+            from: { nodeId: source.nodeId, portKey: source.portKey },
+            to: { nodeId: target.nodeId, portKey: target.portKey },
+            replace: (event as MouseEvent).shiftKey,
+          },
+        });
+      }, "grape.edge.connect");
     }),
   );
   listen(root, "keydown", (event) =>
     run(() => {
       const e = event as KeyboardEvent;
       if (
+        e.defaultPrevented ||
         e.isComposing ||
-        (e.target as HTMLElement).matches("input,textarea,select")
+        e.repeat ||
+        document.querySelector("dialog[open]") ||
+        (e.target as HTMLElement).closest(
+          "input,textarea,select,[contenteditable=true],.node-browser,.canvas-menu",
+        )
       )
+        return;
+      if ((drag || portDrag) && e.key !== "Escape") return;
+      if (
+        e.key === "Tab" &&
+        !e.ctrlKey &&
+        !e.metaKey &&
+        !e.altKey &&
+        !e.shiftKey &&
+        e.target === root
+      ) {
+        e.preventDefault();
+        openCreator();
+        return;
+      }
+      if (e.key === "?" && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        showHelp();
+        return;
+      }
+      if (
+        !e.altKey &&
+        !e.ctrlKey &&
+        !e.metaKey &&
+        (e.key === "ContextMenu" || (e.key === "F10" && e.shiftKey))
+      ) {
+        e.preventDefault();
+        const r = root.getBoundingClientRect();
+        showMenu(
+          e.target as Element,
+          r.left + r.width / 2,
+          r.top + r.height / 3,
+        );
+        return;
+      }
+      if (e.altKey || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() !== "z"))
         return;
       if (e.key === "Escape") {
         selectedPort = null;
@@ -996,9 +1436,9 @@ function mountCanvas(
         if (items.length) {
           const x = Math.min(...items.map((n) => n.position[0])),
             y = Math.min(...items.map((n) => n.position[1])),
-            right = Math.max(...items.map((n) => n.position[0] + 180)),
+            right = Math.max(...items.map((n) => n.position[0] + 190)),
             bottom = Math.max(
-              ...items.map((n) => n.position[1] + 46 + n.ports.length * 31),
+              ...items.map((n) => n.position[1] + 48 + n.ports.length * 29),
             );
           const zoom = Math.min(
             1.5,
@@ -1019,6 +1459,12 @@ function mountCanvas(
     "wheel",
     (event) => {
       const e = event as WheelEvent;
+      if (
+        (e.target as Element).closest(
+          ".node-browser,.network-toolbar,dialog,.canvas-menu",
+        )
+      )
+        return;
       e.preventDefault();
       const current = camera(),
         rect = root.getBoundingClientRect(),
@@ -1038,6 +1484,40 @@ function mountCanvas(
   );
   return {
     update: (projection: ReturnType<typeof capture>, _frame: ViewFrame) => {
+      if (projection.context) {
+        const c = projection.context;
+        browser.update(c);
+        if (
+          !menu.hidden &&
+          (menuBase !== JSON.stringify(c.scope) ||
+            menuRevision !== c.graph.revision ||
+            menuSelection !== JSON.stringify(c.selection))
+        )
+          closeMenu();
+        const stages = c.graph.document.graph.stages;
+        const stageKey = stages.map((s) => s.id + ":" + s.key).join("|");
+        if (stageBar.dataset.key !== stageKey) {
+          stageBar.dataset.key = stageKey;
+          stageBar.replaceChildren();
+          for (const stage of stages) {
+            const b = document.createElement("button");
+            b.textContent = stage.key[0]!.toUpperCase() + stage.key.slice(1);
+            b.dataset.stageId = stage.id;
+            b.title = b.textContent + " Stage";
+            b.onclick = mount.scope.event(() =>
+              execute("grape.stage.navigate", { stageId: stage.id }),
+            );
+            stageBar.append(b);
+          }
+        }
+        for (const b of stageBar.querySelectorAll<HTMLButtonElement>("button"))
+          b.setAttribute(
+            "aria-pressed",
+            String(b.dataset.stageId === c.scope.stageId),
+          );
+        addNode.disabled = services.editing?.(lease().lease) === false;
+        upNode.disabled = !c.scope.networkPath.length;
+      }
       root.setAttribute(
         "aria-label",
         _frame.text({
@@ -1059,6 +1539,12 @@ function mountCanvas(
         return;
       }
       const scopeKey = JSON.stringify(c.scope);
+      if (
+        holdToken &&
+        (holdToken.scope !== scopeKey ||
+          holdToken.revision !== c.graph.revision)
+      )
+        clearHold();
       if (renderedScope && renderedScope !== scopeKey) {
         selectedPort = null;
         suppressPortClick = false;
@@ -1066,6 +1552,7 @@ function mountCanvas(
         structureDraft = null;
         editor.open = false;
         structs.open = false;
+        noticeErrors.clear();
         notice.textContent = "";
         if (drag && root.hasPointerCapture(drag.id))
           root.releasePointerCapture(drag.id);
@@ -1172,6 +1659,7 @@ function mountCanvas(
           card.className =
             "node" + (c.selection.includes(n.id) ? " selected" : "");
           card.dataset.node = n.id;
+          card.dataset.role = c.nodeRoles[n.id];
           card.tabIndex = 0;
           card.setAttribute("aria-label", n.name);
           card.setAttribute(
@@ -1215,29 +1703,20 @@ function mountCanvas(
             card.append(spare);
           }
           for (const p of n.ports) {
-            const row = document.createElement("div"),
-              button = document.createElement("button");
-            row.className = "port-row " + p.direction;
-            button.type = "button";
-            button.className = "port";
-            button.dataset.port = p.key;
-            button.dataset.nodeId = n.id;
-            button.dataset.direction = p.direction;
-            button.setAttribute(
-              "aria-label",
-              `${n.name} ${p.direction} ${c.portLabels[n.id]?.[p.key] ?? p.key}`,
+            const connected = network.edges.some((e) =>
+              p.direction === "output"
+                ? e.from.nodeId === n.id && e.from.portKey === p.key
+                : e.to.nodeId === n.id && e.to.portKey === p.key,
             );
-            const socket = document.createElement("span");
-            socket.className = "socket";
-            socket.textContent = "●";
-            const caption = document.createElement("span");
-            caption.textContent = c.portLabels[n.id]?.[p.key] ?? p.key;
-            if (p.direction === "output") button.append(caption, socket);
-            else button.append(socket, caption);
-            const type = document.createElement("small");
-            type.textContent = p.type.replace("glsl.", "");
-            row.append(button, type);
-            card.append(row);
+            card.append(
+              nodePortRow(
+                p,
+                c.portLabels[n.id]?.[p.key] ?? p.key,
+                { id: n.id, name: n.name },
+                connected,
+                n.inputValues[p.key],
+              ),
+            );
           }
           return card;
         }),
@@ -1279,6 +1758,17 @@ function mountCanvas(
             `M ${a[0]} ${a[1]} C ${a[0] + 70} ${a[1]}, ${b[0] - 70} ${b[1]}, ${b[0]} ${b[1]}`,
           );
           path.classList.toggle("invalid", !!e.invalid);
+          const sourcePort = network.nodes
+            .find((n) => n.id === e.from.nodeId)
+            ?.ports.find((p) => p.key === e.from.portKey);
+          path.style.stroke =
+            sourcePort?.type === "glsl.float"
+              ? "#c4c1bc"
+              : sourcePort?.type === "glsl.vec2"
+                ? "#8fc5ee"
+                : sourcePort?.type === "glsl.vec3"
+                  ? "#87ceb7"
+                  : "#c5b2e2";
           path.dataset.edge = e.id;
           return path;
         }),

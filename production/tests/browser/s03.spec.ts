@@ -1,11 +1,10 @@
+import { createNode } from "./create-node.ts";
 import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 const evidence = process.env.GRAPE_EVIDENCE_DIR!;
 async function flow(page: any) {
   for (const name of ["Float", "Multiply", "Compose"])
-    await page
-      .getByRole("button", { name: "Add " + name, exact: true })
-      .click();
+    await createNode(page, name);
   let edgeCount = 0;
   for (const [a, b] of [
     ["Float output value", "Multiply input a"],
@@ -153,7 +152,7 @@ test("AT-S03-04 nested IME/cancel/focus and navigation cleanup use the real Insp
   await page
     .getByRole("button", { name: "Enter subgraph", exact: true })
     .click();
-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
+  await createNode(page, "Float");
   const field = page.getByRole("textbox", { name: "Value", exact: true });
   await field.fill("0.75");
   await field.dispatchEvent("compositionstart");

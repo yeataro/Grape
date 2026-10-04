@@ -95,21 +95,6 @@ export function actionsType(
                 buttons.push(button);
                 return button;
               };
-              catalog.forEach((item) =>
-                add(item.presentation.label, "grape.node.add", () => {
-                  const count = Math.max(
-                    0,
-                    services.context(update.lease).network().nodes.length - 1,
-                  );
-                  return {
-                    ref: { ...item.ref },
-                    position: [
-                      40 + (count % 3) * 205,
-                      85 + Math.floor(count / 3) * 225,
-                    ],
-                  };
-                }),
-              );
               const undo = add("Undo", "grape.undo", () => ({})),
                 redo = add("Redo", "grape.redo", () => ({}));
               add("Delete selected", "grape.node.delete", () => ({}));
@@ -118,11 +103,20 @@ export function actionsType(
                 if (
                   e.defaultPrevented ||
                   e.isComposing ||
+                  e.repeat ||
+                  e.altKey ||
+                  document.querySelector("dialog[open]") ||
                   !(e.ctrlKey || e.metaKey) ||
                   e.key.toLowerCase() !== "z"
                 )
                   return;
                 const target = e.target as HTMLElement;
+                if (
+                  target.closest(
+                    "[contenteditable=true],.node-browser,.canvas-menu",
+                  )
+                )
+                  return;
                 if (
                   target.matches("input,textarea,select") &&
                   (target.dataset.draft === "true" ||
@@ -155,6 +149,35 @@ export function actionsType(
                   frame: import("../sdk/view-mount.ts").ViewFrame,
                 ) => {
                   labels.forEach((render) => render(frame));
+                  for (const [b, name] of [
+                    [undo, "undo"],
+                    [redo, "redo"],
+                  ] as const) {
+                    const svg = document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "svg",
+                      ),
+                      p = document.createElementNS(svg.namespaceURI, "path");
+                    svg.setAttribute("viewBox", "0 0 24 24");
+                    svg.setAttribute("aria-hidden", "true");
+                    svg.classList.add("action-icon");
+                    p.setAttribute(
+                      "d",
+                      name === "undo"
+                        ? "m8 4-5 5 5 5M3 9h10a7 7 0 0 1 0 14"
+                        : "m16 4 5 5-5 5M21 9h-10a7 7 0 0 0 0 14",
+                    );
+                    p.setAttribute("fill", "none");
+                    p.setAttribute("stroke", "currentColor");
+                    p.setAttribute("stroke-width", "1.6");
+                    svg.append(p);
+                    b.prepend(svg);
+                    b.title =
+                      b.textContent! +
+                      " · Ctrl/⌘ " +
+                      (name === "redo" ? "Shift+" : "") +
+                      "Z";
+                  }
                   buttons.forEach(
                     (b) => (b.disabled = !p.target || p.editing === false),
                   );

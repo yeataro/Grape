@@ -1,3 +1,4 @@
+import { clickAction } from "./public-actions.ts";
 import fs from "node:fs/promises";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
@@ -91,9 +92,7 @@ export async function deliveredFlow(
     upgrade: unknown = null;
   if (name.endsWith(".personal.json")) {
     review = await openValidFile(page, "seed.grape.json", validSeed);
-    await page
-      .getByRole("button", { name: "Personal Library", exact: true })
-      .click();
+    await clickAction(page, "Personal Library");
     await page
       .getByLabel("Import Personal package")
       .setInputFiles({ name, mimeType: "application/json", buffer: bytes });
@@ -125,9 +124,7 @@ export async function deliveredFlow(
       const before = await exportDocument(page);
       let canvas = await enter(page, "Subgraph");
       await expect(canvas.getByLabel("Subgraph emission mode")).toBeDisabled();
-      await page
-        .getByRole("button", { name: "Upgrade subgraph owners", exact: true })
-        .click();
+      await clickAction(page, "Upgrade subgraph owners");
       const after = await exportDocument(page);
       const expected = structuredClone(before);
       expected.graph.resources.forEach((r: any) => {

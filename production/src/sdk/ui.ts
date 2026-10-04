@@ -20,6 +20,11 @@ export interface ContextQuery {
   subscribe(fn: () => void): () => void;
 }
 export interface PanelServices {
+  catalog?(
+    lease: PanelCommandLease,
+    wire?: CatalogWire,
+  ): readonly CatalogEntry[];
+  editing?(lease: PanelCommandLease): boolean;
   identifier?(): string;
   clipboard?(): string;
   reshape?(lease: PanelCommandLease, type: string, value: Json): Json;
@@ -29,6 +34,37 @@ export interface PanelServices {
   parameter(lease: PanelCommandLease, nodeId: string, key: string): FieldTarget;
   accept(lease: PanelCommandLease, callback: () => void): boolean;
   activate(): void;
+}
+/** Detached, exact-owner creation proposals. Presentation never owns a model. */
+export interface CatalogWire {
+  readonly nodeId: string;
+  readonly portKey: string;
+  readonly direction: "input" | "output";
+}
+export interface CatalogEntry {
+  readonly key: string;
+  readonly ref: import("./public-surface.ts").NodeTypeRef;
+  readonly presentation: import("./public-surface.ts").NodePresentation;
+  readonly source: string;
+  readonly ports: readonly import("./document.ts").PortSnapshot[];
+  readonly parameters: Readonly<Record<string, Json>>;
+  readonly libraryScope?: "builtin" | "project";
+  readonly creation?:
+    | {
+        readonly kind: "reference";
+        readonly role: "call" | "source" | "structure";
+        readonly resourceId: string;
+      }
+    | {
+        readonly kind: "source";
+        readonly name: string;
+        readonly type: string;
+        readonly value: Json;
+      };
+  readonly matchingPort?: string;
+  readonly exactMatch: boolean;
+  readonly scope: ScopeRef;
+  readonly revision: number;
 }
 export interface Panel {
   restoreViewState(state: Json): void;

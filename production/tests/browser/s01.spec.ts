@@ -1,9 +1,10 @@
+import { createNode } from "./create-node.ts";
 import { openLegacyDocument } from "./legacy-document.ts";
 import { test, expect } from "@playwright/test";
 async function fullFlow(page: any) {
-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
-  await page.getByRole("button", { name: "Add Multiply", exact: true }).click();
-  await page.getByRole("button", { name: "Add Compose", exact: true }).click();
+  await createNode(page, "Float");
+  await createNode(page, "Multiply");
+  await createNode(page, "Compose");
   await page
     .getByRole("button", { name: "Float output value", exact: true })
     .click();
@@ -142,7 +143,7 @@ test("AT-S01-02 browser: occupied and incompatible connections preserve wires an
 test("AT-S01-04 browser: draft cancel, IME guard, keyboard commit, pointer gesture Undo and cancel", async ({
   page,
 }) => {
-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
+  await createNode(page, "Float");
   const input = page.getByRole("textbox", { name: "Value", exact: true }),
     canvas = page.locator(".canvas");
   const before = await canvas.getAttribute("data-revision");
@@ -184,8 +185,8 @@ test("AT-S01-04 browser: draft cancel, IME guard, keyboard commit, pointer gestu
 test("AT-S01-06 browser: two Canvas contexts keep independent selections and camera while sharing edits", async ({
   page,
 }) => {
-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
-  await page.getByRole("button", { name: "Add Multiply", exact: true }).click();
+  await createNode(page, "Float");
+  await createNode(page, "Multiply");
   await page
     .locator("#canvas-1 .node h3")
     .filter({ hasText: /^Float$/ })
@@ -243,7 +244,7 @@ test("AT-S01-06 browser: two Canvas contexts keep independent selections and cam
 test("AT-S01-07 browser: delayed storage completion cannot clear a newer edit; rejection and export preserve dirty", async ({
   page,
 }) => {
-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
+  await createNode(page, "Float");
   await page.evaluate(() => {
     const descriptor = Object.getOwnPropertyDescriptor(
       IDBTransaction.prototype,
@@ -318,14 +319,14 @@ test("recovery browser: future structural document stays read-only and original 
 test("readonly browser: fields, actions and keyboard cannot edit; unlocking restores the same value", async ({
   page,
 }) => {
-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
+  await createNode(page, "Float");
   const field = page.getByRole("textbox", { name: "Value", exact: true }),
     canvas = page.locator(".canvas");
   const revision = await canvas.getAttribute("data-revision");
   await page.getByRole("button", { name: "Lock editing", exact: true }).click();
   await expect(field).toHaveAttribute("readonly", "");
   await expect(
-    page.getByRole("button", { name: "Add Float", exact: true }),
+    page.getByRole("button", { name: "Add Node", exact: true }),
   ).toBeDisabled();
   await canvas.focus();
   await canvas.press("Control+z");
@@ -415,7 +416,7 @@ test("view failure shows shared retry placeholder and releases the failed mount"
   await page.getByRole("button", { name: "Retry view", exact: true }).click();
   await expect(page.locator(".canvas")).toHaveCount(1);
   await expect(page.locator(".view-placeholder")).toHaveCount(0);
-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
+  await createNode(page, "Float");
   await expect(
     page.getByRole("textbox", { name: "Value", exact: true }),
   ).toHaveValue("0.25");
@@ -534,7 +535,7 @@ for (const source of ["Float", "Multiply"] as const) {
 test("N1 browser: middle/right movement cannot edit nodes; primary drag still groups into one Undo", async ({
   page,
 }) => {
-  await page.getByRole("button", { name: "Add Float", exact: true }).click();
+  await createNode(page, "Float");
   await page.getByRole("button", { name: "Save", exact: true }).click();
   await expect(page.locator("#save-state")).toHaveText("Saved");
   const card = page

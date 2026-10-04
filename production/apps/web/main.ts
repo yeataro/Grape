@@ -1,3 +1,4 @@
+import { icon } from "../../src/features/node-browser.ts";
 import { currentSources } from "../../src/modules/sources-current.ts";
 import {
   fixedValues,
@@ -112,7 +113,7 @@ const application = new EditorApplication(
 );
 const app = document.querySelector<HTMLElement>("#app")!;
 app.innerHTML =
-  '<header><div class="brand"><span class="grape-mark">●</span> Grape <small>SHADER WORKSPACE</small></div><nav aria-label="Document actions"></nav><div class="status"><span id="save-state"></span><span class="host">Host-free</span></div></header><div id="message" role="status"></div><div id="actions"></div><main><section id="canvases"></section><aside id="inspector"></aside></main><section id="code"></section><footer><span>Click an output port, then an input to connect. Shift-click replaces a connection.</span><span>Scroll to zoom · Drag empty space to pan</span></footer><dialog id="open-dialog"><h2>Open saved document</h2><div id="saved-list"></div><button id="cancel-open">Cancel</button></dialog><dialog id="recovery"><h2>Document retained</h2><p id="recovery-message"></p><button id="export-original">Export original</button><button id="close-recovery">Close</button></dialog>';
+  '<header><div class="brand"><svg class="grape-mark" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><circle cx="20" cy="23" r="11" fill="#bfa5f4"/><circle cx="44" cy="23" r="11" fill="#a98be2"/><circle cx="32" cy="44" r="11" fill="#b499ef"/></svg> Grape <small>SHADER WORKSPACE</small></div><nav aria-label="Document actions"></nav><div class="status"><span id="save-state"></span><span class="host">Host-free</span></div></header><div id="message" role="status"></div><div id="actions"></div><main><section id="canvases"></section><aside id="inspector"></aside></main><section id="code"></section><footer><span>Click an output port, then an input to connect. Shift-click replaces a connection.</span><span>Scroll to zoom · Drag empty space to pan</span></footer><dialog id="open-dialog"><h2>Open saved document</h2><div id="saved-list"></div><button id="cancel-open">Cancel</button></dialog><dialog id="recovery"><h2>Document retained</h2><p id="recovery-message"></p><button id="export-original">Export original</button><button id="close-recovery">Close</button></dialog>';
 const staticText = [
   [".brand small", "subtitle"],
   [".host", "hostFree"],
@@ -134,26 +135,52 @@ locale.subscribe(renderShell);
 const message = document.querySelector<HTMLElement>("#message")!,
   nav = app.querySelector("nav")!,
   saveState = document.querySelector<HTMLElement>("#save-state")!;
-const report = (error: unknown) => {
-  message.textContent = error instanceof Error ? error.message : String(error);
-  message.classList.add("error");
+const errors = new Map<string, string>();
+const success = (text: string) => {
+  if (!errors.size) message.textContent = text;
+};
+const renderErrors = () => {
+  message.textContent = [...errors.values()].join(" · ");
+  message.classList.toggle("error", !!errors.size);
+  message.setAttribute("role", errors.size ? "alert" : "status");
+};
+const report = (error: unknown, key = "operation") => {
+  errors.set(key, error instanceof Error ? error.message : String(error));
+  renderErrors();
 };
 const action = (
   key: Parameters<typeof shellText>[0],
   fn: () => void | Promise<void>,
 ) => {
   const button = document.createElement("button");
-  button.textContent = text(key);
-  locale.subscribe(() => {
-    button.textContent = text(key);
-  });
+  button.dataset.action = key;
+  const symbol: Record<string, string> = {
+    new: "add",
+    save: "save",
+    open: "folder",
+    file: "folder",
+    export: "download",
+    png: "image",
+    generate: "code",
+    second: "panels",
+    lock: "lock",
+  };
+  const renderAction = () =>
+    button.replaceChildren(
+      icon(symbol[key] ?? "folder"),
+      document.createTextNode(text(key)),
+    );
+  renderAction();
+  locale.subscribe(renderAction);
   button.addEventListener("click", () => {
-    message.textContent = "";
-    message.classList.remove("error");
     try {
-      Promise.resolve(fn()).catch(report);
+      Promise.resolve(fn())
+        .then(() => {
+          if (errors.delete(key)) renderErrors();
+        })
+        .catch((error) => report(error, key));
     } catch (error) {
-      report(error);
+      report(error, key);
     }
   });
   nav.append(button);
@@ -174,24 +201,22 @@ function buildWorkspace() {
   workspace.register(inspectorType(widgets, locale));
   workspace.register(
     actionsType(
-      application
-        .catalog()
-        .map((item) =>
-          item.ref.moduleId === FIXED_VALUES_PIN.moduleId &&
-          item.ref.typeId === "float"
-            ? {
-                ...item,
-                presentation: {
-                  ...item.presentation,
-                  label: {
-                    ...item.presentation.label,
-                    key: "float.authoring",
-                    fallback: "Float (fixed)",
-                  },
+      application.catalog().map((item) =>
+        item.ref.moduleId === FIXED_VALUES_PIN.moduleId &&
+        item.ref.typeId === "float"
+          ? {
+              ...item,
+              presentation: {
+                ...item.presentation,
+                label: {
+                  ...item.presentation.label,
+                  key: "float.authoring",
+                  fallback: "Float (fixed)",
                 },
-              }
-            : item,
-        ),
+              },
+            }
+          : item,
+      ),
       () => ({
         undo: application.canUndo,
         redo: application.canRedo,
@@ -310,7 +335,7 @@ upgradeButton.onclick = () => {
 nav.append(upgradeButton);
 const saveButton = action("save", async () => {
   await application.save();
-  message.textContent = text("stored");
+  success(text("stored"));
 });
 action("open", async () => {
   const list = document.querySelector("#saved-list")!;
@@ -336,7 +361,7 @@ action("open", async () => {
 });
 action("export", async () => {
   await application.download();
-  message.textContent = text("exported");
+  success(text("exported"));
 });
 const pngDialog = document.createElement("dialog");
 const pngTitle = document.createElement("h2"),
@@ -479,7 +504,11 @@ input.addEventListener("change", () => {
   })().catch(report);
 });
 action("generate", () => {
-  application.generate();
+  const result = application.generate();
+  if (result.status !== "success")
+    throw Error(
+      result.diagnostics.map((d) => d.code + ": " + d.message).join(" · "),
+    );
 });
 action("second", () => {
   addCanvas();
@@ -631,5 +660,56 @@ mountPersonal(
     functionProfile,
     probeDefinitions,
   ),
-  report,
+  (error, operation) => {
+    const key = "personal:" + operation;
+    if (error === undefined) {
+      if (errors.delete(key)) renderErrors();
+    } else report(error, key);
+  },
 );
+
+const overflow = document.createElement("details"),
+  overflowLabel = document.createElement("summary"),
+  overflowItems = document.createElement("div");
+overflow.className = "action-overflow";
+overflowLabel.textContent = "More actions";
+overflowLabel.prepend(icon("more"));
+overflowItems.className = "overflow-items";
+overflow.append(overflowLabel, overflowItems);
+const actionGroups = [
+  document.createElement("div"),
+  document.createElement("div"),
+  document.createElement("div"),
+];
+actionGroups.forEach((g) => (g.className = "action-group"));
+for (const child of Array.from(nav.children)) {
+  const key = (child as HTMLElement).dataset.action;
+  const index = key
+    ? ["new", "save", "open", "file", "export", "png"].includes(key)
+      ? 0
+      : 1
+    : 2;
+  actionGroups[index]!.append(child);
+}
+nav.append(...actionGroups, overflow);
+const groupWidths = actionGroups.map((g) => g.getBoundingClientRect().width);
+const fitActions = () => {
+  const capacity = nav.clientWidth;
+  let used = 130;
+  let hidden = 0;
+  for (let i = 0; i < actionGroups.length; i++) {
+    const g = actionGroups[i]!;
+    const width = groupWidths[i]! + 8;
+    if (used + width > capacity) {
+      overflowItems.append(g);
+      hidden++;
+    } else {
+      nav.insertBefore(g, overflow);
+      used += width;
+    }
+  }
+  overflow.hidden = !hidden;
+  if (!hidden) overflow.open = false;
+};
+new ResizeObserver(fitActions).observe(nav);
+fitActions();

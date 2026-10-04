@@ -1,0 +1,354 @@
+
+Running 9 tests using 1 worker
+
+  ok 1 [chromium] › tests\browser\s05-values.spec.ts:10:1 › S05 fixed values backend feasibility: all leaves stages modes and components execute (1.7s)
+  x  2 [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed float pixel: public create edit connect history save and JSON reopen (5.6s)
+  x  3 [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed float vertex: public create edit connect history save and JSON reopen (5.9s)
+  x  4 [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed vec2 pixel: public create edit connect history save and JSON reopen (5.6s)
+  x  5 [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed vec2 vertex: public create edit connect history save and JSON reopen (6.0s)
+  x  6 [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed vec3 pixel: public create edit connect history save and JSON reopen (5.7s)
+  x  7 [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed vec3 vertex: public create edit connect history save and JSON reopen (6.0s)
+  x  8 [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed color pixel: public create edit connect history save and JSON reopen (5.7s)
+  x  9 [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed color vertex: public create edit connect history save and JSON reopen (6.2s)
+
+
+  1) [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed float pixel: public create edit connect history save and JSON reopen 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#message')
+    Expected substring: "Generated successfully"
+    Received string:    ""
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#message')
+        14 × locator resolved to <div id="message" role="status"></div>
+           - unexpected value ""
+
+
+      140 |         .getByRole("button", { name: "Generate GLSL", exact: true })
+      141 |         .click();
+    > 142 |       await expect(page.locator("#message")).toContainText(
+          |                                              ^
+      143 |         "Generated successfully",
+      144 |       );
+      145 |       const document = await exportDocument(page),
+        at C:\Users\user\source\Grape\production\tests\browser\s05-values.spec.ts:142:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-float-b505e-istory-save-and-JSON-reopen-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-float-b505e-istory-save-and-JSON-reopen-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-float-b505e-istory-save-and-JSON-reopen-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-float-b505e-istory-save-and-JSON-reopen-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed float vertex: public create edit connect history save and JSON reopen 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#message')
+    Expected substring: "Generated successfully"
+    Received string:    ""
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#message')
+        14 × locator resolved to <div id="message" role="status"></div>
+           - unexpected value ""
+
+
+      140 |         .getByRole("button", { name: "Generate GLSL", exact: true })
+      141 |         .click();
+    > 142 |       await expect(page.locator("#message")).toContainText(
+          |                                              ^
+      143 |         "Generated successfully",
+      144 |       );
+      145 |       const document = await exportDocument(page),
+        at C:\Users\user\source\Grape\production\tests\browser\s05-values.spec.ts:142:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-float-022b6-istory-save-and-JSON-reopen-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-float-022b6-istory-save-and-JSON-reopen-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-float-022b6-istory-save-and-JSON-reopen-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-float-022b6-istory-save-and-JSON-reopen-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed vec2 pixel: public create edit connect history save and JSON reopen 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#message')
+    Expected substring: "Generated successfully"
+    Received string:    ""
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#message')
+        14 × locator resolved to <div id="message" role="status"></div>
+           - unexpected value ""
+
+
+      140 |         .getByRole("button", { name: "Generate GLSL", exact: true })
+      141 |         .click();
+    > 142 |       await expect(page.locator("#message")).toContainText(
+          |                                              ^
+      143 |         "Generated successfully",
+      144 |       );
+      145 |       const document = await exportDocument(page),
+        at C:\Users\user\source\Grape\production\tests\browser\s05-values.spec.ts:142:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec2--3b369-istory-save-and-JSON-reopen-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec2--3b369-istory-save-and-JSON-reopen-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec2--3b369-istory-save-and-JSON-reopen-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec2--3b369-istory-save-and-JSON-reopen-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed vec2 vertex: public create edit connect history save and JSON reopen 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#message')
+    Expected substring: "Generated successfully"
+    Received string:    ""
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#message')
+        14 × locator resolved to <div id="message" role="status"></div>
+           - unexpected value ""
+
+
+      140 |         .getByRole("button", { name: "Generate GLSL", exact: true })
+      141 |         .click();
+    > 142 |       await expect(page.locator("#message")).toContainText(
+          |                                              ^
+      143 |         "Generated successfully",
+      144 |       );
+      145 |       const document = await exportDocument(page),
+        at C:\Users\user\source\Grape\production\tests\browser\s05-values.spec.ts:142:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec2--1367e-istory-save-and-JSON-reopen-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec2--1367e-istory-save-and-JSON-reopen-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec2--1367e-istory-save-and-JSON-reopen-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec2--1367e-istory-save-and-JSON-reopen-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed vec3 pixel: public create edit connect history save and JSON reopen 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#message')
+    Expected substring: "Generated successfully"
+    Received string:    ""
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#message')
+        14 × locator resolved to <div id="message" role="status"></div>
+           - unexpected value ""
+
+
+      140 |         .getByRole("button", { name: "Generate GLSL", exact: true })
+      141 |         .click();
+    > 142 |       await expect(page.locator("#message")).toContainText(
+          |                                              ^
+      143 |         "Generated successfully",
+      144 |       );
+      145 |       const document = await exportDocument(page),
+        at C:\Users\user\source\Grape\production\tests\browser\s05-values.spec.ts:142:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec3--990d2-istory-save-and-JSON-reopen-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec3--990d2-istory-save-and-JSON-reopen-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec3--990d2-istory-save-and-JSON-reopen-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec3--990d2-istory-save-and-JSON-reopen-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed vec3 vertex: public create edit connect history save and JSON reopen 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#message')
+    Expected substring: "Generated successfully"
+    Received string:    ""
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#message')
+        14 × locator resolved to <div id="message" role="status"></div>
+           - unexpected value ""
+
+
+      140 |         .getByRole("button", { name: "Generate GLSL", exact: true })
+      141 |         .click();
+    > 142 |       await expect(page.locator("#message")).toContainText(
+          |                                              ^
+      143 |         "Generated successfully",
+      144 |       );
+      145 |       const document = await exportDocument(page),
+        at C:\Users\user\source\Grape\production\tests\browser\s05-values.spec.ts:142:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec3--ecac2-istory-save-and-JSON-reopen-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec3--ecac2-istory-save-and-JSON-reopen-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec3--ecac2-istory-save-and-JSON-reopen-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-vec3--ecac2-istory-save-and-JSON-reopen-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed color pixel: public create edit connect history save and JSON reopen 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#message')
+    Expected substring: "Generated successfully"
+    Received string:    ""
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#message')
+        14 × locator resolved to <div id="message" role="status"></div>
+           - unexpected value ""
+
+
+      140 |         .getByRole("button", { name: "Generate GLSL", exact: true })
+      141 |         .click();
+    > 142 |       await expect(page.locator("#message")).toContainText(
+          |                                              ^
+      143 |         "Generated successfully",
+      144 |       );
+      145 |       const document = await exportDocument(page),
+        at C:\Users\user\source\Grape\production\tests\browser\s05-values.spec.ts:142:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-color-5ca51-istory-save-and-JSON-reopen-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-color-5ca51-istory-save-and-JSON-reopen-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-color-5ca51-istory-save-and-JSON-reopen-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-color-5ca51-istory-save-and-JSON-reopen-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed color vertex: public create edit connect history save and JSON reopen 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#message')
+    Expected substring: "Generated successfully"
+    Received string:    ""
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#message')
+        14 × locator resolved to <div id="message" role="status"></div>
+           - unexpected value ""
+
+
+      140 |         .getByRole("button", { name: "Generate GLSL", exact: true })
+      141 |         .click();
+    > 142 |       await expect(page.locator("#message")).toContainText(
+          |                                              ^
+      143 |         "Generated successfully",
+      144 |       );
+      145 |       const document = await exportDocument(page),
+        at C:\Users\user\source\Grape\production\tests\browser\s05-values.spec.ts:142:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-color-32b36-istory-save-and-JSON-reopen-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-color-32b36-istory-save-and-JSON-reopen-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-color-32b36-istory-save-and-JSON-reopen-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\s05\catalog-values-01\browser-development-02\results\s05-values-S05-fixed-color-32b36-istory-save-and-JSON-reopen-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8 failed
+    [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed float pixel: public create edit connect history save and JSON reopen 
+    [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed float vertex: public create edit connect history save and JSON reopen 
+    [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed vec2 pixel: public create edit connect history save and JSON reopen 
+    [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed vec2 vertex: public create edit connect history save and JSON reopen 
+    [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed vec3 pixel: public create edit connect history save and JSON reopen 
+    [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed vec3 vertex: public create edit connect history save and JSON reopen 
+    [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed color pixel: public create edit connect history save and JSON reopen 
+    [chromium] › tests\browser\s05-values.spec.ts:70:5 › S05 fixed color vertex: public create edit connect history save and JSON reopen 
+  1 passed (52.9s)
+[WebServer] (node:3720) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:46240) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41792) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45008) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:52516) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43644) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

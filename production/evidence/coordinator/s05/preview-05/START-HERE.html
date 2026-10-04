@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grape S05 · 測試說明與範例</title>
+<style>body{max-width:880px;margin:40px auto;padding:0 24px 60px;font:17px/1.7 system-ui,sans-serif;color:#253044;background:#f6f7fb}h1{line-height:1.25}h2{margin-top:36px;font-size:23px}a{color:#5140b0}nav{display:flex;gap:14px;flex-wrap:wrap;margin:24px 0}.button{display:inline-block;background:#493881;color:white;text-decoration:none;padding:10px 18px;border-radius:8px}section{background:white;padding:10px 24px 22px;margin:20px 0;border:1px solid #dce0e9;border-radius:12px}table{border-collapse:collapse;width:100%;font-size:15px}td,th{text-align:left;border-bottom:1px solid #dce0e9;padding:10px 8px}.muted{color:#5d6779;font-size:14px}li{margin:9px 0}code{font-size:.9em;background:#ecebf2;padding:2px 5px;border-radius:4px}</style>
+<h1>Grape S05<br>拖曳修正與四種固定值節點</h1>
+<p>這是目前 S05 的這一批實機測試。先測拖曳，再看新節點；S05 整體仍在進行。</p>
+<p class="muted">頁首應顯示 <strong>S05-drag-aa4c86e</strong>，受審版本 <strong>6c3a734</strong>。</p>
+<nav><a class="button" href="review.html" target="_blank" rel="noopener">開啟測試畫面</a><a class="button" href="s05-drag-aa4c86e-tests.zip" download>下載全部測試檔案 ZIP</a><a href="START-HERE.txt" download>下載文字說明</a></nav>
+<section><h2>1. 拖曳是否順暢</h2>
+<p><a href="performance/fixture-14-Multiply.json" download="01-drag-multiply.grape.json">下載 Multiply 拖曳範例</a> · <a href="performance/fixture-14-Image-output.json" download="02-drag-image-output.grape.json">下載 Image Output 對照範例</a></p>
+<ol><li>先保存手上有修改的文件。在測試畫面按 <strong>Open file</strong>，選剛下載的 Multiply 範例。</li><li>Review document 顯示 <strong>DOCUMENT_VALID</strong> 後，按 <strong>Open in new session</strong>。</li><li>選取 Multiply，讓右側 Inspector 顯示 A、B。連續拖曳幾次，確認節點跟隨游標，A、B 數值保持不變。</li><li>放開後按一次 <strong>Undo</strong>，應回到這次拖曳前的位置；<strong>Redo</strong> 應恢復。再次拖曳時按 <strong>Escape</strong>，應取消這次拖曳。</li><li>用同樣方式開啟 Image Output 對照範例，拖曳 Image output，感受两者是否都可正常操作。</li></ol>
+<p class="muted">兩份圖都是 14 節點；其中 10 個未連線節點在畫面外，用來增加同樣的圖資料量。自動量測的改善不等於所有裝置都保證相同 FPS，這裡請以你的實際拖曳感受判斷。</p></section>
+<section><h2>2. 四種固定值節點</h2>
+<p>開新文件，或從下表下載範例，以 <strong>Open file → Open in new session</strong> 開啟。</p>
+<table><tr><th>按鈕／節點</th><th>預設值</th><th>範例下載</th></tr>
+<tr><td>Add Float (fixed)</td><td>0.5</td><td><a href="samples/float-pixel-root.grape.json" download>Float</a></td></tr>
+<tr><td>Add Vector 2</td><td>X/Y：0.5、0.5</td><td><a href="samples/vec2-pixel-root.grape.json" download>Vector 2</a></td></tr>
+<tr><td>Add Vector 3</td><td>X/Y/Z：1、1、1</td><td><a href="samples/vec3-pixel-root.grape.json" download>Vector 3</a></td></tr>
+<tr><td>Add Color RGBA</td><td>R/G/B/A：0.55、0.28、0.9、1</td><td><a href="samples/color-pixel-root.grape.json" download>Color RGBA</a></td></tr></table>
+<ol><li>選取節點，修改 Inspector 的數字並按 Enter。可依序試 0.125、0.375、0.625、0.875，只填該節點有的欄位。</li><li>按 Undo／Redo，確認最後一次編輯能還原及重做。按 Save，再用 Open saved 重新開啟，數值應保留。</li><li>範例已接好 Image output；按 <strong>Generate GLSL</strong>，應看到 <strong>Generated successfully · Host-free GLSL</strong>。</li></ol>
+<p class="muted">新 Float 請選 <strong>Add Float (fixed)</strong>。舊的 Add Float 仍維持原有行為。輸出型別分別為 float、vec2、vec3、vec4，接線不改變來源節點型別。</p></section>
+<section><h2>3. 子圖與 Vertex（需要時可補測）</h2>
+<p><a href="samples/vec2-pixel-function.grape.json" download>Vector 2 共用 Function 範例</a>：選 Subgraph → Enter subgraph，選裡面的值節點後改 X/Y，再試 Undo／Redo、Save／Open saved 與 Generate GLSL。共用呼叫應保持一致。</p>
+<p><a href="samples/vertex-workspace.grape.json" download>Vertex 工作區</a>：開啟後可新增本批四種固定值節點，將 out 接到 Position 子圖的 Value，再 Generate GLSL。其他節點仍依既有 Stage 設定限制。</p>
+<p>ZIP 中 <code>samples</code> 是新固定值範例，<code>performance</code> 是拖曳範例，<code>legacy-samples</code> 保留之前的 S05 範例。</p></section>
+<p>你先前已確認的 Replace 部分不用整套重測。不同模組或輸出設定的文件會停用 Replace，這時使用 Open in new session 即可。</p>
+<p class="muted">I：aa4c86e20b0b4b54218b9992921578e7f24a28a2<br>R：6c3a734325d0db2d924356a9614e971d80a966c8<br>本批仍待 Human 確認；技術檢查、產品接受與完整 S05 完成分別記錄。</p></html>

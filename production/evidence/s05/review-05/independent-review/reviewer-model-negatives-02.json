@@ -1,0 +1,877 @@
+{
+  "status": "PASS",
+  "rows": [
+    {
+      "leaf": "float",
+      "pass": true,
+      "specializationError": "TYPE_UNKNOWN: TYPE_UNKNOWN",
+      "rejects": [
+        {
+          "input": "null",
+          "error": "PARAMETER_VALUE: PARAMETER_VALUE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "[object Object]",
+          "error": "PARAMETER_VALUE: PARAMETER_VALUE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "",
+          "error": "PARAMETER_VALUE: PARAMETER_VALUE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1",
+          "error": "PARAMETER_VALUE: PARAMETER_VALUE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1,2,3,4,5",
+          "error": "PARAMETER_VALUE: PARAMETER_VALUE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "Infinity",
+          "error": "JSON_NUMBER: JSON_NUMBER",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "NaN",
+          "error": "JSON_NUMBER: JSON_NUMBER",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1e+40",
+          "error": "PARAMETER_VALUE: PARAMETER_VALUE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1.25",
+          "error": "PARAMETER_VALUE: PARAMETER_VALUE",
+          "unchanged": true,
+          "noUndo": true
+        }
+      ],
+      "unusedNestedDiagnostics": [
+        {
+          "code": "INPUT_REQUIRED",
+          "message": "Connect the required input.",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "INPUT_REQUIRED",
+            "fallback": "Connect the required input."
+          },
+          "subject": {
+            "graphId": "id-22",
+            "stageId": "id-27",
+            "nodeId": "id-26",
+            "portKey": "color"
+          }
+        },
+        {
+          "code": "FIXED_VALUE",
+          "message": "Expected 1 finite float32 component(s) for Float.",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.nodes.fixed-values",
+              "version": "0.1.0",
+              "fingerprint": "sha256:0d75d254ae4654e672001bc326252ab9775c87b581b79c15e6e8d44fee59a6ba",
+              "namespace": "grape.nodes.fixed-values",
+              "catalogVersion": 1
+            },
+            "key": "invalid-float",
+            "fallback": "Expected 1 finite float32 component(s) for Float."
+          },
+          "subject": {
+            "graphId": "id-22",
+            "stageId": "id-31",
+            "nodeId": "id-29"
+          }
+        },
+        {
+          "code": "NODE_STATE",
+          "message": "NODE_STATE",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "NODE_STATE",
+            "fallback": "NODE_STATE"
+          },
+          "subject": {
+            "graphId": "id-22",
+            "resourceId": "id-31",
+            "nodeId": "id-29"
+          },
+          "related": [
+            {
+              "networkId": "id-25",
+              "nodeId": "id-38"
+            },
+            {
+              "networkId": "id-40",
+              "nodeId": "id-35"
+            }
+          ]
+        },
+        {
+          "code": "NODE_STATE",
+          "message": "NODE_STATE",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "NODE_STATE",
+            "fallback": "NODE_STATE"
+          },
+          "subject": {
+            "graphId": "id-22",
+            "resourceId": "id-31",
+            "nodeId": "id-29"
+          },
+          "related": [
+            {
+              "networkId": "id-25",
+              "nodeId": "id-38"
+            },
+            {
+              "networkId": "id-40",
+              "nodeId": "id-35"
+            }
+          ]
+        }
+      ],
+      "unsupportedProfileDiagnostics": [
+        {
+          "code": "INPUT_REQUIRED",
+          "message": "Connect the required input.",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "INPUT_REQUIRED",
+            "fallback": "Connect the required input."
+          },
+          "subject": {
+            "graphId": "id-22",
+            "stageId": "id-27",
+            "nodeId": "id-31",
+            "portKey": "array"
+          }
+        },
+        {
+          "code": "PROFILE_CAPABILITY",
+          "message": "PROFILE_CAPABILITY",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "PROFILE_CAPABILITY",
+            "fallback": "PROFILE_CAPABILITY"
+          }
+        }
+      ],
+      "compilePure": true
+    },
+    {
+      "leaf": "vec2",
+      "pass": true,
+      "specializationError": "TYPE_UNKNOWN: TYPE_UNKNOWN",
+      "rejects": [
+        {
+          "input": "null",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "[object Object]",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1,2,3,4,5",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "Infinity",
+          "error": "JSON_NUMBER: JSON_NUMBER",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "NaN",
+          "error": "JSON_NUMBER: JSON_NUMBER",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1e+40",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "0",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "Infinity,Infinity",
+          "error": "JSON_NUMBER: JSON_NUMBER",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1,1",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        }
+      ],
+      "unusedNestedDiagnostics": [
+        {
+          "code": "INPUT_REQUIRED",
+          "message": "Connect the required input.",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "INPUT_REQUIRED",
+            "fallback": "Connect the required input."
+          },
+          "subject": {
+            "graphId": "id-22",
+            "stageId": "id-27",
+            "nodeId": "id-26",
+            "portKey": "color"
+          }
+        },
+        {
+          "code": "FIXED_VALUE",
+          "message": "Expected 2 finite float32 component(s) for Vector 2.",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.nodes.fixed-values",
+              "version": "0.1.0",
+              "fingerprint": "sha256:0d75d254ae4654e672001bc326252ab9775c87b581b79c15e6e8d44fee59a6ba",
+              "namespace": "grape.nodes.fixed-values",
+              "catalogVersion": 1
+            },
+            "key": "invalid-vec2",
+            "fallback": "Expected 2 finite float32 component(s) for Vector 2."
+          },
+          "subject": {
+            "graphId": "id-22",
+            "stageId": "id-31",
+            "nodeId": "id-29"
+          }
+        },
+        {
+          "code": "NODE_STATE",
+          "message": "NODE_STATE",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "NODE_STATE",
+            "fallback": "NODE_STATE"
+          },
+          "subject": {
+            "graphId": "id-22",
+            "resourceId": "id-31",
+            "nodeId": "id-29"
+          },
+          "related": [
+            {
+              "networkId": "id-25",
+              "nodeId": "id-38"
+            },
+            {
+              "networkId": "id-40",
+              "nodeId": "id-35"
+            }
+          ]
+        },
+        {
+          "code": "NODE_STATE",
+          "message": "NODE_STATE",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "NODE_STATE",
+            "fallback": "NODE_STATE"
+          },
+          "subject": {
+            "graphId": "id-22",
+            "resourceId": "id-31",
+            "nodeId": "id-29"
+          },
+          "related": [
+            {
+              "networkId": "id-25",
+              "nodeId": "id-38"
+            },
+            {
+              "networkId": "id-40",
+              "nodeId": "id-35"
+            }
+          ]
+        }
+      ],
+      "unsupportedProfileDiagnostics": [
+        {
+          "code": "INPUT_REQUIRED",
+          "message": "Connect the required input.",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "INPUT_REQUIRED",
+            "fallback": "Connect the required input."
+          },
+          "subject": {
+            "graphId": "id-22",
+            "stageId": "id-27",
+            "nodeId": "id-31",
+            "portKey": "array"
+          }
+        },
+        {
+          "code": "PROFILE_CAPABILITY",
+          "message": "PROFILE_CAPABILITY",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "PROFILE_CAPABILITY",
+            "fallback": "PROFILE_CAPABILITY"
+          }
+        }
+      ],
+      "compilePure": true
+    },
+    {
+      "leaf": "vec3",
+      "pass": true,
+      "specializationError": "TYPE_UNKNOWN: TYPE_UNKNOWN",
+      "rejects": [
+        {
+          "input": "null",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "[object Object]",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1,2,3,4,5",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "Infinity",
+          "error": "JSON_NUMBER: JSON_NUMBER",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "NaN",
+          "error": "JSON_NUMBER: JSON_NUMBER",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1e+40",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "0,0",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "Infinity,Infinity,Infinity",
+          "error": "JSON_NUMBER: JSON_NUMBER",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1,1,1",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        }
+      ],
+      "unusedNestedDiagnostics": [
+        {
+          "code": "INPUT_REQUIRED",
+          "message": "Connect the required input.",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "INPUT_REQUIRED",
+            "fallback": "Connect the required input."
+          },
+          "subject": {
+            "graphId": "id-22",
+            "stageId": "id-27",
+            "nodeId": "id-26",
+            "portKey": "color"
+          }
+        },
+        {
+          "code": "FIXED_VALUE",
+          "message": "Expected 3 finite float32 component(s) for Vector 3.",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.nodes.fixed-values",
+              "version": "0.1.0",
+              "fingerprint": "sha256:0d75d254ae4654e672001bc326252ab9775c87b581b79c15e6e8d44fee59a6ba",
+              "namespace": "grape.nodes.fixed-values",
+              "catalogVersion": 1
+            },
+            "key": "invalid-vec3",
+            "fallback": "Expected 3 finite float32 component(s) for Vector 3."
+          },
+          "subject": {
+            "graphId": "id-22",
+            "stageId": "id-31",
+            "nodeId": "id-29"
+          }
+        },
+        {
+          "code": "NODE_STATE",
+          "message": "NODE_STATE",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "NODE_STATE",
+            "fallback": "NODE_STATE"
+          },
+          "subject": {
+            "graphId": "id-22",
+            "resourceId": "id-31",
+            "nodeId": "id-29"
+          },
+          "related": [
+            {
+              "networkId": "id-25",
+              "nodeId": "id-38"
+            },
+            {
+              "networkId": "id-40",
+              "nodeId": "id-35"
+            }
+          ]
+        },
+        {
+          "code": "NODE_STATE",
+          "message": "NODE_STATE",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "NODE_STATE",
+            "fallback": "NODE_STATE"
+          },
+          "subject": {
+            "graphId": "id-22",
+            "resourceId": "id-31",
+            "nodeId": "id-29"
+          },
+          "related": [
+            {
+              "networkId": "id-25",
+              "nodeId": "id-38"
+            },
+            {
+              "networkId": "id-40",
+              "nodeId": "id-35"
+            }
+          ]
+        }
+      ],
+      "unsupportedProfileDiagnostics": [
+        {
+          "code": "INPUT_REQUIRED",
+          "message": "Connect the required input.",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "INPUT_REQUIRED",
+            "fallback": "Connect the required input."
+          },
+          "subject": {
+            "graphId": "id-22",
+            "stageId": "id-27",
+            "nodeId": "id-31",
+            "portKey": "array"
+          }
+        },
+        {
+          "code": "PROFILE_CAPABILITY",
+          "message": "PROFILE_CAPABILITY",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "PROFILE_CAPABILITY",
+            "fallback": "PROFILE_CAPABILITY"
+          }
+        }
+      ],
+      "compilePure": true
+    },
+    {
+      "leaf": "color",
+      "pass": true,
+      "specializationError": "TYPE_UNKNOWN: TYPE_UNKNOWN",
+      "rejects": [
+        {
+          "input": "null",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "[object Object]",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1,2,3,4,5",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "Infinity",
+          "error": "JSON_NUMBER: JSON_NUMBER",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "NaN",
+          "error": "JSON_NUMBER: JSON_NUMBER",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1e+40",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "0,0,0",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "Infinity,Infinity,Infinity,Infinity",
+          "error": "JSON_NUMBER: JSON_NUMBER",
+          "unchanged": true,
+          "noUndo": true
+        },
+        {
+          "input": "1,1,1,1",
+          "error": "NODE_STATE: NODE_STATE",
+          "unchanged": true,
+          "noUndo": true
+        }
+      ],
+      "unusedNestedDiagnostics": [
+        {
+          "code": "INPUT_REQUIRED",
+          "message": "Connect the required input.",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "INPUT_REQUIRED",
+            "fallback": "Connect the required input."
+          },
+          "subject": {
+            "graphId": "id-22",
+            "stageId": "id-27",
+            "nodeId": "id-26",
+            "portKey": "color"
+          }
+        },
+        {
+          "code": "FIXED_VALUE",
+          "message": "Expected 4 finite float32 component(s) for Color RGBA.",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.nodes.fixed-values",
+              "version": "0.1.0",
+              "fingerprint": "sha256:0d75d254ae4654e672001bc326252ab9775c87b581b79c15e6e8d44fee59a6ba",
+              "namespace": "grape.nodes.fixed-values",
+              "catalogVersion": 1
+            },
+            "key": "invalid-color",
+            "fallback": "Expected 4 finite float32 component(s) for Color RGBA."
+          },
+          "subject": {
+            "graphId": "id-22",
+            "stageId": "id-31",
+            "nodeId": "id-29"
+          }
+        },
+        {
+          "code": "NODE_STATE",
+          "message": "NODE_STATE",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "NODE_STATE",
+            "fallback": "NODE_STATE"
+          },
+          "subject": {
+            "graphId": "id-22",
+            "resourceId": "id-31",
+            "nodeId": "id-29"
+          },
+          "related": [
+            {
+              "networkId": "id-25",
+              "nodeId": "id-38"
+            },
+            {
+              "networkId": "id-40",
+              "nodeId": "id-35"
+            }
+          ]
+        },
+        {
+          "code": "NODE_STATE",
+          "message": "NODE_STATE",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "NODE_STATE",
+            "fallback": "NODE_STATE"
+          },
+          "subject": {
+            "graphId": "id-22",
+            "resourceId": "id-31",
+            "nodeId": "id-29"
+          },
+          "related": [
+            {
+              "networkId": "id-25",
+              "nodeId": "id-38"
+            },
+            {
+              "networkId": "id-40",
+              "nodeId": "id-35"
+            }
+          ]
+        }
+      ],
+      "unsupportedProfileDiagnostics": [
+        {
+          "code": "INPUT_REQUIRED",
+          "message": "Connect the required input.",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "INPUT_REQUIRED",
+            "fallback": "Connect the required input."
+          },
+          "subject": {
+            "graphId": "id-22",
+            "stageId": "id-27",
+            "nodeId": "id-31",
+            "portKey": "array"
+          }
+        },
+        {
+          "code": "PROFILE_CAPABILITY",
+          "message": "PROFILE_CAPABILITY",
+          "severity": "error",
+          "messageRef": {
+            "owner": {
+              "moduleId": "grape.core",
+              "version": "0.1.0",
+              "fingerprint": "core-s01-v1",
+              "namespace": "grape.core",
+              "catalogVersion": 1
+            },
+            "key": "PROFILE_CAPABILITY",
+            "fallback": "PROFILE_CAPABILITY"
+          }
+        }
+      ],
+      "compilePure": true
+    }
+  ]
+}

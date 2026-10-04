@@ -1,0 +1,378 @@
+diff --git a/production/apps/web/main.ts b/production/apps/web/main.ts
+index 5bb1962..3b725bd 100644
+--- a/production/apps/web/main.ts
++++ b/production/apps/web/main.ts
+@@ -1,4 +1,9 @@
+ import { currentSources } from "../../src/modules/sources-current.ts";
++import {
++  fixedValues,
++  FIXED_VALUES_PIN,
++} from "../../src/modules/fixed-values.ts";
++import { vectorWidget } from "../../src/features/vector-control.ts";
+ import { browserIdentity } from "../../src/adapters/browser/identity.ts";
+ import { functionNetworks } from "../../src/modules/function-networks.ts";
+ import {
+@@ -58,6 +63,7 @@ import {
+ const definitions = new Definitions();
+ stages.forEach((s) => definitions.registerStage(s));
+ definitions.register(basicNodes);
++definitions.register(fixedValues);
+ definitions.register(networkModule);
+ definitions.register(extentModule);
+ definitions.register(currentSources);
+@@ -89,6 +95,12 @@ const widgets = new WidgetRegistry(feedback);
+ widgets.register(jsonWidget, (p) => p.spec.type === "json");
+ widgets.register(numberWidget, (p) => p.spec.type === "number");
+ widgets.register(choiceWidget, (p) => p.spec.type === "choice");
++widgets.register(
++  vectorWidget,
++  (p) =>
++    p.spec.presentation.widget === "grape.widget.vector" &&
++    Array.isArray(p.value),
++);
+ const application = new EditorApplication(
+   definitions,
+   browserIdentity(),
+@@ -161,11 +173,31 @@ function buildWorkspace() {
+   workspace.register(canvasType);
+   workspace.register(inspectorType(widgets, locale));
+   workspace.register(
+-    actionsType(application.catalog(), () => ({
+-      undo: application.canUndo,
+-      redo: application.canRedo,
+-      editing: !application.readonly && !application.busy,
+-    })),
++    actionsType(
++      application
++        .catalog()
++        .map((item) =>
++          item.ref.moduleId === FIXED_VALUES_PIN.moduleId &&
++          item.ref.typeId === "float"
++            ? {
++                ...item,
++                presentation: {
++                  ...item.presentation,
++                  label: {
++                    ...item.presentation.label,
++                    key: "float.authoring",
++                    fallback: "Float (fixed)",
++                  },
++                },
++              }
++            : item,
++        ),
++      () => ({
++        undo: application.canUndo,
++        redo: application.canRedo,
++        editing: !application.readonly && !application.busy,
++      }),
++    ),
+   );
+   workspace.register(
+     codeType(() => ({
+diff --git a/production/src/features/vector-control.ts b/production/src/features/vector-control.ts
+new file mode 100644
+index 0000000..b906772
+--- /dev/null
++++ b/production/src/features/vector-control.ts
+@@ -0,0 +1,166 @@
++import type { ParameterWidgetViewType } from "../sdk/view-mount.ts";
++import type { ParameterProjection } from "../sdk/editing.ts";
++import { demand } from "../sdk/kernel.ts";
++
++// Component editing retains one owner-defined value and one scoped draft/token.
++export const vectorWidget: ParameterWidgetViewType<ParameterProjection> = {
++  widgetId: "grape.widget.vector",
++  create: ({ binding }) => {
++    let editing = false,
++      composing = false,
++      texts: string[] = [];
++    return {
++      kind: "parameter-widget",
++      capture: () => binding.capture(),
++      subscribe: (fn) => binding.subscribe(fn),
++      dispose: () => {},
++      mount: ({ surface, scope, commands }) => {
++        demand(surface.protocol === "grape.dom.v1", "SURFACE_PROTOCOL");
++        const root = document.createElement("div"),
++          title = document.createElement("label"),
++          error = document.createElement("span"),
++          cancel = document.createElement("button");
++        root.className = "field";
++        error.className = "field-error";
++        error.setAttribute("role", "alert");
++        const projection = binding.capture().projection,
++          labels = (
++            projection.spec.presentation.options as { components: string[] }
++          ).components;
++        demand(
++          Array.isArray(projection.value) &&
++            labels.length === projection.value.length,
++          "VECTOR_WIDGET_SHAPE",
++        );
++        const inputs = labels.map((label) => {
++          const input = document.createElement("input");
++          input.type = "text";
++          input.inputMode = "decimal";
++          input.ariaLabel = label;
++          input.dataset.parameter = projection.spec.key;
++          input.dataset.component = label;
++          return input;
++        });
++        cancel.type = "button";
++        cancel.hidden = !editing;
++        const componentRows = inputs.map((input, i) => {
++          const label = document.createElement("label");
++          label.textContent = labels[i];
++          label.append(input);
++          return label;
++        });
++        root.append(title, ...componentRows, cancel, error);
++        (surface.target as HTMLElement).append(root);
++        scope.own(() => root.remove());
++        const reset = () => {
++          commands.draft().cancel();
++          editing = false;
++          composing = false;
++          texts = (binding.capture().projection.value as number[]).map(String);
++          inputs.forEach((input, i) => {
++            input.value = texts[i];
++            input.dataset.draft = "false";
++            input.dataset.composing = "false";
++            input.removeAttribute("aria-invalid");
++          });
++          error.textContent = "";
++          cancel.hidden = true;
++        };
++        const attempt = (fn: () => void) => {
++          try {
++            fn();
++            error.textContent = "";
++            inputs.forEach((input) => input.removeAttribute("aria-invalid"));
++          } catch (e) {
++            error.textContent = String(e);
++            inputs.forEach((input) =>
++              input.setAttribute("aria-invalid", "true"),
++            );
++          }
++        };
++        const commit = () =>
++          attempt(() => {
++            if (!editing) return;
++            demand(!composing, "IME_COMPOSITION");
++            commands.draft().commit((raw) => {
++              const parts = JSON.parse(raw) as string[];
++              demand(
++                parts.every(
++                  (t) => t.trim() !== "" && Number.isFinite(Number(t)),
++                ),
++                "NUMBER_PARSE",
++              );
++              return parts.map(Number);
++            });
++            reset();
++          });
++        inputs.forEach((input, i) => {
++          const listen = (name: string, fn: (event: Event) => void) => {
++            const handler = scope.event(fn);
++            input.addEventListener(name, handler);
++            scope.own(() => input.removeEventListener(name, handler));
++          };
++          listen("input", () => {
++            if (!editing)
++              texts = (binding.capture().projection.value as number[]).map(
++                String,
++              );
++            texts[i] = input.value;
++            commands.draft().setText(JSON.stringify(texts));
++            editing = true;
++            inputs.forEach((x) => (x.dataset.draft = "true"));
++            cancel.hidden = false;
++          });
++          listen("compositionstart", () => {
++            composing = true;
++            input.dataset.composing = "true";
++            commands.draft().composition(true);
++          });
++          listen("compositionend", () => {
++            composing = false;
++            input.dataset.composing = "false";
++            commands.draft().composition(false);
++          });
++          listen("keydown", (event) => {
++            const e = event as KeyboardEvent;
++            if (e.key === "Enter") {
++              e.stopPropagation();
++              if (!e.isComposing) commit();
++            }
++            if (e.key === "Escape") {
++              e.stopPropagation();
++              attempt(reset);
++            }
++          });
++        });
++        const cancelEvent = scope.event(() => attempt(reset));
++        cancel.addEventListener("click", cancelEvent);
++        scope.own(() => cancel.removeEventListener("click", cancelEvent));
++        return {
++          update: (snapshot, frame) => {
++            cancel.textContent = frame.text({
++              owner: {
++                moduleId: "grape.ui.controls",
++                version: "0.1.0",
++                fingerprint: "controls-dom-v1",
++                namespace: "grape.ui.controls",
++                catalogVersion: 1,
++              },
++              key: "cancel",
++              fallback: "Cancel edit",
++            });
++            title.textContent = frame.text(snapshot.projection.label);
++            if (!editing)
++              texts = (snapshot.projection.value as number[]).map(String);
++            inputs.forEach((input, i) => {
++              input.value = texts[i];
++              input.readOnly = !snapshot.writable;
++              input.dataset.draft = String(editing);
++            });
++            cancel.hidden = !editing;
++          },
++        };
++      },
++    };
++  },
++};
+diff --git a/production/src/modules/fixed-values.ts b/production/src/modules/fixed-values.ts
+new file mode 100644
+index 0000000..650d17d
+--- /dev/null
++++ b/production/src/modules/fixed-values.ts
+@@ -0,0 +1,128 @@
++import type { ModuleContribution, NodeDefinition } from "../sdk/editing.ts";
++import type { Json } from "../sdk/public-surface.ts";
++import { issue } from "../sdk/kernel.ts";
++
++// Additive owner: the legacy basic Float keeps its original value, ports and pin.
++export const FIXED_VALUES_PIN = {
++  moduleId: "grape.nodes.fixed-values",
++  version: "0.1.0",
++  fingerprint:
++    "sha256:0d75d254ae4654e672001bc326252ab9775c87b581b79c15e6e8d44fee59a6ba",
++};
++const owner = {
++  ...FIXED_VALUES_PIN,
++  namespace: FIXED_VALUES_PIN.moduleId,
++  catalogVersion: 1,
++};
++export const fixedValueRef = (typeId: string) => ({
++  ...FIXED_VALUES_PIN,
++  typeId,
++});
++const text = (key: string, fallback: string) => ({ owner, key, fallback });
++const scalar = (v: Json) =>
++  typeof v === "number" &&
++  Number.isFinite(v) &&
++  Number.isFinite(Math.fround(v));
++function valueNode(
++  id: string,
++  label: string,
++  type: string,
++  initial: Json,
++  components: string[],
++): NodeDefinition {
++  return {
++    ref: fixedValueRef(id),
++    role: "operation",
++    presentation: {
++      label: text(id, label),
++      ports: { out: { label: text("out", "Value") } },
++      parameters: { value: { label: text("value", "Value") } },
++    },
++    eligibility: {
++      stageKindIds: ["grape.stage.vertex", "grape.stage.pixel"],
++      requiredGeneratorCapabilities: ["grape.glsl.numeric"],
++    },
++    stateCodec: {
++      schemaVersion: 1,
++      validate: (state) => {
++        const value =
++          state &&
++          typeof state === "object" &&
++          !Array.isArray(state) &&
++          Object.keys(state).length === 1 &&
++          "value" in state
++            ? state.value
++            : null;
++        const valid =
++          components.length === 1
++            ? scalar(value)
++            : Array.isArray(value) &&
++              value.length === components.length &&
++              value.every(scalar);
++        return valid
++          ? []
++          : [
++              {
++                ...issue(
++                  "FIXED_VALUE",
++                  `Expected ${components.length} finite float32 component(s) for ${label}.`,
++                ),
++                messageRef: text(
++                  "invalid-" + id,
++                  `Expected ${components.length} finite float32 component(s) for ${label}.`,
++                ),
++              },
++            ];
++      },
++    },
++    initialize: () => ({
++      value: Array.isArray(initial) ? [...initial] : initial,
++    }),
++    ports: () => [{ key: "out", direction: "output", type }],
++    parameters: () => [
++      {
++        key: "value",
++        target: "state",
++        type: components.length === 1 ? "number" : "json",
++        presentation: {
++          widget:
++            components.length === 1
++              ? "grape.widget.number"
++              : "grape.widget.vector",
++          fallback: "auto",
++          options: { components },
++        },
++      },
++    ],
++    validate: () => [],
++    emit: (state, _inputs, context) => ({
++      outputs: {
++        out: {
++          type,
++          code: context!.literal(type, (state as { value: Json }).value),
++          constant: true,
++        },
++      },
++    }),
++  };
++}
++export const fixedValues: ModuleContribution = {
++  manifest: FIXED_VALUES_PIN,
++  presentation: {
++    owner,
++    defaultLocale: "en",
++    label: text("module", "Fixed values"),
++  },
++  nodes: [
++    valueNode("float", "Float", "glsl.float", 0.5, ["Value"]),
++    valueNode("vec2", "Vector 2", "glsl.vec2", [0.5, 0.5], ["X", "Y"]),
++    valueNode("vec3", "Vector 3", "glsl.vec3", [1, 1, 1], ["X", "Y", "Z"]),
++    valueNode(
++      "color",
++      "Color RGBA",
++      "glsl.vec4",
++      [0.55, 0.28, 0.9, 1],
++      ["R", "G", "B", "A"],
++    ),
++  ],
++};

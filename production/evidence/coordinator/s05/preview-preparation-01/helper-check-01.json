@@ -1,0 +1,35 @@
+{
+  "recordType": "S05_DEPLOYMENT_HELPER_PREPARATION_CHECK",
+  "recordedAt": "2026-10-03T23:43:08.141Z",
+  "runtime": "v25.5.0",
+  "helper": {
+    "file": ".verification/serve-reviewed-preview-01.mjs",
+    "sha256": "99ad98d58ae884f8f97296774e6f476400d674af1d7f3fb6bf4f5fdc8bed46ca"
+  },
+  "checks": [
+    "Exact asset /index.html",
+    "Exact asset /assets/index-BdaXQCVs.css",
+    "Exact asset /assets/index-BFQ61do0.js",
+    "Visible version with no secure-only verification dependency",
+    "Exact reviewed metadata",
+    "Refuse undeclared route /../implementation-state.json",
+    "Refuse undeclared route /%2e%2e/README.md",
+    "Refuse undeclared route /assets/%2e%2e/%2e%2e/AGENTS.md",
+    "Refuse undeclared route /.git/config",
+    "Refuse undeclared route /samples",
+    "Refuse undeclared route /unknown",
+    "Refuse undeclared route //index.html",
+    "Malformed URI rejected",
+    "Non-read method rejected",
+    "HEAD has same length, no body",
+    "No cache or MIME sniffing",
+    "Served preloaded bytes immutable",
+    "Changed disk build rejected on preparation",
+    "Wrong review hash rejected"
+  ],
+  "fixture": "Disposable byte copy of accepted S04 build and exact original review bindings. Tests verify deployment helper only, not S05 product or independent PASS.",
+  "temporaryListener": "127.0.0.1 ephemeral port; closed after test",
+  "actualNetworkS05Deployment": "NOT_STARTED",
+  "originalArtifactsChanged": false,
+  "untrustedPathsServed": false
+}

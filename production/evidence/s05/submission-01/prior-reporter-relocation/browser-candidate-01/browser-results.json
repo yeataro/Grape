@@ -1,0 +1,305 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "tools/s05-playwright.config.ts",
+      "s05.spec.ts",
+      "--output",
+      "evidence/s05/browser-candidate-01/results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s05-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s05/browser-candidate-01/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "evidence/s05/browser-candidate-01/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node node_modules/vite/bin/vite.js --host 0.0.0.0 --port 4195 --strictPort",
+      "url": "http://127.0.0.1:4195",
+      "reuseExistingServer": false,
+      "cwd": "C:\\Users\\user\\source\\Grape\\production"
+    }
+  },
+  "suites": [
+    {
+      "title": "s05.spec.ts",
+      "file": "s05.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S05 AT02 AT03 real WebGL2 distinct shared and nested caller values and Uniform parameters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 348,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T23:49:48.863Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57dc48ff28ab4764e511-b63355c37134578a875b",
+          "file": "s05.spec.ts",
+          "line": 4,
+          "column": 1
+        },
+        {
+          "title": "S05 mode UI persists shared choice and Make independent and Undo through real commands",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5433,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').first().getByLabel('Subgraph emission mode')\nExpected: \u001b[32m\"function\"\u001b[39m\nReceived: \u001b[31m\"expand\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').first().getByLabel('Subgraph emission mode')\u001b[22m\n\u001b[2m    14 × locator resolved to <select disabled aria-label=\"Subgraph emission mode\">…</select>\u001b[22m\n\u001b[2m       - unexpected value \"expand\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').first().getByLabel('Subgraph emission mode')\nExpected: \u001b[32m\"function\"\u001b[39m\nReceived: \u001b[31m\"expand\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').first().getByLabel('Subgraph emission mode')\u001b[22m\n\u001b[2m    14 × locator resolved to <select disabled aria-label=\"Subgraph emission mode\">…</select>\u001b[22m\n\u001b[2m       - unexpected value \"expand\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05.spec.ts:16:638",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05.spec.ts",
+                      "column": 638,
+                      "line": 16
+                    },
+                    "snippet": "  14 | });\n  15 | test(\"S05 mode UI persists shared choice and Make independent and Undo through real commands\",async({page})=>{\n> 16 |  await page.goto(\"/\");const canvas=page.locator('.canvas').first();await canvas.getByRole(\"button\",{name:\"New subgraph\",exact:true}).click();await canvas.getByRole(\"button\",{name:\"Enter subgraph\",exact:true}).click();await canvas.getByText(\"Subgraph interface\",{exact:true}).click();const selector=canvas.getByLabel(\"Subgraph emission mode\");await expect(selector).toHaveValue(\"expand\");await selector.selectOption(\"function\");await expect(selector).toHaveValue(\"function\");await canvas.getByRole(\"button\",{name:\"Up\",exact:true}).click();await canvas.getByRole(\"button\",{name:\"Enter subgraph\",exact:true}).click();await expect(selector).toHaveValue(\"function\");await page.screenshot({path:evidence+\"/s05-mode-ui.png\"});\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^\n  17 | });\n  18 | for(const host of [\"127.0.0.1\",\"192.168.1.105\",\"100.83.88.97\"])test(`S05 served HTTP ${host} boots with secure IDs and exact Personal digest`,async({page,browser})=>{\n  19 |  await page.goto(`http://${host}:4195`);await expect(page.locator('.canvas').first()).toBeVisible();const result=await page.evaluate(async()=>{"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05.spec.ts",
+                        "column": 638,
+                        "line": 16
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').first().getByLabel('Subgraph emission mode')\nExpected: \u001b[32m\"function\"\u001b[39m\nReceived: \u001b[31m\"expand\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').first().getByLabel('Subgraph emission mode')\u001b[22m\n\u001b[2m    14 × locator resolved to <select disabled aria-label=\"Subgraph emission mode\">…</select>\u001b[22m\n\u001b[2m       - unexpected value \"expand\"\u001b[22m\n\n\n  14 | });\n  15 | test(\"S05 mode UI persists shared choice and Make independent and Undo through real commands\",async({page})=>{\n> 16 |  await page.goto(\"/\");const canvas=page.locator('.canvas').first();await canvas.getByRole(\"button\",{name:\"New subgraph\",exact:true}).click();await canvas.getByRole(\"button\",{name:\"Enter subgraph\",exact:true}).click();await canvas.getByText(\"Subgraph interface\",{exact:true}).click();const selector=canvas.getByLabel(\"Subgraph emission mode\");await expect(selector).toHaveValue(\"expand\");await selector.selectOption(\"function\");await expect(selector).toHaveValue(\"function\");await canvas.getByRole(\"button\",{name:\"Up\",exact:true}).click();await canvas.getByRole(\"button\",{name:\"Enter subgraph\",exact:true}).click();await expect(selector).toHaveValue(\"function\");await page.screenshot({path:evidence+\"/s05-mode-ui.png\"});\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^\n  17 | });\n  18 | for(const host of [\"127.0.0.1\",\"192.168.1.105\",\"100.83.88.97\"])test(`S05 served HTTP ${host} boots with secure IDs and exact Personal digest`,async({page,browser})=>{\n  19 |  await page.goto(`http://${host}:4195`);await expect(page.locator('.canvas').first()).toBeVisible();const result=await page.evaluate(async()=>{\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05.spec.ts:16:638"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T23:49:50.545Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\browser-candidate-01\\results\\s05-S05-mode-UI-persists-s-7218a--Undo-through-real-commands-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\browser-candidate-01\\results\\s05-S05-mode-UI-persists-s-7218a--Undo-through-real-commands-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\browser-candidate-01\\results\\s05-S05-mode-UI-persists-s-7218a--Undo-through-real-commands-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05.spec.ts",
+                    "column": 638,
+                    "line": 16
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "57dc48ff28ab4764e511-f660c9558d3568bc3003",
+          "file": "s05.spec.ts",
+          "line": 15,
+          "column": 1
+        },
+        {
+          "title": "S05 served HTTP 127.0.0.1 boots with secure IDs and exact Personal digest",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 435,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T23:49:56.295Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57dc48ff28ab4764e511-2f0c0dffbf51bb611647",
+          "file": "s05.spec.ts",
+          "line": 18,
+          "column": 64
+        },
+        {
+          "title": "S05 served HTTP 192.168.1.105 boots with secure IDs and exact Personal digest",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7595,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T23:49:57.059Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57dc48ff28ab4764e511-9c86a1a038c46807074f",
+          "file": "s05.spec.ts",
+          "line": 18,
+          "column": 64
+        },
+        {
+          "title": "S05 served HTTP 100.83.88.97 boots with secure IDs and exact Personal digest",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 393,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T23:50:04.659Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57dc48ff28ab4764e511-ce5e498690ae04119f36",
+          "file": "s05.spec.ts",
+          "line": 18,
+          "column": 64
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-03T23:49:48.083Z",
+    "duration": 85723.048,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

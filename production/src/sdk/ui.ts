@@ -20,6 +20,7 @@ export interface ContextQuery {
   subscribe(fn: () => void): () => void;
 }
 export interface PanelServices {
+  identifier?(): string;
   clipboard?(): string;
   reshape?(lease: PanelCommandLease, type: string, value: Json): Json;
   layout?(lease: PanelCommandLease): Json;

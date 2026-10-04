@@ -1,0 +1,56 @@
+{
+  "findingGroup": "S05-FG-DRAG-PERFORMANCE-01",
+  "repairAttempt": 1,
+  "unsuccessfulReviewRounds": 0,
+  "dispatchAttempt": 1,
+  "retriesUsed": 0,
+  "rows": [
+    {
+      "finding": "Repeated detached whole-document reads within one Context.capture/network and FieldTarget.capture",
+      "change": "editor.ts122 captures Graph once and resolves its network; private networkFrom at264 preserves stage/occurrence checks; FieldTarget at1065 reuses original.network/c.network for node/edge reads",
+      "evidence": [
+        "performance-comparison-01.json",
+        "performance-01/aggregate-01.json",
+        "checks/unit-conformance-01.log"
+      ],
+      "result": "Capture/clone overhead reduced; no persisted/shared cache"
+    },
+    {
+      "finding": "PM hypothesis of duplicate Context/Application invalidation and repeated widget resolution",
+      "change": "No notification suppression or widget change",
+      "evidence": [
+        "performance-comparison-01.json"
+      ],
+      "result": "Measured duplicate notifications remain exactly118+118,236 field invalidations and708 field captures for mounted Multiply. Their repeated Graph cloning is reduced."
+    },
+    {
+      "finding": "Fresh detached projections and lifetime/authority correctness",
+      "change": "Three new root/nested/readonly/busy focused cases; existing authority paths unchanged",
+      "evidence": [
+        "production/tests/unit/s05-drag-capture.test.ts",
+        "checks/unit-conformance-01.log",
+        "checks/browser-full-01.log"
+      ],
+      "result": "Single isolated read capture; immutable prior result; current revision/navigation/lifetime; readonly/busy transitions; movement token stability; cancel restoration; existing linkABA/newload/retarget/cleanup/IME/UndoRedo regressions PASS"
+    },
+    {
+      "finding": "Candidate functionality after performance repair",
+      "change": "No node/module/profile/numeric or import eligibility changes",
+      "evidence": [
+        "archive-public-01/result.json",
+        "archive-origin-01/result.json",
+        "browser-full-01/browser-results.json"
+      ],
+      "result": "13public archive flows,12actual numeric shader cases,106browsercases including64 fixedvalue numeric combinations and linkedUniform regressions;2staticOrigin equivalents PASS"
+    }
+  ],
+  "bounds": "No Graph API change, no global/cross-revision cache, notification batching, RAF/deferred mutations, skipped reconciliation/validation/constant analysis, Canvas/Inspector rewrite, dependency update or new catalog leaves. Static helper assistance is not independent review.",
+  "priorCounters": {
+    "diagnosticContinuations": 2,
+    "diagnosticOriginalComparisonDrags": 88,
+    "diagnosticExcludedPilot": 1,
+    "legacy": "repair2/unsuccessful0/globalReview4PASS",
+    "uniform": "initialFAIL1/repair1/review2PASS",
+    "fixedValues": "review5PASS exactI5/R5"
+  }
+}

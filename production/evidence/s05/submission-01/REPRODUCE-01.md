@@ -1,0 +1,15 @@
+# Reproduce this submission
+
+Start from exact submitted R in an isolated checkout. Use Node25.5.0 and npm ci with the committed lock. Do not run frozen write-producing Handoff tools in place. Never reuse accepted evidence/output directories.
+
+From repository root: node tools/verify-bootstrap.mjs; node handoff/tools/check-implementation-state.mjs --current; node --test tools/verify-bootstrap.test.mjs. These are read-only integrity checks and disposable fixture tests, not a frozen runtime requalification.
+
+From production: npm run typecheck; npm run conformance; npm test; npm run build. Final implementation executed each script's direct Node components (runtime preflight once, tsc, both conformance tools, node test, vite build); exact commands and exit codes are in checks/*.json.
+
+For browser verification from production, create a NEW absolute directory whose name contains s05, set GRAPE_EVIDENCE_DIR to that path, then run node node_modules/@playwright/test/cli.js test --config tools/s05-playwright.config.ts --output <that-new-directory>/test-results. This runs all62 tests. The config binds disposable port4195, rejects missing S05 evidence path, resolves reporter output against cwd, and does not reuse a running server. The current same-machine endpoints are localhost,192.168.1.105,100.83.88.97; another host must report unavailable network-specific evidence honestly. It is not permission to alter network settings. Windows test environment used legitimately escalated execution after the recorded sandbox teardown limitation.
+
+Regenerate sample bytes in a NEW directory using node --experimental-transform-types tools/s05-samples.ts <new-directory>. The12 outputs and original manifest are under samples/. Build-manifest files bind the three dist assets; extract candidate-web-01.tar.gz into an isolated directory and verify each hash before serving. No live product source is needed by the archive.
+
+The supplemental raw harnesses under reproduce/ preserve the executed scripts. To rerun, copy to root .verification with their original relative location, and derive NEW scratch/evidence filenames before execution: they intentionally refuse/rely on exclusive output and must never overwrite this submission. helper-http-check uses the actual accepted S04 archive/report as a helper-only fixture, not invented S05 PASS. archive-browser-check-02 checks this exact S05 archive and sample operations on three temporary origins; attempt01's wrong display-name label and cleanup remain separately recorded. These scripts create disposable contexts and close their own listeners. Do not stop existing Human4174/4192 helpers.
+
+Actual full run:195 unit/conformance,62 browser,10 bootstrap fixtures,471 integrity checks/411 indexed files,53 ownership files. No failed/skipped/flaky case in the final suites. Prior development failures remain historical evidence and are not relabeled as passing. The helper's19 prior archive/path checks and3 HTTP identity origins are separate from product test counts. Numeric WebGL evidence includes artifacts, bindings, expected and actual pixels/depth comparisons; no physical GPU/native TD proof is inferred.

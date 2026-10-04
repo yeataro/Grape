@@ -1,0 +1,568 @@
+{
+  "implementationI": "9230f9652c2affd4c20a7dda1033baaa0d61f7e1",
+  "priorI": "a5033d0b6a223250337fd1a2eeb98b2fd1f9e145",
+  "priorR": "04403a22adbd6f751c078ee4208db71ba7df223b",
+  "findingId": "S05-FR-001",
+  "findingGroup": "S05-FG-RESOURCE-01",
+  "originalReport": {
+    "file": "production/evidence/s05/review-01/independent-review/INDEPENDENT_REVIEW_RESULT.json",
+    "sha256": "01cf25eaaed4d5210ed41ee7ace171e3b149cb3e48fc3846e15781a49e96eb05",
+    "bytes": 38599
+  },
+  "originalSupportingManifest": {
+    "file": "production/evidence/s05/review-01/independent-review/supporting-evidence-manifest-01.json",
+    "sha256": "8ea2b5bf70374a6b3d75cfcd96d270c36e0a53370e762b623c2f4b11085c940c",
+    "bytes": 19976
+  },
+  "originalVerdict": "FAIL",
+  "originalAuthor": "/root/s05_fresh_review_01",
+  "status": "REPAIRED_AND_SELF_CHECKED_PENDING_TARGETED_INDEPENDENT_REVIEW",
+  "cause": "Stage-local ordinal Uniform allocation reused u_grape_0 for distinct resources when vertex and pixel shaders were linked.",
+  "fix": "One compile-job resource-to-symbol/type/detached-default map across all stages; each stage emits its own declaration/schema row once for the same global binding. Repeated same-resource requests must agree on type and default or compilation fails without artifacts.",
+  "architecture": "Read-only compiler-local data only. Graph, snapshots, Application command authority, History, owner codecs, module pins, profile admission, lifetime and persistence remain unchanged.",
+  "changedPaths": [
+    {
+      "file": "production/src/generation/compiler.ts",
+      "sha256": "3a7c83a5f2d446227e3091c14ed2fc8497794a06deead2b35699b9cbe41f801f",
+      "bytes": 21586,
+      "role": "Only production behavior change"
+    },
+    {
+      "file": "production/tools/s05-samples.ts",
+      "sha256": "2af05e622ca20a93fe942fa323734d188e327a973a0997f6d71d8bb4d29dfdc7",
+      "bytes": 6134,
+      "role": "Two reproducible repair samples"
+    },
+    {
+      "file": "production/tests/browser/s05-uniforms.spec.ts",
+      "sha256": "be0b5ac4c725dd1b2039269d5bf584a3b5a007cd7d323f19df9f7d513046ac4d",
+      "bytes": 4616,
+      "role": "Meaningful regression fixture or assertion"
+    },
+    {
+      "file": "production/tests/fixtures/s05-linked-webgl.ts",
+      "sha256": "d2f5c044f9dec26fe4b8a8e7f9aa8a4c8da0306c9a75ace58ba3fd18dd13e366",
+      "bytes": 3609,
+      "role": "Meaningful regression fixture or assertion"
+    },
+    {
+      "file": "production/tests/fixtures/s05-review-crossstage.json",
+      "sha256": "86226683b8aa36d11ea64b9402fbf88269862b18b647f908ed9c13bfc63df3b8",
+      "bytes": 45114,
+      "role": "Exact original reviewer document fixture; immutable copy"
+    },
+    {
+      "file": "production/tests/fixtures/s05-uniforms.ts",
+      "sha256": "236ed6ce8652abe4521f65ac484e4b68c324e9acfee160213615e1281ee4e33b",
+      "bytes": 3354,
+      "role": "Meaningful regression fixture or assertion"
+    },
+    {
+      "file": "production/tests/unit/s05-uniforms.test.ts",
+      "sha256": "fc3fc2315ddd4112c6a2f2e4a41a8cc909c3c1e5f5315570347b95a0a68ff7c0",
+      "bytes": 5553,
+      "role": "Meaningful regression fixture or assertion"
+    }
+  ],
+  "counterexampleReplay": {
+    "originalFixture": {
+      "file": "production/tests/fixtures/s05-review-crossstage.json",
+      "sha256": "86226683b8aa36d11ea64b9402fbf88269862b18b647f908ed9c13bfc63df3b8",
+      "bytes": 45114
+    },
+    "source": {
+      "file": "production/evidence/s05/review-01/independent-review/cross-stage-uniform-01.json",
+      "sha256": "86226683b8aa36d11ea64b9402fbf88269862b18b647f908ed9c13bfc63df3b8",
+      "bytes": 45114
+    },
+    "fixtureBytesIdentical": true,
+    "evidence": {
+      "file": "production/evidence/s05/repair-01/browser-final-01/original-review-counterexample-replay.json",
+      "sha256": "d06299d9e84a4ec01d94760c95064d227a1c6f66fae32baa0dc24a269a91e87d",
+      "bytes": 2278
+    },
+    "actual": {
+      "linked": true,
+      "active": [
+        {
+          "name": "u_grape_0",
+          "type": 5126,
+          "size": 1
+        },
+        {
+          "name": "u_grape_1",
+          "type": 5126,
+          "size": 1
+        }
+      ],
+      "readback": [
+        {
+          "stageId": "id-17",
+          "resourceId": "id-34",
+          "symbol": "u_grape_0",
+          "type": "glsl.float",
+          "defaultValue": 0.25,
+          "actual": 0.25
+        },
+        {
+          "stageId": "id-20",
+          "resourceId": "id-37",
+          "symbol": "u_grape_1",
+          "type": "glsl.float",
+          "defaultValue": 0.75,
+          "actual": 0.75
+        }
+      ],
+      "vertexPosition": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "glError": 0
+    }
+  },
+  "matrix": [
+    {
+      "kind": "distinct",
+      "mode": "expand",
+      "types": [
+        "float",
+        "float"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "grape.nodes.function-operations es300-functions",
+      "defaultPosition": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "overrideAPosition": [
+        0.125,
+        0.125,
+        0.125,
+        0.125
+      ],
+      "activeUniforms": 2,
+      "independentReadback": true,
+      "sameStageAndCrossStage": false,
+      "evidence": {
+        "file": "production/evidence/s05/repair-01/browser-final-01/uniform-distinct-expand.json",
+        "sha256": "2819b579ba16c85e27f4a284d5a62cc2d8e72e8dccf772406c31203d09fddf7a",
+        "bytes": 24160
+      }
+    },
+    {
+      "kind": "distinct",
+      "mode": "function",
+      "types": [
+        "float",
+        "float"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "grape.nodes.function-operations es300-functions",
+      "defaultPosition": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "overrideAPosition": [
+        0.125,
+        0.125,
+        0.125,
+        0.125
+      ],
+      "activeUniforms": 2,
+      "independentReadback": true,
+      "sameStageAndCrossStage": false,
+      "evidence": {
+        "file": "production/evidence/s05/repair-01/browser-final-01/uniform-distinct-function.json",
+        "sha256": "4a26c32b85c8cf42a6b01399d20d7cdf563abaa5023bc1c73b221d9c551186a3",
+        "bytes": 24672
+      }
+    },
+    {
+      "kind": "distinct",
+      "mode": "nested",
+      "types": [
+        "float",
+        "float"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "grape.nodes.function-operations es300-functions",
+      "defaultPosition": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "overrideAPosition": [
+        0.125,
+        0.125,
+        0.125,
+        0.125
+      ],
+      "activeUniforms": 2,
+      "independentReadback": true,
+      "sameStageAndCrossStage": false,
+      "evidence": {
+        "file": "production/evidence/s05/repair-01/browser-final-01/uniform-distinct-nested.json",
+        "sha256": "2fc821fd52d5efede543002e832b970c11a4f34ec6f2f6f2831d49596f36f4fe",
+        "bytes": 40178
+      }
+    },
+    {
+      "kind": "distinct",
+      "mode": "mixed",
+      "types": [
+        "float",
+        "float"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "grape.nodes.function-operations es300-functions",
+      "defaultPosition": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "overrideAPosition": [
+        0.125,
+        0.125,
+        0.125,
+        0.125
+      ],
+      "activeUniforms": 2,
+      "independentReadback": true,
+      "sameStageAndCrossStage": false,
+      "evidence": {
+        "file": "production/evidence/s05/repair-01/browser-final-01/uniform-distinct-mixed.json",
+        "sha256": "f2f444b093f37b0965d369b1dff3a359ffef1a36306cfdf0d74728fcf672a9c3",
+        "bytes": 39667
+      }
+    },
+    {
+      "kind": "shared-reversed",
+      "mode": "expand",
+      "types": [
+        "float",
+        "float"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "grape.nodes.function-operations es300-functions",
+      "defaultPosition": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "overrideAPosition": [
+        0.875,
+        0.875,
+        0.875,
+        0.875
+      ],
+      "activeUniforms": 2,
+      "independentReadback": true,
+      "sameStageAndCrossStage": true,
+      "evidence": {
+        "file": "production/evidence/s05/repair-01/browser-final-01/uniform-shared-reversed-expand.json",
+        "sha256": "ae835431668c810d166ea8b03c9ebc5fc3187b42ec438f857cbeb5117d4be493",
+        "bytes": 32808
+      }
+    },
+    {
+      "kind": "shared-reversed",
+      "mode": "function",
+      "types": [
+        "float",
+        "float"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "grape.nodes.function-operations es300-functions",
+      "defaultPosition": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "overrideAPosition": [
+        0.875,
+        0.875,
+        0.875,
+        0.875
+      ],
+      "activeUniforms": 2,
+      "independentReadback": true,
+      "sameStageAndCrossStage": true,
+      "evidence": {
+        "file": "production/evidence/s05/repair-01/browser-final-01/uniform-shared-reversed-function.json",
+        "sha256": "b99aa3292edce73f8722b1acfe2dcdacccce56107795a39c2dc4417df1f3d39a",
+        "bytes": 33320
+      }
+    },
+    {
+      "kind": "shared-reversed",
+      "mode": "nested",
+      "types": [
+        "float",
+        "float"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "grape.nodes.function-operations es300-functions",
+      "defaultPosition": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "overrideAPosition": [
+        0.875,
+        0.875,
+        0.875,
+        0.875
+      ],
+      "activeUniforms": 2,
+      "independentReadback": true,
+      "sameStageAndCrossStage": true,
+      "evidence": {
+        "file": "production/evidence/s05/repair-01/browser-final-01/uniform-shared-reversed-nested.json",
+        "sha256": "0bdf820586802666803611ddce2684800b327d9a067150ed4eca84d26c66ee77",
+        "bytes": 48826
+      }
+    },
+    {
+      "kind": "shared-reversed",
+      "mode": "mixed",
+      "types": [
+        "float",
+        "float"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "grape.nodes.function-operations es300-functions",
+      "defaultPosition": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "overrideAPosition": [
+        0.875,
+        0.875,
+        0.875,
+        0.875
+      ],
+      "activeUniforms": 2,
+      "independentReadback": true,
+      "sameStageAndCrossStage": true,
+      "evidence": {
+        "file": "production/evidence/s05/repair-01/browser-final-01/uniform-shared-reversed-mixed.json",
+        "sha256": "37d1b6d0e93fd9d12bcecd5b02c0fe861addab8bf5557784348395338eee56d7",
+        "bytes": 48315
+      }
+    },
+    {
+      "kind": "distinct-types",
+      "mode": "expand",
+      "types": [
+        "float",
+        "vec2"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "grape.nodes.function-operations es300-functions",
+      "defaultPosition": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "overrideAPosition": [
+        0.125,
+        0.125,
+        0.125,
+        0.125
+      ],
+      "activeUniforms": 2,
+      "independentReadback": true,
+      "sameStageAndCrossStage": false,
+      "evidence": {
+        "file": "production/evidence/s05/repair-01/browser-final-01/uniform-distinct-types-expand.json",
+        "sha256": "3a08a83220310835e793968dbe92b2dde965997646cc4d5a96300801ca61b766",
+        "bytes": 24377
+      }
+    },
+    {
+      "kind": "distinct-types",
+      "mode": "function",
+      "types": [
+        "float",
+        "vec2"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "grape.nodes.function-operations es300-functions",
+      "defaultPosition": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "overrideAPosition": [
+        0.125,
+        0.125,
+        0.125,
+        0.125
+      ],
+      "activeUniforms": 2,
+      "independentReadback": true,
+      "sameStageAndCrossStage": false,
+      "evidence": {
+        "file": "production/evidence/s05/repair-01/browser-final-01/uniform-distinct-types-function.json",
+        "sha256": "0c79fe0ab6fbe30762976c9f4f64566f3a47c4b91ff325489c13bfe33e198a5d",
+        "bytes": 24889
+      }
+    },
+    {
+      "kind": "distinct-types",
+      "mode": "nested",
+      "types": [
+        "float",
+        "vec2"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "grape.nodes.function-operations es300-functions",
+      "defaultPosition": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "overrideAPosition": [
+        0.125,
+        0.125,
+        0.125,
+        0.125
+      ],
+      "activeUniforms": 2,
+      "independentReadback": true,
+      "sameStageAndCrossStage": false,
+      "evidence": {
+        "file": "production/evidence/s05/repair-01/browser-final-01/uniform-distinct-types-nested.json",
+        "sha256": "e9eaac749b9397d724ebbcc9b1bc6bd38651335c72c0c936f470492268e124c1",
+        "bytes": 40395
+      }
+    },
+    {
+      "kind": "distinct-types",
+      "mode": "mixed",
+      "types": [
+        "float",
+        "vec2"
+      ],
+      "stages": [
+        "vertex",
+        "pixel"
+      ],
+      "profile": "grape.nodes.function-operations es300-functions",
+      "defaultPosition": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "overrideAPosition": [
+        0.125,
+        0.125,
+        0.125,
+        0.125
+      ],
+      "activeUniforms": 2,
+      "independentReadback": true,
+      "sameStageAndCrossStage": false,
+      "evidence": {
+        "file": "production/evidence/s05/repair-01/browser-final-01/uniform-distinct-types-mixed.json",
+        "sha256": "3ee9a152e403db0f756a9e8beccd296de7a0ee2b9d35e95b5feffd6a82be0dc3",
+        "bytes": 39884
+      }
+    }
+  ],
+  "negativeTests": [
+    {
+      "case": "same-stage same resource type conflict",
+      "expected": "UNIFORM_CONFLICT, failed, no artifacts, unchanged Graph",
+      "testFile": "production/tests/unit/s05-uniforms.test.ts",
+      "execution": "production/evidence/s05/repair-01/checks/unit-01.log"
+    },
+    {
+      "case": "same-stage same resource default conflict",
+      "expected": "UNIFORM_CONFLICT, failed, no artifacts, unchanged Graph",
+      "testFile": "production/tests/unit/s05-uniforms.test.ts",
+      "execution": "production/evidence/s05/repair-01/checks/unit-01.log"
+    },
+    {
+      "case": "cross-stage same resource type conflict",
+      "expected": "UNIFORM_CONFLICT, failed, no artifacts, unchanged Graph",
+      "testFile": "production/tests/unit/s05-uniforms.test.ts",
+      "execution": "production/evidence/s05/repair-01/checks/unit-01.log"
+    },
+    {
+      "case": "cross-stage same resource default conflict",
+      "expected": "UNIFORM_CONFLICT, failed, no artifacts, unchanged Graph",
+      "testFile": "production/tests/unit/s05-uniforms.test.ts",
+      "execution": "production/evidence/s05/repair-01/checks/unit-01.log"
+    }
+  ],
+  "harnessAdaptation": {
+    "originalsUnmodified": [
+      "production/evidence/s05/review-01/independent-review/adversarial-01.ts",
+      "production/evidence/s05/review-01/independent-review/adversarial-browser-01.mjs"
+    ],
+    "newHarness": "production/tests/fixtures/s05-linked-webgl.ts",
+    "method": "Fresh compile/link, active uniforms, resource-bound readback, transform feedback captures actual gl_Position, default then override. Adapted reviewer transform-feedback method; fixtures use public Graph mutations and shipped exact owners.",
+    "stageResults": "Vertex numeric transform feedback plus actual linked pixel Uniform readback; pixel raster numeric regressions remain in existing full browser suite. No new UI GPU preview claimed."
+  },
+  "counters": {
+    "initialReview": 1,
+    "initialVerdict": "FAIL",
+    "failedReviewRoundsRetained": 1,
+    "repairAttempt": 1,
+    "targetedReviewRound": 2,
+    "maxUnsuccessfulReviewRounds": 3,
+    "failedRepairRereviewRoundsBeforeThis": 0,
+    "interpretation": "Retain reviewer failedRounds=1; conservative total unsuccessful-review budget max3. Do not reset counters by renaming/transport/recovery."
+  }
+}

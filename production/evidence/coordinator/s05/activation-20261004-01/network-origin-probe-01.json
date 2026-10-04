@@ -1,0 +1,51 @@
+{
+  "recordType": "S05_NETWORK_ORIGIN_CAPABILITY_DIAGNOSTIC",
+  "recordedAt": "2026-10-03T23:37:35.078Z",
+  "browser": "151.0.7922.34",
+  "node": "v25.5.0",
+  "platform": "win32",
+  "arch": "x64",
+  "method": "Fresh ephemeral Playwright contexts. Requests intercepted with an inert HTML probe; these results prove browser origin API availability, not actual LAN/Tailscale reachability, deployed product behavior, or independent product PASS.",
+  "rows": [
+    {
+      "origin": "http://127.0.0.1:4192",
+      "capabilities": {
+        "isSecureContext": true,
+        "randomUUID": "function",
+        "subtleDigest": "function",
+        "getRandomValues": "function",
+        "digestResult": "ok",
+        "uuidResult": "ok"
+      }
+    },
+    {
+      "origin": "http://192.168.1.105:4192",
+      "capabilities": {
+        "isSecureContext": false,
+        "randomUUID": "undefined",
+        "subtleDigest": "undefined",
+        "getRandomValues": "function",
+        "digestResult": "TypeError: Cannot read properties of undefined (reading 'digest')",
+        "uuidResult": "TypeError: crypto.randomUUID is not a function"
+      }
+    },
+    {
+      "origin": "http://100.83.88.97:4192",
+      "capabilities": {
+        "isSecureContext": false,
+        "randomUUID": "undefined",
+        "subtleDigest": "undefined",
+        "getRandomValues": "function",
+        "digestResult": "TypeError: Cannot read properties of undefined (reading 'digest')",
+        "uuidResult": "TypeError: crypto.randomUUID is not a function"
+      }
+    }
+  ],
+  "affectedSource": [
+    "production/src/application/personal.ts:58",
+    "production/src/features/canvas.ts:352,555,589"
+  ],
+  "systemSettingsChanged": false,
+  "productFilesChanged": false,
+  "securityBypass": false
+}

@@ -1,0 +1,194 @@
+{
+  "reportId": "S05-DRAG-PERFORMANCE-DIAGNOSIS-02-RESULT-01",
+  "actionKey": "yeataro/Grape:S05:drag-performance-diagnosis:676c339:01",
+  "findingGroup": "S05-FG-DRAG-PERFORMANCE-01",
+  "status": "DIAGNOSIS_COMPLETE_OPTIMIZATION_PROPOSED_NOT_IMPLEMENTED",
+  "writer": {
+    "displayTitle": "Grape S05 實作與維護",
+    "canonicalAgent": "/root/s03_implementer_resume"
+  },
+  "createdAt": "2026-10-04T06:58:28.382Z",
+  "bindings": {
+    "reported4195": {
+      "I": "ee1212fdc54359f1ceba4c4b09f6e7cc06cddc41",
+      "R": "29695b3c25e2d200856d780b31e20e23f24efb6d",
+      "build": "S05-web-ee1212f",
+      "archiveSha256": "07edd46c4830fa5113ff096a941693a4349ff2fd66830813b70676850cc358da"
+    },
+    "currentFrozen": {
+      "I": "8ffbea96bdc76e307d59eaa8514f3c6432a7d34d",
+      "R": "bc74bd9aa7f2d357815cd0dfd0afa0b6088eee3a",
+      "build": "S05-values-8ffbea9",
+      "archiveSha256": "808556904749c44c56ee10b2665d20c0cbdf6045b157e5cedb7a0675ef987595"
+    },
+    "packetSha256": "b493f72a547f70edb31798db7970de3f86adbc6d1db7fb6bb13b4239f6c5c15a"
+  },
+  "conclusion": "Reproduced an actor-dependent drag update-rate difference. Selected Multiply with two Inspector fields triggers repeated whole-document detached captures through two notification paths. Removing Inspector FieldTargets in a disposable control removes the actor asymmetry. Synchronous snapshot and projection work dominates these fixtures; shader arithmetic is not implicated. Both I4 and R5 show the same capture counts and source paths.",
+  "methodology": {
+    "primaryDrags": 78,
+    "detailDrags": 4,
+    "minimalObserverDrags": 6,
+    "excludedPilotDrags": 1,
+    "repeatsPerPrimaryCell": 3,
+    "graphSizes": [
+      {
+        "nodes": 4,
+        "edges": 3,
+        "nested": 0
+      },
+      {
+        "nodes": 14,
+        "edges": 3,
+        "nested": 0,
+        "extra": "ten unconnected Multiply nodes; outside viewport, still in model/DOM"
+      }
+    ],
+    "viewport": [
+      1440,
+      1000
+    ],
+    "dpr": 1,
+    "contexts": 1,
+    "renderMode": "Headless Chromium151 / ANGLE SwiftShader; Windows11, Ryzen7 9800X3D, no CPU throttle",
+    "path": "60 pointer movements: x=x0+60*sin(i*pi/60), y=y0+20*sin(i*pi/60), i1..60; target initial center is identical between actors and Inspector conditions within each build. I4 starts(357,364); R5 starts(357,381) because its catalog action bar is17px taller.",
+    "duration": "Same intended1000ms schedule and60 points. Sequential browser input backpressure lengthens actual duration, explicitly recorded; do not claim identical actual duration. First small move stays below4px threshold:59 Graph publications in instrumented cases.",
+    "setup": "Public Add/connect/export fixture, then actual Open document file → DOCUMENT_VALID → Open in new session. No model injection or Human browser storage. Compare actor position permutations with identical graph identities/semantics/edge counts.",
+    "measurementWindow": "Steady moves only; pointerdown selection excluded, pointerup commit excluded from timers. CDP traces include small setup/release margins. Frame intervals and input intervals reported separately.",
+    "instrumentation": "AST try/finally body probes, count-only and timed modes, inactive global wrappers and minimal-observer archived baselines. Inclusive spans overlap; exclusive counters and separate trace categories are provided.",
+    "artifactEquivalence": "I4/R5 original JS/CSS served unchanged. Isolated HTML only prefixes asset paths. Both uninstrumented source reconstructions match all3 archive files exactly."
+  },
+  "observations": [
+    {
+      "id": "DP-M01",
+      "fact": "4-node I4 baseline Multiply38.24 input requests/s versus ImageOutput58.96; R5 37.90 versus58.86.14-node I4 Multiply28.53 versus33.08; R5 27.85 versus31.33. These are completed input/position-update throughput, not display FPS.",
+      "evidence": "aggregate-01.json; raw run04 files"
+    },
+    {
+      "id": "DP-M02",
+      "fact": "For59 publications, mounted Multiply has19544 Graph.capture,708 FieldTarget.capture,236 invalidations,118 Context-origin and118 Application-origin field notifications,236 WidgetSlot.resolve and236 actual widget updates.708 signatures remained unchanged. Two fields × two notification routes × three captures =12 field captures/publication.",
+      "evidence": "run04-003-i4-4-Multiply-mounted-timed-0.json; detail01-001-i4-14-Multiply-mounted-timed-0.json"
+    },
+    {
+      "id": "DP-M03",
+      "fact": "ImageOutput has zero fields and8924 Graph captures. Inspector-absent Multiply and ImageOutput both have6446 captures and no FieldTarget notifications. This control removes the entire Inspector, so its improvement includes inspector routing/projection overhead, not only widget DOM.",
+      "evidence": "aggregate-01.json"
+    },
+    {
+      "id": "DP-M04",
+      "fact": "I4 14-node mounted Multiply median gesture total1667.8ms/59≈28.27ms each; structuredClone1166.1ms≈69.9% of gesture time. Graph validation42.6ms≈2.6%, constant analysis8.3ms≈0.5%.4-node corresponding gesture839.1ms and clone565.9ms. Constant analysis is nested within validation, never add both totals.",
+      "evidence": "aggregate-01.json"
+    },
+    {
+      "id": "DP-M05",
+      "fact": "Workspace.route and Canvas.update each occur118 times for59 Graph publications. Rebuilding Canvas nodes/wires and repeated geometry reads are measured secondary work.14-node trace shows layout71.818ms, style30.570ms, paint19.728ms versus EventDispatch1706.348ms; separate overlapping categories must not be summed as exclusive cost.",
+      "evidence": "run04-039-i4-14-Multiply-mounted-timed-0.trace.json; aggregate-01.json"
+    },
+    {
+      "id": "DP-M06",
+      "fact": "Detail case: parameter-widget refresh236 calls takes263.7ms inclusive; actual widget update236 calls takes12.5ms. Most widget refresh cost is projection capture, not drawing numeric text.",
+      "evidence": "detail01-001-i4-14-Multiply-mounted-timed-0.json"
+    },
+    {
+      "id": "DP-M07",
+      "fact": "RAF stays near60Hz in4-node cases and roughly58–60Hz in14-node cases while position update throughput drops. The Owner25–30FPS screenshot metric cannot be identified from its crop, so exact equivalence is not claimed.",
+      "evidence": "aggregate-01.json; environment-04.json; original Human inputs"
+    },
+    {
+      "id": "DP-M08",
+      "fact": "All instrumented count patterns match across I4 and R5; all9 attributed core/editor/UI files have identical hashes. No evidence attributes this regression to the new fixed-value owner.",
+      "evidence": "source-attribution-01.json"
+    }
+  ],
+  "hypothesesAndLimits": [
+    "The Human actual graph, operation type, browser origin and FPS overlay implementation are unknown; no Butterfly node is inferred.",
+    "The local headless SwiftShader environment reproduces comparative asymmetry, not the exact Human rendering environment or a universal FPS guarantee.",
+    "Snapshot allocation is a supported dominant explanation, but no repair was applied or timed. Proposed speedups are not measured.",
+    "Only4/14-node,3-edge,zero-nested,one-context fixtures were measured. Large/nested/multicontext performance is not qualified.",
+    "Three repeats and non-concurrent matrix order permit thermal/system drift; distributions and trace overhead are retained.",
+    "Unchanged projection signatures do not imply writable/busy/token/lifetime notifications may be removed.",
+    "Setup harness failures, source-copy preparation corrections and the excluded pilot remain preserved; none invalidate historical independently authored product PASS or qualify a new product build."
+  ],
+  "boundedProposal": {
+    "firstChoice": "Within production/src/application/editor.ts, derive each synchronous EditorContext.capture/network and FieldTarget.capture from one already-detached GraphSnapshot and resolved occurrence. Reuse that call-local network for nodes/links/labels/frames rather than repeatedly invoking context.network()/graph.capture(). Keep output detached/frozen and all current guard/notification semantics. No cross-revision cache required.",
+    "whySmallest": "EditorContext.capture currently calls network five times, each network captures Graph twice, on top of its own Graph capture (11 total). Each FieldTarget.capture adds two network calls (15 Graph captures).12 field captures/publication alone account for180 Graph captures. Call-local reuse attacks the measured multiplier without weakening validation or scheduling.",
+    "affectedPaths": [
+      "production/src/application/editor.ts",
+      "focused tests/browser performance harness; eventual source/evidence manifests"
+    ],
+    "secondaryOnlyIfNeeded": "After first bounded change, rerun the same measurements. Separately consider coalescing redundant projection delivery or per-revision immutable snapshots only if still necessary and with explicit lifecycle/notification counterexamples; not bundled into this diagnosis or a broad cache rewrite.",
+    "invariants": [
+      "Canonical Graph ownership and all mutation/validation/constant-analysis steps unchanged",
+      "One drag operation and commit/cancel/Undo/Redo boundaries unchanged",
+      "Capture outputs immutable; no mutable internal document escapes",
+      "Scope/load/context/navigation/lifetime/lease/readonly/busy checked as today",
+      "Parameter edit tokens, link ABA, input type/owner reconciliation and stale rejection unchanged",
+      "No skipping Context/Application notifications solely because numeric value is unchanged",
+      "Locale, disposal, widget re-resolution, focused drafts and IME behavior preserved"
+    ],
+    "requiredRepairEvidence": [
+      "Exact new I/R and independent targeted review after source repair",
+      "Re-run same immutable fixtures/matrix, count reductions and inclusive/self/trace evidence",
+      "Focused lifetime/token/ABA/readonly/busy/navigation/Undo/Redo/drag-cancel and graph validation regressions",
+      "Affected S02 replacement, S03 nested Inspector, S04 admission and S05 Uniform/function/fixed-value protection checks"
+    ]
+  },
+  "overhead": [
+    {
+      "actor": "Multiply",
+      "minimalObserverMedianMs": 2102.9000000059605,
+      "globalWrappersInactiveMedianMs": 2102.9000000059605,
+      "countOnlyMedianMs": 2137.9000000059605,
+      "timedMedianMs": 2131.2000000029802,
+      "globalWrapperVsMinimalPercent": 0,
+      "countVsWrappedBaselinePercent": 1.6643682533596937,
+      "timedVsWrappedBaselinePercent": 1.3457606161462632
+    },
+    {
+      "actor": "Image output",
+      "minimalObserverMedianMs": 1767.3999999910593,
+      "globalWrappersInactiveMedianMs": 1813.699999988079,
+      "countOnlyMedianMs": 1815.699999988079,
+      "timedMedianMs": 1965.7999999970198,
+      "globalWrapperVsMinimalPercent": 2.6196673077545585,
+      "countVsWrappedBaselinePercent": 0.11027182003711111,
+      "timedVsWrappedBaselinePercent": 8.386171914315522
+    }
+  ],
+  "artifactIndex": {
+    "primary": "execution-04.json",
+    "aggregate": "aggregate-01.json",
+    "detail": "execution-detail-01.json",
+    "minimal": "execution-minimal-01.json",
+    "environment": "environment-04.json",
+    "source": "source-attribution-01.json",
+    "fixtures": "fixture-identities-01.json",
+    "buildEquivalence": "build-equivalence-01.json",
+    "setupHistory": "setup-observations-01.json",
+    "preservation": "preservation-check-01.json",
+    "manifest": "manifest-01.json"
+  },
+  "counters": {
+    "continuation": 2,
+    "attempt": 2,
+    "retriesUsed": 0,
+    "priorMeasurements": 0,
+    "repairAttempts": 0,
+    "unsuccessfulReviewRounds": 0,
+    "legacyGroup": "repairAttempt2 / unsuccessful0 / globalReview4PASS retained",
+    "uniformGroup": "initialFAIL1 / repair1 / review2PASS retained"
+  },
+  "finalState": {
+    "HEAD": "bc74bd9aa7f2d357815cd0dfd0afa0b6088eee3a",
+    "trackedFilesUnchanged": 3627,
+    "untrackedPreimagesUnchanged": 109,
+    "noCommit": true,
+    "productOptimizationImplemented": false,
+    "noDeployment": true,
+    "noStateChange": true,
+    "independentPassClaim": false,
+    "humanAcceptance": "NOT_GRANTED",
+    "S05": "ACTIVE_INCOMPLETE",
+    "next": "Coordinator reconciliation then already-authorized bounded optimization; no further generic Human go-ahead needed",
+    "writer": "STOP_WRITING"
+  }
+}

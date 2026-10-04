@@ -1,0 +1,101 @@
+{
+  "packetType": "COORDINATOR_DELIVERY_RESULT",
+  "recordedAt": "2026-10-04T04:30:45.514Z",
+  "status": "VERIFIED_DEPLOYMENT_READY_FOR_TARGETED_HUMAN_RETEST",
+  "sliceId": "S05",
+  "implementationI": "b0d61c61d35908f6332b439aae539ce87bf854c5",
+  "reviewedR": "cfcde2ac26908c1850ade4d387d5ab41ab72ee11",
+  "buildId": "S05-web-b0d61c6",
+  "review": {
+    "file": "C:/Users/user/.codex/worktrees/s05-legacy-import-review-01/Grape/.verification/s05-legacy-import-review-01/INDEPENDENT_REVIEW_RESULT.json",
+    "sha256": "86235a7e86cf7511ce04abe5b6f44ee11e3817011d21f7e2ec2e3cabf1150aab",
+    "bytes": 70797
+  },
+  "reviewReconciliation": {
+    "file": "production/evidence/coordinator/s05/review-03/reconciliation-01.json",
+    "sha256": "a40b927109487aa59f646e933567e1a2f6dd4999b8a3462d2fb198d8c890ab8c",
+    "bytes": 1451
+  },
+  "browserCheck": {
+    "file": "production/evidence/coordinator/s05/preview-03/browser-check-01/result.json",
+    "sha256": "a1c51658f28cbcd8e19e4404d0c2bee2730ae637898e21c356e52e4daac5ceb9",
+    "bytes": 274570
+  },
+  "serviceConfig": {
+    "file": "production/evidence/coordinator/s05/preview-03/service-config-01.json",
+    "sha256": "4bd2454dbc0e07be6b08a9d22fd9422ba64b7eeec007e0d2891a760f2c7e5a67",
+    "bytes": 3560
+  },
+  "launch": {
+    "file": "production/evidence/coordinator/s05/preview-03/launch-result-01.json",
+    "sha256": "058eac3ab008d00a40fd2121ad6183083dd5c02583267111b01c336f6ad915b1",
+    "bytes": 987
+  },
+  "process": {
+    "pid": 11340,
+    "creationDate": "2026-10-04T04:26:21.1267310Z",
+    "commandLine": "\"C:\\Program Files\\nodejs\\node.exe\" .verification/serve-reviewed-preview-01.mjs C:\\Users\\user\\source\\Grape\\production\\evidence\\coordinator\\s05\\preview-03\\service-config-01.json"
+  },
+  "entries": [
+    {
+      "address": "127.0.0.1",
+      "entry": "http://127.0.0.1:4194/review.html",
+      "bundle": "http://127.0.0.1:4194/s05-legacy-retest-b0d61c6.zip",
+      "instructions": "http://127.0.0.1:4194/RETEST.txt"
+    },
+    {
+      "address": "192.168.1.105",
+      "entry": "http://192.168.1.105:4194/review.html",
+      "bundle": "http://192.168.1.105:4194/s05-legacy-retest-b0d61c6.zip",
+      "instructions": "http://192.168.1.105:4194/RETEST.txt"
+    },
+    {
+      "address": "100.83.88.97",
+      "entry": "http://100.83.88.97:4194/review.html",
+      "bundle": "http://100.83.88.97:4194/s05-legacy-retest-b0d61c6.zip",
+      "instructions": "http://100.83.88.97:4194/RETEST.txt"
+    }
+  ],
+  "bundle": {
+    "file": "production/evidence/coordinator/s05/preview-03/s05-legacy-retest-b0d61c6.zip",
+    "sha256": "6c1663d5aacfa31969ae16becb2c709d0d2206c16a10654b3cfec5570835911f",
+    "bytes": 2673
+  },
+  "instructions": {
+    "file": "production/evidence/coordinator/s05/preview-03/RETEST.txt",
+    "sha256": "0b7211ec502bb7794fa89c279c3bbc5af575b43a8b239e0f4f1d9240ed9d41a3",
+    "bytes": 1268
+  },
+  "sample": {
+    "file": "production/evidence/s05/repair-02/samples/legacy-owner.grape.json",
+    "sha256": "2bc735a55637ee42f7beeef7687a6e687fa62a8154dfc36cef3d4ebc152fbb86",
+    "bytes": 10296
+  },
+  "verification": {
+    "servedFilesPerOrigin": 19,
+    "origins": 3,
+    "browser": "151.0.7922.34",
+    "strictInspection": "DOCUMENT_VALID",
+    "publicOpenExplicitUpgradeExpandGenerationSaveReopen": "PASS",
+    "visualInspection": "Coordinator inspected saved valid-import and deployed-upgraded localhost screenshots: DOCUMENT_VALID, correct I/R header, connected Image Output, successful generation and saved state",
+    "sameMachine": true,
+    "secondDevice": false,
+    "isolatedContexts": true,
+    "humanStorageUntouched": true
+  },
+  "humanRetestScope": "Only the corrected legacy-owner.grape.json upgrade flow. Other Owner-tested items do not require repetition for this sample-only correction.",
+  "vertexObservation": {
+    "file": "production/evidence/coordinator/s05/vertex-observation-01/human-clarification-01.json",
+    "sha256": "3efc6b9b13175bf60aaa61569c0247df4cd29411770fd99b84074e7d753a0bc1",
+    "bytes": 1588
+  },
+  "priorDelivery": "Port4193 and all original reports, samples and PASS/FAIL scope remain preserved; use newly downloaded sample for this retest.",
+  "limitations": [
+    "Operational delivery verification is not an independent product verdict.",
+    "Independent PASS remains bound to I/R, not any later persistence commit.",
+    "Human acceptance of repaired candidate and full S05 completion are not inferred."
+  ],
+  "productAcceptance": "NOT_GRANTED",
+  "publication": "NOT_AUTHORIZED_FOR_S05",
+  "nextAction": "Original designated maintainer persists raw independent review and operational receipts byte-for-byte; present exact deployed candidate for targeted Human retest."
+}

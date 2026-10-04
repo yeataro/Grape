@@ -1,0 +1,49 @@
+{
+  "scope": "Root/state/unstaged tracked diff read-only checks; raw added evidence whitespace diagnosed separately after exact staging",
+  "results": [
+    {
+      "name": "bootstrap",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tools/verify-bootstrap.mjs"
+      ],
+      "cwd": "C:/Users/user/source/Grape",
+      "startedAt": "2026-10-04T07:41:52.622Z",
+      "endedAt": "2026-10-04T07:41:53.218Z",
+      "exitCode": 0,
+      "error": null,
+      "stdout": "checks/bootstrap.stdout.txt",
+      "stderr": "checks/bootstrap.stderr.txt"
+    },
+    {
+      "name": "current-state",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "handoff/tools/check-implementation-state.mjs",
+        "--current"
+      ],
+      "cwd": "C:/Users/user/source/Grape",
+      "startedAt": "2026-10-04T07:41:53.218Z",
+      "endedAt": "2026-10-04T07:41:53.262Z",
+      "exitCode": 0,
+      "error": null,
+      "stdout": "checks/current-state.stdout.txt",
+      "stderr": "checks/current-state.stderr.txt"
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "C:/Users/user/source/Grape",
+      "startedAt": "2026-10-04T07:41:53.262Z",
+      "endedAt": "2026-10-04T07:41:53.304Z",
+      "exitCode": 0,
+      "error": null,
+      "stdout": "checks/diff-check.stdout.txt",
+      "stderr": "checks/diff-check.stderr.txt"
+    }
+  ]
+}

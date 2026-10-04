@@ -1,0 +1,42 @@
+{
+  "recordType": "PERMISSION_SOURCE_RECONCILIATION",
+  "recordedAt": "2026-10-04T07:57:45.085Z",
+  "request": "Human asks whether the LAN/Tailscale block comes from OpenAI/Codex or the Grape repository, after deployment.",
+  "observedBlockingLayer": "Codex exec automatic approval review at the runtime sandbox boundary",
+  "actualRejection": "production/evidence/s05/review-06/independent-review/network-approval-rejection-01.json",
+  "rejectionMeaning": "Serving the candidate archive over LAN/Tailscale was classified as sensitive egress; authorization obtained through another thread's tool output was not accepted as trusted user authorization specifying payload/destinations.",
+  "repositoryRule": {
+    "file": "workflow/PACKETS.md",
+    "line": 101,
+    "meaning": "Required evidence gaps prevent a PASS verdict. This is not a rule forbidding a localhost-only engineering preview."
+  },
+  "localConfigObserved": {
+    "file": "C:/Users/user/.codex/config.toml",
+    "approval_policy": "never",
+    "approvals_reviewer": "user",
+    "sandbox_mode": "danger-full-access",
+    "hasAutoReviewPolicySection": false,
+    "hasGuardianPolicyOverride": false,
+    "repositoryConfigPresent": false
+  },
+  "effectiveCurrentTask": {
+    "sandbox_mode": "workspace-write",
+    "approvals_reviewer": "auto_review",
+    "network": "restricted",
+    "source": "Effective environment configuration for this active task, not inferred from repository files"
+  },
+  "configurationLimit": "The visible global config does not match this task's effective permissions. No read evidence establishes the exact app/managed/task setting responsible for that override; do not claim it is a universal OpenAI LAN ban or a Human-configured repository rule.",
+  "officialDocumentation": {
+    "url": "https://learn.chatgpt.com/docs/sandboxing/auto-review",
+    "relevant": "Auto-review adjudicates boundary escalation. On explicit denial, use a materially safer alternative or ask Human; it does not itself expand permission boundaries."
+  },
+  "saferAlternative": {
+    "status": "DEPLOYED_LOCAL_ONLY",
+    "origin": "http://127.0.0.1:4196",
+    "scope": "Verified static candidate, samples and guides; no LAN/Tailscale listener or rejection workaround"
+  },
+  "settingsChanged": false,
+  "permissionQuestion": "Prior explicit three-destination question remains unanswered; latest complaint/explanation request is not registered as a LAN/Tailscale answer.",
+  "coordinatorCorrection": "Stopping localhost delivery together with the unresolved remote review gap was an overly broad workflow interpretation. Local engineering preview and formal acceptance are distinct."
+}
+

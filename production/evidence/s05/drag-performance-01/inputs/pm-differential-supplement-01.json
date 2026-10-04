@@ -1,0 +1,22 @@
+{
+  "packetType": "PM_DIAGNOSTIC_SUPPLEMENT",
+  "recordedAt": "2026-10-04T06:10:12.682Z",
+  "actionKey": "yeataro/Grape:S05:drag-performance-diagnosis:676c339:01",
+  "findingGroup": "S05-FG-DRAG-PERFORMANCE-01",
+  "source": {
+    "threadId": "01a1010f-2b35-7861-bb35-0e7e9b0b42a9",
+    "role": "Technical Product Steward / PM",
+    "transport": "Direct PM send_message_to_thread supplement; static analysis, not measured verdict"
+  },
+  "observation": "Human comparison: computational-node dragging slow, Image Output dragging fine. Multiply has two parameters while Image Output has none; compare actual identified node types.",
+  "pmStaticTrace": [
+    "modules/nodes.ts:145 Multiply A/B parameters; :240 Image Output parameters empty and image-current inherits them",
+    "features/inspector.ts creates one FieldTarget per selected-node parameter",
+    "application/editor.ts:1143 invalidate subscribes Context and Application at1154/1155, capture and changes.emit even if parameter projection unchanged",
+    "capture uses full context.capture/network queries; widgets target listener resolve/capture and PresentationSession view update add captures"
+  ],
+  "requiredDiagnosticAddition": "Same graph/path/input: Multiply versus Image Output and Inspector parameter fields mounted versus not mounted. Measure capture counts/time and duplicate notification costs along with prior whole-graph/DOM/layout categories.",
+  "invariants": "Preserve edit tokens, writable/busy/readonly, stale/lifetime and History protections. No change to product source in diagnosis.",
+  "notEstablished": "Dominant cause still unmeasured. Do not call this slow Multiply shader arithmetic.",
+  "authority": "No new product/architecture change or new writer. Same diagnosis/action/finding group; counts unchanged."
+}

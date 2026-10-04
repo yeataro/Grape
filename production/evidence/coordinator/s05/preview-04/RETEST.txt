@@ -1,0 +1,14 @@
+Grape S05 — Replace 相容性提示重試
+版本：S05-web-ee1212f；受審版本：29695b3
+
+這次只需確認 Replace 的提示與操作，其他已測項目不用重做。
+legacy-owner.grape.json 與上一包完全相同，可以沿用手上的檔案。
+ZIP 解壓後，範例與本說明都在最外層。
+
+1. 先保存目前工作。確認測試頁頂端顯示 S05-web-ee1212f。
+2. 按 Open file，選 legacy-owner.grape.json。DOCUMENT_VALID 表示檔案有效；下方會另行說明能否替換目前圖。若模組版本或輸出設定不同，Accept replacement (one Undo) 會停用，並提示使用 Open in new session；Close 與 Export original 仍可用。
+3. 按 Open in new session；出現放棄未保存內容的確認時，確認工作已保存後再繼續。新開啟仍應正常。
+4. 要測可成功的 Replace：開啟原範例後暫時不要升級，先按 Add Float，再 Open file 選同一份原範例。此時 Replace 應可用；按下後新增的 Float 移除，一次 Undo 恢復，一次 Redo 再次移除。
+5. 最後按 Upgrade subgraph owners，子圖初始模式應為 Expand。Generate GLSL、Save、重新整理後 Open saved 都應可用。升級後與原範例的模組版本不同，Replace 停用是預期保護。
+
+文件本身有效與可替換目前图是兩項不同檢查。若原圖在檢查後有變動，Replace 會要求重新檢查，以保留目前內容及 Undo。

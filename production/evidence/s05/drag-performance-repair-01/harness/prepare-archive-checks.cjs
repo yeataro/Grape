@@ -1,0 +1,35 @@
+const fs=require('fs'),path=require('path'),crypto=require('crypto');
+const root='C:/Users/user/source/Grape',scratch=root+'/.verification/s05-drag-performance-repair-01',out=root+'/production/evidence/s05/drag-performance-repair-01';
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+let source=fs.readFileSync(root+'/production/tools/s05-values-archive-check.ts','utf8');
+source=source.replace('from "@playwright/test"','from "./runtime/production/node_modules/@playwright/test/index.mjs"').replaceAll('from "../tests/','from "./runtime/production/tests/');
+source='// Private adaptation of the unchanged production archive checker: adds real compiled-stage numeric results after public reopen.\n'+source;
+source=source.replace('const arg =', 'import { executeGL } from "./runtime/production/tests/fixtures/s05-webgl.ts";\nimport { executeLinkedUniforms } from "./runtime/production/tests/fixtures/s05-linked-webgl.ts";\nconst arg =');
+source=source.replace('chromium.launch()', 'chromium.launch({args:["--enable-logging=stderr"]})');
+source=source.replace('      await page.screenshot({',`      const numeric = item ? await (async () => {
+        const text = await page.getByLabel("Generated GLSL").innerText();
+        const pieces = text.split(/^\/\/ (vertex|pixel)\\n/gm);
+        const artifacts=[]; for(let i=1;i<pieces.length;i+=2) artifacts.push({key:pieces[i],text:pieces[i+1].trim()});
+        assert.equal(artifacts.length,2,"Both generated shader stages must be present");
+        const compilation={status:"success",artifacts,diagnostics:[],bindingSchema:[]};
+        const expected=Array.isArray(item.edited)?[...item.edited]:[item.edited,item.edited,item.edited,item.edited];
+        while(expected.length<4)expected.push(expected.length===3?1:0);
+        const gl=r.stage==='vertex'?await page.evaluate(executeLinkedUniforms,compilation):await page.evaluate(executeGL,compilation);
+        const actual=r.stage==='vertex'?gl.position:gl.pixels;
+        for(let i=0;i<4;i++)assert.ok(Math.abs(actual[i]-(r.stage==='vertex'?expected[i]:Math.round(expected[i]*255)))<=(r.stage==='vertex'?1e-6:1),JSON.stringify({actual,expected,stage:r.stage}));
+        return {stage:r.stage,expected,actual,gl,status:'PASS'};
+      })() : null;
+      await page.screenshot({`);
+source=source.replace('        sample: r,\n        document,','        sample: r,\n        numeric,\n        document,');
+// CRLF source replacement must target the normalized private copy only.
+if(!source.includes('        numeric,'))source=source.replace('        sample: r,\r\n        document,','        sample: r,\r\n        numeric,\r\n        document,');
+fs.writeFileSync(scratch+'/archive-public-numeric-01.ts',source,{flag:'wx'});
+let origin=fs.readFileSync(root+'/production/evidence/s05/review-05/independent-review/archive-origin-smoke-02.ts','utf8');
+origin=origin.replace('// PROPOSED ONLY. Never run until the Human specifically authorizes the bounded LAN/VPN exposure below.','// Repair replay under existing directly verified Human LAN/Tailscale authorization; scoped static assets only. Original preserved unchanged.');
+origin=origin.replace("const out=path.dirname(import.meta.filename),dir=path.join(out,'archive-origin-approved-02');",`const out=path.dirname(import.meta.filename),dir=process.env.GRAPE_EVIDENCE_DIR;assert.ok(dir&&path.isAbsolute(dir));assert.equal(process.argv[process.argv.indexOf('--output')+1],path.join(dir,'result.json').replaceAll('\\\\','/'));`);
+origin=origin.replace("const base=path.join(out,'runtime/production/evidence/s05/catalog-values-01')",`const base='${out}'`);
+origin=origin.replace("'archive-extract-01'","'archive-public-extract-01'").replace('samples-02/vec2-pixel-function.grape.json','samples/vec2-pixel-function.grape.json').replace('chromium.launch()','chromium.launch({args:["--enable-logging=stderr"]})');
+fs.writeFileSync(scratch+'/archive-origin-replay-01.ts',origin,{flag:'wx'});
+fs.mkdirSync(out+'/harness',{recursive:true});
+for(const f of ['archive-public-numeric-01.ts','archive-origin-replay-01.ts'])fs.copyFileSync(scratch+'/'+f,out+'/harness/'+f,fs.constants.COPYFILE_EXCL);
+fs.writeFileSync(out+'/harness/adaptation-01.json',JSON.stringify({originals:[{file:'production/tools/s05-values-archive-check.ts',sha256:sha(fs.readFileSync(root+'/production/tools/s05-values-archive-check.ts'))},{file:'production/evidence/s05/review-05/independent-review/archive-origin-smoke-02.ts',sha256:sha(fs.readFileSync(root+'/production/evidence/s05/review-05/independent-review/archive-origin-smoke-02.ts'))}],changes:['Disposable runtime import paths and candidate manifest/output paths','Public checker adds actual compiled shader-stage numeric results using existing WebGL oracles after save/file reopen','Origin checker keeps 3-asset static allowlist and explicit approved IPs; no source endpoints','No product tool or original reviewer probe modified']},null,2)+'\n',{flag:'wx'});

@@ -29,6 +29,7 @@ import { Graph } from "../model/graph.ts";
 import { compile } from "../generation/compiler.ts";
 import { parseJSON } from "../persistence/codec.ts";
 import { validateDocumentStructure } from "../sdk/document-validation.ts";
+import { sha256Digest } from "./digest.ts";
 
 export const PERSONAL_LIMITS = Object.freeze({
   files: 64,
@@ -53,16 +54,7 @@ const stable = (v: unknown): string =>
         "}"
       : JSON.stringify(v);
 async function digest(value: unknown): Promise<string> {
-  return [
-    ...new Uint8Array(
-      await crypto.subtle.digest(
-        "SHA-256",
-        new TextEncoder().encode(stable(value)),
-      ),
-    ),
-  ]
-    .map((x) => x.toString(16).padStart(2, "0"))
-    .join("");
+  return sha256Digest(new TextEncoder().encode(stable(value)));
 }
 function node(
   def: NonNullable<ReturnType<DefinitionSet["node"]>>,

@@ -1,0 +1,149 @@
+[
+  {
+    "id": "bootstrap-01",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "tools/verify-bootstrap.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-legacy-import-review-01\\Grape",
+    "start": "2026-10-04T04:19:40.710Z",
+    "end": "2026-10-04T04:19:41.513Z",
+    "exitCode": 0,
+    "log": "bootstrap-01.log"
+  },
+  {
+    "id": "state-01",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "handoff/tools/check-implementation-state.mjs",
+      "--current"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-legacy-import-review-01\\Grape",
+    "start": "2026-10-04T04:19:41.513Z",
+    "end": "2026-10-04T04:19:41.561Z",
+    "exitCode": 0,
+    "log": "state-01.log"
+  },
+  {
+    "id": "bootstrap-tests-01",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "--test",
+      "--test-isolation=none",
+      "tools/verify-bootstrap.test.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-legacy-import-review-01\\Grape",
+    "start": "2026-10-04T04:19:41.562Z",
+    "end": "2026-10-04T04:19:46.702Z",
+    "exitCode": 0,
+    "log": "bootstrap-tests-01.log"
+  },
+  {
+    "id": "typecheck-01",
+    "command": [
+      "npm.cmd",
+      "--prefix",
+      "production",
+      "run",
+      "typecheck"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-legacy-import-review-01\\Grape",
+    "start": "2026-10-04T04:19:46.702Z",
+    "end": "2026-10-04T04:19:47.921Z",
+    "exitCode": 0,
+    "log": "typecheck-01.log"
+  },
+  {
+    "id": "conformance-01",
+    "command": [
+      "npm.cmd",
+      "--prefix",
+      "production",
+      "run",
+      "conformance"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-legacy-import-review-01\\Grape",
+    "start": "2026-10-04T04:19:47.921Z",
+    "end": "2026-10-04T04:19:48.712Z",
+    "exitCode": 0,
+    "log": "conformance-01.log"
+  },
+  {
+    "id": "targeted-unit-01",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "--experimental-transform-types",
+      "--test",
+      "--test-isolation=none",
+      "production/tests/unit/s05.test.ts",
+      "production/tests/unit/s05-uniforms.test.ts",
+      "production/tests/unit/persistence.test.ts"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-legacy-import-review-01\\Grape",
+    "start": "2026-10-04T04:19:48.712Z",
+    "end": "2026-10-04T04:19:50.531Z",
+    "exitCode": 0,
+    "log": "targeted-unit-01.log"
+  },
+  {
+    "id": "build-01",
+    "command": [
+      "npm.cmd",
+      "--prefix",
+      "production",
+      "run",
+      "build"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-legacy-import-review-01\\Grape",
+    "start": "2026-10-04T04:19:50.532Z",
+    "end": "2026-10-04T04:19:52.625Z",
+    "exitCode": 0,
+    "log": "build-01.log"
+  },
+  {
+    "id": "samples-01",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "--experimental-transform-types",
+      "production/tools/s05-samples.ts",
+      "C:\\Users\\user\\.codex\\worktrees\\s05-legacy-import-review-01\\Grape\\.verification\\s05-legacy-import-review-01\\samples-replay-01"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-legacy-import-review-01\\Grape",
+    "start": "2026-10-04T04:19:52.628Z",
+    "end": "2026-10-04T04:19:53.118Z",
+    "exitCode": 0,
+    "log": "samples-01.log"
+  },
+  {
+    "id": "diff-check-raw-01",
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "7590935c0b11f351561c832adb19f03248c0517e..HEAD"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-legacy-import-review-01\\Grape",
+    "start": "2026-10-04T04:19:53.119Z",
+    "end": "2026-10-04T04:19:53.201Z",
+    "exitCode": 2,
+    "log": "diff-check-raw-01.log"
+  },
+  {
+    "id": "diff-check-authored-01",
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "7590935c0b11f351561c832adb19f03248c0517e..HEAD",
+      "--",
+      ".",
+      ":(exclude)production/evidence/coordinator/s05/owner-review-legacy-import-01/dispatch-parent-intent-01.json",
+      ":(exclude)production/evidence/coordinator/s05/owner-review-legacy-import-01/dispatch-parent-result-01.json"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-legacy-import-review-01\\Grape",
+    "start": "2026-10-04T04:19:53.201Z",
+    "end": "2026-10-04T04:19:53.281Z",
+    "exitCode": 0,
+    "log": "diff-check-authored-01.log"
+  }
+]

@@ -1,0 +1,42 @@
+
+Running 1 test using 1 worker
+
+  x  1 [chromium] › tests\browser\s05-values.spec.ts:10:1 › S05 fixed values backend feasibility: all leaves stages modes and components execute (1.4s)
+
+
+  1) [chromium] › tests\browser\s05-values.spec.ts:10:1 › S05 fixed values backend feasibility: all leaves stages modes and components execute 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: undefined
+
+      45 |   for (const row of rows) {
+      46 |     expect(row.unchanged).toBe(true);
+    > 47 |     expect(row.result.error).toBe(0);
+         |                              ^
+      48 |     if (row.stage === "pixel")
+      49 |       row.expected.forEach((v, i) =>
+      50 |         expect(
+        at C:\Users\user\source\Grape\production\tests\browser\s05-values.spec.ts:47:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-feasibility-01\results\s05-values-S05-fixed-value-c3244-odes-and-components-execute-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: evidence\s05\catalog-values-01\browser-feasibility-01\results\s05-values-S05-fixed-value-c3244-odes-and-components-execute-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\s05\catalog-values-01\browser-feasibility-01\results\s05-values-S05-fixed-value-c3244-odes-and-components-execute-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\s05\catalog-values-01\browser-feasibility-01\results\s05-values-S05-fixed-value-c3244-odes-and-components-execute-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests\browser\s05-values.spec.ts:10:1 › S05 fixed values backend feasibility: all leaves stages modes and components execute 
+[WebServer] (node:50180) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:53176) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

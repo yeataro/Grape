@@ -1,0 +1,14 @@
+{
+  "scope": "Minimal Application-owned replacement eligibility and explanatory UI correction under current packet authorizedScope/allowedRepairScope; no change to exact pins, kind/profile, lifecycle or mutation authority.",
+  "necessaryPresentationPaths": [
+    "production/apps/web/main.ts",
+    "production/apps/web/shell-copy.ts"
+  ],
+  "pathRationale": "The packet expressly authorizes UI eligibility/error-message repair. Its src/** directory pattern does not name the existing web shell, whose current owner is apps/web/main.ts and shell-copy.ts. These two narrow existing owner files are required to deliver that requested behavior; placing shell DOM work inside the model/application would violate ownership. This is an implementation path reconciliation, not new product authority or an edit to packet bytes. Prior running S05 composition clarification also identified main.ts as ordinary authorized UI integration.",
+  "excluded": "No other apps files, styles, provider/module semantics, policy or decision edits.",
+  "explicitOriginalPacket": {
+    "file": "production/evidence/coordinator/s05/owner-review-legacy-replacement-01/implementer-packet-01.json",
+    "sha256": "5beb72ba873ebbc061799cf8137855067dea3b67b359b697656aa95da8b529a0",
+    "bytes": 14552
+  }
+}

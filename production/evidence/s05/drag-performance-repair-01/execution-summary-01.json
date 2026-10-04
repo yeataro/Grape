@@ -1,0 +1,306 @@
+{
+  "implementationI": "aa4c86e20b0b4b54218b9992921578e7f24a28a2",
+  "checks": [
+    {
+      "file": "checks/archive-origin-01.json",
+      "started": "2026-10-04T07:14:46.098Z",
+      "ended": "2026-10-04T07:15:00.104Z",
+      "cwd": "C:/Users/user/source/Grape/.verification/s05-drag-performance-repair-01",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--experimental-transform-types",
+        "C:/Users/user/source/Grape/.verification/s05-drag-performance-repair-01/archive-origin-replay-01.ts",
+        "--output",
+        "C:/Users/user/source/Grape/production/evidence/s05/drag-performance-repair-01/archive-origin-01/result.json"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "archive-origin-01.log"
+    },
+    {
+      "file": "checks/archive-public-01.json",
+      "started": "2026-10-04T07:14:02.880Z",
+      "ended": "2026-10-04T07:14:17.975Z",
+      "cwd": "C:/Users/user/source/Grape/.verification/s05-drag-performance-repair-01/runtime",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--experimental-transform-types",
+        "C:/Users/user/source/Grape/.verification/s05-drag-performance-repair-01/archive-public-numeric-01.ts",
+        "--manifest",
+        "C:/Users/user/source/Grape/production/evidence/s05/drag-performance-repair-01/build-manifest-01.json",
+        "--output",
+        "C:/Users/user/source/Grape/production/evidence/s05/drag-performance-repair-01/archive-public-01/result.json",
+        "--scratch",
+        "C:/Users/user/source/Grape/.verification/s05-drag-performance-repair-01/archive-public-extract-01"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "archive-public-01.log"
+    },
+    {
+      "file": "checks/boundaries-01.json",
+      "started": "2026-10-04T07:05:50.805Z",
+      "ended": "2026-10-04T07:05:51.313Z",
+      "cwd": "C:/Users/user/source/Grape/production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tools/boundaries.mjs"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "boundaries-01.log"
+    },
+    {
+      "file": "checks/browser-full-01.json",
+      "started": "2026-10-04T07:07:11.553Z",
+      "ended": "2026-10-04T07:08:42.253Z",
+      "cwd": "C:/Users/user/source/Grape/.verification/s05-drag-performance-repair-01/runtime/production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "--config",
+        "C:/Users/user/source/Grape/.verification/s05-drag-performance-repair-01/browser.config.mjs",
+        "--grep-invert",
+        "S05 served HTTP (192\\.168\\.1\\.105|100\\.83\\.88\\.97)",
+        "--output",
+        "C:/Users/user/source/Grape/production/evidence/s05/drag-performance-repair-01/browser-full-01/results"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "browser-full-01.log"
+    },
+    {
+      "file": "checks/build-feasibility-01.json",
+      "started": "2026-10-04T07:05:51.100Z",
+      "ended": "2026-10-04T07:05:51.759Z",
+      "cwd": "C:/Users/user/source/Grape/production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "build-feasibility-01.log"
+    },
+    {
+      "file": "checks/build-final-01.json",
+      "started": "2026-10-04T07:10:09.782Z",
+      "ended": "2026-10-04T07:10:10.364Z",
+      "cwd": "C:/Users/user/source/Grape/production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "build-final-01.log"
+    },
+    {
+      "file": "checks/fixtures-final-01.json",
+      "started": "2026-10-04T07:16:01.241Z",
+      "ended": "2026-10-04T07:16:06.803Z",
+      "cwd": "C:/Users/user/source/Grape",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "tools/verify-bootstrap.test.mjs"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "fixtures-final-01.log"
+    },
+    {
+      "file": "checks/fixtures-intake-01.json",
+      "started": "2026-10-04T07:03:34.599Z",
+      "ended": "2026-10-04T07:03:39.876Z",
+      "cwd": "C:/Users/user/source/Grape",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "--test-isolation=none",
+        "tools/verify-bootstrap.test.mjs"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "fixtures-intake-01.log"
+    },
+    {
+      "file": "checks/focused-capture-01.json",
+      "started": "2026-10-04T07:05:35.528Z",
+      "ended": "2026-10-04T07:05:35.721Z",
+      "cwd": "C:/Users/user/source/Grape/production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--experimental-transform-types",
+        "--test",
+        "--test-isolation=none",
+        "tests/unit/s05-drag-capture.test.ts"
+      ],
+      "exitCode": 1,
+      "error": null,
+      "stdoutFile": "focused-capture-01.log"
+    },
+    {
+      "file": "checks/module-pins-01.json",
+      "started": "2026-10-04T07:05:50.527Z",
+      "ended": "2026-10-04T07:05:50.576Z",
+      "cwd": "C:/Users/user/source/Grape/production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tools/module-pins.mjs"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "module-pins-01.log"
+    },
+    {
+      "file": "checks/performance-01.json",
+      "started": "2026-10-04T07:10:50.269Z",
+      "ended": "2026-10-04T07:13:11.116Z",
+      "cwd": "C:/Users/user/source/Grape/.verification/s05-drag-performance-repair-01/performance",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "measure.cjs",
+        "--output",
+        "C:/Users/user/source/Grape/production/evidence/s05/drag-performance-repair-01/performance-01/execution-04.json"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "performance-01.log"
+    },
+    {
+      "file": "checks/root-final-01.json",
+      "started": "2026-10-04T07:16:00.986Z",
+      "ended": "2026-10-04T07:16:01.688Z",
+      "cwd": "C:/Users/user/source/Grape",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tools/verify-bootstrap.mjs"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "root-final-01.log"
+    },
+    {
+      "file": "checks/root-intake-01.json",
+      "started": "2026-10-04T07:03:34.067Z",
+      "ended": "2026-10-04T07:03:34.777Z",
+      "cwd": "C:/Users/user/source/Grape",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tools/verify-bootstrap.mjs"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "root-intake-01.log"
+    },
+    {
+      "file": "checks/state-final-01.json",
+      "started": "2026-10-04T07:16:00.987Z",
+      "ended": "2026-10-04T07:16:01.039Z",
+      "cwd": "C:/Users/user/source/Grape",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "handoff/tools/check-implementation-state.mjs",
+        "--current"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "state-final-01.log"
+    },
+    {
+      "file": "checks/state-intake-01.json",
+      "started": "2026-10-04T07:03:34.330Z",
+      "ended": "2026-10-04T07:03:34.385Z",
+      "cwd": "C:/Users/user/source/Grape",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "handoff/tools/check-implementation-state.mjs",
+        "--current"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "state-intake-01.log"
+    },
+    {
+      "file": "checks/typecheck-01.json",
+      "started": "2026-10-04T07:05:35.272Z",
+      "ended": "2026-10-04T07:05:36.158Z",
+      "cwd": "C:/Users/user/source/Grape/production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "typecheck-01.log"
+    },
+    {
+      "file": "checks/typecheck-final-01.json",
+      "started": "2026-10-04T07:09:13.191Z",
+      "ended": "2026-10-04T07:09:14.019Z",
+      "cwd": "C:/Users/user/source/Grape/production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "typecheck-final-01.log"
+    },
+    {
+      "file": "checks/unit-conformance-01.json",
+      "started": "2026-10-04T07:05:50.239Z",
+      "ended": "2026-10-04T07:05:58.868Z",
+      "cwd": "C:/Users/user/source/Grape/production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--experimental-transform-types",
+        "--test",
+        "--test-isolation=none",
+        "tests/unit/*.test.ts",
+        "tests/conformance/*.test.ts"
+      ],
+      "exitCode": 0,
+      "error": null,
+      "stdoutFile": "unit-conformance-01.log"
+    }
+  ],
+  "counts": {
+    "bootstrapChecks": 471,
+    "indexedFiles": 411,
+    "frozenFiles": 412,
+    "bootstrapFixtures": 10,
+    "unitConformance": 227,
+    "browserLoopback": 106,
+    "staticArchiveOrigins": 2,
+    "archivedPublicSamples": 13,
+    "archivedNumericSamples": 12,
+    "performanceDrags": 78,
+    "modulePins": 10,
+    "boundaryFiles": 55
+  },
+  "excludedBrowserCases": {
+    "count": 2,
+    "pattern": "S05 served HTTP (192.168.1.105|100.83.88.97)",
+    "reason": "Avoid development-source exposure; independently hashed static archive equivalents executed instead",
+    "equivalent": "archive-origin-01/result.json"
+  },
+  "retainedInitialFailure": {
+    "file": "checks/focused-capture-01.log",
+    "cause": "New focused fixture re-granted existing panel test authority; fixture corrected to unique capture-test. Full227-test execution contains all3 corrected focused cases.",
+    "productFailure": false
+  },
+  "metadataCheckpointHistory": {
+    "first": "226dc3a13d31ca4f59ad7dde7151390bcaebaf8e",
+    "completion": "7298e734791860692f408eec0a51d0ef52584112",
+    "cause": "15 diagnostic dist evidence paths ignored during exact staging; separate completion commit retained both original checkpoint and actual ignored-path outcome",
+    "receipt": "metadata-checkpoint-completion-01.json"
+  },
+  "independentVerdict": "NOT_CLAIMED"
+}

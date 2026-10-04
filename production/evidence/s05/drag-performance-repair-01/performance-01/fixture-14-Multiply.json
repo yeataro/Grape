@@ -1,0 +1,749 @@
+{
+  "format": "grape.document",
+  "formatVersion": {
+    "major": 2,
+    "minor": 1
+  },
+  "graph": {
+    "id": "420c2583-4523-4c07-a3b8-4d0ce5b7fe0f",
+    "name": "Untitled shader",
+    "kind": {
+      "moduleId": "grape.graph-kinds",
+      "version": "0.2.0",
+      "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+      "kindId": "grape.image"
+    },
+    "kindSettings": {},
+    "modules": [
+      {
+        "moduleId": "grape.nodes.basic",
+        "version": "0.1.0",
+        "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292"
+      },
+      {
+        "moduleId": "grape.nodes.networks",
+        "version": "0.1.0",
+        "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2"
+      },
+      {
+        "moduleId": "grape.resources.extents",
+        "version": "0.1.0",
+        "fingerprint": "sha256:bcfaaca3ef01c57070e05b26e09bbcacde5d51f6ba0091b8b6aaf3d83efa3c60"
+      },
+      {
+        "moduleId": "grape.resources.image-sources",
+        "version": "0.2.0",
+        "fingerprint": "sha256:bb0ff902b36d7a07fc104412d0ccb11e4e7efed0106aa3c8595026dbcef8b212"
+      },
+      {
+        "moduleId": "grape.resources.function-networks",
+        "version": "0.1.0",
+        "fingerprint": "sha256:25d291427adb77405f826a636cd2a7c9a5851f0017cb779ced1a13e5a9b0b9e7"
+      },
+      {
+        "moduleId": "grape.nodes.function-operations",
+        "version": "0.1.0",
+        "fingerprint": "sha256:86501aa76e15aa05f3837ec050f2f883ab6aba6932e4ee59998a864432435b01"
+      },
+      {
+        "moduleId": "grape.graph-kinds",
+        "version": "0.1.0",
+        "fingerprint": "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3"
+      },
+      {
+        "moduleId": "grape.nodes.image-output",
+        "version": "0.2.0",
+        "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+      },
+      {
+        "moduleId": "grape.graph-kinds",
+        "version": "0.2.0",
+        "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+      }
+    ],
+    "stages": [
+      {
+        "id": "b26f5d55-01f0-43a9-be4b-fbc4abf89c0d",
+        "key": "vertex",
+        "stageKindId": "grape.stage.vertex",
+        "implementation": "profile-default",
+        "network": {
+          "id": "76844313-985b-42cd-bd8e-3346aa6a9f53",
+          "nodes": [],
+          "edges": [],
+          "extensions": {}
+        },
+        "extensions": {}
+      },
+      {
+        "id": "05e886b6-0ea6-486b-876b-3aa29b7e8258",
+        "key": "pixel",
+        "stageKindId": "grape.stage.pixel",
+        "implementation": "network",
+        "network": {
+          "id": "f51a8469-df5c-429f-945a-38acda0a7c76",
+          "nodes": [
+            {
+              "id": "ff344457-6545-4c37-b9cf-48b42c4a8e06",
+              "name": "Image output",
+              "type": {
+                "moduleId": "grape.nodes.image-output",
+                "version": "0.2.0",
+                "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+                "typeId": "image-output"
+              },
+              "state": {},
+              "inputValues": {},
+              "ports": [
+                {
+                  "key": "color",
+                  "direction": "input",
+                  "type": "glsl.vec4",
+                  "supply": "required",
+                  "connectionPolicy": "numeric"
+                }
+              ],
+              "references": [],
+              "referencesComplete": true,
+              "position": [
+                60,
+                330
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "53d958ad-5e16-49cc-9573-bff8f638ee77",
+              "name": "Float",
+              "type": {
+                "moduleId": "grape.nodes.basic",
+                "version": "0.1.0",
+                "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                "typeId": "float"
+              },
+              "state": {
+                "value": 0.25
+              },
+              "inputValues": {},
+              "ports": [
+                {
+                  "key": "value",
+                  "direction": "output",
+                  "type": "glsl.float"
+                }
+              ],
+              "references": [],
+              "referencesComplete": true,
+              "position": [
+                280,
+                330
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "e34decf4-fb35-4d16-8bb0-d7054d91e363",
+              "name": "Multiply",
+              "type": {
+                "moduleId": "grape.nodes.basic",
+                "version": "0.1.0",
+                "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                "typeId": "multiply"
+              },
+              "state": {},
+              "inputValues": {
+                "a": 1,
+                "b": 2
+              },
+              "ports": [
+                {
+                  "key": "a",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 1
+                },
+                {
+                  "key": "b",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 2
+                },
+                {
+                  "key": "result",
+                  "direction": "output",
+                  "type": "glsl.float"
+                }
+              ],
+              "references": [],
+              "referencesComplete": true,
+              "position": [
+                320,
+                100
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "c4fb050c-20e0-4fdb-8d22-965901bb8098",
+              "name": "Compose",
+              "type": {
+                "moduleId": "grape.nodes.basic",
+                "version": "0.1.0",
+                "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                "typeId": "compose"
+              },
+              "state": {
+                "mode": "vec4"
+              },
+              "inputValues": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+              },
+              "ports": [
+                {
+                  "key": "x",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 0
+                },
+                {
+                  "key": "y",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 0
+                },
+                {
+                  "key": "z",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 0
+                },
+                {
+                  "key": "w",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 1
+                },
+                {
+                  "key": "result",
+                  "direction": "output",
+                  "type": "glsl.vec4"
+                }
+              ],
+              "references": [],
+              "referencesComplete": true,
+              "position": [
+                500,
+                330
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "diagnostic-extra-0",
+              "name": "Unused Multiply 0",
+              "type": {
+                "moduleId": "grape.nodes.basic",
+                "version": "0.1.0",
+                "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                "typeId": "multiply"
+              },
+              "state": {},
+              "inputValues": {
+                "a": 1,
+                "b": 2
+              },
+              "ports": [
+                {
+                  "key": "a",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 1
+                },
+                {
+                  "key": "b",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 2
+                },
+                {
+                  "key": "result",
+                  "direction": "output",
+                  "type": "glsl.float"
+                }
+              ],
+              "references": [],
+              "referencesComplete": true,
+              "position": [
+                1300,
+                100
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "diagnostic-extra-1",
+              "name": "Unused Multiply 1",
+              "type": {
+                "moduleId": "grape.nodes.basic",
+                "version": "0.1.0",
+                "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                "typeId": "multiply"
+              },
+              "state": {},
+              "inputValues": {
+                "a": 1,
+                "b": 2
+              },
+              "ports": [
+                {
+                  "key": "a",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 1
+                },
+                {
+                  "key": "b",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 2
+                },
+                {
+                  "key": "result",
+                  "direction": "output",
+                  "type": "glsl.float"
+                }
+              ],
+              "references": [],
+              "referencesComplete": true,
+              "position": [
+                1530,
+                100
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "diagnostic-extra-2",
+              "name": "Unused Multiply 2",
+              "type": {
+                "moduleId": "grape.nodes.basic",
+                "version": "0.1.0",
+                "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                "typeId": "multiply"
+              },
+              "state": {},
+              "inputValues": {
+                "a": 1,
+                "b": 2
+              },
+              "ports": [
+                {
+                  "key": "a",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 1
+                },
+                {
+                  "key": "b",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 2
+                },
+                {
+                  "key": "result",
+                  "direction": "output",
+                  "type": "glsl.float"
+                }
+              ],
+              "references": [],
+              "referencesComplete": true,
+              "position": [
+                1760,
+                100
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "diagnostic-extra-3",
+              "name": "Unused Multiply 3",
+              "type": {
+                "moduleId": "grape.nodes.basic",
+                "version": "0.1.0",
+                "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                "typeId": "multiply"
+              },
+              "state": {},
+              "inputValues": {
+                "a": 1,
+                "b": 2
+              },
+              "ports": [
+                {
+                  "key": "a",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 1
+                },
+                {
+                  "key": "b",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 2
+                },
+                {
+                  "key": "result",
+                  "direction": "output",
+                  "type": "glsl.float"
+                }
+              ],
+              "references": [],
+              "referencesComplete": true,
+              "position": [
+                1990,
+                100
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "diagnostic-extra-4",
+              "name": "Unused Multiply 4",
+              "type": {
+                "moduleId": "grape.nodes.basic",
+                "version": "0.1.0",
+                "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                "typeId": "multiply"
+              },
+              "state": {},
+              "inputValues": {
+                "a": 1,
+                "b": 2
+              },
+              "ports": [
+                {
+                  "key": "a",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 1
+                },
+                {
+                  "key": "b",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 2
+                },
+                {
+                  "key": "result",
+                  "direction": "output",
+                  "type": "glsl.float"
+                }
+              ],
+              "references": [],
+              "referencesComplete": true,
+              "position": [
+                2220,
+                100
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "diagnostic-extra-5",
+              "name": "Unused Multiply 5",
+              "type": {
+                "moduleId": "grape.nodes.basic",
+                "version": "0.1.0",
+                "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                "typeId": "multiply"
+              },
+              "state": {},
+              "inputValues": {
+                "a": 1,
+                "b": 2
+              },
+              "ports": [
+                {
+                  "key": "a",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 1
+                },
+                {
+                  "key": "b",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 2
+                },
+                {
+                  "key": "result",
+                  "direction": "output",
+                  "type": "glsl.float"
+                }
+              ],
+              "references": [],
+              "referencesComplete": true,
+              "position": [
+                2450,
+                100
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "diagnostic-extra-6",
+              "name": "Unused Multiply 6",
+              "type": {
+                "moduleId": "grape.nodes.basic",
+                "version": "0.1.0",
+                "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                "typeId": "multiply"
+              },
+              "state": {},
+              "inputValues": {
+                "a": 1,
+                "b": 2
+              },
+              "ports": [
+                {
+                  "key": "a",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 1
+                },
+                {
+                  "key": "b",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 2
+                },
+                {
+                  "key": "result",
+                  "direction": "output",
+                  "type": "glsl.float"
+                }
+              ],
+              "references": [],
+              "referencesComplete": true,
+              "position": [
+                2680,
+                100
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "diagnostic-extra-7",
+              "name": "Unused Multiply 7",
+              "type": {
+                "moduleId": "grape.nodes.basic",
+                "version": "0.1.0",
+                "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                "typeId": "multiply"
+              },
+              "state": {},
+              "inputValues": {
+                "a": 1,
+                "b": 2
+              },
+              "ports": [
+                {
+                  "key": "a",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 1
+                },
+                {
+                  "key": "b",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 2
+                },
+                {
+                  "key": "result",
+                  "direction": "output",
+                  "type": "glsl.float"
+                }
+              ],
+              "references": [],
+              "referencesComplete": true,
+              "position": [
+                2910,
+                100
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "diagnostic-extra-8",
+              "name": "Unused Multiply 8",
+              "type": {
+                "moduleId": "grape.nodes.basic",
+                "version": "0.1.0",
+                "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                "typeId": "multiply"
+              },
+              "state": {},
+              "inputValues": {
+                "a": 1,
+                "b": 2
+              },
+              "ports": [
+                {
+                  "key": "a",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 1
+                },
+                {
+                  "key": "b",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 2
+                },
+                {
+                  "key": "result",
+                  "direction": "output",
+                  "type": "glsl.float"
+                }
+              ],
+              "references": [],
+              "referencesComplete": true,
+              "position": [
+                3140,
+                100
+              ],
+              "extensions": {}
+            },
+            {
+              "id": "diagnostic-extra-9",
+              "name": "Unused Multiply 9",
+              "type": {
+                "moduleId": "grape.nodes.basic",
+                "version": "0.1.0",
+                "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                "typeId": "multiply"
+              },
+              "state": {},
+              "inputValues": {
+                "a": 1,
+                "b": 2
+              },
+              "ports": [
+                {
+                  "key": "a",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 1
+                },
+                {
+                  "key": "b",
+                  "direction": "input",
+                  "type": "glsl.float",
+                  "supply": "local",
+                  "defaultValue": 2
+                },
+                {
+                  "key": "result",
+                  "direction": "output",
+                  "type": "glsl.float"
+                }
+              ],
+              "references": [],
+              "referencesComplete": true,
+              "position": [
+                3370,
+                100
+              ],
+              "extensions": {}
+            }
+          ],
+          "edges": [
+            {
+              "id": "166b3e13-1ebf-4599-8128-0abea80b72c1",
+              "from": {
+                "nodeId": "53d958ad-5e16-49cc-9573-bff8f638ee77",
+                "portKey": "value"
+              },
+              "to": {
+                "nodeId": "e34decf4-fb35-4d16-8bb0-d7054d91e363",
+                "portKey": "a"
+              },
+              "adaptation": {
+                "schema": "grape.edge-adaptation",
+                "version": 1,
+                "sourceType": "glsl.float",
+                "targetType": "glsl.float",
+                "operation": "identity",
+                "extensions": {}
+              },
+              "extensions": {}
+            },
+            {
+              "id": "94c35881-d237-4dc3-b603-22f3b0e01cb3",
+              "from": {
+                "nodeId": "e34decf4-fb35-4d16-8bb0-d7054d91e363",
+                "portKey": "result"
+              },
+              "to": {
+                "nodeId": "c4fb050c-20e0-4fdb-8d22-965901bb8098",
+                "portKey": "x"
+              },
+              "adaptation": {
+                "schema": "grape.edge-adaptation",
+                "version": 1,
+                "sourceType": "glsl.float",
+                "targetType": "glsl.float",
+                "operation": "identity",
+                "extensions": {}
+              },
+              "extensions": {}
+            },
+            {
+              "id": "a4d59b58-a214-4957-b08f-096fbaf220e2",
+              "from": {
+                "nodeId": "c4fb050c-20e0-4fdb-8d22-965901bb8098",
+                "portKey": "result"
+              },
+              "to": {
+                "nodeId": "ff344457-6545-4c37-b9cf-48b42c4a8e06",
+                "portKey": "color"
+              },
+              "adaptation": {
+                "schema": "grape.edge-adaptation",
+                "version": 1,
+                "sourceType": "glsl.vec4",
+                "targetType": "glsl.vec4",
+                "operation": "identity",
+                "extensions": {}
+              },
+              "extensions": {}
+            }
+          ],
+          "extensions": {}
+        },
+        "extensions": {}
+      }
+    ],
+    "resources": [],
+    "losses": [],
+    "recovery": [],
+    "extensions": {}
+  }
+}

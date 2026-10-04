@@ -1,0 +1,107 @@
+[
+  {
+    "id": "bootstrap",
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "tools/verify-bootstrap.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-values-review-01\\Grape",
+    "startedAt": "2026-10-04T06:43:55.999Z",
+    "endedAt": "2026-10-04T06:43:56.852Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "state",
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "handoff/tools/check-implementation-state.mjs",
+      "--current"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-values-review-01\\Grape",
+    "startedAt": "2026-10-04T06:43:56.853Z",
+    "endedAt": "2026-10-04T06:43:56.905Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "maintenance",
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "--test",
+      "--test-isolation=none",
+      "tools/verify-bootstrap.test.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-values-review-01\\Grape",
+    "startedAt": "2026-10-04T06:43:56.906Z",
+    "endedAt": "2026-10-04T06:44:02.277Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "typecheck",
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "node_modules/typescript/bin/tsc",
+      "--noEmit"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-values-review-01\\Grape\\.verification\\s05-values-review-01\\runtime\\production",
+    "startedAt": "2026-10-04T06:44:02.277Z",
+    "endedAt": "2026-10-04T06:44:03.555Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "module-pins",
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "tools/module-pins.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-values-review-01\\Grape\\.verification\\s05-values-review-01\\runtime\\production",
+    "startedAt": "2026-10-04T06:44:03.555Z",
+    "endedAt": "2026-10-04T06:44:03.602Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "boundaries",
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "tools/boundaries.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-values-review-01\\Grape\\.verification\\s05-values-review-01\\runtime\\production",
+    "startedAt": "2026-10-04T06:44:03.603Z",
+    "endedAt": "2026-10-04T06:44:04.229Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "unit",
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "--experimental-transform-types",
+      "--test",
+      "--test-isolation=none",
+      "tests/unit/*.test.ts",
+      "tests/conformance/*.test.ts"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-values-review-01\\Grape\\.verification\\s05-values-review-01\\runtime\\production",
+    "startedAt": "2026-10-04T06:44:04.229Z",
+    "endedAt": "2026-10-04T06:44:12.772Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "build",
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "node_modules/vite/bin/vite.js",
+      "build"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-values-review-01\\Grape\\.verification\\s05-values-review-01\\runtime\\production",
+    "startedAt": "2026-10-04T06:44:12.773Z",
+    "endedAt": "2026-10-04T06:44:13.797Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

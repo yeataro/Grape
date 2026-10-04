@@ -1,0 +1,721 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "../.verification/s05-values.config.mjs",
+      "tests/browser/s05-values.spec.ts",
+      "--output",
+      "C:/Users/user/source/Grape/production/evidence/s05/catalog-values-01/browser-development-02/results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\.verification\\s05-values.config.mjs",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s05/catalog-values-01/browser-development-02/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:/Users/user/source/Grape/production/evidence/s05/catalog-values-01/browser-development-02/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node node_modules/vite/bin/vite.js --host 0.0.0.0 --port 4176 --strictPort",
+      "cwd": "C:/Users/user/source/Grape/production",
+      "url": "http://127.0.0.1:4176",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "s05-values.spec.ts",
+      "file": "s05-values.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S05 fixed values backend feasibility: all leaves stages modes and components execute",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1737,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T06:19:23.251Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "664d61e6a642c6a150f8-4c2e55515c0d23554a58",
+          "file": "s05-values.spec.ts",
+          "line": 10,
+          "column": 1
+        },
+        {
+          "title": "S05 fixed float pixel: public create edit connect history save and JSON reopen",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5577,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                      "column": 46,
+                      "line": 142
+                    },
+                    "snippet": "  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                        "column": 46,
+                        "line": 142
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T06:19:25.081Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-float-b505e-istory-save-and-JSON-reopen-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-float-b505e-istory-save-and-JSON-reopen-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-float-b505e-istory-save-and-JSON-reopen-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                    "column": 46,
+                    "line": 142
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "664d61e6a642c6a150f8-b3c7278d62332f9ae870",
+          "file": "s05-values.spec.ts",
+          "line": 70,
+          "column": 5
+        },
+        {
+          "title": "S05 fixed float vertex: public create edit connect history save and JSON reopen",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5949,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                      "column": 46,
+                      "line": 142
+                    },
+                    "snippet": "  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                        "column": 46,
+                        "line": 142
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T06:19:31.031Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-float-022b6-istory-save-and-JSON-reopen-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-float-022b6-istory-save-and-JSON-reopen-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-float-022b6-istory-save-and-JSON-reopen-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                    "column": 46,
+                    "line": 142
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "664d61e6a642c6a150f8-76ffaaf7da64b38a5c01",
+          "file": "s05-values.spec.ts",
+          "line": 70,
+          "column": 5
+        },
+        {
+          "title": "S05 fixed vec2 pixel: public create edit connect history save and JSON reopen",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5644,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                      "column": 46,
+                      "line": 142
+                    },
+                    "snippet": "  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                        "column": 46,
+                        "line": 142
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T06:19:37.429Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-vec2--3b369-istory-save-and-JSON-reopen-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-vec2--3b369-istory-save-and-JSON-reopen-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-vec2--3b369-istory-save-and-JSON-reopen-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                    "column": 46,
+                    "line": 142
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "664d61e6a642c6a150f8-3e14718963905a6a7202",
+          "file": "s05-values.spec.ts",
+          "line": 70,
+          "column": 5
+        },
+        {
+          "title": "S05 fixed vec2 vertex: public create edit connect history save and JSON reopen",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5985,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                      "column": 46,
+                      "line": 142
+                    },
+                    "snippet": "  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                        "column": 46,
+                        "line": 142
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T06:19:43.522Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-vec2--1367e-istory-save-and-JSON-reopen-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-vec2--1367e-istory-save-and-JSON-reopen-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-vec2--1367e-istory-save-and-JSON-reopen-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                    "column": 46,
+                    "line": 142
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "664d61e6a642c6a150f8-d790d4cd02aa955723b0",
+          "file": "s05-values.spec.ts",
+          "line": 70,
+          "column": 5
+        },
+        {
+          "title": "S05 fixed vec3 pixel: public create edit connect history save and JSON reopen",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5689,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                      "column": 46,
+                      "line": 142
+                    },
+                    "snippet": "  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                        "column": 46,
+                        "line": 142
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T06:19:49.962Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-vec3--990d2-istory-save-and-JSON-reopen-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-vec3--990d2-istory-save-and-JSON-reopen-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-vec3--990d2-istory-save-and-JSON-reopen-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                    "column": 46,
+                    "line": 142
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "664d61e6a642c6a150f8-0beae38d1529c576e57f",
+          "file": "s05-values.spec.ts",
+          "line": 70,
+          "column": 5
+        },
+        {
+          "title": "S05 fixed vec3 vertex: public create edit connect history save and JSON reopen",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6031,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                      "column": 46,
+                      "line": 142
+                    },
+                    "snippet": "  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                        "column": 46,
+                        "line": 142
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T06:19:56.103Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-vec3--ecac2-istory-save-and-JSON-reopen-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-vec3--ecac2-istory-save-and-JSON-reopen-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-vec3--ecac2-istory-save-and-JSON-reopen-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                    "column": 46,
+                    "line": 142
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "664d61e6a642c6a150f8-43f1c77715060d84fe51",
+          "file": "s05-values.spec.ts",
+          "line": 70,
+          "column": 5
+        },
+        {
+          "title": "S05 fixed color pixel: public create edit connect history save and JSON reopen",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5715,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                      "column": 46,
+                      "line": 142
+                    },
+                    "snippet": "  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                        "column": 46,
+                        "line": 142
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T06:20:02.592Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-color-5ca51-istory-save-and-JSON-reopen-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-color-5ca51-istory-save-and-JSON-reopen-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-color-5ca51-istory-save-and-JSON-reopen-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                    "column": 46,
+                    "line": 142
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "664d61e6a642c6a150f8-b0e301a11fabd5346b4d",
+          "file": "s05-values.spec.ts",
+          "line": 70,
+          "column": 5
+        },
+        {
+          "title": "S05 fixed color vertex: public create edit connect history save and JSON reopen",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6154,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                      "column": 46,
+                      "line": 142
+                    },
+                    "snippet": "  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                        "column": 46,
+                        "line": 142
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#message')\nExpected substring: \u001b[32m\"Generated successfully\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#message')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"message\" role=\"status\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  140 |         .getByRole(\"button\", { name: \"Generate GLSL\", exact: true })\n  141 |         .click();\n> 142 |       await expect(page.locator(\"#message\")).toContainText(\n      |                                              ^\n  143 |         \"Generated successfully\",\n  144 |       );\n  145 |       const document = await exportDocument(page),\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts:142:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T06:20:08.756Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-color-32b36-istory-save-and-JSON-reopen-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-color-32b36-istory-save-and-JSON-reopen-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\catalog-values-01\\browser-development-02\\results\\s05-values-S05-fixed-color-32b36-istory-save-and-JSON-reopen-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-values.spec.ts",
+                    "column": 46,
+                    "line": 142
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "664d61e6a642c6a150f8-e43383373af05bd40a3f",
+          "file": "s05-values.spec.ts",
+          "line": 70,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T06:19:22.312Z",
+    "duration": 52947.429000000004,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}

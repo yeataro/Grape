@@ -1,0 +1,244 @@
+{
+  "packetVersion": 1,
+  "packetType": "IMPLEMENTER_DISPATCH",
+  "packetId": "S05-IMPLEMENTER-01",
+  "actionKey": "yeataro/Grape:S05:activation-and-early-function:6aa6abb:20261004-01",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0826de5a9cca7cf200d843435985a7dc624634a2",
+  "acceptedMain": "6aa6abbdc46d55753111d5ef5ca9899870a8805a",
+  "expectedWorkHead": "6aa6abbdc46d55753111d5ef5ca9899870a8805a",
+  "PR": null,
+  "authorizationRef": {
+    "file": "production/evidence/coordinator/s05/activation-20261004-01/human-authorization-01.json",
+    "sha256": "d74d8dd03147b2cf528f79bd2bba1000f179154426bd4d828609971137bed576"
+  },
+  "sliceId": "S05",
+  "writer": {
+    "displayTitle": "Grape S05 實作與維護",
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "priorStatus": "Verified idle / STOP_WRITING; S04 delivered and merged; rename does not reassign ownership"
+  },
+  "attempt": 1,
+  "retriesUsed": 0,
+  "findingGroup": "NONE initially; stable S05 groups on findings, up to3 unsuccessful repair/re-review rounds per group",
+  "requestedAction": "Resume original writer, verify guards, atomically activate S05, implement and self-verify the complete early function-mode vertical batch, prepare exact independent-review submission. Continue ordinary engineering autonomously; never claim activation alone is delivery.",
+  "entryPoints": [
+    "README.md",
+    "AGENTS.md",
+    "workflow/COORDINATOR.md",
+    "workflow/RUNBOOK.md",
+    "workflow/PACKETS.md",
+    "implementation-state.json",
+    "HANDOFF_ACCEPTANCE.json"
+  ],
+  "inputRefs": [
+    {
+      "file": "production/evidence/coordinator/s05/activation-20261004-01/human-authorization-01.json",
+      "sha256": "d74d8dd03147b2cf528f79bd2bba1000f179154426bd4d828609971137bed576"
+    },
+    {
+      "file": "production/evidence/coordinator/s05/activation-20261004-01/recovery-preflight-01.json",
+      "sha256": "7393c1d55f60689038ce041bd18b0509df55bb959940f90d360cab9c796a0d20"
+    },
+    {
+      "file": "production/evidence/coordinator/decisions/dec003-intake-20261004-01/local-delivery/early-s05-unissued-draft-01.json",
+      "sha256": "7d3ab5b416c6ca84e5419bc842c4b3d97cdf35d195c3fced1003a350daf6cba3"
+    },
+    {
+      "file": "decisions/DEC-GRAPE-003.md",
+      "sha256": "9a0acb74ee0bac36f23784db7743c45e2b3f36023ca329400b7f65711ee4428e"
+    },
+    {
+      "file": "decisions/AC-GRAPE-002.md",
+      "sha256": "ab1e4067f479f640c2fd59c3bc994413475a0dfc2b0e8259c4b5319f03c60c4a"
+    },
+    {
+      "file": "production/evidence/coordinator/s04/review-01/owner-working-notice-01.json",
+      "sha256": "920607b5be4afe3ffaf4743a32b320e59fd370fce7874002618b6fba8a58d982"
+    },
+    {
+      "file": "production/evidence/acceptance/s04/closeout-20261004-01/accepted-scope-01.json",
+      "sha256": "166a94a7a3cc7d3c3ba4ad7cf12b8d5d2db42dfafff7a6055bf677ff9209e826"
+    },
+    {
+      "file": "production/evidence/coordinator/s04/closeout-20261004-01/merge-result-01.json",
+      "sha256": "fa232349204883286d2319cbe239f55ede8c12150a7dc4504d232b6492373edd"
+    },
+    {
+      "file": "production/evidence/coordinator/s04/closeout-20261004-01/post-merge-sync-result-01.json",
+      "sha256": "e082ee6532f3417417c0646afd6cff87bf37b6ff42ba784b845e5c12b3834320"
+    }
+  ],
+  "acceptedBehavior": [
+    "Owner versioned mode payload and explicit legacy expand upgrade; exact module missing/unknown preservation",
+    "Usable mode command, node-owned constant eligibility including nested/shared/dependent closure",
+    "One Graph transaction for localization, mode, affected references, new constant-invalid incoming edges, typed losses and diagnostics; Undo/Redo; queryable notification",
+    "Deduplicated function bodies per shader/exact dependencies/profile, per-caller inputs and no duplicate effects; independent real shader/result qualification",
+    "Library/Personal/save/reopen exchange after exact owner codec support; no admission bypass"
+  ],
+  "acceptanceCriteria": [
+    {
+      "id": "AT-DEC-GRAPE-003-01",
+      "behavior": "新建預設展開；定義模式影響全部共享引用；Make Independent 保留初始模式且之後可獨立修改。",
+      "status": "REQUIRED_FOR_THIS_SUBMISSION; not yet executed"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-02",
+      "behavior": "同一複雜子圖在同一 shader 重複引用及巢狀引用時，函式本文只生成一份，各 caller 的不同輸入與多輸出正確；不能共用不同 caller 的計算結果。",
+      "status": "REQUIRED_FOR_THIS_SUBMISSION; not yet executed"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-03",
+      "behavior": "普通常量／Uniform 都可作普通函式參數；內部固定常量及固定形狀長度查詢可用；外露參數被用於必須常量的位置時拒絕啟用，圖與 History 不變。",
+      "status": "REQUIRED_FOR_THIS_SUBMISSION; not yet executed"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-04",
+      "behavior": "root、nested、shared 的下游常量影響傳播至實際要求處；只拆本次新增失效的接收端線，保留正常分支及既有錯誤證據，通知含明確原因。",
+      "status": "REQUIRED_FOR_THIS_SUBMISSION; not yet executed"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-05",
+      "behavior": "模式、本地化、所有受影響引用及 losses 同筆發布／Undo／Redo；切回展開不復線；斷線後 required input 缺值可保存但阻止生成。",
+      "status": "REQUIRED_FOR_THIS_SUBMISSION; not yet executed"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-06",
+      "behavior": "授權範圍內的 Library／Personal 收錄、引入、再編輯、再收錄及 save/reopen 保留模式與依賴；原 Library 不被改動，不跳過既有 admission。",
+      "status": "REQUIRED_FOR_THIS_SUBMISSION; not yet executed"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-07",
+      "behavior": "受支持舊資料經明示升級維持展開；新資料缺失／未知模式不被猜成展開；缺 exact module 保留資料並遵循既有阻止生成／恢復規則。",
+      "status": "REQUIRED_FOR_THIS_SUBMISSION; not yet executed"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-08",
+      "behavior": "不同 stage／profile、資源、名義型別、nested helper、effects 與多輸出在所交付範圍內保持語意；實際 shader 編譯及相應結果驗證不以文字快照替代。",
+      "status": "REQUIRED_FOR_THIS_SUBMISSION; not yet executed"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-09",
+      "behavior": "已啟用的子圖後續變成不合資格，模式不被靜默重設；生成回確定 diagnostic，來源能定位共享定義與相關引用，Generator 不修改 Graph。",
+      "status": "REQUIRED_FOR_THIS_SUBMISSION; not yet executed"
+    },
+    {
+      "id": "AT-DEC-GRAPE-003-10",
+      "behavior": "模式、定義本文、依賴或 profile 改變後，不錯用先前產物；共享函式的診斷不虛構成單一 caller；既有 snapshot／stale reply 保護保留。",
+      "status": "REQUIRED_FOR_THIS_SUBMISSION; not yet executed"
+    }
+  ],
+  "initialBatch": {
+    "name": "Complete optional subgraph function emission",
+    "profile": "Current portable static-web Windows x64 / Chromium / GLSL ES300 WebGL2 profile. Qualify actual rendering/compilation/results; report renderer. No native TD assumption.",
+    "ordering": "Full mode ownership/codec/upgrade + usable command + qualification/atomic detach/history + helper emission + Library/Personal persistence together; no inert field or fake working switch.",
+    "capabilityMapping": "Map exact supporting leaf/modes and mechanisms to immutable behavior contracts. Include all current basic/source/array/struct/subgraph cases necessary to prove ten amendment tests. Do not add arbitrary unrelated catalog features.",
+    "nextFamilies": "Produce a bounded CQ-family readiness/missing-oracle matrix for later S05 packets. Remain S05 active; first batch does not complete all391 leaves or authorize S06."
+  },
+  "negativeBehavior": [
+    "Formal inputs lose constant-value eligibility even with literal callers; type-derived fixed-length facts keep their node-defined eligibility. Reject unqualified activation before any fork/detach/history.",
+    "After valid activation, trace all shared/nested/unused consumers; detach only incoming edges that were valid before and become invalid due to this switch. Preserve unrelated branches, pre-existing errors, exact typed losses and provenance.",
+    "Publish mode/localization/reference updates/losses/diagnostics once; Undo/Redo all; switch back never reconnects automatically. Missing required input may remain saveable error and blocks generation.",
+    "Subsequent invalidating edit/load preserves mode; Generator never repairs Graph. Exact module absence/unknown or missing mode is never silent expand fallback.",
+    "Deduplicate function definition, not caller evaluation; no repeated per-caller effects from multi-output use. Respect resources/types/stages/profile/helper dependency order and shared-body diagnostic provenance."
+  ],
+  "contractRefs": [
+    "handoff/08_IMPLEMENTATION_PLAN.md#s05",
+    "handoff/data/slices.json S05",
+    "handoff/09_ACCEPTANCE_AND_CONFORMANCE.md S05",
+    "handoff/10_KNOWN_GATES.md",
+    "handoff/data/gates.json",
+    "handoff/04_EXTENSION_MODEL.md",
+    "handoff/13_PRODUCTION_CONTRACT_SURFACE.md",
+    "handoff/14_DOCUMENT_FORMAT.md",
+    "handoff/17_PANEL_COMMAND_CONTRACT.md",
+    "handoff/01_PRODUCT_MODEL.md",
+    "handoff/02_ARCHITECTURE_SPEC.md",
+    "handoff/03_RESPONSIBILITY_AND_DEPENDENCY.md",
+    "handoff/executable-reference/COMPUTE_QUALIFICATION_CONTRACTS.md",
+    "handoff/executable-reference/WORKSPACE_QUALIFICATION_CONTRACTS.md",
+    "handoff/compatibility/behavior-contracts.md",
+    "handoff/data/capability-coverage.json"
+  ],
+  "gateTiming": {
+    "native": "G-LU-NODE-001 native first-backend/runtime evidence waits S07/S08 and separately authorized TD operations; portable work proceeds.",
+    "leafSemantics": "G-LU-NODE-002/003/004/005/006, G-LU-UI-006, G-LU-DATA-005 apply only affected leaves; preserve counterexample, do not choose new product behavior or broaden support.",
+    "evidence": "G-LU-AUDIT-002/003 actual environment/numeric/golden-difference evidence; no inherited global closure.",
+    "ownership": "G-HANDOFF-CQ-OWNERSHIP quarantine remains; normative ownership wins over contradictory CQ summaries."
+  },
+  "allowedPaths": [
+    "production/src/**",
+    "production/tests/**",
+    "production/tools/** only necessary checks/contract tooling",
+    "production/evidence/s05/** fresh immutable submissions",
+    "production/evidence/coordinator/s05/** append-only assigned writer results",
+    "implementation-state.json validated sole-maintainer updates",
+    "README.md scoped current status/navigation preserving English",
+    "production/evidence/coordinator/s04/closeout-20261004-01/** existing untracked historical receipts: add exact bytes only via explicit manifest",
+    "production/evidence/acceptance/s04/closeout-20261004-01/postcommit-integrity-02.json exact existing bytes only"
+  ],
+  "prohibitedPaths": [
+    "handoff/**",
+    "accepted S01-S04 source evidence overwrite",
+    "decisions/DEC-GRAPE-003.md or AC-GRAPE-002.md semantic edits",
+    "references/** staging or modifications",
+    "notes/** reinterpretation as accepted requirements",
+    ".github/** settings/workflow changes",
+    "unrelated Human work"
+  ],
+  "initialMaintenance": [
+    "Confirm work==accepted main before activation. Preserve untracked preimages. Register sole active S05 with unchanged S01-S04 accepted scopes.",
+    "Assign DEC003/AC002 delivery sliceIds S05 and mark authorized/NOT_DELIVERED until real evidence. Do not claim decision adoption by old S04 I. Bind implementationBaseline/build to actual new I only when produced.",
+    "Preserve exact uncommitted S04 publication/merge/sync receipts in a separate explicit metadata allowlist commit, with prior failed authorization evidence intact. Update scoped README historical merge/current S05 status.",
+    "Commit only reviewed authorized paths; retain original writer identity despite new display name."
+  ],
+  "environment": {
+    "node": "25.5.0",
+    "os": "Windows x64",
+    "playwright": "1.62.1",
+    "browser": "actual Chromium version recorded; current accepted is151.0.7922.34",
+    "storage": "disposable test origins/contexts; do not erase Human data"
+  },
+  "verificationCommands": [
+    "node tools/verify-bootstrap.mjs",
+    "node handoff/tools/check-implementation-state.mjs --current",
+    "node --test tools/verify-bootstrap.test.mjs",
+    "npm --prefix production run typecheck",
+    "npm --prefix production run conformance",
+    "npm --prefix production test",
+    "npm --prefix production run test:browser",
+    "npm --prefix production run build"
+  ],
+  "evidenceRequirements": [
+    "I/R, source/config/exact module+codec contract and hashes, original input preservation, decisions and full10case matrix, inherited AT-S05-01..04 coverage with explicit exclusions.",
+    "Unit/application/conformance + actual browser full user flow + real supported-profile shader compile/link and numeric/results, counterexamples and affected S01-S04 regressions. Reference tests alone insufficient.",
+    "Archived exact runnable build+manifest+sample files+plain-language operation guide; limitations, unresolved gates and unsupported cases truthfully separate.",
+    "Keep readiness exact R immutable; original evidence append-only. No self independent PASS, product acceptance, global gate closure or completion by inference."
+  ],
+  "testDelivery": {
+    "visibleIdentity": "Display S05 and exact build/reviewed version at deployment entry; no withdrawn test-popup/checklist feature.",
+    "links": "Local127.0.0.1, current LAN IP and Tailscale IP; verify actual browser functionality and secure context, not HTTP200 alone. Include real availability/limits; a hostname TLS substitute must be explained.",
+    "origins": "Preserve existing Human storage. Different origins have separate storage; no silent migration/deletion.",
+    "services": "Temporary scoped test server only. Verify replacement before retiring obsolete known helper by exact PID/start/path/port; do not accumulate services or bulk-stop node.",
+    "reviewRoute": "Fresh independent context + isolated checkout immediately on complete submission; no Human pre-review. Coordinator coordinates deployment before Human test request."
+  },
+  "exclusions": [
+    "No Q003 multi-target/version product choice",
+    "No S06 UI/appearance project",
+    "No S07/S08/nativeTD controls",
+    "No S02 legacy converter/global catalog parity",
+    "No performance guarantee/general cache rewrite",
+    "No remote publication/PR before exact Human OK; no S05 merge or nextSlice authorization"
+  ],
+  "stopConditions": [
+    "Unknown writer/status, stale heads or mismatched required hashes: preserve and reconcile.",
+    "True product/architecture conflict: exact counterexample and affected dependency only to Coordinator/PM; continue independent settled work.",
+    "At complete review-ready R stop product writes pending fresh review; do not wait for Human before review.",
+    "Retain retry counters: max2 retries same transient operation, max3 failed repair/review rounds/group; no bypass of auto-approval refusal."
+  ],
+  "outputLocation": "production/evidence/s05/activation-01 and submission-01; append-only coordinator/s05 receipts",
+  "nextRoute": "Coordinator immediately dispatches independent Fresh Reviewer for the exact complete first batch; technical defects return to same Implementer. Human only after technical PASS and tested deployment.",
+  "scopeStatus": "S05 authorization is active; first packet is a batch, not catalog completion. Subsequent settled S05 family packets need no repeat generic start approval."
+}

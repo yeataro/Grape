@@ -1,0 +1,41 @@
+{
+  "packetVersion": 1,
+  "packetType": "IMPLEMENTER_DISPATCH_SUPPLEMENT",
+  "packetId": "S05-HTTP-ORIGIN-DELIVERY-01",
+  "actionKey": "yeataro/Grape:S05:network-origin-delivery:01",
+  "parentActionKey": "yeataro/Grape:S05:activation-and-early-function:6aa6abb:20261004-01",
+  "repository": "https://github.com/yeataro/Grape",
+  "recordedAt": "2026-10-03T23:38:11.144Z",
+  "authorizationRef": "production/evidence/coordinator/s05/activation-20261004-01/human-authorization-01.json",
+  "sourceRequirement": "Human current S05 instruction incorporates prior test-handoff notice. Exact Human three-IP request is verified in network-preview-recon-01.json.",
+  "writer": "Same existing Grape S05 實作與維護; no second writer or restart",
+  "findingGroup": "S05-ENV-HTTP-01; Coordinator environment diagnostic, not an independent review finding/verdict",
+  "attempt": 1,
+  "retriesUsed": 0,
+  "diagnostic": {
+    "file": "production/evidence/coordinator/s05/activation-20261004-01/network-origin-probe-01.json",
+    "sha256": "c85dc1fbf6077893bcc9ddc5f6815db99e0ddd7d55b0a8f0881d4759ee238013",
+    "scope": "Real Chromium API availability on intercepted inert HTTP origins; not a real network/service or product test"
+  },
+  "counterexample": "HTTP LAN and Tailscale IP origins have no crypto.subtle or crypto.randomUUID. Current Personal hashing and Canvas port/field creation call them directly. localhost is secure and works, so localhost-only tests miss this path.",
+  "requestedAction": "While implementing the authorized S05 vertical flow, reproduce affected product operations and resolve this bounded test-entry compatibility defect using an ordinary declared browser/application provider approach or already authorized temporary deployment method. Preserve all product semantics and actual security properties. Include resulting code/config in S05 I/R and independent review; never alter S04 artifacts.",
+  "invariants": [
+    "Exact same canonical bytes and SHA-256 checksum/package names; no weaker hash or skipped comparison/admission",
+    "Stable IDs keep required uniqueness and owner rules; cryptographic entropy may use available getRandomValues; no Math.random insecure fallback",
+    "Browser/application/model import boundaries unchanged; no Node/native imports in core/UI",
+    "No browser security bypass, blanket HTTPS-error ignoring, system trust/CA install, Tailscale/ACL/router/settings changes or permanent service",
+    "Do not silently add unsupported platform/features or claim HTTP provides transport encryption"
+  ],
+  "allowedScope": [
+    "Narrow production browser identity/digest provider compatibility required for existing Personal and S05 authoring/exchange; module/owner boundaries preserved",
+    "Meaningful tests for real non-secure HTTP origin as well as secure localhost, hash-known vectors/equality and persistence/ID behavior",
+    "Minimal production package/lock dependency changes only if a normal standard implementation dependency is necessary; record exact version/source/impact for Fresh Reviewer"
+  ],
+  "requiredEvidence": [
+    "Actual product browser operations on local and served LAN/Tailscale entries, with exact candidate/build identity; same-machine reachability versus second-device proof distinguished",
+    "Affected S01-S04 regressions and all S05 first-batch tests; no reapproval of already accepted product behavior",
+    "Deployment wrapper hash verification also must work at offered origin without weakening asset identity; wrapper may use server-side verification with exact manifests"
+  ],
+  "limits": "This is necessary engineering for the explicitly required S05 test links, not a new product semantic decision or S12 full deployment release. If no in-boundary solution exists, retain exact remaining prerequisite for Coordinator; continue unaffected S05 work.",
+  "nextRoute": "Included in same S05 Fresh Review before Human hands-on handoff. Do not request Human to choose a routine library/implementation algorithm."
+}

@@ -1,0 +1,1779 @@
+{
+  "status": "MEASURED_SELF_CHECK_NOT_INDEPENDENT_PASS",
+  "implementationI": "aa4c86e20b0b4b54218b9992921578e7f24a28a2",
+  "beforeR": "bc74bd9aa7f2d357815cd0dfd0afa0b6088eee3a",
+  "oldI4": {
+    "implementationI": "ee1212fdc54359f1ceba4c4b09f6e7cc06cddc41",
+    "reviewR": "29695b3c25e2d200856d780b31e20e23f24efb6d",
+    "evidence": "../drag-performance-01/diagnosis-01.json",
+    "replayedInOriginalDiagnosis": true,
+    "rerunThisRepair": false,
+    "reason": "Historical oldI4 and R5 measurements retained separately; fresh controlled repair comparison uses exact pre-repair R5 and I6."
+  },
+  "method": {
+    "runs": 78,
+    "repeats": 3,
+    "fixtures": "Exact original four immutable4/14-node fixtures;3edges;0nested;14node adds10unused Multiply nodes",
+    "path": "60 requested pointer positions; identical sinusoidal60px path, intended1000ms. Actual duration lengthens under backpressure. Pointerdown/up and setup excluded from timed region.",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "profile": "Headless Chromium151 / SwiftShader / Windows AMD9800X3D; same-machine only",
+    "modes": "24 archived-byte uninstrumented mounted runs;48 timed instrumented mounted/absent runs;6 extra count-only after14node mounted runs",
+    "trace": "8 timed14node repeat0 traces, same CDP categories; trace margins include setup/drain",
+    "instrumentation": "AST counters/timers on disposable byte copies only; uninstrumented rebuilt sources match all3 archive files. Inclusive nested times must not be added. Timed/count/off spread retained in aggregate."
+  },
+  "comparisons": [
+    {
+      "size": 4,
+      "actor": "Multiply",
+      "inspector": "mounted",
+      "unmodifiedArchive": true,
+      "before": {
+        "elapsedMs": {
+          "n": 3,
+          "min": 1451.5999999940395,
+          "p50": 1699.5,
+          "p95": 1705.5,
+          "max": 1705.5,
+          "mean": 1618.8666666646798
+        },
+        "inputRequestsPerSecond": {
+          "n": 3,
+          "min": 35.18029903254178,
+          "p50": 35.3045013239188,
+          "p95": 41.33370074417633,
+          "max": 41.33370074417633,
+          "mean": 37.27283370021231
+        },
+        "rafIntervalsP95": {
+          "n": 3,
+          "min": 16.799999999999955,
+          "p50": 16.799999999999955,
+          "p95": 16.799999999999955,
+          "max": 16.799999999999955,
+          "mean": 16.799999999999955
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "n": 3,
+          "min": 1015.5,
+          "p50": 1016,
+          "p95": 1016.3000000119209,
+          "max": 1016.3000000119209,
+          "mean": 1015.933333337307
+        },
+        "inputRequestsPerSecond": {
+          "n": 3,
+          "min": 59.03768572202717,
+          "p50": 59.05511811023622,
+          "p95": 59.084194977843424,
+          "max": 59.084194977843424,
+          "mean": 59.05899960336893
+        },
+        "rafIntervalsP95": {
+          "n": 3,
+          "min": 16.700000000000045,
+          "p50": 16.799999999999955,
+          "p95": 16.799999999999955,
+          "max": 16.799999999999955,
+          "mean": 16.76666666666665
+        }
+      },
+      "afterToBeforeRate": 1.672736220472441
+    },
+    {
+      "size": 4,
+      "actor": "Image output",
+      "inspector": "mounted",
+      "unmodifiedArchive": true,
+      "before": {
+        "elapsedMs": {
+          "n": 3,
+          "min": 1014.2000000029802,
+          "p50": 1016.8999999910593,
+          "p95": 1033.4000000059605,
+          "max": 1033.4000000059605,
+          "mean": 1021.5
+        },
+        "inputRequestsPerSecond": {
+          "n": 3,
+          "min": 58.060770272550734,
+          "p50": 59.002851805022644,
+          "p95": 59.159929007911344,
+          "max": 59.159929007911344,
+          "mean": 58.74118369516157
+        },
+        "rafIntervalsP95": {
+          "n": 3,
+          "min": 16.700000000000045,
+          "p50": 16.799999999999955,
+          "p95": 16.799999999999955,
+          "max": 16.799999999999955,
+          "mean": 16.76666666666665
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "n": 3,
+          "min": 1014.3999999910593,
+          "p50": 1016,
+          "p95": 1016,
+          "max": 1016,
+          "mean": 1015.4666666636864
+        },
+        "inputRequestsPerSecond": {
+          "n": 3,
+          "min": 59.05511811023622,
+          "p50": 59.05511811023622,
+          "p95": 59.14826498474845,
+          "max": 59.14826498474845,
+          "mean": 59.08616706840697
+        },
+        "rafIntervalsP95": {
+          "n": 3,
+          "min": 16.700000000000045,
+          "p50": 16.799999999999955,
+          "p95": 16.799999999999955,
+          "max": 16.799999999999955,
+          "mean": 16.76666666666665
+        }
+      },
+      "afterToBeforeRate": 1.0008858267628538
+    },
+    {
+      "size": 14,
+      "actor": "Multiply",
+      "inspector": "mounted",
+      "unmodifiedArchive": true,
+      "before": {
+        "elapsedMs": {
+          "n": 3,
+          "min": 2086.5999999940395,
+          "p50": 2106.9000000059605,
+          "p95": 2171.7000000029802,
+          "max": 2171.7000000029802,
+          "mean": 2121.7333333343267
+        },
+        "inputRequestsPerSecond": {
+          "n": 3,
+          "min": 27.628125431651544,
+          "p50": 28.477858464962864,
+          "p95": 28.75491229759963,
+          "max": 28.75491229759963,
+          "mean": 28.286965398071345
+        },
+        "rafIntervalsP95": {
+          "n": 3,
+          "min": 16.700000000000273,
+          "p50": 16.799999999999955,
+          "p95": 16.800000000000182,
+          "max": 16.800000000000182,
+          "mean": 16.766666666666804
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "n": 3,
+          "min": 1017.0999999940395,
+          "p50": 1032.7999999970198,
+          "p95": 1032.9000000059605,
+          "max": 1032.9000000059605,
+          "mean": 1027.5999999990065
+        },
+        "inputRequestsPerSecond": {
+          "n": 3,
+          "min": 58.08887597991457,
+          "p50": 58.0945003874643,
+          "p95": 58.9912496316504,
+          "max": 58.9912496316504,
+          "mean": 58.39154199967643
+        },
+        "rafIntervalsP95": {
+          "n": 3,
+          "min": 16.700000000000045,
+          "p50": 16.700000000000045,
+          "p95": 16.700000000000045,
+          "max": 16.700000000000045,
+          "mean": 16.700000000000045
+        }
+      },
+      "afterToBeforeRate": 2.03998838111158
+    },
+    {
+      "size": 14,
+      "actor": "Image output",
+      "inspector": "mounted",
+      "unmodifiedArchive": true,
+      "before": {
+        "elapsedMs": {
+          "n": 3,
+          "min": 1765.9000000059605,
+          "p50": 1898.6000000089407,
+          "p95": 1948.300000011921,
+          "max": 1948.300000011921,
+          "mean": 1870.933333342274
+        },
+        "inputRequestsPerSecond": {
+          "n": 3,
+          "min": 30.79607863246568,
+          "p50": 31.60223322433238,
+          "p95": 33.97700889053598,
+          "max": 33.97700889053598,
+          "mean": 32.12510691577801
+        },
+        "rafIntervalsP95": {
+          "n": 3,
+          "min": 16.700000000000273,
+          "p50": 16.799999999999955,
+          "p95": 16.799999999999955,
+          "max": 16.799999999999955,
+          "mean": 16.766666666666726
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "n": 3,
+          "min": 1014,
+          "p50": 1015.9000000059605,
+          "p95": 1016.5,
+          "max": 1016.5,
+          "mean": 1015.4666666686535
+        },
+        "inputRequestsPerSecond": {
+          "n": 3,
+          "min": 59.02606984751599,
+          "p50": 59.060931193668644,
+          "p95": 59.171597633136095,
+          "max": 59.171597633136095,
+          "mean": 59.086199558106905
+        },
+        "rafIntervalsP95": {
+          "n": 3,
+          "min": 16.700000000000045,
+          "p50": 16.799999999999955,
+          "p95": 16.799999999999955,
+          "max": 16.799999999999955,
+          "mean": 16.76666666666665
+        }
+      },
+      "afterToBeforeRate": 1.868884732747122
+    }
+  ],
+  "counts": [
+    {
+      "size": 4,
+      "actor": "Multiply",
+      "fields": "mounted",
+      "unchangedCounts": {
+        "Canvas.pointermove": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorApplication.resolve": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorContext.capture": {
+          "n": 3,
+          "min": 1358,
+          "p50": 1358,
+          "p95": 1358,
+          "max": 1358,
+          "mean": 1358
+        },
+        "gesture.update": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.change": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.reconcile": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.validate": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "analyzeConstants": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.publish": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Workspace.route": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "PresentationSession.refresh": {
+          "n": 3,
+          "min": 708,
+          "p50": 708,
+          "p95": 708,
+          "max": 708,
+          "mean": 708
+        },
+        "DOM.createElement": {
+          "n": 3,
+          "min": 7434,
+          "p50": 7434,
+          "p95": 7434,
+          "max": 7434,
+          "mean": 7434
+        },
+        "Canvas.update": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "DOM.getBoundingClientRect": {
+          "n": 3,
+          "min": 1416,
+          "p50": 1416,
+          "p95": 1416,
+          "max": 1416,
+          "mean": 1416
+        },
+        "DOM.createElementNS": {
+          "n": 3,
+          "min": 354,
+          "p50": 354,
+          "p95": 354,
+          "max": 354,
+          "mean": 354
+        },
+        "field.notification.context": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "FieldTarget.invalidate": {
+          "n": 3,
+          "min": 236,
+          "p50": 236,
+          "p95": 236,
+          "max": 236,
+          "mean": 236
+        },
+        "FieldTarget.capture": {
+          "n": 3,
+          "min": 708,
+          "p50": 708,
+          "p95": 708,
+          "max": 708,
+          "mean": 708
+        },
+        "WidgetSlot.resolve": {
+          "n": 3,
+          "min": 236,
+          "p50": 236,
+          "p95": 236,
+          "max": 236,
+          "mean": 236
+        },
+        "WidgetRegistry.resolve": {
+          "n": 3,
+          "min": 236,
+          "p50": 236,
+          "p95": 236,
+          "max": 236,
+          "mean": 236
+        },
+        "field.notification.application": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        }
+      },
+      "beforeCapture": {
+        "n": 3,
+        "min": 19544,
+        "p50": 19544,
+        "p95": 19544,
+        "max": 19544,
+        "mean": 19544
+      },
+      "afterCapture": {
+        "n": 3,
+        "min": 2540,
+        "p50": 2540,
+        "p95": 2540,
+        "max": 2540,
+        "mean": 2540
+      },
+      "beforeCloneCount": {
+        "n": 3,
+        "min": 32997,
+        "p50": 32997,
+        "p95": 32997,
+        "max": 32997,
+        "mean": 32997
+      },
+      "afterCloneCount": {
+        "n": 3,
+        "min": 15993,
+        "p50": 15993,
+        "p95": 15993,
+        "max": 15993,
+        "mean": 15993
+      },
+      "beforeCloneInclusiveMs": {
+        "n": 3,
+        "min": 555.4000001400709,
+        "p50": 559.9000002741814,
+        "p95": 564.099999949336,
+        "max": 564.099999949336,
+        "mean": 559.8000001211961
+      },
+      "afterCloneInclusiveMs": {
+        "n": 3,
+        "min": 137.40000009536743,
+        "p50": 141.89999990165234,
+        "p95": 143.60000003874302,
+        "max": 143.60000003874302,
+        "mean": 140.9666666785876
+      }
+    },
+    {
+      "size": 4,
+      "actor": "Multiply",
+      "fields": "absent",
+      "unchangedCounts": {
+        "Canvas.pointermove": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorApplication.resolve": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorContext.capture": {
+          "n": 3,
+          "min": 532,
+          "p50": 532,
+          "p95": 532,
+          "max": 532,
+          "mean": 532
+        },
+        "gesture.update": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.change": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.reconcile": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.validate": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "analyzeConstants": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.publish": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Workspace.route": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "PresentationSession.refresh": {
+          "n": 3,
+          "min": 354,
+          "p50": 354,
+          "p95": 354,
+          "max": 354,
+          "mean": 354
+        },
+        "DOM.createElement": {
+          "n": 3,
+          "min": 7080,
+          "p50": 7080,
+          "p95": 7080,
+          "max": 7080,
+          "mean": 7080
+        },
+        "Canvas.update": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "DOM.getBoundingClientRect": {
+          "n": 3,
+          "min": 1416,
+          "p50": 1416,
+          "p95": 1416,
+          "max": 1416,
+          "mean": 1416
+        },
+        "DOM.createElementNS": {
+          "n": 3,
+          "min": 354,
+          "p50": 354,
+          "p95": 354,
+          "max": 354,
+          "mean": 354
+        }
+      },
+      "beforeCapture": {
+        "n": 3,
+        "min": 6446,
+        "p50": 6446,
+        "p95": 6446,
+        "max": 6446,
+        "mean": 6446
+      },
+      "afterCapture": {
+        "n": 3,
+        "min": 1006,
+        "p50": 1006,
+        "p95": 1006,
+        "max": 1006,
+        "mean": 1006
+      },
+      "beforeCloneCount": {
+        "n": 3,
+        "min": 15887,
+        "p50": 15887,
+        "p95": 15887,
+        "max": 15887,
+        "mean": 15887
+      },
+      "afterCloneCount": {
+        "n": 3,
+        "min": 10447,
+        "p50": 10447,
+        "p95": 10447,
+        "max": 10447,
+        "mean": 10447
+      },
+      "beforeCloneInclusiveMs": {
+        "n": 3,
+        "min": 208.59999987483025,
+        "p50": 209.10000003874302,
+        "p95": 209.79999995231628,
+        "max": 209.79999995231628,
+        "mean": 209.16666662196317
+      },
+      "afterCloneInclusiveMs": {
+        "n": 3,
+        "min": 64.09999993443489,
+        "p50": 68.1000000834465,
+        "p95": 68.59999985992908,
+        "max": 68.59999985992908,
+        "mean": 66.93333329260349
+      }
+    },
+    {
+      "size": 4,
+      "actor": "Image output",
+      "fields": "mounted",
+      "unchangedCounts": {
+        "Canvas.pointermove": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorApplication.resolve": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorContext.capture": {
+          "n": 3,
+          "min": 650,
+          "p50": 650,
+          "p95": 650,
+          "max": 650,
+          "mean": 650
+        },
+        "gesture.update": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.change": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.reconcile": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.validate": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "analyzeConstants": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.publish": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Workspace.route": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "PresentationSession.refresh": {
+          "n": 3,
+          "min": 472,
+          "p50": 472,
+          "p95": 472,
+          "max": 472,
+          "mean": 472
+        },
+        "DOM.createElement": {
+          "n": 3,
+          "min": 7434,
+          "p50": 7434,
+          "p95": 7434,
+          "max": 7434,
+          "mean": 7434
+        },
+        "Canvas.update": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "DOM.getBoundingClientRect": {
+          "n": 3,
+          "min": 1416,
+          "p50": 1416,
+          "p95": 1416,
+          "max": 1416,
+          "mean": 1416
+        },
+        "DOM.createElementNS": {
+          "n": 3,
+          "min": 354,
+          "p50": 354,
+          "p95": 354,
+          "max": 354,
+          "mean": 354
+        }
+      },
+      "beforeCapture": {
+        "n": 3,
+        "min": 8924,
+        "p50": 8924,
+        "p95": 8924,
+        "max": 8924,
+        "mean": 8924
+      },
+      "afterCapture": {
+        "n": 3,
+        "min": 1832,
+        "p50": 1832,
+        "p95": 1832,
+        "max": 1832,
+        "mean": 1832
+      },
+      "beforeCloneCount": {
+        "n": 3,
+        "min": 19427,
+        "p50": 19427,
+        "p95": 19427,
+        "max": 19427,
+        "mean": 19427
+      },
+      "afterCloneCount": {
+        "n": 3,
+        "min": 12335,
+        "p50": 12335,
+        "p95": 12335,
+        "max": 12335,
+        "mean": 12335
+      },
+      "beforeCloneInclusiveMs": {
+        "n": 3,
+        "min": 269.60000012815,
+        "p50": 274.79999977350235,
+        "p95": 275.09999975562096,
+        "max": 275.09999975562096,
+        "mean": 273.16666655242443
+      },
+      "afterCloneInclusiveMs": {
+        "n": 3,
+        "min": 90.40000006556511,
+        "p50": 94.00000001490116,
+        "p95": 94.50000043213367,
+        "max": 94.50000043213367,
+        "mean": 92.96666683753331
+      }
+    },
+    {
+      "size": 4,
+      "actor": "Image output",
+      "fields": "absent",
+      "unchangedCounts": {
+        "Canvas.pointermove": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorApplication.resolve": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorContext.capture": {
+          "n": 3,
+          "min": 532,
+          "p50": 532,
+          "p95": 532,
+          "max": 532,
+          "mean": 532
+        },
+        "gesture.update": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.change": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.reconcile": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.validate": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "analyzeConstants": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.publish": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Workspace.route": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "PresentationSession.refresh": {
+          "n": 3,
+          "min": 354,
+          "p50": 354,
+          "p95": 354,
+          "max": 354,
+          "mean": 354
+        },
+        "DOM.createElement": {
+          "n": 3,
+          "min": 7080,
+          "p50": 7080,
+          "p95": 7080,
+          "max": 7080,
+          "mean": 7080
+        },
+        "Canvas.update": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "DOM.getBoundingClientRect": {
+          "n": 3,
+          "min": 1416,
+          "p50": 1416,
+          "p95": 1416,
+          "max": 1416,
+          "mean": 1416
+        },
+        "DOM.createElementNS": {
+          "n": 3,
+          "min": 354,
+          "p50": 354,
+          "p95": 354,
+          "max": 354,
+          "mean": 354
+        }
+      },
+      "beforeCapture": {
+        "n": 3,
+        "min": 6446,
+        "p50": 6446,
+        "p95": 6446,
+        "max": 6446,
+        "mean": 6446
+      },
+      "afterCapture": {
+        "n": 3,
+        "min": 1006,
+        "p50": 1006,
+        "p95": 1006,
+        "max": 1006,
+        "mean": 1006
+      },
+      "beforeCloneCount": {
+        "n": 3,
+        "min": 15887,
+        "p50": 15887,
+        "p95": 15887,
+        "max": 15887,
+        "mean": 15887
+      },
+      "afterCloneCount": {
+        "n": 3,
+        "min": 10447,
+        "p50": 10447,
+        "p95": 10447,
+        "max": 10447,
+        "mean": 10447
+      },
+      "beforeCloneInclusiveMs": {
+        "n": 3,
+        "min": 207.40000009536743,
+        "p50": 210.50000025331974,
+        "p95": 212.00000002980232,
+        "max": 212.00000002980232,
+        "mean": 209.96666679282984
+      },
+      "afterCloneInclusiveMs": {
+        "n": 3,
+        "min": 66.50000029802322,
+        "p50": 67.29999989271164,
+        "p95": 67.80000007152557,
+        "max": 67.80000007152557,
+        "mean": 67.20000008742015
+      }
+    },
+    {
+      "size": 14,
+      "actor": "Multiply",
+      "fields": "mounted",
+      "unchangedCounts": {
+        "Canvas.pointermove": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorApplication.resolve": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorContext.capture": {
+          "n": 3,
+          "min": 1358,
+          "p50": 1358,
+          "p95": 1358,
+          "max": 1358,
+          "mean": 1358
+        },
+        "gesture.update": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.change": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.reconcile": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.validate": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "analyzeConstants": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.publish": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Workspace.route": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "PresentationSession.refresh": {
+          "n": 3,
+          "min": 708,
+          "p50": 708,
+          "p95": 708,
+          "max": 708,
+          "mean": 708
+        },
+        "DOM.createElement": {
+          "n": 3,
+          "min": 27494,
+          "p50": 27494,
+          "p95": 27494,
+          "max": 27494,
+          "mean": 27494
+        },
+        "Canvas.update": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "DOM.getBoundingClientRect": {
+          "n": 3,
+          "min": 1416,
+          "p50": 1416,
+          "p95": 1416,
+          "max": 1416,
+          "mean": 1416
+        },
+        "DOM.createElementNS": {
+          "n": 3,
+          "min": 354,
+          "p50": 354,
+          "p95": 354,
+          "max": 354,
+          "mean": 354
+        },
+        "field.notification.context": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "FieldTarget.invalidate": {
+          "n": 3,
+          "min": 236,
+          "p50": 236,
+          "p95": 236,
+          "max": 236,
+          "mean": 236
+        },
+        "FieldTarget.capture": {
+          "n": 3,
+          "min": 708,
+          "p50": 708,
+          "p95": 708,
+          "max": 708,
+          "mean": 708
+        },
+        "WidgetSlot.resolve": {
+          "n": 3,
+          "min": 236,
+          "p50": 236,
+          "p95": 236,
+          "max": 236,
+          "mean": 236
+        },
+        "WidgetRegistry.resolve": {
+          "n": 3,
+          "min": 236,
+          "p50": 236,
+          "p95": 236,
+          "max": 236,
+          "mean": 236
+        },
+        "field.notification.application": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        }
+      },
+      "beforeCapture": {
+        "n": 3,
+        "min": 19544,
+        "p50": 19544,
+        "p95": 19544,
+        "max": 19544,
+        "mean": 19544
+      },
+      "afterCapture": {
+        "n": 3,
+        "min": 2540,
+        "p50": 2540,
+        "p95": 2540,
+        "max": 2540,
+        "mean": 2540
+      },
+      "beforeCloneCount": {
+        "n": 3,
+        "min": 41257,
+        "p50": 41257,
+        "p95": 41257,
+        "max": 41257,
+        "mean": 41257
+      },
+      "afterCloneCount": {
+        "n": 3,
+        "min": 24253,
+        "p50": 24253,
+        "p95": 24253,
+        "max": 24253,
+        "mean": 24253
+      },
+      "beforeCloneInclusiveMs": {
+        "n": 3,
+        "min": 1168.9000002294779,
+        "p50": 1183.599999666214,
+        "p95": 1185.0999997854233,
+        "max": 1185.0999997854233,
+        "mean": 1179.1999998937051
+      },
+      "afterCloneInclusiveMs": {
+        "n": 3,
+        "min": 267.09999999403954,
+        "p50": 267.60000017285347,
+        "p95": 281.99999994039536,
+        "max": 281.99999994039536,
+        "mean": 272.2333333690961
+      }
+    },
+    {
+      "size": 14,
+      "actor": "Multiply",
+      "fields": "absent",
+      "unchangedCounts": {
+        "Canvas.pointermove": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorApplication.resolve": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorContext.capture": {
+          "n": 3,
+          "min": 532,
+          "p50": 532,
+          "p95": 532,
+          "max": 532,
+          "mean": 532
+        },
+        "gesture.update": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.change": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.reconcile": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.validate": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "analyzeConstants": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.publish": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Workspace.route": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "PresentationSession.refresh": {
+          "n": 3,
+          "min": 354,
+          "p50": 354,
+          "p95": 354,
+          "max": 354,
+          "mean": 354
+        },
+        "DOM.createElement": {
+          "n": 3,
+          "min": 27140,
+          "p50": 27140,
+          "p95": 27140,
+          "max": 27140,
+          "mean": 27140
+        },
+        "Canvas.update": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "DOM.getBoundingClientRect": {
+          "n": 3,
+          "min": 1416,
+          "p50": 1416,
+          "p95": 1416,
+          "max": 1416,
+          "mean": 1416
+        },
+        "DOM.createElementNS": {
+          "n": 3,
+          "min": 354,
+          "p50": 354,
+          "p95": 354,
+          "max": 354,
+          "mean": 354
+        }
+      },
+      "beforeCapture": {
+        "n": 3,
+        "min": 6446,
+        "p50": 6446,
+        "p95": 6446,
+        "max": 6446,
+        "mean": 6446
+      },
+      "afterCapture": {
+        "n": 3,
+        "min": 1006,
+        "p50": 1006,
+        "p95": 1006,
+        "max": 1006,
+        "mean": 1006
+      },
+      "beforeCloneCount": {
+        "n": 3,
+        "min": 24147,
+        "p50": 24147,
+        "p95": 24147,
+        "max": 24147,
+        "mean": 24147
+      },
+      "afterCloneCount": {
+        "n": 3,
+        "min": 18707,
+        "p50": 18707,
+        "p95": 18707,
+        "max": 18707,
+        "mean": 18707
+      },
+      "beforeCloneInclusiveMs": {
+        "n": 3,
+        "min": 426.7000000476837,
+        "p50": 428.0000000447035,
+        "p95": 435.6999997794628,
+        "max": 435.6999997794628,
+        "mean": 430.1333332906167
+      },
+      "afterCloneInclusiveMs": {
+        "n": 3,
+        "min": 128.2999999821186,
+        "p50": 128.7999999076128,
+        "p95": 132.40000027418137,
+        "max": 132.40000027418137,
+        "mean": 129.83333338797092
+      }
+    },
+    {
+      "size": 14,
+      "actor": "Image output",
+      "fields": "mounted",
+      "unchangedCounts": {
+        "Canvas.pointermove": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorApplication.resolve": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorContext.capture": {
+          "n": 3,
+          "min": 650,
+          "p50": 650,
+          "p95": 650,
+          "max": 650,
+          "mean": 650
+        },
+        "gesture.update": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.change": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.reconcile": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.validate": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "analyzeConstants": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.publish": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Workspace.route": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "PresentationSession.refresh": {
+          "n": 3,
+          "min": 472,
+          "p50": 472,
+          "p95": 472,
+          "max": 472,
+          "mean": 472
+        },
+        "DOM.createElement": {
+          "n": 3,
+          "min": 27494,
+          "p50": 27494,
+          "p95": 27494,
+          "max": 27494,
+          "mean": 27494
+        },
+        "Canvas.update": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "DOM.getBoundingClientRect": {
+          "n": 3,
+          "min": 1416,
+          "p50": 1416,
+          "p95": 1416,
+          "max": 1416,
+          "mean": 1416
+        },
+        "DOM.createElementNS": {
+          "n": 3,
+          "min": 354,
+          "p50": 354,
+          "p95": 354,
+          "max": 354,
+          "mean": 354
+        }
+      },
+      "beforeCapture": {
+        "n": 3,
+        "min": 8924,
+        "p50": 8924,
+        "p95": 8924,
+        "max": 8924,
+        "mean": 8924
+      },
+      "afterCapture": {
+        "n": 3,
+        "min": 1832,
+        "p50": 1832,
+        "p95": 1832,
+        "max": 1832,
+        "mean": 1832
+      },
+      "beforeCloneCount": {
+        "n": 3,
+        "min": 27687,
+        "p50": 27687,
+        "p95": 27687,
+        "max": 27687,
+        "mean": 27687
+      },
+      "afterCloneCount": {
+        "n": 3,
+        "min": 20595,
+        "p50": 20595,
+        "p95": 20595,
+        "max": 20595,
+        "mean": 20595
+      },
+      "beforeCloneInclusiveMs": {
+        "n": 3,
+        "min": 557.69999961555,
+        "p50": 561.5000000298023,
+        "p95": 567.8000003248453,
+        "max": 567.8000003248453,
+        "mean": 562.3333333233992
+      },
+      "afterCloneInclusiveMs": {
+        "n": 3,
+        "min": 174.9000000357628,
+        "p50": 178.19999961555004,
+        "p95": 192.49999997019768,
+        "max": 192.49999997019768,
+        "mean": 181.8666665405035
+      }
+    },
+    {
+      "size": 14,
+      "actor": "Image output",
+      "fields": "absent",
+      "unchangedCounts": {
+        "Canvas.pointermove": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorApplication.resolve": {
+          "n": 3,
+          "min": 60,
+          "p50": 60,
+          "p95": 60,
+          "max": 60,
+          "mean": 60
+        },
+        "EditorContext.capture": {
+          "n": 3,
+          "min": 532,
+          "p50": 532,
+          "p95": 532,
+          "max": 532,
+          "mean": 532
+        },
+        "gesture.update": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.change": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.reconcile": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.validate": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "analyzeConstants": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Graph.publish": {
+          "n": 3,
+          "min": 59,
+          "p50": 59,
+          "p95": 59,
+          "max": 59,
+          "mean": 59
+        },
+        "Workspace.route": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "PresentationSession.refresh": {
+          "n": 3,
+          "min": 354,
+          "p50": 354,
+          "p95": 354,
+          "max": 354,
+          "mean": 354
+        },
+        "DOM.createElement": {
+          "n": 3,
+          "min": 27140,
+          "p50": 27140,
+          "p95": 27140,
+          "max": 27140,
+          "mean": 27140
+        },
+        "Canvas.update": {
+          "n": 3,
+          "min": 118,
+          "p50": 118,
+          "p95": 118,
+          "max": 118,
+          "mean": 118
+        },
+        "DOM.getBoundingClientRect": {
+          "n": 3,
+          "min": 1416,
+          "p50": 1416,
+          "p95": 1416,
+          "max": 1416,
+          "mean": 1416
+        },
+        "DOM.createElementNS": {
+          "n": 3,
+          "min": 354,
+          "p50": 354,
+          "p95": 354,
+          "max": 354,
+          "mean": 354
+        }
+      },
+      "beforeCapture": {
+        "n": 3,
+        "min": 6446,
+        "p50": 6446,
+        "p95": 6446,
+        "max": 6446,
+        "mean": 6446
+      },
+      "afterCapture": {
+        "n": 3,
+        "min": 1006,
+        "p50": 1006,
+        "p95": 1006,
+        "max": 1006,
+        "mean": 1006
+      },
+      "beforeCloneCount": {
+        "n": 3,
+        "min": 24147,
+        "p50": 24147,
+        "p95": 24147,
+        "max": 24147,
+        "mean": 24147
+      },
+      "afterCloneCount": {
+        "n": 3,
+        "min": 18707,
+        "p50": 18707,
+        "p95": 18707,
+        "max": 18707,
+        "mean": 18707
+      },
+      "beforeCloneInclusiveMs": {
+        "n": 3,
+        "min": 424.5999999791384,
+        "p50": 427.7000003606081,
+        "p95": 429.19999983906746,
+        "max": 429.19999983906746,
+        "mean": 427.16666672627133
+      },
+      "afterCloneInclusiveMs": {
+        "n": 3,
+        "min": 128.80000004172325,
+        "p50": 130.20000004768372,
+        "p95": 131.70000003278255,
+        "max": 131.70000003278255,
+        "mean": 130.23333337406316
+      }
+    }
+  ],
+  "allMeasuredNotificationAndValidationCountsUnchanged": true,
+  "measuredFindings": [
+    "Mounted Multiply Graph.capture19544→2540 (-87.0%); ImageOutput8924→1832; Inspector absent6446→1006, both4/14node fixtures.",
+    "14node mounted Multiply structuredClone inclusive median1183.6→267.6ms; gesture inclusive1700.7→593.3ms. Inclusive times overlap.",
+    "Actual uninstrumented14node Multiply input throughput median28.48→58.09 requests/s; ImageOutput31.60→59.06. Four-node Multiply35.30→59.06.",
+    "Validation, constant analysis, publication, Context/Application notifications, FieldTarget invalidation/capture, Widget resolution and Canvas update counts unchanged.",
+    "RAF callbacks remain around60Hz; input throughput is not a display FPS measurement."
+  ],
+  "sufficiency": "Measured first-choice minimal repair substantially reduces clone/capture cost and restores near intended input rate in these fixtures. No secondary cache/coalescing optimization included.",
+  "limitations": [
+    "3 repetitions per cell, sequential local machine run, headless synthetic pointer path, SwiftShader only; not physical GPU/touch/second-device or universal FPS.",
+    "DOM rendering/validation remain present and may dominate larger graphs; no scale beyond4/14 nodes claimed.",
+    "Instrumented counts/timings from disposable copies are separate from archive public/numeric proof. No production cache or notification suppression."
+  ],
+  "raw": "performance-01/aggregate-01.json",
+  "environment": "performance-01/environment-04.json"
+}

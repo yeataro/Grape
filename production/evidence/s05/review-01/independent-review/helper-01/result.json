@@ -1,0 +1,108 @@
+{
+  "status": "PASS_HELPER_ONLY",
+  "fixture": "Unchanged independently accepted S04 report and archive; no fabricated S05 PASS or deployment",
+  "helperSha256": "99ad98d58ae884f8f97296774e6f476400d674af1d7f3fb6bf4f5fdc8bed46ca",
+  "reportSha256": "c1cb4fd813ba2f78405ba03eb07f1986a0c97021fae2dd3772eeb95001158d2c",
+  "manifestSha256": "d8c2095f36833d4cfcc3ffaac72f691853cb9936c76791e887fcd1b0a3739f34",
+  "cases": [
+    {
+      "name": "exact accepted S04 report/archive accepted as helper-only fixture",
+      "result": "PASS"
+    },
+    {
+      "name": "wrong review digest",
+      "result": "PASS_EXPECTED_REJECTION"
+    },
+    {
+      "name": "wrong I",
+      "result": "PASS_EXPECTED_REJECTION"
+    },
+    {
+      "name": "wrong R",
+      "result": "PASS_EXPECTED_REJECTION"
+    },
+    {
+      "name": "wrong manifest digest",
+      "result": "PASS_EXPECTED_REJECTION"
+    },
+    {
+      "name": "outside verification root",
+      "result": "PASS_EXPECTED_REJECTION"
+    },
+    {
+      "name": "FAIL verdict",
+      "result": "PASS_EXPECTED_REJECTION"
+    },
+    {
+      "name": "remaining finding",
+      "result": "PASS_EXPECTED_REJECTION"
+    },
+    {
+      "name": "required gap",
+      "result": "PASS_EXPECTED_REJECTION"
+    },
+    {
+      "name": "missing gaps",
+      "result": "PASS_EXPECTED_REJECTION"
+    },
+    {
+      "name": "traversal",
+      "result": "PASS_EXPECTED_REJECTION"
+    },
+    {
+      "name": "reserved route",
+      "result": "PASS_EXPECTED_REJECTION"
+    },
+    {
+      "name": "bad asset hash",
+      "result": "PASS_EXPECTED_REJECTION"
+    },
+    {
+      "name": "unapproved bind address rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "prepared bytes immutable after scratch-file modification",
+      "result": "PASS"
+    },
+    {
+      "name": "all temporary listeners closed",
+      "result": "PASS"
+    },
+    {
+      "name": "partial bind failure closes earlier owned listener",
+      "result": "PASS"
+    }
+  ],
+  "httpResults": [
+    {
+      "origin": "http://127.0.0.1:55319",
+      "headerIdentity": true,
+      "deliveryIdentity": true,
+      "allAssetsExact": true,
+      "pathExposureRejected": true,
+      "methodAndHead": true
+    },
+    {
+      "origin": "http://192.168.1.105:55320",
+      "headerIdentity": true,
+      "deliveryIdentity": true,
+      "allAssetsExact": true,
+      "pathExposureRejected": true,
+      "methodAndHead": true
+    },
+    {
+      "origin": "http://100.83.88.97:55321",
+      "headerIdentity": true,
+      "deliveryIdentity": true,
+      "allAssetsExact": true,
+      "pathExposureRejected": true,
+      "methodAndHead": true
+    }
+  ],
+  "listenersClosed": true,
+  "humanPortsUntouched": [
+    4174,
+    4192
+  ]
+}

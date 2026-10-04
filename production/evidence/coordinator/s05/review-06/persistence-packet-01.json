@@ -1,0 +1,117 @@
+{
+  "packetVersion": 1,
+  "packetType": "IMPLEMENTER_DISPATCH",
+  "packetId": "S05-REVIEW06-PERSISTENCE-01",
+  "actionKey": "yeataro/Grape:S05:review06-persistence:6c3a734:01",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0826de5a9cca7cf200d843435985a7dc624634a2",
+  "acceptedMain": "6aa6abbdc46d55753111d5ef5ca9899870a8805a",
+  "expectedWorkHead": "6c3a734325d0db2d924356a9614e971d80a966c8",
+  "PR": "NOT_CREATED",
+  "authorizationRef": {
+    "file": "production/evidence/coordinator/s05/activation-20261004-01/human-authorization-01.json",
+    "sha256": "d74d8dd03147b2cf528f79bd2bba1000f179154426bd4d828609971137bed576",
+    "bytes": 2851
+  },
+  "sliceId": "S05",
+  "authorizedScope": "Mechanical preservation of independent review6 BLOCKED result and workflow records under existing S05 authority. No product work.",
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "title": "Grape S05 實作與維護",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea"
+  },
+  "inputRefs": [
+    {
+      "file": "C:/Users/user/.codex/worktrees/s05-drag-performance-review-01/Grape/.verification/s05-drag-performance-review-01/INDEPENDENT_REVIEW_RESULT.json",
+      "bytes": 45612,
+      "sha256": "a86ed934efee560b71584e6f85cddf50ed0e1c8cea9e7e8418b5df4b2dc64077"
+    },
+    {
+      "file": "C:/Users/user/.codex/worktrees/s05-drag-performance-review-01/Grape/.verification/s05-drag-performance-review-01/supporting-evidence-manifest-01.json",
+      "bytes": 60963,
+      "sha256": "5a779e3c6978a4310f7418d79d83dea1a72d8b1c4ae89f49a11a4736c82fcdc4",
+      "count": 329
+    },
+    {
+      "file": "production/evidence/s05/drag-performance-repair-01/source-config-manifest-01.json",
+      "bytes": 22908,
+      "sha256": "1eefe71998b5c195f6bf636a11b7a82d8d3eb25cab78e324b383dd9b28b5a75f"
+    },
+    {
+      "file": "implementation-state.json",
+      "bytes": 21408,
+      "sha256": "175a214c71d83f6b6d092b27238a8ca7f6d2e0c80aeedf44d0b3accfe03774c8"
+    }
+  ],
+  "rawReview": {
+    "root": "C:/Users/user/.codex/worktrees/s05-drag-performance-review-01/Grape/.verification/s05-drag-performance-review-01",
+    "report": {
+      "file": "INDEPENDENT_REVIEW_RESULT.json",
+      "bytes": 45612,
+      "sha256": "a86ed934efee560b71584e6f85cddf50ed0e1c8cea9e7e8418b5df4b2dc64077"
+    },
+    "manifest": {
+      "file": "supporting-evidence-manifest-01.json",
+      "bytes": 60963,
+      "sha256": "5a779e3c6978a4310f7418d79d83dea1a72d8b1c4ae89f49a11a4736c82fcdc4",
+      "count": 329
+    },
+    "destination": "production/evidence/s05/review-06/independent-review/",
+    "copyRule": "Copy original report, manifest and all329 manifest-declared files byte-for-byte after checking traversal/hash/size. No regeneration or runtime extras."
+  },
+  "requestedAction": [
+    "Recover current HEAD and prior receipts; reuse this actionKey, no duplicate job.",
+    "Preserve all331 original review objects; register author, I/R, BLOCKED/WF_PERMISSION and exact missing network scope using existing state schema; retain historical scoped PASS identities.",
+    "Keep implementationBaseline I6, build, activeSlices S05, acceptedEvidence, historical acceptance and product files unchanged. The completed probes are not a technical PASS or Human acceptance.",
+    "Commit only the allowed new evidence and necessary existing state prose as a metadata-only descendant of R6. Include Coordinator review-06/preview-05 staged receipts without claiming deployment. Return actual commit and preservation/verification evidence, then STOP_WRITING."
+  ],
+  "allowedPaths": [
+    "implementation-state.json (existing S05 status prose only)",
+    "production/evidence/s05/review-06/",
+    "production/evidence/coordinator/s05/review-06/",
+    "production/evidence/coordinator/s05/preview-05/"
+  ],
+  "prohibitedPaths": [
+    "handoff/**",
+    "production/src/**",
+    "production/tests/**",
+    "production/tools/**",
+    "references/**",
+    "production/debug.log",
+    "all prior immutable evidence except no edits",
+    "README.md"
+  ],
+  "verificationCommands": [
+    "node tools/verify-bootstrap.mjs",
+    "node handoff/tools/check-implementation-state.mjs --current",
+    "git diff --check",
+    "Verify131 source-config identities; all331 copiedreview objects; acceptedEvidence equals R6; I6/build/activeSlices unchanged; staged diff onlyallowlist"
+  ],
+  "priorActionReceipt": "production/evidence/coordinator/s05/review-06/dispatch-result-01.json",
+  "attempt": 1,
+  "findingGroup": {
+    "id": "S05-FG-DRAG-PERFORMANCE-01",
+    "repairAttempt": 1,
+    "unsuccessfulTechnicalReviewRounds": 0,
+    "globalReviewSequence": 6,
+    "blockingClassification": "WF_PERMISSION (not product failure; no retry budget reset)"
+  },
+  "outputLocation": "production/evidence/s05/review-06/persistence-01.json plus actual commit receipt and STOP_WRITING",
+  "stopConditions": [
+    "Changed expected HEAD or unexpected product/state change",
+    "Missing/mismatched raw review identity",
+    "No second logical writer, network service start, new product work, Human acceptance, push, PR, merge or S06"
+  ],
+  "provenance": {
+    "coordinator": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "writerIdleVerified": "app wait cursor dd0469e1-b0e2-448c-abf6-d12be72a4a93:661; repair turn completed",
+    "networkApproval": "Question pending; no Human answer inferred"
+  },
+  "limitations": [
+    "No exactI6 independent PASS yet",
+    "No new deployment performed",
+    "Remote M/PR facts last verified earlier this turn; no remote mutation requested"
+  ]
+}
+

@@ -1,0 +1,1390 @@
+{
+  "packetVersion": 1,
+  "packetType": "INDEPENDENT_REVIEW_RESULT",
+  "reviewId": "S05-REPLACEMENT-INDEPENDENT-29695b3-02",
+  "packetId": "S05-REPLACEMENT-INDEPENDENT-29695b3-02",
+  "actionKey": "yeataro/Grape:S05:rereview:legacy-replacement:29695b3:02",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0826de5a9cca7cf200d843435985a7dc624634a2",
+  "acceptedMain": "6aa6abbdc46d55753111d5ef5ca9899870a8805a",
+  "expectedWorkHead": "29695b3c25e2d200856d780b31e20e23f24efb6d",
+  "PR": null,
+  "authorizationRef": {
+    "file": "production/evidence/coordinator/s05/activation-20261004-01/human-authorization-01.json",
+    "sha256": "d74d8dd03147b2cf528f79bd2bba1000f179154426bd4d828609971137bed576"
+  },
+  "sliceId": "S05",
+  "writer": {
+    "displayTitle": "Grape S05 實作與維護",
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "priorStatus": "Verified idle / STOP_WRITING at P3 through app wait_threads; same original writer"
+  },
+  "reviewerRole": "Fresh Independent Reviewer",
+  "reviewerIdentity": {
+    "canonicalAgent": "/root/s05_fresh_review_01",
+    "threadId": "01a10448-616d-7eb2-9177-f8798e938ed3",
+    "attribution": "Actual reviewer identity from bounded Coordinator packet; same independent reviewer context, prior raw metadata preserved."
+  },
+  "recordedAt": "2026-10-04T05:48:54.181Z",
+  "provenance": {
+    "packet": {
+      "file": "reviewer-packet-01.json",
+      "sha256": "8402a412e5530cbead8f75e62172889f1b0a10ae9421e24a64f7057bb1f596ca",
+      "bytes": 17983
+    },
+    "originalPacketPath": "C:/Users/user/source/Grape/production/evidence/coordinator/s05/review-04/reviewer-packet-01.json",
+    "originalReview": {
+      "file": "production/evidence/s05/review-03/independent-review/INDEPENDENT_REVIEW_RESULT.json",
+      "sha256": "86235a7e86cf7511ce04abe5b6f44ee11e3817011d21f7e2ec2e3cabf1150aab",
+      "bytes": 70797
+    },
+    "findingGroup": "S05-FG-LEGACY-IMPORT-01",
+    "groupRound": 2,
+    "globalReviewSequence": 4,
+    "counters": {
+      "sameUnderlyingFindingGroup": true,
+      "priorRepairAttempt": 1,
+      "currentRepairAttempt": 2,
+      "priorUnsuccessfulRepairReviewRounds": 0,
+      "priorReviewSequence": 3,
+      "priorTargetedRoundVerdict": "PASS",
+      "counterReset": false,
+      "originalUniformCounters": "Separate S05-FG-RESOURCE-01 retains initialFailure1/repair1/reviewRound2 PASS"
+    },
+    "authorship": "Direct independent review; implementation assertions checked against exact sources, Git, actual tests and archived public operations. No implementation conversation inherited/read."
+  },
+  "independenceStatement": {
+    "checkout": "C:\\Users\\user\\.codex\\worktrees\\s05-replacement-review-01\\Grape",
+    "scratchRoot": "C:\\Users\\user\\.codex\\worktrees\\s05-replacement-review-01\\Grape\\.verification\\s05-replacement-review-01",
+    "initialHead": "29695b3c25e2d200856d780b31e20e23f24efb6d",
+    "initialTrackedStatus": "",
+    "finalHead": "29695b3c25e2d200856d780b31e20e23f24efb6d",
+    "finalTrackedStatus": "",
+    "productStateTrackedWrites": false,
+    "handoffWrites": false,
+    "originalEvidenceWrites": false,
+    "implementationChatRead": false,
+    "unboundedHumanConversationRead": false,
+    "userBrowserProfileUsed": false,
+    "humanServices4193Or4194AccessedOrChanged": false,
+    "commits": false,
+    "pushes": false,
+    "delegatedReview": false,
+    "dependencies": "Declared locked production tools installed only in isolated checkout; no lock/config change."
+  },
+  "reviewedI": "ee1212fdc54359f1ceba4c4b09f6e7cc06cddc41",
+  "reviewedR": "29695b3c25e2d200856d780b31e20e23f24efb6d",
+  "reviewedScope": {
+    "authorized": "Independent targeted review of S05-OWNER-002 replacement eligibility/presentation repair and affected regressions at exact I/R. Verify mandatory exact pins/profile, current-base/load and one-Undo protections; no full S05 catalog or acceptance.",
+    "changedImplementationPaths": "M\tproduction/apps/web/main.ts\nM\tproduction/apps/web/shell-copy.ts\nM\tproduction/src/application/editor.ts\nM\tproduction/src/model/graph.ts\nM\tproduction/tests/browser/s02.spec.ts\nA\tproduction/tests/browser/s05-replacement.spec.ts\nA\tproduction/tests/fixtures/s05-replacement-flows.ts\nA\tproduction/tests/unit/s05-replacement.test.ts",
+    "eightPathsVerified": true,
+    "oldCounterexample": {
+      "archive": {
+        "file": "production/evidence/s05/repair-02/candidate-web-01.tar.gz",
+        "sha256": "f49574499a70e4c0ad5bfe461fb169b65d6385557ff78d6deb4c4414233a4f8f",
+        "bytes": 70836
+      },
+      "states": [
+        {
+          "mode": "default",
+          "review": "valid: DOCUMENT_VALID. The current graph was not replaced. You can export the original source.",
+          "sourceValid": true,
+          "refusalCode": "IMPORT_DEFINITIONS",
+          "originalBytesExact": true,
+          "refusalPreservesDocumentHistoryDirtyContexts": true,
+          "closeNewSessionUpgradeGenerateSaveReopen": true,
+          "oneUndoRedo": null,
+          "evidence": "browser-archive-old-01/default.json"
+        },
+        {
+          "mode": "upgraded",
+          "review": "valid: DOCUMENT_VALID. The current graph was not replaced. You can export the original source.",
+          "sourceValid": true,
+          "refusalCode": "IMPORT_DEFINITIONS",
+          "originalBytesExact": true,
+          "refusalPreservesDocumentHistoryDirtyContexts": true,
+          "closeNewSessionUpgradeGenerateSaveReopen": true,
+          "oneUndoRedo": null,
+          "evidence": "browser-archive-old-01/upgraded.json"
+        },
+        {
+          "mode": "matching",
+          "review": "valid: DOCUMENT_VALID. The current graph was not replaced. You can export the original source.",
+          "sourceValid": true,
+          "refusalCode": null,
+          "originalBytesExact": true,
+          "refusalPreservesDocumentHistoryDirtyContexts": null,
+          "closeNewSessionUpgradeGenerateSaveReopen": null,
+          "oneUndoRedo": true,
+          "evidence": "browser-archive-old-01/matching.json"
+        }
+      ]
+    },
+    "currentReplacement": [
+      {
+        "mode": "default",
+        "review": "valid: DOCUMENT_VALID. The current graph was not replaced. You can export the original source.",
+        "hint": "This file is valid, but Replace is unavailable because it uses different module versions or output profile. Choose Open in new session to open the file, or Close to keep working here. You can still export the original source.",
+        "sourceValid": true,
+        "refusalCode": "IMPORT_DEFINITIONS",
+        "forcedButtonStillGuarded": true,
+        "originalBytesExact": true,
+        "refusalPreservesDocumentHistoryDirtyContexts": true,
+        "closeNewSessionUpgradeGenerateSaveReopen": true,
+        "oneUndoRedo": null,
+        "oneRevision": null,
+        "evidence": "browser-archive-new-01/default.json"
+      },
+      {
+        "mode": "upgraded",
+        "review": "valid: DOCUMENT_VALID. The current graph was not replaced. You can export the original source.",
+        "hint": "This file is valid, but Replace is unavailable because it uses different module versions or output profile. Choose Open in new session to open the file, or Close to keep working here. You can still export the original source.",
+        "sourceValid": true,
+        "refusalCode": "IMPORT_DEFINITIONS",
+        "forcedButtonStillGuarded": true,
+        "originalBytesExact": true,
+        "refusalPreservesDocumentHistoryDirtyContexts": true,
+        "closeNewSessionUpgradeGenerateSaveReopen": true,
+        "oneUndoRedo": null,
+        "oneRevision": null,
+        "evidence": "browser-archive-new-01/upgraded.json"
+      },
+      {
+        "mode": "matching",
+        "review": "valid: DOCUMENT_VALID. The current graph was not replaced. You can export the original source.",
+        "hint": "Replace is available for the current document. It keeps this session and replaces its contents in one Undo step.",
+        "sourceValid": true,
+        "refusalCode": null,
+        "forcedButtonStillGuarded": null,
+        "originalBytesExact": true,
+        "refusalPreservesDocumentHistoryDirtyContexts": null,
+        "closeNewSessionUpgradeGenerateSaveReopen": null,
+        "oneUndoRedo": true,
+        "oneRevision": true,
+        "evidence": "browser-archive-new-01/matching.json"
+      }
+    ],
+    "independentApplication": [
+      {
+        "kind": "default-mismatch",
+        "status": "PASS",
+        "eligibility": {
+          "available": false,
+          "code": "IMPORT_DEFINITIONS"
+        }
+      },
+      {
+        "kind": "upgraded-mismatch",
+        "status": "PASS",
+        "eligibility": {
+          "available": false,
+          "code": "IMPORT_DEFINITIONS"
+        }
+      },
+      {
+        "kind": "ordered-pins-mismatch",
+        "status": "PASS",
+        "eligibility": {
+          "available": false,
+          "code": "IMPORT_DEFINITIONS"
+        }
+      },
+      {
+        "kind": "kind-only-mismatch",
+        "status": "PASS",
+        "eligibility": {
+          "available": false,
+          "code": "IMPORT_DEFINITIONS"
+        }
+      },
+      {
+        "kind": "missing-exact-module",
+        "status": "PASS",
+        "eligibility": {
+          "available": false,
+          "code": "IMPORT_ERRORS"
+        }
+      },
+      {
+        "kind": "invalid-mode",
+        "status": "PASS",
+        "eligibility": {
+          "available": false,
+          "code": "IMPORT_ERRORS"
+        }
+      },
+      {
+        "kind": "stale-after-eligible",
+        "status": "PASS",
+        "eligibility": {
+          "available": false,
+          "code": "IMPORT_STALE"
+        }
+      },
+      {
+        "kind": "new-load-after-eligible",
+        "status": "PASS",
+        "eligibility": {
+          "available": false,
+          "code": "IMPORT_STALE"
+        }
+      },
+      {
+        "kind": "closed",
+        "status": "PASS",
+        "eligibility": {
+          "available": false,
+          "code": "REVIEW_CLOSED"
+        }
+      },
+      {
+        "kind": "fabricated",
+        "status": "PASS",
+        "eligibility": {
+          "available": false,
+          "code": "REVIEW_CLOSED"
+        }
+      },
+      {
+        "kind": "readonly-after-eligible",
+        "status": "PASS",
+        "eligibility": {
+          "available": false,
+          "code": "IMPORT_READONLY"
+        }
+      },
+      {
+        "kind": "busy-after-eligible",
+        "status": "PASS",
+        "eligibility": {
+          "available": false,
+          "code": "HISTORY_BUSY"
+        }
+      },
+      {
+        "kind": "matching-complete-replacement",
+        "status": "PASS",
+        "eligibility": null
+      }
+    ],
+    "actualCurrentSamples": [
+      {
+        "name": "shared-expand.grape.json",
+        "sha256": "71912170544675c6fe6a4266b9b16905807ce7f920105b0ce6f0ae6b0bb29ff9",
+        "bytes": 19018,
+        "evidence": "browser-archive-new-01/delivered-shared-expand.grape.json.json",
+        "actions": [
+          "shared mode change and Undo/Redo",
+          "successful GLSL generation",
+          "save/reopen exact document"
+        ],
+        "status": "PASS_COMPLETED_BEFORE_LATER_HARNESS_TIMEOUT"
+      },
+      {
+        "name": "shared-function.grape.json",
+        "sha256": "f4cd1a04fd3a28ad0695ea49d4f99a4c164627a59c2aef1df47f5afef3a5bf7b",
+        "bytes": 19020,
+        "evidence": "browser-archive-new-01/delivered-shared-function.grape.json.json",
+        "actions": [
+          "Make independent retains mode then diverges without changing shared original",
+          "successful GLSL generation",
+          "save/reopen exact document"
+        ],
+        "status": "PASS_COMPLETED_BEFORE_LATER_HARNESS_TIMEOUT"
+      },
+      {
+        "name": "shared-function.personal.json",
+        "sha256": "b5c40f599a6015eeb695187342b82d4bf2180ea266ba8b6684319bab95d31438",
+        "bytes": 8446,
+        "evidence": "browser-archive-new-01/delivered-shared-function.personal.json.json",
+        "actions": [
+          "public Personal import/export/insert",
+          "retained function then localized Expand",
+          "successful GLSL generation",
+          "save/reopen exact document"
+        ],
+        "status": "PASS_COMPLETED_BEFORE_LATER_HARNESS_TIMEOUT"
+      },
+      {
+        "name": "nested-function.grape.json",
+        "sha256": "606f16e8de380b5355a8498e73f106a5feb17e933ebc1b394383e9c685f9b48c",
+        "bytes": 26428,
+        "evidence": "browser-archive-new-01/delivered-nested-function.grape.json.json",
+        "actions": [
+          "successful GLSL generation",
+          "save/reopen exact document"
+        ],
+        "status": "PASS_COMPLETED_BEFORE_LATER_HARNESS_TIMEOUT"
+      },
+      {
+        "name": "uniform-function.grape.json",
+        "sha256": "f32a5e71739a24a03a88fa92e0374d44eb75933523b5da2701a399d1588d7fe9",
+        "bytes": 21233,
+        "evidence": "browser-archive-new-01/delivered-uniform-function.grape.json.json",
+        "actions": [
+          "successful GLSL generation",
+          "save/reopen exact document"
+        ],
+        "status": "PASS_COMPLETED_BEFORE_LATER_HARNESS_TIMEOUT"
+      },
+      {
+        "name": "constant-detach.grape.json",
+        "sha256": "a056b93e4daa33e22116e3f1753ccd5fe05f58102680f07629bbaa32755be568",
+        "bytes": 20676,
+        "evidence": "browser-archive-new-01/delivered-constant-detach.grape.json.json",
+        "actions": [
+          "atomic detach/loss and Undo/Redo",
+          "expected INPUT_REQUIRED only after deliberate mode detach",
+          "save/reopen exact document"
+        ],
+        "status": "PASS_COMPLETED_BEFORE_LATER_HARNESS_TIMEOUT"
+      },
+      {
+        "name": "activation-rejected.grape.json",
+        "sha256": "0f565fa91cc91b8bee570487583815b08d6cca94bceb8cb274d0e84e4a3c7617",
+        "bytes": 20782,
+        "evidence": "browser-archive-new-01/delivered-activation-rejected.grape.json.json",
+        "actions": [
+          "invalid activation rejected atomically",
+          "successful GLSL generation",
+          "save/reopen exact document"
+        ],
+        "status": "PASS_COMPLETED_BEFORE_LATER_HARNESS_TIMEOUT"
+      },
+      {
+        "name": "shape-array.grape.json",
+        "sha256": "8d0f2c256f8869d5a9028ffe93a126acc9021916a3999b5571de8fec4b34c7c6",
+        "bytes": 15813,
+        "evidence": "browser-archive-new-01/delivered-shape-array.grape.json.json",
+        "actions": [
+          "successful GLSL generation",
+          "save/reopen exact document"
+        ],
+        "status": "PASS_COMPLETED_BEFORE_LATER_HARNESS_TIMEOUT"
+      },
+      {
+        "name": "shape-nominal.grape.json",
+        "sha256": "de45a406976b76166b15a5a58955f7bc0c9add7daf1516d422479d51e007facc",
+        "bytes": 12740,
+        "evidence": "browser-archive-new-01/delivered-shape-nominal.grape.json.json",
+        "actions": [
+          "successful GLSL generation",
+          "save/reopen exact document"
+        ],
+        "status": "PASS_COMPLETED_BEFORE_LATER_HARNESS_TIMEOUT"
+      },
+      {
+        "name": "pixel-effects.grape.json",
+        "sha256": "5834c1cf55a5b30534f7e0fa0a72e106f05daff600e0e59342cd60b2fbade6f0",
+        "bytes": 19381,
+        "evidence": "browser-archive-new-01/delivered-pixel-effects.grape.json.json",
+        "actions": [
+          "successful GLSL generation",
+          "save/reopen exact document"
+        ],
+        "status": "PASS_COMPLETED_BEFORE_LATER_HARNESS_TIMEOUT"
+      },
+      {
+        "name": "vertex-pixel.grape.json",
+        "sha256": "5c8f3a4e8b3be373422c7975926b5f251a6df5f365ff3d2c10f5031b33b2f644",
+        "bytes": 15442,
+        "evidence": "browser-archive-new-01/delivered-vertex-pixel.grape.json.json",
+        "actions": [
+          "successful GLSL generation",
+          "save/reopen exact document"
+        ],
+        "status": "PASS_COMPLETED_BEFORE_LATER_HARNESS_TIMEOUT"
+      },
+      {
+        "name": "legacy-owner.grape.json",
+        "sha256": "2bc735a55637ee42f7beeef7687a6e687fa62a8154dfc36cef3d4ebc152fbb86",
+        "bytes": 10296,
+        "evidence": "browser-archive-new-01/delivered-legacy-owner.grape.json.json",
+        "actions": [
+          "explicit old owner upgrade",
+          "Expand with full authored-data preservation",
+          "successful GLSL generation",
+          "save/reopen exact document"
+        ],
+        "status": "PASS_COMPLETED_BEFORE_LATER_HARNESS_TIMEOUT"
+      },
+      {
+        "name": "cross-stage-uniform-distinct.grape.json",
+        "sha256": "84717f32a54717e8911795f1f9ac4b8e1aab7a11a9be4fd2741265a0d0adae4e",
+        "bytes": 19272,
+        "evidence": "browser-archive-new-01/delivered-cross-stage-uniform-distinct.grape.json.json",
+        "actions": [
+          "successful GLSL generation",
+          "save/reopen exact document"
+        ],
+        "status": "PASS_COMPLETED_BEFORE_LATER_HARNESS_TIMEOUT"
+      },
+      {
+        "name": "cross-stage-uniform-shared-reversed.grape.json",
+        "sha256": "d69d9bb410c19f34b16321500144be58ce2c46ff4c0fcb2757157c7d0aa8a7b5",
+        "bytes": 26340,
+        "evidence": "browser-archive-new-01/delivered-cross-stage-uniform-shared-reversed.grape.json.json",
+        "actions": [
+          "successful GLSL generation",
+          "save/reopen exact document"
+        ],
+        "status": "PASS_COMPLETED_BEFORE_LATER_HARNESS_TIMEOUT"
+      }
+    ],
+    "currentSuites": [
+      "full production unit and conformance tests",
+      "S02 browser import",
+      "S04 browser exchange/personal/provider/lifetime",
+      "S05 function/effect/HTTP",
+      "S05 linked Uniform",
+      "S05 delivered14+negative",
+      "S05 replacement"
+    ],
+    "carryForward": {
+      "priorR": "cfcde2ac26908c1850ade4d387d5ab41ab72ee11",
+      "priorP": "d634d7edb195839d75707c528072479b48f478b1",
+      "protectedFiles": 2716,
+      "historicalSupportFiles": 378,
+      "reason": "Unchanged modules/codecs/pins/profiles/dependencies, compiler, prior sample bytes and contracts retain prior bounded limits. Shared Graph/Application changes are requalified by full204 unit/conformance tests and current54 relevant browser cases; actual new runtime archive independently tested.",
+      "notCarriedAsCurrentPass": "Old R3 PASS is not current runtime approval. New report supplies targeted current verdict. Unrelated S01/S03 browser flows remain historical evidence, not newly executed."
+    }
+  },
+  "build": {
+    "implementationI": "ee1212fdc54359f1ceba4c4b09f6e7cc06cddc41",
+    "buildId": "S05-web-ee1212f",
+    "command": "Node25.5.0 tsc --noEmit then vite build, exact logs in checks",
+    "archive": {
+      "file": "production/evidence/s05/repair-03/candidate-web-01.tar.gz",
+      "sha256": "07edd46c4830fa5113ff096a941693a4349ff2fd66830813b70676850cc358da",
+      "bytes": 71456
+    },
+    "files": [
+      {
+        "file": "production/dist/assets/index-BdaXQCVs.css",
+        "sha256": "1d376bbcfc7bb380c274ad19bd00d2a96e14bc7b38c257077867978d9906599f",
+        "bytes": 5286
+      },
+      {
+        "file": "production/dist/assets/index-ntLjx6pf.js",
+        "sha256": "b0e8144b7c20197982f796e06c2ef2552b1f4158f8fdbcc0c289618d664c7e94",
+        "bytes": 224337
+      },
+      {
+        "file": "production/dist/index.html",
+        "sha256": "c034578e7289899e23dbf3b4bd84f613abdd69f05d7c8848efc50331cc690868",
+        "bytes": 404
+      }
+    ],
+    "runtimeBytesEqualPriorReviewedBuild": false,
+    "priorBuildManifest": {
+      "file": "production/evidence/s05/repair-02/build-manifest-01.json",
+      "sha256": "3b40a9d19f7cb672cea8eb495c1c37bf04e38d6ef170cf99576b6f645976f1de",
+      "bytes": 1308
+    },
+    "meaning": "Replacement eligibility/presentation runtime changed. This new I/R requires targeted independent review; no prior PASS is relabeled.",
+    "archiveHashVerified": true,
+    "allArchivedAssetsMatchManifest": true,
+    "rebuiltAssetsMatchArchive": true,
+    "oldArchiveAlsoVerified": {
+      "file": "production/evidence/s05/repair-02/candidate-web-01.tar.gz",
+      "sha256": "f49574499a70e4c0ad5bfe461fb169b65d6385557ff78d6deb4c4414233a4f8f",
+      "bytes": 70836
+    },
+    "runtimeDiff": "CSS unchanged; current JS and HTML changed and freshly reviewed."
+  },
+  "environment": {
+    "os": "win32",
+    "arch": "x64",
+    "node": "v25.5.0",
+    "playwright": "1.62.1",
+    "chromium": "151.0.7922.34",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "webgl": {
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "WebKit WebGL",
+      "unmaskedRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    "browserConfig": "production/tools/s05-playwright.config.ts",
+    "disposableSuitePort": 4195,
+    "oldArchiveOrigin": "http://127.0.0.1:58143",
+    "newSupplementArchiveOrigin": "http://127.0.0.1:59770",
+    "sameMachine": true,
+    "secondDevice": false,
+    "physicalGpu": false,
+    "nativeBackend": false,
+    "freshContexts": true,
+    "allOwnArchiveListenersClosed": true,
+    "humanServicesUntouched": [
+      4193,
+      4194
+    ]
+  },
+  "evidenceHashes": {
+    "packet": {
+      "file": "reviewer-packet-01.json",
+      "sha256": "8402a412e5530cbead8f75e62172889f1b0a10ae9421e24a64f7057bb1f596ca",
+      "bytes": 17983
+    },
+    "submittedRefs": [
+      {
+        "file": "production/evidence/coordinator/s05/activation-20261004-01/human-authorization-01.json",
+        "sha256": "d74d8dd03147b2cf528f79bd2bba1000f179154426bd4d828609971137bed576",
+        "bytes": 2851
+      },
+      {
+        "file": "production/evidence/s05/review-03/independent-review/INDEPENDENT_REVIEW_RESULT.json",
+        "sha256": "86235a7e86cf7511ce04abe5b6f44ee11e3817011d21f7e2ec2e3cabf1150aab",
+        "bytes": 70797
+      },
+      {
+        "file": "decisions/DEC-GRAPE-003.md",
+        "sha256": "9a0acb74ee0bac36f23784db7743c45e2b3f36023ca329400b7f65711ee4428e",
+        "bytes": 13101
+      },
+      {
+        "file": "decisions/AC-GRAPE-002.md",
+        "sha256": "ab1e4067f479f640c2fd59c3bc994413475a0dfc2b0e8259c4b5319f03c60c4a",
+        "bytes": 15010
+      },
+      {
+        "file": "handoff/executable-reference/WORKSPACE_QUALIFICATION_CONTRACTS.md",
+        "sha256": "6c109b6095ac15f91b09e085fa112a6181c0338dd2c2b596b3e0f26398e9906f",
+        "bytes": 39230
+      },
+      {
+        "file": "handoff/executable-reference/COMPUTE_QUALIFICATION_CONTRACTS.md",
+        "sha256": "7212af0d5a88b29c247d50d6f58a8526e22afd8d73ca70b35422c04e28ecfe5d",
+        "bytes": 26248
+      },
+      {
+        "file": "handoff/09_ACCEPTANCE_AND_CONFORMANCE.md",
+        "sha256": "d9c32c0a3ef1a47e2704c44e33e12d69ab1748cfd5cbb49e878f731671f6a7c2",
+        "bytes": 28825
+      },
+      {
+        "file": "decisions/DEC-GRAPE-002.md",
+        "sha256": "ef2492ba16e5c96cede2d9b70e638033f80ecb7825b2d2c8c2dbe36d24fad848",
+        "bytes": 8075
+      },
+      {
+        "file": "decisions/AC-GRAPE-001.md",
+        "sha256": "00c21f29fb66c07e1db1a7ea6dce2dbffadb47682c534f3019e2dc984057be00",
+        "bytes": 9288
+      },
+      {
+        "file": "decisions/DEC-GRAPE-004.md",
+        "sha256": "9d1af8aba9e1e65d9318590f601b89e094404eeea09e3670382d42b171e57238",
+        "bytes": 9555
+      },
+      {
+        "file": "production/evidence/s05/repair-03/submission-01.json",
+        "sha256": "2067c6f90aaa0fd159f157582b8fe0830ded8d1ee34cda261fc8edbdce0ecc25",
+        "bytes": 13295
+      },
+      {
+        "file": "production/evidence/coordinator/s05/owner-review-legacy-replacement-01/human-defect-01.json",
+        "sha256": "7357a10cefcaa4d69310d5aa2908b51c4c031d117e775dd4d6be68b747267886",
+        "bytes": 3650
+      },
+      {
+        "file": "production/evidence/coordinator/s05/owner-review-legacy-replacement-01/human-before-replace-01.png",
+        "sha256": "a86b417072dcab67d88e3ad5ca834a49c013a6221e03433fccf776148b2a14d2",
+        "bytes": 80611
+      },
+      {
+        "file": "production/evidence/coordinator/s05/owner-review-legacy-replacement-01/human-after-replace-01.png",
+        "sha256": "60da99247819ec91662eee4f31bd81d75cafa5282b0b2eb2df5aff7c7c84500d",
+        "bytes": 76125
+      },
+      {
+        "file": "production/evidence/s05/repair-03/writer-start-01.json",
+        "sha256": "7420141f281bce12af3ffa2850ca126444c3d7a9cee21a2f97dfe80d22f38905",
+        "bytes": 1460
+      },
+      {
+        "file": "production/evidence/s05/repair-03/coordinator-inputs-01.json",
+        "sha256": "96972ae0765b52229643ee421261eac1fd6c8b969cf82222ebdb4a29c3be33dc",
+        "bytes": 1948
+      },
+      {
+        "file": "production/evidence/s05/repair-03/source-config-manifest-01.json",
+        "sha256": "7e05085f18c0af3762ae9fa45ef98d56fcee6c06c3da3b21aee3aef84a4d1e0e",
+        "bytes": 23753
+      },
+      {
+        "file": "production/evidence/s05/repair-03/protected-identities-01.json",
+        "sha256": "9001fe5c8753b3509d94ccb946971ec316e1f21ed179c087db40b05d59eaba47",
+        "bytes": 569166
+      },
+      {
+        "file": "production/evidence/s05/repair-03/build-manifest-01.json",
+        "sha256": "6558c8940186bad08c35239369cf0fb13b74e1c74df5bac7c8530db9428339b9",
+        "bytes": 1302
+      },
+      {
+        "file": "production/evidence/s05/repair-03/candidate-web-01.tar.gz",
+        "sha256": "07edd46c4830fa5113ff096a941693a4349ff2fd66830813b70676850cc358da",
+        "bytes": 71456
+      },
+      {
+        "file": "production/evidence/s05/repair-03/evidence-manifest-01.json",
+        "sha256": "157232716994cbb8908800e96c58a2286df271dda94e36dfbfecd4696b1b4e83",
+        "bytes": 45037
+      },
+      {
+        "file": "production/evidence/s05/repair-03/finding-to-fix-01.json",
+        "sha256": "ca5001544e1e7d3f4466d632c8282c9a3da94d413c48e0bc703f4c0718dce746",
+        "bytes": 17332
+      },
+      {
+        "file": "production/evidence/s05/repair-03/coverage-01.json",
+        "sha256": "c3d5ce665e269b0cc4c534910cb2f843a1768111014f6143c9c57d19e5b46a02",
+        "bytes": 37841
+      },
+      {
+        "file": "production/evidence/s05/repair-03/execution-01.json",
+        "sha256": "9169bd94832da3623e594412f6162869dcfe6779721066333e46ba2aafb6c341",
+        "bytes": 20400
+      },
+      {
+        "file": "production/evidence/s05/repair-03/environment-01.json",
+        "sha256": "26b6876dbec210a738bf0665db11b5e2c1e28445c3d43b0e62a428a35244e5fb",
+        "bytes": 2631
+      },
+      {
+        "file": "production/evidence/s05/repair-03/development-findings-01.json",
+        "sha256": "7786160a87ed5c214ba4b0c165fa550233d7a73b2162a5baa214de32e3366267",
+        "bytes": 2967
+      },
+      {
+        "file": "production/evidence/s05/repair-03/final-binding-01.json",
+        "sha256": "0d2866e013b33dedaccbef632c4afa61251e8795db6d0a7884d4ca5c1791f193",
+        "bytes": 28747
+      },
+      {
+        "file": "production/evidence/s05/repair-03/state-adoption-01.json",
+        "sha256": "40fc03f2dee5dea63bc5926e41bc36f824379e10fb971b2343c1d8ba4fe632c4",
+        "bytes": 8758
+      },
+      {
+        "file": "production/evidence/s05/repair-03/whitespace-diagnostic-01.json",
+        "sha256": "95e56cd39e25e0681e5031c19331f22183c9f295bf2d2497b642250c52d63a6a",
+        "bytes": 21200
+      },
+      {
+        "file": "production/evidence/s05/repair-03/path-scope-rationale-01.json",
+        "sha256": "b8871338ad2f341e23fefa2dd4aa906e9f754a3f9e1bed892c651cfc2cbb53b6",
+        "bytes": 1277
+      },
+      {
+        "file": "production/evidence/s05/repair-03/samples/manifest.json",
+        "sha256": "662a502b780fa03196abb6283e6f8ceeb6369ef44cfbfb2bdd4fa691078d9e02",
+        "bytes": 5272
+      },
+      {
+        "file": "production/evidence/s05/repair-03/HUMAN-WALKTHROUGH-01.md",
+        "sha256": "08abd7507c3850f3ebbebdfbfa9bc30cffa8a310e1139f8c495ebe2c16bf9e62",
+        "bytes": 1932
+      },
+      {
+        "file": "production/evidence/s05/repair-03/REPRODUCE-01.md",
+        "sha256": "129c1d654597e1950535df9109186d038d90bbe028c044c33c30ad8f5a1f7ed5",
+        "bytes": 2014
+      },
+      {
+        "file": "production/evidence/s05/repair-03/archive-public-flows-01/result.json",
+        "sha256": "88c51bddba26d7263ac5df0e280f8f2bfd4fe109c3f06ede5c1054481370be38",
+        "bytes": 8032
+      },
+      {
+        "file": "production/evidence/s05/repair-03/archive-visual-02/result.json",
+        "sha256": "b5c0a13953ee14598296d20b37d87d9d37162f33c37033aa355c857ce69cde02",
+        "bytes": 1379
+      },
+      {
+        "file": "production/evidence/coordinator/s05/review-04/readiness-01.json",
+        "sha256": "fa5afd4380f0fcfd9e7c6a96df9d1256d8c87be71b5ef005e3ce1ea2ad4d405d",
+        "bytes": 2686
+      },
+      {
+        "file": "production/evidence/coordinator/s05/review-03/reconciliation-01.json",
+        "sha256": "a40b927109487aa59f646e933567e1a2f6dd4999b8a3462d2fb198d8c890ab8c",
+        "bytes": 1451
+      }
+    ],
+    "sourceFiles": 123,
+    "rootInputs": 10,
+    "submittedEvidenceFiles": 209,
+    "protectedFiles": 2716,
+    "originalReview": {
+      "file": "production/evidence/s05/review-03/independent-review/INDEPENDENT_REVIEW_RESULT.json",
+      "sha256": "86235a7e86cf7511ce04abe5b6f44ee11e3817011d21f7e2ec2e3cabf1150aab",
+      "bytes": 70797
+    },
+    "priorSupportFiles": 378,
+    "supportingManifest": {
+      "file": "supporting-evidence-manifest-01.json",
+      "sha256": "89d6a29a6f07532c5b96d71b5b33240820e7affe41f418dc34148ea12218b90b",
+      "bytes": 29877
+    },
+    "supportingFileCount": 165,
+    "keyCurrentEvidence": [
+      {
+        "file": "binding-check-01.json",
+        "sha256": "e33a0e0c3ceadd672fcc768bece1a95a8e76672482955e0f306c591fa3583219",
+        "bytes": 735868
+      },
+      {
+        "file": "required-checks-01.json",
+        "sha256": "a415cf55458c3f6d94280261ed20362243a460682e56dce6b1f43658e3f21843",
+        "bytes": 2996
+      },
+      {
+        "file": "final-integrity-01.json",
+        "sha256": "f1288490e98044a584eeab90786a5059bd2f489329fadef90ff62626ac5ea81e",
+        "bytes": 1029
+      },
+      {
+        "file": "independent-application-03.json",
+        "sha256": "35a59da9c060dd5e65046b8a05bac4800be7e68fbe3918c0f794625eb5b6fd56",
+        "bytes": 115225
+      },
+      {
+        "file": "browser-01/browser-results.json",
+        "sha256": "36f2f6568c1457c7c40d0f25b93c4d0e5106ca6cc1068da92ab98ba5a0736fe3",
+        "bytes": 62184
+      },
+      {
+        "file": "archive-results-summary-01.json",
+        "sha256": "3d186f1fa8dd8f33c5b45a348a33ca132c0ee113dd2b6fc881e2a8260b122a9c",
+        "bytes": 8030
+      },
+      {
+        "file": "browser-archive-old-01/result.json",
+        "sha256": "5bc415fc6ab3d18ecbdab8a97c5c282ed1b0c004bd7d6a72b6dba90cd70e7085",
+        "bytes": 2214
+      },
+      {
+        "file": "browser-archive-new-02/result.json",
+        "sha256": "12b76415deb2c2c29bbacee53bc406d719dd741ce174fe20a10afda77d52294f",
+        "bytes": 2062
+      },
+      {
+        "file": "review-run-dispositions-01.json",
+        "sha256": "d8cc04abee073b09db78f0760a2b241a83d9a01a0c1b537b68b41b95e24f7c78",
+        "bytes": 1666
+      }
+    ]
+  },
+  "executedChecks": [
+    {
+      "id": "bootstrap-01",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tools/verify-bootstrap.mjs"
+      ],
+      "start": "2026-10-04T05:41:36.122Z",
+      "end": "2026-10-04T05:41:36.990Z",
+      "exitCode": 0,
+      "log": "bootstrap-01.log"
+    },
+    {
+      "id": "state-01",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "handoff/tools/check-implementation-state.mjs",
+        "--current"
+      ],
+      "start": "2026-10-04T05:41:36.990Z",
+      "end": "2026-10-04T05:41:37.041Z",
+      "exitCode": 0,
+      "log": "state-01.log"
+    },
+    {
+      "id": "bootstrap-tests-01",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "--test-isolation=none",
+        "tools/verify-bootstrap.test.mjs"
+      ],
+      "start": "2026-10-04T05:41:37.041Z",
+      "end": "2026-10-04T05:41:42.734Z",
+      "exitCode": 0,
+      "log": "bootstrap-tests-01.log"
+    },
+    {
+      "id": "typecheck-01",
+      "command": [
+        "npm.cmd",
+        "--prefix",
+        "production",
+        "run",
+        "typecheck"
+      ],
+      "start": "2026-10-04T05:41:42.734Z",
+      "end": "2026-10-04T05:41:44.038Z",
+      "exitCode": 0,
+      "log": "typecheck-01.log"
+    },
+    {
+      "id": "conformance-01",
+      "command": [
+        "npm.cmd",
+        "--prefix",
+        "production",
+        "run",
+        "conformance"
+      ],
+      "start": "2026-10-04T05:41:44.039Z",
+      "end": "2026-10-04T05:41:44.869Z",
+      "exitCode": 0,
+      "log": "conformance-01.log"
+    },
+    {
+      "id": "test-01",
+      "command": [
+        "npm.cmd",
+        "--prefix",
+        "production",
+        "test"
+      ],
+      "start": "2026-10-04T05:41:44.870Z",
+      "end": "2026-10-04T05:41:53.170Z",
+      "exitCode": 0,
+      "log": "test-01.log"
+    },
+    {
+      "id": "build-01",
+      "command": [
+        "npm.cmd",
+        "--prefix",
+        "production",
+        "run",
+        "build"
+      ],
+      "start": "2026-10-04T05:41:53.170Z",
+      "end": "2026-10-04T05:41:55.156Z",
+      "exitCode": 0,
+      "log": "build-01.log"
+    },
+    {
+      "id": "diff-check-raw-01",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "d634d7edb195839d75707c528072479b48f478b1..HEAD"
+      ],
+      "start": "2026-10-04T05:41:55.157Z",
+      "end": "2026-10-04T05:41:55.241Z",
+      "exitCode": 2,
+      "log": "diff-check-raw-01.log"
+    },
+    {
+      "id": "diff-check-authored-01",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "d634d7edb195839d75707c528072479b48f478b1..HEAD",
+        "--",
+        ".",
+        ":(exclude)production/evidence/coordinator/s05/owner-review-legacy-replacement-01/dispatch-parent-intent-01.json",
+        ":(exclude)production/evidence/coordinator/s05/owner-review-legacy-replacement-01/dispatch-parent-result-01.json",
+        ":(exclude)production/evidence/s05/repair-03/checks/archive-visual-01.log",
+        ":(exclude)production/evidence/s05/repair-03/checks/replacement-unit-01.log"
+      ],
+      "start": "2026-10-04T05:41:55.242Z",
+      "end": "2026-10-04T05:41:55.318Z",
+      "exitCode": 0,
+      "log": "diff-check-authored-01.log"
+    },
+    {
+      "id": "affected-browser-suite",
+      "end": "2026-10-04T05:43:04.7227023Z",
+      "evidenceDir": "C:/Users/user/.codex/worktrees/s05-replacement-review-01/Grape/.verification/s05-replacement-review-01/browser-01",
+      "exitCode": 0,
+      "start": "2026-10-04T05:42:08.4934274Z",
+      "command": "From production with fresh absolute GRAPE_EVIDENCE_DIR: Playwright tools/s05-playwright.config.ts, s02.spec.ts s04.spec.ts s05.spec.ts s05-uniforms.spec.ts s05-delivered.spec.ts s05-replacement.spec.ts, explicit fresh --output",
+      "stats": {
+        "startTime": "2026-10-04T05:42:08.996Z",
+        "duration": 55708.411,
+        "expected": 54,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "id": "independent-application",
+      "command": "node --experimental-transform-types .verification/s05-replacement-review-01/independent-application-03.ts",
+      "exitCode": 0,
+      "cases": 13,
+      "evidence": "independent-application-03.json"
+    },
+    {
+      "id": "old-and-new-archive-initial",
+      "command": "node --experimental-transform-types .verification/s05-replacement-review-01/archive-independent-01.mjs",
+      "exitCode": 1,
+      "completedCases": 20,
+      "disposition": "Reviewer hidden-locator timeout after old3/new17 complete; preserved as failure, not product failure or complete process PASS.",
+      "log": "archive-independent-01.log"
+    },
+    {
+      "id": "archive-stale-invalid-supplement",
+      "command": "node --experimental-transform-types .verification/s05-replacement-review-01/archive-independent-02.mjs",
+      "exitCode": 0,
+      "completedCases": 1,
+      "evidence": "browser-archive-new-02/stale-and-invalid-authoritative.json"
+    },
+    {
+      "id": "final-integrity",
+      "command": "node .verification/s05-replacement-review-01/final-integrity-01.mjs",
+      "exitCode": 0,
+      "evidence": "final-integrity-01.json"
+    }
+  ],
+  "results": {
+    "bootstrap": {
+      "status": "PASS",
+      "checks": 471,
+      "indexedFiles": 411,
+      "frozenFiles": 412,
+      "bootstrapTests": 10
+    },
+    "state": "CURRENT_RECORD_VALID; active S05; latest accepted S04 unchanged",
+    "typecheck": "PASS",
+    "conformance": "PASS",
+    "unitAndConformance": {
+      "pass": 204,
+      "fail": 0,
+      "skip": 0
+    },
+    "affectedBrowser": {
+      "pass": 54,
+      "unexpected": 0,
+      "skip": 0,
+      "flaky": 0
+    },
+    "independentApplication": {
+      "status": "PASS_13_INDEPENDENT_APPLICATION_CASES",
+      "cases": 13,
+      "queryPurity": true,
+      "matchingGraphInstanceLoadContextAndOneHistoryEntry": true,
+      "fullUndoRedo": true,
+      "authoritativeGuardAfterEligibilityChanges": true
+    },
+    "oldArchive": {
+      "cases": 3,
+      "allPass": true,
+      "mandatoryRefusalReproduced": true,
+      "deadlockObserved": false
+    },
+    "newArchive": {
+      "currentCases": 18,
+      "publicDeliveredSamples": 14,
+      "destinationCases": 3,
+      "staleInvalidForcedUiCase": 1,
+      "allRequiredCasesPass": true,
+      "rawInitialHarnessExitRetained": 1,
+      "supplementExit": 0,
+      "summary": "archive-results-summary-01.json"
+    },
+    "samples": {
+      "count": 14,
+      "allBytesAndManifestUnchanged": true,
+      "currentArchivePublicFlowsReplayed": true
+    },
+    "scopeIntegrity": {
+      "sourceFiles": 123,
+      "rootInputs": 10,
+      "protectedIdentities": 2716,
+      "historicalSupportFiles": 378,
+      "iToRMetadataOnly": true
+    },
+    "whitespace": {
+      "baseline": "d634d7edb195839d75707c528072479b48f478b1",
+      "rawExit": 2,
+      "authoredExit": 0,
+      "actualWarningFiles": [
+        "production/evidence/coordinator/s05/owner-review-legacy-replacement-01/dispatch-parent-intent-01.json",
+        "production/evidence/coordinator/s05/owner-review-legacy-replacement-01/dispatch-parent-result-01.json",
+        "production/evidence/s05/repair-03/checks/archive-visual-01.log",
+        "production/evidence/s05/repair-03/checks/replacement-unit-01.log"
+      ],
+      "allDeclaredAndExact": true,
+      "noNormalizationOrSettingsChanges": true
+    },
+    "harnessDispositions": [
+      {
+        "files": [
+          "independent-application-01.ts",
+          "independent-application-01.log"
+        ],
+        "classification": "REVIEWER_HARNESS_IMPORT_ERROR_RESOLVED",
+        "detail": "Initial probe imported functionProfile from fixture that does not export it. No product check executed before module initialization failure. Next script imported declared module."
+      },
+      {
+        "files": [
+          "independent-application-02.ts",
+          "independent-application-02.log"
+        ],
+        "classification": "REVIEWER_INVALID_PROBE_DATA_RESOLVED",
+        "detail": "Twelve negative/purity cases completed before reviewer positive candidate used a nonconforming extensions entry and source inspection correctly rejected it. Final probe uses a namespaced object extension and all13 cases pass. Original rejected draft/log retained; no product relaxation."
+      },
+      {
+        "files": [
+          "archive-independent-01.mjs",
+          "archive-independent-01.log"
+        ],
+        "classification": "REVIEWER_HIDDEN_LOCATOR_TIMEOUT_RESOLVED",
+        "detail": "Old3 and new17 archive cases completed and retained individual records. Final invalid-file adversarial click could not locate the intentionally hidden Replace button because getByRole excluded hidden elements. Only stale/invalid case rerun with includeHidden:true in new browser-archive-new-02; authoritative guard still refused. First process exit1 remains unchanged."
+      },
+      {
+        "classification": "NORMAL_SANDBOX_ESCALATION",
+        "detail": "Outside-root scratch/dependency/browser execution and Git configuration reads used require_escalated. No global safe.directory, network/browser security setting change or denied-action bypass."
+      }
+    ]
+  },
+  "notExecuted": [
+    {
+      "scope": "Unrelated S01 and S03 complete browser files",
+      "reason": "Shared model/application unit corpus fully replayed; targeted S02/S04/S05 browser/import paths cover changed boundary. These unrelated browser paths have no changed implementation; prior evidence remains bounded historical scope.",
+      "requiredGap": false
+    },
+    {
+      "scope": "Repeat prior independent17-case/34-draw Uniform adversarial matrix",
+      "reason": "Compiler/pins/profile unchanged. Current full unit and linked Uniform browser regressions freshly replayed. Prior raw matrix preserved without relabeling.",
+      "requiredGap": false
+    },
+    {
+      "scope": "Full391 catalog, all native/backends, physical GPU, second device, nativeTD/performance",
+      "reason": "Explicit exclusions and residual Gates.",
+      "requiredGap": false
+    },
+    {
+      "scope": "Human live4193/4194 deployment or profile/storage interaction",
+      "reason": "Prohibited; exact old/new archives reproduced on disposable services.",
+      "requiredGap": false
+    },
+    {
+      "scope": "Frozen full reference qualification in place",
+      "reason": "Forbidden in place; root read-only integrity checks executed.",
+      "requiredGap": false
+    }
+  ],
+  "limitations": [
+    "Targeted S05-OWNER-002 replacement eligibility/presentation and affected regression verdict at this exact current I/R. No full391 catalog, S06, native/physical GPU/second-device or performance qualification.",
+    "Old R3 PASS remains its exact original version/scope. Current JavaScript and HTML differ; this report uses actual current build/archive execution rather than applying old PASS to new runtime.",
+    "All14 sample byte hashes and manifest are unchanged; current exact archive public file/Personal operations freshly replayed. File-operation generation checks are distinct from numerical WebGL evidence supplied by current Uniform/function/effect browser tests.",
+    "Old archive reproduced on an ephemeral localhost service. Human screenshot URL/version/exact file identity remains unproven; no live Human4193/4194 or user browser storage was accessed or changed.",
+    "Graph/load/Context identity and pure eligibility observed at Application level. Archive shell exposes panel/revision/dirty/Undo state but not private loadId; no internal hydration substituted for public archive file admission.",
+    "Actual Windows x64 Node25.5.0, Playwright1.62.1 Chromium151.0.7922.34 and ANGLE SwiftShader. Three HTTP origins exercised on the same machine in current browser regressions, not a second device.",
+    "Four default whitespace warnings confined to exact declared Coordinator/raw-log bytes. Other authored paths pass default whitespace checking; no settings weakened or originals normalized.",
+    "Prior S02 converter/G-VERSION-COMPAT and broader catalog/CQ/native Gates remain unresolved as previously scoped. No Human acceptance, deployment, remote publication, merge or nextSlice authority."
+  ],
+  "verdict": "PASS",
+  "findings": [
+    {
+      "id": "S05-OWNER-002",
+      "findingGroup": "S05-FG-LEGACY-IMPORT-01",
+      "severity": "P2",
+      "status": "CLOSED_VERIFIED_AT_NEW_I_R",
+      "classification": "REPLACEMENT_ELIGIBILITY_PRESENTATION",
+      "title": "Valid source offered incompatible Replace without prior destination eligibility explanation",
+      "reportedCounterexample": {
+        "file": "production/evidence/coordinator/s05/owner-review-legacy-replacement-01/human-defect-01.json",
+        "sha256": "7357a10cefcaa4d69310d5aa2908b51c4c031d117e775dd4d6be68b747267886",
+        "bytes": 3650
+      },
+      "screenshotLimit": "Both supplied images inspected; they show valid candidate then IMPORT_DEFINITIONS, but omit URL/version/exact file identity. Actual reproduction uses independently verified oldR3 archive and unchanged legacy sample, never a live4194/browser profile.",
+      "oldBehavior": {
+        "sourceValidity": "DOCUMENT_VALID",
+        "defaultAndUpgraded": "Replace offered but authoritative exact modules/kind check returns IMPORT_DEFINITIONS with no document/History/dirty/context mutation.",
+        "matching": "Same exact pins/kind Replace succeeds within one revision/Undo and preserves panels.",
+        "recovery": "Close/export-original/new-session/explicit-upgrade/generate/save-reopen work; no application deadlock demonstrated.",
+        "classification": "Rejection is mandated protection; issue is misleading action availability and opaque after-click explanation.",
+        "states": [
+          {
+            "mode": "default",
+            "review": "valid: DOCUMENT_VALID. The current graph was not replaced. You can export the original source.",
+            "sourceValid": true,
+            "refusalCode": "IMPORT_DEFINITIONS",
+            "originalBytesExact": true,
+            "refusalPreservesDocumentHistoryDirtyContexts": true,
+            "closeNewSessionUpgradeGenerateSaveReopen": true,
+            "oneUndoRedo": null,
+            "evidence": "browser-archive-old-01/default.json"
+          },
+          {
+            "mode": "upgraded",
+            "review": "valid: DOCUMENT_VALID. The current graph was not replaced. You can export the original source.",
+            "sourceValid": true,
+            "refusalCode": "IMPORT_DEFINITIONS",
+            "originalBytesExact": true,
+            "refusalPreservesDocumentHistoryDirtyContexts": true,
+            "closeNewSessionUpgradeGenerateSaveReopen": true,
+            "oneUndoRedo": null,
+            "evidence": "browser-archive-old-01/upgraded.json"
+          },
+          {
+            "mode": "matching",
+            "review": "valid: DOCUMENT_VALID. The current graph was not replaced. You can export the original source.",
+            "sourceValid": true,
+            "refusalCode": null,
+            "originalBytesExact": true,
+            "refusalPreservesDocumentHistoryDirtyContexts": null,
+            "closeNewSessionUpgradeGenerateSaveReopen": null,
+            "oneUndoRedo": true,
+            "evidence": "browser-archive-old-01/matching.json"
+          }
+        ]
+      },
+      "contract": [
+        {
+          "file": "handoff/executable-reference/COMPUTE_QUALIFICATION_CONTRACTS.md",
+          "line": 57,
+          "requirement": "Same exact definition/module pins and output profile; preserve Graph object/id/load/history; one Undo restores complete old content; no alternate Graph publication."
+        },
+        {
+          "file": "handoff/executable-reference/WORKSPACE_QUALIFICATION_CONTRACTS.md",
+          "lines": [
+            31,
+            140
+          ],
+          "requirement": "Review is bound to complete destination document and load; failed/cancelled/stale accept changes nothing, success closes review."
+        },
+        {
+          "file": "decisions/AC-GRAPE-002.md",
+          "requirement": "Known old owner upgrade is explicit and retains authored contents; no implicit mode/pin reinterpretation."
+        }
+      ],
+      "expectedBehavior": [
+        "DOCUMENT_VALID describes source validity. In-place Replace requires matching destination exact module/definition/output identities and a current captured base/load. New-session load is a separate lifecycle and may use different supported exact pins.",
+        "Preserve Graph identity/load/History for valid in-place replacement; one Undo restores complete prior content. A refused/cancelled/stale replacement changes no Graph, History, dirty state or context authority.",
+        "Never broaden or bypass IMPORT_DEFINITIONS to make the legacy sample replace a differently pinned current Graph. No silently adding/rebinding module pins, implicit owner upgrade, alternative Graph instance disguised as one Undo, or hidden conversion.",
+        "The public review should make the available action and reason understandable. If Replace cannot apply to the current destination, distinguish that from file validity and provide a clear supported way onward through existing Open in new session/Close; keep API/command guards authoritative.",
+        "Same exact pin/profile successful replacement must remain reachable. Cancellation/export-original/new-session and explicit upgrade remain usable; no forced repeat-click loop or lost source."
+      ],
+      "repairInspection": {
+        "graph": "Prior Draft.replaceDocument structural and ordered exact modules/kind condition extracted unchanged to shared checkReplacement. Graph read-only wrapper demands live Graph; Draft repeats the same helper before cloning candidate and preserving destination graph.id.",
+        "application": "replacementEligibility reads the registered review/base/load/read-only/busy guards, requires valid candidate and invokes Graph preflight. It neither opens another Graph nor mutates review/state/history. acceptReview remains unchanged and repeats live checkReview plus Draft guard, independently of eligibility or DOM state.",
+        "shell": "Shell only displays Application result, disables unsuitable actions and refreshes on Application notifications. It does not mutate Graph or upgrade/rebind pins during Replace. Existing new-session path remains separate.",
+        "changedPaths": "M\tproduction/apps/web/main.ts\nM\tproduction/apps/web/shell-copy.ts\nM\tproduction/src/application/editor.ts\nM\tproduction/src/model/graph.ts\nM\tproduction/tests/browser/s02.spec.ts\nA\tproduction/tests/browser/s05-replacement.spec.ts\nA\tproduction/tests/fixtures/s05-replacement-flows.ts\nA\tproduction/tests/unit/s05-replacement.test.ts"
+      },
+      "closure": {
+        "reviewedI": "ee1212fdc54359f1ceba4c4b09f6e7cc06cddc41",
+        "reviewedR": "29695b3c25e2d200856d780b31e20e23f24efb6d",
+        "newStates": [
+          {
+            "mode": "default",
+            "review": "valid: DOCUMENT_VALID. The current graph was not replaced. You can export the original source.",
+            "hint": "This file is valid, but Replace is unavailable because it uses different module versions or output profile. Choose Open in new session to open the file, or Close to keep working here. You can still export the original source.",
+            "sourceValid": true,
+            "refusalCode": "IMPORT_DEFINITIONS",
+            "forcedButtonStillGuarded": true,
+            "originalBytesExact": true,
+            "refusalPreservesDocumentHistoryDirtyContexts": true,
+            "closeNewSessionUpgradeGenerateSaveReopen": true,
+            "oneUndoRedo": null,
+            "oneRevision": null,
+            "evidence": "browser-archive-new-01/default.json"
+          },
+          {
+            "mode": "upgraded",
+            "review": "valid: DOCUMENT_VALID. The current graph was not replaced. You can export the original source.",
+            "hint": "This file is valid, but Replace is unavailable because it uses different module versions or output profile. Choose Open in new session to open the file, or Close to keep working here. You can still export the original source.",
+            "sourceValid": true,
+            "refusalCode": "IMPORT_DEFINITIONS",
+            "forcedButtonStillGuarded": true,
+            "originalBytesExact": true,
+            "refusalPreservesDocumentHistoryDirtyContexts": true,
+            "closeNewSessionUpgradeGenerateSaveReopen": true,
+            "oneUndoRedo": null,
+            "oneRevision": null,
+            "evidence": "browser-archive-new-01/upgraded.json"
+          },
+          {
+            "mode": "matching",
+            "review": "valid: DOCUMENT_VALID. The current graph was not replaced. You can export the original source.",
+            "hint": "Replace is available for the current document. It keeps this session and replaces its contents in one Undo step.",
+            "sourceValid": true,
+            "refusalCode": null,
+            "forcedButtonStillGuarded": null,
+            "originalBytesExact": true,
+            "refusalPreservesDocumentHistoryDirtyContexts": null,
+            "closeNewSessionUpgradeGenerateSaveReopen": null,
+            "oneUndoRedo": true,
+            "oneRevision": true,
+            "evidence": "browser-archive-new-01/matching.json"
+          }
+        ],
+        "independentApplicationCases": [
+          {
+            "kind": "default-mismatch",
+            "status": "PASS",
+            "eligibility": {
+              "available": false,
+              "code": "IMPORT_DEFINITIONS"
+            }
+          },
+          {
+            "kind": "upgraded-mismatch",
+            "status": "PASS",
+            "eligibility": {
+              "available": false,
+              "code": "IMPORT_DEFINITIONS"
+            }
+          },
+          {
+            "kind": "ordered-pins-mismatch",
+            "status": "PASS",
+            "eligibility": {
+              "available": false,
+              "code": "IMPORT_DEFINITIONS"
+            }
+          },
+          {
+            "kind": "kind-only-mismatch",
+            "status": "PASS",
+            "eligibility": {
+              "available": false,
+              "code": "IMPORT_DEFINITIONS"
+            }
+          },
+          {
+            "kind": "missing-exact-module",
+            "status": "PASS",
+            "eligibility": {
+              "available": false,
+              "code": "IMPORT_ERRORS"
+            }
+          },
+          {
+            "kind": "invalid-mode",
+            "status": "PASS",
+            "eligibility": {
+              "available": false,
+              "code": "IMPORT_ERRORS"
+            }
+          },
+          {
+            "kind": "stale-after-eligible",
+            "status": "PASS",
+            "eligibility": {
+              "available": false,
+              "code": "IMPORT_STALE"
+            }
+          },
+          {
+            "kind": "new-load-after-eligible",
+            "status": "PASS",
+            "eligibility": {
+              "available": false,
+              "code": "IMPORT_STALE"
+            }
+          },
+          {
+            "kind": "closed",
+            "status": "PASS",
+            "eligibility": {
+              "available": false,
+              "code": "REVIEW_CLOSED"
+            }
+          },
+          {
+            "kind": "fabricated",
+            "status": "PASS",
+            "eligibility": {
+              "available": false,
+              "code": "REVIEW_CLOSED"
+            }
+          },
+          {
+            "kind": "readonly-after-eligible",
+            "status": "PASS",
+            "eligibility": {
+              "available": false,
+              "code": "IMPORT_READONLY"
+            }
+          },
+          {
+            "kind": "busy-after-eligible",
+            "status": "PASS",
+            "eligibility": {
+              "available": false,
+              "code": "HISTORY_BUSY"
+            }
+          },
+          {
+            "kind": "matching-complete-replacement",
+            "status": "PASS",
+            "eligibility": null
+          }
+        ],
+        "sameGraphInstanceAndLoadAndContexts": true,
+        "matchingOneContentRevisionAndOneHistoryEntry": true,
+        "fullSnapshotUndoRedo": true,
+        "multipleOperationNotifications": "Application may report graph publication and operation end; every observed snapshot is the same complete after-state. No claim of only one listener callback.",
+        "pureRepeatedEligibility": "No identity allocation, notifications, snapshot/history/dirty/context changes during repeated query; busy cancel restores eligibility.",
+        "forcedUiAcceptance": "Independently forcing disabled/hidden DOM button did not bypass mismatch, stale or invalid authoritative guard.",
+        "evidence": [
+          "independent-application-03.json",
+          "browser-archive-new-01/default.json",
+          "browser-archive-new-01/upgraded.json",
+          "browser-archive-new-01/matching.json",
+          "browser-archive-new-02/stale-and-invalid-authoritative.json"
+        ]
+      },
+      "humanDecisionRequired": false
+    }
+  ],
+  "remainingFindings": [],
+  "requiredEvidenceGaps": [],
+  "acceptanceEligibility": {
+    "eligible": true,
+    "scope": "Exact current S05-OWNER-002 eligibility/presentation repair plus explicitly tested affected regressions and preserved bounded prior scope; Coordinator may prepare targeted Human result only under its separate authority.",
+    "humanAcceptanceGranted": false,
+    "fullS05Completion": false,
+    "globalGateClosure": false,
+    "deploymentAuthority": false,
+    "publicationMergeAuthority": false,
+    "nextSliceAuthority": false
+  },
+  "boundedExclusions": [
+    "No new product semantics, pin/profile relaxation, implicit owner upgrades or replacement by hidden new Graph",
+    "No Vertex eligibility changes, style redesign, full391 catalog, native/second-device qualification, S06, Human acceptance, publication or merge"
+  ],
+  "residualGates": {
+    "native": "G-LU-NODE-001 native first-backend/runtime evidence waits S07/S08 and separately authorized TD operations; portable work proceeds.",
+    "leafSemantics": "G-LU-NODE-002/003/004/005/006, G-LU-UI-006, G-LU-DATA-005 apply only affected leaves; preserve counterexample, do not choose new product behavior or broaden support.",
+    "evidence": "G-LU-AUDIT-002/003 actual environment/numeric/golden-difference evidence; no inherited global closure.",
+    "ownership": "G-HANDOFF-CQ-OWNERSHIP quarantine remains; normative ownership wins over contradictory CQ summaries."
+  },
+  "technicalOrEnvironmentClassification": {
+    "result": "PASS_TARGETED_ELIGIBILITY_PRESENTATION_REPAIR",
+    "oldImportDefinitions": "Correct mandatory protection, misleading prior action availability",
+    "runtimeGuardWeakening": false,
+    "requiredEnvironmentGaps": [],
+    "findingGroup": "S05-FG-LEGACY-IMPORT-01",
+    "repairAttempt": 2,
+    "groupReviewRound": 2,
+    "globalReviewSequence": 4,
+    "priorUnsuccessfulRepairReviewRounds": 0,
+    "newUnsuccessfulRepairReviewRounds": 0,
+    "priorUniformCounters": "S05-FG-RESOURCE-01 retains initialFailure1/repair1/reviewRound2 PASS",
+    "counterReset": false
+  },
+  "nextAction": {
+    "route": "Return exact raw report/support manifest to Coordinator for binding verification and same-writer preservation, then separately authorized tested targeted Human delivery. Reviewer stops writing.",
+    "automaticAcceptance": false,
+    "remotePublicationOrMergeAuthorized": false
+  },
+  "productAcceptance": "NOT_GRANTED"
+}

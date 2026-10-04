@@ -37,7 +37,15 @@ import type {
   PanelCommandTarget,
   PanelCommandIntent,
 } from "../sdk/panel-commands.ts";
-import { Signal, detached, equal, demand, plain } from "../sdk/kernel.ts";
+import {
+  Signal,
+  detached,
+  equal,
+  demand,
+  plain,
+  exact,
+  Fault,
+} from "../sdk/kernel.ts";
 import type { IdentitySource } from "../sdk/kernel.ts";
 import { compile } from "../generation/compiler.ts";
 import { readDocument, writeDocument } from "../persistence/codec.ts";
@@ -113,7 +121,8 @@ export class EditorContext {
   }
   capture(): ContextSnapshot {
     demand(this.#live, "CONTEXT_DISPOSED");
-    const graph = this.graph.capture();
+    const graph = this.graph.capture(),
+      network = this.networkFrom(graph);
     return detached({
       scope: {
         graphId: graph.document.graph.id,
@@ -127,7 +136,7 @@ export class EditorContext {
       primary: this.#primary,
       navigation: this.#navigation,
       definitionNames: Object.fromEntries(
-        this.network().nodes.flatMap((n) => {
+        network.nodes.flatMap((n) => {
           if (this.graph.definitionSet.node(n.type)?.modelRole !== "call")
             return [];
           const id = (n.state as { definition: string }).definition;
@@ -152,14 +161,14 @@ export class EditorContext {
           ).name,
         })),
       ],
-      network: this.network(),
+      network,
       frames: frames(
         graph.document,
         this.graph.definitionSet,
-        this.network().id,
+        network.id,
       ),
       portLabels: Object.fromEntries(
-        this.network().nodes.map((n) => {
+        network.nodes.map((n) => {
           const role = this.graph.definitionSet.node(n.type)?.modelRole;
           const id = (n.state as { definition?: string }).definition;
           const d = graph.document.graph.resources.find((r) => r.id === id)
@@ -175,7 +184,7 @@ export class EditorContext {
         }),
       ),
       nodeRoles: Object.fromEntries(
-        this.network().nodes.map((n) => [
+        network.nodes.map((n) => [
           n.id,
           this.graph.definitionSet.node(n.type)?.modelRole ?? "operation",
         ]),
@@ -230,6 +239,20 @@ export class EditorContext {
       definition: this.#chain.length
         ? {
             id: this.#chain.at(-1)!,
+            emissionMode: (() => {
+              const r = graph.document.graph.resources.find(
+                (r) => r.id === this.#chain.at(-1),
+              )!;
+              try {
+                return (
+                  this.graph.definitionSet
+                    .resource(r.type)
+                    ?.networkEmission?.mode(r.data) ?? null
+                );
+              } catch {
+                return null;
+              }
+            })(),
             data: graph.document.graph.resources.find(
               (r) => r.id === this.#chain.at(-1),
             )!.data as unknown as NetworkData,
@@ -240,12 +263,13 @@ export class EditorContext {
   }
   network() {
     demand(this.#live, "CONTEXT_DISPOSED");
-    const stage = this.graph
-      .capture()
-      .document.graph.stages.find((s) => s.id === this.#stage);
+    return this.networkFrom(this.graph.capture());
+  }
+  private networkFrom(graph: GraphSnapshot) {
+    const stage = graph.document.graph.stages.find((s) => s.id === this.#stage);
     demand(stage, "STAGE_MISSING");
     return resolveOccurrence(
-      this.graph.capture().document,
+      graph.document,
       this.graph.definitionSet,
       this.#stage,
       this.#path,
@@ -425,6 +449,9 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     demand(this.#graph, "NO_DOCUMENT");
     return this.#graph.capture();
   }
+  identifier(): string {
+    return this.identity.next();
+  }
   get dirty(): boolean {
     return !!this.#graph && !equal(this.snapshot.document, this.#saved);
   }
@@ -499,6 +526,56 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     }
     return parsed;
   }
+  /** User-requested owner upgrade. The original snapshot and old pins remain immutable. */
+  upgradeOwners(): void {
+    demand(!this.#readonly && !this.busy, "UPGRADE_UNAVAILABLE");
+    const source = this.snapshot,
+      candidate = structuredClone(source.document);
+    let changed = false;
+    for (const resource of candidate.graph.resources) {
+      const destinations = this.definitions
+        .resourceTypes()
+        .flatMap((owner) =>
+          (owner.upgrades ?? [])
+            .filter(
+              (u) =>
+                exact(u.from, resource.type) &&
+                u.from.typeId === resource.type.typeId,
+            )
+            .map((upgrade) => ({ owner, upgrade })),
+        );
+      demand(destinations.length <= 1, "UPGRADE_AMBIGUOUS");
+      if (!destinations.length) continue;
+      const { owner, upgrade } = destinations[0];
+      resource.data = structuredClone(upgrade.upgrade(detached(resource.data)));
+      demand(
+        !owner.codec
+          .validate(resource.data)
+          .some((i) => i.severity === "error"),
+        "UPGRADE_PAYLOAD",
+      );
+      resource.type = { ...owner.ref };
+      if (!candidate.graph.modules.some((p) => exact(p, owner.ref)))
+        candidate.graph.modules.push({
+          moduleId: owner.ref.moduleId,
+          version: owner.ref.version,
+          fingerprint: owner.ref.fingerprint,
+        });
+      changed = true;
+    }
+    if (!changed) return;
+    const graph = new Graph(
+      candidate,
+      this.definitions.pin(candidate.graph.modules),
+      this.identity,
+    );
+    demand(
+      this.snapshot.loadId === source.loadId &&
+        this.snapshot.revision === source.revision,
+      "STALE_PROPOSAL",
+    );
+    this.install(graph, null);
+  }
   inspectText(raw: string): DocumentInspection {
     const base = this.snapshot;
     const review = inspectDocument(raw, this.definitions);
@@ -528,6 +605,21 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
       draft.replaceDocument(review.candidate!),
     );
     this.#reviews.delete(review);
+  }
+  /** Source validity is separate from the captured destination's eligibility.
+   * This projection grants no authority; acceptance repeats all live guards. */
+  replacementEligibility(
+    review: DocumentInspection,
+  ): { available: true } | { available: false; code: string } {
+    try {
+      this.checkReview(review);
+      demand(review.candidate, "IMPORT_ERRORS");
+      this.#graph!.checkReplacement(review.candidate);
+      return { available: true };
+    } catch (error) {
+      if (!(error instanceof Fault)) throw error;
+      return { available: false, code: error.code };
+    }
   }
   /** Explicit load is a new lifetime. Unlike import acceptance, it can preserve
    * representable model errors, including missing definitions, for later re-save. */
@@ -765,10 +857,19 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
         "grape.network.encapsulate",
         "grape.network.independent",
         "grape.network.interface",
+        "grape.network.mode",
       ].includes(intent.commandId)
     ) {
       let created = "";
       graph.change("Edit subgraph", (d) => {
+        if (intent.commandId === "grape.network.mode") {
+          demand(args.revision === this.snapshot.revision, "STALE_PROPOSAL");
+          demand(
+            args.mode === "expand" || args.mode === "function",
+            "COMMAND_ARGS",
+          );
+          d.emissionMode(network, args.mode, this.profile);
+        }
         if (intent.commandId === "grape.network.create")
           created = d.createSubgraph(
             network,
@@ -965,7 +1066,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
   ): FieldTarget {
     const original = context.capture();
     demand(equal(scope, original.scope), "STALE_SCOPE");
-    const type = context.network().nodes.find((n) => n.id === nodeId)?.type;
+    const type = original.network.nodes.find((n) => n.id === nodeId)?.type;
     demand(type, "NODE_MISSING");
     let live = true,
       epoch = 0,
@@ -980,7 +1081,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
           equal(c.scope, scope) && c.navigation === original.navigation,
           "STALE_SCOPE",
         );
-        const node = context.network().nodes.find((n) => n.id === nodeId);
+        const node = c.network.nodes.find((n) => n.id === nodeId);
         demand(node && equal(node.type, type), "NODE_MISSING");
         const def = this.definitions
           .pin(c.graph.document.graph.modules)
@@ -1002,9 +1103,8 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
           spec.target === "input"
             ? node.ports.find((p) => p.key === key && p.direction === "input")
             : undefined;
-        const links = context
-          .network()
-          .edges.filter((e) => e.to.nodeId === nodeId && e.to.portKey === key)
+        const links = c.network.edges
+          .filter((e) => e.to.nodeId === nodeId && e.to.portKey === key)
           .map((e) => ({
             edgeId: e.id,
             sourceNodeId: e.from.nodeId,

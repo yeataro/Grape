@@ -1,0 +1,53 @@
+{
+  "recordedAt": "2026-10-04T05:39:11.666Z",
+  "status": "READY_FOR_INDEPENDENT_REVIEW",
+  "I": "ee1212fdc54359f1ceba4c4b09f6e7cc06cddc41",
+  "R": "29695b3c25e2d200856d780b31e20e23f24efb6d",
+  "submission": {
+    "file": "production/evidence/s05/repair-03/submission-01.json",
+    "sha256": "2067c6f90aaa0fd159f157582b8fe0830ded8d1ee34cda261fc8edbdce0ecc25",
+    "bytes": 13295
+  },
+  "manifests": [
+    {
+      "file": "production/evidence/s05/repair-03/source-config-manifest-01.json",
+      "count": 123
+    },
+    {
+      "file": "production/evidence/s05/repair-03/evidence-manifest-01.json",
+      "count": 209
+    },
+    {
+      "file": "production/evidence/s05/repair-03/protected-identities-01.json",
+      "count": 2716
+    }
+  ],
+  "verifiedReferences": 3075,
+  "sourceChanges": [
+    "production/apps/web/main.ts",
+    "production/apps/web/shell-copy.ts",
+    "production/src/application/editor.ts",
+    "production/src/model/graph.ts",
+    "production/tests/browser/s02.spec.ts",
+    "production/tests/browser/s05-replacement.spec.ts",
+    "production/tests/fixtures/s05-replacement-flows.ts",
+    "production/tests/unit/s05-replacement.test.ts"
+  ],
+  "metadataOnlyItoR": true,
+  "writerStop": "Actual original writer completed turn01a1055c-4625-70e3-8d56-0eaa0b8aef19; idle cursor539 and STOP_WRITING",
+  "reviewVerdict": "NOT_YET_REVIEWED",
+  "pathScopeRationale": {
+    "scope": "Minimal Application-owned replacement eligibility and explanatory UI correction under current packet authorizedScope/allowedRepairScope; no change to exact pins, kind/profile, lifecycle or mutation authority.",
+    "necessaryPresentationPaths": [
+      "production/apps/web/main.ts",
+      "production/apps/web/shell-copy.ts"
+    ],
+    "pathRationale": "The packet expressly authorizes UI eligibility/error-message repair. Its src/** directory pattern does not name the existing web shell, whose current owner is apps/web/main.ts and shell-copy.ts. These two narrow existing owner files are required to deliver that requested behavior; placing shell DOM work inside the model/application would violate ownership. This is an implementation path reconciliation, not new product authority or an edit to packet bytes. Prior running S05 composition clarification also identified main.ts as ordinary authorized UI integration.",
+    "excluded": "No other apps files, styles, provider/module semantics, policy or decision edits.",
+    "explicitOriginalPacket": {
+      "file": "production/evidence/coordinator/s05/owner-review-legacy-replacement-01/implementer-packet-01.json",
+      "sha256": "5beb72ba873ebbc061799cf8137855067dea3b67b359b697656aa95da8b529a0",
+      "bytes": 14552
+    }
+  }
+}

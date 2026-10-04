@@ -1,0 +1,74 @@
+{
+  "browser": "151.0.7922.34",
+  "source": "production/evidence/s05/review-01/independent-review/cross-stage-uniform-01.json",
+  "originalResources": [
+    {
+      "stageId": "id-17",
+      "resourceId": "id-34",
+      "value": 0.25
+    },
+    {
+      "stageId": "id-20",
+      "resourceId": "id-37",
+      "value": 0.75
+    }
+  ],
+  "result": {
+    "linked": true,
+    "active": [
+      {
+        "name": "u_grape_0",
+        "type": 5126,
+        "size": 1
+      },
+      {
+        "name": "u_grape_1",
+        "type": 5126,
+        "size": 1
+      }
+    ],
+    "readback": [
+      {
+        "stageId": "id-17",
+        "resourceId": "id-34",
+        "symbol": "u_grape_0",
+        "type": "glsl.float",
+        "defaultValue": 0.25,
+        "actual": 0.25
+      },
+      {
+        "stageId": "id-20",
+        "resourceId": "id-37",
+        "symbol": "u_grape_1",
+        "type": "glsl.float",
+        "defaultValue": 0.75,
+        "actual": 0.75
+      }
+    ],
+    "position": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "error": 0,
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "renderer": "WebKit WebGL",
+    "unmaskedRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "artifacts": [
+      {
+        "key": "vertex",
+        "stageId": "id-17",
+        "mediaType": "text/x-glsl",
+        "text": "#version 300 es\nprecision highp float;\nlayout(location=0) in vec2 grape_position;\nuniform float u_grape_0;\nvoid grape_function_0(vec4 arg_0, out vec4 out_0) {\n  vec4 n_s0_0_p0 = arg_0;\n  out_0 = n_s0_0_p0;\n}\nvoid main() {\n  float n_3_p0 = u_grape_0;\n  vec4 call_1;\n  grape_function_0(vec4(n_3_p0), call_1);\n  vec4 n_1_p1 = call_1;\n  gl_Position = n_1_p1;\n}\n"
+      },
+      {
+        "key": "pixel",
+        "stageId": "id-20",
+        "mediaType": "text/x-glsl",
+        "text": "#version 300 es\nprecision highp float;\nout vec4 fragColor;\nuniform float u_grape_1;\nvoid grape_function_0(vec4 arg_0, out vec4 out_0) {\n  vec4 n_s0_0_p0 = arg_0;\n  out_0 = n_s0_0_p0;\n}\nvoid main() {\n  float n_2_p0 = u_grape_1;\n  vec4 call_1;\n  grape_function_0(vec4(n_2_p0), call_1);\n  vec4 n_1_p1 = call_1;\n  fragColor = n_1_p1;\n}\n"
+      }
+    ],
+    "unchanged": true
+  }
+}

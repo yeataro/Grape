@@ -1,0 +1,451 @@
+{
+  "findingId": "S05-OWNER-001",
+  "findingGroup": "S05-FG-LEGACY-IMPORT-01",
+  "implementationI": "b0d61c61d35908f6332b439aae539ce87bf854c5",
+  "priorP": "7590935c0b11f351561c832adb19f03248c0517e",
+  "status": "DELIVERY_SAMPLE_AND_GUIDE_REPAIRED_PENDING_INDEPENDENT_REVIEW",
+  "originalObservation": "Exact reviewed4193 sample reproduces strict review IMPORT_ERRORS/candidate:null with only INPUT_REQUIRED for unconnected Image Output. Human browser URL is unknown.",
+  "originalOpenConclusion": "Clicking visible Open in new session and accepting its confirmation succeeds with exact original document; explicit owner upgrade succeeds to Expand with original body retained. INPUT_REQUIRED then correctly blocks generation. No importer, owner upgrade, duplicate-pin or module composition defect was reproduced.",
+  "classification": "Delivery sample precondition and walkthrough clarity, not a malformed document or runtime importer defect.",
+  "originalSample": {
+    "file": "production/evidence/s05/repair-01/samples/legacy-owner.grape.json",
+    "sha256": "9acc5011baa073918d7e7bfdf2577de5ed545cabe991d2359eb1994321fdd485",
+    "bytes": 9692
+  },
+  "originalReproduction": {
+    "file": "production/evidence/s05/repair-02/original-reproduction-01/result.json",
+    "sha256": "3dee204ca7c2d297dfa67741c7177245e96316227c24e305354210eb0209cd21",
+    "bytes": 2474
+  },
+  "originalSuccessfulOpenUpgrade": {
+    "file": "production/evidence/s05/repair-02/original-continuation-02/actual-open-upgrade.json",
+    "sha256": "eeded73df94b15203e4183b79582a02b69d0b6b4b696589a935071c94865c5eb",
+    "bytes": 21240
+  },
+  "originalSuccessfulOpenReceipt": {
+    "file": "production/evidence/s05/repair-02/original-continuation-02/result.json",
+    "sha256": "d301b6feb22db19d90ed9db597969ca0ef555c794e5bc9dbb34115fc1beef257",
+    "bytes": 2851
+  },
+  "repair": "Connect the known-old Subgraph pass-through to Image Output in the sample producer and lay out the two nodes. Require every generated document sample to have a valid public inspection candidate, then exercise the actual file/Personal UI and documented operations. New guide distinguishes strict replacement from explicitly opening preserved error drafts.",
+  "newSample": {
+    "file": "production/evidence/s05/repair-02/samples/legacy-owner.grape.json",
+    "sha256": "2bc735a55637ee42f7beeef7687a6e687fa62a8154dfc36cef3d4ebc152fbb86",
+    "bytes": 10296
+  },
+  "changedPaths": [
+    {
+      "file": "production/tools/s05-samples.ts",
+      "sha256": "cf2dc1ba9ab545df797845be551e6f962bb77b89088b793006cb07e24e745272",
+      "bytes": 6723
+    },
+    {
+      "file": "production/tests/fixtures/s05-delivered-flows.ts",
+      "sha256": "5a629760b0efb7d160ab71b2de4358186d8bff25e6a3fb449514db1a6eefb033",
+      "bytes": 9937
+    },
+    {
+      "file": "production/tests/browser/s05-delivered.spec.ts",
+      "sha256": "46bef7086163254129ac4bc02fe217159170dacfb2980674e6c1657d93ebb603",
+      "bytes": 5738
+    }
+  ],
+  "runtimeProductChanges": [],
+  "admissionChanges": [],
+  "oldSampleAndReviewsOverwritten": false,
+  "whyPriorCoverageMissed": "The historical legacy browser test used public file selection and Open in new session on JSON-deep-equal original data; it did not bypass hydration, and its opening/upgrade assertions passed. It did not assert that the intermediate review was DOCUMENT_VALID. The producer only checked structural readback and recorded expected INPUT_REQUIRED; prior archive delivery smoke exercised a subset, not every shipped file. That allowed a confusing strict-review error in the walkthrough. New coverage adds valid candidate guard, exact delivered14 file flows and original error-draft distinction without rewriting historical PASS.",
+  "negativeAdmission": [
+    {
+      "kind": "duplicate-pin",
+      "message": "rejected: DUPLICATE_IDENTITY. The current graph was not replaced. You can export the original source.",
+      "diagnosticCodes": [],
+      "candidate": null,
+      "graphAndHistoryUnchanged": true
+    },
+    {
+      "kind": "undeclared-pin",
+      "message": "rejected: UNDECLARED_EXACT_PIN. The current graph was not replaced. You can export the original source.",
+      "diagnosticCodes": [],
+      "candidate": null,
+      "graphAndHistoryUnchanged": true
+    },
+    {
+      "kind": "missing-owner",
+      "message": "blocked: IMPORT_ERRORS. The current graph was not replaced. You can export the original source.",
+      "diagnosticCodes": [
+        "MISSING_MODULE",
+        "SUBGRAPH_STAGE",
+        "SUBGRAPH_STAGE",
+        "RESOURCE_MISSING"
+      ],
+      "candidate": null,
+      "graphAndHistoryUnchanged": true
+    },
+    {
+      "kind": "missing-mode",
+      "message": "blocked: IMPORT_ERRORS. The current graph was not replaced. You can export the original source.",
+      "diagnosticCodes": [
+        "NETWORK_EMISSION_MODE",
+        "NETWORK_EMISSION_MODE"
+      ],
+      "candidate": null,
+      "graphAndHistoryUnchanged": true
+    },
+    {
+      "kind": "unknown-mode",
+      "message": "blocked: IMPORT_ERRORS. The current graph was not replaced. You can export the original source.",
+      "diagnosticCodes": [
+        "NETWORK_EMISSION_MODE",
+        "NETWORK_EMISSION_MODE"
+      ],
+      "candidate": null,
+      "graphAndHistoryUnchanged": true
+    },
+    {
+      "kind": "missing-dependency",
+      "message": "blocked: IMPORT_ERRORS. The current graph was not replaced. You can export the original source.",
+      "diagnosticCodes": [
+        "REFERENCE_MISSING",
+        "REFERENCE_MISSING",
+        "MODULE_CALLBACK",
+        "SUBGRAPH_STAGE",
+        "MODULE_CALLBACK",
+        "SUBGRAPH_STAGE"
+      ],
+      "candidate": null,
+      "graphAndHistoryUnchanged": true
+    }
+  ],
+  "negativeEvidence": {
+    "file": "production/evidence/s05/repair-02/browser-final-01/delivered-negative-admission.json",
+    "sha256": "f3c5f7d4557ff2634561633af64b4f34ae1f8a5f3f4ac68a6909a642c9752ecb",
+    "bytes": 36755
+  },
+  "all14Flows": [
+    {
+      "sample": {
+        "file": "production/evidence/s05/repair-02/samples/shared-expand.grape.json",
+        "sha256": "71912170544675c6fe6a4266b9b16905807ce7f920105b0ce6f0ae6b0bb29ff9",
+        "bytes": 19018
+      },
+      "kind": "document",
+      "actions": [
+        "shared mode change and Undo/Redo",
+        "successful GLSL generation",
+        "save/reopen exact document"
+      ],
+      "publicFlow": {
+        "file": "production/evidence/s05/repair-02/browser-final-01/delivered-shared-expand.grape.json",
+        "sha256": "a762d23b8bb42f79150e892c66b9b51e7a37f478c7eec916acda94d3c6c0d1bf",
+        "bytes": 66688
+      },
+      "archiveFlow": {
+        "file": "production/evidence/s05/repair-02/archive-public-flows-01/shared-expand.grape.json.json",
+        "sha256": "4eff9037e5b2b096f1542f72abe9a5c0a2a00e6772b78c41edfdea26e4011213",
+        "bytes": 66659
+      }
+    },
+    {
+      "sample": {
+        "file": "production/evidence/s05/repair-02/samples/shared-function.grape.json",
+        "sha256": "f4cd1a04fd3a28ad0695ea49d4f99a4c164627a59c2aef1df47f5afef3a5bf7b",
+        "bytes": 19020
+      },
+      "kind": "document",
+      "actions": [
+        "Make independent retains mode then diverges without changing shared original",
+        "successful GLSL generation",
+        "save/reopen exact document"
+      ],
+      "publicFlow": {
+        "file": "production/evidence/s05/repair-02/browser-final-01/delivered-shared-function.grape.json",
+        "sha256": "beaa4081f4b2e100d3cb75801715bc5bb827fc04c8a9c2a597c70aa38cee8b6b",
+        "bytes": 86106
+      },
+      "archiveFlow": {
+        "file": "production/evidence/s05/repair-02/archive-public-flows-01/shared-function.grape.json.json",
+        "sha256": "2d861284d517b901767555946649e226bd10d6909d8bf69e4d13b6ec1ca8a83b",
+        "bytes": 86077
+      }
+    },
+    {
+      "sample": {
+        "file": "production/evidence/s05/repair-02/samples/shared-function.personal.json",
+        "sha256": "b5c40f599a6015eeb695187342b82d4bf2180ea266ba8b6684319bab95d31438",
+        "bytes": 8446
+      },
+      "kind": "Personal",
+      "actions": [
+        "public Personal import/export/insert",
+        "retained function then localized Expand",
+        "successful GLSL generation",
+        "save/reopen exact document"
+      ],
+      "publicFlow": {
+        "file": "production/evidence/s05/repair-02/browser-final-01/delivered-shared-function.personal.json",
+        "sha256": "9efc6dec8bd519d1c34e280b9a5cc1e079a93c57d7cc6c8f86397d063cdef487",
+        "bytes": 92401
+      },
+      "archiveFlow": {
+        "file": "production/evidence/s05/repair-02/archive-public-flows-01/shared-function.personal.json.json",
+        "sha256": "438a62e668309cb02c2ae78dae33cb8a72c74c08536dea82ed20a4ea326bbf8e",
+        "bytes": 92372
+      }
+    },
+    {
+      "sample": {
+        "file": "production/evidence/s05/repair-02/samples/nested-function.grape.json",
+        "sha256": "606f16e8de380b5355a8498e73f106a5feb17e933ebc1b394383e9c685f9b48c",
+        "bytes": 26428
+      },
+      "kind": "document",
+      "actions": [
+        "successful GLSL generation",
+        "save/reopen exact document"
+      ],
+      "publicFlow": {
+        "file": "production/evidence/s05/repair-02/browser-final-01/delivered-nested-function.grape.json",
+        "sha256": "361e5ae845021c9f3bc9658a8f5fa1c64e429fabbf1b4f8621975d5589a4def3",
+        "bytes": 92166
+      },
+      "archiveFlow": {
+        "file": "production/evidence/s05/repair-02/archive-public-flows-01/nested-function.grape.json.json",
+        "sha256": "b6bafa40c17b57ce13b558a3a008a427a2ebeacb1bcd65d03eaf119d9bc76258",
+        "bytes": 92137
+      }
+    },
+    {
+      "sample": {
+        "file": "production/evidence/s05/repair-02/samples/uniform-function.grape.json",
+        "sha256": "f32a5e71739a24a03a88fa92e0374d44eb75933523b5da2701a399d1588d7fe9",
+        "bytes": 21233
+      },
+      "kind": "document",
+      "actions": [
+        "successful GLSL generation",
+        "save/reopen exact document"
+      ],
+      "publicFlow": {
+        "file": "production/evidence/s05/repair-02/browser-final-01/delivered-uniform-function.grape.json",
+        "sha256": "1deabec5414d60aa64f2a934ba167baf02f66839f51b3488e348e7dadd0f49c9",
+        "bytes": 74342
+      },
+      "archiveFlow": {
+        "file": "production/evidence/s05/repair-02/archive-public-flows-01/uniform-function.grape.json.json",
+        "sha256": "6c1df6c4e139d597783a9643a6f72ad8f7e5ad154321cfe03ba1edd84aff504b",
+        "bytes": 74313
+      }
+    },
+    {
+      "sample": {
+        "file": "production/evidence/s05/repair-02/samples/constant-detach.grape.json",
+        "sha256": "a056b93e4daa33e22116e3f1753ccd5fe05f58102680f07629bbaa32755be568",
+        "bytes": 20676
+      },
+      "kind": "document",
+      "actions": [
+        "atomic detach/loss and Undo/Redo",
+        "expected INPUT_REQUIRED only after deliberate mode detach",
+        "save/reopen exact document"
+      ],
+      "publicFlow": {
+        "file": "production/evidence/s05/repair-02/browser-final-01/delivered-constant-detach.grape.json",
+        "sha256": "c6576bb19a9aa47724387b16c52d49d84d9e4b5df27afb9b931165b30314113e",
+        "bytes": 73641
+      },
+      "archiveFlow": {
+        "file": "production/evidence/s05/repair-02/archive-public-flows-01/constant-detach.grape.json.json",
+        "sha256": "2b0cdb2e6fdae0b768b42507b6238e5e8df0ae40f181c813e0c54cae361b5a82",
+        "bytes": 73612
+      }
+    },
+    {
+      "sample": {
+        "file": "production/evidence/s05/repair-02/samples/activation-rejected.grape.json",
+        "sha256": "0f565fa91cc91b8bee570487583815b08d6cca94bceb8cb274d0e84e4a3c7617",
+        "bytes": 20782
+      },
+      "kind": "document",
+      "actions": [
+        "invalid activation rejected atomically",
+        "successful GLSL generation",
+        "save/reopen exact document"
+      ],
+      "publicFlow": {
+        "file": "production/evidence/s05/repair-02/browser-final-01/delivered-activation-rejected.grape.json",
+        "sha256": "59325b8ce5dcd88b59d4f7a98d7dcbd299204ac935d261175d8c7b58dd723135",
+        "bytes": 72730
+      },
+      "archiveFlow": {
+        "file": "production/evidence/s05/repair-02/archive-public-flows-01/activation-rejected.grape.json.json",
+        "sha256": "cb5d3f4cb9eda08df032ef9a856ae963fb9e637e552de2e4e213373e431fcb58",
+        "bytes": 72701
+      }
+    },
+    {
+      "sample": {
+        "file": "production/evidence/s05/repair-02/samples/shape-array.grape.json",
+        "sha256": "8d0f2c256f8869d5a9028ffe93a126acc9021916a3999b5571de8fec4b34c7c6",
+        "bytes": 15813
+      },
+      "kind": "document",
+      "actions": [
+        "successful GLSL generation",
+        "save/reopen exact document"
+      ],
+      "publicFlow": {
+        "file": "production/evidence/s05/repair-02/browser-final-01/delivered-shape-array.grape.json",
+        "sha256": "405ad2e9fa5fdd446ec3ad0d083638dcde6efb6909fbef02c32dbf68f5b16e83",
+        "bytes": 55459
+      },
+      "archiveFlow": {
+        "file": "production/evidence/s05/repair-02/archive-public-flows-01/shape-array.grape.json.json",
+        "sha256": "8850864d1b5a1fdc717137a80555470a35d7814438e32a01dd6f8d15b7a892ef",
+        "bytes": 55430
+      }
+    },
+    {
+      "sample": {
+        "file": "production/evidence/s05/repair-02/samples/shape-nominal.grape.json",
+        "sha256": "de45a406976b76166b15a5a58955f7bc0c9add7daf1516d422479d51e007facc",
+        "bytes": 12740
+      },
+      "kind": "document",
+      "actions": [
+        "successful GLSL generation",
+        "save/reopen exact document"
+      ],
+      "publicFlow": {
+        "file": "production/evidence/s05/repair-02/browser-final-01/delivered-shape-nominal.grape.json",
+        "sha256": "d13eb15349f4ad0f032de40f2502368dbf32be37817a657c73244f07f96adf23",
+        "bytes": 44926
+      },
+      "archiveFlow": {
+        "file": "production/evidence/s05/repair-02/archive-public-flows-01/shape-nominal.grape.json.json",
+        "sha256": "b30ff04ae368562f0020bb2eeeff52c3a445695bd236d2a115a40fe788223af8",
+        "bytes": 44897
+      }
+    },
+    {
+      "sample": {
+        "file": "production/evidence/s05/repair-02/samples/pixel-effects.grape.json",
+        "sha256": "5834c1cf55a5b30534f7e0fa0a72e106f05daff600e0e59342cd60b2fbade6f0",
+        "bytes": 19381
+      },
+      "kind": "document",
+      "actions": [
+        "successful GLSL generation",
+        "save/reopen exact document"
+      ],
+      "publicFlow": {
+        "file": "production/evidence/s05/repair-02/browser-final-01/delivered-pixel-effects.grape.json",
+        "sha256": "46d3b3b9022d6ce863c210d7505564f67a0194f09a627c3f735f90db281202ca",
+        "bytes": 67775
+      },
+      "archiveFlow": {
+        "file": "production/evidence/s05/repair-02/archive-public-flows-01/pixel-effects.grape.json.json",
+        "sha256": "f568722ca10429bc8e9aec4ba17c3f6009a10181dff0517803b56b244340ec3c",
+        "bytes": 67746
+      }
+    },
+    {
+      "sample": {
+        "file": "production/evidence/s05/repair-02/samples/vertex-pixel.grape.json",
+        "sha256": "5c8f3a4e8b3be373422c7975926b5f251a6df5f365ff3d2c10f5031b33b2f644",
+        "bytes": 15442
+      },
+      "kind": "document",
+      "actions": [
+        "successful GLSL generation",
+        "save/reopen exact document"
+      ],
+      "publicFlow": {
+        "file": "production/evidence/s05/repair-02/browser-final-01/delivered-vertex-pixel.grape.json",
+        "sha256": "642cde3d24154ecebc1a7a127876636854ef51055a04c625898cb122e5d69e1b",
+        "bytes": 54515
+      },
+      "archiveFlow": {
+        "file": "production/evidence/s05/repair-02/archive-public-flows-01/vertex-pixel.grape.json.json",
+        "sha256": "b3c580584686cab7b0a14a89a71d2f22887843165316380aa7ef2d502f7fcc90",
+        "bytes": 54486
+      }
+    },
+    {
+      "sample": {
+        "file": "production/evidence/s05/repair-02/samples/legacy-owner.grape.json",
+        "sha256": "2bc735a55637ee42f7beeef7687a6e687fa62a8154dfc36cef3d4ebc152fbb86",
+        "bytes": 10296
+      },
+      "kind": "document",
+      "actions": [
+        "explicit old owner upgrade",
+        "Expand with full authored-data preservation",
+        "successful GLSL generation",
+        "save/reopen exact document"
+      ],
+      "publicFlow": {
+        "file": "production/evidence/s05/repair-02/browser-final-01/delivered-legacy-owner.grape.json",
+        "sha256": "a62b920a2e51f10fea9007f020675ca2902c912e3887c82b830a8292cfed135d",
+        "bytes": 61172
+      },
+      "archiveFlow": {
+        "file": "production/evidence/s05/repair-02/archive-public-flows-01/legacy-owner.grape.json.json",
+        "sha256": "2ea01d3bf76edd017d0ee684cb01f35d2525ac4a2e39a9d2e836867fc21d67c8",
+        "bytes": 61143
+      }
+    },
+    {
+      "sample": {
+        "file": "production/evidence/s05/repair-02/samples/cross-stage-uniform-distinct.grape.json",
+        "sha256": "84717f32a54717e8911795f1f9ac4b8e1aab7a11a9be4fd2741265a0d0adae4e",
+        "bytes": 19272
+      },
+      "kind": "document",
+      "actions": [
+        "successful GLSL generation",
+        "save/reopen exact document"
+      ],
+      "publicFlow": {
+        "file": "production/evidence/s05/repair-02/browser-final-01/delivered-cross-stage-uniform-distinct.grape.json",
+        "sha256": "f6073d9aafe42b75f325dd660d468276585723063d6a9df730ee6e0b428e61be",
+        "bytes": 67841
+      },
+      "archiveFlow": {
+        "file": "production/evidence/s05/repair-02/archive-public-flows-01/cross-stage-uniform-distinct.grape.json.json",
+        "sha256": "e8d1f91e8c3d3a4c6bf328a8169d1dc2c45d896b2f36517b91b2f65f6e2895ab",
+        "bytes": 67812
+      }
+    },
+    {
+      "sample": {
+        "file": "production/evidence/s05/repair-02/samples/cross-stage-uniform-shared-reversed.grape.json",
+        "sha256": "d69d9bb410c19f34b16321500144be58ce2c46ff4c0fcb2757157c7d0aa8a7b5",
+        "bytes": 26340
+      },
+      "kind": "document",
+      "actions": [
+        "successful GLSL generation",
+        "save/reopen exact document"
+      ],
+      "publicFlow": {
+        "file": "production/evidence/s05/repair-02/browser-final-01/delivered-cross-stage-uniform-shared-reversed.grape.json",
+        "sha256": "e40bc7b588d46e92f5bfb550d57d06f464403149dfdcdde1e93ed508f7ede78e",
+        "bytes": 92328
+      },
+      "archiveFlow": {
+        "file": "production/evidence/s05/repair-02/archive-public-flows-01/cross-stage-uniform-shared-reversed.grape.json.json",
+        "sha256": "dfef1f2e19af475d917878461a491eef901cb1313896b7152a93db6e4bc0a972",
+        "bytes": 92299
+      }
+    }
+  ],
+  "counters": {
+    "attempt": 1,
+    "retriesUsed": 0,
+    "repairAttempt": 1,
+    "unsuccessfulRepairReviewRounds": 0,
+    "priorResourceFindingGroup": "S05-FG-RESOURCE-01 retained separately with initialFailure1 repairAttempt1 reviewRound2 PASS",
+    "newGroupReason": "First owner-reported legacy document import/upgrade failure, separate from linked-program Uniform identity defect; same underlying import issue retains this group across diagnosis and retries."
+  },
+  "priorResourceGroup": "S05-FG-RESOURCE-01 remains CLOSED_VERIFIED at original I9230f965/R4df5492, initialFailure1/repairAttempt1/reviewRound2PASS; linked Uniform regression rerun at new I, no old verdict relabeling."
+}

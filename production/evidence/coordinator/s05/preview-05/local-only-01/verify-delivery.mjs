@@ -1,0 +1,73 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import {pathToFileURL} from 'node:url';
+const {chromium,expect}=await import(pathToFileURL(path.resolve('production/node_modules/@playwright/test/index.mjs')).href);
+const origin='http://127.0.0.1:4196';
+const out=path.resolve('.verification/s05-preview05-local-smoke-01');
+fs.mkdirSync(out);
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const response=await fetch(origin+'/_delivery.json');assert.equal(response.status,200);
+const delivery=await response.json();
+assert.equal(delivery.implementationI,'aa4c86e20b0b4b54218b9992921578e7f24a28a2');
+assert.equal(delivery.reviewedR,'6c3a734325d0db2d924356a9614e971d80a966c8');
+assert.equal(delivery.overallReviewVerdict,'BLOCKED');
+for(const f of delivery.files){const r=await fetch(origin+'/'+f.file);assert.equal(r.status,200);const b=Buffer.from(await r.arrayBuffer());assert.equal(b.length,f.bytes);assert.equal(hash(b),f.sha256);}
+for(const route of ['/README.md','/.git/config','/src/application/editor.ts','/local-assessment-01.json'])assert.equal((await fetch(origin+route)).status,404);
+assert.equal((await fetch(origin+'/',{method:'POST'})).status,405);
+const browser=await chromium.launch({args:['--enable-logging=stderr']});
+const context=await browser.newContext({viewport:{width:1600,height:1050},acceptDownloads:true});
+const page=await context.newPage();
+const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>void d.accept());
+let result;
+try{
+  await page.goto(origin+'/START-HERE.html');
+  await expect(page.getByRole('link',{name:'開啟測試畫面',exact:true})).toBeVisible();
+  const download=page.waitForEvent('download');
+  await page.getByRole('link',{name:'下載全部測試檔案 ZIP',exact:true}).click();
+  const zip=fs.readFileSync(await (await download).path());
+  assert.equal(hash(zip),'c86fa7c4f9e12707731a0db6e2dcdf5e2ac93ea1b81641a79ca5eff58b3afdc5');
+  await page.screenshot({path:path.join(out,'guide.png'),fullPage:true});
+  await page.goto(origin+'/review.html');
+  await expect(page.getByText(/本機工程試用 · 審查 BLOCKED/)).toBeVisible();
+  const app=page.frameLocator('iframe');
+  await expect(app.getByRole('button',{name:'Add Float (fixed)',exact:true})).toBeVisible();
+  const open=async file=>{
+    const r=await fetch(origin+'/'+file);const buffer=Buffer.from(await r.arrayBuffer());
+    await app.getByLabel('Open document file').setInputFiles({name:path.basename(file),mimeType:'application/json',buffer});
+    await expect(app.locator('#recovery-message')).toContainText('DOCUMENT_VALID');
+    await app.getByRole('button',{name:'Open in new session',exact:true}).click();
+    await expect(app.locator('#recovery')).not.toBeVisible();
+  };
+  const exportDoc=async()=>{
+    const pending=page.waitForEvent('download');await app.getByRole('button',{name:'Export JSON',exact:true}).click();
+    return JSON.parse(fs.readFileSync(await (await pending).path(),'utf8'));
+  };
+  await open('samples/vec2-pixel-root.grape.json');
+  await app.locator('.canvas').first().getByRole('heading',{name:'Vector 2',exact:true}).click();
+  const x=app.getByRole('textbox',{name:'X',exact:true});
+  await x.fill('0.125');await x.press('Enter');await expect(x).toHaveValue('0.125');
+  await app.getByRole('button',{name:'Undo',exact:true}).click();await expect(x).toHaveValue('0.5');
+  await app.getByRole('button',{name:'Redo',exact:true}).click();await expect(x).toHaveValue('0.125');
+  await app.getByRole('button',{name:'Generate GLSL',exact:true}).click();
+  await expect(app.getByText('Generated successfully · Host-free GLSL',{exact:true})).toBeVisible();
+  await app.getByRole('button',{name:'Save',exact:true}).click();await expect(app.locator('#save-state')).toHaveText('Saved');
+  await page.screenshot({path:path.join(out,'fixed-value.png'),fullPage:true});
+  await open('performance/fixture-14-Multiply.json');
+  const title=app.locator('.canvas').first().getByRole('heading',{name:'Multiply',exact:true});await title.click();
+  const before=await exportDoc();const nodes=d=>d.graph.stages.flatMap(s=>s.network?.nodes??[]);
+  assert.equal(nodes(before).length,14);
+  const initial=nodes(before).find(n=>n.name==='Multiply').position;
+  let box=await title.boundingBox();assert.ok(box);
+  await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();await page.mouse.move(box.x+box.width/2+100,box.y+box.height/2+60,{steps:12});await page.mouse.up();
+  const moved=await exportDoc();assert.notDeepEqual(nodes(moved).find(n=>n.name==='Multiply').position,initial);
+  await app.getByRole('button',{name:'Undo',exact:true}).click();assert.deepEqual(nodes(await exportDoc()).find(n=>n.name==='Multiply').position,initial);
+  await app.getByRole('button',{name:'Redo',exact:true}).click();assert.deepEqual(nodes(await exportDoc()).find(n=>n.name==='Multiply').position,nodes(moved).find(n=>n.name==='Multiply').position);
+  box=await title.boundingBox();await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();await page.mouse.move(box.x+box.width/2+70,box.y+box.height/2+30,{steps:8});await page.keyboard.press('Escape');await page.mouse.up();
+  assert.deepEqual(nodes(await exportDoc()).find(n=>n.name==='Multiply').position,nodes(moved).find(n=>n.name==='Multiply').position);
+  await page.screenshot({path:path.join(out,'drag-preview.png'),fullPage:true});assert.deepEqual(errors,[]);
+  result={status:'PASS_LOCAL_DELIVERY_SMOKE',recordedAt:new Date().toISOString(),origin,implementationI:delivery.implementationI,reviewedR:delivery.reviewedR,buildId:delivery.buildId,servedFilesHashVerified:delivery.files.length,zipDownloadedAndVerified:true,publicOperations:['Open reviewed JSON in new session','Vector2 edit/Undo/Redo/GLSL/Save','14-node Multiply drag/Undo/Redo/Escape'],nonAllowlistedFiles:'404',writeMethods:'405',browser:browser.version(),browserErrors:errors,overallIndependentReview:'BLOCKED/WF_PERMISSION unchanged',productAcceptance:'NOT_GRANTED',scope:'Coordinator deployment smoke only; not independent product review',existingHumanStorage:'untouched, fresh browser context',screenshots:['guide.png','fixed-value.png','drag-preview.png']};
+}catch(error){result={status:'FAIL_DELIVERY_SMOKE',error:String(error),stack:error.stack,origin,browserErrors:errors};await page.screenshot({path:path.join(out,'failure.png'),fullPage:true});throw error;}
+finally{fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx'});await context.close();await browser.close();}
+console.log(JSON.stringify(result));

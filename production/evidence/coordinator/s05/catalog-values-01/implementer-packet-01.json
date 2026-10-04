@@ -1,0 +1,521 @@
+{
+  "packetVersion": 1,
+  "packetType": "IMPLEMENTER_DISPATCH",
+  "packetId": "S05-CATALOG-FIXED-VALUES-01",
+  "actionKey": "yeataro/Grape:S05:catalog-fixed-values:676c339:01",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0826de5a9cca7cf200d843435985a7dc624634a2",
+  "acceptedMain": "6aa6abbdc46d55753111d5ef5ca9899870a8805a",
+  "expectedWorkHead": "676c33930e82b5bacc2fd69f8d70e535837449bf",
+  "PR": "NOT_CREATED_FOR_S05",
+  "authorizationRef": {
+    "file": "production/evidence/coordinator/s05/activation-20261004-01/human-authorization-01.json",
+    "sha256": "d74d8dd03147b2cf528f79bd2bba1000f179154426bd4d828609971137bed576"
+  },
+  "sliceId": "S05",
+  "writer": {
+    "displayTitle": "Grape S05 實作與維護",
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "priorStatus": "Verified idle / STOP_WRITING after P4 evidence persistence, same original writer; app cursor553"
+  },
+  "authorizedScope": "One S05 vertical catalog batch: LC-NODE-011 Float,012 Vector2,013 Vector3,014 ColorRGBA, all fixed modes and supported vertex/pixel behavior in current portable browser profile, plus required existing type/constant/command/history/codec machinery only. Persist already prepared partial Owner feedback as provenance.",
+  "requestedAction": "Resume original writer, preserve and commit pending bounded Owner feedback/Coordinator reconciliation, implement and self-verify the four fixed-value leaves, prepare complete exact I/R submission for independent Fresh Review. Do not stop at a plan or mapping.",
+  "inputRefs": [
+    {
+      "file": "production/evidence/coordinator/s05/catalog-values-01/recovery-01.json",
+      "sha256": "3a61f0bec40a45bbffd2bba3f814116dd21bf943120b6edd141b415fe3b1ba5b",
+      "bytes": 1208
+    },
+    {
+      "file": "production/evidence/coordinator/s05/activation-20261004-01/human-authorization-01.json",
+      "sha256": "d74d8dd03147b2cf528f79bd2bba1000f179154426bd4d828609971137bed576",
+      "bytes": 2851
+    },
+    {
+      "file": "production/evidence/coordinator/s05/activation-20261004-01/pm-scope-analysis-01.json",
+      "sha256": "f948f2d779b2ccd57c364a3134c962314146ba62394154b853b526ac33cc0f39",
+      "bytes": 11120
+    },
+    {
+      "file": "production/evidence/coordinator/s05/owner-review-replacement-confirmation-01/human-feedback-01.json",
+      "sha256": "4680dbc95dd8a848230f7b7792ecb0db9987c2c54eeb5abc401eb53db3627bbc",
+      "bytes": 1856
+    },
+    {
+      "file": "production/evidence/coordinator/s05/persistence-03/coordinator-reconciliation-01.json",
+      "sha256": "fc42efaa7532d2bf6ee62d8d281050fe0a97812789f1a752fd2334ae1d06114c",
+      "bytes": 1165
+    },
+    {
+      "file": "production/evidence/coordinator/s05/preview-04/delivery-result-01.json",
+      "sha256": "75f8dfdb6c0f7242b52b04a3b16376bea33fb33f7e14affca8e6c1aa54dda63d",
+      "bytes": 4989
+    },
+    {
+      "file": "production/evidence/coordinator/s05/review-04/reconciliation-01.json",
+      "sha256": "de02da22c5421ac744ce9f307b3488b20b0661a4eaf0b01a634a0750563d33c3",
+      "bytes": 1505
+    },
+    {
+      "file": "production/evidence/s05/review-04/independent-review/INDEPENDENT_REVIEW_RESULT.json",
+      "sha256": "87bfb196ce45b7e28f102f76a8cc5e7fda5879787fc395dd616f3f48857a59d9",
+      "bytes": 58735
+    },
+    {
+      "file": "production/evidence/s05/repair-03/submission-01.json",
+      "sha256": "2067c6f90aaa0fd159f157582b8fe0830ded8d1ee34cda261fc8edbdce0ecc25",
+      "bytes": 13295
+    },
+    {
+      "file": "HANDOFF_ACCEPTANCE.json",
+      "sha256": "5ff88ef9e913f58d45599ab0a47a2d015714d6700d11032fc480a0c1b234336b",
+      "bytes": 1957
+    },
+    {
+      "file": "implementation-state.json",
+      "sha256": "521c4f921579415661b01a864f4c7a6577fec9f0da9c12d6a17e4cfb3b57f395",
+      "bytes": 20908
+    },
+    {
+      "file": "decisions/DEC-GRAPE-002.md",
+      "sha256": "ef2492ba16e5c96cede2d9b70e638033f80ecb7825b2d2c8c2dbe36d24fad848",
+      "bytes": 8075
+    },
+    {
+      "file": "decisions/AC-GRAPE-001.md",
+      "sha256": "00c21f29fb66c07e1db1a7ea6dce2dbffadb47682c534f3019e2dc984057be00",
+      "bytes": 9288
+    },
+    {
+      "file": "decisions/DEC-GRAPE-003.md",
+      "sha256": "9a0acb74ee0bac36f23784db7743c45e2b3f36023ca329400b7f65711ee4428e",
+      "bytes": 13101
+    },
+    {
+      "file": "decisions/AC-GRAPE-002.md",
+      "sha256": "ab1e4067f479f640c2fd59c3bc994413475a0dfc2b0e8259c4b5319f03c60c4a",
+      "bytes": 15010
+    },
+    {
+      "file": "decisions/DEC-GRAPE-004.md",
+      "sha256": "9d1af8aba9e1e65d9318590f601b89e094404eeea09e3670382d42b171e57238",
+      "bytes": 9555
+    }
+  ],
+  "contractRefs": [
+    {
+      "file": "handoff/08_IMPLEMENTATION_PLAN.md",
+      "sha256": "df9ad6d9e05d762b767b1d536b97eb6f71c82b6c152c180bcf586cb6a713713d",
+      "bytes": 45504
+    },
+    {
+      "file": "handoff/09_ACCEPTANCE_AND_CONFORMANCE.md",
+      "sha256": "d9c32c0a3ef1a47e2704c44e33e12d69ab1748cfd5cbb49e878f731671f6a7c2",
+      "bytes": 28825
+    },
+    {
+      "file": "handoff/10_KNOWN_GATES.md",
+      "sha256": "8374d473c1534e3627d37573119a6488863d8992e0318c8e1f0d71d99b184b2b",
+      "bytes": 64343
+    },
+    {
+      "file": "handoff/data/gates.json",
+      "sha256": "94ed3cd38f6415e442470a9b241ded29fb6851215eaff3161bd0a80b7a1755c0",
+      "bytes": 118726
+    },
+    {
+      "file": "handoff/compatibility/capabilities.json",
+      "sha256": "387fe3e5dc75f73dc711e867df18b292dcbf452569829767d1a2ccb835fa5a36",
+      "bytes": 6586414
+    },
+    {
+      "file": "handoff/compatibility/behavior-contracts.md",
+      "sha256": "de484d93122f27de6a756e559d9338ac8737889c0654a631f4f2caafed553988",
+      "bytes": 685360
+    },
+    {
+      "file": "handoff/04_EXTENSION_MODEL.md",
+      "sha256": "42f2df5e6345e592ba703efd15453110b6e7adb58d71a1ef482d7484a7373b4a",
+      "bytes": 29664
+    },
+    {
+      "file": "handoff/13_PRODUCTION_CONTRACT_SURFACE.md",
+      "sha256": "52be05f0db6eab935efc8869c703f20ce5bb8992ba583c311c9bc76d76a28294",
+      "bytes": 19338
+    },
+    {
+      "file": "handoff/14_DOCUMENT_FORMAT.md",
+      "sha256": "46ab90194b148fc8e1c7688d3eac8617685bce9f279606b3c0b31d03764dfb7d",
+      "bytes": 31344
+    },
+    {
+      "file": "handoff/17_PANEL_COMMAND_CONTRACT.md",
+      "sha256": "49b8feb35f38f8c56ee9ce446c8d230eac7456416706186913fdeb2a71ab6131",
+      "bytes": 8949
+    },
+    {
+      "file": "handoff/executable-reference/COMPUTE_QUALIFICATION_CONTRACTS.md",
+      "sha256": "7212af0d5a88b29c247d50d6f58a8526e22afd8d73ca70b35422c04e28ecfe5d",
+      "bytes": 26248
+    }
+  ],
+  "acceptedDecisions": [
+    "DEC-GRAPE-002",
+    "AC-GRAPE-001",
+    "DEC-GRAPE-003",
+    "AC-GRAPE-002",
+    "DEC-GRAPE-004"
+  ],
+  "priorActionReceipt": {
+    "file": "production/evidence/coordinator/s05/persistence-03/coordinator-reconciliation-01.json",
+    "sha256": "fc42efaa7532d2bf6ee62d8d281050fe0a97812789f1a752fd2334ae1d06114c",
+    "bytes": 1165
+  },
+  "attempt": 1,
+  "retriesUsed": 0,
+  "findingGroup": {
+    "current": "NONE for new settled catalog implementation; this is not a retry of the prior replacement repair",
+    "preserved": "S05-FG-LEGACY-IMPORT-01 repairAttempt2/unsuccessful0/globalReview4 PASS; S05-FG-RESOURCE-01 initialFAIL1/repair1/review2PASS remain unchanged",
+    "limits": "max2 retries per transient operation; max3 unsuccessful repair/review rounds per underlying group, never reset by new wording"
+  },
+  "selectedLeaves": [
+    {
+      "id": "LC-NODE-011",
+      "name": "Float [float]",
+      "operationSpec": {
+        "key": "float",
+        "label": "Float",
+        "definitionUuid": "sgrape.builtin.float",
+        "revisionHash": "61df883534354ac44a35997e42d30db702f339fefe0767ea77ac6330431a553b",
+        "defaultParameters": {
+          "value": 0.5
+        },
+        "inputDefaultRules": {},
+        "stages": [
+          "vertex",
+          "pixel"
+        ],
+        "targets": [
+          "top",
+          "mat"
+        ],
+        "interface": {
+          "selector": "fixed",
+          "variants": [
+            {
+              "type": null,
+              "inputs": {},
+              "outputs": {
+                "out": "float"
+              },
+              "unconnectedInputs": {}
+            }
+          ]
+        },
+        "modes": {},
+        "ordinaryConstantEligible": true,
+        "specializationExpressionEligible": false
+      },
+      "preconditions": [
+        "graph 與 ports 通過共通驗證 LC-NODE-365",
+        "固定型別，不因 downstream 或 value 長度隱式改型；所有初始數值列於 operationSpec.defaultParameters。"
+      ],
+      "contracts": [
+        {
+          "given": "合法 float 節點與 operationSpec 中的一組完整型別/設定",
+          "when": "以所列 inputs/defaults 編譯",
+          "then": "輸出固定 float literal；保存 value 控制所有分量。"
+        },
+        {
+          "given": "模式/型別/連線違反列出的前置條件",
+          "when": "請求編譯",
+          "then": "GraphError；compile不更改原圖資料，不靜默換算法。"
+        }
+      ]
+    },
+    {
+      "id": "LC-NODE-012",
+      "name": "Vector 2 [vec2]",
+      "operationSpec": {
+        "key": "vec2",
+        "label": "Vector 2",
+        "definitionUuid": "sgrape.builtin.vec2",
+        "revisionHash": "3626d76bfc9b576e593300589c2dcd2c00bdfc79706bedad57f98d530a84cb37",
+        "defaultParameters": {
+          "value": [
+            0.5,
+            0.5
+          ]
+        },
+        "inputDefaultRules": {},
+        "stages": [
+          "vertex",
+          "pixel"
+        ],
+        "targets": [
+          "top",
+          "mat"
+        ],
+        "interface": {
+          "selector": "fixed",
+          "variants": [
+            {
+              "type": null,
+              "inputs": {},
+              "outputs": {
+                "out": "vec2"
+              },
+              "unconnectedInputs": {}
+            }
+          ]
+        },
+        "modes": {},
+        "ordinaryConstantEligible": true,
+        "specializationExpressionEligible": false
+      },
+      "preconditions": [
+        "graph 與 ports 通過共通驗證 LC-NODE-365",
+        "固定型別，不因 downstream 或 value 長度隱式改型；所有初始數值列於 operationSpec.defaultParameters。"
+      ],
+      "contracts": [
+        {
+          "given": "合法 vec2 節點與 operationSpec 中的一組完整型別/設定",
+          "when": "以所列 inputs/defaults 編譯",
+          "then": "輸出固定 vec2 literal；保存 value 控制所有分量。"
+        },
+        {
+          "given": "模式/型別/連線違反列出的前置條件",
+          "when": "請求編譯",
+          "then": "GraphError；compile不更改原圖資料，不靜默換算法。"
+        }
+      ]
+    },
+    {
+      "id": "LC-NODE-013",
+      "name": "Vector 3 [vec3]",
+      "operationSpec": {
+        "key": "vec3",
+        "label": "Vector 3",
+        "definitionUuid": "sgrape.builtin.vec3",
+        "revisionHash": "f576162450abafdc51d9ff84531c9689c21236291f9ba65ad8d477366eb1372b",
+        "defaultParameters": {
+          "value": [
+            1,
+            1,
+            1
+          ]
+        },
+        "inputDefaultRules": {},
+        "stages": [
+          "vertex",
+          "pixel"
+        ],
+        "targets": [
+          "top",
+          "mat"
+        ],
+        "interface": {
+          "selector": "fixed",
+          "variants": [
+            {
+              "type": null,
+              "inputs": {},
+              "outputs": {
+                "out": "vec3"
+              },
+              "unconnectedInputs": {}
+            }
+          ]
+        },
+        "modes": {},
+        "ordinaryConstantEligible": true,
+        "specializationExpressionEligible": false
+      },
+      "preconditions": [
+        "graph 與 ports 通過共通驗證 LC-NODE-365",
+        "固定型別，不因 downstream 或 value 長度隱式改型；所有初始數值列於 operationSpec.defaultParameters。"
+      ],
+      "contracts": [
+        {
+          "given": "合法 vec3 節點與 operationSpec 中的一組完整型別/設定",
+          "when": "以所列 inputs/defaults 編譯",
+          "then": "輸出固定 vec3 literal；保存 value 控制所有分量。"
+        },
+        {
+          "given": "模式/型別/連線違反列出的前置條件",
+          "when": "請求編譯",
+          "then": "GraphError；compile不更改原圖資料，不靜默換算法。"
+        }
+      ]
+    },
+    {
+      "id": "LC-NODE-014",
+      "name": "Color RGBA [color]",
+      "operationSpec": {
+        "key": "color",
+        "label": "Color RGBA",
+        "definitionUuid": "sgrape.builtin.color",
+        "revisionHash": "248cb1f0646af23e93597f4cb941fccd9fdc65cfb36ce816467635766ccddedc",
+        "defaultParameters": {
+          "value": [
+            0.55,
+            0.28,
+            0.9,
+            1
+          ]
+        },
+        "inputDefaultRules": {},
+        "stages": [
+          "vertex",
+          "pixel"
+        ],
+        "targets": [
+          "top",
+          "mat"
+        ],
+        "interface": {
+          "selector": "fixed",
+          "variants": [
+            {
+              "type": null,
+              "inputs": {},
+              "outputs": {
+                "out": "vec4"
+              },
+              "unconnectedInputs": {}
+            }
+          ]
+        },
+        "modes": {},
+        "ordinaryConstantEligible": true,
+        "specializationExpressionEligible": false
+      },
+      "preconditions": [
+        "graph 與 ports 通過共通驗證 LC-NODE-365",
+        "固定型別，不因 downstream 或 value 長度隱式改型；所有初始數值列於 operationSpec.defaultParameters。"
+      ],
+      "contracts": [
+        {
+          "given": "合法 color 節點與 operationSpec 中的一組完整型別/設定",
+          "when": "以所列 inputs/defaults 編譯",
+          "then": "輸出固定 vec4 literal；保存 value 控制所有分量。"
+        },
+        {
+          "given": "模式/型別/連線違反列出的前置條件",
+          "when": "請求編譯",
+          "then": "GraphError；compile不更改原圖資料，不靜默換算法。"
+        }
+      ]
+    }
+  ],
+  "requiredBehavior": [
+    "Each selected leaf has a public authoring entry and node-owned Inspector editing of every component with exact defaults and fixed output type. Root, nested/shared and admitted Function/Expand composition remain supported.",
+    "Use exact frozen operationSpec and behavior oracle for these leaves. Both vertex and pixel are declared; qualify supported production paths and actual shader results. Do not remove stage guards for unrelated nodes.",
+    "Preserve ordinary constant eligibility and specializationExpressionEligible=false distinctions, including required-constant consumers and Function formal-input rules.",
+    "Preserve DEC002 Edge conversion table, Image Output vec4 boundary and per-port exact policy. Connecting a fixed-value output never silently changes its source type.",
+    "Carry each leaf through UI create/edit/connect/generate/save-reopen/JSON roundtrip/Undo/Redo with actual values, not text-only GLSL snapshots or shared-template coverage.",
+    "Keep canonical Graph/Application authority and domain-separated History, CAS/load/snapshot lifetimes, two-Context consistency, owner codec/reference semantics and missing exact-module recovery.",
+    "Build a precise leaf x stage x profile x operation matrix, including declared exclusions and missing families; this batch does not claim all391 catalog parity."
+  ],
+  "negativeBehavior": [
+    "Invalid payload type/component count/non-finite values and malformed saved data are rejected by applicable existing value contracts, with no silent resize/coercion or compile-time graph mutation.",
+    "No current-error hiding by unused-node pruning; unsuccessful commands preserve Graph/History; missing exact modules remain preserved/recoverable under current import contract.",
+    "Profiles/stages that are not supported produce deterministic diagnostics; do not represent browser tests as native TD/hardware GPU proof.",
+    "Retain legacy replacement eligibility, valid-vs-replaceable message, atomic rejection, matching one Undo/Redo, export/Close/new-session and explicit upgrade paths as affected regression checks."
+  ],
+  "initialMaintenance": [
+    "Persist the two pending Coordinator receipts byte-for-byte and this bounded packet/dispatch provenance in a separate explicit metadata checkpoint; do not reinterpret partial Owner confirmation as entire early-batch or S05 acceptance.",
+    "Maintain S05 as the sole active Slice; preserve all S01-S04 completed and acceptedEvidence records. The latest independent early-batch PASS stays pinned I4 ee1212fdc54359f1ceba4c4b09f6e7cc06cddc41 / R4 29695b3c25e2d200856d780b31e20e23f24efb6d. New implementation requires new review.",
+    "Original maintainer may update scoped README/current-state truth after verification, preserving English and exact evidence bindings. Do not invent acceptedEvidence/full-Slice completion. Bind baseline/build to actual new I only when produced."
+  ],
+  "allowedPaths": [
+    "production/src/** only selected leaves and necessary shared support",
+    "production/apps/web/** minimal authoring entry and node editing support",
+    "production/tests/** selected behavior and affected regression",
+    "production/tools/** only necessary checks/evidence tooling",
+    "production/evidence/s05/catalog-values-01/** new immutable submission/build/samples/evidence",
+    "production/evidence/coordinator/s05/catalog-values-01/** append-only dispatch/ownership receipts",
+    "production/evidence/coordinator/s05/persistence-03/coordinator-reconciliation-01.json exact pending bytes",
+    "production/evidence/coordinator/s05/owner-review-replacement-confirmation-01/human-feedback-01.json exact pending bytes",
+    "implementation-state.json sole-maintainer validated scoped progress",
+    "README.md scoped truthful status in English"
+  ],
+  "prohibitedPaths": [
+    "handoff/**",
+    "existing evidence overwrite including all original reviewer reports, manifests, samples and test archives",
+    "accepted S01-S04 evidence changes",
+    "decisions/** semantic changes",
+    "references/** or production/debug.log or production/tools/evidence/** staging/changes",
+    "unrelated uncommitted Human content",
+    ".github/** or repository/system settings",
+    "product code outside this batch without required shared-support justification"
+  ],
+  "preservation": [
+    "Preserve exact current reviewed source/evidence identities as historical I/R. Material new source changes require new review and cannot inherit R4 PASS.",
+    "Do not redefine an existing exact module pin or reinterpret its old serialized payload. Use existing module versioning and explicit supported upgrade rules; legacy samples remain valid under original modules.",
+    "Keep4193/4194/4195 live reviewed previews untouched; no new deployment until independent PASS, no changes to Human browser data."
+  ],
+  "environment": {
+    "node": "25.5.0",
+    "os": "Windows x64",
+    "playwright": "1.62.1",
+    "browser": "actual Chromium version recorded; current accepted is151.0.7922.34",
+    "storage": "disposable test origins/contexts; do not erase Human data"
+  },
+  "verificationCommands": [
+    "node tools/verify-bootstrap.mjs",
+    "node handoff/tools/check-implementation-state.mjs --current",
+    "node --test --test-isolation=none tools/verify-bootstrap.test.mjs",
+    "npm --prefix production run typecheck",
+    "npm --prefix production run conformance",
+    "npm --prefix production test",
+    "npm --prefix production run test:browser",
+    "npm --prefix production run build"
+  ],
+  "acceptanceFamilies": [
+    "AT-S05-01 all4 selected leaf fixed modes: complete public UI lifecycle and per-leaf oracle",
+    "AT-S05-02 type/constant/stage checks and whole-graph errors for applicable selected-leaf cases",
+    "AT-S05-03 actual supported profile compiler/link/run behavior and deterministic unsupported refusal",
+    "AT-S05-04 declared browser runtime numeric/component evidence only; native TD/backend matrix remains unqualified"
+  ],
+  "gateTiming": {
+    "LU_NODE_002": "Actual new UI/save/reload/Undo evidence for all4 selected leaves; no new product decision required merely because evidence was previously absent",
+    "native": "Native target/runtime qualification depends on S07/S08 and is excluded; portable work proceeds",
+    "residual": "Preserve current Gate decisions, numeric/driver and audit scope; no global Gate closure by inference"
+  },
+  "evidenceRequirements": [
+    "Guard expected P4, empty index, preserved untracked preimages, existing evidence and contract hashes before writes.",
+    "Before first new I, demonstrate representative supported backend feasibility; then each selected leaf needs real compile/link and numerical/component results plus public editing/persistence/history evidence.",
+    "Deliver immutable I/R, source/config/build/evidence manifests, exact modules and codecs, original-input guards, capability/mode/profile matrix and actual commands/runtime/results.",
+    "Include runnable archived build with manifest, minimal clear sample files, human-readable steps and expected results; report all limitations.",
+    "No copying prototype implementation as production foundation, no self independent PASS; scope conflicts preserve counterexample and return only affected dependency."
+  ],
+  "exclusions": [
+    "All other catalog leaves, Scalar/Convert/math/matrix/dynamic nodes are later bounded batches",
+    "Unrelated Vertex enablement, current complaint was explanation-only",
+    "S06 appearance/workspace redesign, S07/S08 native Host controls, Q003",
+    "S02 legacy revision converter/global catalog parity",
+    "Whole early-batch or S05 acceptance, remote publication/PR/merge, next Slice",
+    "New daemon, scheduling system or permanent service"
+  ],
+  "outputLocation": "production/evidence/s05/catalog-values-01/ with append-only Coordinator dispatch receipts",
+  "submission": {
+    "required": "I,R, build/environment, leaf/mode/stage/profile coverage, hashes, full checks and limitations, readiness statement",
+    "freeze": "Stop product writes at complete review-ready R; do not await Human pre-review"
+  },
+  "stopConditions": [
+    "Unexpected owner/HEAD/hash/unique work: preserve and reconcile",
+    "Real contract or product conflict: exact counterexample to Coordinator/PM, continue independent settled work",
+    "Required runtime unavailable: report actual operational limitation, never fabricate PASS",
+    "Complete exact review-ready submission: STOP_WRITING for Fresh Review",
+    "No autonomous publication, deployment or merge"
+  ],
+  "nextRoute": "Coordinator validates complete submission and immediately arranges isolated independent Fresh Review. Fix/review loop remains ordinary authorized S05 work. Human receives tested deployment and simple links only after PASS.",
+  "provenance": "Selected four fixed-value leaves are an engineering subdivision of already authorized portable S05 catalog and PM numeric-family ordering, not a new Human product decision.",
+  "limitations": [
+    "Current exact reviewed preview remains early function batch; next fixed-value batch not delivered by this packet.",
+    "Human replacement feedback is bounded; prior positive remarks do not silently accept all catalog work."
+  ]
+}

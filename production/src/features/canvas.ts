@@ -159,62 +159,33 @@ function mountCanvas(
   const toolbar = document.createElement("div");
   const noticeErrors = new Map<string, string>();
   const noticeSummary = document.createElement("button"),
-    statusDialog = document.createElement("dialog"),
-    statusTitle = document.createElement("h2"),
-    statusText = document.createElement("div"),
-    statusClose = document.createElement("button");
+    statusText = document.createElement("div");
   noticeSummary.type = "button";
   noticeSummary.ariaLabel = "Read full Canvas status";
   noticeSummary.setAttribute("aria-haspopup", "dialog");
   notice.append(noticeSummary);
-  statusDialog.className = "status-details";
-  statusDialog.ariaLabel = "Canvas status details";
-  statusTitle.textContent = "Canvas status details";
   statusText.className = "status-details-text";
   statusText.setAttribute("role", "region");
   statusText.ariaLabel = "Full current Canvas status";
   statusText.tabIndex = 0;
-  statusClose.type = "button";
-  statusClose.textContent = "Close status details";
-  statusDialog.append(statusTitle, statusText, statusClose);
-  root.append(statusDialog);
-  const closeStatus = () => {
-    if (!statusDialog.open) return;
-    statusDialog.close();
-    (noticeSummary.disabled || notice.hidden ? root : noticeSummary).focus({
-      preventScroll: true,
-    });
-  };
+  demand(mount.floating, "FLOATING_PRESENTATION_UNAVAILABLE");
+  const statusView = mount.floating({
+    host: root,
+    trigger: noticeSummary,
+    content: statusText,
+    title: "Canvas status details",
+    closeLabel: "Close status details",
+    kind: "modal",
+    width: 680,
+    maxHeight: 680,
+  });
+  const closeStatus = () => statusView.close();
   noticeSummary.onclick = mount.scope.event(() => {
     clearConnection();
     if (noticeSummary.disabled) return;
     browser.cancel(false);
     end(true);
-    statusDialog.showModal();
-    statusText.focus();
-  });
-  statusClose.onclick = mount.scope.event(closeStatus);
-  statusDialog.addEventListener(
-    "cancel",
-    mount.scope.event((e) => {
-      e.preventDefault();
-      closeStatus();
-    }),
-  );
-  statusDialog.addEventListener(
-    "keydown",
-    mount.scope.event((e: KeyboardEvent) => {
-      if (e.key === "Tab" && !e.isComposing) {
-        e.preventDefault();
-        (document.activeElement === statusText
-          ? statusClose
-          : statusText
-        ).focus();
-      }
-    }),
-  );
-  mount.scope.own(() => {
-    if (statusDialog.open) statusDialog.close();
+    statusView.open();
   });
   let connectionNotice = "",
     detailNotice = "";
@@ -1067,6 +1038,27 @@ function mountCanvas(
   const drawConnection = () => {
     connectionPreview.replaceChildren();
     const pending = portDrag ?? selectedPort;
+    const hit = pointerPoint
+      ? document
+          .elementFromPoint(pointerPoint.x, pointerPoint.y)
+          ?.closest<HTMLElement>("[data-port]")
+      : null;
+    for (const button of nodes.querySelectorAll<HTMLElement>("[data-port]")) {
+      button.classList.toggle(
+        "wire-origin",
+        !!pending &&
+          button.dataset.nodeId === pending.nodeId &&
+          button.dataset.port === pending.portKey &&
+          button.dataset.direction === pending.direction,
+      );
+      button.classList.toggle(
+        "wire-target",
+        !!pending &&
+          services.editing?.(lease().lease) !== false &&
+          button === hit &&
+          pending.direction !== button.dataset.direction,
+      );
+    }
     if (!pending || !pointerPoint || browser.isOpen()) return;
     const socket = Array.from(
       nodes.querySelectorAll<HTMLElement>("[data-port]"),
@@ -1099,6 +1091,10 @@ function mountCanvas(
     ring.setAttribute("cx", String(x));
     ring.setAttribute("cy", String(y));
     ring.setAttribute("r", "8");
+    ring.setAttribute(
+      "style",
+      `stroke:${p.getAttribute("stroke")};fill:transparent`,
+    );
     connectionPreview.append(p, ring);
   };
   const clearConnection = () => {
@@ -1255,7 +1251,7 @@ function mountCanvas(
         browser.isOpen() ||
         !menu.hidden ||
         helpDialog.open ||
-        statusDialog.open
+        statusView.isOpen()
       )
         return;
       if (!e.isPrimary) {
@@ -1568,7 +1564,7 @@ function mountCanvas(
         e.defaultPrevented ||
         e.isComposing ||
         e.repeat ||
-        document.querySelector("dialog[open]") ||
+        document.querySelector("dialog:modal") ||
         (e.target as HTMLElement).closest(
           "input,textarea,select,[contenteditable=true],.node-browser,.canvas-menu",
         )

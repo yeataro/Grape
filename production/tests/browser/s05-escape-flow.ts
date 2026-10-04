@@ -80,7 +80,15 @@ export async function naturalEscapeFlow(
     });
   const exportDocument = async () => {
     const downloaded = page.waitForEvent("download");
-    await app.getByRole("button", { name: "Export JSON", exact: true }).click();
+    const exportButton = app.getByRole("menuitem", {
+      name: "Export JSON",
+      exact: true,
+    });
+    if (!(await exportButton.isVisible()))
+      await app
+        .getByRole("button", { name: "Project actions", exact: true })
+        .click();
+    await exportButton.click();
     return JSON.parse(
       fs.readFileSync((await (await downloaded).path())!, "utf8"),
     );

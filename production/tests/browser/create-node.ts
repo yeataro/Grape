@@ -8,6 +8,7 @@ export async function createNode(page: Page, name: string) {
     fixed = name === "Float (fixed)",
     label = fixed ? "Float" : name;
   await browser.getByLabel("Search nodes", { exact: true }).fill(label);
+  await browser.getByLabel("Node source", { exact: true }).selectOption("");
   if (label === "Float")
     await browser
       .getByLabel("Node source", { exact: true })
@@ -20,7 +21,7 @@ export async function createNode(page: Page, name: string) {
       v = el.querySelector<HTMLElement>(".viewport")!,
       m = new DOMMatrix(getComputedStyle(v).transform);
     return {
-      x: r.left + m.e + (40 + ((n - 1) % 3) * 205) * m.a,
+      x: r.left + m.e + (40 + ((n - 1) % 3) * 235) * m.a,
       y: r.top + m.f + (85 + Math.floor((n - 1) / 3) * 225) * m.d,
     };
   }, count);

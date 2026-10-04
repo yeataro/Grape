@@ -104,10 +104,10 @@ export function nodePortRow(
     "glsl.vec4": "#c5b2e2",
   };
   row.style.setProperty("--port-color", colors[port.type] ?? "#a1adb7");
-  if (port.direction === "output") button.append(caption, socket);
-  else button.append(socket, caption);
+  button.append(socket);
+  caption.className = "port-label";
   type.textContent = port.type.replace("glsl.", "");
-  row.append(button, type);
+  row.append(button, caption, type);
   if (port.direction === "input" && !connected && value !== undefined) {
     const display = document.createElement("span");
     display.className = "node-value";

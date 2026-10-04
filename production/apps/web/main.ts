@@ -1,3 +1,4 @@
+import { floatingSurface } from "../../src/ui/floating.ts";
 import { mountBuildInfo } from "./build-info.ts";
 import { icon } from "../../src/features/node-browser.ts";
 import { mountHover } from "../../src/ui/hover.ts";
@@ -116,12 +117,12 @@ const application = new EditorApplication(
 );
 const app = document.querySelector<HTMLElement>("#app")!;
 app.innerHTML =
-  '<header><div class="brand"><svg class="grape-mark" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><circle cx="20" cy="23" r="11" fill="#bfa5f4"/><circle cx="44" cy="23" r="11" fill="#a98be2"/><circle cx="32" cy="44" r="11" fill="#b499ef"/></svg> Grape <small>SHADER WORKSPACE</small></div><nav aria-label="Document actions"></nav><div class="status"><span id="save-state"></span><span class="host">Host-free</span></div></header><div id="message" role="status"></div><div id="actions"></div><main><section id="canvases"></section><aside id="inspector"></aside></main><section id="code"></section><footer><span>Click an output port, then an input to connect. Shift-click replaces a connection.</span><span>Scroll to zoom · Drag empty space to pan</span></footer><dialog id="open-dialog"><h2>Open saved document</h2><div id="saved-list"></div><button id="cancel-open">Cancel</button></dialog><dialog id="recovery"><h2>Document retained</h2><p id="recovery-message"></p><button id="export-original">Export original</button><button id="close-recovery">Close</button></dialog>';
+  '<header><div class="brand"><svg class="grape-mark" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><circle cx="20" cy="23" r="11" fill="#bfa5f4"/><circle cx="44" cy="23" r="11" fill="#a98be2"/><circle cx="32" cy="44" r="11" fill="#b499ef"/></svg> Grape <small>SHADER WORKSPACE</small></div><nav aria-label="Document actions"></nav><div class="status"><span id="save-state"></span><span class="host">Host-free</span></div></header><div id="message" role="status"></div><div id="actions"></div><main><section id="canvases"></section><aside id="inspector"></aside></main><section id="code"></section><footer><span data-hint="connections">Click an output port, then an input to connect. Shift-click replaces a connection.</span><span data-hint="navigation">Scroll to zoom · Drag empty space to pan</span></footer><dialog id="open-dialog"><h2>Open saved document</h2><div id="saved-list"></div><button id="cancel-open">Cancel</button></dialog><dialog id="recovery"><h2>Document retained</h2><p id="recovery-message"></p><button id="export-original">Export original</button><button id="close-recovery">Close</button></dialog>';
 const staticText = [
   [".brand small", "subtitle"],
   [".host", "hostFree"],
-  ["footer span:first-child", "connections"],
-  ["footer span:last-child", "navigation"],
+  ["[data-hint=connections]", "connections"],
+  ["[data-hint=navigation]", "navigation"],
   ["#open-dialog h2", "openTitle"],
   ["#cancel-open", "cancel"],
   ["#recovery h2", "recoveryTitle"],
@@ -149,47 +150,30 @@ statusBar.className = "application-status";
 statusBar.setAttribute("role", "status");
 oldMessage.replaceWith(statusBar);
 statusBar.append(message);
-app.querySelector("footer")!.after(statusBar);
-const statusDialog = document.createElement("dialog"),
-  statusTitle = document.createElement("h2"),
-  statusText = document.createElement("div"),
-  statusClose = document.createElement("button");
-statusDialog.className = "status-details";
-statusDialog.ariaLabel = "Application status details";
-statusTitle.textContent = "Application status details";
+app.querySelector("footer")!.append(statusBar);
+const statusText = document.createElement("div");
 statusText.className = "status-details-text";
 statusText.tabIndex = 0;
 statusText.setAttribute("role", "region");
 statusText.ariaLabel = "Full current application status";
-statusClose.type = "button";
-statusClose.textContent = "Close status details";
-statusDialog.append(statusTitle, statusText, statusClose);
-app.append(statusDialog);
-const closeStatus = () => {
-  if (!statusDialog.open) return;
-  statusDialog.close();
-  const fallback = Array.from(
-    nav.querySelectorAll<HTMLButtonElement>("button"),
-  ).find((b) => !b.disabled && b.isConnected && b.getClientRects().length);
-  (message.disabled ? fallback : message)?.focus({ preventScroll: true });
-};
+const statusView = floatingSurface({
+  host: app,
+  trigger: message,
+  content: statusText,
+  title: "Application status details",
+  closeLabel: "Close status details",
+  kind: "anchored",
+  width: 680,
+  maxHeight: 420,
+  beforeOpen: () => !!message.textContent,
+  fallbackFocus: () =>
+    nav.querySelector<HTMLButtonElement>("button:not(:disabled)"),
+});
+const closeStatus = () => statusView.close();
 message.onclick = () => {
-  if (!message.textContent) return;
   statusText.textContent = message.textContent;
-  statusDialog.showModal();
-  statusText.focus();
+  statusView.toggle();
 };
-statusClose.onclick = closeStatus;
-statusDialog.addEventListener("cancel", (e) => {
-  e.preventDefault();
-  closeStatus();
-});
-statusDialog.addEventListener("keydown", (e) => {
-  if (e.key === "Tab" && !e.isComposing) {
-    e.preventDefault();
-    (document.activeElement === statusText ? statusClose : statusText).focus();
-  }
-});
 const setMessage = (text: string) => {
   message.textContent = text;
   message.disabled = !text;
@@ -251,6 +235,26 @@ const action = (
 let workspace: Workspace | null = null,
   renderer: PanelRenderer | null = null,
   canvasCount = 0;
+const footer = app.querySelector<HTMLElement>("footer")!;
+const outputTrigger = document.createElement("button"),
+  output = app.querySelector<HTMLElement>("#code")!;
+outputTrigger.type = "button";
+outputTrigger.textContent = "Shader output";
+footer.append(outputTrigger);
+output.tabIndex = 0;
+const outputView = floatingSurface({
+  host: app,
+  trigger: outputTrigger,
+  content: output,
+  title: "Shader output and diagnostics",
+  closeLabel: "Close shader output",
+  kind: "anchored",
+  width: 860,
+  maxHeight: 550,
+  align: "end",
+  dismissOutside: false,
+});
+outputTrigger.onclick = () => outputView.toggle();
 const hover = mountHover(
   app,
   app.querySelector("footer")!,
@@ -586,7 +590,7 @@ action("second", () => {
 const lockButton = action("lock", () =>
   application.setReadonly(!application.readonly),
 );
-lockButton.setAttribute("aria-pressed", "false");
+lockButton.setAttribute("aria-checked", "false");
 let original: string | ArrayBuffer | Blob = "";
 let currentReview: DocumentInspection | null = null,
   reviewTicket = 0;
@@ -712,7 +716,7 @@ application.subscribe(() => {
       ? text("dirty")
       : text("saved");
   saveButton.disabled = application.saving;
-  lockButton.setAttribute("aria-pressed", String(application.readonly));
+  lockButton.setAttribute("aria-checked", String(application.readonly));
 });
 application.newDocument();
 buildWorkspace();
@@ -739,48 +743,75 @@ mountPersonal(
   },
 );
 
-const overflow = document.createElement("details"),
-  overflowLabel = document.createElement("summary"),
-  overflowItems = document.createElement("div");
-overflow.className = "action-overflow";
-overflowLabel.textContent = "More actions";
-overflowLabel.prepend(icon("more"));
-overflowItems.className = "overflow-items";
-overflow.append(overflowLabel, overflowItems);
-const actionGroups = [
-  document.createElement("div"),
-  document.createElement("div"),
-  document.createElement("div"),
-];
-actionGroups.forEach((g) => (g.className = "action-group"));
+// Existing document commands keep their own handlers and guards; only their
+// presentation moves into the shared owned disclosure.
+const menuTrigger = document.createElement("button"),
+  menuContent = document.createElement("div"),
+  hintsTrigger = document.createElement("button"),
+  hintsContent = document.createElement("div");
+menuTrigger.type = "button";
+menuTrigger.textContent = "Project actions";
+menuTrigger.className = "project-actions";
+menuContent.className = "function-actions";
+menuContent.tabIndex = -1;
+const documentGroup = document.createElement("div"),
+  workspaceGroup = document.createElement("div");
+for (const [group, label] of [
+  [documentGroup, "Documents and library"],
+  [workspaceGroup, "Workspace"],
+] as const) {
+  group.setAttribute("role", "group");
+  group.ariaLabel = label;
+  menuContent.append(group);
+}
 for (const child of Array.from(nav.children)) {
   const key = (child as HTMLElement).dataset.action;
-  const index = key
-    ? ["new", "save", "open", "file", "export", "png"].includes(key)
-      ? 0
-      : 1
-    : 2;
-  actionGroups[index]!.append(child);
-}
-nav.append(...actionGroups, overflow);
-const groupWidths = actionGroups.map((g) => g.getBoundingClientRect().width);
-const fitActions = () => {
-  const capacity = nav.clientWidth;
-  let used = 130;
-  let hidden = 0;
-  for (let i = 0; i < actionGroups.length; i++) {
-    const g = actionGroups[i]!;
-    const width = groupWidths[i]! + 8;
-    if (used + width > capacity) {
-      overflowItems.append(g);
-      hidden++;
-    } else {
-      nav.insertBefore(g, overflow);
-      used += width;
-    }
+  if (!(child instanceof HTMLButtonElement)) app.append(child);
+  else if (key !== "save" && key !== "generate") {
+    child.setAttribute(
+      "role",
+      key === "lock" ? "menuitemcheckbox" : "menuitem",
+    );
+    (key === "second" || key === "lock"
+      ? workspaceGroup
+      : documentGroup
+    ).append(child);
   }
-  overflow.hidden = !hidden;
-  if (!hidden) overflow.open = false;
-};
-new ResizeObserver(fitActions).observe(nav);
-fitActions();
+}
+footer.prepend(menuTrigger);
+const projectMenu = floatingSurface({
+  host: app,
+  trigger: menuTrigger,
+  content: menuContent,
+  title: "Project actions",
+  closeLabel: "Close project actions",
+  kind: "menu",
+  width: 310,
+  maxHeight: 520,
+});
+menuTrigger.onclick = () => projectMenu.toggle();
+menuContent.addEventListener("click", (event) => {
+  const action = (event.target as Element).closest<HTMLButtonElement>("button")
+    ?.dataset.action;
+  // Dialog-opening callers retain their visible opener until their own Close.
+  if (action && ["new", "export", "file", "second", "lock"].includes(action))
+    projectMenu.close(false);
+});
+hintsTrigger.type = "button";
+hintsTrigger.textContent = "Hints";
+hintsContent.tabIndex = 0;
+for (const hint of Array.from(footer.querySelectorAll(":scope > span")))
+  hintsContent.append(hint);
+footer.append(hintsTrigger);
+const hintsView = floatingSurface({
+  host: app,
+  trigger: hintsTrigger,
+  content: hintsContent,
+  title: "Workspace hints",
+  closeLabel: "Close hints",
+  kind: "anchored",
+  width: 370,
+  maxHeight: 300,
+  align: "end",
+});
+hintsTrigger.onclick = () => hintsView.toggle();

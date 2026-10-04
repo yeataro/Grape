@@ -107,6 +107,7 @@ test("S06 diagnostic mount revoke hide move update and late callback cannot revi
     ),
   ).toBe(true);
   await target.hover();
+  await expect(page.locator(".hover-summary")).toContainText("Lifetime target");
   await page
     .getByRole("button", { name: "Read object details", exact: true })
     .click();
@@ -121,6 +122,7 @@ test("S06 diagnostic mount revoke hide move update and late callback cannot revi
   ).toBe(true);
   await page.mouse.move(1, 1);
   await target.hover();
+  await expect(page.locator(".hover-summary")).toContainText("Lifetime target");
   await page
     .getByRole("button", { name: "Read object details", exact: true })
     .click();
@@ -133,12 +135,16 @@ test("S06 diagnostic mount revoke hide move update and late callback cannot revi
     (window as any).__hoverLifetime.surface.hidden = false;
     (window as any).__hoverLifetime.move();
   });
+  await page
+    .getByRole("button", { name: "Shader output", exact: true })
+    .click();
   await expect(target).toHaveAttribute("data-mount", "2");
   expect(
     await page.evaluate(() => (window as any).__hoverLifetime.late()),
   ).toBe(false);
   await page.evaluate(() => (window as any).__hoverLifetime.stale());
   await target.hover();
+  await expect(page.locator(".hover-summary")).toContainText("Lifetime target");
   await page
     .getByRole("button", { name: "Read object details", exact: true })
     .click();

@@ -51,12 +51,14 @@ export function codeType(
               root.append(title, status, code, issues);
               (surface.target as HTMLElement).append(root);
               scope.own(() => root.remove());
+              let renderVersion = 0;
               return {
                 update: (
                   p: ReturnType<typeof read>,
                   frame: import("../sdk/view-mount.ts").ViewFrame,
                 ) => {
-                  const result = p.compilation;
+                  const version = ++renderVersion,
+                    result = p.compilation;
                   title.textContent = frame.text({
                     owner,
                     key: "title",
@@ -108,7 +110,9 @@ export function codeType(
                       const subject = d.subject;
                       if (
                         subject?.nodeId &&
-                        target.target?.scope.stageId === subject.stageId
+                        target.target?.scope.stageId === subject.stageId &&
+                        (p.snapshot.diagnostics.includes(d) ||
+                          result?.revision === p.snapshot.revision)
                       ) {
                         const button = document.createElement("button");
                         button.textContent = frame.text({
@@ -119,6 +123,11 @@ export function codeType(
                         button.addEventListener(
                           "click",
                           scope.event(() => {
+                            if (
+                              version !== renderVersion ||
+                              !button.isConnected
+                            )
+                              return;
                             const context = services.context(target.lease);
                             if (
                               context

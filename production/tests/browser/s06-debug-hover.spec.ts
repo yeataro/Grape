@@ -26,6 +26,8 @@ async function documentJSON(p: Page) {
   return JSON.parse(fs.readFileSync((await (await wait).path())!, "utf8"));
 }
 async function read(p: Page) {
+  // Read the settled public hover hint before following its explicit action.
+  await p.waitForTimeout(180);
   await p
     .getByRole("button", { name: "Read object details", exact: true })
     .click();
@@ -483,6 +485,14 @@ test("S06 debug target follows nested occurrence and independent Canvas navigati
   await enable(page);
   for (const name of ["Float", "Multiply", "Compose"])
     await createNode(page, name);
+  // Keep this multi-port fixture clear of the existing output before connecting.
+  const composeBox = (await page
+    .getByRole("heading", { name: "Compose", exact: true })
+    .boundingBox())!;
+  await page.mouse.move(composeBox.x + 40, composeBox.y + 10);
+  await page.mouse.down();
+  await page.mouse.move(composeBox.x + 40, composeBox.y + 235, { steps: 10 });
+  await page.mouse.up();
   for (const [a, b] of [
     ["Float output value", "Multiply input a"],
     ["Multiply output result", "Compose input x"],

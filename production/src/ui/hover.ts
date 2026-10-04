@@ -1,3 +1,4 @@
+import { floatingSurface } from "./floating.ts";
 import type {
   HoverBlock,
   MountScope,
@@ -50,8 +51,8 @@ export function mountHover(
   busy: () => boolean,
 ) {
   const ui = document.createElement("div"),
-    settings = document.createElement("details"),
-    summary = document.createElement("summary"),
+    settings = document.createElement("div"),
+    summary = document.createElement("button"),
     group = document.createElement("fieldset"),
     legend = document.createElement("legend"),
     label = document.createElement("label"),
@@ -59,12 +60,10 @@ export function mountHover(
     issue = document.createElement("p"),
     hint = document.createElement("span"),
     expand = document.createElement("button"),
-    dialog = document.createElement("dialog"),
-    heading = document.createElement("h2"),
-    content = document.createElement("pre"),
-    close = document.createElement("button");
+    content = document.createElement("pre");
   ui.className = "hover-debug-ui";
   settings.className = "experimental-settings";
+  summary.type = "button";
   summary.textContent = "Experimental features";
   legend.textContent = "Hover information";
   checkbox.type = "checkbox";
@@ -75,8 +74,10 @@ export function mountHover(
   );
   issue.setAttribute("role", "status");
   issue.className = "experimental-issue";
+  group.className = "experimental-options";
+  group.tabIndex = -1;
   group.append(legend, label, issue);
-  settings.append(summary, group);
+  settings.append(summary);
   hint.className = "hover-summary";
   hint.setAttribute("aria-live", "off");
   expand.type = "button";
@@ -85,24 +86,19 @@ export function mountHover(
   expand.setAttribute("aria-haspopup", "dialog");
   expand.setAttribute("aria-keyshortcuts", "F2");
   expand.title = "Read the focused object's information with F2";
-  dialog.className = "status-details hover-details";
-  dialog.ariaLabel = "Object information";
-  heading.textContent = "Object information — read only";
   content.className = "status-details-text";
   content.tabIndex = 0;
   content.setAttribute("role", "region");
   content.ariaLabel = "Current object data";
-  close.type = "button";
-  close.textContent = "Close object details";
-  dialog.append(heading, content, close);
-  ui.append(settings, hint, expand, dialog);
+  ui.append(settings, hint, expand);
   footer.append(ui);
   const initial = preference.load();
   checkbox.checked = initial.enabled;
   issue.textContent = initial.issue;
   let active: { element: Element; entry: Entry | null } | null = null,
     disposed = false,
-    opener: HTMLElement | SVGElement | null = null;
+    pending: ReturnType<typeof setTimeout> | undefined;
+  let pendingTarget: Element | null = null;
   const cleanups: (() => void)[] = [];
   const listen = (
     target: EventTarget,
@@ -123,18 +119,44 @@ export function mountHover(
     (!active.entry ||
       (active.entry.owner.live &&
         active.entry.owner.root.contains(active.element)));
-  const finish = (focus: boolean) => {
-    if (!dialog.open) return;
-    dialog.close();
-    if (focus)
-      (opener && visible(opener) && !(opener as HTMLButtonElement).disabled
-        ? opener
-        : expand.disabled
-          ? summary
-          : expand
-      ).focus({ preventScroll: true });
+  const preferenceView = floatingSurface({
+    host: root,
+    trigger: summary,
+    content: group,
+    title: "Hover preferences",
+    closeLabel: "Close experimental features",
+    kind: "anchored",
+    width: 360,
+    maxHeight: 340,
+    align: "end",
+    dismissOutside: false,
+    beforeOpen: () => {
+      const reason = blocked();
+      if (reason) issue.textContent = reason;
+      return !reason;
+    },
+  });
+  const detailsView = floatingSurface({
+    host: root,
+    trigger: expand,
+    content,
+    title: "Object information",
+    closeLabel: "Close object details",
+    kind: "modal",
+    width: 680,
+    maxHeight: 700,
+  });
+  const dialog = detailsView.surface;
+  dialog.classList.add("hover-details", "hover-owned-surface");
+  preferenceView.surface.classList.add("hover-owned-surface");
+  const finish = (focus: boolean) => detailsView.close(focus);
+  const cancelPending = () => {
+    clearTimeout(pending);
+    pending = undefined;
+    pendingTarget = null;
   };
   const clear = () => {
+    cancelPending();
     const wasOpen = dialog.open;
     finish(false);
     active = null;
@@ -197,12 +219,11 @@ export function mountHover(
       role: element.getAttribute("role") || element.tagName.toLowerCase(),
     },
   });
-  const show = (event: Event) => {
-    const target = event.target;
+  const showTarget = (target: Element) => {
     if (
       disposed ||
       !(target instanceof Element) ||
-      target.closest(".hover-debug-ui") ||
+      target.closest(".hover-debug-ui,.hover-owned-surface") ||
       dialog.open
     )
       return;
@@ -210,7 +231,7 @@ export function mountHover(
       clear();
       return;
     }
-    if ((event as PointerEvent).buttons || busy()) {
+    if (busy()) {
       clear();
       return;
     }
@@ -240,20 +261,54 @@ export function mountHover(
     hint.textContent = `${info.kind} · ${info.name} · ${info.state}`;
     expand.disabled = false;
   };
-  listen(root, "pointerover", show);
-  listen(root, "focusin", show);
+  // Hold a valid target during continuous travel to its explicit reader. Settling
+  // over a different object hands off after a short dwell; movement reads no data.
+  const queueTarget = (target: Element) => {
+    cancelPending();
+    if (target.closest(".hover-debug-ui,.hover-owned-surface") || dialog.open)
+      return;
+    if (!active) {
+      showTarget(target);
+      return;
+    }
+    pendingTarget = target;
+    pending = setTimeout(() => {
+      pendingTarget = null;
+      showTarget(target);
+    }, 140);
+  };
+  listen(root, "pointerover", (e) => {
+    if ((e as PointerEvent).buttons) {
+      clear();
+      return;
+    }
+    if (e.target instanceof Element) queueTarget(e.target);
+  });
+  listen(root, "pointermove", () => {
+    if (pendingTarget) queueTarget(pendingTarget);
+  });
+  listen(root, "focusin", (e) => {
+    if (e.target instanceof Element) {
+      cancelPending();
+      showTarget(e.target);
+    }
+  });
   listen(root, "pointerleave", () => {
     if (!dialog.open) clear();
   });
   listen(root, "input", (e) => {
-    if (!(e.target as Element)?.closest(".hover-debug-ui")) clear();
+    if (!(e.target as Element)?.closest(".hover-debug-ui,.hover-owned-surface"))
+      clear();
   });
   listen(root, "compositionstart", () => clear());
   listen(
     root,
     "pointerdown",
     (e) => {
-      if (!(e.target as Element)?.closest(".hover-debug-ui")) clear();
+      if (
+        !(e.target as Element)?.closest(".hover-debug-ui,.hover-owned-surface")
+      )
+        clear();
     },
     true,
   );
@@ -280,9 +335,13 @@ export function mountHover(
       hint.textContent = reason;
     }
   };
+  listen(summary, "click", () => preferenceView.toggle());
   listen(settings, "pointerdown", guardPreference, true);
   listen(settings, "mousedown", guardPreference, true);
   listen(settings, "click", guardPreference, true);
+  listen(group, "pointerdown", guardPreference, true);
+  listen(group, "mousedown", guardPreference, true);
+  listen(group, "click", guardPreference, true);
   listen(settings, "keydown", (e) => {
     const k = e as KeyboardEvent;
     if (["Enter", " "].includes(k.key)) guardPreference(e);
@@ -302,8 +361,7 @@ export function mountHover(
   listen(settings, "keydown", (e) => {
     if ((e as KeyboardEvent).key === "Escape") {
       e.preventDefault();
-      settings.open = false;
-      summary.focus();
+      preferenceView.close();
     }
   });
   listen(
@@ -318,7 +376,8 @@ export function mountHover(
     },
     true,
   );
-  listen(expand, "click", () => {
+  const openDetails = () => {
+    cancelPending();
     if (!valid() || busy()) {
       clear();
       return;
@@ -333,19 +392,14 @@ export function mountHover(
         ? active!.entry.read()
         : fallback(active!.element);
       content.textContent = `${info.kind}: ${info.name}\nIdentity: ${info.identity}\nState: ${info.state}\n\n${info.data === undefined ? "未提供" : JSON.stringify(info.data, null, 2)}`;
-      opener =
-        document.activeElement instanceof HTMLElement ||
-        document.activeElement instanceof SVGElement
-          ? document.activeElement
-          : null;
-      settings.open = false;
-      dialog.showModal();
-      content.focus();
+      preferenceView.close(false);
+      detailsView.open();
     } catch {
       clear();
       issue.textContent = "Current object data: 未提供";
     }
-  });
+  };
+  listen(expand, "click", openDetails);
   listen(root, "keydown", (event) => {
     const e = event as KeyboardEvent;
     if (
@@ -354,23 +408,17 @@ export function mountHover(
       !e.isComposing &&
       !e.repeat &&
       !e.defaultPrevented &&
-      !dialog.open &&
-      !expand.disabled
+      !dialog.open
     ) {
       e.preventDefault();
-      expand.click();
-    }
-  });
-  listen(close, "click", () => finish(true));
-  listen(dialog, "cancel", (e) => {
-    e.preventDefault();
-    finish(true);
-  });
-  listen(dialog, "keydown", (e) => {
-    const k = e as KeyboardEvent;
-    if (k.key === "Tab" && !k.isComposing) {
-      k.preventDefault();
-      (document.activeElement === content ? close : content).focus();
+      const focused = document.activeElement;
+      if (
+        focused instanceof Element &&
+        !focused.closest(".hover-debug-ui,.hover-owned-surface")
+      )
+        showTarget(focused);
+      else return;
+      openDetails();
     }
   });
   return {
@@ -380,6 +428,8 @@ export function mountHover(
       disposed = true;
       clear();
       for (const cleanup of cleanups.reverse()) cleanup();
+      preferenceView.dispose();
+      detailsView.dispose();
       ui.remove();
     },
   };

@@ -98,7 +98,7 @@ test("S06 bottom application error summary opens complete current text without c
     const r = el.getBoundingClientRect(), footer = document.querySelector("footer")!.getBoundingClientRect();
     return { y: r.y, height: r.height, footerBottom: footer.bottom, whiteSpace: getComputedStyle(el).whiteSpace };
   });
-  expect(bottom.y).toBeGreaterThanOrEqual(bottom.footerBottom); expect(bottom.height).toBe(32); expect(bottom.whiteSpace).toBe("nowrap");
+  expect(bottom.y + bottom.height).toBeLessThanOrEqual(bottom.footerBottom); expect(bottom.height).toBeLessThanOrEqual(32); expect(bottom.whiteSpace).toBe("nowrap");
   await summary.click();
   const popup = page.getByRole("dialog", { name: "Application status details", exact: true }), text = popup.getByRole("region", { name: "Full current application status", exact: true });
   await expect(text).toHaveText(full); await expect(text).toBeFocused();

@@ -290,11 +290,18 @@ input[readonly] {
   color: #ccb786;
 }
 footer {
-  padding: 12px 24px;
+  position: sticky;
+  bottom: 0;
+  z-index: 30;
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  color: #8d8498;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 4px 8px;
+  background: #1b1922;
+  border-top: 1px solid #36323e;
+  color: rgb(255 255 255 / 65%);
   font-size: 11px;
 }
 dialog {
@@ -326,9 +333,6 @@ dialog::backdrop {
   }
   nav button {
     font-size: 12px;
-  }
-  footer {
-    flex-direction: column;
   }
   .canvas-pane {
     min-height: 470px;
@@ -471,50 +475,6 @@ header nav {
   align-items: center;
   gap: 8px;
 }
-.action-group {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 5px;
-  padding-right: 8px;
-  border-right: 1px solid #35313f;
-}
-.action-group button {
-  white-space: nowrap;
-  font-size: 12px;
-  padding: 7px 9px;
-}
-.action-overflow {
-  position: relative;
-  margin-left: auto;
-}
-.action-overflow summary {
-  cursor: pointer;
-  white-space: nowrap;
-  padding: 8px;
-  list-style: none;
-  border: 1px solid #51465f;
-  border-radius: 5px;
-}
-.overflow-items {
-  position: absolute;
-  z-index: 50;
-  right: 0;
-  top: 100%;
-  min-width: 250px;
-  max-width: 90vw;
-  max-height: 70vh;
-  overflow: auto;
-  background: var(--panel);
-  padding: 12px;
-  box-shadow: 0 10px 40px #000a;
-  border: 1px solid #60576e;
-  border-radius: 7px;
-}
-.overflow-items .action-group {
-  flex-direction: column;
-  border: 0;
-  padding: 6px 0;
-}
 .editing-actions {
   padding: 6px 18px;
   gap: 5px;
@@ -631,9 +591,6 @@ main {
   flex-direction: row;
   justify-content: flex-end;
 }
-.port-row .port {
-  color: #ffffffbd;
-}
 .node-value {
   flex: 1;
   min-width: 0;
@@ -651,29 +608,63 @@ main {
   font-size: 9px;
   color: var(--port-color, #c4c1bc);
 }
-.port {
-  padding: 0;
-  min-height: 29px;
-  font-size: 11px;
-  border: 0;
-  background: transparent;
-}
-.socket {
+.port-row .port {
   position: absolute;
-  left: -6px;
-  top: calc(50% - 5.5px);
+  left: -10px;
+  top: calc(50% - 10px);
+  width: 20px;
+  height: 20px;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--port-color);
+}
+.port-row.output .port {
+  left: auto;
+  right: -10px;
+}
+.port-label {
+  font-size: 11px;
+  color: rgb(255 255 255 / 75%);
+}
+.port .socket {
+  position: absolute;
+  left: 4.5px;
+  top: 4.5px;
   width: 11px;
   height: 11px;
-  border: 2px solid var(--port-color, #c4c1bc);
+  border: 2px solid var(--port-color);
   border-radius: 50%;
   background: #181822;
+  pointer-events: none;
 }
-.output .socket {
-  right: -6px;
-  left: auto;
+.port .socket.connected,
+.port:hover .socket,
+.port:active .socket,
+.port:focus-visible .socket,
+.port.wire-origin .socket,
+.port.wire-target .socket {
+  background: var(--port-color);
 }
-.socket.connected {
-  background: var(--port-color, #c4c1bc);
+.port:hover .socket {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--port-color) 35%, transparent);
+}
+.port:active .socket {
+  box-shadow: 0 0 0 3px var(--port-color);
+}
+.port:focus-visible {
+  outline: 1px solid var(--port-color);
+  outline-offset: 1px;
+}
+.port.wire-origin .socket {
+  box-shadow: 0 0 0 2px var(--port-color);
+}
+.port.wire-target .socket {
+  box-shadow:
+    0 0 0 4px var(--port-color),
+    0 0 12px var(--port-color);
 }
 .wires path {
   stroke-width: 2;
@@ -744,62 +735,37 @@ main {
   pointer-events: none;
 }
 .hover-debug-ui {
+  margin-left: auto;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
   color: rgb(255 255 255 / 88%);
   min-width: 0;
-  flex-wrap: wrap;
-}
-footer:has(.hover-debug-ui) {
-  flex-wrap: wrap;
-  position: relative;
+  flex-wrap: nowrap;
 }
 .hover-summary {
   display: inline-block;
-  max-width: min(340px, 50vw);
+  max-width: min(200px, 22vw);
+  font-size: 11px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   color: rgb(255 255 255 / 75%);
 }
-.experimental-settings {
-  position: relative;
-}
-.experimental-settings summary {
-  cursor: pointer;
-  padding: 7px 10px;
-  border: 1px solid rgb(255 255 255 / 20%);
-  border-radius: 5px;
-  color: rgb(255 255 255 / 85%);
-}
-.experimental-settings fieldset {
-  position: absolute;
-  z-index: 40;
-  bottom: calc(100% + 8px);
-  right: 0;
+.experimental-options {
+  border: 0;
   margin: 0;
-  padding: 16px;
-  width: min(360px, 88vw);
-  box-sizing: border-box;
-  background: #24232b;
-  border: 1px solid rgb(255 255 255 / 24%);
-  border-radius: 8px;
-  box-shadow: 0 8px 30px #0007;
+  padding: 0;
 }
-.experimental-settings legend {
-  color: rgb(255 255 255 / 90%);
-}
-.experimental-settings label {
+.experimental-options label {
   display: flex;
   align-items: flex-start;
   gap: 8px;
   line-height: 1.5;
   white-space: normal;
-  color: rgb(255 255 255 / 85%);
 }
-.experimental-settings input {
+.experimental-options input {
   width: auto;
   flex: none;
   accent-color: #bfa5f4;
@@ -1153,5 +1119,96 @@ footer:has(.hover-debug-ui) {
   }
   .brand small {
     display: none;
+  }
+}
+
+/* Shared owned floating surfaces; caller-supplied dimensions and alignment. */
+.floating-surface {
+  position: fixed;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid rgb(255 255 255 / 24%);
+  border-radius: 8px;
+  background: #24232b;
+  color: rgb(255 255 255 / 88%);
+  box-shadow: 0 8px 30px #0007;
+  z-index: 70;
+  overflow: hidden;
+}
+.floating-surface[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.floating-surface:not([data-kind="modal"]) {
+  margin: 0;
+  right: auto;
+  bottom: auto;
+}
+.floating-surface h2 {
+  flex: none;
+  font-size: 14px;
+  margin: 0;
+}
+.floating-content {
+  min-height: 0;
+  overflow: auto;
+  overflow-wrap: anywhere;
+}
+.floating-surface > button {
+  align-self: flex-end;
+  flex: none;
+}
+.floating-content > span {
+  display: block;
+  margin-bottom: 10px;
+}
+.function-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.function-actions button {
+  text-align: left;
+}
+.function-actions [role="group"] {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.function-actions [role="group"] + [role="group"] {
+  border-top: 1px solid rgb(255 255 255 / 18%);
+  padding-top: 8px;
+}
+#app > footer button {
+  font-size: 11px;
+  padding: 5px 7px;
+}
+.application-status {
+  flex: 1;
+  min-width: 80px;
+  border: 0;
+  order: 1;
+}
+.application-status #message {
+  height: 26px;
+  padding: 4px 8px;
+}
+#code .code {
+  padding: 0;
+  border: 0;
+}
+#code .code pre {
+  max-height: 220px;
+}
+@media (max-width: 700px) {
+  .hover-summary {
+    max-width: 120px;
+  }
+  #app > footer {
+    gap: 3px;
+  }
+  .application-status {
+    flex-basis: 100%;
   }
 }

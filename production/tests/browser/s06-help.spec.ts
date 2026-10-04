@@ -2,10 +2,11 @@ import { test, expect, type Page } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 import { createNode } from "./create-node.ts";
+import { clickAction } from "../fixtures/public-actions.ts";
 
 async function documentOf(page: Page) {
   const wait = page.waitForEvent("download");
-  await page.getByRole("button", { name: "Export JSON", exact: true }).click();
+  await clickAction(page, "Export JSON");
   return JSON.parse(fs.readFileSync((await (await wait).path())!, "utf8"));
 }
 test.beforeEach(async ({ page }) => {
@@ -152,9 +153,7 @@ test("S06 Help Escape Close and reopen consume old gestures and restore usable f
 test("S06 Help keyboard menu returns focus to Canvas and remains independent across two Canvas contexts", async ({
   page,
 }) => {
-  await page
-    .getByRole("button", { name: "Second Canvas", exact: true })
-    .click();
+  await clickAction(page, "Second Canvas");
   const canvas = page.locator(".canvas").first(),
     r = (await canvas.boundingBox())!;
   await page.mouse.click(r.x + 300, r.y + 230);
@@ -190,15 +189,15 @@ test("S06 Help keyboard menu returns focus to Canvas and remains independent acr
 test("S06 Help readonly interaction and remounted document retain scoped lifetime", async ({
   page,
 }) => {
-  await page.getByRole("button", { name: "Lock editing", exact: true }).click();
+  await clickAction(page, "Lock editing");
   const before = await documentOf(page);
   await page.getByRole("button", { name: "Shortcuts", exact: true }).click();
   const old = await page.locator("dialog.shortcut-help").elementHandle();
   await page.keyboard.press("Escape");
   expect(await documentOf(page)).toEqual(before);
-  await page.getByRole("button", { name: "Lock editing", exact: true }).click();
+  await clickAction(page, "Lock editing");
   page.once("dialog", (dialog) => dialog.accept());
-  await page.getByRole("button", { name: "New document", exact: true }).click();
+  await clickAction(page, "New document");
   expect(await old!.evaluate((e) => e.isConnected)).toBe(false);
   await page.getByRole("button", { name: "Shortcuts", exact: true }).click();
   await old!.evaluate((e) => {

@@ -1,3 +1,4 @@
+import { floatingSurface } from "./floating.ts";
 import type {
   HoverBlock,
   MountScope,
@@ -132,6 +133,36 @@ export class PresentationSession {
         scope,
         ...(surface.protocol === "grape.dom.v1"
           ? {
+              floating: (
+                options: import("../sdk/view-mount.ts").FloatingPresentation,
+              ) => {
+                if (
+                  !(surface.target instanceof HTMLElement) ||
+                  !(options.host instanceof HTMLElement) ||
+                  !surface.target.contains(options.host) ||
+                  !(options.trigger instanceof HTMLElement) ||
+                  !(options.content instanceof HTMLElement)
+                )
+                  throw Error("FLOATING_SURFACE_PROTOCOL");
+                const view = floatingSurface({
+                  ...options,
+                  host: options.host,
+                  trigger: options.trigger,
+                  content: options.content,
+                });
+                let live = true;
+                scope.own(() => {
+                  live = false;
+                  view.dispose();
+                });
+                return {
+                  isOpen: () => live && view.surface.open,
+                  open: () => live && view.open(),
+                  close: (focus = true) => {
+                    if (live) view.close(focus);
+                  },
+                };
+              },
               hover: (target: unknown, blocked?: () => HoverBlock | null) =>
                 hoverOwner(target, scope, blocked),
             }

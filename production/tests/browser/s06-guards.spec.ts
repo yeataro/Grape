@@ -106,7 +106,7 @@ test("S06 Personal search and inspect are readonly, malformed import survives un
   await page.locator(".nodes [data-direction=input]").click();
   await page.getByRole("button", { name: "New subgraph", exact: true }).click();
   await clickAction(page, "Personal Library");
-  const dialog = page.locator("dialog[open]");
+  const dialog = page.locator("dialog:modal");
   await page
     .getByRole("button", { name: "Save selected subgraph", exact: true })
     .click();

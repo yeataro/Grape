@@ -2,6 +2,7 @@ import { test, expect, type Page } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 import { createNode } from "./create-node.ts";
+import { clickAction } from "../fixtures/public-actions.ts";
 const evidence = () => {
   const out = process.env.GRAPE_EVIDENCE_DIR!;
   if (!path.isAbsolute(out) || !out.includes("s06"))
@@ -10,7 +11,7 @@ const evidence = () => {
 };
 async function documentOf(page: Page) {
   const wait = page.waitForEvent("download");
-  await page.getByRole("button", { name: "Export JSON", exact: true }).click();
+  await clickAction(page, "Export JSON");
   return JSON.parse(fs.readFileSync((await (await wait).path())!, "utf8"));
 }
 test.beforeEach(async ({ page }) => {
@@ -118,8 +119,7 @@ test("S06 wired creation is preview-only until snap placement and one Undo resto
     .filter({ has: page.getByRole("heading", { name: "Float", exact: true }) })
     .locator("[data-direction=output]");
   const destination = page
-    .locator(".nodes [data-direction=input]")
-    .filter({ hasText: "color" })
+    .locator('.nodes [data-direction=input][data-port="color"]')
     .first();
   await source.click();
   await destination.click();
@@ -183,7 +183,7 @@ test("S06 help and context menu keyboard, readonly browsing and responsive origi
   ).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(menu).toBeHidden();
-  await page.getByRole("button", { name: "Lock editing", exact: true }).click();
+  await clickAction(page, "Lock editing");
   await expect(
     page.getByRole("button", { name: "Add Node", exact: true }),
   ).toBeDisabled();
@@ -198,7 +198,9 @@ test("S06 help and context menu keyboard, readonly browsing and responsive origi
     .click();
   await page.keyboard.press("Escape");
   await page.setViewportSize({ width: 620, height: 850 });
-  await page.getByText("More actions", { exact: true }).click();
+  await page
+    .getByRole("button", { name: "Project actions", exact: true })
+    .click();
   await expect(
     page.getByRole("button", { name: "Save", exact: true }),
   ).toBeVisible();

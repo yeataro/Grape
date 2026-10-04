@@ -282,6 +282,7 @@ function mountCanvas(
     ["H / F", "Frame graph / selected nodes"],
     ["Shift+F10", "Open canvas or node menu"],
     ["?", "Keyboard shortcuts"],
+    ["F2", "Read the focused object information (read-only)"],
   ]) {
     const k = document.createElement("kbd"),
       d = document.createElement("span");

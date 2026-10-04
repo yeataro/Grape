@@ -131,13 +131,11 @@ for (const zoom of [0.65, 1, 1.25])
     await start.click();
     await end.hover();
     await expect(end).toHaveClass(/wire-target/);
-    const targetStyle = await end
-      .locator(".socket")
-      .evaluate((e) => ({
-        fill: getComputedStyle(e).backgroundColor,
-        border: getComputedStyle(e).borderColor,
-        shadow: getComputedStyle(e).boxShadow,
-      }));
+    const targetStyle = await end.locator(".socket").evaluate((e) => ({
+      fill: getComputedStyle(e).backgroundColor,
+      border: getComputedStyle(e).borderColor,
+      shadow: getComputedStyle(e).boxShadow,
+    }));
     expect(targetStyle.fill).toBe(targetStyle.border);
     expect(targetStyle.shadow).not.toBe(hoverShadow);
     const wrong = c.getByRole("button", {
@@ -184,12 +182,7 @@ for (const [width, height] of [
     await expect(page.locator("#code")).not.toBeVisible();
     const before = await doc(page),
       records = [];
-    for (const name of [
-      "Project actions",
-      "Shader output",
-      "Hints",
-      "Experimental features",
-    ]) {
+    for (const name of ["Project actions", "Shader output", "Hints"]) {
       const trigger = page.getByRole("button", { name, exact: true });
       await trigger.click();
       const popup = page.locator(".floating-surface[open]").last();

@@ -13,7 +13,7 @@ for (const width of [620, 1440])
     await expect(button).toBeVisible();
     const identity = await brand.locator(".build-identity").innerText();
     expect(identity).toMatch(
-      /^(Development · unversioned|S06-debug-[a-f0-9]{7})$/,
+      /^(Development · unversioned|S06-(debug|f2)-[a-f0-9]{7})$/,
     );
     const box = (await button.boundingBox())!;
     expect(box.x).toBeGreaterThanOrEqual(0);

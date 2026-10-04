@@ -9,17 +9,6 @@ const save = (name: string, value: unknown) =>
     path.join(out, name + ".json"),
     JSON.stringify(value, null, 2),
   );
-async function enable(p: Page) {
-  await p
-    .getByRole("button", { name: "Experimental features", exact: true })
-    .click();
-  await p
-    .getByRole("checkbox", {
-      name: "Show object information instead of normal hover hints",
-    })
-    .check();
-  await p.keyboard.press("Escape");
-}
 async function exported(p: Page) {
   const wait = p.waitForEvent("download");
   await clickAction(p, "Export JSON");
@@ -41,86 +30,13 @@ async function keyboardFocus(p: Page, target: Locator) {
   }
   throw Error("Target unreachable by trusted Tab");
 }
-for (const width of [1440, 1920])
-  for (const kind of ["Node", "Port", "Parameter Widget"]) {
-    test(`S06 repair continuous 80-step ${kind} details ${width}`, async ({
-      page,
-    }) => {
-      await page.setViewportSize({ width, height: 1000 });
-      const node = await fixture(page),
-        before = await exported(page);
-      await enable(page);
-      const target =
-        kind === "Node"
-          ? node.getByRole("heading")
-          : kind === "Port"
-            ? node.locator("[data-port]").first()
-            : page.getByRole("textbox", { name: "R", exact: true });
-      await target.hover();
-      await expect(page.locator(".hover-summary")).toContainText(kind);
-      const read = page.getByRole("button", {
-          name: "Read object details",
-          exact: true,
-        }),
-        to = (await read.boundingBox())!;
-      await page.evaluate(() => {
-        (window as any).__travel = [];
-        for (const type of [
-          "pointerover",
-          "pointermove",
-          "pointerdown",
-          "pointerup",
-          "click",
-        ])
-          document.addEventListener(
-            type,
-            (e) => {
-              const p = e as PointerEvent;
-              (window as any).__travel.push({
-                type,
-                trusted: e.isTrusted,
-                x: p.clientX,
-                y: p.clientY,
-                target: (e.target as Element).tagName,
-              });
-            },
-            true,
-          );
-      });
-      await page.mouse.move(to.x + to.width / 2, to.y + to.height / 2, {
-        steps: 80,
-      });
-      await page.mouse.down();
-      await page.mouse.up();
-      const dialog = page.getByRole("dialog", {
-        name: "Object information",
-        exact: true,
-      });
-      await expect(dialog).toBeVisible();
-      const text = await dialog.getByRole("region").innerText();
-      expect(text.startsWith(kind + ":")).toBeTruthy();
-      await page.screenshot({
-        path: path.join(
-          out,
-          `continuous-${width}-${kind.replaceAll(" ", "-")}.png`,
-        ),
-      });
-      save(`continuous-${width}-${kind.replaceAll(" ", "-")}`, {
-        text,
-        events: await page.evaluate(() => (window as any).__travel),
-      });
-      await page.keyboard.press("Escape");
-      await expect(read).toBeFocused();
-      expect(await exported(page)).toEqual(before);
-    });
-  }
+// Pointer detail opening was superseded by the Owner F2-only requirement.
 for (const focusKind of ["control", "node", "port"])
   for (const hoverKind of ["node", "panel", "control"]) {
     test(`S06 repair F2 focused ${focusKind} versus hovered ${hoverKind}`, async ({
       page,
     }) => {
       const node = await fixture(page);
-      await enable(page);
       const focus =
         focusKind === "control"
           ? page.getByRole("button", { name: "Generate GLSL", exact: true })
@@ -170,12 +86,7 @@ test("S06 repair compact disclosures share presentation without model changes", 
   await page.goto("/");
   const before = await exported(page);
   await expect(page.locator("#code")).not.toBeVisible();
-  for (const name of [
-    "Project actions",
-    "Shader output",
-    "Hints",
-    "Experimental features",
-  ]) {
+  for (const name of ["Project actions", "Shader output", "Hints"]) {
     const button = page.getByRole("button", { name, exact: true });
     await button.click();
     await expect(button).toHaveAttribute("aria-expanded", "true");

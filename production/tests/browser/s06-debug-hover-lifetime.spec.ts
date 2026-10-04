@@ -6,13 +6,6 @@ test("S06 diagnostic mount revoke hide move update and late callback cannot revi
   page,
 }) => {
   await page.goto("/");
-  await page.getByText("Experimental features", { exact: true }).click();
-  await page
-    .getByRole("checkbox", {
-      name: "Show object information instead of normal hover hints",
-    })
-    .check();
-  await page.keyboard.press("Escape");
   await page.evaluate(async () => {
     const url = "/src/ui/mount.ts",
       { PresentationSession } = await import(url);
@@ -106,11 +99,8 @@ test("S06 diagnostic mount revoke hide move update and late callback cannot revi
       (window as any).__hoverLifetime.initiallyAccepts(),
     ),
   ).toBe(true);
-  await target.hover();
-  await expect(page.locator(".hover-summary")).toContainText("Lifetime target");
-  await page
-    .getByRole("button", { name: "Read object details", exact: true })
-    .click();
+  await target.focus(); // Synthetic public mount/lifetime fixture, not a physical focus-route claim.
+  await page.keyboard.press("F2");
   await expect(details).toContainText('"old"');
   await page.evaluate(() => (window as any).__hoverLifetime.change());
   await expect(details).not.toBeVisible();
@@ -121,11 +111,8 @@ test("S06 diagnostic mount revoke hide move update and late callback cannot revi
     await page.evaluate(() => (window as any).__hoverLifetime.rearm()),
   ).toBe(true);
   await page.mouse.move(1, 1);
-  await target.hover();
-  await expect(page.locator(".hover-summary")).toContainText("Lifetime target");
-  await page
-    .getByRole("button", { name: "Read object details", exact: true })
-    .click();
+  await target.focus(); // Synthetic public mount/lifetime fixture, not a physical focus-route claim.
+  await page.keyboard.press("F2");
   await expect(details).toContainText('"current"');
   await page.evaluate(() => {
     (window as any).__hoverLifetime.surface.hidden = true;
@@ -143,11 +130,8 @@ test("S06 diagnostic mount revoke hide move update and late callback cannot revi
     await page.evaluate(() => (window as any).__hoverLifetime.late()),
   ).toBe(false);
   await page.evaluate(() => (window as any).__hoverLifetime.stale());
-  await target.hover();
-  await expect(page.locator(".hover-summary")).toContainText("Lifetime target");
-  await page
-    .getByRole("button", { name: "Read object details", exact: true })
-    .click();
+  await target.focus(); // Synthetic public mount/lifetime fixture, not a physical focus-route claim.
+  await page.keyboard.press("F2");
   await expect(details).toContainText('"current"');
   await expect(details).not.toContainText("STALE");
   await page.evaluate(() => (window as any).__hoverLifetime.session.dispose());

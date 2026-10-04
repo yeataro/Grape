@@ -2,7 +2,6 @@ import { floatingSurface } from "../../src/ui/floating.ts";
 import { mountBuildInfo } from "./build-info.ts";
 import { icon } from "../../src/features/node-browser.ts";
 import { mountHover } from "../../src/ui/hover.ts";
-import { hoverPreference } from "./experimental-preferences.ts";
 import { currentSources } from "../../src/modules/sources-current.ts";
 import {
   fixedValues,
@@ -255,12 +254,7 @@ const outputView = floatingSurface({
   dismissOutside: false,
 });
 outputTrigger.onclick = () => outputView.toggle();
-const hover = mountHover(
-  app,
-  app.querySelector("footer")!,
-  hoverPreference(() => localStorage),
-  () => application.busy || application.saving,
-);
+const hover = mountHover(app, () => application.busy || application.saving);
 function buildWorkspace() {
   hover.invalidate();
   renderer?.dispose();
@@ -802,6 +796,10 @@ hintsTrigger.textContent = "Hints";
 hintsContent.tabIndex = 0;
 for (const hint of Array.from(footer.querySelectorAll(":scope > span")))
   hintsContent.append(hint);
+const inspectHint = document.createElement("span");
+inspectHint.textContent =
+  "F2 · Read the focused object information (read-only). Close or Escape returns focus.";
+hintsContent.append(inspectHint);
 footer.append(hintsTrigger);
 const hintsView = floatingSurface({
   host: app,

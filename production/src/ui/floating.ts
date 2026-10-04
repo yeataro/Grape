@@ -2,7 +2,7 @@ let surfaceOrder = 70;
 /** DOM presentation only. Callers retain content, data and command ownership. */
 export interface FloatingOptions {
   host: HTMLElement;
-  trigger: HTMLElement;
+  trigger?: HTMLElement;
   content: HTMLElement;
   title: string;
   closeLabel: string;
@@ -17,6 +17,8 @@ export interface FloatingOptions {
 }
 export function floatingSurface(options: FloatingOptions) {
   const { host, trigger, content } = options;
+  if (!trigger && options.kind !== "modal")
+    throw Error("FLOATING_ANCHOR_REQUIRED");
   const surface = document.createElement("dialog"),
     heading = document.createElement("h2"),
     closeButton = document.createElement("button");
@@ -30,11 +32,11 @@ export function floatingSurface(options: FloatingOptions) {
   content.classList.add("floating-content");
   surface.append(heading, content, closeButton);
   host.append(surface);
-  trigger.setAttribute(
+  trigger?.setAttribute(
     "aria-haspopup",
     options.kind === "menu" ? "menu" : "dialog",
   );
-  trigger.setAttribute("aria-expanded", "false");
+  trigger?.setAttribute("aria-expanded", "false");
   let disposed = false,
     opener: HTMLElement | SVGElement | null = null;
   const cleanups: (() => void)[] = [];
@@ -57,7 +59,7 @@ export function floatingSurface(options: FloatingOptions) {
     surface.style.width = width + "px";
     surface.style.maxHeight = height + "px";
     if (options.kind === "modal") return;
-    const a = trigger.getBoundingClientRect();
+    const a = trigger!.getBoundingClientRect();
     const left = options.align === "end" ? a.right - width : a.left;
     surface.style.left =
       Math.max(margin, Math.min(left, innerWidth - width - margin)) + "px";
@@ -69,7 +71,7 @@ export function floatingSurface(options: FloatingOptions) {
   const close = (focus = true) => {
     if (!surface.open) return;
     surface.close();
-    trigger.setAttribute("aria-expanded", "false");
+    trigger?.setAttribute("aria-expanded", "false");
     options.closed?.();
     const available = (
       e: HTMLElement | SVGElement | null,
@@ -77,24 +79,28 @@ export function floatingSurface(options: FloatingOptions) {
       !!e && visible(e) && !(e as HTMLButtonElement).disabled;
     const target = available(opener)
       ? opener
-      : available(trigger)
-        ? trigger
+      : available(trigger ?? null)
+        ? trigger!
         : (options.fallbackFocus?.() ?? host);
     if (focus && available(target)) target.focus({ preventScroll: true });
   };
   const open = (focusTarget: HTMLElement | null = content) => {
-    if (disposed || !visible(trigger) || options.beforeOpen?.() === false)
+    if (
+      disposed ||
+      !visible(trigger ?? host) ||
+      options.beforeOpen?.() === false
+    )
       return false;
     if (surface.open) return true;
     opener =
       document.activeElement instanceof HTMLElement ||
       document.activeElement instanceof SVGElement
         ? document.activeElement
-        : trigger;
+        : (trigger ?? host);
     surface.style.zIndex = String(++surfaceOrder);
     if (options.kind === "modal") surface.showModal();
     else surface.show();
-    trigger.setAttribute("aria-expanded", "true");
+    trigger?.setAttribute("aria-expanded", "true");
     position();
     (options.kind === "menu"
       ? content.querySelector<HTMLElement>("[role^=menuitem]:not(:disabled)")
@@ -173,7 +179,7 @@ export function floatingSurface(options: FloatingOptions) {
           surface.open &&
           e.target instanceof Node &&
           !surface.contains(e.target) &&
-          !trigger.contains(e.target)
+          !trigger?.contains(e.target)
         )
           close(false);
       },
@@ -181,9 +187,17 @@ export function floatingSurface(options: FloatingOptions) {
     );
   listen(window, "resize", position);
   listen(document, "scroll", position, true);
-  const observer = new ResizeObserver(position);
-  observer.observe(content);
-  observer.observe(trigger);
+  let observer: ResizeObserver | undefined;
+  try {
+    observer = new ResizeObserver(position);
+    observer.observe(content);
+    if (trigger) observer.observe(trigger);
+  } catch (error) {
+    observer?.disconnect();
+    cleanups.forEach((cleanup) => cleanup());
+    surface.remove();
+    throw error;
+  }
   return {
     surface,
     closeButton,
@@ -195,7 +209,7 @@ export function floatingSurface(options: FloatingOptions) {
       if (disposed) return;
       disposed = true;
       close(false);
-      observer.disconnect();
+      observer?.disconnect();
       cleanups.forEach((f) => f());
       surface.remove();
     },

@@ -1,52 +1,47 @@
-import { test, expect, type Page } from "@playwright/test";
+import { test, expect, type Page, type Locator } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 import { createNode } from "./create-node.ts";
 import { clickAction } from "../fixtures/public-actions.ts";
 const out = process.env.GRAPE_EVIDENCE_DIR!;
-const save = (name: string, data: unknown) =>
+const save = (n: string, v: unknown) =>
   fs.writeFileSync(
-    path.join(out, name + ".json"),
-    JSON.stringify(data, null, 2) + "\n",
+    path.join(out, n + ".json"),
+    JSON.stringify(v, null, 2) + "\n",
   );
 const dialog = (p: Page) =>
   p.getByRole("dialog", { name: "Object information", exact: true });
-const checkbox = (p: Page) =>
-  p.getByRole("checkbox", {
-    name: "Show object information instead of normal hover hints",
-  });
-async function enable(p: Page) {
-  await p.getByText("Experimental features", { exact: true }).click();
-  await checkbox(p).check();
-  await p.keyboard.press("Escape");
-}
-async function documentJSON(p: Page) {
-  const wait = p.waitForEvent("download");
+async function doc(p: Page) {
+  const d = p.waitForEvent("download");
   await clickAction(p, "Export JSON");
-  return JSON.parse(fs.readFileSync((await (await wait).path())!, "utf8"));
+  return JSON.parse(fs.readFileSync((await (await d).path())!, "utf8"));
 }
-async function read(p: Page) {
-  // Read the settled public hover hint before following its explicit action.
-  await p.waitForTimeout(180);
-  await p
-    .getByRole("button", { name: "Read object details", exact: true })
-    .click();
+async function focus(p: Page, t: Locator) {
+  for (let i = 0; i < 180; i++) {
+    if (await t.evaluate((e) => e === document.activeElement)) return;
+    await p.keyboard.press("Shift+Tab");
+  }
+  throw Error("Trusted Tab target unavailable");
+}
+async function read(p: Page, t: Locator) {
+  await focus(p, t);
+  await p.keyboard.press("F2");
   await expect(dialog(p)).toBeVisible();
   return dialog(p).getByRole("region").innerText();
 }
-async function close(p: Page) {
+async function close(p: Page, t: Locator) {
   await p.keyboard.press("Escape");
   await expect(dialog(p)).not.toBeVisible();
-  await expect(
-    p.getByRole("button", { name: "Read object details", exact: true }),
-  ).toBeFocused();
+  await expect(t).toBeFocused();
 }
 async function fixture(p: Page) {
   await createNode(p, "Color RGBA");
   const c = p.locator(".canvas").last(),
-    n = c.locator("article.node").filter({
-      has: p.getByRole("heading", { name: "Color RGBA", exact: true }),
-    });
+    n = c
+      .locator("article.node")
+      .filter({
+        has: p.getByRole("heading", { name: "Color RGBA", exact: true }),
+      });
   await n.locator('[data-direction="output"]').click();
   await c.locator('[data-direction="input"][data-port="color"]').click();
   return { c, n };
@@ -55,434 +50,318 @@ test.beforeEach(async ({ page }) => {
   page.on("dialog", (d) => d.accept());
   await page.goto("/");
 });
-
-test("S06 normal debug normal checkbox preserves graph history selection and covers built-in objects", async ({
+test("S06 F2-only all built-in readonly kinds and ordinary hints preserve document selection History Redo", async ({
   page,
 }) => {
   const { c, n } = await fixture(page),
-    before = await documentJSON(page),
-    selection = await c.getAttribute("data-selection");
-  await n.getByRole("heading").hover();
-  await expect(page.locator(".hover-summary")).toBeEmpty();
-  await enable(page);
-  const records = [];
-  for (const [kind, target] of [
-    ["Node", n.getByRole("heading")],
+    before = await doc(page),
+    selection = await c.getAttribute("data-selection"),
+    records = [];
+  await expect(
+    page.getByRole("button", { name: "Read object details", exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("checkbox", { name: /Show object information/ }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Experimental features", exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    c.getByRole("button", { name: "Add Node", exact: true }),
+  ).toHaveAttribute("title", /Tab/);
+  for (const [k, t] of [
+    ["Node", n],
     ["Port", n.locator('[data-direction="output"]')],
-    ["Edge", c.locator(".wires path")],
-    ["Panel", page.locator(".inspector h2")],
+    ["Edge", c.locator(".wires path").first()],
+    ["Panel", c],
     [
       "UI control",
       page.getByRole("button", { name: "Generate GLSL", exact: true }),
     ],
   ] as const) {
-    await target.hover();
-    await expect(page.locator(".hover-summary")).toContainText(kind);
-    const details = await read(page);
-    expect(details).toContain(kind + ":");
-    expect(details).not.toMatch(
-      /editToken|generation|TargetLease|MountTicket|"lease"/,
-    );
-    if (kind === "UI control") expect(details).toContain("未提供");
-    records.push({ kind, details });
-    await close(page);
+    const text = await read(page, t);
+    expect(text).toContain(k + ":");
+    expect(text).not.toMatch(/editToken|TargetLease|MountTicket|"lease"/);
+    if (k === "UI control") expect(text).toContain("未提供");
+    records.push({ kind: k, text });
+    await close(page, t);
   }
   expect(await c.getAttribute("data-selection")).toBe(selection);
-  expect(await documentJSON(page)).toEqual(before);
+  expect(await doc(page)).toEqual(before);
   await n.getByRole("heading").click();
-  const value = page.getByRole("textbox", { name: "R", exact: true });
-  await value.hover();
-  const widget = await read(page);
-  expect(widget).toContain("Parameter Widget");
-  expect(widget).toContain('"committed"');
-  records.push({ kind: "Parameter Widget", details: widget });
-  await close(page);
-  await page.getByText("Experimental features", { exact: true }).click();
-  await checkbox(page).uncheck();
-  await page.keyboard.press("Escape");
-  await n.getByRole("heading").hover();
-  await expect(page.locator(".hover-summary")).toBeEmpty();
-  expect(await documentJSON(page)).toEqual(before);
+  const r = page.getByRole("textbox", { name: "R", exact: true });
+  const text = await read(page, r);
+  expect(text).toContain("Parameter Widget:");
+  expect(text).toContain('"committed"');
+  await close(page, r);
   await clickAction(page, "Undo");
-  expect(
-    (await documentJSON(page)).graph.stages.find((s: any) => s.key === "pixel")
-      .network.edges,
-  ).toHaveLength(0);
+  const undone = await doc(page);
+  await read(page, n);
+  await close(page, n);
   await clickAction(page, "Redo");
-  expect(await documentJSON(page)).toEqual(before);
-  save("built-in-objects", records);
-  await page.screenshot({ path: path.join(out, "normal-restored.png") });
+  expect(await doc(page)).toEqual(before);
+  expect(
+    undone.graph.stages.find((s: any) => s.key === "pixel").network.edges,
+  ).toHaveLength(0);
+  save("f2-kinds", records);
 });
-
-test("S06 scalar and vector committed values stay distinct from unfinished drafts and IME guards", async ({
+for (const stored of ["true", "false", "{broken}", "denied"])
+  test("S06 F2 ignores obsolete preference " + stored, async ({ page }) => {
+    await page.addInitScript((value) => {
+      localStorage.setItem("other-app", "retain");
+      localStorage.setItem("grape.preferences.hover.v1", value);
+      (window as any).__preferenceCalls = [];
+      for (const method of ["getItem", "setItem", "removeItem"] as const) {
+        const original = Storage.prototype[method];
+        (Storage.prototype as any)[method] = function (
+          k: string,
+          ...args: any[]
+        ) {
+          if (k === "grape.preferences.hover.v1") {
+            (window as any).__preferenceCalls.push(method);
+            if (value === "denied")
+              throw new DOMException("Denied", "SecurityError");
+          }
+          return (original as any).call(this, k, ...args);
+        };
+      }
+    }, stored);
+    await page.reload();
+    const button = page.getByRole("button", {
+      name: "Generate GLSL",
+      exact: true,
+    });
+    expect(await read(page, button)).toContain("UI control: Generate GLSL");
+    await close(page, button);
+    expect(
+      await page.evaluate(() => (window as any).__preferenceCalls),
+    ).toEqual([]);
+    expect(await page.evaluate(() => localStorage.getItem("other-app"))).toBe(
+      "retain",
+    );
+    save("ignored-pref-" + stored.replace(/\W/g, ""), {
+      stored,
+      inspectionStorageCalls: 0,
+    });
+  });
+test("S06 F2 scalar vector draft and multifield IME guards preserve current text", async ({
   page,
 }) => {
-  await enable(page);
   await createNode(page, "Multiply");
-  const c = page.locator(".canvas").last();
-  await c.getByRole("heading", { name: "Multiply", exact: true }).click();
-  await page.getByText("Experimental features", { exact: true }).click();
-  const input = page.getByRole("textbox", { name: "A", exact: true }),
-    before = await documentJSON(page);
-  await input.fill("7.25");
-  // Refusal is tested through an actual click, not a check() retry that hides rejection.
-  await checkbox(page).click();
-  await expect(checkbox(page)).toBeChecked();
-  await expect(input).toHaveValue("7.25");
-  await expect(input).toBeFocused();
-  await input.dispatchEvent("compositionstart");
-  await checkbox(page).click();
-  await expect(input).toBeFocused();
-  await expect(page.locator(".experimental-issue")).toContainText(
-    "composition",
-  );
-  await input.dispatchEvent("compositionend");
-  await input.hover();
-  const text = await read(page);
-  expect(text).toContain('"value": 1');
-  expect(text).toContain('"text": "7.25"');
-  await close(page);
-  await input.hover();
-  await input.press("Escape");
-  await expect(page.locator(".hover-summary")).toBeEmpty();
-  await expect(input).toHaveValue("1");
-  expect(await documentJSON(page)).toEqual(before);
+  await page.getByRole("heading", { name: "Multiply", exact: true }).click();
+  const before = await doc(page),
+    a = page.getByRole("textbox", { name: "A", exact: true }),
+    b = page.getByRole("textbox", { name: "B", exact: true });
+  await a.fill("7.25");
+  await b.fill("2.5");
+  await b.dispatchEvent("compositionstart");
+  await page.keyboard.press("F2");
+  await expect(dialog(page)).not.toBeVisible();
+  await expect(b).toBeFocused();
+  await expect(a).toHaveValue("7.25");
+  await b.dispatchEvent("compositionend");
+  const scalar = await read(page, a);
+  expect(scalar).toContain('"text": "7.25"');
+  expect(scalar).toContain('"value": 1');
+  await close(page, a);
+  await a.press("Escape");
+  await b.press("Escape");
+  expect(await doc(page)).toEqual(before);
   await createNode(page, "Color RGBA");
-  await c.getByRole("heading", { name: "Color RGBA", exact: true }).click();
+  await page.getByRole("heading", { name: "Color RGBA", exact: true }).click();
   const r = page.getByRole("textbox", { name: "R", exact: true });
   await r.fill("0.37");
-  await r.hover();
-  const vector = await read(page);
+  const vector = await read(page, r);
   expect(vector).toContain('"componentTexts"');
-  expect(vector).toContain('"0.37"');
-  await close(page);
-  await r.hover();
+  expect(vector).toContain("0.37");
+  await close(page, r);
   await r.press("Escape");
-  await expect(page.locator(".hover-summary")).toBeEmpty();
-  save("drafts", {
-    scalar: text,
+  save("f2-drafts", {
+    scalar,
     vector,
-    composition:
-      "Synthetic composition boundary events; actual typing/focus/click refusal. No physical IME qualification.",
+    IME: "Synthetic composition boundary; actual typing/keyboard/focus. Not physical IME qualification.",
   });
 });
-
-test("S06 hover detail invalidation follows selection stage deletion Undo and same-ID reopen", async ({
+test("S06 F2 stage deletion Undo same-ID document reopen discards old target", async ({
   page,
 }) => {
-  await enable(page);
   const { c, n } = await fixture(page),
-    original = await documentJSON(page),
+    original = await doc(page),
     id = await n.getAttribute("data-node");
-  await n.getByRole("heading").hover();
-  expect(await read(page)).toContain(id!);
-  await close(page);
+  expect(await read(page, n)).toContain(id!);
+  await close(page, n);
   await c.getByRole("button", { name: "Vertex", exact: true }).click();
-  await expect(
-    page.getByRole("button", { name: "Read object details", exact: true }),
-  ).toBeDisabled();
+  await expect(n).toHaveCount(0);
+  await page.keyboard.press("F2");
+  await expect(dialog(page)).not.toContainText(id!);
+  if (await dialog(page).isVisible()) await page.keyboard.press("Escape");
   await c.getByRole("button", { name: "Pixel", exact: true }).click();
   await n.getByRole("heading").click();
   await clickAction(page, "Delete selected");
   await expect(n).toHaveCount(0);
-  await expect(page.locator(".hover-summary")).toBeEmpty();
   await clickAction(page, "Undo");
-  await expect(n).toHaveCount(1);
   const old = await n.elementHandle();
-  await page.getByLabel("Open document file").setInputFiles({
-    name: "same-id.grape.json",
-    mimeType: "application/json",
-    buffer: Buffer.from(JSON.stringify(original)),
-  });
+  await page
+    .getByLabel("Open document file")
+    .setInputFiles({
+      name: "same-id.json",
+      mimeType: "application/json",
+      buffer: Buffer.from(JSON.stringify(original)),
+    });
   await page
     .getByRole("button", { name: "Open in new session", exact: true })
     .click();
   expect(await old!.evaluate((e) => e.isConnected)).toBe(false);
-  await expect(dialog(page)).not.toBeVisible();
-  await expect(page.locator(".hover-summary")).not.toContainText("Color RGBA");
-  const fresh = page.locator(`article[data-node="${id}"]`);
-  await fresh.getByRole("heading").hover();
-  expect(await read(page)).toContain(id!);
-  await close(page);
-  expect(await documentJSON(page)).toEqual(original);
-  save("lifetime-public", {
+  const fresh = page.locator('article[data-node="' + id + '"]');
+  expect(await read(page, fresh)).toContain(id!);
+  await close(page, fresh);
+  expect(await doc(page)).toEqual(original);
+  save("f2-public-lifetime", {
     id,
-    samePersistentIdDifferentMount: true,
-    stageDeletionUndoReopen: "passed",
+    newLoad: true,
+    oldElementDisconnected: true,
   });
 });
-
-test("S06 pending connection and held gesture reject preference changes while readonly inspection remains", async ({
+test("S06 F2 pending wire held drag readonly and natural Escape remain guarded", async ({
   page,
 }) => {
-  await enable(page);
-  const { c, n } = await fixture(page),
-    before = await documentJSON(page);
-  await page.getByText("Experimental features", { exact: true }).click();
+  const { n } = await fixture(page),
+    before = await doc(page);
   await n.locator('[data-direction="output"]').click();
-  await checkbox(page).click();
-  await expect(checkbox(page)).toBeChecked();
-  await expect(page.locator(".experimental-issue")).toContainText("connection");
+  await page.keyboard.press("F2");
+  await expect(dialog(page)).not.toBeVisible();
   await page.keyboard.press("Escape");
-  await page.getByText("Experimental features", { exact: true }).click();
   await clickAction(page, "Lock editing");
-  await n.getByRole("heading").hover();
-  expect(await read(page)).toContain("Node:");
-  await close(page);
-  expect(await documentJSON(page)).toEqual(before);
+  expect(await read(page, n)).toContain("Node:");
+  await close(page, n);
   await n.getByRole("heading").click();
-  await page.getByRole("textbox", { name: "R", exact: true }).hover();
-  expect(await read(page)).toContain("Read-only");
-  await close(page);
+  const r = page.getByRole("textbox", { name: "R", exact: true });
+  expect(await read(page, r)).toContain("Read-only");
+  await close(page, r);
   await clickAction(page, "Lock editing");
-  await page.getByText("Experimental features", { exact: true }).click();
-  await n.getByRole("heading").click();
   const b = (await n.getByRole("heading").boundingBox())!;
   await page.mouse.move(b.x + 20, b.y + 10);
   await page.mouse.down();
   await page.mouse.move(b.x + 60, b.y + 40, { steps: 5 });
-  await checkbox(page).dispatchEvent("click");
-  await expect(checkbox(page)).toBeChecked(); // synthetic concurrent UI event while real mouse gesture is held
+  await page.keyboard.press("F2");
+  await expect(dialog(page)).not.toBeVisible();
   await page.keyboard.press("Escape");
   await page.mouse.up();
-  expect(await documentJSON(page)).toEqual(before);
-  save("gesture-preference-guard", {
-    actualMouseDrag: true,
-    concurrentCheckbox:
-      "Synthetic click while held; no second physical pointer claim",
+  expect(await doc(page)).toEqual(before);
+  save("f2-gesture", {
+    pendingBlocked: true,
+    heldMouseBlocked: true,
+    readonlyReadable: true,
     naturalEscape: true,
   });
 });
-
-for (const bad of ["malformed", "denied", "read-denied"])
-  test(`S06 preference ${bad} visibly falls back without touching other keys`, async ({
-    page,
-  }) => {
-    await page.addInitScript((mode) => {
-      localStorage.setItem("other-app", "retain");
-      if (mode === "malformed")
-        localStorage.setItem("grape.preferences.hover.v1", "{broken}");
-      else if (mode === "read-denied") {
-        const original = Storage.prototype.getItem;
-        Storage.prototype.getItem = function (k) {
-          if (k === "grape.preferences.hover.v1")
-            throw new DOMException("Denied", "SecurityError");
-          return original.call(this, k);
-        };
-      } else {
-        const original = Storage.prototype.setItem;
-        Storage.prototype.setItem = function (k, v) {
-          if (k === "grape.preferences.hover.v1")
-            throw new DOMException("Denied", "SecurityError");
-          return original.call(this, k, v);
-        };
-      }
-    }, bad);
-    await page.reload();
-    await page.getByText("Experimental features", { exact: true }).click();
-    await expect(checkbox(page)).not.toBeChecked();
-    if (bad === "malformed")
-      await expect(page.locator(".experimental-issue")).toContainText(
-        "invalid",
-      );
-    else if (bad === "denied") {
-      await checkbox(page).click();
-      await expect(checkbox(page)).not.toBeChecked();
-      await expect(page.locator(".experimental-issue")).toContainText(
-        "could not be saved",
-      );
-    } else
-      await expect(page.locator(".experimental-issue")).toContainText(
-        "unavailable",
-      );
-    expect(await page.evaluate(() => localStorage.getItem("other-app"))).toBe(
-      "retain",
-    );
-    save("preference-" + bad, {
-      issue: await page.locator(".experimental-issue").innerText(),
-      current: await page.evaluate(() => {
-        try {
-          return localStorage.getItem("grape.preferences.hover.v1");
-        } catch {
-          return "storage unavailable";
-        }
-      }),
-    });
-  });
-
-test("S06 diagnostic preference persists separately and rapid hover performs no per-move capture or serialization", async ({
+test("S06 F2 no inspection serialization or clone during 80 trusted pointer moves or focus navigation", async ({
   page,
 }) => {
-  await enable(page);
-  await page.reload();
-  await page.getByText("Experimental features", { exact: true }).click();
-  await expect(checkbox(page)).toBeChecked();
-  await page.keyboard.press("Escape");
-  const { c, n } = await fixture(page),
-    before = await documentJSON(page),
-    selection = await c.getAttribute("data-selection");
+  const { n } = await fixture(page);
+  await focus(page, n);
   await page.evaluate(() => {
-    const clone = window.structuredClone,
-      stringify = JSON.stringify;
-    (window as any).__hoverCounts = { clone: 0, stringify: 0 };
-    window.structuredClone = (...args) => {
-      (window as any).__hoverCounts.clone++;
-      return clone(...args);
+    const c = structuredClone,
+      s = JSON.stringify;
+    (window as any).__counts = { clone: 0, stringify: 0 };
+    window.structuredClone = (...a) => {
+      (window as any).__counts.clone++;
+      return c(...a);
     };
-    JSON.stringify = ((...args: any[]) => {
-      (window as any).__hoverCounts.stringify++;
-      return (stringify as any)(...args);
+    JSON.stringify = ((...a: any[]) => {
+      (window as any).__counts.stringify++;
+      return (s as any)(...a);
     }) as typeof JSON.stringify;
   });
-  await n.getByRole("heading").hover();
-  await page.evaluate(() => {
-    (window as any).__hoverCounts = { clone: 0, stringify: 0 };
-  });
-  const b = (await n.getByRole("heading").boundingBox())!;
+  const b = (await n.boundingBox())!;
   for (let i = 0; i < 80; i++)
-    await page.mouse.move(b.x + 10 + (i % 30), b.y + 10);
-  const counts = await page.evaluate(() => (window as any).__hoverCounts);
-  expect(counts).toEqual({ clone: 0, stringify: 0 });
-  expect(await c.getAttribute("data-selection")).toBe(selection);
-  expect(await documentJSON(page)).toEqual(before);
-  save("rapid-hover-counts", {
-    moves: 80,
-    counts,
-    methodology:
-      "Browser-wide structuredClone and JSON.stringify counters after entry, actual trusted mouse movement within one current target; instrumentation only in disposable context. This is not a general performance/FPS claim.",
+    await page.mouse.move(b.x + 20 + (i % 50), b.y + 15);
+  expect(await page.evaluate(() => (window as any).__counts)).toEqual({
+    clone: 0,
+    stringify: 0,
   });
-});
-
-test("S06 keyboard details and bounded long owner data are readable without selection layout changes", async ({
-  page,
-}) => {
-  await enable(page);
-  const { c, n } = await fixture(page);
-  await n.getByRole("heading").click();
-  const before = await documentJSON(page),
-    geometry = await n.boundingBox();
-  await n.getByRole("heading").hover();
-  const button = page.getByRole("button", {
-    name: "Read object details",
-    exact: true,
-  });
-  // Pure keyboard target navigation and the explicit reader shortcut, without focus injection.
-  for (
-    let i = 0;
-    i < 150 && !(await n.evaluate((el) => el === document.activeElement));
-    i++
-  )
-    await page.keyboard.press("Shift+Tab");
-  await expect(n).toBeFocused();
   await page.keyboard.press("F2");
   await expect(dialog(page)).toBeVisible();
+  const counts = await page.evaluate(() => (window as any).__counts);
+  expect(counts.stringify).toBe(1);
+  save("f2-on-demand-counts", {
+    moves: 80,
+    before: { clone: 0, stringify: 0 },
+    after: counts,
+    limits:
+      "Instrumented disposable browser, not universal performance guarantee.",
+  });
+});
+test("S06 F2 complete long data narrow keyboard close and unchanged geometry", async ({
+  page,
+}) => {
+  const { n } = await fixture(page),
+    before = await doc(page),
+    bounds = await n.boundingBox();
+  await read(page, n);
   await page.setViewportSize({ width: 620, height: 380 });
   const text = dialog(page).getByRole("region");
   await page.keyboard.press("Control+End");
   await page.keyboard.press("End");
   await expect
     .poll(() =>
-      text.evaluate((el) => el.scrollHeight - el.clientHeight - el.scrollTop),
+      text.evaluate((e) => e.scrollHeight - e.clientHeight - e.scrollTop),
     )
     .toBeLessThanOrEqual(1);
-  const facts = await text.evaluate((el) => ({
-    width: el.clientWidth,
-    scrollWidth: el.scrollWidth,
-    height: el.clientHeight,
-    scrollHeight: el.scrollHeight,
-    text: el.textContent,
+  const facts = await text.evaluate((e) => ({
+    width: e.clientWidth,
+    scrollWidth: e.scrollWidth,
+    height: e.clientHeight,
+    scrollHeight: e.scrollHeight,
+    text: e.textContent,
   }));
   expect(facts.scrollWidth).toBeLessThanOrEqual(facts.width + 1);
-  expect(facts.text).toContain('"committed"');
-  await page.screenshot({ path: path.join(out, "debug-details-narrow.png") });
-  await page.keyboard.press("Escape");
-  await expect(n).toBeFocused();
+  await page.screenshot({ path: path.join(out, "f2-narrow.png") });
+  await close(page, n);
   await page.setViewportSize({ width: 1440, height: 1000 });
-  expect(await n.boundingBox()).toEqual(geometry);
-  expect(await documentJSON(page)).toEqual(before);
-  save("keyboard-long-details", facts);
+  expect(await n.boundingBox()).toEqual(bounds);
+  expect(await doc(page)).toEqual(before);
+  save("f2-long-data", facts);
 });
-
-test("S06 another field draft cannot mask active composition when reading details", async ({
+test("S06 F2 busy Save acknowledgement does not intercept or corrupt save", async ({
   page,
 }) => {
-  await enable(page);
-  await createNode(page, "Multiply");
-  await page
-    .locator(".canvas")
-    .last()
-    .getByRole("heading", { name: "Multiply", exact: true })
-    .click();
-  const a = page.getByRole("textbox", { name: "A", exact: true }),
-    b = page.getByRole("textbox", { name: "B", exact: true });
-  await a.fill("7.25");
-  await b.fill("2.5");
-  await b.dispatchEvent("compositionstart");
-  await b.hover();
-  await page.keyboard.press("F2");
-  await expect(dialog(page)).not.toBeVisible();
-  await expect(b).toBeFocused();
-  await expect(a).toHaveValue("7.25");
-  await expect(b).toHaveValue("2.5");
-  await expect(page.locator(".experimental-issue")).toContainText(
-    "composition",
-  );
-  await b.dispatchEvent("compositionend");
-  await b.press("Escape");
-  await a.press("Escape");
-  save("multi-field-composition", {
-    method:
-      "Real focused draft fields with synthetic composition events; no physical IME qualification",
-    modalOpened: false,
-    draftsRetained: true,
-  });
-});
-
-test("S06 saving blocks preference changes without discarding current document", async ({
-  page,
-}) => {
-  await enable(page);
   await fixture(page);
-  const before = await documentJSON(page);
-  await page.getByText("Experimental features", { exact: true }).click();
+  const before = await doc(page);
   await page.evaluate(() => {
-    const descriptor = Object.getOwnPropertyDescriptor(
+    const d = Object.getOwnPropertyDescriptor(
       IDBTransaction.prototype,
       "oncomplete",
     )!;
     Object.defineProperty(IDBTransaction.prototype, "oncomplete", {
-      ...descriptor,
+      ...d,
       set(handler) {
-        descriptor.set!.call(
-          this,
-          function (this: IDBTransaction, event: Event) {
-            (window as any).releaseSave = () => handler.call(this, event);
-          },
-        );
+        d.set!.call(this, function (this: IDBTransaction, event: Event) {
+          (window as any).releaseSave = () => handler.call(this, event);
+        });
       },
     });
   });
   await clickAction(page, "Save");
   await expect(page.locator("#save-state")).toHaveText("Saving…");
-  await checkbox(page).click();
-  await expect(checkbox(page)).toBeChecked();
-  await expect(page.locator(".experimental-issue")).toContainText("operation");
+  await page.keyboard.press("F2");
+  await expect(dialog(page)).not.toBeVisible();
   await page.waitForFunction(
     () => typeof (window as any).releaseSave === "function",
   );
   await page.evaluate(() => (window as any).releaseSave());
   await expect(page.locator("#save-state")).not.toHaveText("Saving…");
-  expect(await documentJSON(page)).toEqual(before);
-  save("busy-guard", {
-    delayedStorage: "Injected acknowledgement only",
-    preferenceUnchanged: true,
-    documentUnchanged: true,
+  expect(await doc(page)).toEqual(before);
+  save("f2-save-ack", {
+    injectedStorageDelay: true,
+    F2Blocked: true,
+    saveCompleted: true,
   });
 });
+
 test("S06 debug target follows nested occurrence and independent Canvas navigation", async ({
   page,
 }) => {
-  await enable(page);
   for (const name of ["Float", "Multiply", "Compose"])
     await createNode(page, name);
   // Keep this multi-port fixture clear of the existing output before connecting.
@@ -521,20 +400,24 @@ test("S06 debug target follows nested occurrence and independent Canvas navigati
   await second
     .getByRole("button", { name: "Enter subgraph", exact: true })
     .click();
-  const before = await documentJSON(page),
+  const before = await doc(page),
     records = [];
   for (const c of [first, second]) {
-    await c.getByRole("heading", { name: "Multiply", exact: true }).hover();
-    const text = await read(page);
+    const target = c
+      .locator("article")
+      .filter({
+        has: page.getByRole("heading", { name: "Multiply", exact: true }),
+      });
+    const text = await read(page, target);
     expect(text).toContain('"occurrence"');
     records.push(text);
-    await close(page);
+    await close(page, target);
   }
   expect(records[0]).not.toEqual(records[1]);
   await first.getByRole("button", { name: "Up", exact: true }).click();
   await expect(first).toHaveAttribute("data-path", "");
   await expect(second).toHaveAttribute("data-path", /.+/);
   await expect(dialog(page)).not.toBeVisible();
-  expect(await documentJSON(page)).toEqual(before);
+  expect(await doc(page)).toEqual(before);
   save("nested-occurrences", records);
 });

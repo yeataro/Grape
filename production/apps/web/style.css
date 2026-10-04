@@ -717,7 +717,9 @@ main {
   overflow: hidden;
   pointer-events: none;
 }
-.canvas-notice[hidden] { display: none; }
+.canvas-notice[hidden] {
+  display: none;
+}
 .canvas-notice > button {
   width: 100%;
   height: 32px;
@@ -731,15 +733,127 @@ main {
   font-size: 12px;
   pointer-events: auto;
 }
-.canvas-notice > button:disabled { opacity: 1; pointer-events: none; }
-.canvas-scene { position: absolute; inset: 0 0 32px; overflow: hidden; pointer-events: none; }
-.canvas .network-toolbar { bottom: 40px; }
-.status-details { width: min(680px, 92vw); max-width: 92vw; max-height: 90vh; padding: 18px; }
-.status-details h2 { font-size: 18px; margin: 0 0 12px; }
-.status-details-text { max-height: 60vh; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; padding: 8px; border: 1px solid #51465f; font-size: 13px; }
-.status-details > button { margin-top: 12px; }
-.status-details-text:focus-visible { outline: 2px solid #bca0ff; }
-.application-status { border-top: 1px solid #36323e; background: #1b1922; min-width: 0; }
+.canvas-notice > button:disabled {
+  opacity: 1;
+  pointer-events: none;
+}
+.canvas-scene {
+  position: absolute;
+  inset: 0 0 32px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hover-debug-ui {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  color: rgb(255 255 255 / 88%);
+  min-width: 0;
+  flex-wrap: wrap;
+}
+footer:has(.hover-debug-ui) {
+  flex-wrap: wrap;
+  position: relative;
+}
+.hover-summary {
+  display: inline-block;
+  max-width: min(340px, 50vw);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: rgb(255 255 255 / 75%);
+}
+.experimental-settings {
+  position: relative;
+}
+.experimental-settings summary {
+  cursor: pointer;
+  padding: 7px 10px;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 5px;
+  color: rgb(255 255 255 / 85%);
+}
+.experimental-settings fieldset {
+  position: absolute;
+  z-index: 40;
+  bottom: calc(100% + 8px);
+  right: 0;
+  margin: 0;
+  padding: 16px;
+  width: min(360px, 88vw);
+  box-sizing: border-box;
+  background: #24232b;
+  border: 1px solid rgb(255 255 255 / 24%);
+  border-radius: 8px;
+  box-shadow: 0 8px 30px #0007;
+}
+.experimental-settings legend {
+  color: rgb(255 255 255 / 90%);
+}
+.experimental-settings label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+  white-space: normal;
+  color: rgb(255 255 255 / 85%);
+}
+.experimental-settings input {
+  width: auto;
+  flex: none;
+  accent-color: #bfa5f4;
+}
+.experimental-issue {
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 65%);
+  margin: 12px 0 0;
+}
+.hover-details,
+.hover-details h2,
+.hover-details button {
+  color: rgb(255 255 255 / 90%);
+}
+.hover-details pre {
+  color: rgb(255 255 255 / 80%);
+  font-family: ui-monospace, monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.canvas .network-toolbar {
+  bottom: 40px;
+}
+.status-details {
+  width: min(680px, 92vw);
+  max-width: 92vw;
+  max-height: 90vh;
+  padding: 18px;
+}
+.status-details h2 {
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+.status-details-text {
+  max-height: 60vh;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding: 8px;
+  border: 1px solid #51465f;
+  font-size: 13px;
+}
+.status-details > button {
+  margin-top: 12px;
+}
+.status-details-text:focus-visible {
+  outline: 2px solid #bca0ff;
+}
+.application-status {
+  border-top: 1px solid #36323e;
+  background: #1b1922;
+  min-width: 0;
+}
 .application-status #message {
   display: block;
   width: 100%;
@@ -991,5 +1105,53 @@ main {
   }
   .brand {
     font-size: 18px;
+  }
+}
+
+.brand .build-identity {
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.brand .build-updates {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.82);
+  padding: 5px 7px;
+  white-space: nowrap;
+}
+.build-details {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+}
+.build-notes {
+  min-height: 0;
+  overflow: auto;
+  overflow-wrap: anywhere;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+.build-notes p {
+  margin: 0 0 16px;
+}
+.build-details h2 {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.95);
+}
+@media (max-width: 700px) {
+  .brand {
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+  .brand .build-identity {
+    max-width: 150px;
+  }
+  .brand small {
+    display: none;
   }
 }

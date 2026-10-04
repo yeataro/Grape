@@ -14,7 +14,7 @@ export const vectorWidget: ParameterWidgetViewType<ParameterProjection> = {
       capture: () => binding.capture(),
       subscribe: (fn) => binding.subscribe(fn),
       dispose: () => {},
-      mount: ({ surface, scope, commands }) => {
+      mount: ({ surface, scope, commands, hover: diagnostics }) => {
         demand(surface.protocol === "grape.dom.v1", "SURFACE_PROTOCOL");
         const root = document.createElement("div"),
           title = document.createElement("label"),
@@ -52,8 +52,23 @@ export const vectorWidget: ParameterWidgetViewType<ParameterProjection> = {
         root.append(title, ...componentRows, cancel, error);
         (surface.target as HTMLElement).append(root);
         scope.own(() => root.remove());
+        const hover = diagnostics?.(root, () =>
+          composing
+            ? {
+                kind: "composition",
+                message: "Finish composition before changing this preference.",
+              }
+            : editing
+              ? {
+                  kind: "draft",
+                  message:
+                    "Finish or cancel the field draft before changing this preference.",
+                }
+              : null,
+        );
         const reset = () => {
           commands.draft().cancel();
+          hover?.invalidate();
           editing = false;
           composing = false;
           texts = (binding.capture().projection.value as number[]).map(String);
@@ -138,6 +153,27 @@ export const vectorWidget: ParameterWidgetViewType<ParameterProjection> = {
         scope.own(() => cancel.removeEventListener("click", cancelEvent));
         return {
           update: (snapshot, frame) => {
+            const p = snapshot.projection;
+            inputs.forEach((input, i) =>
+              hover?.set(input, () => ({
+                kind: "Parameter Widget",
+                name: `${frame.text(p.label)} / ${labels[i]}`,
+                identity: `${p.nodeId}/${p.spec.key}/${labels[i]}`,
+                state: `${snapshot.writable ? "Writable" : "Read-only"} · ${editing ? "unfinished draft" : "committed"}`,
+                data: {
+                  widget: "grape.widget.vector",
+                  committed: {
+                    value: p.value,
+                    type: p.spec.type,
+                    links: p.links.map((l) => ({ ...l })),
+                  },
+                  draft: editing
+                    ? { componentTexts: [...texts], composing }
+                    : null,
+                  uiOnly: { component: labels[i], editing, composing },
+                },
+              })),
+            );
             cancel.textContent = frame.text({
               owner: {
                 moduleId: "grape.ui.controls",

@@ -1,4 +1,5 @@
 import type {
+  HoverBlock,
   MountScope,
   MountTicket,
   MountedView,
@@ -14,6 +15,7 @@ import type { LocalizationService } from "../sdk/localization.ts";
 import { demand } from "../sdk/kernel.ts";
 import { Workspace } from "./workspace.ts";
 import type { PresentationFeedback } from "../sdk/ui.ts";
+import { hoverOwner, invalidateHover } from "./hover.ts";
 let mountSequence = 0;
 export class PresentationSession {
   #scope: MountScope | null = null;
@@ -125,7 +127,16 @@ export class PresentationSession {
     this.#scope = scope;
     try {
       this.#rendering = true;
-      const base = { surface, scope };
+      const base = {
+        surface,
+        scope,
+        ...(surface.protocol === "grape.dom.v1"
+          ? {
+              hover: (target: unknown, blocked?: () => HoverBlock | null) =>
+                hoverOwner(target, scope, blocked),
+            }
+          : {}),
+      };
       if (this.view.kind === "panel") {
         const commands = this.bind?.({
           assertEvent: () => {
@@ -193,6 +204,7 @@ export class PresentationSession {
     if (this.status === "mounted") this.refresh();
   }
   refresh(): void {
+    invalidateHover(this.#surface?.target);
     this.#revision++;
     if (this.#scope && this.#rendering) {
       this.fail("render", "VIEW_RENDER_REENTRANCY");
@@ -215,6 +227,7 @@ export class PresentationSession {
     }
   }
   unmount(): void {
+    invalidateHover(this.#surface?.target);
     this.#scope = null;
     this.#mount = ++mountSequence;
     for (const cleanup of this.#cleanups.splice(0).reverse())
@@ -347,8 +360,51 @@ export class PanelRenderer {
       if (!item.session) {
         try {
           const attachment = item;
+          const view = r.instance.createView();
+          const presented: PanelViewContribution = {
+            kind: "panel",
+            capture: () => view.capture(),
+            subscribe: (fn) => view.subscribe(fn),
+            dispose: () => view.dispose(),
+            mount: (mount) => {
+              const mounted = view.mount(mount);
+              if (
+                mount.surface.protocol === "grape.dom.v1" &&
+                typeof Element !== "undefined" &&
+                mount.surface.target instanceof Element
+              ) {
+                const root = mount.surface.target;
+                root.setAttribute("data-hover-panel", id);
+                const hover = hoverOwner(root, mount.scope);
+                hover.set(root, () => {
+                  const current = this.workspace.record(id);
+                  demand(
+                    current.incarnation === r.incarnation &&
+                      this.workspace.visible(id),
+                    "PANEL_UNAVAILABLE",
+                  );
+                  return {
+                    kind: "Panel",
+                    name: current.type
+                      ? this.locale.resolve(current.type.presentation.label)
+                          .text
+                      : id,
+                    identity: id,
+                    state: "UI-only · visible",
+                    data: {
+                      type: current.saved.typeId,
+                      viewState:
+                        current.instance?.exportViewState() ?? "未提供",
+                    },
+                  };
+                });
+                mount.scope.own(() => root.removeAttribute("data-hover-panel"));
+              }
+              return mounted;
+            },
+          };
           item.session = new PresentationSession(
-            r.instance.createView(),
+            presented,
             this.locale,
             (guard) => this.workspace.bindPanelCommands(id, guard),
             undefined,

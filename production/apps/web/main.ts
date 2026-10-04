@@ -1,4 +1,7 @@
+import { mountBuildInfo } from "./build-info.ts";
 import { icon } from "../../src/features/node-browser.ts";
+import { mountHover } from "../../src/ui/hover.ts";
+import { hoverPreference } from "./experimental-preferences.ts";
 import { currentSources } from "../../src/modules/sources-current.ts";
 import {
   fixedValues,
@@ -132,6 +135,7 @@ const renderShell = () => {
 };
 renderShell();
 locale.subscribe(renderShell);
+mountBuildInfo(app.querySelector<HTMLElement>(".brand")!);
 const oldMessage = document.querySelector<HTMLElement>("#message")!,
   message = document.createElement("button"),
   statusBar = document.createElement("div"),
@@ -164,8 +168,9 @@ app.append(statusDialog);
 const closeStatus = () => {
   if (!statusDialog.open) return;
   statusDialog.close();
-  const fallback = Array.from(nav.querySelectorAll<HTMLButtonElement>("button"))
-    .find(b => !b.disabled && b.isConnected && b.getClientRects().length);
+  const fallback = Array.from(
+    nav.querySelectorAll<HTMLButtonElement>("button"),
+  ).find((b) => !b.disabled && b.isConnected && b.getClientRects().length);
   (message.disabled ? fallback : message)?.focus({ preventScroll: true });
 };
 message.onclick = () => {
@@ -175,8 +180,11 @@ message.onclick = () => {
   statusText.focus();
 };
 statusClose.onclick = closeStatus;
-statusDialog.addEventListener("cancel", e => { e.preventDefault(); closeStatus(); });
-statusDialog.addEventListener("keydown", e => {
+statusDialog.addEventListener("cancel", (e) => {
+  e.preventDefault();
+  closeStatus();
+});
+statusDialog.addEventListener("keydown", (e) => {
   if (e.key === "Tab" && !e.isComposing) {
     e.preventDefault();
     (document.activeElement === statusText ? statusClose : statusText).focus();
@@ -243,7 +251,14 @@ const action = (
 let workspace: Workspace | null = null,
   renderer: PanelRenderer | null = null,
   canvasCount = 0;
+const hover = mountHover(
+  app,
+  app.querySelector("footer")!,
+  hoverPreference(() => localStorage),
+  () => application.busy || application.saving,
+);
 function buildWorkspace() {
+  hover.invalidate();
   renderer?.dispose();
   workspace?.dispose();
   document.querySelector("#canvases")!.replaceChildren();
@@ -380,7 +395,9 @@ upgradeButton.onclick = () => {
     prepareReplace();
     application.upgradeOwners();
     buildWorkspace();
-    setMessage("Subgraph owners upgraded explicitly; existing definitions remain expanded. Save to retain the upgraded document.");
+    setMessage(
+      "Subgraph owners upgraded explicitly; existing definitions remain expanded. Save to retain the upgraded document.",
+    );
   } catch (error) {
     report(error);
   }
@@ -687,6 +704,7 @@ document
     (document.querySelector("#open-dialog") as HTMLDialogElement).close(),
   );
 application.subscribe(() => {
+  hover.invalidate();
   refreshReplacement();
   saveState.textContent = application.saving
     ? text("saving")

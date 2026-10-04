@@ -26,13 +26,28 @@ function valueWidget(
         capture: () => binding.capture(),
         subscribe: (fn) => binding.subscribe(fn),
         dispose: () => {},
-        mount: ({ surface, scope, commands }) => {
+        mount: ({ surface, scope, commands, hover: diagnostics }) => {
           demand(surface.protocol === "grape.dom.v1", "SURFACE_PROTOCOL");
           const anchor = surface.target as HTMLElement,
             root = document.createElement("div");
           root.className = "field";
           anchor.append(root);
           scope.own(() => root.remove());
+          const hover = diagnostics?.(root, () =>
+            composing
+              ? {
+                  kind: "composition",
+                  message:
+                    "Finish composition before changing this preference.",
+                }
+              : editing
+                ? {
+                    kind: "draft",
+                    message:
+                      "Finish or cancel the field draft before changing this preference.",
+                  }
+                : null,
+          );
           const label = document.createElement("label"),
             input = document.createElement("input"),
             error = document.createElement("span"),
@@ -113,6 +128,7 @@ function valueWidget(
               e.stopPropagation();
               draft = commands.draft();
               draft.cancel();
+              hover?.invalidate();
               editing = false;
               input.dataset.draft = "false";
               input.value = json
@@ -125,6 +141,7 @@ function valueWidget(
           const cancelEvent = scope.event(() => {
             draft = commands.draft();
             draft.cancel();
+            hover?.invalidate();
             editing = false;
             input.dataset.draft = "false";
             input.value = json
@@ -138,6 +155,22 @@ function valueWidget(
           return {
             update: (snapshot, frame) => {
               const p = snapshot.projection;
+              hover?.set(input, () => ({
+                kind: "Parameter Widget",
+                name: frame.text(p.label),
+                identity: `${p.nodeId}/${p.spec.key}`,
+                state: `${snapshot.writable ? "Writable" : "Read-only"} · ${editing ? "unfinished draft" : "committed"}`,
+                data: {
+                  widget: json ? "grape.widget.json" : "grape.widget.number",
+                  committed: {
+                    value: p.value,
+                    type: p.spec.type,
+                    links: p.links.map((l) => ({ ...l })),
+                  },
+                  draft: editing ? { text: retainedText, composing } : null,
+                  uiOnly: { editing, composing },
+                },
+              }));
               cancel.textContent = frame.text({
                 owner,
                 key: "cancel",
@@ -180,7 +213,7 @@ export const choiceWidget: ParameterWidgetViewType<ParameterProjection> = {
     capture: () => binding.capture(),
     subscribe: (fn) => binding.subscribe(fn),
     dispose: () => {},
-    mount: ({ surface, scope, commands }) => {
+    mount: ({ surface, scope, commands, hover: diagnostics }) => {
       demand(surface.protocol === "grape.dom.v1", "SURFACE_PROTOCOL");
       const root = document.createElement("div"),
         label = document.createElement("label"),
@@ -190,6 +223,7 @@ export const choiceWidget: ParameterWidgetViewType<ParameterProjection> = {
       root.append(label, select, error);
       (surface.target as HTMLElement).append(root);
       scope.own(() => root.remove());
+      const hover = diagnostics?.(root);
       let token = "";
       const change = scope.event(() => {
         try {
@@ -208,6 +242,21 @@ export const choiceWidget: ParameterWidgetViewType<ParameterProjection> = {
       scope.own(() => select.removeEventListener("change", change));
       return {
         update: (snapshot, frame) => {
+          const p = snapshot.projection;
+          hover?.set(select, () => ({
+            kind: "Parameter Widget",
+            name: frame.text(p.label),
+            identity: `${p.nodeId}/${p.spec.key}`,
+            state: snapshot.writable
+              ? "Writable · committed"
+              : "Read-only · committed",
+            data: {
+              widget: "grape.widget.choice",
+              committed: { value: p.value, type: p.spec.type },
+              draft: null,
+              uiOnly: { writable: snapshot.writable },
+            },
+          }));
           token = snapshot.editToken;
           label.textContent = frame.text(snapshot.projection.label);
           select.setAttribute(

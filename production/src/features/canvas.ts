@@ -129,6 +129,15 @@ function mountCanvas(
   root.dataset.panel = lease().lease.panelId;
   anchor.append(root);
   mount.scope.own(() => root.remove());
+  const hover = mount.hover?.(root, () =>
+    drag || portDrag || selectedPort
+      ? {
+          kind: "gesture",
+          message:
+            "Finish the Canvas gesture or pending connection before changing this preference.",
+        }
+      : null,
+  );
   const scene = document.createElement("div"),
     viewport = document.createElement("div"),
     nodes = document.createElement("div"),
@@ -172,7 +181,9 @@ function mountCanvas(
   const closeStatus = () => {
     if (!statusDialog.open) return;
     statusDialog.close();
-    (noticeSummary.disabled || notice.hidden ? root : noticeSummary).focus({ preventScroll: true });
+    (noticeSummary.disabled || notice.hidden ? root : noticeSummary).focus({
+      preventScroll: true,
+    });
   };
   noticeSummary.onclick = mount.scope.event(() => {
     clearConnection();
@@ -183,14 +194,28 @@ function mountCanvas(
     statusText.focus();
   });
   statusClose.onclick = mount.scope.event(closeStatus);
-  statusDialog.addEventListener("cancel", mount.scope.event(e => { e.preventDefault(); closeStatus(); }));
-  statusDialog.addEventListener("keydown", mount.scope.event((e: KeyboardEvent) => {
-    if (e.key === "Tab" && !e.isComposing) {
+  statusDialog.addEventListener(
+    "cancel",
+    mount.scope.event((e) => {
       e.preventDefault();
-      (document.activeElement === statusText ? statusClose : statusText).focus();
-    }
-  }));
-  mount.scope.own(() => { if (statusDialog.open) statusDialog.close(); });
+      closeStatus();
+    }),
+  );
+  statusDialog.addEventListener(
+    "keydown",
+    mount.scope.event((e: KeyboardEvent) => {
+      if (e.key === "Tab" && !e.isComposing) {
+        e.preventDefault();
+        (document.activeElement === statusText
+          ? statusClose
+          : statusText
+        ).focus();
+      }
+    }),
+  );
+  mount.scope.own(() => {
+    if (statusDialog.open) statusDialog.close();
+  });
   let connectionNotice = "",
     detailNotice = "";
   const showNoticeErrors = () => {
@@ -1226,7 +1251,13 @@ function mountCanvas(
   listen(root, "pointerdown", (event) =>
     run(() => {
       const e = event as PointerEvent;
-      if (browser.isOpen() || !menu.hidden || helpDialog.open || statusDialog.open) return;
+      if (
+        browser.isOpen() ||
+        !menu.hidden ||
+        helpDialog.open ||
+        statusDialog.open
+      )
+        return;
       if (!e.isPrimary) {
         clearConnection();
         end(true);
@@ -1492,10 +1523,13 @@ function mountCanvas(
       };
       if (!selectedPort) {
         selectedPort = port;
-        pointerPoint = (event as MouseEvent).detail === 0 ? null : {
-          x: (event as MouseEvent).clientX,
-          y: (event as MouseEvent).clientY,
-        };
+        pointerPoint =
+          (event as MouseEvent).detail === 0
+            ? null
+            : {
+                x: (event as MouseEvent).clientX,
+                y: (event as MouseEvent).clientY,
+              };
         connectionNotice = connectionHint;
         showNoticeErrors();
         drawConnection();
@@ -1665,6 +1699,7 @@ function mountCanvas(
   );
   return {
     update: (projection: ReturnType<typeof capture>, _frame: ViewFrame) => {
+      hover?.invalidate();
       if (projection.context) {
         const c = projection.context;
         browser.update(c);
@@ -1745,10 +1780,14 @@ function mountCanvas(
       renderedScope = scopeKey;
       // Project current loss facts, including Undo/Redo; this is not a status log.
       detailNotice = c.graph.document.graph.losses
-        .filter(l => l.code === "FUNCTION_CONSTANT_DETACHED")
-        .map(l => l.reason + (l.payload.kind === "edge"
-          ? ` Receiver ${l.payload.edge.to.nodeId}/${l.payload.edge.to.portKey}; edge ${l.payload.edge.id}.`
-          : ""))
+        .filter((l) => l.code === "FUNCTION_CONSTANT_DETACHED")
+        .map(
+          (l) =>
+            l.reason +
+            (l.payload.kind === "edge"
+              ? ` Receiver ${l.payload.edge.to.nodeId}/${l.payload.edge.to.portKey}; edge ${l.payload.edge.id}.`
+              : ""),
+        )
         .join(" ");
       showNoticeErrors();
       const network = c.network;
@@ -1872,6 +1911,28 @@ function mountCanvas(
           const title = document.createElement("h3");
           title.textContent = c.definitionNames[n.id] ?? n.name;
           card.append(title);
+          hover?.set(card, () => ({
+            kind: "Node",
+            name: c.definitionNames[n.id] ?? n.name,
+            identity: n.id,
+            state: c.selection.includes(n.id)
+              ? "Committed · selected (UI-only)"
+              : "Committed · unselected (UI-only)",
+            data: {
+              committed: {
+                type: { ...n.type },
+                state: n.state,
+                inputValues: n.inputValues,
+                position: [...n.position],
+                references: n.references.map((r) => ({ ...r })),
+              },
+              uiOnly: {
+                selected: c.selection.includes(n.id),
+                stage: c.scope.stageId,
+                occurrence: [...c.scope.networkPath],
+              },
+            },
+          }));
           if (c.definitionNames[n.id] && c.definitionNames[n.id] !== n.name) {
             const label = document.createElement("small");
             label.className = "instance-name";
@@ -1911,15 +1972,40 @@ function mountCanvas(
                 ? e.from.nodeId === n.id && e.from.portKey === p.key
                 : e.to.nodeId === n.id && e.to.portKey === p.key,
             );
-            card.append(
-              nodePortRow(
-                p,
-                c.portLabels[n.id]?.[p.key] ?? p.key,
-                { id: n.id, name: n.name },
-                connected,
-                n.inputValues[p.key],
-              ),
+            const row = nodePortRow(
+              p,
+              c.portLabels[n.id]?.[p.key] ?? p.key,
+              { id: n.id, name: n.name },
+              connected,
+              n.inputValues[p.key],
             );
+            card.append(row);
+            hover?.set(row, () => ({
+              kind: "Port",
+              name: c.portLabels[n.id]?.[p.key] ?? p.key,
+              identity: `${n.id}/${p.direction}/${p.key}`,
+              state: connected
+                ? "Committed · connected"
+                : "Committed · disconnected",
+              data: {
+                committed: {
+                  key: p.key,
+                  direction: p.direction,
+                  type: p.type,
+                  requireConstant: p.requireConstant ?? false,
+                  value:
+                    p.key in n.inputValues
+                      ? n.inputValues[p.key]
+                      : p.defaultValue === undefined
+                        ? "未提供"
+                        : p.defaultValue,
+                },
+                uiOnly: {
+                  stage: c.scope.stageId,
+                  occurrence: [...c.scope.networkPath],
+                },
+              },
+            }));
           }
           return card;
         }),
@@ -1973,6 +2059,26 @@ function mountCanvas(
                   ? "#87ceb7"
                   : "#c5b2e2";
           path.dataset.edge = e.id;
+          path.setAttribute("tabindex", "0");
+          path.setAttribute("aria-label", `Edge ${e.id}`);
+          hover?.set(path, () => ({
+            kind: "Edge",
+            name: `${e.from.nodeId}/${e.from.portKey} → ${e.to.nodeId}/${e.to.portKey}`,
+            identity: e.id,
+            state: e.invalid ? "Committed · invalid" : "Committed · valid",
+            data: {
+              committed: {
+                from: { ...e.from },
+                to: { ...e.to },
+                adaptation: { ...e.adaptation },
+                invalid: e.invalid ? { ...e.invalid } : null,
+              },
+              uiOnly: {
+                stage: c.scope.stageId,
+                occurrence: [...c.scope.networkPath],
+              },
+            },
+          }));
           return path;
         }),
       );

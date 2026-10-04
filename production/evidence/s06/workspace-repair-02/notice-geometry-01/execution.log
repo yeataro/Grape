@@ -1,0 +1,53 @@
+
+Running 6 tests using 1 worker
+
+(node:58260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:62:3 › S06 connection notice compact geometry 1280 and successful inverse routes one Undo (1.5s)
+  ok 2 [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:62:3 › S06 connection notice compact geometry 1440 and successful inverse routes one Undo (1.4s)
+  ok 3 [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:62:3 › S06 connection notice compact geometry 620 and successful inverse routes one Undo (1.5s)
+  ok 4 [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:104:3 › S06 selection geometry remains fixed at zoom 1 (953ms)
+  ok 5 [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:104:3 › S06 selection geometry remains fixed at zoom 1.2 (924ms)
+  x  6 [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:136:1 › S06 PORT_TARGET and same-direction refusal remain visible until matching recovery; compiler error stays (5.4s)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:136:1 › S06 PORT_TARGET and same-direction refusal remain visible until matching recovery; compiler error stays 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#errors')
+    Expected substring: "INPUT_REQUIRED"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#errors')
+
+
+      139 |   const { c, out, input } = await color(page);
+      140 |   await clickAction(page, "Generate GLSL");
+    > 141 |   await expect(page.locator("#errors")).toContainText("INPUT_REQUIRED");
+          |                                         ^
+      142 |   const before = await doc(page);
+      143 |   const a = await center(out),
+      144 |     b = await center(
+        at C:\Users\user\source\Grape\production\tests\browser\s06-connection-view.spec.ts:141:41
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-02\notice-geometry-01\test-results\s06-connection-view-S06-PO-24d07-covery-compiler-error-stays-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-02\notice-geometry-01\test-results\s06-connection-view-S06-PO-24d07-covery-compiler-error-stays-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-02\notice-geometry-01\test-results\s06-connection-view-S06-PO-24d07-covery-compiler-error-stays-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-02\notice-geometry-01\test-results\s06-connection-view-S06-PO-24d07-covery-compiler-error-stays-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-connection-view.spec.ts:136:1 › S06 PORT_TARGET and same-direction refusal remain visible until matching recovery; compiler error stays 
+  5 passed (12.5s)

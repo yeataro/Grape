@@ -1,0 +1,50 @@
+{
+  "status": "FINAL_INTEGRATION_SOURCE_CHECKS",
+  "results": [
+    {
+      "name": "typecheck",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "cwd": "C:\\Users\\user\\source\\Grape\\production",
+      "exitCode": 0,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "pins",
+      "args": [
+        "tools/module-pins.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\source\\Grape\\production",
+      "exitCode": 0,
+      "bytes": 1653,
+      "sha256": "9dcde9f0b8245f2dfacbc450574a289fb82b0b7bba80950bb6494a335cac883f"
+    },
+    {
+      "name": "boundaries",
+      "args": [
+        "tools/boundaries.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\source\\Grape\\production",
+      "exitCode": 0,
+      "bytes": 450,
+      "sha256": "ac0a32533290717147d4159b7ba590b77ae48632c57891adfd6f1751863c45f3"
+    },
+    {
+      "name": "unit-conformance",
+      "args": [
+        "--experimental-transform-types",
+        "--test",
+        "--test-isolation=none",
+        "tests/unit/*.test.ts",
+        "tests/conformance/*.test.ts"
+      ],
+      "cwd": "C:\\Users\\user\\source\\Grape\\production",
+      "exitCode": 0,
+      "bytes": 26396,
+      "sha256": "324e03fa246b6a8db22bb8bdae7edde5fbbacb5faff72b0b047ea83106670c86"
+    }
+  ]
+}

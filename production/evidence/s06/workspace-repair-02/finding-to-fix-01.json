@@ -1,0 +1,107 @@
+{
+  "implementationI": "a42d4aedd8e33c1fd432c92163db9f9d689e1bcb",
+  "priorI": "11e43c8f3bda995ba017b5a4790ddb461a3ebd62",
+  "priorR": "8d7dc0a4531fe14f7a490ddf025a47595e97ae1d",
+  "originalReviewVerdict": "FAIL preserved",
+  "counters": {
+    "initialReviewAttempt": 1,
+    "latestReviewAttempt": 2,
+    "latestReviewVerdict": "FAIL",
+    "repairRound": 2,
+    "unsuccessfulRepairReReviewRounds": 1,
+    "transientRetries": 0,
+    "escapeFindingGroup": "S05-FG-ESCAPE-FOCUS-01",
+    "escapeRepairAttempt": 1,
+    "escapeUnsuccessfulRounds": 0,
+    "basis": "Preserve whole broad workspace group count despite original two fixes closed. New notice finding has zero prior attempted fixes."
+  },
+  "findings": [
+    {
+      "id": "S06-FR-CANVAS-CONNECTION-NOTICE-001",
+      "status": "IMPLEMENTER_REPAIRED_PENDING_INDEPENDENT_REVIEW",
+      "repair": "Bound notice height and separate temporary connection guidance from operation-keyed persistent errors. Success and cancellation end temporary guidance; only successful direct/spare/wired creation connection recovers matching connection error. Blank-drop opening a candidate is not recovery. Compiler and unrelated errors retained.",
+      "paths": [
+        {
+          "file": "production/apps/web/style.css",
+          "bytes": 16134,
+          "sha256": "685c2e346285b81496a5b53cf64148e396a52213fd41866e29bd63f23388a90a"
+        },
+        {
+          "file": "production/src/features/canvas.ts",
+          "bytes": 64411,
+          "sha256": "ee5b531b3fe4e0984e80be3ae8e4e649a1e4b18d7e9eb5599dec94c126450b43"
+        },
+        {
+          "file": "production/src/features/node-browser.ts",
+          "bytes": 26947,
+          "sha256": "fba5efa696fb0f9f96d97514ca07762af328e0decd47b96720f836f21763c723"
+        }
+      ],
+      "before": "baseline-01 old exact archive reproduces height513px; raw independent review2 preserves success/cancel stale hint failures.",
+      "after": [
+        "archive-public-01: notice1280/1440/620, both directions oneUndoRedo, PORT_TARGET and same-direction refusal/recovery, unrelated compiler error, readonly/stale/twoCanvas/cancel",
+        "final-connections-04:13; archive-public-01 same13 at exact I"
+      ]
+    },
+    {
+      "id": "OWNER_SELECTION_GEOMETRY",
+      "status": "IMPLEMENTER_REPAIRED_PENDING_INDEPENDENT_REVIEW",
+      "repair": "Selected node border uses same1px width as ordinary node; external selection shadow retained. Creation preview border matches actual node.",
+      "before": "baseline-selection-03 confirms unselected79px/selected81px height with socket/wire shifts at zoom1; earlier runs had a fixture blank-click precondition error and are retained.",
+      "after": "archive-public-01 selection-1.json and selection-1.2.json compare full node/socket/wire geometry before, selected and restored; document unchanged."
+    },
+    {
+      "id": "OWNER_HOVER_AND_TEMPORARY_WIRE",
+      "status": "IMPLEMENTER_REPAIRED_PENDING_INDEPENDENT_REVIEW",
+      "repair": "Pointer movement selects hovered catalog row without recreating controls. Separate noninteractive SVG shows typed dashed curved temporary wire and origin ring at real socket center, in both directions and transformed view. Real wires remain untouched; captured scope/revision/readonly and cancellation remove temporary state.",
+      "reference": {
+        "packetVersion": 1,
+        "recordType": "HUMAN_OWNER_REVIEW_CORRECTION",
+        "recordedAt": "2026-10-04T12:14:23.133Z",
+        "sliceId": "S06",
+        "source": {
+          "threadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+          "transport": "Direct user messages in Coordinator conversation",
+          "messageIds": "Not exposed by current turn; quote-bound without fabricated ID",
+          "quotes": [
+            "我更正一下新增節點拖拉的回報好了，我猜應該是其他節點沒辦法被選擇這件事。就是它一點下去，呃，它現在只能拖拉，不是一點下去就可以用，才是正確的回報。所以拖拉這件事是有的，但一點下去就在原地出現是沒有的。然後它的高亮沒有跟隨滑鼠的 hover 這件事。然後加加到底是幹嘛的我也不知道，既然它可以直接點節點的話，這樣子。所以現在少的是直接點，不是拖拉。",
+            "然後臨時拉線能加就加吧。我要給你截圖嗎？"
+          ]
+        },
+        "supersedesObservationOnly": "S06-OWNER-CREATION-FEEDBACK-001 report of missing dragging: withdrawn; dragging works. Does not erase original receipt.",
+        "normalized": [
+          "Dragging exists; do not dispatch a broken-drag assumption.",
+          "Owner wants direct single-click creation and hover-following item highlight; plus control purpose unclear.",
+          "Owner permits temporary preview wire: attached image shows a dashed curved line from output socket toward pointer with origin ring. Retain real edges; no model/History mutation until valid commit."
+        ],
+        "visualReference": {
+          "originalPath": "C:/Users/user/AppData/Local/Temp/codex-clipboard-d025d4ef-f3c5-4475-9fa4-8293d4b845c2.png",
+          "file": "production/evidence/coordinator/s06/owner-feedback-01/temporary-wire-reference-original.png",
+          "bytes": 93688,
+          "sha256": "b04307180028e2bf53d26be83fc0f006cd42a67369139a55a2695af1350f19ad",
+          "classification": "Human supplied visual reference, version/source UNKNOWN; not tested production evidence"
+        },
+        "routing": {
+          "priority": "Occluding PORT_TARGET notice first, selection geometry next. Ordinary hover/temporary-wire view work follows in same writer.",
+          "singleClick": "Resolve Create vs Browse input mapping: LC-UI-081 explicitly single-click inspect in Browse; LC-UI-036 requires wired preview then placement. Do not silently override those contracts. A concise mode question is pending; hold only ambiguous single-click semantics, continue all independent repair.",
+          "plus": "Current source plus is explicit create/insert; no arbitrary removal or Browser semantics change inferred."
+        },
+        "acceptance": "NOT_GRANTED",
+        "publication": "NOT_GRANTED"
+      },
+      "after": "archive-public-01 wire-output/input JSON+screenshots; hover/keyboard/Browse test, real drag/drop and wired creation regressions.",
+      "additionalBoundary": "A new subthreshold mouse-release test independently reproduced an orphan preview during implementation (subthreshold-before-01). Every matching pointerup now redraws after clearing portDrag; 13final source and archived cases pass."
+    }
+  ],
+  "priorClosures": {
+    "atI": "11e43c8f3bda995ba017b5a4790ddb461a3ebd62",
+    "atR": "8d7dc0a4531fe14f7a490ddf025a47595e97ae1d",
+    "independentReview": "S06-WORKSPACE-TARGETED-REVIEW-02",
+    "closed": [
+      "S06-FR-EVIDENCE-AVAILABILITY-001",
+      "S06-FR-HELP-BACKDROP-001"
+    ],
+    "notReopened": true
+  },
+  "pending": "Single-click Create vs Browse clarification only; semantics unchanged; initial double-click placement remains deferred."
+}

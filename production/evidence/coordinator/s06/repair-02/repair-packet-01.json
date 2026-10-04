@@ -1,0 +1,346 @@
+{
+  "packetVersion": 1,
+  "packetType": "TARGETED_REPAIR_OR_REREVIEW",
+  "mode": "REPAIR",
+  "packetId": "S06-WORKSPACE-REPAIR-02",
+  "actionKey": "yeataro/Grape:S06:repair:workspace-entry:8d7dc0a:02",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0826de5a9cca7cf200d843435985a7dc624634a2",
+  "recordedAt": "2026-10-04T12:14:23.134Z",
+  "sliceId": "S06",
+  "acceptedMain": "ad31676b555120cf455fc2a7677be38791b62b64",
+  "expectedWorkHead": "8d7dc0a4531fe14f7a490ddf025a47595e97ae1d",
+  "priorI": "11e43c8f3bda995ba017b5a4790ddb461a3ebd62",
+  "priorR": "8d7dc0a4531fe14f7a490ddf025a47595e97ae1d",
+  "PR": "No S06 PR; no S06 remote publication/merge authority",
+  "authorizationRef": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/human-authorization-01.json",
+    "bytes": 4537,
+    "sha256": "1fe0f74dd43a6406c21d43fe57fa2d3fa03cee9248feac4f421b852b7b7984ab"
+  },
+  "workflowControl": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/coordinator-consolidation-control-01.json",
+    "bytes": 2241,
+    "sha256": "1d06f3aa977901784bb24fe3fb2937a074b00eb354a67a3df6cac483b0422744"
+  },
+  "networkControl": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/network-delivery-control-01.json",
+    "bytes": 3056,
+    "sha256": "54d4ae2ddc14e205bb679c5dd6b108a0d76308e6066fa298a0886571e9c9c1bd"
+  },
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "displayTitle": "Grape S06 實作與維護",
+    "verifiedStatus": "Idle STOP_WRITING at cursor820; parent idle cursor189, directly rechecked this turn"
+  },
+  "originalReview": {
+    "file": "C:/Users/user/.codex/worktrees/s06-workspace-review-02/Grape/.verification/s06-workspace-review-02/INDEPENDENT_REVIEW_RESULT.json",
+    "bytes": 41616,
+    "sha256": "9332144070ede7b9fb16c0afc54976daa0ada11bffa80c8e4350ead6541612b0"
+  },
+  "supportingManifest": {
+    "file": "C:/Users/user/.codex/worktrees/s06-workspace-review-02/Grape/.verification/s06-workspace-review-02/supporting-evidence-manifest-01.json",
+    "bytes": 34283,
+    "sha256": "eae187c365b37db2a2efe05cabddc7feb6220d7073f335460fece2213b0ac69a"
+  },
+  "priorActionReceipt": {
+    "file": "production/evidence/coordinator/s06/review-02/collection-result-01.json",
+    "bytes": 1739,
+    "sha256": "d6b15695e66add31834a4fdac9b8ea56998a89723283291c8da60b324e8834df"
+  },
+  "ownerObservations": {
+    "file": "production/evidence/coordinator/s06/owner-feedback-01/human-observations-01.json",
+    "bytes": 4604,
+    "sha256": "2f353769d59d9aa5c7b70071590bbfaedb97db45bca7254e3c962e3fb9c36594"
+  },
+  "ownerCorrection": {
+    "file": "production/evidence/coordinator/s06/owner-feedback-01/human-correction-02.json",
+    "bytes": 2660,
+    "sha256": "2405932bf8171d49cf779fedc526c7f4e723edf2007b19d913789afa5110ae96"
+  },
+  "findingGroup": "S06-FG-WORKSPACE-ENTRY-01",
+  "counters": {
+    "initialReviewAttempt": 1,
+    "latestReviewAttempt": 2,
+    "latestReviewVerdict": "FAIL",
+    "repairRound": 2,
+    "unsuccessfulRepairReReviewRounds": 1,
+    "transientRetries": 0,
+    "escapeFindingGroup": "S05-FG-ESCAPE-FOCUS-01",
+    "escapeRepairAttempt": 1,
+    "escapeUnsuccessfulRounds": 0,
+    "basis": "Preserve whole broad workspace group count despite original two fixes closed. New notice finding has zero prior attempted fixes."
+  },
+  "findings": [
+    {
+      "id": "S06-FR-CANVAS-CONNECTION-NOTICE-001",
+      "severity": "P2",
+      "status": "OPEN",
+      "classification": "PRODUCT_BEHAVIOR",
+      "affectedScope": "Included S06 Legacy workspace/status presentation and advertised direct-click connection flow; LC-UI-091 connection status boundary",
+      "summary": "Connection notice covers most of the Canvas and remains after successful connection or Escape cancellation.",
+      "expected": "Ordinary connection guidance remains a bounded readable status without covering the graph. Completing or cancelling that connection ends its temporary opposite-port prompt while preserving unrelated persistent errors and Graph/History.",
+      "actual": {
+        "geometry1280": {
+          "notice": {
+            "text": "Choose the opposite port. Hold Shift to replace an existing connection.",
+            "x": 12,
+            "y": 268.1875,
+            "width": 886.5,
+            "height": 513,
+            "background": "rgb(39, 34, 44)"
+          },
+          "canvas": {
+            "x": 0,
+            "y": 176.1875,
+            "width": 985,
+            "height": 619
+          },
+          "nodes": [
+            {
+              "name": "Image output",
+              "x": 674,
+              "y": 460.1875,
+              "width": 190,
+              "height": 79,
+              "centerUnderNotice": true
+            },
+            {
+              "name": "Color RGBA",
+              "x": 180,
+              "y": 336.1875,
+              "width": 190,
+              "height": 81,
+              "centerUnderNotice": true
+            }
+          ]
+        },
+        "geometry1440": {
+          "notice": {
+            "text": "Choose the opposite port. Hold Shift to replace an existing connection.",
+            "x": 12,
+            "y": 268.1875,
+            "width": 1030.5,
+            "height": 513,
+            "background": "rgb(39, 34, 44)"
+          },
+          "canvas": {
+            "x": 0,
+            "y": 176.1875,
+            "width": 1145,
+            "height": 619
+          },
+          "nodes": [
+            {
+              "name": "Image output",
+              "x": 674,
+              "y": 460.1875,
+              "width": 190,
+              "height": 79,
+              "centerUnderNotice": true
+            },
+            {
+              "name": "Color RGBA",
+              "x": 180,
+              "y": 336.1875,
+              "width": 190,
+              "height": 81,
+              "centerUnderNotice": true
+            }
+          ]
+        },
+        "model": "Direct mouse clicks create exactly one valid identity edge; Generate emits vec4(0.55,0.28,0.9,1.0). This is a presentation/lifecycle defect, not failed connection or data loss.",
+        "hint": "Choose the opposite port. Hold Shift to replace an existing connection.",
+        "failedAssertions": [
+          {
+            "id": "canvas-notice-must-not-cover-nodes",
+            "status": "FAIL",
+            "error": "AssertionError [ERR_ASSERTION]: Ordinary connection status must not visually cover graph node centers"
+          },
+          {
+            "id": "successful-connection-must-retire-pending-hint",
+            "status": "FAIL",
+            "error": "AssertionError [ERR_ASSERTION]: Successful connection must retire the no-longer-pending opposite-port hint\n+ actual - expected\n\n+ 'Choose the opposite port. Hold Shift to replace an existing connection.'\n- ''\n"
+          },
+          {
+            "id": "escape-cancel-must-retire-pending-hint",
+            "status": "FAIL",
+            "error": "AssertionError [ERR_ASSERTION]: Escape cancellation must retire the no-longer-pending opposite-port hint\n+ actual - expected\n\n+ 'Choose the opposite port. Hold Shift to replace an existing connection.'\n- ''\n"
+          }
+        ]
+      },
+      "counterexample": [
+        "Open current exact archived build in a fresh context, viewport1280x720 (also1440x1000). Optional Shortcuts then natural Escape is harmless and not required.",
+        "Browse nodes; search Color RGBA; click Add Color RGBA. Browse mode inserts directly.",
+        "Use ordinary mouse click on Color RGBA output out, then Image output input color. The first click already paints the large status rectangle.",
+        "Generate GLSL. Connection succeeds, but the opposite-port prompt and rectangle remain over both nodes.",
+        "Separate fresh case: select the output port then press natural Escape. The pending-port state cancels but its prompt remains."
+      ],
+      "source": [
+        {
+          "file": "production/apps/web/style.css",
+          "line": 707,
+          "detail": "The later .canvas-notice rule adds top:92px and right:12px without overriding bottom:14px from line210; auto height therefore stretches the opaque background across the canvas."
+        },
+        {
+          "file": "production/src/features/canvas.ts",
+          "line": 989,
+          "detail": "Successful run refreshes the notice only if noticeErrors.delete(action) returns true. A normal no-error connection hint is assigned directly at1351 and is never refreshed on successful connection."
+        },
+        {
+          "file": "production/src/features/canvas.ts",
+          "line": 1423,
+          "detail": "Escape nulls selectedPort/portDrag but does not retire the temporary notice."
+        }
+      ],
+      "contract": [
+        "production/evidence/coordinator/s06/activation-20261004-01/human-authorization-01.json: scoped Legacy UI/UX, coherent controls and usable-testing requirements",
+        "production/evidence/s06/workspace-entry-01/coverage-final-01.json: included LC-UI-091 connection status and current Legacy workspace branches",
+        "handoff/compatibility/behavior-contracts.md LC-UI-091/B01: distinguish temporary operational hints and persistent errors; matching recovery is operation-specific",
+        "Advertised product footer explicitly says click output then input to connect; no exclusion waives visible graph/status behavior."
+      ],
+      "scopeAssessment": "Within existing bounded workspace/status/public-flow assessment. Not an optional new feature, not a physical-device or arbitrary-layout claim, and not an architecture conflict.",
+      "introducedByRepair": false,
+      "priorReproduction": {
+        "I": "cc920485e005825fea007863f0815cf7c0a5437b",
+        "R": "276a427c1e70db05d652488700c361f86e72d3e7",
+        "build": "S06-workspace-cc92048",
+        "archive": {
+          "file": "production/evidence/s06/workspace-entry-01/build-final-01/candidate-web.tar.gz",
+          "bytes": 85735,
+          "sha256": "8f4541643265aa6762f6c6b0ee30fc8f58a8875ad39bfb5d5d0bbe731b7c6d88"
+        },
+        "detail": "Same independent trusted direct-click flow at1280x720 reproduces the overlay and stale successful-connection hint on old archive. Prior report remains historical FAIL with its original two findings; this report adds newly established evidence, without retroactively editing it."
+      },
+      "requiredRepair": "Bound the ordinary status surface height and retire only completed/cancelled connection guidance through the existing view event/status boundary. Preserve unrelated operation-keyed errors, connection validation, History and readonly/lifetime guards. Add visible geometry and direct-click complete/cancel regression coverage; do not weaken model admission.",
+      "acceptanceBlocking": true,
+      "evidence": [
+        {
+          "file": "reviewer-public-01/connection-observed-1280-current.json",
+          "bytes": 12972,
+          "sha256": "ce3762adce95036187a34c602e0a303fc1bd6f9ec8b8db02f6a1920357a1d7e3"
+        },
+        {
+          "file": "reviewer-public-01/connection-observed-1440-current.json",
+          "bytes": 12975,
+          "sha256": "5bf8cb6992c32b64f9f272f2b3b4d5cc548e648cff39a122ef1d3b2fc8bdf8d4"
+        },
+        {
+          "file": "reviewer-public-01/connection-observed-1280-prior.json",
+          "bytes": 12972,
+          "sha256": "17a0cbeaebaec9ec2dc37f9940f21c150925e91a3a3f88f62fbcb085426ebdb8"
+        },
+        {
+          "file": "reviewer-public-01/connection-overlay-1280-current.png",
+          "bytes": 53139,
+          "sha256": "13d81363c3872b592516ba3420b14cf4aa906e383f84b836d004804c8a4909ad"
+        },
+        {
+          "file": "reviewer-public-01/connection-overlay-1280-prior.png",
+          "bytes": 53139,
+          "sha256": "13d81363c3872b592516ba3420b14cf4aa906e383f84b836d004804c8a4909ad"
+        },
+        {
+          "file": "reviewer-public-01/direct-click-connection-1280-observation-events.json",
+          "bytes": 5008,
+          "sha256": "451947915658ac0fd78b48c80c031871aa72f61967a46b0e98bf3232efec490a"
+        },
+        {
+          "file": "reviewer-public-01/direct-click-connection-1280-observation.zip",
+          "bytes": 384298,
+          "sha256": "41d53792ff387de35d240ef80675a8afd202ea7fde25077502c380384aa13260"
+        },
+        {
+          "file": "reviewer-public-01/prior-archive-direct-click-connection-observation.zip",
+          "bytes": 409371,
+          "sha256": "efd9f2b40195db1c9b5665592244fc9356b8ea04ed27d2c281dbfd7488e99a27"
+        },
+        {
+          "file": "reviewer-public-02/results.json",
+          "bytes": 3398,
+          "sha256": "d9f2160066cb63ae75c27f2405fa776550eb1fbf2e2d1c507966859d72e01ac2"
+        },
+        {
+          "file": "reviewer-public-02/occlusion-facts.json",
+          "bytes": 523,
+          "sha256": "f581b54f74a85ea17ebd78531bbd682012981c4c3df76a366fc91834b13c7685"
+        },
+        {
+          "file": "reviewer-public-02/canvas-notice-must-not-cover-nodes-failure.png",
+          "bytes": 48960,
+          "sha256": "69efbc1699194d95b38fd43edb10923df0f8fa22b27a27a1bf0695090a18d6a5"
+        },
+        {
+          "file": "reviewer-public-02/success-hint-facts.json",
+          "bytes": 395,
+          "sha256": "c0e20b02d50f257360f82bb18fde047d85e7056df8fb0081f3fd93370ac92298"
+        },
+        {
+          "file": "reviewer-public-02/cancel-hint-facts.json",
+          "bytes": 88,
+          "sha256": "204793ee8ec0570e3879bcbb13bd02f7b1431bfb0ca90c6e55aede9bae0f957a"
+        },
+        {
+          "file": "reviewer-public-02/successful-connection-must-retire-pending-hint.zip",
+          "bytes": 351803,
+          "sha256": "316df3d8326f01bacc36e5dd688820c6f4df1e8f9b200c88937903f9a6fbe0bf"
+        },
+        {
+          "file": "reviewer-public-02/escape-cancel-must-retire-pending-hint.zip",
+          "bytes": 285665,
+          "sha256": "88cac7a8a5d4d13d1d8796bc102e7b718dd5ca3ca8b974175f128cd07e1f8f01"
+        }
+      ]
+    }
+  ],
+  "requestedAction": [
+    "Reconcile head and one writer. Persist review2 original report, manifest and all180 support files byte-for-byte in production/evidence/s06/review-02/independent-review. Preserve old reports and exact closure attribution.",
+    "Priority1: repair giant Canvas notice through existing presentation boundary. Reproduce both independent successful/cancelled connection hint and Human PORT_TARGET rejection/recovery. Compact status surface must not occlude nodes or intercept Canvas interaction. Retire completed/cancelled temporary hints, while preserving unrelated operation-keyed errors; clear errors only on matching recovery.",
+    "Priority2: reproduce Owner selection/deselection geometry shift. Fix confirmed outline/border box/layout changes without node geometry movement, socket/wire displacement or Graph mutations. Supply quantitative bounding boxes and visible before/after at relevant scale.",
+    "Honor corrected report: dragging creation works. Add/fix pointer-following catalog hover highlight and temporary curved dashed wire with selected origin ring using attached visual reference and existing typed wire appearance, with proper cleanup/cancel and no premature Graph/History writes. Protect existing drag/drop, keyboard selection and wired creation preview.",
+    "Single-click creation mapping is under a narrow pending Owner clarification of Create vs Browse. Inspect exact Legacy/reference/contracts now; do not change Browse single-inspect or wired two-phase commit by inference. Continue all prior items; this branch cannot block notice/geometry/hover/wire repair. Report specific current behavior and plus meaning, no arbitrary button redesign.",
+    "Run meaningful source and exact archived public-browser checks plus affected guards, proper actual mouse/keyboard actions, model/History invariants, and required root checks. Validate evidence bytes in new exactR Git objects/fresh export.",
+    "Produce new I/R and immutable build/evidence manifests, finding mapping, impact analysis and usable guide. Persist Coordinator receipts with original authorship. Update only current state/progress as designated maintainer; S06 stays active/unaccepted. STOP_WRITING at complete submission; Coordinator immediately collects, independently reviews and serves temporary localhost candidate."
+  ],
+  "allowedRepairScope": [
+    "production/src/features/canvas.ts: connection hint/preview/cancel and selection presentation boundaries only",
+    "production/src/features/node-browser.ts: hover/visual feedback; direct click semantics only after resolved mapping",
+    "production/apps/web/style.css: notice, selection, preview/hover presentation",
+    "production/tests/: meaningful scoped browser/geometry/status/negative regression coverage",
+    "production/evidence/s06/review-02/independent-review/: immutable raw reviewer preservation",
+    "production/evidence/s06/workspace-repair-02/: new candidate/evidence",
+    "production/evidence/coordinator/s06/review-02,repair-02,owner-feedback-01,preview-02: preserve exact existing operational artifacts as needed",
+    "implementation-state.json and README.md: original maintainer current progress, no completion/acceptance"
+  ],
+  "contractRefs": [
+    "workflow/COORDINATOR.md",
+    "workflow/RUNBOOK.md",
+    "workflow/PACKETS.md",
+    "handoff/compatibility/behavior-contracts.md LC-UI-025,034,035,036,072,081,083,091",
+    "production/evidence/coordinator/s06/preparation-01/legacy-reference-manifest-01.json (use actual sourceRoot reference package; no missing LEGACY_CAPABILITIES.md dependency)"
+  ],
+  "reReviewCoverage": [
+    "Notice geometry at1280x720/1440x1000 and responsive views, visible nodes, successful/cancelled guidance, invalid same-direction/PORT_TARGET and correct recovery, unrelated compiler error retained",
+    "Both connection directions, exact admission and one atomic Undo/Redo; cancellation invalid/stale/readonly no edits",
+    "Selection geometry and actual wire/socket alignment, hover vs keyboard state, dashed preview on pointer movement in root/pan/zoom and cancellation",
+    "Prior Help and four natural Escape affected cases, evidence availability and unchanged-scope impact analysis"
+  ],
+  "exclusions": [
+    "No new product scope, catalog leaves, numeric admission/Graph/History contract changes.",
+    "No handoff or accepted evidence edits, no loss of prior failures or counts.",
+    "No S06 acceptance, push, PR, merge, next Slice or permanent service.",
+    "LAN/Tailscale requirements were removed by Owner. Do not retry or stop localhost delivery for them.",
+    "No optional button relocation, full catalog/preset or next multi-workspace batch in this repair.",
+    "Creation placement at initial double-click point was explicitly deferred; no new urgent work unless clarified by Owner."
+  ],
+  "outputLocation": "production/evidence/s06/workspace-repair-02/submission-01.json",
+  "stopConditions": [
+    "Unexpected head or writer: retain work and return concrete reconciliation.",
+    "Genuine accepted contract conflict: preserve counterexample and pause affected dependency only.",
+    "Complete exact submission: STOP_WRITING for targeted reviewer."
+  ],
+  "provenance": "Coordinator validates identities and routes original Human and independent findings, never authors technical PASS. Owner screenshot version remains unknown.",
+  "limitations": "Main current R is local/unpublished. Accepted remote main/work were read back M2 in current recovery. No new publication."
+}

@@ -1,0 +1,174 @@
+[
+  {
+    "id": "root-bootstrap",
+    "args": [
+      "tools/verify-bootstrap.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape",
+    "startedAt": "2026-10-04T12:03:19.137Z",
+    "finishedAt": "2026-10-04T12:03:20.156Z",
+    "exitCode": 0
+  },
+  {
+    "id": "root-state",
+    "args": [
+      "handoff/tools/check-implementation-state.mjs",
+      "--current"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape",
+    "startedAt": "2026-10-04T12:03:20.157Z",
+    "finishedAt": "2026-10-04T12:03:20.221Z",
+    "exitCode": 0
+  },
+  {
+    "id": "root-fixtures",
+    "args": [
+      "--test",
+      "--test-isolation=none",
+      "tools/verify-bootstrap.test.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape",
+    "startedAt": "2026-10-04T12:03:20.222Z",
+    "finishedAt": "2026-10-04T12:03:26.603Z",
+    "exitCode": 0
+  },
+  {
+    "id": "typecheck",
+    "args": [
+      "node_modules/typescript/bin/tsc",
+      "--noEmit"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape\\.verification\\s06-workspace-review-02\\runtime\\production",
+    "startedAt": "2026-10-04T12:03:26.604Z",
+    "finishedAt": "2026-10-04T12:03:27.929Z",
+    "exitCode": 0
+  },
+  {
+    "id": "module-pins",
+    "args": [
+      "tools/module-pins.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape\\.verification\\s06-workspace-review-02\\runtime\\production",
+    "startedAt": "2026-10-04T12:03:27.930Z",
+    "finishedAt": "2026-10-04T12:03:27.994Z",
+    "exitCode": 0
+  },
+  {
+    "id": "boundaries",
+    "args": [
+      "tools/boundaries.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape\\.verification\\s06-workspace-review-02\\runtime\\production",
+    "startedAt": "2026-10-04T12:03:27.995Z",
+    "finishedAt": "2026-10-04T12:03:28.753Z",
+    "exitCode": 0
+  },
+  {
+    "id": "unit-conformance",
+    "args": [
+      "--experimental-transform-types",
+      "--test",
+      "--test-isolation=none",
+      "tests/unit/model.test.ts",
+      "tests/unit/numeric-literals.test.ts",
+      "tests/unit/persistence.test.ts",
+      "tests/unit/png.test.ts",
+      "tests/unit/s02.test.ts",
+      "tests/unit/s03-limits.test.ts",
+      "tests/unit/s03-repair.test.ts",
+      "tests/unit/s03-repair2.test.ts",
+      "tests/unit/s03-transfer.test.ts",
+      "tests/unit/s03.test.ts",
+      "tests/unit/s04-closure.test.ts",
+      "tests/unit/s04.test.ts",
+      "tests/unit/s05-drag-capture.test.ts",
+      "tests/unit/s05-replacement.test.ts",
+      "tests/unit/s05-uniforms.test.ts",
+      "tests/unit/s05-values.test.ts",
+      "tests/unit/s05.test.ts",
+      "tests/unit/s06-workspace.test.ts",
+      "tests/unit/save-limits.test.ts",
+      "tests/conformance/boundaries.test.ts",
+      "tests/conformance/import.test.ts",
+      "tests/conformance/localization.test.ts",
+      "tests/conformance/ui.test.ts"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape\\.verification\\s06-workspace-review-02\\runtime\\production",
+    "startedAt": "2026-10-04T12:03:28.754Z",
+    "finishedAt": "2026-10-04T12:03:38.774Z",
+    "exitCode": 0
+  },
+  {
+    "id": "source-rebuild",
+    "args": [
+      "node_modules/vite/bin/vite.js",
+      "build",
+      "--outDir",
+      "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape\\.verification\\s06-workspace-review-02\\rebuilt"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape\\.verification\\s06-workspace-review-02\\runtime\\production",
+    "startedAt": "2026-10-04T12:03:38.775Z",
+    "finishedAt": "2026-10-04T12:03:39.957Z",
+    "exitCode": 0
+  },
+  {
+    "id": "source-affected",
+    "args": [
+      "node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "tools/s06-playwright.config.ts",
+      "s06-help.spec.ts",
+      "s06-creation.spec.ts",
+      "s06-workspace.spec.ts",
+      "s06-guards.spec.ts",
+      "s05-escape-focus.spec.ts",
+      "s01.spec.ts",
+      "--output",
+      "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape\\.verification\\s06-workspace-review-02\\source-affected\\test-results"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape\\.verification\\s06-workspace-review-02\\runtime\\production",
+    "startedAt": "2026-10-04T12:03:40.140Z",
+    "finishedAt": "2026-10-04T12:04:32.743Z",
+    "exitCode": 0
+  },
+  {
+    "id": "archive-affected",
+    "args": [
+      "node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "tools/s06-playwright.config.ts",
+      "s06-help.spec.ts",
+      "s06-creation.spec.ts",
+      "s06-workspace.spec.ts",
+      "s06-guards.spec.ts",
+      "s05-escape-focus.spec.ts",
+      "--grep-invert",
+      "Personal late insertion",
+      "--output",
+      "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape\\.verification\\s06-workspace-review-02\\archive-affected\\test-results"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape\\.verification\\s06-workspace-review-02\\runtime\\production",
+    "startedAt": "2026-10-04T12:04:32.821Z",
+    "finishedAt": "2026-10-04T12:05:06.143Z",
+    "exitCode": 0
+  },
+  {
+    "id": "archive-smoke-execution",
+    "args": [
+      "--experimental-transform-types",
+      "tools/s06-archive-check.ts",
+      "--manifest",
+      "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape\\production\\evidence\\s06\\workspace-repair-01\\build-01\\build-manifest.json",
+      "--output",
+      "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape\\.verification\\s06-workspace-review-02\\archive-smoke\\result.json",
+      "--scratch",
+      "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape\\.verification\\s06-workspace-review-02\\archive-smoke-extracted"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s06-workspace-review-02\\Grape\\.verification\\s06-workspace-review-02\\runtime\\production",
+    "startedAt": "2026-10-04T12:05:06.145Z",
+    "finishedAt": "2026-10-04T12:05:12.183Z",
+    "exitCode": 0
+  }
+]

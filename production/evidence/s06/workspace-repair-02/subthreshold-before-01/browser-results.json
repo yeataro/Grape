@@ -1,0 +1,166 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+      "s06-connection-view.spec.ts",
+      "--grep",
+      "subthreshold",
+      "--output",
+      "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\subthreshold-before-01\\test-results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/workspace-repair-02/subthreshold-before-01/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\subthreshold-before-01\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s06-connection-view.spec.ts",
+      "file": "s06-connection-view.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 subthreshold port release outside the button leaves no orphan wire or History",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5728,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').last().locator('.connection-preview path')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').last().locator('.connection-preview path')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').last().locator('.connection-preview path')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').last().locator('.connection-preview path')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts:402:55",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts",
+                      "column": 55,
+                      "line": 402
+                    },
+                    "snippet": "  400 |   await expect(c.locator(\".connection-preview path\")).toHaveCount(1);\n  401 |   await page.mouse.up();\n> 402 |   await expect(c.locator(\".connection-preview path\")).toHaveCount(0);\n      |                                                       ^\n  403 |   await expect(c.locator(\".canvas-notice\")).toBeEmpty();\n  404 |   expect(await doc(page)).toEqual(before);\n  405 |   await clickAction(page, \"Undo\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts",
+                        "column": 55,
+                        "line": 402
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.canvas').last().locator('.connection-preview path')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.canvas').last().locator('.connection-preview path')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  400 |   await expect(c.locator(\".connection-preview path\")).toHaveCount(1);\n  401 |   await page.mouse.up();\n> 402 |   await expect(c.locator(\".connection-preview path\")).toHaveCount(0);\n      |                                                       ^\n  403 |   await expect(c.locator(\".canvas-notice\")).toBeEmpty();\n  404 |   expect(await doc(page)).toEqual(before);\n  405 |   await clickAction(page, \"Undo\");\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts:402:55"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T12:27:01.363Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\subthreshold-before-01\\test-results\\s06-connection-view-S06-su-a3f2f-s-no-orphan-wire-or-History-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\subthreshold-before-01\\test-results\\s06-connection-view-S06-su-a3f2f-s-no-orphan-wire-or-History-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-02\\subthreshold-before-01\\test-results\\s06-connection-view-S06-su-a3f2f-s-no-orphan-wire-or-History-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts",
+                    "column": 55,
+                    "line": 402
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-974ba8113822fdc48544",
+          "file": "s06-connection-view.spec.ts",
+          "line": 393,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T12:27:00.943Z",
+    "duration": 6469.785,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

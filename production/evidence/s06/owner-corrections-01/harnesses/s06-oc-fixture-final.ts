@@ -1,0 +1,2 @@
+import fs from 'node:fs';import {valuesSetup}from '../production/tests/fixtures/s05-values.ts';import{writeDocument}from '../production/src/persistence/codec.ts';
+const file='production/tests/fixtures/required-image-output.grape.json';fs.copyFileSync(file,'production/evidence/s06/owner-corrections-01/required-fixture-before-correction.json',fs.constants.COPYFILE_EXCL);const s=valuesSetup();fs.writeFileSync(file,writeDocument(s.graph.capture().document,s.fixed));

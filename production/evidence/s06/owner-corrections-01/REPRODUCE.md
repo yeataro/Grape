@@ -1,0 +1,11 @@
+# Reproduce Owner corrections
+
+Use a disposable exact R checkout, Node25.5.0 and locked production dependencies. Existing Human browser/service/storage must remain untouched.
+
+1. From root run `node tools/verify-bootstrap.mjs`, `node handoff/tools/check-implementation-state.mjs --current`, `node --test --test-isolation=none tools/verify-bootstrap.test.mjs`. In production run `npm run typecheck`, `npm run conformance`, `npm test`.
+2. From production run `node tools/build-candidate.mjs <absolute-new-build-directory> <absolute-build-01/build-metadata.json>`. Verify all3 file hashes against build-01/build-manifest.json. Rebuild-verification.json proves actual identical file bytes; gzip metadata itself need not be reproducible.
+3. Source and archive run exact specs/arguments in final-source-01/execution.json and archive-public-01/execution.json. Copy harnesses/s06-oc-browser.mjs to disposable .verification (module-relative Vite import expects that path), use NEW run names and absolute evidence/output paths. Never use the browser package default path. Source100/archive90 overlap;10 source-only injected/mount/config fixtures deliberately excluded from static archive.
+4. Archive smoke: production/tools/s06-archive-check.ts with NEW absolute --manifest, --output, --scratch and GRAPE_EVIDENCE_DIR containing s06, cwd disposable .verification. It verifies4 naturalEscape cases plus public edit/export/import/generation and real WebGL2pixel readback.
+5. delivery-01/config.json and guide-delivery-01/config.json identify the exact unchanged headerless helper, temporary extraction,8direct/wrapped dimensions,12focus routes and6downloadable samples. All3 served product files and7guide/sample files were read back and hashed. For deployment Coordinator must bind finalR, not the temporary pre-R engineering R=I. Human preview comes FIRST; no AI independent review was started.
+
+Editing and commit scripts are immutable operation history, not safe replay tests. Each old wx output/failure is retained; use fresh paths for every new execution. OC11 layering remains deferred, rightclick extra placement excluded, automaticgeneration withdrawn. Neither selfchecks nor prior PASS transfer acceptance to this candidate.

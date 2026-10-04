@@ -1,0 +1,1 @@
+import fs from 'node:fs';let p='production/src/features/canvas.ts',s=fs.readFileSync(p,'utf8');s=s.replace('const point = (id: string, key: string, direction: string) => {','const point = (id: string, key: string, direction: string): [number, number] => {');fs.writeFileSync(p,s);

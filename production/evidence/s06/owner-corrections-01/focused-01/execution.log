@@ -1,0 +1,91 @@
+
+Running 8 tests using 1 worker
+
+(node:59044) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 [chromium] › ..\..\..\production\tests\browser\s06-owner-corrections.spec.ts:5:1 › OC01 new empty zero-alpha shader and old exact public import explicit upgrade save reopen (715ms)
+(node:45072) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 [chromium] › ..\..\..\production\tests\browser\s06-owner-corrections.spec.ts:6:1 › OC03 physical output drop single click commits captured graph coordinate under pan zoom and moved menu (1.6s)
+(node:11072) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 3 [chromium] › ..\..\..\production\tests\browser\s06-owner-corrections.spec.ts:7:1 › OC04 connected input empty release disconnects once; Escape outside readonly and cancel preserve (4.3s)
+  ok 4 [chromium] › ..\..\..\production\tests\browser\s06-owner-corrections.spec.ts:8:1 › OC05 default replaces without Shift; ordinary hover purple and target feedback share geometry (1.9s)
+  ok 5 [chromium] › ..\..\..\production\tests\browser\s06-owner-corrections.spec.ts:9:36 › OC02 footer fills viewport 620 and disclosures preserve graph (648ms)
+  ok 6 [chromium] › ..\..\..\production\tests\browser\s06-owner-corrections.spec.ts:9:36 › OC02 footer fills viewport 1440 and disclosures preserve graph (685ms)
+  ok 7 [chromium] › ..\..\..\production\tests\browser\s06-owner-corrections.spec.ts:9:36 › OC02 footer fills viewport 1920 and disclosures preserve graph (664ms)
+  ok 8 [chromium] › ..\..\..\production\tests\browser\s06-owner-corrections.spec.ts:10:1 › OC10 F2 captures once before modal with live keyboard focus over different hovered target (1.9s)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-owner-corrections.spec.ts:5:1 › OC01 new empty zero-alpha shader and old exact public import explicit upgrade save reopen 
+
+    Error: locator.setInputFiles: Error: strict mode violation: locator('input[type=file]') resolved to 2 elements:
+        1) <input hidden="" type="file" aria-label="Open document file" accept=".json,.grape.json,.png,application/json,image/png"/> aka getByLabel('Open document file')
+        2) <input type="file" accept=".json,.sgrape-function.json" aria-label="Import Personal package"/> aka getByLabel('Import Personal package')
+
+    Call log:
+      - waiting for locator('input[type=file]')
+
+
+       at ..\fixtures\required-output.ts:3
+
+      1 | import{expect,type Page}from '@playwright/test';import path from 'node:path';import{fileURLToPath}from 'node:url';import{clickAction}from './public-actions.ts';
+      2 | /** Public import of an unchanged 0.2 exact owner; keeps required-input error fixtures explicit. */
+    > 3 | export async function requiredOutput(page:Page){await clickAction(page,'Open file');await page.locator('input[type=file]').setInputFiles(fileURLToPath(new URL('./required-image-output.grape.json',import.meta.url)));await expect(page.getByRole('dialog',{name:'Review document',exact:true})).toContainText('DOCUMENT_VALID');await page.getByRole('button',{name:'Open in new session',exact:true}).click()}
+        |                                                                                     ^
+      4 |
+        at requiredOutput (C:\Users\user\source\Grape\production\tests\fixtures\required-output.ts:3:85)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-owner-corrections.spec.ts:5:302
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\owner-corrections-01\focused-01\test-results\s06-owner-corrections-OC01-bec6d-xplicit-upgrade-save-reopen-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\owner-corrections-01\focused-01\test-results\s06-owner-corrections-OC01-bec6d-xplicit-upgrade-save-reopen-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\owner-corrections-01\focused-01\test-results\s06-owner-corrections-OC01-bec6d-xplicit-upgrade-save-reopen-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\owner-corrections-01\focused-01\test-results\s06-owner-corrections-OC01-bec6d-xplicit-upgrade-save-reopen-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › ..\..\..\production\tests\browser\s06-owner-corrections.spec.ts:6:1 › OC03 physical output drop single click commits captured graph coordinate under pan zoom and moved menu 
+
+    Error: expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 571.7537613013579
+    Received: 571.7562020210858
+
+    Expected precision:    4
+    Expected difference: < 0.00005
+    Received difference:   0.0024407197278151216
+
+      4 | test.beforeEach(async({page})=>{page.on('dialog',d=>d.accept());await page.setViewportSize({width:1440,height:1000});await page.goto('/')});
+      5 | test('OC01 new empty zero-alpha shader and old exact public import explicit upgrade save reopen',async({page})=>{const initial=await doc(page);expect(initial.graph.kind.version).toBe('0.3.0');const compiled=await shader(page),result=await pixels(page,compiled);expect(result.pixel).toEqual([0,0,0,0]);await requiredOutput(page);const old=await doc(page);expect(old.graph.kind.version).toBe('0.2.0');await clickAction(page,'Generate GLSL');await expect(page.locator('#message')).toContainText('INPUT_REQUIRED');await clickAction(page,'Save');await clickAction(page,'Upgrade Image Output');const after=await doc(page);expect(after.graph.kind.version).toBe('0.3.0');expect(net(after).nodes.map((n:any)=>n.id)).toEqual(net(old).nodes.map((n:any)=>n.id));expect(net(after).edges).toEqual(net(old).edges);expect((await pixels(page,await shader(page))).pixel).toEqual([0,0,0,0]);await clickAction(page,'Save');await clickAction(page,'Open saved');await page.locator('#saved-list button').first().click();expect((await doc(page)).graph).toEqual(after.graph);save('oc01-zero-upgrade',{initial,old,after,compiled,result});});
+    > 6 | test('OC03 physical output drop single click commits captured graph coordinate under pan zoom and moved menu',async({page})=>{await createNode(page,'Color RGBA');const c=page.locator('.canvas'),out=c.locator('[data-direction=output]');await c.getByRole('heading',{name:'Color RGBA',exact:true}).click();await page.keyboard.press('h');const b=await blank(c);await page.mouse.move(b.x,b.y);await page.mouse.wheel(0,160);const point=await blank(c),before=await doc(page),expected=await c.evaluate((el,p)=>{const r=el.getBoundingClientRect(),m=new DOMMatrix(getComputedStyle(el.querySelector('.viewport')!).transform);return[(p.x-r.left-m.e)/m.a,(p.y-r.top-m.f)/m.d]},point);await drag(page,out,point);const menu=c.getByRole('dialog',{name:'Node catalog'});await expect(menu).toBeVisible();await menu.getByLabel('Search nodes',{exact:true}).fill('Multiply');const label=menu.getByRole('button',{name:'Create Multiply',exact:true});await label.click();await expect(menu).toBeHidden();await expect(c.locator('.creation-preview')).toBeHidden();const after=await doc(page),made=net(after).nodes.find((n:any)=>!net(before).nodes.some((x:any)=>x.id===n.id));expect(made.position[0]).toBeCloseTo(expected[0],4);expect(made.position[1]).toBeCloseTo(expected[1],4);expect(net(after).edges).toHaveLength(1);await clickAction(page,'Undo');expect(await doc(page)).toEqual(before);await clickAction(page,'Redo');expect(await doc(page)).toEqual(after);save('oc03-single-click',{point,expected,before,after});});
+        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+      7 | test('OC04 connected input empty release disconnects once; Escape outside readonly and cancel preserve',async({page})=>{await createNode(page,'Color RGBA');const c=page.locator('.canvas'),out=c.locator('[data-direction=output]'),input=c.locator('[data-port=color]');await out.click();await input.click();const before=await doc(page),b=await blank(c);await drag(page,input,b);await expect(c.getByRole('dialog',{name:'Node catalog'})).toBeHidden();const after=await doc(page);expect(net(after).edges).toHaveLength(0);await clickAction(page,'Undo');expect(await doc(page)).toEqual(before);await clickAction(page,'Redo');expect(await doc(page)).toEqual(after);await clickAction(page,'Undo');for(const route of ['escape','outside','cancel']){const a=await center(input);await page.mouse.move(a.x,a.y);await page.mouse.down();await page.mouse.move(b.x,b.y,{steps:20});if(route==='escape')await page.keyboard.press('Escape');if(route==='outside')await page.mouse.move(1430,10);if(route==='cancel')await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await page.mouse.up();expect(await doc(page)).toEqual(before)}await clickAction(page,'Lock editing');await drag(page,input,b);expect(await doc(page)).toEqual(before);await clickAction(page,'Lock editing');save('oc04-disconnect',{before,after,synthetic:'cancel uses window blur; other routes trusted mouse/key'});});
+      8 | test('OC05 default replaces without Shift; ordinary hover purple and target feedback share geometry',async({page})=>{await createNode(page,'Color RGBA');await createNode(page,'Vector 3');const c=page.locator('.canvas'),outs=c.locator('[data-direction=output]'),input=c.locator('[data-port=color]');await outs.nth(0).click();await input.click();const before=await doc(page);await outs.nth(1).click();const target=await center(input);await page.mouse.move(target.x,target.y,{steps:30});const feedback=await input.evaluate(el=>({body:getComputedStyle(el.querySelector('.socket')!).backgroundColor,shadow:getComputedStyle(el.querySelector('.socket')!).boxShadow,rect:el.getBoundingClientRect().toJSON(),preview:document.querySelector('.connection-preview path')?.getAttribute('d')}));await input.click();const after=await doc(page);expect(net(after).edges).toHaveLength(1);expect(net(after).edges[0].from.nodeId).not.toBe(net(before).edges[0].from.nodeId);expect(feedback.shadow).toContain('170, 132, 214');expect(await input.evaluate(e=>e.className)).not.toContain('replace');await clickAction(page,'Undo');expect(await doc(page)).toEqual(before);await clickAction(page,'Redo');expect(await doc(page)).toEqual(after);save('oc05-replace-feedback',{before,after,feedback,wire:await c.locator('.wires path').getAttribute('d')});});
+      9 | for(const width of [620,1440,1920])test(`OC02 footer fills viewport ${width} and disclosures preserve graph`,async({page})=>{await page.setViewportSize({width,height:width===620?650:1000});const before=await doc(page);const geometry=await page.evaluate(()=>({footer:document.querySelector('footer')!.getBoundingClientRect().toJSON(),main:document.querySelector('main')!.getBoundingClientRect().toJSON(),width:innerWidth,height:innerHeight,scroll:document.documentElement.scrollHeight}));expect(geometry.footer.x).toBe(0);expect(geometry.footer.width).toBe(width);expect(geometry.footer.bottom).toBe(geometry.height);expect(geometry.main.bottom).toBe(geometry.footer.y);expect(geometry.scroll).toBe(geometry.height);await page.screenshot({path:path.join(process.env.GRAPE_EVIDENCE_DIR!,`footer-${width}.png`)});for(const name of ['Shader output','Hints','Project actions']){await page.getByRole('button',{name,exact:true}).click();await page.keyboard.press('Escape');await expect(page.getByRole('button',{name,exact:true})).toBeFocused()}expect(await doc(page)).toEqual(before);save('oc02-footer-'+width,geometry)});
+        at C:\Users\user\source\Grape\production\tests\browser\s06-owner-corrections.spec.ts:6:1174
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\owner-corrections-01\focused-01\test-results\s06-owner-corrections-OC03-3cecc-der-pan-zoom-and-moved-menu-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\owner-corrections-01\focused-01\test-results\s06-owner-corrections-OC03-3cecc-der-pan-zoom-and-moved-menu-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\owner-corrections-01\focused-01\test-results\s06-owner-corrections-OC03-3cecc-der-pan-zoom-and-moved-menu-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\owner-corrections-01\focused-01\test-results\s06-owner-corrections-OC03-3cecc-der-pan-zoom-and-moved-menu-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-owner-corrections.spec.ts:5:1 › OC01 new empty zero-alpha shader and old exact public import explicit upgrade save reopen 
+    [chromium] › ..\..\..\production\tests\browser\s06-owner-corrections.spec.ts:6:1 › OC03 physical output drop single click commits captured graph coordinate under pan zoom and moved menu 
+  6 passed (14.2s)

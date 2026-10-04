@@ -1,0 +1,1 @@
+import fs from 'node:fs';let s=fs.readFileSync('.verification/s06-f2-final-checks.mjs','utf8').replaceAll('f2-only-01','owner-corrections-01').replaceAll('e8c477ec511637f71646b79272422c72e40bd680','30c867945c992d25956a2a32825de34571f7749e').replaceAll('checks-final-03','checks-final-01');fs.writeFileSync('.verification/s06-oc-metadata-checks.mjs',s,{flag:'wx'});

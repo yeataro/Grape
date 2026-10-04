@@ -1,0 +1,122 @@
+{
+  "packetVersion": 1,
+  "packetType": "HUMAN_BOUNDED_REVISION_AND_WORKFLOW_CONTROL",
+  "packetId": "OWNER-S06-CORRECTIONS-01",
+  "actionKey": "yeataro/Grape:S06:implementation:owner-corrections:a9398e3:01",
+  "recordedAt": "2026-10-04T16:00:34.434Z",
+  "source": {
+    "threadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "authority": "Human Owner",
+    "messageIds": null,
+    "reason": "Direct Human messages in current Coordinator conversation; provider message IDs unavailable, no invented identifiers or Human timestamps."
+  },
+  "reviewedPreview": {
+    "url": "http://127.0.0.1:4202/review.html",
+    "I": "528c4f76149fad6da53c3c4da701cf1e8e121750",
+    "R": "571f04a7dcdc1567aff53e530e48170f1a86870c",
+    "build": "S06-debug-528c4f7"
+  },
+  "base": {
+    "I": "e8c477ec511637f71646b79272422c72e40bd680",
+    "R": "a9398e38a053c605e12889d10a27d2f8c33a9506"
+  },
+  "acceptedMain": "ad31676b555120cf455fc2a7677be38791b62b64",
+  "sliceId": "S06",
+  "promotionQuote": "好，我觉得就修正我刚刚讲的东西，然后这一轮不要交给 AI review，我自己先看过再丢给 AI review 就好。",
+  "additionalDispatchQuote": "我補一個，你就丟給實作者",
+  "requirements": [
+    {
+      "id": "OC01",
+      "name": "Unconnected Image Output",
+      "quote": "當 image output 沒接任何東西的時候，它沒有任何錯誤，因為它輸出的就是零零零零嘛。",
+      "required": "Image Output/color unconnected is valid and emits vec4(0,0,0,0), including alpha zero. No INPUT_REQUIRED for that missing color input. Connected conversion table and mandatory vec4 boundary output remain. Other required inputs and Vertex output do not change.",
+      "contractDelta": "Supersedes only required-connection wording in DEC-GRAPE-002 line44 and AC-GRAPE-001 line67 for the newly versioned adopted Image Output definition. Preserve accepted documents and old exact pins. Record external accepted addendum, use new exact module identity and existing explicit upgrade boundary; never silently repin older documents."
+    },
+    {
+      "id": "OC02",
+      "name": "Full-width compact footer",
+      "quote": "下面的功能狀態列，它就不能佔滿整個螢幕自動排版嘛。就是，會不會覺得很彆扭嗎？下面多一塊東西。",
+      "required": "Single compact functional/status footer spans available viewport width and sits at bottom. Collapsed content reserves no extra blank/shader-output block; remaining height belongs to canvas. Responsive wide/narrow layout, anchored disclosures and existing Locate remain usable in direct and wrapped preview."
+    },
+    {
+      "id": "OC03",
+      "name": "Wire-drop single-click create in place",
+      "quote": "拖拉線再放開的新增節點的意思就是原地新增節點。",
+      "required": "Output port wire released over blank canvas opens compatible creation. A SINGLE click on a node entry creates at the captured wire-release graph coordinate, retaining the existing create/connect transaction. No extra drag or second placement click. Coordinate remains correct under pan/zoom and menu movement/clamping. Abort/invalid target has no partial node/edge/history. Limit this change to this wire-drop route; general Add/Browse modes remain shared and unchanged."
+    },
+    {
+      "id": "OC04",
+      "name": "Input-drop disconnect",
+      "quote": "從 input 拉線到別地方，空的地方再放開是斷線的意思。",
+      "required": "Dragging a CONNECTED input to blank canvas and releasing disconnects that input in one Graph operation/Undo; do not open Create. Escape/cancel/outside-window/invalid-lifetime do not become disconnect. Preserve LC-UI-026 default behavior and other connections."
+    },
+    {
+      "id": "OC05",
+      "name": "Replace enabled by default but configurable",
+      "quote": "我們預設接線的 replace 是啟開的，好不好？但這個終究是一個參數。",
+      "required": "Default connection replacement is enabled without Shift. Retain an explicit configurable parameter and the disabled/reject-existing behavior, via existing application/view configuration seam. Do not hardcode replace true into every model command or invent a global settings subsystem. Validation, atomicity and single Undo remain."
+    },
+    {
+      "id": "OC06",
+      "name": "No extra replace ring",
+      "quote": "在 replace 上面，你現在有額外的視覺顯示這件事情就不用了。現在外面會多一個圈圈。",
+      "required": "Remove extra replace-specific outer ring. Keep normal port hover and valid wire-target feedback."
+    },
+    {
+      "id": "OC07",
+      "name": "Legacy purple socket feedback",
+      "quote": "我覺得就用Legacy的紫色球球就可以了。就完全模仿它就還蠻好的。",
+      "required": "Use observed Legacy soft translucent purple circular origin/target feedback, preserving solid type-colored socket bodies and distinct ordinary hover versus wire-hit states. This supersedes the earlier tentative blanket50% backdrop instruction. Minimum reusable primitive/state reference only, no copying Legacy rendering architecture, no node geometry shift."
+    },
+    {
+      "id": "OC08",
+      "name": "Legacy-like wire curves",
+      "quote": "現在接線的弧線很不好看，你要參考 Legacy的弧線的感覺。",
+      "required": "Use smooth Legacy-like cubic curves with horizontal endpoint tangents and distance-aware control extent, shared across real/temporary/creation-preview wires where applicable. Preserve endpoint identities, hit paths and zoom/pan correctness. Read observed SVG/CSS only; implement in our own shared geometry primitive."
+    },
+    {
+      "id": "OC10",
+      "name": "F2 capture before modal",
+      "quote": "物件資訊因為那個彈出視窗因為有黑底的關係，應該是因為這樣變成 Canvas。它應該是捕捉按下去的那一刻吧。",
+      "required": "Capture the intended current inspection target and readonly data once at F2 keydown BEFORE opening the modal. Modal/backdrop/focus movement cannot retarget or substitute Canvas. Reproduce physical Node/Port/F2 route and Canvas fallback to distinguish target-selection from capture-timing defect. Preserve F2-only/current keyboard-focus policy and focusA-hoverB guard; do not silently substitute global hovered target. If a distinct target policy question remains, return exact counterexample while finishing unaffected items. Keep optional core-isolated helper and all F2-only lifetime/IME/gesture/readonly guards."
+    },
+    {
+      "id": "OC11",
+      "name": "Bounded selection foreground",
+      "quote": "單選跟多選都一樣，請把它們的層級提高，就是 layer 的層級提高。但我又擔心，這樣子 layer 只會越來越高。",
+      "required": "Selected editable objects, single or multiple, render above unselected peer nodes/objects. Derive a bounded presentation tier from existing selection state; no monotonically increasing z counter. Deselect restores ordinary layer, preserve stable order within each tier and floating-surface priority. Put behavior in proper existing Canvas/presentation consumer of selection; no new Graph field, dirty/History entry, layout shift, wholesale node remount or duplicated selection manager. Check repeated selection and overlapping nodes/controls/ports."
+    }
+  ],
+  "workflow": {
+    "next": "Implementer self-check -> exact archive/local preview deployment -> Human inspection FIRST -> independent review only after later Human go-ahead",
+    "scope": "This bounded correction round and its incorporated F2-only work",
+    "supersedes": "Only immediate Fresh Review/no-Human-pre-review order in COORDINATOR/RUNBOOK/previous F2 dispatch. Direct Human instruction has precedence. Preserve policy files and historical receipts.",
+    "independentReview": "DO_NOT_DISPATCH_YET",
+    "productAcceptance": "NOT_GRANTED",
+    "merge": "NOT_GRANTED",
+    "nextSlice": "NOT_GRANTED"
+  },
+  "withdrawn": [
+    {
+      "id": "OC09",
+      "observation": "Code view showed previous generation after graph edit",
+      "quote": "沒事，原來是要手動按一次纏碼才會纏碼。",
+      "disposition": "Withdrawn; manual generate remains. No auto-generation/Updates/incremental compiler work authorized by subsequent informational question."
+    }
+  ],
+  "deferred": [
+    {
+      "id": "DEFER-RIGHT-PORT-CREATE-PREVIEW",
+      "description": "Right-click socket opens creation; pick enters no-held-button pointer-follow preview; another click places. Possible translucent node appearance.",
+      "quote": "但這一輪先不用再補這個東西。你先記起來就好。",
+      "disposition": "REFERENCE_ONLY_NOT_ASSIGNED"
+    }
+  ],
+  "clarifications": [
+    {
+      "topic": "Add Node versus Browse nodes",
+      "decision": "Owner asked and confirmed same shared panel/different behavior; no merge/removal/general click-map redesign requested."
+    }
+  ],
+  "authorityLimits": "Requirements accepted, implementation not accepted; old review evidence stays pinned. This is not S07/S08 authorization."
+}

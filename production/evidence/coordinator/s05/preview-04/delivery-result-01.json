@@ -1,0 +1,99 @@
+{
+  "packetType": "COORDINATOR_DELIVERY_RESULT",
+  "recordedAt": "2026-10-04T05:54:39.662Z",
+  "status": "VERIFIED_DEPLOYMENT_READY_FOR_TARGETED_HUMAN_RETEST",
+  "sliceId": "S05",
+  "implementationI": "ee1212fdc54359f1ceba4c4b09f6e7cc06cddc41",
+  "reviewedR": "29695b3c25e2d200856d780b31e20e23f24efb6d",
+  "buildId": "S05-web-ee1212f",
+  "review": {
+    "file": "C:/Users/user/.codex/worktrees/s05-replacement-review-01/Grape/.verification/s05-replacement-review-01/INDEPENDENT_REVIEW_RESULT.json",
+    "sha256": "87bfb196ce45b7e28f102f76a8cc5e7fda5879787fc395dd616f3f48857a59d9",
+    "bytes": 58735
+  },
+  "reviewReconciliation": {
+    "file": "production/evidence/coordinator/s05/review-04/reconciliation-01.json",
+    "sha256": "de02da22c5421ac744ce9f307b3488b20b0661a4eaf0b01a634a0750563d33c3",
+    "bytes": 1505
+  },
+  "browserCheck": {
+    "file": "production/evidence/coordinator/s05/preview-04/browser-check-01/result.json",
+    "sha256": "bf4bf9e919f99777b3e59cb3f7ed852a67be2d71bca8f11adaaed568606f44c0",
+    "bytes": 19592
+  },
+  "serviceConfig": {
+    "file": "production/evidence/coordinator/s05/preview-04/service-config-01.json",
+    "sha256": "c0da0b34b185a3265d7fbf1e6e0314b5e970e7a2a399c34698b623e29ac0207f",
+    "bytes": 3565
+  },
+  "launch": {
+    "file": "production/evidence/coordinator/s05/preview-04/launch-result-01.json",
+    "sha256": "f1eff22366701420b619f28769653eb4dc0acfdb5c223a10fe344ed0e1ed4fab",
+    "bytes": 994
+  },
+  "process": {
+    "pid": 45084,
+    "creationDate": "2026-10-04T05:50:55.9435200Z",
+    "commandLine": "\"C:\\Program Files\\nodejs\\node.exe\" .verification/serve-reviewed-preview-01.mjs C:\\Users\\user\\source\\Grape\\production\\evidence\\coordinator\\s05\\preview-04\\service-config-01.json"
+  },
+  "entries": [
+    {
+      "address": "127.0.0.1",
+      "entry": "http://127.0.0.1:4195/review.html",
+      "bundle": "http://127.0.0.1:4195/s05-replacement-retest-ee1212f.zip",
+      "instructions": "http://127.0.0.1:4195/RETEST.txt"
+    },
+    {
+      "address": "192.168.1.105",
+      "entry": "http://192.168.1.105:4195/review.html",
+      "bundle": "http://192.168.1.105:4195/s05-replacement-retest-ee1212f.zip",
+      "instructions": "http://192.168.1.105:4195/RETEST.txt"
+    },
+    {
+      "address": "100.83.88.97",
+      "entry": "http://100.83.88.97:4195/review.html",
+      "bundle": "http://100.83.88.97:4195/s05-replacement-retest-ee1212f.zip",
+      "instructions": "http://100.83.88.97:4195/RETEST.txt"
+    }
+  ],
+  "bundle": {
+    "file": "production/evidence/coordinator/s05/preview-04/s05-replacement-retest-ee1212f.zip",
+    "sha256": "5e66ad38555397f9525a4007ce4ce05a95a1917194010ab08f1c4e56681b8643",
+    "bytes": 2744
+  },
+  "instructions": {
+    "file": "production/evidence/coordinator/s05/preview-04/RETEST.txt",
+    "sha256": "54c02d650d25d7b2e530d40541c408206f5de0e39d5d612835d16587d693cef9",
+    "bytes": 1423
+  },
+  "sample": {
+    "file": "production/evidence/s05/repair-03/samples/legacy-owner.grape.json",
+    "sha256": "2bc735a55637ee42f7beeef7687a6e687fa62a8154dfc36cef3d4ebc152fbb86",
+    "bytes": 10296
+  },
+  "verification": {
+    "servedFilesPerOrigin": 19,
+    "origins": 3,
+    "browser": "151.0.7922.34",
+    "strictInspection": "DOCUMENT_VALID",
+    "publicReplacementCases": 9,
+    "defaultAndUpgraded": "Clear incompatibility explanation, disabled Replace, atomic authoritative refusal, Close/export/retry/new session/explicit upgrade/generation/save-reopen preserved",
+    "matching": "Replace, one Undo and Redo PASS with same Graph/load/Contexts",
+    "visualInspection": "Coordinator inspected deployed-ineligible-127.0.0.1.png and result-matching-127.0.0.1.png: exact I/R header, visible actionable explanation, disabled incompatible Replace, enabled new session, accessible Close/export, matching replacement completed",
+    "sameMachine": true,
+    "secondDevice": false,
+    "isolatedContexts": true,
+    "humanStorageUntouched": true
+  },
+  "humanRetestScope": "Only replacement eligibility and recovery, plus matching Replace/one Undo/Redo. Existing legacy-owner.grape.json from4194 is byte-identical and reusable; other previously Owner-tested items need not be repeated.",
+  "priorDelivery": "4193/4194 services and prior PASS/FAIL scope remain preserved. This4195 delivery supersedes preview-04 historical pending receipts only for completed deployment checks.",
+  "limitations": [
+    "Operational delivery verification is not an independent product verdict.",
+    "Independent PASS remains bound to I4/R4, not any later evidence persistence commit.",
+    "Same-machine origins only; no second-device or native hardware GPU qualification.",
+    "Human acceptance and full S05 completion are not inferred."
+  ],
+  "productAcceptance": "NOT_GRANTED",
+  "publication": "NOT_AUTHORIZED_FOR_S05",
+  "nextAction": "Original designated maintainer persists raw independent review and operational receipts byte-for-byte; present exact deployed candidate for targeted Human retest."
+}

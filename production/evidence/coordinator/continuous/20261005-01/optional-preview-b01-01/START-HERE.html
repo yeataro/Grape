@@ -1,0 +1,15 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Grape · 途中預覽 B01</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#15131d;color:rgba(255,255,255,.9);font:16px/1.65 system-ui,sans-serif}main{max-width:850px;margin:auto;padding:40px 24px}h1{font-size:30px;line-height:1.2;margin:12px 0}h2{font-size:20px;margin-top:30px}p{color:rgba(255,255,255,.7)}small,.muted{color:rgba(255,255,255,.5)}a{color:#c9b5ff;text-underline-offset:3px}.open{display:inline-block;border:1px solid #a18cc9;border-radius:8px;background:#40324f;color:white;padding:12px 24px;text-decoration:none;margin:12px 0}code{font:14px ui-monospace,monospace;background:rgba(255,255,255,.06);padding:3px 5px;border-radius:3px}li{margin:12px 0}.note{padding:14px 18px;border-left:3px solid #9d83cc;background:rgba(255,255,255,.035)}hr{border:0;border-top:1px solid rgba(255,255,255,.12);margin:28px 0}</style>
+<main><small>GRAPE · 連續實作途中預覽</small><h1>多 Canvas 與 Parameters 工作區</h1><p>版本 <code>S06-debug-dc65351</code> · 交付版本 <code>270e50e</code></p>
+<a class="open" href="/">開啟 Editor →</a><p class="note">本頁發布時：實作者自測與封存驗證完成，獨立審查進行中。這是隨時可看的途中預覽，無需回覆或驗收；工程會繼續推進。</p>
+<h2>這一批改了什麼</h2><ul>
+<li><strong>多視圖編輯：</strong>在 <code>Project actions</code> 開啟 <code>Second Canvas</code> 與 <code>Add Parameters</code>。各 Canvas 保留自己的選取、導覽與視角，編輯共用同一份圖及 Undo。</li>
+<li><strong>Parameters 跟隨來源：</strong>從頁籤的 <code>Panel options</code> 或底部 <code>Panels → Settings</code> 調整 Source、Link group。群組 0 跟隨最近啟用的 Canvas；其他群組只跟同組來源。</li>
+<li><strong>版面調整：</strong>拖拉頁籤移動與分組，或使用 Move／Split／排序操作。分隔線可拖曳，或用方向鍵、Shift、Home／End；Escape 取消這次調整。</li>
+<li><strong>浮動 Parameters：</strong><code>Float Parameters</code> 會放到右上方，可收合、調寬或回到原停靠區。P 快捷鍵保留文字輸入與 IME 的守衛。</li>
+<li><strong>保存目前版面：</strong><code>Save current layout</code> 與 Restore／Export／Import 保存工作區，不影響圖的 Undo 或儲存狀態。恢復後點選 Canvas，重新指定目前操作來源。</li>
+</ul><h2>可直接試的範例</h2><p><a href="samples/workspace.grape.json" download>下載範例圖</a> · <a href="samples/current-layout.json" download>下載對應版面</a></p>
+<p>先 Open file → 選範例圖 → Open in new session，再 Import current layout 選對應版面。兩份檔案有相同圖身分；不相符的版面會保留找不到目標的提示，不會猜測套用。</p>
+<p>F2 仍只在按下時讀取物件資訊；底部狀態、Locate、Shader output 與原有節點操作保留。</p>
+<hr><p>這批不包含命名版面預設集、任意自由浮動或原生 Host／TD 連線。驗證環境為 Windows Chromium 151／SwiftShader；模擬 IME 與生命週期案例不代表實體裝置驗證。這不是完整 S06 或整體契約完成宣告。</p>
+<p><a href="START-HERE.md">原始操作與重現指南</a> · <a href="coverage-01.json">本批範圍</a> · <a href="_delivery.json">目前部署身分</a></p><small>固定入口：<a href="/">http://127.0.0.1:4203/</a>。重新整理才會載入新部署；已開啟的編輯畫面不會被強制重載。</small></main></html>

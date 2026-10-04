@@ -1,0 +1,90 @@
+[
+  {
+    "id": "bootstrap",
+    "args": [
+      "tools/verify-bootstrap.mjs"
+    ],
+    "exit": 0,
+    "durationMs": 905
+  },
+  {
+    "id": "state",
+    "args": [
+      "handoff/tools/check-implementation-state.mjs",
+      "--current"
+    ],
+    "exit": 0,
+    "durationMs": 62
+  },
+  {
+    "id": "fixtures",
+    "args": [
+      "--test",
+      "tools/verify-bootstrap.test.mjs"
+    ],
+    "exit": 0,
+    "durationMs": 5555
+  },
+  {
+    "id": "typecheck",
+    "args": [
+      "production/node_modules/typescript/bin/tsc",
+      "--noEmit",
+      "-p",
+      "production/tsconfig.json"
+    ],
+    "exit": 0,
+    "durationMs": 1090
+  },
+  {
+    "id": "pins",
+    "args": [
+      "production/tools/module-pins.mjs"
+    ],
+    "exit": 0,
+    "durationMs": 46
+  },
+  {
+    "id": "boundaries",
+    "args": [
+      "production/tools/boundaries.mjs"
+    ],
+    "exit": 0,
+    "durationMs": 514
+  },
+  {
+    "id": "unit",
+    "args": [
+      "--experimental-transform-types",
+      "--test",
+      "--test-isolation=none",
+      "production/tests/unit/b01-workspace.test.ts",
+      "production/tests/unit/model.test.ts",
+      "production/tests/unit/numeric-literals.test.ts",
+      "production/tests/unit/persistence.test.ts",
+      "production/tests/unit/png.test.ts",
+      "production/tests/unit/s02.test.ts",
+      "production/tests/unit/s03-limits.test.ts",
+      "production/tests/unit/s03-repair.test.ts",
+      "production/tests/unit/s03-repair2.test.ts",
+      "production/tests/unit/s03-transfer.test.ts",
+      "production/tests/unit/s03.test.ts",
+      "production/tests/unit/s04-closure.test.ts",
+      "production/tests/unit/s04.test.ts",
+      "production/tests/unit/s05-drag-capture.test.ts",
+      "production/tests/unit/s05-replacement.test.ts",
+      "production/tests/unit/s05-uniforms.test.ts",
+      "production/tests/unit/s05-values.test.ts",
+      "production/tests/unit/s05.test.ts",
+      "production/tests/unit/s06-owner-corrections.test.ts",
+      "production/tests/unit/s06-workspace.test.ts",
+      "production/tests/unit/save-limits.test.ts",
+      "production/tests/conformance/boundaries.test.ts",
+      "production/tests/conformance/import.test.ts",
+      "production/tests/conformance/localization.test.ts",
+      "production/tests/conformance/ui.test.ts"
+    ],
+    "exit": 0,
+    "durationMs": 9061
+  }
+]

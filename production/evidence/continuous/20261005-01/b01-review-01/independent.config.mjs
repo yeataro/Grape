@@ -1,0 +1,4 @@
+import {defineConfig} from '../../production/node_modules/@playwright/test/index.mjs';
+import path from 'node:path';import {fileURLToPath} from 'node:url';
+const here=path.dirname(fileURLToPath(import.meta.url));
+export default defineConfig({testDir:here,testMatch:'independent-browser.spec.ts',workers:1,retries:0,timeout:20000,reporter:[['list'],['json',{outputFile:path.join(here,'independent-browser-results.json')}]],use:{viewport:{width:1440,height:1000},trace:'on',screenshot:'only-on-failure'},outputDir:path.join(here,'independent-browser-output')});

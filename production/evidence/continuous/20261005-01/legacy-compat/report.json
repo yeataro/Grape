@@ -1,0 +1,1595 @@
+{
+  "schemaVersion": 1,
+  "packetId": "CONTINUOUS-LEGACY-COMPAT-SCOUT-01",
+  "runId": "GRAPE-CONTINUOUS-20261005-01",
+  "role": "read-only residual-scope scout; not implementer or Fresh Reviewer",
+  "status": "READ_ONLY_DIAGNOSIS_AND_BATCH_INPUTS",
+  "sourceCommit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+  "sourceReadMethod": "git show exact commit:path; original blob byte hashes",
+  "checkpoint": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+  "packet": {
+    "file": "production/evidence/coordinator/continuous/20261005-01/legacy-compat-scout-packet-01.json",
+    "bytes": 2920,
+    "sha256": "17d4e129aa83c11b6c90a2ccea458c031b50a1652d44f7b7b4866cf143a408f1"
+  },
+  "report": {
+    "file": ".verification/continuous-legacy-compat-01/report.md",
+    "bytes": 21048,
+    "sha256": "964728185e013dfea4bcfaddb81813217fde2ce6aac925ea888e1f3b4198d8bb"
+  },
+  "inventoryInput": {
+    "file": ".verification/continuous-inventory-01/report.md",
+    "bytes": 21732,
+    "sha256": "edba25ff5bb7b58c472f944a7f426a54ba620c3e65ac9f941341fc480eea5712",
+    "equalsPinnedCommittedCopy": true
+  },
+  "conclusion": {
+    "architectureConflictEstablished": false,
+    "newHumanProductDecisionRequired": false,
+    "legacyGateDisposition": "UNCHANGED / unresolved for legacy compatibility branch",
+    "acceptanceFamily": "AT-S02-03 NOT DELIVERED / BLOCKED",
+    "historicalClassification": "A: bounded acceptance disposition, not IH architecture classification",
+    "canImmediatelyClaimPositiveLegacyConversion": false,
+    "reason": "Missing exact raw/catalog/history/output oracle closure; no production Legacy converter; full embedded graph has unimplemented catalog/profile/native dependencies."
+  },
+  "historicalS02": {
+    "completedEntry": {
+      "sliceId": "S02",
+      "scope": "S02 bounded current-format document inspection/review/cancel and explicit atomic replacement; missing exact-module opaque preservation, save/reopen and exact-codec restoration; deterministic format/resource validation and PNG roundtrip. AT-S02-01, AT-S02-02 and AT-S02-04 within the declared Linux x64 desktop Chromium 151.0.7922.34 / Playwright 1.62.1 / 1440x1000 scope. AT-S02-03 legacy compatibility NOT DELIVERED / BLOCKED (Classification A); G-VERSION-COMPAT unresolved for that branch. All previously declared environment/platform limitations retained.",
+      "implementationRevision": "e23a997f53a17f3e00bf7f83de489cfaeb367251",
+      "evidenceIds": [
+        "S02-ARCHITECTURE-e23a997",
+        "S02-PRODUCT-e23a997"
+      ]
+    },
+    "independentRecordProvenance": {
+      "source": "Explicit Human Owner instruction reporting targeted independent S02 re-review PASS and bounded acceptance eligibility at the revisions above.",
+      "reviewerRole": "Independent Reviewer",
+      "reviewerIdentity": null,
+      "recordedBy": "Implementer (bookkeeping only; not the independent reviewer)",
+      "originalReviewerReportAttached": false,
+      "reviewCompletedAt": null,
+      "limits": "Verdict, closures and eligibility are recorded as reported by the Human Owner. No original independent command transcript, reviewer identity or review timestamp was supplied; none is invented."
+    },
+    "legacyBranch": {
+      "classification": "A",
+      "acceptanceFamily": "AT-S02-03",
+      "status": "NOT DELIVERED / BLOCKED",
+      "gateId": "G-VERSION-COMPAT",
+      "gateStatus": "unresolved for the legacy compatibility branch",
+      "boundedAcceptancePermitted": true,
+      "humanGateRequiredForScopeQuestion": false,
+      "inventedMappingsConvertersOrFallback": false
+    },
+    "namedClosedFindings": {
+      "M1": {
+        "status": "closed",
+        "summary": "Acknowledged saves satisfy supported reopen size/network constraints, including compact serialization, while preserving opaque data and truthful Saved status."
+      },
+      "M2": {
+        "status": "closed",
+        "summary": "Authoritative replacement validates complete structure before atomic publication; rejection preserves canonical content, revision and History."
+      }
+    }
+  },
+  "frozenSourceCapture": {
+    "sourceRoot": "C:\\Users\\user\\Dropbox\\Codex\\TD-Grape-workspace\\TD-Grape",
+    "version": "0.8.271",
+    "head": "2c5eb64d1d47f49bff1abd167545d42f03e5dd27",
+    "capturedAt": "2026-10-01T15:31:31.765704+00:00",
+    "scope": "Current working-tree source, tests, tools, product docs and examples; binary assets captured for identity, not claimed decoded. Future refactor plans excluded.",
+    "workingTreeChanges": [
+      " M docs/README.md",
+      " M src/td/TD-Grape-dev.toe",
+      "?? .claude/",
+      "?? docs/discussions/WEB_PWA_HOST_DEPLOYMENT_DRAFT_2026-09-29.md"
+    ]
+  },
+  "relevantCapabilities": [
+    {
+      "id": "LC-DATA-011",
+      "domain": "Compatibility",
+      "name": "節點版本／行為升級先比較快照",
+      "classification": "Portable",
+      "legacyBehavior": "catalogSnapshot記錄簽名與emitter版本hash；檢閱定位各node的舊／新revision與行為差異；缺baseline明示unknownBaseline。",
+      "triggerInput": "Inspect upgrade",
+      "preconditions": [
+        "已有可編輯且目標相符的圖；檢視／檢查操作不要求可寫。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "此行為本身不要求特定宿主；Legacy 操作介面仍由 TD 提供。"
+      ],
+      "observableResult": "可檢視change清單及localizedFunctions；未接受不改來源圖。",
+      "stateTransition": "成功後由操作前圖狀態轉為上述結果；失敗依 Failure Behavior 保持或呈現錯誤。",
+      "failureBehavior": "未知definition無替代則blocked；snapshot損壞或升級會需要修掉edge時blocked，保留原連線。",
+      "persistenceBehavior": "候選加當前catalogSnapshot；舊圖不覆写。",
+      "undoRedoBehavior": "檢閱不入歷史。",
+      "importantEdgeCases": [
+        "hash是內容完整性／相容性線索，不是作者身分認證。",
+        "受影響非local子圖與其非local callers一起localize，舊來源放origin。"
+      ],
+      "legacyCoupling": "沒有獨立環境耦合；資料語法及舊版限制屬本產品格式。",
+      "preservedProductIntent": "可檢視change清單及localizedFunctions；未接受不改來源圖。",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "src/core/sgrape_document.py",
+          "lineStart": 219,
+          "lineEnd": 219,
+          "kind": "source",
+          "observation": "升級比較"
+        },
+        {
+          "path": "src/core/sgrape_document.py",
+          "lineStart": 238,
+          "lineEnd": 238,
+          "kind": "source",
+          "observation": "缺baseline標記"
+        },
+        {
+          "path": "src/editor/import_ui.js",
+          "lineStart": 310,
+          "lineEnd": 310,
+          "kind": "source",
+          "observation": "差異顯示"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀現行 source 及相應反查入口；未宣稱真實瀏覽器／TD 已執行。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "符合 Preconditions",
+          "when": "Inspect upgrade",
+          "then": "可檢視change清單及localizedFunctions；未接受不改來源圖。"
+        }
+      ]
+    },
+    {
+      "id": "LC-DATA-012",
+      "domain": "Compatibility",
+      "name": "確認升級必須仍對應檢閱快照與宿主revision",
+      "classification": "Environment-bound",
+      "legacyBehavior": "Accept需review token/candidate、無busy，且baseGraph/baseRevision仍同；一次提交候選，成功替換結果圖。",
+      "triggerInput": "Accept upgrade",
+      "preconditions": [
+        "已有可編輯且目標相符的圖；檢視／檢查操作不要求可寫。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "TD upgrade inspect/apply、revision、歷史token可用。"
+      ],
+      "observableResult": "清upgradePending與草稿、Home並加入可Undo歷史；原生token關聯保存。",
+      "stateTransition": "成功後由操作前圖狀態轉為上述結果；失敗依 Failure Behavior 保持或呈現錯誤。",
+      "failureBehavior": "請求失敗使token失效；請求飛行中若本地草稿被callback改了，不覆盖草稿，標dirty/conflicted；stale load結果忽略。",
+      "persistenceBehavior": "成功套用後保存新圖；備份與原生回滾由host能力記錄。",
+      "undoRedoBehavior": "成功升級一筆nativeApplied圖歷史；未成功不虛構成功歷史。",
+      "importantEdgeCases": [],
+      "legacyCoupling": "TD upgrade inspect/apply、revision、歷史token可用。",
+      "preservedProductIntent": "清upgradePending與草稿、Home並加入可Undo歷史；原生token關聯保存。",
+      "transformationRequired": true,
+      "evidence": [
+        {
+          "path": "src/editor/import_ui.js",
+          "lineStart": 353,
+          "lineEnd": 353,
+          "kind": "source",
+          "observation": "提交／衝突／恢復"
+        },
+        {
+          "path": "src/editor/import_ui.js",
+          "lineStart": 230,
+          "lineEnd": 230,
+          "kind": "source",
+          "observation": "快照檢查"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀現行 source 及相應反查入口；未宣稱真實瀏覽器／TD 已執行。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "符合 Preconditions",
+          "when": "Accept upgrade",
+          "then": "清upgradePending與草稿、Home並加入可Undo歷史；原生token關聯保存。"
+        }
+      ]
+    },
+    {
+      "id": "LC-DATA-013",
+      "domain": "Compatibility",
+      "name": "嵌入的歷史 archive 只保留不執行",
+      "classification": "Portable",
+      "legacyBehavior": "含archive的圖可原樣保存，檢查回提示；archive不参与目前編譯／定義清單。",
+      "triggerInput": "載入帶archive的合法圖",
+      "preconditions": [
+        "已有可編輯且目標相符的圖；檢視／檢查操作不要求可寫。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "此行為本身不要求特定宿主；Legacy 操作介面仍由 TD 提供。"
+      ],
+      "observableResult": "archive內容保留而不改當前Shader結果。",
+      "stateTransition": "圖語意不變，歷史payload保留。",
+      "failureBehavior": "archive不是修復非法現行圖的替代；現行圖仍須通過驗證。",
+      "persistenceBehavior": "結果存入圖 JSON；接受並成功套用後隨宿主保存的圖保留，未套用只屬本地草稿。",
+      "undoRedoBehavior": "僅作圖的一部分跟隨整圖undo，沒有archive執行操作。",
+      "importantEdgeCases": [],
+      "legacyCoupling": "沒有獨立環境耦合；資料語法及舊版限制屬本產品格式。",
+      "preservedProductIntent": "archive內容保留而不改當前Shader結果。",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "tests/unit/test_documents.py",
+          "lineStart": 81,
+          "lineEnd": 81,
+          "kind": "test",
+          "observation": "存而不執行斷言"
+        },
+        {
+          "path": "src/core/sgrape_document.py",
+          "lineStart": 124,
+          "lineEnd": 124,
+          "kind": "source",
+          "observation": "archive提示"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀現行 source 及相應反查入口；未宣稱真實瀏覽器／TD 已執行。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "符合 Preconditions",
+          "when": "載入帶archive的合法圖",
+          "then": "archive內容保留而不改當前Shader結果。"
+        }
+      ]
+    },
+    {
+      "id": "LC-DATA-052",
+      "domain": "Compatibility",
+      "name": "舊合併Texture節點可拆為來源加Texture2D",
+      "classification": "Portable",
+      "legacyBehavior": "保留原sample的nodeID、UV輸入及輸出線，把sampler/TOPInput來源另置左邊并接sampler；已有对应source reference重用。",
+      "triggerInput": "Split legacy Texture",
+      "preconditions": [
+        "已有可編輯且目標相符的圖；檢視／檢查操作不要求可寫。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "此行為本身不要求特定宿主；Legacy 操作介面仍由 TD 提供。"
+      ],
+      "observableResult": "采样结果接線保留，声明引用移到source node；MAT fallback設定opaque-black。",
+      "stateTransition": "成功後由操作前圖狀態轉為上述結果；失敗依 Failure Behavior 保持或呈現錯誤。",
+      "failureBehavior": "找不到legacy sampler声明報錯，整筆回復；非Texture節點no-op。",
+      "persistenceBehavior": "結果存入圖 JSON；接受並成功套用後隨宿主保存的圖保留，未套用只屬本地草稿。",
+      "undoRedoBehavior": "透過編輯器 change/changeDeclaration 形成一次圖編輯；Undo 還原之前的圖，Redo 重做；已套用宿主後受原生歷史有效性檢查限制。",
+      "importantEdgeCases": [
+        "旧node hidden in新增menu但load保留，不能当已移除能力。"
+      ],
+      "legacyCoupling": "沒有獨立環境耦合；資料語法及舊版限制屬本產品格式。",
+      "preservedProductIntent": "采样结果接線保留，声明引用移到source node；MAT fallback設定opaque-black。",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "src/editor/functions_ui.js",
+          "lineStart": 492,
+          "lineEnd": 492,
+          "kind": "source",
+          "observation": "sampler/top兩分支"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀現行 source 及相應反查入口；未宣稱真實瀏覽器／TD 已執行。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "符合 Preconditions",
+          "when": "Split legacy Texture",
+          "then": "采样结果接線保留，声明引用移到source node；MAT fallback設定opaque-black。"
+        }
+      ]
+    },
+    {
+      "id": "LC-DATA-053",
+      "domain": "Compatibility",
+      "name": "舊TOP source format需要review遷移到有序槽",
+      "classification": "Environment-bound",
+      "legacyBehavior": "topSourceVersion!=1檢閱時提出normalize：舊Sampler/Texture轉TOPInput references，原input:0 aliases共用，保存default及UV/output；受影響外部functions localize。",
+      "triggerInput": "升級舊TOP圖",
+      "preconditions": [
+        "已有可編輯且目標相符的圖；檢視／檢查操作不要求可寫。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "外接TOP及公開參數身份需TD原生migration配合。"
+      ],
+      "observableResult": "候選採topInputs穩定ID，不再將舊sampler當新TOP宣告；接受前不改原圖。",
+      "stateTransition": "成功後由操作前圖狀態轉為上述結果；失敗依 Failure Behavior 保持或呈現錯誤。",
+      "failureBehavior": "仍不能compile或會損線升級blocked；原資料不被自動重存。",
+      "persistenceBehavior": "結果存入圖 JSON；接受並成功套用後隨宿主保存的圖保留，未套用只屬本地草稿。",
+      "undoRedoBehavior": "透過編輯器 change/changeDeclaration 形成一次圖編輯；Undo 還原之前的圖，Redo 重做；已套用宿主後受原生歷史有效性檢查限制。",
+      "importantEdgeCases": [
+        "topInputLegacyId、legacyKeys仍有歷史承諾，不是新使用者feature。"
+      ],
+      "legacyCoupling": "外接TOP及公開參數身份需TD原生migration配合。",
+      "preservedProductIntent": "候選採topInputs穩定ID，不再將舊sampler當新TOP宣告；接受前不改原圖。",
+      "transformationRequired": true,
+      "evidence": [
+        {
+          "path": "src/core/sgrape_core.py",
+          "lineStart": 920,
+          "lineEnd": 920,
+          "kind": "source",
+          "observation": "TOP迁移"
+        },
+        {
+          "path": "src/core/sgrape_document.py",
+          "lineStart": 254,
+          "lineEnd": 254,
+          "kind": "source",
+          "observation": "review整合"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀現行 source 及相應反查入口；未宣稱真實瀏覽器／TD 已執行。"
+      },
+      "unknownRefs": [
+        "LU-DATA-003"
+      ],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "符合 Preconditions",
+          "when": "升級舊TOP圖",
+          "then": "候選採topInputs穩定ID，不再將舊sampler當新TOP宣告；接受前不改原圖。"
+        }
+      ]
+    },
+    {
+      "id": "LC-DATA-059",
+      "domain": "Document integrity",
+      "name": "合法保存envelope revision有界且不得靜默修復",
+      "classification": "Portable",
+      "legacyBehavior": "保存revision必須精確整數0..9007199254740991，不接受bool／fraction／負數；已保存圖需valid而非repairable。",
+      "triggerInput": "inspect_saved_state／state-source",
+      "preconditions": [
+        "已有可編輯且目標相符的圖；檢視／檢查操作不要求可寫。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "此行為本身不要求特定宿主；Legacy 操作介面仍由 TD 提供。"
+      ],
+      "observableResult": "坏保存狀態走保護流程；revision不可失去精度後當作成功加载。",
+      "stateTransition": "載入成功或protected；不自动normalization。",
+      "failureBehavior": "duplicate JSON keys、NaN/Infinity、原文非str、oversize回error並保留原文。",
+      "persistenceBehavior": "revision跟graph在宿主envelope，不是使用者node值。",
+      "undoRedoBehavior": "inspect不入歷史。",
+      "importantEdgeCases": [],
+      "legacyCoupling": "沒有獨立環境耦合；資料語法及舊版限制屬本產品格式。",
+      "preservedProductIntent": "坏保存狀態走保護流程；revision不可失去精度後當作成功加载。",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "src/core/sgrape_document.py",
+          "lineStart": 134,
+          "lineEnd": 134,
+          "kind": "source",
+          "observation": "strict revision及raw"
+        },
+        {
+          "path": "src/core/sgrape_document.py",
+          "lineStart": 158,
+          "lineEnd": 158,
+          "kind": "source",
+          "observation": "JSsafeint界"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀現行 source 及相應反查入口；未宣稱真實瀏覽器／TD 已執行。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "符合 Preconditions",
+          "when": "inspect_saved_state／state-source",
+          "then": "坏保存狀態走保護流程；revision不可失去精度後當作成功加载。"
+        }
+      ],
+      "verificationRecords": [
+        {
+          "kind": "executed",
+          "path": "legacy-inventory-work/evidence/independent-probes.json",
+          "scope": "14 builtin definitions under valid MAT graph inspect/build/entry preserve graph; semantic name/ui comparisons; revision bounds. No wired caller/GPU/runtime UI claim."
+        }
+      ]
+    },
+    {
+      "id": "LC-NODE-370",
+      "domain": "Types / validation / compilation",
+      "name": "內建操作辨識與revision來源檢查",
+      "classification": "Portable",
+      "legacyBehavior": "內建definitionUuid與revisionHash決定可辨識性，catalog提供UI資料與emitter版本；已知history revision可識別並保留原reference，unknown/missing/malformed revision不混為一談。 此inspection不是deployment policy：unknown revision可標unresolved但已知UUID的compile_graph仍用現行emitter，不自動阻擋。",
+      "triggerInput": "提交圖/連線/編輯後請求型別契約、驗證或GLSL編譯。",
+      "preconditions": [],
+      "legacyEnvironmentAssumptions": [
+        "純資料/產碼邏輯可離線檢查；GPU/TD native編譯不是此步驟。"
+      ],
+      "observableResult": "內建definitionUuid與revisionHash決定可辨識性，catalog提供UI資料與emitter版本；已知history revision可識別並保留原reference，unknown/missing/malformed revision不混為一談。",
+      "stateTransition": "除另有说明外，讀圖並返回結果；compile不改寫輸入圖。",
+      "failureBehavior": "不支援emitter/version/duplicate catalog拒絕；graph攜帶archive不是可執行emitter authority；不因未知revision載入外来程式。",
+      "persistenceBehavior": "結果的ports/diagnostics/sourceMap是衍生資料；原始graph保存責任另列DATA盤點。",
+      "undoRedoBehavior": "此階段不是編輯事件；UI造成的輸入修改另有history，參照具體tests。",
+      "importantEdgeCases": [
+        "catalogVersion為0.8.259不代表完整產品版本0.8.271。",
+        "來源/provenance檢查涵蓋unused functions及同localid不同scope。",
+        "inspect_document可回valid但definitionReview.hasUnresolved；不能把來源warning說成compile硬阻擋。"
+      ],
+      "legacyCoupling": "所支援型別、目標stage與TD shell profile為legacy能力範圍。",
+      "preservedProductIntent": "內建definitionUuid與revisionHash決定可辨識性，catalog提供UI資料與emitter版本；已知history revision可識別並保留原reference，unknown/missing/malformed revision不混為一談。",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "src/core/sgrape_core.py",
+          "lineStart": 284,
+          "lineEnd": 391,
+          "kind": "source",
+          "observation": "catalog驗證與reference inspection"
+        },
+        {
+          "path": "tests/unit/test_catalog_contract.py",
+          "lineStart": 12,
+          "lineEnd": 105,
+          "kind": "test",
+          "observation": "revision/archive不可作authority斷言"
+        },
+        {
+          "path": "tests/unit/test_catalog_contract.py",
+          "lineStart": 12,
+          "lineEnd": 20,
+          "kind": "test",
+          "observation": "test_contract_is_deterministic_and_detached：已閱讀assertions，執行結果另見root證據。"
+        },
+        {
+          "path": "tests/unit/test_catalog_contract.py",
+          "lineStart": 22,
+          "lineEnd": 32,
+          "kind": "test",
+          "observation": "test_known_history_keeps_original_reference_and_compiled_result：已閱讀assertions，執行結果另見root證據。"
+        },
+        {
+          "path": "tests/unit/test_catalog_contract.py",
+          "lineStart": 34,
+          "lineEnd": 41,
+          "kind": "test",
+          "observation": "test_provenance_includes_unused_functions_and_duplicate_local_ids：已閱讀assertions，執行結果另見root證據。"
+        },
+        {
+          "path": "../evidence/portable-01.log",
+          "lineStart": 270,
+          "lineEnd": 281,
+          "kind": "executed",
+          "observation": "與固定舊baseline的hash/完整結果不相等；實際兼容性斷言失敗，不能宣称byte-for-byte legacy compatibility。尚未以此判定像素/功能已變。"
+        },
+        {
+          "path": "../evidence/portable-01.log",
+          "lineStart": 282,
+          "lineEnd": 291,
+          "kind": "executed",
+          "observation": "與固定舊baseline的hash/完整結果不相等；實際兼容性斷言失敗，不能宣称byte-for-byte legacy compatibility。尚未以此判定像素/功能已變。"
+        },
+        {
+          "path": "../evidence/portable-01.log",
+          "lineStart": 292,
+          "lineEnd": 303,
+          "kind": "executed",
+          "observation": "與固定舊baseline的hash/完整結果不相等；實際兼容性斷言失敗，不能宣称byte-for-byte legacy compatibility。尚未以此判定像素/功能已變。"
+        }
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "basis": "source與test期望可讀，但本次集中執行存在記錄中的實際failure/fixture阻塞；不宣稱全部通過。"
+      },
+      "unknownRefs": [
+        "LU-NODE-006"
+      ],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "graph夾帶未知revision的舊definitionarchive",
+          "when": "inspection",
+          "then": "報來源差異、不以archive取代目前emitter。"
+        }
+      ]
+    }
+  ],
+  "historicalAssertions": [
+    {
+      "sourcePointer": "/auditTraces/282",
+      "path": "tests/unit/test_catalog_contract.py",
+      "lineStart": 12,
+      "entry": "test_contract_is_deterministic_and_detached",
+      "capabilityIds": [
+        "LC-NODE-370"
+      ],
+      "disposition": "mapped",
+      "reason": "獨立test入口；保留下列斷言原文供核對。family fallback僅表示同檔測試集合，非宣稱每個operation逐一覆蓋。",
+      "assertions": [
+        {
+          "line": 14,
+          "expression": "self.assertEqual(a,b)"
+        },
+        {
+          "line": 16,
+          "expression": "self.assertEqual(c.digest(a),fingerprint)"
+        },
+        {
+          "line": 18,
+          "expression": "self.assertEqual(c.catalog_contract(),before)"
+        },
+        {
+          "line": 19,
+          "expression": "self.assertEqual(len(a['definitions']),len(c.CATALOG))"
+        },
+        {
+          "line": 20,
+          "expression": "self.assertEqual(len(a['history']),19)"
+        }
+      ]
+    },
+    {
+      "sourcePointer": "/auditTraces/283",
+      "path": "tests/unit/test_catalog_contract.py",
+      "lineStart": 22,
+      "entry": "test_known_history_keeps_original_reference_and_compiled_result",
+      "capabilityIds": [
+        "LC-NODE-370"
+      ],
+      "disposition": "mapped",
+      "reason": "獨立test入口；保留下列斷言原文供核對。family fallback僅表示同檔測試集合，非宣稱每個operation逐一覆蓋。",
+      "assertions": [
+        {
+          "line": 29,
+          "expression": "self.assertFalse(review['hasUnresolved'])"
+        },
+        {
+          "line": 30,
+          "expression": "self.assertTrue(all(row['status']=='compatible_history' for row in review['entries']))"
+        },
+        {
+          "line": 31,
+          "expression": "self.assertEqual(c.compile_graph(graph),normal)"
+        },
+        {
+          "line": 32,
+          "expression": "self.assertEqual(graph,before)"
+        }
+      ]
+    },
+    {
+      "sourcePointer": "/auditTraces/284",
+      "path": "tests/unit/test_catalog_contract.py",
+      "lineStart": 34,
+      "entry": "test_provenance_includes_unused_functions_and_duplicate_local_ids",
+      "capabilityIds": [
+        "LC-NODE-370"
+      ],
+      "disposition": "mapped",
+      "reason": "獨立test入口；保留下列斷言原文供核對。family fallback僅表示同檔測試集合，非宣稱每個operation逐一覆蓋。",
+      "assertions": [
+        {
+          "line": 38,
+          "expression": "self.assertTrue(report['hasUnresolved'])"
+        },
+        {
+          "line": 40,
+          "expression": "self.assertEqual([(r['node'],r['functionId']) for r in unknown],[('multiply',fn['id'])])"
+        },
+        {
+          "line": 41,
+          "expression": "self.assertEqual(g,before)"
+        }
+      ]
+    },
+    {
+      "sourcePointer": "/auditTraces/285",
+      "path": "tests/unit/test_catalog_contract.py",
+      "lineStart": 43,
+      "entry": "test_unknown_revision_never_uses_graph_archive_as_authority",
+      "capabilityIds": [
+        "LC-NODE-370"
+      ],
+      "disposition": "mapped",
+      "reason": "獨立test入口；保留下列斷言原文供核對。family fallback僅表示同檔測試集合，非宣稱每個operation逐一覆蓋。",
+      "assertions": [
+        {
+          "line": 47,
+          "expression": "self.assertTrue(report['hasUnresolved'])"
+        },
+        {
+          "line": 48,
+          "expression": "self.assertEqual(next(r for r in report['entries'] if r['node']=='color')['status'],'unresolved_revision')"
+        },
+        {
+          "line": 49,
+          "expression": "self.assertEqual(g,before)"
+        },
+        {
+          "line": 52,
+          "expression": "self.assertNotIn('#error',c.compile_graph(g)['pixel'])"
+        }
+      ]
+    },
+    {
+      "sourcePointer": "/auditTraces/286",
+      "path": "tests/unit/test_catalog_contract.py",
+      "lineStart": 54,
+      "entry": "test_missing_and_malformed_revisions_remain_distinct",
+      "capabilityIds": [
+        "LC-NODE-011",
+        "LC-NODE-370"
+      ],
+      "disposition": "mapped",
+      "reason": "獨立test入口；保留下列斷言原文供核對。family fallback僅表示同檔測試集合，非宣稱每個operation逐一覆蓋。",
+      "assertions": [
+        {
+          "line": 56,
+          "expression": "self.assertEqual(c.inspect_definition_reference(node)['status'],'unversioned')"
+        },
+        {
+          "line": 61,
+          "expression": "self.assertEqual(c.inspect_definition_reference(node)['status'],'unresolved_definition')"
+        },
+        {
+          "line": 63,
+          "expression": "self.assertEqual(c.inspect_definition_reference(node)['status'],'unresolved_definition')"
+        },
+        {
+          "line": 59,
+          "expression": "self.assertEqual(c.inspect_definition_reference(node)['status'],'unresolved_revision')"
+        }
+      ]
+    },
+    {
+      "sourcePointer": "/auditTraces/287",
+      "path": "tests/unit/test_catalog_contract.py",
+      "lineStart": 65,
+      "entry": "test_import_review_exposes_provenance_without_selecting_upgrade",
+      "capabilityIds": [
+        "LC-NODE-370"
+      ],
+      "disposition": "mapped",
+      "reason": "獨立test入口；保留下列斷言原文供核對。family fallback僅表示同檔測試集合，非宣稱每個operation逐一覆蓋。",
+      "assertions": [
+        {
+          "line": 69,
+          "expression": "self.assertEqual(report['status'],'valid')"
+        },
+        {
+          "line": 70,
+          "expression": "self.assertTrue(report['definitionReview']['hasUnresolved'])"
+        },
+        {
+          "line": 71,
+          "expression": "self.assertEqual(report['candidate'],graph)"
+        }
+      ]
+    },
+    {
+      "sourcePointer": "/auditTraces/288",
+      "path": "tests/unit/test_catalog_contract.py",
+      "lineStart": 73,
+      "entry": "test_catalog_rejects_unsupported_emitters_versions_and_duplicates",
+      "capabilityIds": [
+        "LC-NODE-370"
+      ],
+      "disposition": "mapped",
+      "reason": "獨立test入口；保留下列斷言原文供核對。family fallback僅表示同檔測試集合，非宣稱每個operation逐一覆蓋。",
+      "assertions": [
+        {
+          "line": 84,
+          "expression": "self.assertEqual(d,before)"
+        },
+        {
+          "line": 83,
+          "expression": "self.assertRaises(c.GraphError)"
+        }
+      ]
+    },
+    {
+      "sourcePointer": "/auditTraces/289",
+      "path": "tests/unit/test_catalog_contract.py",
+      "lineStart": 86,
+      "entry": "test_changed_historical_semantics_cannot_alias_current_emitter",
+      "capabilityIds": [
+        "LC-NODE-370"
+      ],
+      "disposition": "mapped",
+      "reason": "獨立test入口；保留下列斷言原文供核對。family fallback僅表示同檔測試集合，非宣稱每個operation逐一覆蓋。",
+      "assertions": [
+        {
+          "line": 89,
+          "expression": "self.assertRaisesRegex(c.GraphError,'Historical behavior')"
+        }
+      ]
+    },
+    {
+      "sourcePointer": "/auditTraces/290",
+      "path": "tests/unit/test_catalog_contract.py",
+      "lineStart": 91,
+      "entry": "test_reordered_catalog_preserves_content_contract",
+      "capabilityIds": [
+        "LC-NODE-370"
+      ],
+      "disposition": "mapped",
+      "reason": "獨立test入口；保留下列斷言原文供核對。family fallback僅表示同檔測試集合，非宣稱每個operation逐一覆蓋。",
+      "assertions": [
+        {
+          "line": 94,
+          "expression": "self.assertEqual({r['definition']['definitionUuid']:r for r in validated['definitions']},\n                         {r['definition']['definitionUuid']:r for r in DOCUMENT['definitions']})"
+        }
+      ]
+    },
+    {
+      "sourcePointer": "/auditTraces/291",
+      "path": "tests/unit/test_catalog_contract.py",
+      "lineStart": 97,
+      "entry": "test_core_loads_from_embedded_dat_without_disk_dependency",
+      "capabilityIds": [
+        "LC-NODE-370"
+      ],
+      "disposition": "mapped",
+      "reason": "獨立test入口；保留下列斷言原文供核對。family fallback僅表示同檔測試集合，非宣稱每個operation逐一覆蓋。",
+      "assertions": [
+        {
+          "line": 124,
+          "expression": "self.assertEqual(ns['catalog_contract'](),c.catalog_contract())"
+        },
+        {
+          "line": 125,
+          "expression": "self.assertEqual(ns['compile_graph'](c.demo_graph()),c.compile_graph(c.demo_graph()))"
+        }
+      ]
+    },
+    {
+      "sourcePointer": "/auditTraces/474",
+      "path": "tests/unit/test_sampler_split.py",
+      "lineStart": 65,
+      "entry": "test_legacy_definition_identity_preserved",
+      "capabilityIds": [
+        "LC-NODE-036",
+        "LC-NODE-042",
+        "LC-NODE-043"
+      ],
+      "disposition": "mapped",
+      "reason": "獨立test入口；保留下列斷言原文供核對。family fallback僅表示同檔測試集合，非宣稱每個operation逐一覆蓋。",
+      "assertions": [
+        {
+          "line": 68,
+          "expression": "self.assertEqual(c.digest({k:v for k,v in c.CATALOG.items() if k not in (*c.COMPOSITE_KEYS,*c.MATRIX_KEYS,*c._legacy_nodes.CALLS,'vertex_input','matrix_convert','buffer_fetch','buffer_length','pop_buffer','attribute','tex_attribute','sampler','texture_sample','constant','top_input','glsl_code','vec4','combine','vector_split','swizzle','vector','replace','spec_constant','comment','generated_glsl','compare','if','switch','math','router','sign','sqrt','floor','round','ceil','trunc','mod','rgb_to_hsv','hsv_to_rgb','remap','range_from','range_to','loop','zigzag','perlin_noise','simplex_noise','scalar','convert')}),baseline['catalogHash'])"
+        }
+      ]
+    },
+    {
+      "sourcePointer": "/auditTraces/544",
+      "path": "tests/unit/test_top_target.py",
+      "lineStart": 6,
+      "entry": "test_mat_compatibility",
+      "capabilityIds": [
+        "LC-NODE-040",
+        "LC-NODE-041"
+      ],
+      "disposition": "mapped",
+      "reason": "獨立test入口；保留下列斷言原文供核對。family fallback僅表示同檔測試集合，非宣稱每個operation逐一覆蓋。",
+      "assertions": [
+        {
+          "line": 12,
+          "expression": "self.assertEqual(legacy_single_buffer_result(actual),expected)"
+        }
+      ]
+    },
+    {
+      "sourcePointer": "/auditTraces/551",
+      "path": "tests/unit/test_type_contract.py",
+      "lineStart": 51,
+      "entry": "test_existing_graphs_produce_identical_results",
+      "capabilityIds": [
+        "LC-NODE-041",
+        "LC-NODE-361",
+        "LC-NODE-362"
+      ],
+      "disposition": "mapped",
+      "reason": "獨立test入口；保留下列斷言原文供核對。family fallback僅表示同檔測試集合，非宣稱每個operation逐一覆蓋。",
+      "assertions": [
+        {
+          "line": 71,
+          "expression": "self.assertEqual(len(graphs),138)"
+        },
+        {
+          "line": 70,
+          "expression": "self.assertEqual(c.digest(legacy_single_buffer_result(actual)),expected)"
+        },
+        {
+          "line": 70,
+          "expression": "self.assertEqual(graph,before)"
+        }
+      ]
+    }
+  ],
+  "historicalGoldenFailures": [
+    {
+      "sourcePointer": "/audits/nodes/testCoverage/executionRecords/12",
+      "path": "../evidence/portable-01.log",
+      "lineStart": 270,
+      "lineEnd": 281,
+      "entry": "FAIL: test_legacy_definition_identity_preserved (test_sampler_split.SamplerSplit.test_legacy_definition_identity_preserved)",
+      "capabilityIds": [
+        "LC-NODE-370",
+        "LC-NODE-365"
+      ],
+      "disposition": "mapped",
+      "reason": "與固定舊baseline的hash/完整結果不相等；實際兼容性斷言失敗，不能宣称byte-for-byte legacy compatibility。尚未以此判定像素/功能已變。",
+      "actualResult": "FAILED/ERROR",
+      "failureExcerpt": "FAIL: test_legacy_definition_identity_preserved (test_sampler_split.SamplerSplit.test_legacy_definition_identity_preserved)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-09-09\\td\\legacy-inventory-work\\snapshot\\tests\\unit\\test_sampler_split.py\", line 68, in test_legacy_definition_identity_preserved\n    self.assertEqual(c.digest({k:v for k,v in c.CATALOG.items() if k not in (*c.COMPOSITE_KEYS,*c.MATRIX_KEYS,*c._legacy_nodes.CALLS,'vertex_input','matrix_convert','buffer_fetch','buffer_length','pop_buffer','attribute','tex_attribute','sampler','texture_sample','constant','top_input','glsl_code','vec4','combine','vector_split','swizzle','vector','replace','spec_constant','comment','generated_glsl','compare','if','switch','math','router','sign','sqrt','floor','round','ceil','trunc','mod','rgb_to_hsv','hsv_to_rgb','remap','range_from','range_to','loop','zigzag','perlin_noise','simplex_noise','scalar','convert')}),baseline['catalogHash'])\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'a30f165cef205baecce1493983f3f1a9f0ef1e0279861d57f906e7f5c8ca3153' != 'e2288db6c76b9e07218"
+    },
+    {
+      "sourcePointer": "/audits/nodes/testCoverage/executionRecords/13",
+      "path": "../evidence/portable-01.log",
+      "lineStart": 282,
+      "lineEnd": 291,
+      "entry": "FAIL: test_mat_compatibility (test_top_target.TopTargetTests.test_mat_compatibility)",
+      "capabilityIds": [
+        "LC-NODE-370",
+        "LC-NODE-365"
+      ],
+      "disposition": "mapped",
+      "reason": "與固定舊baseline的hash/完整結果不相等；實際兼容性斷言失敗，不能宣称byte-for-byte legacy compatibility。尚未以此判定像素/功能已變。",
+      "actualResult": "FAILED/ERROR",
+      "failureExcerpt": "FAIL: test_mat_compatibility (test_top_target.TopTargetTests.test_mat_compatibility)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-09-09\\td\\legacy-inventory-work\\snapshot\\tests\\unit\\test_top_target.py\", line 12, in test_mat_compatibility\n    self.assertEqual(legacy_single_buffer_result(actual),expected)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'vertex': 'uniform sampler2D uTexture;\\nou[1849 chars]: []} != {'bindings': [{'id': 'texture_main', 'kind'[1765 chars]}\\n'}\nDiff is 3173 characters long. Set self.maxDiff to None to see it.\n\n======================================================================"
+    },
+    {
+      "sourcePointer": "/audits/nodes/testCoverage/executionRecords/14",
+      "path": "../evidence/portable-01.log",
+      "lineStart": 292,
+      "lineEnd": 303,
+      "entry": "FAIL: test_existing_graphs_produce_identical_results (test_type_contract.TypeContract.test_existing_graphs_produce_identical_results)",
+      "capabilityIds": [
+        "LC-NODE-370",
+        "LC-NODE-365"
+      ],
+      "disposition": "mapped",
+      "reason": "與固定舊baseline的hash/完整結果不相等；實際兼容性斷言失敗，不能宣称byte-for-byte legacy compatibility。尚未以此判定像素/功能已變。",
+      "actualResult": "FAILED/ERROR",
+      "failureExcerpt": "FAIL: test_existing_graphs_produce_identical_results (test_type_contract.TypeContract.test_existing_graphs_produce_identical_results)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-09-09\\td\\legacy-inventory-work\\snapshot\\tests\\unit\\test_type_contract.py\", line 70, in test_existing_graphs_produce_identical_results\n    self.assertEqual(c.digest(legacy_single_buffer_result(actual)),expected);self.assertEqual(graph,before)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'acf40955ffebb7de32e7a8568e64c1aed30f6ae529749dbacca7e26f840cc255' != '3bd58f070cb320aef028de2a11f08a7725735db2e5a9126c86fd1e36bc8ef824'\n- acf40955ffebb7de32e7a8568e64c1aed30f6ae529749dbacca7e26f840cc255\n+ 3bd58f070cb320aef028de2a11f08a7725735db2e5a9126c86fd1e36bc8ef824\n\n\n======================================================================"
+    }
+  ],
+  "fixtureEvidence": {
+    "sourceFile": "handoff/compatibility/capabilities.json",
+    "sourceFileSha256": "387fe3e5dc75f73dc711e867df18b292dcbf452569829767d1a2ccb835fa5a36",
+    "embeddedSavedStateProbes": [
+      {
+        "sourcePointer": "/executionEvidence/independentProbes/16",
+        "probe": "saved-revision",
+        "value": true,
+        "result": {
+          "status": "blocked",
+          "state": null,
+          "issues": [
+            {
+              "code": "saved-state",
+              "message": "Saved state needs a non-negative, safe integer revision."
+            }
+          ]
+        }
+      },
+      {
+        "sourcePointer": "/executionEvidence/independentProbes/17",
+        "probe": "saved-revision",
+        "value": -1,
+        "result": {
+          "status": "blocked",
+          "state": null,
+          "issues": [
+            {
+              "code": "saved-state",
+              "message": "Saved state needs a non-negative, safe integer revision."
+            }
+          ]
+        }
+      },
+      {
+        "sourcePointer": "/executionEvidence/independentProbes/18",
+        "probe": "saved-revision",
+        "value": 0,
+        "result": {
+          "status": "valid",
+          "state": {
+            "revision": 0,
+            "graph": {
+              "schemaVersion": 1,
+              "declarations": [
+                {
+                  "id": "texture_main",
+                  "kind": "sampler",
+                  "name": "uTexture",
+                  "type": "sampler2D",
+                  "source": "builtin:banana"
+                }
+              ],
+              "stages": {
+                "vertex": {
+                  "nodes": [
+                    {
+                      "id": "position",
+                      "definitionUuid": "sgrape.builtin.position",
+                      "revisionHash": "a8f6e28939535762aafc51e037a7955e38820196984d2084ae580e2fe57267ca",
+                      "params": {},
+                      "ui": {
+                        "x": 60,
+                        "y": 120
+                      }
+                    },
+                    {
+                      "id": "deform",
+                      "definitionUuid": "sgrape.builtin.deform",
+                      "revisionHash": "e1342e453626ff6e68766c387acd0ba91e2cd49350681e893fd5a478fa85fcd2",
+                      "params": {},
+                      "ui": {
+                        "x": 300,
+                        "y": 120
+                      }
+                    },
+                    {
+                      "id": "projection",
+                      "definitionUuid": "sgrape.builtin.to_clip",
+                      "revisionHash": "e98b9a603c583000dc69373c52f7a30d281d9438fd814692cd3c6b1070be5217",
+                      "params": {},
+                      "ui": {
+                        "x": 540,
+                        "y": 120
+                      }
+                    },
+                    {
+                      "id": "vertex",
+                      "definitionUuid": "sgrape.builtin.vertex_out",
+                      "revisionHash": "146d1926bb6e08237503bfb773d5eaea21d327edcc0f45e41afb6898a0710e76",
+                      "params": {},
+                      "ui": {
+                        "x": 780,
+                        "y": 120
+                      }
+                    }
+                  ],
+                  "edges": [
+                    {
+                      "from": [
+                        "position",
+                        "out"
+                      ],
+                      "to": [
+                        "deform",
+                        "position"
+                      ]
+                    },
+                    {
+                      "from": [
+                        "deform",
+                        "out"
+                      ],
+                      "to": [
+                        "projection",
+                        "world"
+                      ]
+                    },
+                    {
+                      "from": [
+                        "projection",
+                        "out"
+                      ],
+                      "to": [
+                        "vertex",
+                        "position"
+                      ]
+                    }
+                  ]
+                },
+                "pixel": {
+                  "nodes": [
+                    {
+                      "id": "color",
+                      "definitionUuid": "sgrape.builtin.color",
+                      "revisionHash": "248cb1f0646af23e93597f4cb941fccd9fdc65cfb36ce816467635766ccddedc",
+                      "params": {
+                        "value": [
+                          0.55,
+                          0.28,
+                          0.9,
+                          1
+                        ]
+                      },
+                      "ui": {
+                        "x": 180,
+                        "y": 140
+                      }
+                    },
+                    {
+                      "id": "pixel",
+                      "definitionUuid": "sgrape.builtin.pixel_out",
+                      "revisionHash": "b37335e4e2462dfa4c0e1cf4c3308f9d64d317ce0d916c5c596a1884a44e4f65",
+                      "params": {},
+                      "ui": {
+                        "x": 600,
+                        "y": 140
+                      }
+                    }
+                  ],
+                  "edges": [
+                    {
+                      "from": [
+                        "color",
+                        "out"
+                      ],
+                      "to": [
+                        "pixel",
+                        "color"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "issues": []
+        }
+      },
+      {
+        "sourcePointer": "/executionEvidence/independentProbes/19",
+        "probe": "saved-revision",
+        "value": 9007199254740991,
+        "result": {
+          "status": "valid",
+          "state": {
+            "revision": 9007199254740991,
+            "graph": {
+              "schemaVersion": 1,
+              "declarations": [
+                {
+                  "id": "texture_main",
+                  "kind": "sampler",
+                  "name": "uTexture",
+                  "type": "sampler2D",
+                  "source": "builtin:banana"
+                }
+              ],
+              "stages": {
+                "vertex": {
+                  "nodes": [
+                    {
+                      "id": "position",
+                      "definitionUuid": "sgrape.builtin.position",
+                      "revisionHash": "a8f6e28939535762aafc51e037a7955e38820196984d2084ae580e2fe57267ca",
+                      "params": {},
+                      "ui": {
+                        "x": 60,
+                        "y": 120
+                      }
+                    },
+                    {
+                      "id": "deform",
+                      "definitionUuid": "sgrape.builtin.deform",
+                      "revisionHash": "e1342e453626ff6e68766c387acd0ba91e2cd49350681e893fd5a478fa85fcd2",
+                      "params": {},
+                      "ui": {
+                        "x": 300,
+                        "y": 120
+                      }
+                    },
+                    {
+                      "id": "projection",
+                      "definitionUuid": "sgrape.builtin.to_clip",
+                      "revisionHash": "e98b9a603c583000dc69373c52f7a30d281d9438fd814692cd3c6b1070be5217",
+                      "params": {},
+                      "ui": {
+                        "x": 540,
+                        "y": 120
+                      }
+                    },
+                    {
+                      "id": "vertex",
+                      "definitionUuid": "sgrape.builtin.vertex_out",
+                      "revisionHash": "146d1926bb6e08237503bfb773d5eaea21d327edcc0f45e41afb6898a0710e76",
+                      "params": {},
+                      "ui": {
+                        "x": 780,
+                        "y": 120
+                      }
+                    }
+                  ],
+                  "edges": [
+                    {
+                      "from": [
+                        "position",
+                        "out"
+                      ],
+                      "to": [
+                        "deform",
+                        "position"
+                      ]
+                    },
+                    {
+                      "from": [
+                        "deform",
+                        "out"
+                      ],
+                      "to": [
+                        "projection",
+                        "world"
+                      ]
+                    },
+                    {
+                      "from": [
+                        "projection",
+                        "out"
+                      ],
+                      "to": [
+                        "vertex",
+                        "position"
+                      ]
+                    }
+                  ]
+                },
+                "pixel": {
+                  "nodes": [
+                    {
+                      "id": "color",
+                      "definitionUuid": "sgrape.builtin.color",
+                      "revisionHash": "248cb1f0646af23e93597f4cb941fccd9fdc65cfb36ce816467635766ccddedc",
+                      "params": {
+                        "value": [
+                          0.55,
+                          0.28,
+                          0.9,
+                          1
+                        ]
+                      },
+                      "ui": {
+                        "x": 180,
+                        "y": 140
+                      }
+                    },
+                    {
+                      "id": "pixel",
+                      "definitionUuid": "sgrape.builtin.pixel_out",
+                      "revisionHash": "b37335e4e2462dfa4c0e1cf4c3308f9d64d317ce0d916c5c596a1884a44e4f65",
+                      "params": {},
+                      "ui": {
+                        "x": 600,
+                        "y": 140
+                      }
+                    }
+                  ],
+                  "edges": [
+                    {
+                      "from": [
+                        "color",
+                        "out"
+                      ],
+                      "to": [
+                        "pixel",
+                        "color"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "issues": []
+        }
+      },
+      {
+        "sourcePointer": "/executionEvidence/independentProbes/20",
+        "probe": "saved-revision",
+        "value": 9007199254740992,
+        "result": {
+          "status": "blocked",
+          "state": null,
+          "issues": [
+            {
+              "code": "saved-state",
+              "message": "Saved state needs a non-negative, safe integer revision."
+            }
+          ]
+        }
+      }
+    ],
+    "positiveStatePointer": "/executionEvidence/independentProbes/18/result/state",
+    "positiveStateNormalizedJsonSha256": "c70f01a6ccae6adb0013a6443dce611660d444d49813ec6dfe17f86fd6690c86",
+    "hashMeaning": "SHA-256 of UTF-8 JSON.stringify(parsed state); not original source bytes or original raw-file hash",
+    "missing": [
+      "Original raw import bytes and wrapper",
+      "Full original catalog/history rows for selected UUID/revision and semantic emitter version",
+      "Exact unknown/malformed/archive/nested-function fixture setup",
+      "Full catalogHash and baseline fixture inputs/outputs for the three recorded golden failures"
+    ]
+  },
+  "proposedBatches": [
+    {
+      "id": "LC0-proposed",
+      "scope": "Immutable exact original fixture/catalog/oracle closure",
+      "status": "PROPOSED_NOT_ACTIVATED",
+      "dependsOn": [],
+      "output": "Data-only provenance-bound case matrix; no invented mappings or golden replacement"
+    },
+    {
+      "id": "LC1-proposed",
+      "scope": "One fully evidenced connected Color-to-pixel image fixture family through public conversion review/generation/save/load",
+      "status": "CONDITIONAL_NOT_READY_FOR_POSITIVE_COMPATIBILITY_CLAIM",
+      "dependsOn": [
+        "LC0-proposed",
+        "Required exact catalog/profile owners"
+      ],
+      "guard": "Do not strip the captured vertex chain/resources to manufacture this fixture",
+      "evidence": "Actual product UI, readonly/opaque/loss preservation, scoped provenance, exact definitions, one-Undo matching replacement, different-pin explicit fresh load, lifetime/History/ACK negatives, independent exact-candidate review"
+    },
+    {
+      "id": "LC2-proposed",
+      "scope": "Texture split, TOP normalization, broader revision and MAT/native/golden equivalence families",
+      "status": "PROPOSED_RESIDUAL",
+      "dependsOn": [
+        "Exact family fixtures and owners",
+        "Native provider evidence where required"
+      ]
+    }
+  ],
+  "sourceReferences": [
+    {
+      "purpose": "S02 accepted residual",
+      "file": "production/evidence/acceptance/s02/S02-independent-review.json",
+      "lines": "8, 14-20, 92-112"
+    },
+    {
+      "purpose": "S02 original non-delivery",
+      "file": "production/evidence/s02/REVIEW.md",
+      "lines": "11-13"
+    },
+    {
+      "purpose": "Classification A scope disposition",
+      "file": "production/evidence/s02-repair/REVIEW.md",
+      "lines": "30-34"
+    },
+    {
+      "purpose": "S02 acceptance and gates",
+      "file": "handoff/08_IMPLEMENTATION_PLAN.md",
+      "lines": "128-163"
+    },
+    {
+      "purpose": "AT-S02-03",
+      "file": "handoff/09_ACCEPTANCE_AND_CONFORMANCE.md",
+      "lines": "90"
+    },
+    {
+      "purpose": "G-VERSION-COMPAT",
+      "file": "handoff/10_KNOWN_GATES.md",
+      "lines": "705-717"
+    },
+    {
+      "purpose": "Legacy compatibility boundary",
+      "file": "handoff/11_LEGACY_COMPATIBILITY.md",
+      "lines": "16-22"
+    },
+    {
+      "purpose": "Prior independent NON-ISSUE",
+      "file": "handoff/provenance/final-independent-review-IH-003/HANDOFF_FINAL_INDEPENDENT_REVIEW.md",
+      "lines": "221, 234"
+    },
+    {
+      "purpose": "LC-NODE-370 full behavior",
+      "file": "handoff/compatibility/capabilities.json",
+      "lines": "100751 onward; /capabilities[id=LC-NODE-370]"
+    },
+    {
+      "purpose": "Read result and converter envelope",
+      "file": "production/src/application/inspection.ts",
+      "lines": "25-39, 69-70, 119-174"
+    },
+    {
+      "purpose": "Replacement and new load guards",
+      "file": "production/src/application/editor.ts",
+      "lines": "886-951"
+    },
+    {
+      "purpose": "Exact replacement constraints",
+      "file": "production/src/model/graph.ts",
+      "lines": "67-78, 1162-1171"
+    },
+    {
+      "purpose": "Only explicit envelope converter",
+      "file": "production/src/application/document-upgrade.ts",
+      "lines": "9-35"
+    },
+    {
+      "purpose": "Current exact registered owners",
+      "file": "production/apps/web/main.ts",
+      "lines": "74-91"
+    },
+    {
+      "purpose": "Current synthetic negative tests",
+      "file": "production/tests/unit/s02.test.ts",
+      "lines": "316-338"
+    },
+    {
+      "purpose": "Current browser synthetic negative test",
+      "file": "production/tests/browser/s02.spec.ts",
+      "lines": "181-205"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "README.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 14861,
+      "sha256": "2a195b5123af3ebc01e29cde2967b479ea7bedeeda966085d9f760b53abb5009"
+    },
+    {
+      "file": "AGENTS.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 2902,
+      "sha256": "babfdd30f507c0b597c96751c62dbe72aae429ec55625c571b9a8466fa42d13e"
+    },
+    {
+      "file": "workflow/COORDINATOR.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 12857,
+      "sha256": "e9b16b1a98868f4e29549a0ea0d9abfc75f460ca4e30fa1eb1ccd58393323d7e"
+    },
+    {
+      "file": "workflow/CONTINUOUS_DELIVERY.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 14175,
+      "sha256": "faac9607081318c2d2caaa476adb14fc28ca56c583c2773df6df0873e1212189"
+    },
+    {
+      "file": "implementation-state.json",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 44745,
+      "sha256": "35c8cd27bd61804e8c6239ef922794fd33f974d1d9e47aae225e38027b7bb270"
+    },
+    {
+      "file": "handoff/14_DOCUMENT_FORMAT.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 31344,
+      "sha256": "46ab90194b148fc8e1c7688d3eac8617685bce9f279606b3c0b31d03764dfb7d"
+    },
+    {
+      "file": "handoff/08_IMPLEMENTATION_PLAN.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 45504,
+      "sha256": "df9ad6d9e05d762b767b1d536b97eb6f71c82b6c152c180bcf586cb6a713713d"
+    },
+    {
+      "file": "handoff/09_ACCEPTANCE_AND_CONFORMANCE.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 28825,
+      "sha256": "d9c32c0a3ef1a47e2704c44e33e12d69ab1748cfd5cbb49e878f731671f6a7c2"
+    },
+    {
+      "file": "handoff/10_KNOWN_GATES.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 64343,
+      "sha256": "8374d473c1534e3627d37573119a6488863d8992e0318c8e1f0d71d99b184b2b"
+    },
+    {
+      "file": "handoff/11_LEGACY_COMPATIBILITY.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 5618,
+      "sha256": "8ba4f811dfb911b071f0bea17bd8ca043b847afc51537f00a44d26ebc4067138"
+    },
+    {
+      "file": "handoff/compatibility/capabilities.json",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 6586414,
+      "sha256": "387fe3e5dc75f73dc711e867df18b292dcbf452569829767d1a2ccb835fa5a36"
+    },
+    {
+      "file": "handoff/compatibility/behavior-contracts.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 685360,
+      "sha256": "de484d93122f27de6a756e559d9338ac8737889c0654a631f4f2caafed553988"
+    },
+    {
+      "file": "handoff/data/capability-coverage.json",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 9460585,
+      "sha256": "59bca889a8f2f29ad49a0f24573ea1b83f9b6baffafafcd181053d4b8db1aed1"
+    },
+    {
+      "file": "handoff/provenance/final-independent-review-IH-003/HANDOFF_FINAL_INDEPENDENT_REVIEW.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 39658,
+      "sha256": "100b2ce207e4b1094946fd5fb03f190c341df9f0b9b1beae528decb97d4e8e00"
+    },
+    {
+      "file": "production/evidence/acceptance/s02/README.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 1980,
+      "sha256": "b075d4b23a13c2232c4a10735daf957a8bc0749cea8452642b68953827d91113"
+    },
+    {
+      "file": "production/evidence/acceptance/s02/S02-independent-review.json",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 5711,
+      "sha256": "a35053bdb7fc5e70583dde209ca5e0f8a0f62a505d216239affcb7e629cafde9"
+    },
+    {
+      "file": "production/evidence/acceptance/s02/S02-human-owner-acceptance.json",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 4974,
+      "sha256": "5c5c86e79a0bd4941f367dd88c2b1df04fa420e84af6889c33d01881ffe0e47b"
+    },
+    {
+      "file": "production/evidence/s02/REVIEW.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 1917,
+      "sha256": "2c7bd8a2c18d83e8f740a57d7826f14df05cf55ed5ab36ddaf9dc62d18e00d38"
+    },
+    {
+      "file": "production/evidence/s02-repair/REVIEW.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 4648,
+      "sha256": "71a221b6e5a42d1e6b397e6b1fd9996ebabf37c574513bbcb5f1b144b49cda63"
+    },
+    {
+      "file": "production/conformance/S02_CONTRACT_MAP.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 11197,
+      "sha256": "968310456f88f2fa8c2d91cf2d0d3096b01c6755c6832075917d5709b4f30391"
+    },
+    {
+      "file": "production/evidence/continuous/20261005-01/inventory/report.md",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 21732,
+      "sha256": "edba25ff5bb7b58c472f944a7f426a54ba620c3e65ac9f941341fc480eea5712"
+    },
+    {
+      "file": "production/evidence/coordinator/continuous/20261005-01/inventory-collection-01.json",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 2266,
+      "sha256": "6203c3c231b1ba20ea9851e7e23a54d8cfc8dbf25c8275120669c4bc43073281"
+    },
+    {
+      "file": "production/src/application/inspection.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 5706,
+      "sha256": "6e0b2900830eb8ca5a2b5229dbf925bf30eac10e7670434835caa9c55d983cee"
+    },
+    {
+      "file": "production/src/application/document-upgrade.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 1308,
+      "sha256": "f35f9016e0ca06501e4c2ea5b260cf9bf49e2572743ad71ba7530134ddae00a5"
+    },
+    {
+      "file": "production/src/application/editor.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 52453,
+      "sha256": "a786da219dc566103c9f08a1a80b451a10aa9d5a12308517621f311b482e8856"
+    },
+    {
+      "file": "production/src/model/graph.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 84857,
+      "sha256": "69d09a03a44ec7902ec9878a2b67e5669ae3d8217c5937c010f18c1a9783ee12"
+    },
+    {
+      "file": "production/src/definitions/registry.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 6362,
+      "sha256": "9ad50603f8880dfdb1666bedfc21fa8639308722577d29a71e16b4baef652248"
+    },
+    {
+      "file": "production/src/persistence/codec.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 5072,
+      "sha256": "4c33327f6e06f380bb44dc9296b8f3d6d2a2ec99053b1ba5d2cde6599e161d4f"
+    },
+    {
+      "file": "production/src/modules/fixed-values.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 3659,
+      "sha256": "dd752e56d0c412d7afe713d00c284db7362ba0eefba313059dec1b895293be5a"
+    },
+    {
+      "file": "production/src/modules/nodes.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 8151,
+      "sha256": "7c24ec13c9dd4931f4b59440ba0dd3bcc051db6b0c5b83bb07f45c4d39005a2d"
+    },
+    {
+      "file": "production/src/modules/image.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 4738,
+      "sha256": "958d925b8acf175150e4cfb9089f7f426b495c328d8258b523f36d0222fe4e32"
+    },
+    {
+      "file": "production/src/modules/image-current.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 2499,
+      "sha256": "fbb7339dd59a61610a695f276de43ff07a7cbb74e20c97ff212839aa55d9502f"
+    },
+    {
+      "file": "production/src/modules/image-zero.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 5361,
+      "sha256": "4404ca09dda55c72ca3700befaf2c4e304cd453ec4341f234f81fd860745fd60"
+    },
+    {
+      "file": "production/src/modules/function-networks.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 3253,
+      "sha256": "fc062d22e93a67693fc1d91bd3ed036d2fe578d3fc53b521c9b616f4d5791f9e"
+    },
+    {
+      "file": "production/src/modules/function-operations.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 8392,
+      "sha256": "2505739980cdd86d67533bf3a327a1d07d8ce7c0dac6fcd2d62ed1d31cb9a4fd"
+    },
+    {
+      "file": "production/apps/web/main.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 28173,
+      "sha256": "4f6160d53ef4dbbf180fc74165b059594d832a3f391502926b4257be60b740fc"
+    },
+    {
+      "file": "production/tests/unit/s02.test.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 13501,
+      "sha256": "f41646439dd594402e22320058d82ec0bdd3152170cda49147b43b0f2b6644a4"
+    },
+    {
+      "file": "production/tests/browser/s02.spec.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 14934,
+      "sha256": "bf724ee57a90b81f64b0a9eeff766c06157c85c9a4a8a2ad41a7ecd3846e3560"
+    },
+    {
+      "file": "production/tests/browser/legacy-document.ts",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 1533,
+      "sha256": "7e90a85f1320f5768462e8730f3784ef9cab9f26497be129b680f325823aab8b"
+    },
+    {
+      "file": "production/evidence/s05/repair-02/samples/legacy-owner.grape.json",
+      "source": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 10296,
+      "sha256": "2bc735a55637ee42f7beeef7687a6e687fa62a8154dfc36cef3d4ebc152fbb86"
+    }
+  ],
+  "activity": {
+    "testsRun": false,
+    "buildsRun": false,
+    "installs": false,
+    "runtimeConnections": false,
+    "externalProjectAccess": false,
+    "publication": false,
+    "productStateEvidenceHandoffWrites": false,
+    "delegation": false,
+    "writeAllowlist": [
+      ".verification/continuous-legacy-compat-01/report.md",
+      ".verification/continuous-legacy-compat-01/report.json"
+    ],
+    "readOnlyCommandLimitation": "One metadata enumeration exceeded default child-process stdout buffer; no writes; narrowed reads completed."
+  },
+  "stop": "STOP_WRITING"
+}

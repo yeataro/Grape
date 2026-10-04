@@ -1,0 +1,42 @@
+[
+  {
+    "id": "layout-is-independent-of-dirty-save-ack-undo-redo",
+    "status": "PASS",
+    "detail": {
+      "layoutActions": 12,
+      "redoRestoredSavedBytes": true,
+      "dirtyAndSnapshotUnchanged": true
+    }
+  },
+  {
+    "id": "receive-restore-export-preflight-reentry-is-rejected",
+    "status": "PASS",
+    "detail": [
+      {
+        "phase": "restoreViewState",
+        "seen": "WORKSPACE_BUSY: WORKSPACE_BUSY"
+      },
+      {
+        "phase": "receive",
+        "seen": "WORKSPACE_BUSY: WORKSPACE_BUSY"
+      },
+      {
+        "phase": "exportViewState",
+        "seen": "WORKSPACE_BUSY: WORKSPACE_BUSY"
+      },
+      {
+        "phase": "canClose",
+        "seen": "WORKSPACE_BUSY: WORKSPACE_BUSY"
+      }
+    ]
+  },
+  {
+    "id": "export-failure-refuses-whole-save-and-opaque-unresolved-retry",
+    "status": "PASS",
+    "detail": {
+      "exportFailure": true,
+      "opaqueRetry": true,
+      "unresolvedPreserved": true
+    }
+  }
+]

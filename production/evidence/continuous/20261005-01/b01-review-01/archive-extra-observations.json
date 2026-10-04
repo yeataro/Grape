@@ -1,0 +1,487 @@
+{
+  "build": "archive",
+  "browser": "151.0.7922.34",
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+    "webgl2": true,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+  },
+  "before": {
+    "format": "grape.document",
+    "formatVersion": {
+      "major": 2,
+      "minor": 1
+    },
+    "graph": {
+      "id": "16e8b350-ac01-4fba-9240-6110fceb9a9e",
+      "name": "Untitled shader",
+      "kind": {
+        "moduleId": "grape.graph-kinds",
+        "version": "0.3.0",
+        "fingerprint": "sha256:675e4e5aca274cb7de4cd90eca0e3405eec406678e9f4dc90d96c48e422e795f",
+        "kindId": "grape.image"
+      },
+      "kindSettings": {},
+      "modules": [
+        {
+          "moduleId": "grape.nodes.basic",
+          "version": "0.1.0",
+          "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292"
+        },
+        {
+          "moduleId": "grape.nodes.fixed-values",
+          "version": "0.1.0",
+          "fingerprint": "sha256:0d75d254ae4654e672001bc326252ab9775c87b581b79c15e6e8d44fee59a6ba"
+        },
+        {
+          "moduleId": "grape.nodes.networks",
+          "version": "0.1.0",
+          "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2"
+        },
+        {
+          "moduleId": "grape.resources.extents",
+          "version": "0.1.0",
+          "fingerprint": "sha256:bcfaaca3ef01c57070e05b26e09bbcacde5d51f6ba0091b8b6aaf3d83efa3c60"
+        },
+        {
+          "moduleId": "grape.resources.image-sources",
+          "version": "0.2.0",
+          "fingerprint": "sha256:bb0ff902b36d7a07fc104412d0ccb11e4e7efed0106aa3c8595026dbcef8b212"
+        },
+        {
+          "moduleId": "grape.resources.function-networks",
+          "version": "0.1.0",
+          "fingerprint": "sha256:25d291427adb77405f826a636cd2a7c9a5851f0017cb779ced1a13e5a9b0b9e7"
+        },
+        {
+          "moduleId": "grape.nodes.function-operations",
+          "version": "0.1.0",
+          "fingerprint": "sha256:86501aa76e15aa05f3837ec050f2f883ab6aba6932e4ee59998a864432435b01"
+        },
+        {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.1.0",
+          "fingerprint": "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3"
+        },
+        {
+          "moduleId": "grape.nodes.image-output",
+          "version": "0.2.0",
+          "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+        },
+        {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.2.0",
+          "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+        },
+        {
+          "moduleId": "grape.nodes.image-output",
+          "version": "0.3.0",
+          "fingerprint": "sha256:675e4e5aca274cb7de4cd90eca0e3405eec406678e9f4dc90d96c48e422e795f"
+        },
+        {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.3.0",
+          "fingerprint": "sha256:675e4e5aca274cb7de4cd90eca0e3405eec406678e9f4dc90d96c48e422e795f"
+        },
+        {
+          "moduleId": "grape.resources.image-sources",
+          "version": "0.3.0",
+          "fingerprint": "sha256:675e4e5aca274cb7de4cd90eca0e3405eec406678e9f4dc90d96c48e422e795f"
+        }
+      ],
+      "stages": [
+        {
+          "id": "83f5676b-115b-4d6f-84c8-0d39803e059a",
+          "key": "vertex",
+          "stageKindId": "grape.stage.vertex",
+          "implementation": "profile-default",
+          "network": {
+            "id": "bc4a71c7-3d10-4b5c-803f-f8d01ade8e4b",
+            "nodes": [],
+            "edges": [],
+            "extensions": {}
+          },
+          "extensions": {}
+        },
+        {
+          "id": "9c044077-0497-49c8-a600-0fb51e9521ce",
+          "key": "pixel",
+          "stageKindId": "grape.stage.pixel",
+          "implementation": "network",
+          "network": {
+            "id": "f2f6e2d0-ec74-4486-ac42-a61880e5ba73",
+            "nodes": [
+              {
+                "id": "b9603421-8118-495a-aefb-1f6b0f565c12",
+                "name": "Image output",
+                "type": {
+                  "moduleId": "grape.nodes.image-output",
+                  "version": "0.3.0",
+                  "fingerprint": "sha256:675e4e5aca274cb7de4cd90eca0e3405eec406678e9f4dc90d96c48e422e795f",
+                  "typeId": "image-output"
+                },
+                "state": {},
+                "inputValues": {
+                  "color": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "ports": [
+                  {
+                    "key": "color",
+                    "direction": "input",
+                    "type": "glsl.vec4",
+                    "supply": "local",
+                    "defaultValue": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "connectionPolicy": "numeric"
+                  }
+                ],
+                "references": [],
+                "referencesComplete": true,
+                "position": [
+                  650,
+                  180
+                ],
+                "extensions": {}
+              },
+              {
+                "id": "6f14fc1a-a545-4643-993d-196ae3309683",
+                "name": "Float",
+                "type": {
+                  "moduleId": "grape.nodes.basic",
+                  "version": "0.1.0",
+                  "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292",
+                  "typeId": "float"
+                },
+                "state": {
+                  "value": 0.25
+                },
+                "inputValues": {},
+                "ports": [
+                  {
+                    "key": "value",
+                    "direction": "output",
+                    "type": "glsl.float"
+                  }
+                ],
+                "references": [],
+                "referencesComplete": true,
+                "position": [
+                  48,
+                  96
+                ],
+                "extensions": {}
+              }
+            ],
+            "edges": [],
+            "extensions": {}
+          },
+          "extensions": {}
+        }
+      ],
+      "resources": [],
+      "losses": [],
+      "recovery": [],
+      "extensions": {}
+    }
+  },
+  "layout": {
+    "version": 1,
+    "panes": [
+      {
+        "id": "actions",
+        "zone": "utility",
+        "weight": 1,
+        "tabs": [
+          "actions"
+        ],
+        "active": "actions"
+      },
+      {
+        "id": "inspector",
+        "zone": "right",
+        "weight": 1,
+        "tabs": [
+          "inspector"
+        ],
+        "active": "inspector"
+      },
+      {
+        "id": "code",
+        "zone": "utility",
+        "weight": 1,
+        "tabs": [
+          "code"
+        ],
+        "active": "code"
+      },
+      {
+        "id": "canvas-1",
+        "zone": "center",
+        "weight": 1,
+        "tabs": [
+          "canvas-1"
+        ],
+        "active": "canvas-1"
+      },
+      {
+        "id": "canvas-2",
+        "zone": "center",
+        "weight": 1,
+        "tabs": [
+          "canvas-2"
+        ],
+        "active": "canvas-2"
+      },
+      {
+        "id": "parameters-1",
+        "zone": "right",
+        "weight": 1,
+        "tabs": [
+          "parameters-1"
+        ],
+        "active": "parameters-1"
+      }
+    ],
+    "panels": [
+      {
+        "id": "actions",
+        "typeId": "grape.panel.actions",
+        "viewStateVersion": 1,
+        "state": {},
+        "paneId": "actions",
+        "hidden": false
+      },
+      {
+        "id": "inspector",
+        "typeId": "grape.panel.inspector",
+        "viewStateVersion": 1,
+        "state": {},
+        "paneId": "inspector",
+        "hidden": false
+      },
+      {
+        "id": "code",
+        "typeId": "grape.panel.code",
+        "viewStateVersion": 1,
+        "state": {},
+        "paneId": "code",
+        "hidden": false
+      },
+      {
+        "id": "canvas-1",
+        "typeId": "grape.panel.canvas",
+        "viewStateVersion": 1,
+        "state": {
+          "x": 24,
+          "y": 104,
+          "zoom": 1
+        },
+        "paneId": "canvas-1",
+        "hidden": false,
+        "collapsed": false,
+        "contextHint": {
+          "graphId": "16e8b350-ac01-4fba-9240-6110fceb9a9e",
+          "stageId": "9c044077-0497-49c8-a600-0fb51e9521ce",
+          "networkPath": [],
+          "selection": [
+            "6f14fc1a-a545-4643-993d-196ae3309683"
+          ],
+          "primary": "6f14fc1a-a545-4643-993d-196ae3309683"
+        }
+      },
+      {
+        "id": "canvas-2",
+        "typeId": "grape.panel.canvas",
+        "viewStateVersion": 1,
+        "state": {
+          "x": 24,
+          "y": 104,
+          "zoom": 1
+        },
+        "paneId": "canvas-2",
+        "hidden": false,
+        "collapsed": false,
+        "contextHint": {
+          "graphId": "16e8b350-ac01-4fba-9240-6110fceb9a9e",
+          "stageId": "9c044077-0497-49c8-a600-0fb51e9521ce",
+          "networkPath": [],
+          "selection": [],
+          "primary": null
+        }
+      },
+      {
+        "id": "parameters-1",
+        "typeId": "grape.panel.inspector",
+        "viewStateVersion": 1,
+        "state": {},
+        "paneId": "parameters-1",
+        "hidden": false,
+        "floating": {
+          "dockPaneId": "parameters-1",
+          "dockIndex": 0,
+          "width": 320,
+          "collapsed": false
+        }
+      }
+    ],
+    "widths": {
+      "left": 240,
+      "right": 320
+    }
+  },
+  "afterLayout": {
+    "version": 1,
+    "panes": [
+      {
+        "id": "actions",
+        "zone": "utility",
+        "weight": 1,
+        "tabs": [
+          "actions"
+        ],
+        "active": "actions"
+      },
+      {
+        "id": "inspector",
+        "zone": "right",
+        "weight": 1,
+        "tabs": [
+          "inspector"
+        ],
+        "active": "inspector"
+      },
+      {
+        "id": "code",
+        "zone": "utility",
+        "weight": 1,
+        "tabs": [
+          "code"
+        ],
+        "active": "code"
+      },
+      {
+        "id": "canvas-1",
+        "zone": "center",
+        "weight": 1,
+        "tabs": [
+          "canvas-1"
+        ],
+        "active": "canvas-1"
+      },
+      {
+        "id": "canvas-2",
+        "zone": "center",
+        "weight": 1,
+        "tabs": [
+          "canvas-2"
+        ],
+        "active": "canvas-2"
+      },
+      {
+        "id": "parameters-1",
+        "zone": "right",
+        "weight": 1,
+        "tabs": [
+          "parameters-1"
+        ],
+        "active": "parameters-1"
+      }
+    ],
+    "panels": [
+      {
+        "id": "actions",
+        "typeId": "grape.panel.actions",
+        "viewStateVersion": 1,
+        "state": {},
+        "paneId": "actions",
+        "hidden": false
+      },
+      {
+        "id": "inspector",
+        "typeId": "grape.panel.inspector",
+        "viewStateVersion": 1,
+        "state": {},
+        "paneId": "inspector",
+        "hidden": false
+      },
+      {
+        "id": "code",
+        "typeId": "grape.panel.code",
+        "viewStateVersion": 1,
+        "state": {},
+        "paneId": "code",
+        "hidden": false
+      },
+      {
+        "id": "canvas-1",
+        "typeId": "grape.panel.canvas",
+        "viewStateVersion": 1,
+        "state": {
+          "x": 24,
+          "y": 104,
+          "zoom": 1
+        },
+        "paneId": "canvas-1",
+        "hidden": false,
+        "collapsed": false,
+        "contextHint": {
+          "graphId": "16e8b350-ac01-4fba-9240-6110fceb9a9e",
+          "stageId": "9c044077-0497-49c8-a600-0fb51e9521ce",
+          "networkPath": [],
+          "selection": [
+            "6f14fc1a-a545-4643-993d-196ae3309683"
+          ],
+          "primary": "6f14fc1a-a545-4643-993d-196ae3309683"
+        }
+      },
+      {
+        "id": "canvas-2",
+        "typeId": "grape.panel.canvas",
+        "viewStateVersion": 1,
+        "state": {
+          "x": 24,
+          "y": 104,
+          "zoom": 1
+        },
+        "paneId": "canvas-2",
+        "hidden": false,
+        "collapsed": false,
+        "contextHint": {
+          "graphId": "16e8b350-ac01-4fba-9240-6110fceb9a9e",
+          "stageId": "9c044077-0497-49c8-a600-0fb51e9521ce",
+          "networkPath": [],
+          "selection": [],
+          "primary": null
+        }
+      },
+      {
+        "id": "parameters-1",
+        "typeId": "grape.panel.inspector",
+        "viewStateVersion": 1,
+        "state": {},
+        "paneId": "parameters-1",
+        "hidden": false,
+        "floating": {
+          "dockPaneId": "parameters-1",
+          "dockIndex": 0,
+          "width": 320,
+          "collapsed": false
+        }
+      }
+    ],
+    "widths": {
+      "left": 240,
+      "right": 320
+    }
+  },
+  "refusalMessage": "REVIEW_EXPORT_REFUSAL"
+}

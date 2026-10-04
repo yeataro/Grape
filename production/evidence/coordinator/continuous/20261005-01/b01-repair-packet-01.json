@@ -1,0 +1,625 @@
+{
+  "packetVersion": 1,
+  "packetType": "TARGETED_REPAIR_OR_REREVIEW",
+  "mode": "REPAIR",
+  "packetId": "CONTINUOUS-B01-REPAIR-01",
+  "actionKey": "yeataro/Grape:continuous-20261005:B01:repair:270e50e:01",
+  "workflowMode": "continuous-contract",
+  "runId": "GRAPE-CONTINUOUS-20261005-01",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+  "checkpoint": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+  "acceptedMain": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+  "acceptedMainMeaning": "Recovery checkpoint, not S06 acceptance",
+  "expectedWorkHead": "270e50e77634b3a5665daf8f471a71371140533c",
+  "currentExpectedHead": "270e50e77634b3a5665daf8f471a71371140533c",
+  "priorI": "dc653519515e167c75d967930defafcf19422197",
+  "priorR": "270e50e77634b3a5665daf8f471a71371140533c",
+  "PR": "not required",
+  "authorizationRef": {
+    "file": "production/evidence/coordinator/continuous/20261005-01/human-run-authorization-01.json",
+    "bytes": 22400,
+    "sha256": "49dd9a0500ae2a07e868fc1cc58c6528f0b50ab0c349f33c9bea8442aa9922fa"
+  },
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "canonicalAgent": "/root/s03_implementer_resume"
+  },
+  "sliceId": "S06",
+  "batch": "B01",
+  "findingGroup": "CONTINUOUS-B01-S06-WORKSPACE-01",
+  "attempt": 1,
+  "round": 1,
+  "originalReview": {
+    "file": "C:/Users/user/.codex/worktrees/continuous-b01-review-01/Grape/.verification/continuous-b01-review-01/INDEPENDENT_REVIEW_RESULT.json",
+    "bytes": 30915,
+    "sha256": "157f55bc1f9325639142995afd26beeb7e82d9e8bbf6f61be2486d3e5637d493"
+  },
+  "originalManifest": {
+    "file": "C:/Users/user/.codex/worktrees/continuous-b01-review-01/Grape/.verification/continuous-b01-review-01/supporting-evidence-manifest-01.json",
+    "bytes": 79655,
+    "sha256": "db4f1e16a138a956abda18d9b3d8e5ca0bff4cfc14e74f8aa5279434e08000e3"
+  },
+  "priorActionReceipt": {
+    "file": "production/evidence/coordinator/continuous/20261005-01/b01-review-collection-01.json",
+    "bytes": 3332,
+    "sha256": "5fd7d46c314ae2ef450e63e8c5a071d956e1b0e4a9311236ca69db227a582e79"
+  },
+  "findingIds": [
+    "B01-FR01",
+    "B01-FR02",
+    "B01-FR03"
+  ],
+  "counterexamples": [
+    {
+      "id": "B01-FR01",
+      "priority": "P2",
+      "severity": "BLOCKING_BOUNDED_PRODUCT_BEHAVIOR",
+      "title": "Group divider reinsert loses focus and pointer capture on its own resize publication",
+      "status": "OPEN",
+      "affectedScope": [
+        "LC-UI-062 group divider",
+        "AT-S06-01 bounded workspace",
+        "AT-S06-02 keyboard controls"
+      ],
+      "location": {
+        "file": "production/src/ui/workspace-view.ts",
+        "line": 600
+      },
+      "counterexample": {
+        "publicRoute": "Project actions > Second Canvas; interact with Resize canvas-1 and canvas-2",
+        "keyboard": "Click separator; ArrowDown moves value to416.50000000000006, then native focus is BODY. A second ArrowDown leaves value unchanged. Escape leaves weights1.0195838433292534 /0.9804161566707466 instead of original1/1.",
+        "pointer": "Drag the same separator70px with real Playwright mouse down/move/up: final weights remain1/1; expected changed weights.",
+        "observedOn": [
+          "Exact source at I/R",
+          "Exact rebuilt-and-hash-verified archive"
+        ],
+        "evidence": [
+          "source-pair-keyboard.json",
+          "archive-pair-keyboard.json",
+          "source-pair-pointer.json",
+          "archive-pair-pointer.json",
+          "independent-browser-results.json",
+          "independent-browser-output/"
+        ]
+      },
+      "cause": "syncPairs calls root.before(existingDivider) during every workspace publication, even when the divider is already correctly placed. Removing/reinserting the focused/captured node causes blur/lostpointercapture and defeats the shared divider gesture.",
+      "contract": [
+        "handoff/compatibility/behavior-contracts.md LC-UI-062/B01: keyboard adjustment, Escape initial-value rollback, group weights",
+        "handoff/16_VIEW_MOUNT_CONTRACT.md actual browser focus/pointer lifetime"
+      ],
+      "expectedBehavior": "Keep a correctly placed divider DOM node in place during value-only publication. Continuous pointer resize, repeated keyboard steps and Escape rollback must work without losing native focus/capture.",
+      "requiredRepairEvidence": "Trusted repeated Arrow/Shift/Home/End/Escape and drag/rollback on adjacent group dividers, plus actual pane reorder and natural Node Escape. Preserve original failing traces.",
+      "lineage": "Same general DOM reinsert/focus mechanism as the implementer-retained pre-final counterexample, now independently observed on group-divider updates. No inherited review budget reset is authorized."
+    },
+    {
+      "id": "B01-FR02",
+      "priority": "P2",
+      "severity": "BLOCKING_LIFECYCLE_CONFORMANCE",
+      "title": "Placeholder retry permits reentrant close and resurrects an orphan Panel",
+      "status": "OPEN",
+      "affectedScope": [
+        "B01 placeholder retry",
+        "Workspace own-publication reentry protection"
+      ],
+      "location": {
+        "file": "production/src/ui/workspace.ts",
+        "line": 422
+      },
+      "counterexample": {
+        "setup": "Use registered conforming reviewer Panel; initial restore throws, leaving placeholder P in pane main. Remove failure; install beforePanelDispose callback that calls workspace.close(P); invoke retry(P).",
+        "actual": "Reentrant close succeeds. retry subsequently writes its constructed replacement into records, but pane main has tabs[] and active:null. The live P record has no Tab; a later layout save would fail structural validation.",
+        "evidence": [
+          "independent-model.mjs",
+          "independent-model-results.json",
+          "retry-reentrant-counterexample.json"
+        ]
+      },
+      "cause": "construct restores #publishing before retry emits #beforeDispose; this lifecycle notification is outside the workspace mutation guard. The replacement is then installed without checking that the old record/placement survived.",
+      "contract": [
+        "handoff/04_EXTENSION_MODEL.md failures: Workspace own public API refuses notification reentry",
+        "handoff/executable-reference/repair/PANEL_COMPOSITION_CONTRACT.md failure/notification and retry sections",
+        "Reviewer packet required independent reentrant lifecycle and same-ID retry probes"
+      ],
+      "expectedBehavior": "Lifecycle callbacks during retry must not mutate Workspace. Keep the old record/Tab intact until the guarded replacement transition, and preserve structural consistency under callback errors.",
+      "requiredRepairEvidence": "Independent retry callback close/move/dispose reentry tests, owned Context retry, same-ID incarnation, stale callback rejection, no partial tab/record loss.",
+      "probeClassification": "Reviewer-authored synchronous conformance injection through public lifecycle API; not a physical-input or arbitrary-external-Panel qualification claim."
+    },
+    {
+      "id": "B01-FR03",
+      "priority": "P2",
+      "severity": "BLOCKING_SHARED_PERSISTENCE_CONFORMANCE",
+      "title": "Valid null private state is silently replaced with the original saved state",
+      "status": "OPEN",
+      "affectedScope": [
+        "B01 complete current-layout private state export",
+        "Shared ordinary Panel state contract"
+      ],
+      "location": {
+        "file": "production/src/ui/workspace.ts",
+        "line": 722
+      },
+      "counterexample": {
+        "setup": "Registered reviewer Panel restores {remember:original}; later its exportViewState returns the valid finite JSON value null. Call Workspace.save().",
+        "actual": "Saved panel.state is {remember:original}, not null. No error is reported.",
+        "evidence": [
+          "independent-model.mjs",
+          "independent-model-results.json"
+        ]
+      },
+      "cause": "Nullish-coalescing fallback treats a live Panel export of null as if no live instance exists.",
+      "contract": [
+        "handoff/04_EXTENSION_MODEL.md private finite JSON state and complete save/failure behavior",
+        "handoff/executable-reference/repair/PANEL_COMPOSITION_CONTRACT.md save returns complete private state",
+        "production/src/sdk/kernel.ts plain explicitly accepts null"
+      ],
+      "expectedBehavior": "Choose fallback based on instance absence, while preserving every valid JSON export including null. Invalid or throwing live export must refuse save.",
+      "requiredRepairEvidence": "Roundtrip null private state and retain opaque placeholder fallback; whole-save export-failure refusal remains intact.",
+      "scopeQualification": "This fallback line predates B01, but B01 introduces the current-layout save API that uses it. Observed by a minimal shared-seam conformance probe; no claim that current built-in Canvas/Parameters exporters return null or that all arbitrary external Panels are qualified."
+    }
+  ],
+  "authorizedScope": "Repair the three collected B01 independent findings and affected workspace/Panel/current-layout regressions only; preserve prior exact review and pending authorized controls/analysis. No new product semantics or catalog/Host batch.",
+  "requestedAction": "Original designated writer resumes once from exact R. Preserve raw review, pending coordinator receipts and read-only scouts first in a separate maintenance commit; then bounded product repair, meaningful self-checks, exact sealed visible build, I/R submission and guard-checked normal work push. Stop writing for Coordinator fresh targeted re-review. Optional Human preview does not gate this work.",
+  "acceptedExpectedBehavior": [
+    {
+      "id": "B01-FR01",
+      "expected": "Keep a correctly placed divider DOM node in place during value-only publication. Continuous pointer resize, repeated keyboard steps and Escape rollback must work without losing native focus/capture.",
+      "requiredRepairEvidence": "Trusted repeated Arrow/Shift/Home/End/Escape and drag/rollback on adjacent group dividers, plus actual pane reorder and natural Node Escape. Preserve original failing traces."
+    },
+    {
+      "id": "B01-FR02",
+      "expected": "Lifecycle callbacks during retry must not mutate Workspace. Keep the old record/Tab intact until the guarded replacement transition, and preserve structural consistency under callback errors.",
+      "requiredRepairEvidence": "Independent retry callback close/move/dispose reentry tests, owned Context retry, same-ID incarnation, stale callback rejection, no partial tab/record loss."
+    },
+    {
+      "id": "B01-FR03",
+      "expected": "Choose fallback based on instance absence, while preserving every valid JSON export including null. Invalid or throwing live export must refuse save.",
+      "requiredRepairEvidence": "Roundtrip null private state and retain opaque placeholder fallback; whole-save export-failure refusal remains intact."
+    }
+  ],
+  "allowedRepairScope": [
+    "Preserve native focus/pointer capture on correctly placed group divider during value-only Workspace publications. Handle real reorder/removal through existing shared lifetime/gesture ownership, without duplicating controllers or force-refocusing to hide DOM churn.",
+    "Guard the complete placeholder retry lifecycle transition against synchronous close/move/dispose/retarget/retry reentry; verify old record/incarnation and placement consistently and preserve atomic failure/cleanup.",
+    "Distinguish absent live instance from a legitimate null private-state export; preserve valid finite JSON and opaque fallback; invalid/throwing live export still refuses the whole save.",
+    "Add meaningful regression tests at public and shared contract boundaries. Reproduce each original counterexample before fixing or retain exact original evidence; use trusted pointer/keyboard for real interaction, no programmatic focus repair in test to mask defects."
+  ],
+  "contractRefs": [
+    {
+      "file": "handoff/04_EXTENSION_MODEL.md",
+      "bytes": 29664,
+      "sha256": "42f2df5e6345e592ba703efd15453110b6e7adb58d71a1ef482d7484a7373b4a"
+    },
+    {
+      "file": "handoff/05_DATA_AND_LIFECYCLE.md",
+      "bytes": 12428,
+      "sha256": "70102a5988ebe3e23992faa54a13a4eed058628273611ceb945429c5b5573f8e"
+    },
+    {
+      "file": "handoff/08_IMPLEMENTATION_PLAN.md",
+      "bytes": 45504,
+      "sha256": "df9ad6d9e05d762b767b1d536b97eb6f71c82b6c152c180bcf586cb6a713713d"
+    },
+    {
+      "file": "handoff/09_ACCEPTANCE_AND_CONFORMANCE.md",
+      "bytes": 28825,
+      "sha256": "d9c32c0a3ef1a47e2704c44e33e12d69ab1748cfd5cbb49e878f731671f6a7c2"
+    },
+    {
+      "file": "handoff/13_PRODUCTION_CONTRACT_SURFACE.md",
+      "bytes": 19338,
+      "sha256": "52be05f0db6eab935efc8869c703f20ce5bb8992ba583c311c9bc76d76a28294"
+    },
+    {
+      "file": "handoff/16_VIEW_MOUNT_CONTRACT.md",
+      "bytes": 21283,
+      "sha256": "9e2cdec344a66637f8b3a2f2b52547181ae38202d8a6632140348cd0e6d6dcb2"
+    },
+    {
+      "file": "handoff/17_PANEL_COMMAND_CONTRACT.md",
+      "bytes": 8949,
+      "sha256": "49b8feb35f38f8c56ee9ce446c8d230eac7456416706186913fdeb2a71ab6131"
+    },
+    {
+      "file": "handoff/executable-reference/repair/PANEL_COMPOSITION_CONTRACT.md",
+      "bytes": 12988,
+      "sha256": "d4cb5029138df600e6f8abd5b4cdaeecaa472f1dd6e20230ec13d6d033a84437"
+    },
+    {
+      "file": "handoff/compatibility/capabilities.json",
+      "bytes": 6586414,
+      "sha256": "387fe3e5dc75f73dc711e867df18b292dcbf452569829767d1a2ccb835fa5a36"
+    },
+    {
+      "file": "handoff/compatibility/behavior-contracts.md",
+      "bytes": 685360,
+      "sha256": "de484d93122f27de6a756e559d9338ac8737889c0654a631f4f2caafed553988"
+    }
+  ],
+  "acceptedDecisions": "Exact checkpoint accepted decisionReferences captured in authorization receipt; preserve DEC001 domain-separated History, DEC002/AC001 conversions, DEC003/AC002 subgraph modes, DEC004 Personal and DEC005 exact output version behavior.",
+  "allowedPaths": [
+    "production/apps/web/** necessary workspace integration",
+    "production/src/ui/**",
+    "production/src/sdk/ui.ts and necessary public Panel/route/view types",
+    "production/src/application/editor.ts Context lifetime/restore composition only",
+    "production/src/features/canvas.ts",
+    "production/src/features/inspector.ts",
+    "production/src/features/actions.ts",
+    "production/tests/** affected meaningful tests",
+    "production/tools/** necessary archive/verification helpers",
+    "production/evidence/continuous/20261005-01/**",
+    "production/evidence/coordinator/continuous/20261005-01/**",
+    "implementation-state.json",
+    "README.md"
+  ],
+  "prohibitedPaths": [
+    "handoff/**",
+    "historical evidence bytes",
+    "unrelated product behavior",
+    "production/debug.log"
+  ],
+  "exclusions": [
+    "No named preset retention or AT-S06-03 completion while G-PD-2 unresolved",
+    "No OP/Host Preview/native or eight-Panel/fullcatalog/arbitraryexternalPanel qualification claim",
+    "No deferred OC11 stacking/right-click socket ghost-follow/general AddBrowse initial placement or automatic generation default",
+    "No Legacy architecture/DOM copying; only accepted minimum primitive behavior reference",
+    "No second writer, main merge, release, force-push or fabricated Human acceptance",
+    "No B02/S05 catalog activation, S07 native integration, general redesign, named preset policy or new architecture decision.",
+    "Preserve optional preview4203 and all Legacy/TD services; use separate owned disposable loopback ports for self-checks. Coordinator deploys the later sealed candidate."
+  ],
+  "environment": {
+    "node": "25.5.0",
+    "playwright": "1.62.1",
+    "declaredBrowser": "Windows Chromium151 portable WebGL2/SwiftShader; report actual version",
+    "preview": "Use bounded disposable localhost checks; preserve existing4203 and Legacy services. No LAN/Tailscale prerequisite or new permanent service."
+  },
+  "verificationCommands": [
+    "node tools/verify-bootstrap.mjs",
+    "node handoff/tools/check-implementation-state.mjs --current",
+    "node --test tools/verify-bootstrap.test.mjs",
+    "production npm run typecheck",
+    "production npm run conformance",
+    "production npm test",
+    "Meaningful B01 public-browser workspace/routing/lifetime/restore negative tests and affected current S06/F2/core regressions",
+    "production npm run build and exact archive smoke; source/build/evidence SHA256 manifest",
+    "git diff --check; retain original evidence line endings"
+  ],
+  "reReviewCoverage": [
+    "FR01 repeated Arrow/Shift/Home/End/Escape, trusted group divider drag/commit/cancel, both source and exact archive; side dividers, real pane reorder and natural Node drag Escape affected regression.",
+    "FR02 beforePanelDispose close/move/dispose/retry reentry, callback throwing, veto, owned Context, same-ID stale mount/event, fresh authority and structural Tab/record consistency.",
+    "FR03 null + ordinary JSON values, opaque placeholder fallback, export throw/invalid refusal and current-layout save/restore roundtrip; no Graph dirty/History/ACK change.",
+    "Affected B01 routing/multiCanvas/drafts/float/layout source and archive regression, natural Escape/F2/selection/Help/public import paths only as changed impact requires."
+  ],
+  "inheritedCounters": {
+    "workspace": {
+      "reviewAttempt": 4,
+      "repairAttempt": 3,
+      "unsuccessfulRepairReReviewRounds": 2
+    },
+    "debugHover": {
+      "reviewAttempt": 2,
+      "repairAttempt": 1,
+      "unsuccessfulRepairReReviewRounds": 0
+    },
+    "ownerCorrections": {
+      "reviewAttempt": 1,
+      "repairAttempt": 0,
+      "unsuccessfulRepairReReviewRounds": 0
+    },
+    "rule": "New B01 finding group is only new scope; recurrence of original underlying defect uses original budget. At3 unsuccessful diagnose; do not reset by changing group name."
+  },
+  "budgetApplication": {
+    "currentB01ReviewAttempt": 1,
+    "currentB01TargetedRepairAttempt": 1,
+    "unsuccessfulB01RepairReReviewRounds": 0,
+    "rule": "Preserve inherited workspace unsuccessful rounds2. FR01 shares DOM reinsert/focus mechanism with retained pre-final self-check counterexample; self-check iteration is not an independent repair/re-review round. Conservatively use inherited remaining repair budget for recurrence rather than granting a fresh budget by naming B01. If this repair re-review is unsuccessful on that underlying group, record third unsuccessful round and perform technical diagnosis before further repair attempts. Do not erase old findings or counts. New FR02/03 are distinct counterexamples, but this packet does not reset any inherited counter."
+  },
+  "persistence": {
+    "reviewSource": "C:/Users/user/.codex/worktrees/continuous-b01-review-01/Grape/.verification/continuous-b01-review-01",
+    "reviewDestination": "production/evidence/continuous/20261005-01/b01-review-01",
+    "reviewFiles": "All402 manifest files plus original report and original manifest; exact bytes, hashes and original paths inside reports preserved. Separate relocation map only.",
+    "pendingReceipts": [
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/b00-persistence-collection-01.json",
+        "bytes": 1504,
+        "sha256": "1fc0d1a9975e7ecbaca1aa938f135a22ff61c4f72fdd874d45565bd92ef77a90"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/b01-review-collection-01.json",
+        "bytes": 3332,
+        "sha256": "5fd7d46c314ae2ef450e63e8c5a071d956e1b0e4a9311236ca69db227a582e79"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/b01-review-dispatch-result-01.json",
+        "bytes": 680,
+        "sha256": "cd5ddb7434111e8538d1a9eccbc279dc37d3f43a424087d0d3a8677a0267f096"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/b01-reviewer-packet-01.json",
+        "bytes": 18692,
+        "sha256": "90716a0c3a7e088787ed0b07a318f650f718039f1ee5307b8fba5c7a7ea18ec8"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/b01-submission-collection-01.json",
+        "bytes": 5936,
+        "sha256": "26b5c3467658285cc9a5362c8664f1a55799bbfc8fa2f2897192aa0ab23a3144"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/host-contracts-collection-01.json",
+        "bytes": 11792,
+        "sha256": "20c1c209a91a665ff553b44baeb2fb6606d237813fbd6a7062204987257558c7"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/host-contracts-dispatch-result-01.json",
+        "bytes": 634,
+        "sha256": "af98eb9ece2c5e52cdb432f70d42b2f5ee88bc57704c0a449679f4c7ff167139"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/host-contracts-scout-packet-01.json",
+        "bytes": 5949,
+        "sha256": "489458cd6fa516128cd9e2818bffc914ef362a1817976ad9a9008dafce17ef80"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/host-feasibility-collection-01.json",
+        "bytes": 5323,
+        "sha256": "d1a6c11aad7f7794edff065aa28b04b8b781923e39cc4ab2c70c744c0c34f7a6"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/host-feasibility-dispatch-result-01.json",
+        "bytes": 285,
+        "sha256": "f57141afabf6fbd7b8afbb6825d1413c6e2c06637875d71a8c7d048e2818ec12"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/host-feasibility-scout-packet-01.json",
+        "bytes": 2873,
+        "sha256": "edf79fa7035ca8593890d06668b24f0b823e4eb6735340c6772a661e56f4c20b"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/human-native-isolation-control-01.json",
+        "bytes": 2209,
+        "sha256": "22cf8a8d4c9285d79f20178446047ad646ac8ab25bf845823bb3f99239705173"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/human-native-isolation-control-02.json",
+        "bytes": 1243,
+        "sha256": "4ca569ed402b5c4b0be4e3f48eb34f85a8482d178248419fe691c992fd57f2c3"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/human-optional-preview-control-01.json",
+        "bytes": 2337,
+        "sha256": "0d32548305c793637da627a875a382693af04a795bfa7483c62231df4f80974c"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/legacy-compat-collection-01.json",
+        "bytes": 5575,
+        "sha256": "82257ad29ca234c24b3c50609dec241d6b3a0fabe9685397d9eba700ce31a9c4"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/legacy-compat-dispatch-result-01.json",
+        "bytes": 279,
+        "sha256": "29268be9ffa2356fbde110af15b7f2812015653ad5a7bddcf0d5edb00ec58794"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/legacy-compat-scout-packet-01.json",
+        "bytes": 2920,
+        "sha256": "17d4e129aa83c11b6c90a2ccea458c031b50a1652d44f7b7b4866cf143a408f1"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/native-isolation-preflight-note-01.json",
+        "bytes": 2248,
+        "sha256": "26cd7d1197e018e3bb1b8140374ff28752959b6054294e58a9dbc5da221c3249"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/optional-preview-b01-01/START-HERE.html",
+        "bytes": 3623,
+        "sha256": "21e1de2ab204d80e7fc7d17becff70a5691ee4109e6a7da08791342ea050c251"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/optional-preview-b01-01/deployment-result-01.json",
+        "bytes": 3835,
+        "sha256": "23e5693a204040443f31298971b82a398ae52765014ab5b87572e843f452d251"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/optional-preview-b01-01/deployment-smoke-01.json",
+        "bytes": 4246,
+        "sha256": "8615efa0345ffcc165c079905b6b691f262091005faffbebbf6916e4fd10d5ad"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/optional-preview-b01-01/deployment-smoke-02.json",
+        "bytes": 4026,
+        "sha256": "8f00186aa59b9f7f08713fc066b74f5279c64865e89db5e35cb0cb99e15d9b83"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/optional-preview-b01-01/editor-multi-panel-02.png",
+        "bytes": 82163,
+        "sha256": "291df937dbfe085b8753b4bc1c32f3ab29d8554d51c2931fa91a5baec4714828"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/optional-preview-b01-01/editor-narrow-02.png",
+        "bytes": 39483,
+        "sha256": "a34cb5df787e0b31d2a8c82a9c968fbd6cdffe3e5401e0162d822dec78bdeb6d"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/optional-preview-b01-01/guide-02.png",
+        "bytes": 102017,
+        "sha256": "6f88f093e3a1d029a05d91af2318573bed10fc00eb3aaf634c045c636c086201"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/optional-preview-b01-01/guide.png",
+        "bytes": 102017,
+        "sha256": "6f88f093e3a1d029a05d91af2318573bed10fc00eb3aaf634c045c636c086201"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/optional-preview-b01-01/preparation-01.json",
+        "bytes": 1642,
+        "sha256": "c2e39df4951402f376d390a7c9b4144b4d2d3dc5453ed9d75f016dc57a53048f"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/optional-preview-b01-01/request-01.json",
+        "bytes": 2784,
+        "sha256": "ff08dde71c6d73b6401d19c49cbe586665120bb098284d17054ad5b67ab975e8"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/optional-preview-b01-01/service-config-01.json",
+        "bytes": 1368,
+        "sha256": "597f88acd288cccb9c596c67c271f9c60bb8f1634da5b9ecc8d958620238981b"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/optional-preview-b01-01/service-start-01.json",
+        "bytes": 1059,
+        "sha256": "81fec320e65049ab2bbc37dc3d4d749e60eeadbc4177ddd23bb19a55fd3de60f"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/optional-preview-b01-01/smoke-trace-02.zip",
+        "bytes": 444110,
+        "sha256": "a16009e29044482b2a97dfa6428393daac7d5f4380252321a981d411038620da"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/optional-preview-readback-01.json",
+        "bytes": 3713,
+        "sha256": "6fecccae5b4a2f67890f9b5638a6848ed85db38d790ba82d1ee93224e8db3d9a"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/owner-host-direction-01.json",
+        "bytes": 2760,
+        "sha256": "a6b054577ff55284cb661b80edd78d8eaf1483bfb3a4afdb274ff618ed245025"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/owner-host-direction-02.json",
+        "bytes": 1920,
+        "sha256": "9903ff2b6a1509b8f11fafadd784ae2c02d4786be76a341ba2e2ec5fb3904c87"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/portable-catalog-collection-01.json",
+        "bytes": 2931,
+        "sha256": "618b31c143e323136e5d64022470d3b004e4dfeb64d1b0d202a26cebb076f9c1"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/portable-catalog-dispatch-result-01.json",
+        "bytes": 268,
+        "sha256": "b60af3db2fb9b0973fe03482dc438604d9bbaf9e22dfd46dd19e8da18aacd71c"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/portable-catalog-scout-packet-01.json",
+        "bytes": 2797,
+        "sha256": "91eaada8f7ab7305a20d5d1cb93005df48daf4ca236d1c4a02246fe4ece28f52"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/product-discussion-01.json",
+        "bytes": 1954,
+        "sha256": "27370d2188a561f18c47960f135d786c4ddd814db060b66ea52d3db4b96568cc"
+      },
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/product-questions-01.json",
+        "bytes": 1696,
+        "sha256": "87a867ed463140f57d37cced8e946e4130546e23d3ede2caffc954fbcdfdfddd"
+      },
+      {
+        "file": "production/evidence/continuous/20261005-01/b01-workspace/postcommit-result-01.json",
+        "bytes": 2460,
+        "sha256": "82b40f1553cd4e10ab0d507fa00ebfbf9d80087708daf6d4d71bfa3264b7918c"
+      },
+      {
+        "file": "production/evidence/continuous/20261005-01/b01-workspace/publication-intent-01.json",
+        "bytes": 1137,
+        "sha256": "cbab0f616a063a872977ce3d979ad6d94b505696ef93802af79357260fa3677c"
+      },
+      {
+        "file": "production/evidence/continuous/20261005-01/b01-workspace/publication-result-01.json",
+        "bytes": 982,
+        "sha256": "8d62ac2e784d870450ac249c254a68f3bd79f4d6a95756cf622a452927d80f59"
+      }
+    ],
+    "scouts": [
+      {
+        "source": ".verification/continuous-portable-catalog-01",
+        "destination": "production/evidence/continuous/20261005-01/portable-catalog",
+        "files": [
+          {
+            "file": ".verification/continuous-portable-catalog-01/report.md",
+            "bytes": 27285,
+            "sha256": "27aebea41057254141d39f85c7f38755c2fefcb98166774b4b1eb36ec48f9d6f"
+          },
+          {
+            "file": ".verification/continuous-portable-catalog-01/report.json",
+            "bytes": 794863,
+            "sha256": "6d1beda0163c3092511ffce7b329d0f8157d570834f0227933e0f7fca017945b"
+          }
+        ],
+        "status": "READ_ONLY_ANALYSIS_NOT_IMPLEMENTATION_OR_PASS",
+        "noWorkActivation": true
+      },
+      {
+        "source": ".verification/continuous-host-feasibility-01",
+        "destination": "production/evidence/continuous/20261005-01/host-feasibility",
+        "files": [
+          {
+            "file": ".verification/continuous-host-feasibility-01/report.md",
+            "bytes": 17282,
+            "sha256": "07436b203c4540a830b9444c35dcfcb18f09291d140ffb89e3e7a0359e493951"
+          },
+          {
+            "file": ".verification/continuous-host-feasibility-01/report.json",
+            "bytes": 99190,
+            "sha256": "e8c7a6fb9e1ab21339138bc6328e673da604ac79e7232b41f83a5ec6701e8c4c"
+          }
+        ],
+        "status": "READ_ONLY_ANALYSIS_NOT_IMPLEMENTATION_OR_PASS",
+        "noWorkActivation": true
+      },
+      {
+        "source": ".verification/continuous-legacy-compat-01",
+        "destination": "production/evidence/continuous/20261005-01/legacy-compat",
+        "files": [
+          {
+            "file": ".verification/continuous-legacy-compat-01/report.md",
+            "bytes": 21048,
+            "sha256": "964728185e013dfea4bcfaddb81813217fde2ce6aac925ea888e1f3b4198d8bb"
+          },
+          {
+            "file": ".verification/continuous-legacy-compat-01/report.json",
+            "bytes": 67436,
+            "sha256": "b6b28336308d8940e9970aa6250033f20a3925c3c46486f1c654778c2d52b717"
+          }
+        ],
+        "status": "READ_ONLY_ANALYSIS_NOT_IMPLEMENTATION_OR_PASS",
+        "noWorkActivation": true
+      },
+      {
+        "source": ".verification/continuous-host-contracts-01",
+        "destination": "production/evidence/continuous/20261005-01/host-contracts",
+        "files": [
+          {
+            "file": ".verification/continuous-host-contracts-01/report.md",
+            "bytes": 43002,
+            "sha256": "227d6b7a37e6d8b27908d4be0a92a9cf352cc450f133e04defee362248130b4b"
+          },
+          {
+            "file": ".verification/continuous-host-contracts-01/report.json",
+            "bytes": 143477,
+            "sha256": "776acee5b653e607a4076fcfe4e876a7300eddc91e8b44b3ad3e8d2cd5de27be"
+          }
+        ],
+        "status": "READ_ONLY_ANALYSIS_NOT_IMPLEMENTATION_OR_PASS",
+        "noWorkActivation": true
+      }
+    ],
+    "packetSelf": "Persist this exact packet and actual parent/child dispatch receipts when present, comparing bytes and hashes.",
+    "state": "S06 remains active and unaccepted. Update actual repaired implementationBaseline/build using existing schema and atomic validation; do not alter acceptedEvidence, completedSlices, gateDecisions or existing decisionReferences historical bytes. Add immutable progress/README links for actual B01 FAIL/repair and optional preview controls, not a second mutable state database.",
+    "noActivationFromScout": "Scouts are preservation only. Their proposals are not instructions to implement S05/S07 or add product decisions in this repair."
+  },
+  "publication": {
+    "target": "https://github.com/yeataro/Grape.git refs/heads/work",
+    "expectedRemoteMain": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+    "expectedRemoteWork": "270e50e77634b3a5665daf8f471a71371140533c",
+    "policy": "Reread remote heads immediately before normal descendant push. Reconcile unexpected movement; no force, no main merge/release. Necessary maintenance/repair/submission commits authorized."
+  },
+  "outputLocation": "production/evidence/continuous/20261005-01/b01-repair-01/",
+  "repairSubmission": "New exact I/R/build, changed-path impact, three finding-to-fix mappings, source/build/evidence manifests, original evidence preservation proof, selfchecks including failures/repair disposition, environment/limits, normal work push/readback, READY_FOR_TARGETED_REVIEW and STOP_WRITING.",
+  "resultRoute": "Coordinator collects exact submission then Fresh Reviewer isolated targeted re-review. PASS advances next eligible batch without Human preview/start gate; failure within retained budget returns technical route.",
+  "stopConditions": [
+    "STOP_WRITING after exact submitted/published result; no separate Human waiting checkpoint.",
+    "Pause only affected work for writer/ref conflict, exact contract conflict, exhausted retry identity or unavailable required environment; preserve work and diagnostic evidence."
+  ],
+  "provenance": "Human direct continuous run plus validated independently authored FAIL at I/R. Optional preview control affects delivery routing only; no new product acceptance."
+}

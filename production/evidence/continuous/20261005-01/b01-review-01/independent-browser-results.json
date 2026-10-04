@@ -1,0 +1,463 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "independent.config.mjs"
+    ],
+    "configFile": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent.config.mjs",
+    "rootDir": "C:/Users/user/.codex/worktrees/continuous-b01-review-01/Grape/.verification/continuous-b01-review-01",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/.codex/worktrees/continuous-b01-review-01/Grape/.verification/continuous-b01-review-01/independent-browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/user/.codex/worktrees/continuous-b01-review-01/Grape/.verification/continuous-b01-review-01",
+        "testIgnore": [],
+        "testMatch": [
+          "independent-browser.spec.ts"
+        ],
+        "timeout": 20000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "independent-browser.spec.ts",
+      "file": "independent-browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "source adjacent-group keyboard resize retains native focus and Escape restores pair",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 917,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"Resize canvas-1 and canvas-2\"\u001b[39m\nReceived: \u001b[31mnull\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"Resize canvas-1 and canvas-2\"\u001b[39m\nReceived: \u001b[31mnull\u001b[39m\n    at C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts:14:23",
+                    "location": {
+                      "file": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts",
+                      "column": 23,
+                      "line": 14
+                    },
+                    "snippet": "  12 |   await divider.click();await p.keyboard.press('ArrowDown');const afterOne=await divider.getAttribute('aria-valuenow');const focus=await p.evaluate(()=>({tag:document.activeElement?.tagName,role:document.activeElement?.getAttribute('role'),label:document.activeElement?.getAttribute('aria-label')}));await p.keyboard.press('ArrowDown');const afterTwo=await divider.getAttribute('aria-valuenow');await p.keyboard.press('Escape');const after=await download(p,'Export current layout');\n  13 |   save(build+'-pair-keyboard',{before,afterOne,focus,afterTwo,after});await p.screenshot({path:path.join(dir,build+'-pair-keyboard.png')});\n> 14 |   expect(focus.label).toBe('Resize canvas-1 and canvas-2');expect(Number(afterTwo)).toBeCloseTo(Number(afterOne)+8,0);expect(after.panes).toEqual(before.panes);\n     |                       ^\n  15 |  });\n  16 |  test(build+' adjacent-group native pointer drag changes weights and does not cancel itself',async({page:p})=>{\n  17 |   await p.goto('http://127.0.0.1:'+port);await clickAction(p,'Second Canvas');const before=await download(p,'Export current layout');const d=p.getByRole('separator',{name:'Resize canvas-1 and canvas-2',exact:true});const b=(await d.boundingBox())!;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts",
+                        "column": 23,
+                        "line": 14
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"Resize canvas-1 and canvas-2\"\u001b[39m\nReceived: \u001b[31mnull\u001b[39m\n\n  12 |   await divider.click();await p.keyboard.press('ArrowDown');const afterOne=await divider.getAttribute('aria-valuenow');const focus=await p.evaluate(()=>({tag:document.activeElement?.tagName,role:document.activeElement?.getAttribute('role'),label:document.activeElement?.getAttribute('aria-label')}));await p.keyboard.press('ArrowDown');const afterTwo=await divider.getAttribute('aria-valuenow');await p.keyboard.press('Escape');const after=await download(p,'Export current layout');\n  13 |   save(build+'-pair-keyboard',{before,afterOne,focus,afterTwo,after});await p.screenshot({path:path.join(dir,build+'-pair-keyboard.png')});\n> 14 |   expect(focus.label).toBe('Resize canvas-1 and canvas-2');expect(Number(afterTwo)).toBeCloseTo(Number(afterOne)+8,0);expect(after.panes).toEqual(before.panes);\n     |                       ^\n  15 |  });\n  16 |  test(build+' adjacent-group native pointer drag changes weights and does not cancel itself',async({page:p})=>{\n  17 |   await p.goto('http://127.0.0.1:'+port);await clickAction(p,'Second Canvas');const before=await download(p,'Export current layout');const d=p.getByRole('separator',{name:'Resize canvas-1 and canvas-2',exact:true});const b=(await d.boundingBox())!;\n    at C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts:14:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T20:48:27.355Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-output\\independent-browser-source-a0bd4-us-and-Escape-restores-pair\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-output\\independent-browser-source-a0bd4-us-and-Escape-restores-pair\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-output\\independent-browser-source-a0bd4-us-and-Escape-restores-pair\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts",
+                    "column": 23,
+                    "line": 14
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "02f2f4043c0abebcd4df-a5e673756e45eaeb88b5",
+          "file": "independent-browser.spec.ts",
+          "line": 9,
+          "column": 2
+        },
+        {
+          "title": "source adjacent-group native pointer drag changes weights and does not cancel itself",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 837,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1\u001b[39m\nReceived:   \u001b[31m1\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1\u001b[39m\nReceived:   \u001b[31m1\u001b[39m\n    at C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts:18:305",
+                    "location": {
+                      "file": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts",
+                      "column": 305,
+                      "line": 18
+                    },
+                    "snippet": "  16 |  test(build+' adjacent-group native pointer drag changes weights and does not cancel itself',async({page:p})=>{\n  17 |   await p.goto('http://127.0.0.1:'+port);await clickAction(p,'Second Canvas');const before=await download(p,'Export current layout');const d=p.getByRole('separator',{name:'Resize canvas-1 and canvas-2',exact:true});const b=(await d.boundingBox())!;\n> 18 |   await p.mouse.move(b.x+b.width/2,b.y+b.height/2);await p.mouse.down();await p.mouse.move(b.x+b.width/2,b.y+b.height/2+70,{steps:7});await p.mouse.up();const after=await download(p,'Export current layout');save(build+'-pair-pointer',{before,after});expect(after.panes.find(x=>x.id==='canvas-1').weight).toBeGreaterThan(before.panes.find(x=>x.id==='canvas-1').weight);\n     |                                                                                                                                                                                                                                                                                                                 ^\n  19 |  });\n  20 |  test(build+' natural Escape after real pane reorder preserves Graph and native focus',async({page:p})=>{\n  21 |   await p.goto('http://127.0.0.1:'+port);await createNode(p,'Float');await clickAction(p,'Second Canvas');await p.getByRole('button',{name:'Panel options in canvas-2',exact:true}).click();const menu=p.getByRole('dialog',{name:'Panel options',exact:true});await menu.getByRole('button',{name:'Move group earlier',exact:true}).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts",
+                        "column": 305,
+                        "line": 18
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1\u001b[39m\nReceived:   \u001b[31m1\u001b[39m\n\n  16 |  test(build+' adjacent-group native pointer drag changes weights and does not cancel itself',async({page:p})=>{\n  17 |   await p.goto('http://127.0.0.1:'+port);await clickAction(p,'Second Canvas');const before=await download(p,'Export current layout');const d=p.getByRole('separator',{name:'Resize canvas-1 and canvas-2',exact:true});const b=(await d.boundingBox())!;\n> 18 |   await p.mouse.move(b.x+b.width/2,b.y+b.height/2);await p.mouse.down();await p.mouse.move(b.x+b.width/2,b.y+b.height/2+70,{steps:7});await p.mouse.up();const after=await download(p,'Export current layout');save(build+'-pair-pointer',{before,after});expect(after.panes.find(x=>x.id==='canvas-1').weight).toBeGreaterThan(before.panes.find(x=>x.id==='canvas-1').weight);\n     |                                                                                                                                                                                                                                                                                                                 ^\n  19 |  });\n  20 |  test(build+' natural Escape after real pane reorder preserves Graph and native focus',async({page:p})=>{\n  21 |   await p.goto('http://127.0.0.1:'+port);await createNode(p,'Float');await clickAction(p,'Second Canvas');await p.getByRole('button',{name:'Panel options in canvas-2',exact:true}).click();const menu=p.getByRole('dialog',{name:'Panel options',exact:true});await menu.getByRole('button',{name:'Move group earlier',exact:true}).click();\n    at C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts:18:305"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T20:48:28.744Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-output\\independent-browser-source-2f49e--and-does-not-cancel-itself\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-output\\independent-browser-source-2f49e--and-does-not-cancel-itself\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-output\\independent-browser-source-2f49e--and-does-not-cancel-itself\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts",
+                    "column": 305,
+                    "line": 18
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "02f2f4043c0abebcd4df-d7f49e22cdb560c5450a",
+          "file": "independent-browser.spec.ts",
+          "line": 16,
+          "column": 2
+        },
+        {
+          "title": "source natural Escape after real pane reorder preserves Graph and native focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1141,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T20:48:30.027Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-output\\independent-browser-source-a539c-rves-Graph-and-native-focus\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "02f2f4043c0abebcd4df-72ead78773f096561ff9",
+          "file": "independent-browser.spec.ts",
+          "line": 20,
+          "column": 2
+        },
+        {
+          "title": "archive adjacent-group keyboard resize retains native focus and Escape restores pair",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 599,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"Resize canvas-1 and canvas-2\"\u001b[39m\nReceived: \u001b[31mnull\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"Resize canvas-1 and canvas-2\"\u001b[39m\nReceived: \u001b[31mnull\u001b[39m\n    at C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts:14:23",
+                    "location": {
+                      "file": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts",
+                      "column": 23,
+                      "line": 14
+                    },
+                    "snippet": "  12 |   await divider.click();await p.keyboard.press('ArrowDown');const afterOne=await divider.getAttribute('aria-valuenow');const focus=await p.evaluate(()=>({tag:document.activeElement?.tagName,role:document.activeElement?.getAttribute('role'),label:document.activeElement?.getAttribute('aria-label')}));await p.keyboard.press('ArrowDown');const afterTwo=await divider.getAttribute('aria-valuenow');await p.keyboard.press('Escape');const after=await download(p,'Export current layout');\n  13 |   save(build+'-pair-keyboard',{before,afterOne,focus,afterTwo,after});await p.screenshot({path:path.join(dir,build+'-pair-keyboard.png')});\n> 14 |   expect(focus.label).toBe('Resize canvas-1 and canvas-2');expect(Number(afterTwo)).toBeCloseTo(Number(afterOne)+8,0);expect(after.panes).toEqual(before.panes);\n     |                       ^\n  15 |  });\n  16 |  test(build+' adjacent-group native pointer drag changes weights and does not cancel itself',async({page:p})=>{\n  17 |   await p.goto('http://127.0.0.1:'+port);await clickAction(p,'Second Canvas');const before=await download(p,'Export current layout');const d=p.getByRole('separator',{name:'Resize canvas-1 and canvas-2',exact:true});const b=(await d.boundingBox())!;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts",
+                        "column": 23,
+                        "line": 14
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"Resize canvas-1 and canvas-2\"\u001b[39m\nReceived: \u001b[31mnull\u001b[39m\n\n  12 |   await divider.click();await p.keyboard.press('ArrowDown');const afterOne=await divider.getAttribute('aria-valuenow');const focus=await p.evaluate(()=>({tag:document.activeElement?.tagName,role:document.activeElement?.getAttribute('role'),label:document.activeElement?.getAttribute('aria-label')}));await p.keyboard.press('ArrowDown');const afterTwo=await divider.getAttribute('aria-valuenow');await p.keyboard.press('Escape');const after=await download(p,'Export current layout');\n  13 |   save(build+'-pair-keyboard',{before,afterOne,focus,afterTwo,after});await p.screenshot({path:path.join(dir,build+'-pair-keyboard.png')});\n> 14 |   expect(focus.label).toBe('Resize canvas-1 and canvas-2');expect(Number(afterTwo)).toBeCloseTo(Number(afterOne)+8,0);expect(after.panes).toEqual(before.panes);\n     |                       ^\n  15 |  });\n  16 |  test(build+' adjacent-group native pointer drag changes weights and does not cancel itself',async({page:p})=>{\n  17 |   await p.goto('http://127.0.0.1:'+port);await clickAction(p,'Second Canvas');const before=await download(p,'Export current layout');const d=p.getByRole('separator',{name:'Resize canvas-1 and canvas-2',exact:true});const b=(await d.boundingBox())!;\n    at C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts:14:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T20:48:31.302Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-output\\independent-browser-archiv-d256f-us-and-Escape-restores-pair\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-output\\independent-browser-archiv-d256f-us-and-Escape-restores-pair\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-output\\independent-browser-archiv-d256f-us-and-Escape-restores-pair\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts",
+                    "column": 23,
+                    "line": 14
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "02f2f4043c0abebcd4df-18992c24dbea23febf3e",
+          "file": "independent-browser.spec.ts",
+          "line": 9,
+          "column": 2
+        },
+        {
+          "title": "archive adjacent-group native pointer drag changes weights and does not cancel itself",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 797,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1\u001b[39m\nReceived:   \u001b[31m1\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1\u001b[39m\nReceived:   \u001b[31m1\u001b[39m\n    at C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts:18:305",
+                    "location": {
+                      "file": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts",
+                      "column": 305,
+                      "line": 18
+                    },
+                    "snippet": "  16 |  test(build+' adjacent-group native pointer drag changes weights and does not cancel itself',async({page:p})=>{\n  17 |   await p.goto('http://127.0.0.1:'+port);await clickAction(p,'Second Canvas');const before=await download(p,'Export current layout');const d=p.getByRole('separator',{name:'Resize canvas-1 and canvas-2',exact:true});const b=(await d.boundingBox())!;\n> 18 |   await p.mouse.move(b.x+b.width/2,b.y+b.height/2);await p.mouse.down();await p.mouse.move(b.x+b.width/2,b.y+b.height/2+70,{steps:7});await p.mouse.up();const after=await download(p,'Export current layout');save(build+'-pair-pointer',{before,after});expect(after.panes.find(x=>x.id==='canvas-1').weight).toBeGreaterThan(before.panes.find(x=>x.id==='canvas-1').weight);\n     |                                                                                                                                                                                                                                                                                                                 ^\n  19 |  });\n  20 |  test(build+' natural Escape after real pane reorder preserves Graph and native focus',async({page:p})=>{\n  21 |   await p.goto('http://127.0.0.1:'+port);await createNode(p,'Float');await clickAction(p,'Second Canvas');await p.getByRole('button',{name:'Panel options in canvas-2',exact:true}).click();const menu=p.getByRole('dialog',{name:'Panel options',exact:true});await menu.getByRole('button',{name:'Move group earlier',exact:true}).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts",
+                        "column": 305,
+                        "line": 18
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1\u001b[39m\nReceived:   \u001b[31m1\u001b[39m\n\n  16 |  test(build+' adjacent-group native pointer drag changes weights and does not cancel itself',async({page:p})=>{\n  17 |   await p.goto('http://127.0.0.1:'+port);await clickAction(p,'Second Canvas');const before=await download(p,'Export current layout');const d=p.getByRole('separator',{name:'Resize canvas-1 and canvas-2',exact:true});const b=(await d.boundingBox())!;\n> 18 |   await p.mouse.move(b.x+b.width/2,b.y+b.height/2);await p.mouse.down();await p.mouse.move(b.x+b.width/2,b.y+b.height/2+70,{steps:7});await p.mouse.up();const after=await download(p,'Export current layout');save(build+'-pair-pointer',{before,after});expect(after.panes.find(x=>x.id==='canvas-1').weight).toBeGreaterThan(before.panes.find(x=>x.id==='canvas-1').weight);\n     |                                                                                                                                                                                                                                                                                                                 ^\n  19 |  });\n  20 |  test(build+' natural Escape after real pane reorder preserves Graph and native focus',async({page:p})=>{\n  21 |   await p.goto('http://127.0.0.1:'+port);await createNode(p,'Float');await clickAction(p,'Second Canvas');await p.getByRole('button',{name:'Panel options in canvas-2',exact:true}).click();const menu=p.getByRole('dialog',{name:'Panel options',exact:true});await menu.getByRole('button',{name:'Move group earlier',exact:true}).click();\n    at C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts:18:305"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T20:48:32.239Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-output\\independent-browser-archiv-5ec16--and-does-not-cancel-itself\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-output\\independent-browser-archiv-5ec16--and-does-not-cancel-itself\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-output\\independent-browser-archiv-5ec16--and-does-not-cancel-itself\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser.spec.ts",
+                    "column": 305,
+                    "line": 18
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "02f2f4043c0abebcd4df-e4b5fd93a07402d8fca8",
+          "file": "independent-browser.spec.ts",
+          "line": 16,
+          "column": 2
+        },
+        {
+          "title": "archive natural Escape after real pane reorder preserves Graph and native focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1108,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T20:48:33.475Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\.codex\\worktrees\\continuous-b01-review-01\\Grape\\.verification\\continuous-b01-review-01\\independent-browser-output\\independent-browser-archiv-1a2f3-rves-Graph-and-native-focus\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "02f2f4043c0abebcd4df-38f140bc88ddf9189a57",
+          "file": "independent-browser.spec.ts",
+          "line": 20,
+          "column": 2
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T20:48:27.007Z",
+    "duration": 7754.865,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

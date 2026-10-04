@@ -1,0 +1,3119 @@
+{
+  "reportVersion": 1,
+  "reportId": "CONTINUOUS-HOST-CONTRACTS-SCOUT-01-REPORT",
+  "status": "READ_ONLY_CONTRACT_PREPARATION_NOT_IMPLEMENTATION_OR_REVIEW",
+  "author": "/root/continuous_host_contracts_01",
+  "runId": "GRAPE-CONTINUOUS-20261005-01",
+  "workflowMode": "continuous-contract",
+  "preparedDate": "2026-10-05",
+  "timezone": "Asia/Taipei",
+  "repositoryRoot": "C:/Users/user/source/Grape",
+  "sourceCommit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+  "checkpoint": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+  "packet": {
+    "path": "production/evidence/coordinator/continuous/20261005-01/host-contracts-scout-packet-01.json",
+    "bytes": 5949,
+    "sha256": "489458cd6fa516128cd9e2818bffc914ef362a1817976ad9a9008dafce17ef80"
+  },
+  "inputRefs": [
+    {
+      "file": "production/evidence/coordinator/continuous/20261005-01/human-run-authorization-01.json",
+      "bytes": 22400,
+      "sha256": "49dd9a0500ae2a07e868fc1cc58c6528f0b50ab0c349f33c9bea8442aa9922fa",
+      "verification": "EXACT_BYTES_AND_SHA256_MATCHED"
+    },
+    {
+      "file": "production/evidence/coordinator/continuous/20261005-01/host-feasibility-collection-01.json",
+      "bytes": 5323,
+      "sha256": "d1a6c11aad7f7794edff065aa28b04b8b781923e39cc4ab2c70c744c0c34f7a6",
+      "verification": "EXACT_BYTES_AND_SHA256_MATCHED"
+    },
+    {
+      "file": "production/evidence/coordinator/continuous/20261005-01/owner-host-direction-01.json",
+      "bytes": 2760,
+      "sha256": "a6b054577ff55284cb661b80edd78d8eaf1483bfb3a4afdb274ff618ed245025",
+      "verification": "EXACT_BYTES_AND_SHA256_MATCHED"
+    },
+    {
+      "file": "production/evidence/coordinator/continuous/20261005-01/owner-host-direction-02.json",
+      "bytes": 1920,
+      "sha256": "9903ff2b6a1509b8f11fafadd784ae2c02d4786be76a341ba2e2ec5fb3904c87",
+      "verification": "EXACT_BYTES_AND_SHA256_MATCHED"
+    },
+    {
+      "file": "production/evidence/coordinator/continuous/20261005-01/human-native-isolation-control-01.json",
+      "bytes": 2209,
+      "sha256": "22cf8a8d4c9285d79f20178446047ad646ac8ab25bf845823bb3f99239705173",
+      "verification": "EXACT_BYTES_AND_SHA256_MATCHED"
+    },
+    {
+      "file": "production/evidence/coordinator/continuous/20261005-01/human-native-isolation-control-02.json",
+      "bytes": 1243,
+      "sha256": "4ca569ed402b5c4b0be4e3f48eb34f85a8482d178248419fe691c992fd57f2c3",
+      "verification": "EXACT_BYTES_AND_SHA256_MATCHED"
+    },
+    {
+      "file": ".verification/continuous-host-feasibility-01/report.md",
+      "bytes": 17282,
+      "sha256": "07436b203c4540a830b9444c35dcfcb18f09291d140ffb89e3e7a0359e493951",
+      "verification": "EXACT_BYTES_AND_SHA256_MATCHED"
+    },
+    {
+      "file": ".verification/continuous-host-feasibility-01/report.json",
+      "bytes": 99190,
+      "sha256": "e8c7a6fb9e1ab21339138bc6328e673da604ac79e7232b41f83a5ec6701e8c4c",
+      "verification": "EXACT_BYTES_AND_SHA256_MATCHED"
+    }
+  ],
+  "readBoundary": "Existing repository source is read only from git show 9357e2152f0d1150d31cae7d7c25085af203d288. Only packet and exact inputRefs use current filesystem. No in-progress B01 source or external Legacy project was read. Source state at pin is historical; this analysis does not change it.",
+  "roleNormalization": [
+    {
+      "role": "TD Host 實例",
+      "ownership": "具體執行環境；持有 OP/Par、active shader、current values、native queue。",
+      "identity": "actual process/instance witness、project/work-directory、hostId；不得只用 URL、port、名稱或歷史 PID 認定。"
+    },
+    {
+      "role": "TD Manager／服務元件",
+      "ownership": "提供 discovery/bootstrap、registered Shader directory、listener/access policy；可服務多個 client sessions 與多個 Shader Targets。",
+      "identity": "服務生命期與 session 政策；沒有契約規定一個 Manager 只能對一個 Connection，也沒有新增全域 singleton。"
+    },
+    {
+      "role": "Connection",
+      "ownership": "一個通訊 session/request-reply channel；可中斷、關閉、重建。",
+      "identity": "peer/service/session identity；不擁有 Graph、不自動取得全部 Targets 的 authority。"
+    },
+    {
+      "role": "Target",
+      "ownership": "接收 artifact/control/native operation 的明確位置。",
+      "identity": "exact {hostId,targetId,incarnation}；OP path/label 只是 locator。重建同 path 不是原 Target。"
+    },
+    {
+      "role": "Binding",
+      "ownership": "把 canonical Graph 的明確 delivery/live-write 意圖連到 Target；持 lease、sequence、receipts、runtime projections。",
+      "identity": "lease={bindingId,graphId,loadId,epoch}+Target；reload/rebind/reauthorize 失效。"
+    },
+    {
+      "role": "Graph／Application／EditorContext",
+      "ownership": "Graph 擁有 canonical document/History；Application 授權命令與轉換；Context 擁有導航、selection、draft 等編輯狀態。",
+      "identity": "graph persistent ID 與新 loadId 分開；Host readback 不是自動模型寫入。"
+    },
+    {
+      "role": "UI Workspace／Panel manager",
+      "ownership": "註冊、掛載、routing、layout/focus 與 Panel lifetime；這是部署啟動次序中的 UI Manager。",
+      "identity": "Panel/mount lease 不是 Host lease；Panel move/hide 不換 Target，不把 TD Manager 塞成全產品同步所有者。"
+    }
+  ],
+  "operationTable": [
+    {
+      "id": "OP-01",
+      "family": "CapabilityDirectory",
+      "effect": "application integration mutation/query",
+      "surface": "register / provide / require / withdraw（既有公開宣告）",
+      "input": "exact CapabilityDefinition {ref:{id,contractVersion},owner,scope,operations:[{name,contract,effect}]}；target scope 必帶 exact HostIdentity。",
+      "output": "typed Service 或 exact CAPABILITY_UNAVAILABLE。",
+      "rules": "初始 ID version=1；register/provide 原子、duplicate 拒絕，不 alias/fallback/silent replace。withdraw 只撤 lookup，已取得 handle 仍須 service lifetime fence；不能宣稱遠端取消。",
+      "source": "handoff/13_PRODUCTION_CONTRACT_SURFACE.md:94–118; handoff/contracts/public-surface.ts:149–184"
+    },
+    {
+      "id": "OP-02",
+      "family": "grape.host.discovery@1 application",
+      "effect": "query",
+      "surface": "discover / resolveDescriptor（規劃名稱）",
+      "input": "explicit locator/entry descriptor、expected identity/expiry、查詢意圖與取消生命期。",
+      "output": "零/一/多候選及其 Target/service identity、顯示/project/path/能力摘要；沒有 write grant。",
+      "rules": "不以候選唯一推定可信；無 Target 根入口仍無 Target。無 provider 明示 unavailable。Static Web 不新增 LAN 掃描；不把 historical manager ID、URL、port 或 UI active Context 當 host identity。",
+      "source": "06:13–25; S07:344–351; LC-HOST-001/012"
+    },
+    {
+      "id": "OP-03",
+      "family": "deployment/provider bootstrap → grape.host.target-session@1",
+      "effect": "session mutation with read-only handshake",
+      "surface": "verifyBootstrap / connect / authorize（規劃名稱）",
+      "input": "copied expected Target identity、descriptor expiry、caller origin/peer context、requested actions/capability versions、optional credentials、request identity。",
+      "output": "actual peer/fixture metadata、resolved exact identity/capabilities、per-action authorization result、revocable session/lease or explicit rejection。",
+      "rules": "identity match 不等於 trusted authentication；TD側核 action/origin/credential/size policy。先核 fixture PID或等價stable instance、project、work/source directory、receiver identity及port；缺失/不符零 native write。不得要求 discovery 為了註冊 application scope 而偽造 Target。",
+      "source": "06:13–25; HOST_QUALIFICATION §2; human-native-isolation-control-01/02"
+    },
+    {
+      "id": "OP-04",
+      "family": "HostDirectory / target-session query",
+      "effect": "query",
+      "surface": "listTargets / readTargetState / inspectDocument（規劃名稱）",
+      "input": "已明確連線 service/target、query request identity、所需讀取權限。",
+      "output": "registered valid unique Targets，顯示 project/path；Target revision、applied raw/document/version/state與fresh明示；inspection原始claim。",
+      "rules": "非法/重複/unregistered targets 不成為可寫項目；較新版本列表禁選並附理由，direct explicit inspection 保 raw readonly。fresh 必須 provider 明示且不存在 raw。inspection不能授權；copy readonly view 改 mode 無效，raw/version/Target改變撤claim。",
+      "source": "LC-HOST-003/012; HOST_QUALIFICATION §10"
+    },
+    {
+      "id": "OP-05",
+      "family": "Application Target selection",
+      "effect": "navigation/session mutation; no Graph Undo entry",
+      "surface": "switchTarget(clean / keepDraft / apply / cancel)（規劃名稱）",
+      "input": "明確候選 Target copy、switch intent、原 Graph/load/revision/Target、所選 draft policy。",
+      "output": "最後 readback 成功才替換選中 Target；failure/cancel保留舊選中對象與工作。",
+      "rules": "先等 Graph Operation 完成或 busy 拒絕；keep 寫完整document後精確讀回；apply 必須 Binding applied receipt（S08缺席明示 unavailable，不模擬成功）；cancel before dispatch不呼provider。每await重驗意圖/base/Target；開始過apply後取消導航不能聲稱遠端撤銷。",
+      "source": "LC-HOST-003; HOST_QUALIFICATION §10; AT-S07-01"
+    },
+    {
+      "id": "OP-06",
+      "family": "grape.host.target-session@1",
+      "effect": "query/event/session mutation",
+      "surface": "observeStatus / retryReadback / reconnect / disconnect / unbind（規劃名稱）",
+      "input": "Target identity、current session/epoch、已知 revision、visibility、pending request/receipt bases。",
+      "output": "connected/interrupted/restored/changed 等可辨狀態、stale observations、新驗authority/capability/epoch，或typed failure。",
+      "rules": "visible頁只讀恢復間隔至少5s；401/403/changed不自動輪詢；20s client timeout與15s未開始queue等待失敗/queue滿要可辨。same revision只恢復連線；changed要求review不覆draft。重连新lease/epoch、先readback；不blind replay write/Pulse/window。unsubscribe/cleanup不刪Graph或Host產物。",
+      "source": "LC-HOST-013; 05:87–101; 06:58–66"
+    },
+    {
+      "id": "OP-07",
+      "family": "provider access / host-affine dispatcher",
+      "effect": "query/mutation/event according to named operation",
+      "surface": "validateRequest / enqueueAction / queryReceipt（規劃名稱）",
+      "input": "valid schema、request identity、exact target/session/action、origin/peer/credential policy、size/deadline；寫入另帶basis。",
+      "output": "accepted pending / definitive denial / busy / unavailable / receipt or indeterminate；status拼字由typed契約定義。",
+      "rules": "queue capacity bounded、未開始逾期零執行、stop拒新/queued；只有host-affine loop碰native objects。始終在side effect前再驗identity/authority；開始後clienttimeout不是取消證據。HTTP provider映射400/401/403/413/415/503；不強制所有transport使用HTTP。",
+      "source": "LC-HOST-008/010/013; 06:48–56; HOST_QUALIFICATION §6"
+    },
+    {
+      "id": "OP-08",
+      "family": "TD service administration contribution（精確typed contract待writer定義）",
+      "effect": "explicit service mutation; outside Graph",
+      "surface": "setCredentialRequirement / setReachability（規劃名稱）",
+      "input": "明確service instance/admin action authority、expected configuration、desired mode；非Shader publication意圖。",
+      "output": "實際credential/reachability policy與成功或保留舊設定的失敗。",
+      "rules": "Requiretoken default off；off允缺/舊credential但仍驗action/origin/identity，on讀寫都需current token；toggle不換port/token/queue。Allowlan default false；strict同port rebind失敗回舊mode，不漂移port、不改firewall，old listener拒新操作。作用層是TD服務元件，不因Target UI切換而自動改。",
+      "source": "LC-HOST-008/009; 13:96–118"
+    },
+    {
+      "id": "OP-09",
+      "family": "optional share/launch/clipboard/QR providers",
+      "effect": "query for descriptor; explicit external mutation for launch/copy",
+      "surface": "shareDescriptor / renderQR / copyLink / launchEditor（規劃名稱）",
+      "input": "同一明確Target與可用origins；經驗证http/https入口；必要現有credential僅經准許share envelope。",
+      "output": "保Target連結、local-only說明、QR/copy/launch outcome，或unavailable。",
+      "rules": "share不啟LAN/改token；先留目前頁link，query失敗仍可用；requiretoken且缺token不給other origins；invalid origins丟棄、token非query/Graph/log。Windows app launch最多10×300ms探活、early nonzero/spawn failure僅fallback一次、0視為handoff；無provider不假稱已開其他設備。後續batch，首個basic Target path不依此。",
+      "source": "LC-HOST-002/011; 07; S07:344–351"
+    },
+    {
+      "id": "OP-10",
+      "family": "grape.host.native-window@1 target",
+      "effect": "explicit native mutation",
+      "surface": "native Viewer / native Parameters / existing direct Pulse（保留底層義務）",
+      "input": "exact Target/action/device/authority；Viewer與Parameters各自policy。",
+      "output": "正確TD設備的視窗動作結果；不Apply/save/generate，不Graph Undo。",
+      "rules": "Human退役兩個UI按鈕；本批不還原、不以此推論API/Pulse刪除。既有Viewer localhost proof與Parameters通用guards不同，remote disposition仍需各別處理。無決策不自行合併成一個isLocal或自動全刪API。",
+      "source": "LC-HOST-021/022; G-PD-4A/4B; owner-host-direction-01/02"
+    },
+    {
+      "id": "OP-11",
+      "family": "grape.host.artifact-publication@1 target（S08前置）",
+      "effect": "mutation/query",
+      "surface": "deliver / prepare / fencedCommit / receiptReadback / recover（規劃名稱）",
+      "input": "requestId、lease+Target、intentSeq、expectedHostRevision、同次generation artifact/code/schema/document/provenance、explicit resetSourceIds。",
+      "output": "applied / retained / rejected / superseded / indeterminate，原basis與新revision；native actual readback。",
+      "rules": "prepare不動active；native提交區段重驗lease/seq/revision/authority、取當時live values並合併compatible id/type；同request只同payload重試；code cache命中仍新delivery；document-only仍排序receipt；cleanup failure另報。S07不得stub applied。",
+      "source": "06:27–46; 05:63–85; HOST_QUALIFICATION §3; S08:368–407"
+    }
+  ],
+  "operationNamingStatus": "OP-01 is existing public declaration. Other names are engineering decomposition only, not existing production methods or newly accepted contract spelling. Semantics derive from cited accepted sources. Implementer must publish typed input/output/authority/retry/cancel/cleanup contracts and runtime validation before service registration.",
+  "s07CapabilityDataShape": "All eleven mapped S07 capability records lack operationSpec. Their exact existing contracts/failureBehavior/importantEdgeCases and other inventory fields are preserved below. No operationSpec is invented. operationSpec elsewhere for shader leaves does not create an S07 field.",
+  "s07CapabilityContracts": [
+    {
+      "locator": "handoff/compatibility/capabilities.json#/capabilities/555",
+      "operationSpecPresent": false,
+      "id": "LC-HOST-001",
+      "domain": "Host / runtime / remote preview / native parameters",
+      "name": "由 Shader 開啟對應 Editor，沿用或辨識管理者",
+      "classification": "Environment-bound",
+      "legacyBehavior": "Shader 的 Open Editor 先解析管理者，再啟動服務並註冊目前 Shader，以其 ID 建立網址。",
+      "triggerInput": "既有 Grape Shader 的 Openeditor Pulse",
+      "preconditions": [
+        "生成 Shader 存在；管理者可唯一辨識"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "TD Python 可遍歷帶管理標記的 COMP；瀏覽器由宿主啟動"
+      ],
+      "observableResult": "進入該 Shader 的 /shader/<32hexID>/，不是不帶對象的首頁；無法辨識時顯示需安裝所屬元件。",
+      "stateTransition": "未啟動服務→啟動；Shader 被註冊；瀏覽器開啟正確目標",
+      "failureBehavior": "相同 manager ID 不是唯一且全場也非唯一管理者時拒絕；服務或開瀏覽器的錯誤回報。",
+      "persistenceBehavior": "Shader ID／manager ID 在 COMP storage；網址 token 為服務 session；開頁本身不保存 TOE。",
+      "undoRedoBehavior": "開頁／註冊不是圖的 Undo 步驟。",
+      "importantEdgeCases": [
+        "零個同 ID 管理者且全場只有一個管理者時程式會採用它，較舊文件卻把跨管理身分採用列為未支援。"
+      ],
+      "legacyCoupling": "入口由本機 TD OP 的 Pulse 提供，天然帶入此 OP 身分。",
+      "preservedProductIntent": "低摩擦進入正確且可識別的宿主 Shader 編輯關係。",
+      "transformationRequired": true,
+      "evidence": [
+        {
+          "path": "src/td/runtime/shader_controls.py",
+          "lineStart": 1,
+          "lineEnd": 28,
+          "kind": "source",
+          "observation": "管理者唯一性、fallback 與帶 Shader ID 的啟動"
+        },
+        {
+          "path": "src/td/runtime/sgrape_runtime.py",
+          "lineStart": 431,
+          "lineEnd": 450,
+          "kind": "source",
+          "observation": "註冊／ID碰撞處理"
+        },
+        {
+          "path": "docs/features/UPDATING.md",
+          "lineStart": 25,
+          "lineEnd": 29,
+          "kind": "documentation",
+          "observation": "較舊管理者採用敘述"
+        }
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "basis": "目前快照程式與列出的測試／文件靜態核對；未執行 TouchDesigner 或瀏覽器實機操作。可攜測試的實際執行範圍另列 audit，不能代替原生驗證。"
+      },
+      "unknownRefs": [
+        "LU-HOST-002"
+      ],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "生成 Shader 存在；管理者可唯一辨識",
+          "when": "既有 Grape Shader 的 Openeditor Pulse",
+          "then": "進入該 Shader 的 /shader/<32hexID>/，不是不帶對象的首頁；無法辨識時顯示需安裝所屬元件。"
+        }
+      ]
+    },
+    {
+      "locator": "handoff/compatibility/capabilities.json#/capabilities/556",
+      "operationSpecPresent": false,
+      "id": "LC-HOST-002",
+      "domain": "Host / runtime / remote preview / native parameters",
+      "name": "Open Editor 的桌面視窗啟動與一般瀏覽器備援",
+      "classification": "Environment-bound",
+      "legacyBehavior": "Windows 已確認的 Chrome／Edge 可用 --app 視窗；不可用或提早非零離開則只備援開一般瀏覽器一次。另有 Open in Browser 直接一般開頁。",
+      "triggerInput": "Openeditor 或 Openinbrowser Pulse",
+      "preconditions": [
+        "http/https Editor URL 已建立"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "宿主可啟動預設瀏覽器；Windows 登錄與可執行檔可查；macOS 採一般瀏覽器"
+      ],
+      "observableResult": "支援的 Windows 安裝嘗試 app 視窗；其餘正常開頁；不因失敗反覆開分頁。",
+      "stateTransition": "launch→app accepted／fallback once",
+      "failureBehavior": "非 http/https 拒絕；spawn 錯誤備援；一般 opener 自身錯誤仍拋出；程序 code 0 視為已交接既有瀏覽器。",
+      "persistenceBehavior": "無 Graph／TOE 寫入；瀏覽器自身視窗持續性不由此功能保证。",
+      "undoRedoBehavior": "不納入圖或參數 Undo。",
+      "importantEdgeCases": [
+        "app 存活檢查最多10次、間隔300ms；macOS 未主張 app 模式實測。"
+      ],
+      "legacyCoupling": "OS 預設瀏覽器發現與開啟程序。",
+      "preservedProductIntent": "可靠開啟編輯介面且失敗時有可用入口。",
+      "transformationRequired": true,
+      "evidence": [
+        {
+          "path": "src/td/runtime/editor_launch.py",
+          "lineStart": 58,
+          "lineEnd": 138,
+          "kind": "source",
+          "observation": "瀏覽器辨識與一次備援"
+        },
+        {
+          "path": "src/td/runtime/shader_controls.py",
+          "lineStart": 17,
+          "lineEnd": 28,
+          "kind": "source",
+          "observation": "兩種 Pulse 分支"
+        },
+        {
+          "path": "docs/ui/EDITOR_LAUNCH.md",
+          "lineStart": 1,
+          "lineEnd": 20,
+          "kind": "documentation",
+          "observation": "入口與平台限制"
+        }
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "basis": "目前快照程式與列出的測試／文件靜態核對；未執行 TouchDesigner 或瀏覽器實機操作。可攜測試的實際執行範圍另列 audit，不能代替原生驗證。"
+      },
+      "unknownRefs": [
+        "LU-HOST-001"
+      ],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "http/https Editor URL 已建立",
+          "when": "Openeditor 或 Openinbrowser Pulse",
+          "then": "支援的 Windows 安裝嘗試 app 視窗；其餘正常開頁；不因失敗反覆開分頁。"
+        }
+      ]
+    },
+    {
+      "locator": "handoff/compatibility/capabilities.json#/capabilities/557",
+      "operationSpecPresent": false,
+      "id": "LC-HOST-003",
+      "domain": "Host / runtime / remote preview / native parameters",
+      "name": "列出管理範圍內的 Shader 並安全切換編輯目標",
+      "classification": "Environment-bound",
+      "legacyBehavior": "只列合法、唯一已註冊 ID 的 MAT/TOP，顯示工程與路徑；切換前等待進行中的操作，未套用草稿可先套用、保留此分頁 session 草稿或取消。",
+      "triggerInput": "GET shaders；選另一 Shader；Apply and switch／Keep draft and switch",
+      "preconditions": [
+        "Editor 已連接一個有效 Shader"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "同一 TD manager 的 Shader registry；同 origin sessionStorage"
+      ],
+      "observableResult": "乾淨圖直接前往新 ID；保留草稿經寫入回讀成功才離開；套用失敗維持原圖。",
+      "stateTransition": "目前 Shader 編輯頁→新 Shader 編輯頁；目前 Shader 模型僅按所選動作更新",
+      "failureBehavior": "重複／壞 ID 或未註冊者略過；較新版本列有原因且選項停用；storage失敗不離頁；忙碌拒絕切換。",
+      "persistenceBehavior": "Keep draft 存 sessionStorage 的 shader-specific key，非 native state；工程 path 只顯示。",
+      "undoRedoBehavior": "導航本身不建圖 Undo；每頁既有編輯 history 不跨導航承諾保存。",
+      "importantEdgeCases": [
+        "開較新版本的直接網址仍能只讀；從列表按鈕進入則被停用；這兩者不可混為一談。"
+      ],
+      "legacyCoupling": "registry與管理ID定義目前範圍，TD project.name 提供工程資訊。",
+      "preservedProductIntent": "清楚選擇正確實例且切換不悄悄丟掉尚未套用的工作。",
+      "transformationRequired": true,
+      "evidence": [
+        {
+          "path": "src/td/runtime/sgrape_runtime.py",
+          "lineStart": 330,
+          "lineEnd": 361,
+          "kind": "source",
+          "observation": "唯讀列舉範圍"
+        },
+        {
+          "path": "src/editor/app.js",
+          "lineStart": 565,
+          "lineEnd": 630,
+          "kind": "source",
+          "observation": "草稿保留與切換門檻"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "目前快照程式與列出的測試／文件靜態核對；未執行 TouchDesigner 或瀏覽器實機操作。可攜測試的實際執行範圍另列 audit，不能代替原生驗證。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "Editor 已連接一個有效 Shader",
+          "when": "GET shaders；選另一 Shader；Apply and switch／Keep draft and switch",
+          "then": "乾淨圖直接前往新 ID；保留草稿經寫入回讀成功才離開；套用失敗維持原圖。"
+        }
+      ]
+    },
+    {
+      "locator": "handoff/compatibility/capabilities.json#/capabilities/562",
+      "operationSpecPresent": false,
+      "id": "LC-HOST-008",
+      "domain": "Host / runtime / remote preview / native parameters",
+      "name": "可選要求 Editor session token，預設不要求",
+      "classification": "Environment-bound",
+      "legacyBehavior": "Requiretoken為False時API接受缺少或舊token；True時讀寫都需匹配當前session。static頁面仍可讀。切換選項不必重啟server。",
+      "triggerInput": "TD manager Requiretoken toggle；Editor API請求",
+      "preconditions": [
+        "runtime已啟動；若要求token需拿到當前開啟連結"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "同一manager session；token由TD生成，頁面fragment取入sessionStorage後清網址"
+      ],
+      "observableResult": "有效憑證正常讀寫；缺失／不符回401；選項切換保持port、token與queue。",
+      "stateTransition": "Requiretoken開／關；不改圖／native values",
+      "failureBehavior": "不正確token與啟用驗證後的舊憑證請求拒絕，body不套用。",
+      "persistenceBehavior": "要求驗證的設定是manager參數；token非圖欄位；頁面token只存分頁sessionStorage。",
+      "undoRedoBehavior": "設定不走graph Undo；驗證失敗無mutation。",
+      "importantEdgeCases": [
+        "舊LAN文件把token說成必要，current code與可攜測試明確default off；分享連結仍可附token。"
+      ],
+      "legacyCoupling": "宿主提供HTTP服務與session憑證，前端同origin送header。",
+      "preservedProductIntent": "按使用者選擇限制控制權，且憑證失效時清楚拒絕而非誤改狀態。",
+      "transformationRequired": true,
+      "evidence": [
+        {
+          "path": "src/td/runtime/sgrape_runtime.py",
+          "lineStart": 1938,
+          "lineEnd": 1954,
+          "kind": "source",
+          "observation": "defaultFalse"
+        },
+        {
+          "path": "src/td/runtime/sgrape_runtime.py",
+          "lineStart": 2160,
+          "lineEnd": 2200,
+          "kind": "source",
+          "observation": "請求驗證"
+        },
+        {
+          "path": "src/editor/app.js",
+          "lineStart": 3,
+          "lineEnd": 7,
+          "kind": "source",
+          "observation": "fragment到sessionStorage"
+        },
+        {
+          "path": "tests/unit/test_lan_access.py",
+          "lineStart": 59,
+          "lineEnd": 64,
+          "kind": "test",
+          "observation": "預設無token仍讀取"
+        },
+        {
+          "path": "tests/unit/test_lan_access.py",
+          "lineStart": 117,
+          "lineEnd": 149,
+          "kind": "test",
+          "observation": "toggle不重啟與主執行緒參數快照"
+        }
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "basis": "目前快照程式與列出的測試／文件靜態核對；未執行 TouchDesigner 或瀏覽器實機操作。可攜測試的實際執行範圍另列 audit，不能代替原生驗證。"
+      },
+      "unknownRefs": [
+        "LU-HOST-003"
+      ],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "runtime已啟動；若要求token需拿到當前開啟連結",
+          "when": "TD manager Requiretoken toggle；Editor API請求",
+          "then": "有效憑證正常讀寫；缺失／不符回401；選項切換保持port、token與queue。"
+        }
+      ]
+    },
+    {
+      "locator": "handoff/compatibility/capabilities.json#/capabilities/563",
+      "operationSpecPresent": false,
+      "id": "LC-HOST-009",
+      "domain": "Host / runtime / remote preview / native parameters",
+      "name": "切換區網可達性但不改變正在編輯的 Shader",
+      "classification": "Environment-bound",
+      "legacyBehavior": "Allowlan預設False只監聽loopback；開啟改聽所有IPv4介面。切換保持port、session與排隊操作，失敗回原設定。",
+      "triggerInput": "Allowlan toggle",
+      "preconditions": [
+        "TD networking可bind目前port"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "區網路由、防火牆與TD程序permission由使用者環境決定"
+      ],
+      "observableResult": "開啟後可使用列出的區網IP連結；關閉後不再接收非loopback；失敗不漂移到新port。",
+      "stateTransition": "listen範圍變更；圖、值與compile狀態不變",
+      "failureBehavior": "strict rebind失敗恢復舊mode並顯示錯誤；不自動修改防火牆。",
+      "persistenceBehavior": "Allowlan為manager參數；addresses定期刷新；port/token存服務生命期與manager記錄，非graph。",
+      "undoRedoBehavior": "不走圖Undo。",
+      "importantEdgeCases": [
+        "列出IP不代表其他設備一定可達；不提供internet穿透保證；舊keepalive listener會拒絕新操作。"
+      ],
+      "legacyCoupling": "TD本機listener與實際OS IPv4介面。",
+      "preservedProductIntent": "可選讓其他設備存取同一實例，並維持明確範圍與可恢復的失敗。",
+      "transformationRequired": true,
+      "evidence": [
+        {
+          "path": "src/td/runtime/sgrape_runtime.py",
+          "lineStart": 1967,
+          "lineEnd": 2030,
+          "kind": "source",
+          "observation": "地址、rebind及回復"
+        },
+        {
+          "path": "tests/unit/test_lan_access.py",
+          "lineStart": 150,
+          "lineEnd": 198,
+          "kind": "test",
+          "observation": "不改狀態／bind失敗／排隊保留"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "目前快照程式與列出的測試／文件靜態核對；未執行 TouchDesigner 或瀏覽器實機操作。可攜測試的實際執行範圍另列 audit，不能代替原生驗證。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "TD networking可bind目前port",
+          "when": "Allowlan toggle",
+          "then": "開啟後可使用列出的區網IP連結；關閉後不再接收非loopback；失敗不漂移到新port。"
+        }
+      ]
+    },
+    {
+      "locator": "handoff/compatibility/capabilities.json#/capabilities/564",
+      "operationSpecPresent": false,
+      "id": "LC-HOST-010",
+      "domain": "Host / runtime / remote preview / native parameters",
+      "name": "拒絕錯誤來源／格式的 Editor 控制請求",
+      "classification": "Environment-bound",
+      "legacyBehavior": "Host必須等於實際目的IP:port，Origin若提供必須一致，cross-site fetch拒絕。POST限定JSON物件且有大小上限。",
+      "triggerInput": "任何Editor HTTP API請求",
+      "preconditions": [
+        "連到現行listener"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "請求到TD的原始目的位址／header可用；不是任意反向代理相容保證"
+      ],
+      "observableResult": "錯誤Host／Origin回403；Transfer-Encoding或重複長度回400；錯mime415；過大413；壞JSON400；有效請求才排入TD。",
+      "stateTransition": "拒絕時圖／native不變",
+      "failureBehavior": "關閉拒絕請求連線，不消耗套用body；缺Origin可接受，不等於跨origin授權。",
+      "persistenceBehavior": "無圖持久狀態；安全response headers no-store、nosniff、no-referrer與CSP。",
+      "undoRedoBehavior": "拒絕無Undo紀錄。",
+      "importantEdgeCases": [
+        "名字形式localhost／gateway與目的IP可能不符；此限制是現有環境耦合而非待保存的協定需求。"
+      ],
+      "legacyCoupling": "內嵌HTTP listener與原始網路請求資訊。",
+      "preservedProductIntent": "非預期來源或壞請求不應改動宿主工作。",
+      "transformationRequired": true,
+      "evidence": [
+        {
+          "path": "src/td/runtime/sgrape_runtime.py",
+          "lineStart": 2140,
+          "lineEnd": 2210,
+          "kind": "source",
+          "observation": "請求guards與錯誤碼"
+        },
+        {
+          "path": "tests/unit/test_lan_access.py",
+          "lineStart": 167,
+          "lineEnd": 174,
+          "kind": "test",
+          "observation": "兩種LAN模式一致guards"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "目前快照程式與列出的測試／文件靜態核對；未執行 TouchDesigner 或瀏覽器實機操作。可攜測試的實際執行範圍另列 audit，不能代替原生驗證。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "連到現行listener",
+          "when": "任何Editor HTTP API請求",
+          "then": "錯誤Host／Origin回403；Transfer-Encoding或重複長度回400；錯mime415；過大413；壞JSON400；有效請求才排入TD。"
+        }
+      ]
+    },
+    {
+      "locator": "handoff/compatibility/capabilities.json#/capabilities/565",
+      "operationSpecPresent": false,
+      "id": "LC-HOST-011",
+      "domain": "Host / runtime / remote preview / native parameters",
+      "name": "分享當前 Shader 的可選位址、QR 與複製連結",
+      "classification": "Environment-bound",
+      "legacyBehavior": "讀取分享位址，不修改LAN或token；先顯示當前頁，查詢成功再列loopback和可用LAN origins。QR在本機產生，fragment帶現有token。",
+      "triggerInput": "開啟UI Share，選address，Copy或掃QR",
+      "preconditions": [
+        "目前頁有正確Shader path；分享者持有必要token"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "同host服務提供share-links；接收者可路由到所選origin"
+      ],
+      "observableResult": "連結保留目標Shader；loopback提示僅本機；複製失敗改選文字手動複製；查詢失敗仍保留目前頁連結。",
+      "stateTransition": "只讀地址／前端分享狀態改變；宿主設定不變",
+      "failureBehavior": "requiretoken且目前缺token時不提供其他origin；壞origin去除；QR生成錯誤有提示。",
+      "persistenceBehavior": "分享面板選項為當頁暫態；token不寫Graph也不放query。",
+      "undoRedoBehavior": "分享不納入Undo。",
+      "importantEdgeCases": [
+        "LAN HTTP可能無Clipboard API，嘗試legacy copy仍失敗則手動；列表可達性無保證。"
+      ],
+      "legacyCoupling": "當前部署origin與manager提供的宿主位址。",
+      "preservedProductIntent": "把同一實例的正確入口低摩擦交給另一設備。",
+      "transformationRequired": true,
+      "evidence": [
+        {
+          "path": "src/editor/share_ui.js",
+          "lineStart": 1,
+          "lineEnd": 66,
+          "kind": "source",
+          "observation": "網址校驗、QR、只讀發現及copy fallback"
+        },
+        {
+          "path": "src/td/runtime/sgrape_runtime.py",
+          "lineStart": 1975,
+          "lineEnd": 1981,
+          "kind": "source",
+          "observation": "分享回傳不含憑證"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "目前快照程式與列出的測試／文件靜態核對；未執行 TouchDesigner 或瀏覽器實機操作。可攜測試的實際執行範圍另列 audit，不能代替原生驗證。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "目前頁有正確Shader path；分享者持有必要token",
+          "when": "開啟UI Share，選address，Copy或掃QR",
+          "then": "連結保留目標Shader；loopback提示僅本機；複製失敗改選文字手動複製；查詢失敗仍保留目前頁連結。"
+        }
+      ]
+    },
+    {
+      "locator": "handoff/compatibility/capabilities.json#/capabilities/566",
+      "operationSpecPresent": false,
+      "id": "LC-HOST-012",
+      "domain": "Host / runtime / remote preview / native parameters",
+      "name": "無明確 Shader 的入口不任意猜測目標",
+      "classification": "Environment-bound",
+      "legacyBehavior": "API路由必須含ShaderID，且ID要解析為仍存在的registeredShader；根頁沒有足夠上下文時報Open Editor from a Grape Shader。",
+      "triggerInput": "直接開根URL或對已刪除Shader的URL發API",
+      "preconditions": [
+        "Editor服務仍存在"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "Shader身分來自TD註冊registry與URL"
+      ],
+      "observableResult": "不將寫入轉給另一個Shader；顯示從指定Shader開Editor的提示。",
+      "stateTransition": "沒有target→仍沒有target；未修改任何Shader",
+      "failureBehavior": "失效ID提示Shader no longer exists；路由不符拒絕。",
+      "persistenceBehavior": "不持久猜測性關聯；合法ID原有storage不改。",
+      "undoRedoBehavior": "失敗无Undo。",
+      "importantEdgeCases": [
+        "manager的OpenEditor可選第一個或建立MAT，但那是另一個明確宿主入口，不能套在任意root API上。"
+      ],
+      "legacyCoupling": "host-owned服務需要target path且沒有全域任意默認寫入。",
+      "preservedProductIntent": "未明確建立關係時不誤改其他工作實例。",
+      "transformationRequired": true,
+      "evidence": [
+        {
+          "path": "src/td/runtime/sgrape_runtime.py",
+          "lineStart": 520,
+          "lineEnd": 526,
+          "kind": "source",
+          "observation": "resolve missing"
+        },
+        {
+          "path": "src/td/runtime/sgrape_runtime.py",
+          "lineStart": 1744,
+          "lineEnd": 1750,
+          "kind": "source",
+          "observation": "ID路由規則"
+        },
+        {
+          "path": "src/td/runtime/manager_controls.py",
+          "lineStart": 20,
+          "lineEnd": 32,
+          "kind": "source",
+          "observation": "manager明確入口"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "目前快照程式與列出的測試／文件靜態核對；未執行 TouchDesigner 或瀏覽器實機操作。可攜測試的實際執行範圍另列 audit，不能代替原生驗證。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "Editor服務仍存在",
+          "when": "直接開根URL或對已刪除Shader的URL發API",
+          "then": "不將寫入轉給另一個Shader；顯示從指定Shader開Editor的提示。"
+        }
+      ]
+    },
+    {
+      "locator": "handoff/compatibility/capabilities.json#/capabilities/567",
+      "operationSpecPresent": false,
+      "id": "LC-HOST-013",
+      "domain": "Host / runtime / remote preview / native parameters",
+      "name": "連線中斷後只讀恢復與revision衝突辨識",
+      "classification": "Environment-bound",
+      "legacyBehavior": "HTTP錯誤分為auth／forbidden／busy／unavailable，與compileerror區分；暫時中斷在可見頁每至少5秒只讀state，對revision確認是否仍安全。",
+      "triggerInput": "網路失敗、TD不回應、Retry／online事件",
+      "preconditions": [
+        "有既有Editor圖；TD可能恢復"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "宿主主執行緒要繼續tick；前端可存草稿並fetch"
+      ],
+      "observableResult": "同revision只恢复連線；revision變更顯示需要review而不覆盖草稿；lost write response不自動重送。",
+      "stateTransition": "connected→interrupted→restored或changed；localgraph／selection/history保留",
+      "failureBehavior": "401/403/changed不自動輪詢；20秒clienttimeout；服務15秒queue等待逾時或queue滿回503，不推定尚未/已寫入。",
+      "persistenceBehavior": "連線提示是當頁暫態；既有草稿保存由資料域負責；不自動保存TD工程。",
+      "undoRedoBehavior": "retry不建Undo；先前已實際接受的操作由其原history規則處理。",
+      "importantEdgeCases": [
+        "可能請求已開始但回覆遺失，必須以讀回確認；compile錯誤不能顯示成掉線。"
+      ],
+      "legacyCoupling": "HTTP與TD主執行緒queue／Cooking生命期。",
+      "preservedProductIntent": "中斷不丟工作、不重複寫入、不把不確定結果當成功或失敗。",
+      "transformationRequired": true,
+      "evidence": [
+        {
+          "path": "src/editor/app.js",
+          "lineStart": 64,
+          "lineEnd": 141,
+          "kind": "source",
+          "observation": "分類／只讀恢復／不重送"
+        },
+        {
+          "path": "src/td/runtime/sgrape_runtime.py",
+          "lineStart": 2033,
+          "lineEnd": 2071,
+          "kind": "source",
+          "observation": "tick與queue錯誤"
+        },
+        {
+          "path": "src/td/runtime/sgrape_runtime.py",
+          "lineStart": 2180,
+          "lineEnd": 2215,
+          "kind": "source",
+          "observation": "requestqueue與timeout"
+        },
+        {
+          "path": "docs/features/CONNECTION_RECOVERY.md",
+          "lineStart": 1,
+          "lineEnd": 30,
+          "kind": "documentation",
+          "observation": "歷史說明"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "目前快照程式與列出的測試／文件靜態核對；未執行 TouchDesigner 或瀏覽器實機操作。可攜測試的實際執行範圍另列 audit，不能代替原生驗證。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "有既有Editor圖；TD可能恢復",
+          "when": "網路失敗、TD不回應、Retry／online事件",
+          "then": "同revision只恢复連線；revision變更顯示需要review而不覆盖草稿；lost write response不自動重送。"
+        }
+      ]
+    },
+    {
+      "locator": "handoff/compatibility/capabilities.json#/capabilities/575",
+      "operationSpecPresent": false,
+      "id": "LC-HOST-021",
+      "domain": "Host / runtime / remote preview / native parameters",
+      "name": "保留原生 Viewer 開窗能力但目前按鈕隱藏",
+      "classification": "Environment-bound",
+      "legacyBehavior": "native-viewer API在TD主執行緒對目前Grape COMP呼叫openViewer(unique=False,borders=True)；目前renderNativeViewer無條件隱藏按鈕。",
+      "triggerInput": "具local origin證明的POST native-viewer",
+      "preconditions": [
+        "peer與destination皆loopback；無Forwarded header；Origin與editorOrigin符合"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "TD具有本機視窗；請求來自本機Editor而非LAN"
+      ],
+      "observableResult": "已有Viewer重用／前景顯示；不Apply、不saveTOE、不開GLSL參數；不能宣稱目前UI可點選。",
+      "stateTransition": "本機視窗開啟，圖與Shader不變",
+      "failureBehavior": "LAN、gateway forwarded、缺origin等403；已刪除目標拒絕。",
+      "persistenceBehavior": "視窗位置由TD管理；此API無圖狀態持久化。",
+      "undoRedoBehavior": "無圖Undo。",
+      "importantEdgeCases": [
+        "舊文件說Preview有Open Viewer，目前程式hidden=true；macOS窗口實機狀態未知。"
+      ],
+      "legacyCoupling": "TD native窗口及本機identity判斷。",
+      "preservedProductIntent": "必要時直接查看宿主原生Viewer，避免把遠端要求意外轉成本機視窗動作。",
+      "transformationRequired": true,
+      "evidence": [
+        {
+          "path": "src/td/runtime/sgrape_runtime.py",
+          "lineStart": 2102,
+          "lineEnd": 2114,
+          "kind": "source",
+          "observation": "local-only gate"
+        },
+        {
+          "path": "src/td/runtime/sgrape_runtime.py",
+          "lineStart": 1902,
+          "lineEnd": 1906,
+          "kind": "source",
+          "observation": "openViewer動作"
+        },
+        {
+          "path": "src/editor/app.js",
+          "lineStart": 658,
+          "lineEnd": 666,
+          "kind": "source",
+          "observation": "按鈕永遠隱藏"
+        },
+        {
+          "path": "docs/features/NATIVE_VIEWER.md",
+          "lineStart": 3,
+          "lineEnd": 9,
+          "kind": "documentation",
+          "observation": "舊文件與macOS未驗證"
+        }
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "basis": "目前快照程式與列出的測試／文件靜態核對；未執行 TouchDesigner 或瀏覽器實機操作。可攜測試的實際執行範圍另列 audit，不能代替原生驗證。"
+      },
+      "unknownRefs": [
+        "LU-HOST-004"
+      ],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "peer與destination皆loopback；無Forwarded header；Origin與editorOrigin符合",
+          "when": "具local origin證明的POST native-viewer",
+          "then": "已有Viewer重用／前景顯示；不Apply、不saveTOE、不開GLSL參數；不能宣稱目前UI可點選。"
+        }
+      ]
+    },
+    {
+      "locator": "handoff/compatibility/capabilities.json#/capabilities/576",
+      "operationSpecPresent": false,
+      "id": "LC-HOST-022",
+      "domain": "Host / runtime / remote preview / native parameters",
+      "name": "開啟對應原生 GLSL 參數視窗",
+      "classification": "Environment-bound",
+      "legacyBehavior": "Shader的Glslparameters Pulse可直接開其material/shader參數；API native-parameters也有同動作，後者沒有native-viewer相同local-only判斷。",
+      "triggerInput": "Glslparameters Pulse；POST native-parameters",
+      "preconditions": [
+        "目標generatedShader及內部GLSL OP仍存在；API通過通用認證/來源guards"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "TD目前桌面能開parameter dialog"
+      ],
+      "observableResult": "對正確內部GLSL OP開Parameters，不套用草稿或重編。",
+      "stateTransition": "native視窗改變；graph不變",
+      "failureBehavior": "missingtarget報錯；API可能在LAN呼叫時也開本機視窗，此是否預期需求未確認。",
+      "persistenceBehavior": "視窗狀態由TD；不保存Graph。",
+      "undoRedoBehavior": "無graph Undo。",
+      "importantEdgeCases": [
+        "直接Shader Pulse不用先解析manager；與native-viewer的遠端授權範圍不同。"
+      ],
+      "legacyCoupling": "本機TD parameter對話窗；API現有較寬鬆scope。",
+      "preservedProductIntent": "可直接檢查對應宿主參數與綁定。",
+      "transformationRequired": true,
+      "evidence": [
+        {
+          "path": "src/td/runtime/shader_controls.py",
+          "lineStart": 13,
+          "lineEnd": 16,
+          "kind": "source",
+          "observation": "直接Pulse"
+        },
+        {
+          "path": "src/td/runtime/sgrape_runtime.py",
+          "lineStart": 1902,
+          "lineEnd": 1909,
+          "kind": "source",
+          "observation": "兩種開窗route guard差異"
+        }
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "basis": "目前快照程式與列出的測試／文件靜態核對；未執行 TouchDesigner 或瀏覽器實機操作。可攜測試的實際執行範圍另列 audit，不能代替原生驗證。"
+      },
+      "unknownRefs": [
+        "LU-HOST-004"
+      ],
+      "possiblyAccidentalBehavior": true,
+      "contracts": [
+        {
+          "given": "目標generatedShader及內部GLSL OP仍存在；API通過通用認證/來源guards",
+          "when": "Glslparameters Pulse；POST native-parameters",
+          "then": "對正確內部GLSL OP開Parameters，不套用草稿或重編。"
+        }
+      ]
+    }
+  ],
+  "sourceSliceContracts": [
+    {
+      "id": "S07",
+      "name": "找到並明確連至正確 Host/Target",
+      "productBehaviorDelivered": "使用者由入口或分享找到候選，明確辨認Host/Target，建立有權限的連線，安全切換/重連；native窗口action按產品決策顯示及授權。",
+      "capabilityIds": [
+        "LC-HOST-001",
+        "LC-HOST-002",
+        "LC-HOST-003",
+        "LC-HOST-008",
+        "LC-HOST-009",
+        "LC-HOST-010",
+        "LC-HOST-011",
+        "LC-HOST-012",
+        "LC-HOST-013",
+        "LC-HOST-021",
+        "LC-HOST-022"
+      ],
+      "architectureResponsibilities": [
+        "HostDirectory/bootstrap descriptors",
+        "Connection/Target identity/Binding",
+        "Capability providers/access policy",
+        "Application actions"
+      ],
+      "prerequisites": [
+        "S01"
+      ],
+      "implementationScope": [
+        "identity不由URL/name/origin替代；候選、權限、connection和選定Target分開。",
+        "ShareDescriptor/QR/clipboard與window launch是可選provider；不可用可報而不猜另一個Target。",
+        "PD-3/4a/4b各自只約束fallback和native窗口分支。"
+      ],
+      "explicitNonGoals": [
+        "不預選WebSocket/WebRTC/IPC作為產品需求；transport由已定abstractserviceadapter實作承接。",
+        "不將static hosting當Host提供者，不新增LAN掃描能力假裝相容。"
+      ],
+      "acceptanceTests": [
+        {
+          "id": "AT-S07-01",
+          "given": "零/一/多個候選及matching/foreignidentity",
+          "when": "從入口連線、切Target、失敗、取消",
+          "then": "未知對象不被任意選中；失敗保留前次有效對象；target與authority可核對。",
+          "evidenceKind": "product-behavior",
+          "status": "planned-not-executed-in-handoff"
+        },
+        {
+          "id": "AT-S07-02",
+          "given": "stale epoch/token、錯origin/格式與斷線",
+          "when": "送控制請求、重連並回覆舊請求",
+          "then": "不跨新Target或epoch套用；當前圖仍可保存/編輯，不自動接其他主機。",
+          "evidenceKind": "product-behavior",
+          "status": "planned-not-executed-in-handoff"
+        },
+        {
+          "id": "AT-S07-03",
+          "given": "PD-3/4a/4b已各別定案",
+          "when": "執行cross-ID入口和兩種nativewindowaction",
+          "then": "可見性/確認/授權/本機remote結果各自符合決策，不互借規則。",
+          "evidenceKind": "product-behavior",
+          "status": "planned-not-executed-in-handoff"
+        }
+      ],
+      "runtimeIntegrationEvidence": [
+        "static-web/Node-hosted/Electron各自bootstrap/permission/Target驗證；LAN本機差異與真window副作用需隔離Host。"
+      ],
+      "architectureConformanceChecks": [
+        "service實現不能穿透applicationcore去讀hostglobal。",
+        "discovery≠授權；Binding必有明確Target，身份不可被顯示名稱替換。"
+      ],
+      "completionDefinition": "明確Target基本路徑與失敗/重連實證成立；未決fallback/nativewindow分支可暫不交付，但必保留對應gate和legacycapability。",
+      "mayProceedInParallel": [
+        "S05 portablecatalog",
+        "S06 UI",
+        "PD-1/PD-2決策不影響本slice"
+      ],
+      "coverageGroupIds": [
+        "CG-0266bff1bb4693c7",
+        "CG-0db193956cf1c79e",
+        "CG-29d51ae9da5b9c01",
+        "CG-3001b9b4b5332e28",
+        "CG-3b698a7c5c65af44",
+        "CG-59bd3f73a4946414",
+        "CG-65c8ab5a94f2a1e0",
+        "CG-bc94fd4559e24d30",
+        "CG-d01c5caa5c3e580c",
+        "CG-d8f3f1b31f7f4f52",
+        "CG-ec2116640308eb39"
+      ],
+      "gates": [
+        "G-LU-HOST-001",
+        "G-LU-HOST-002",
+        "G-LU-HOST-003",
+        "G-LU-HOST-004",
+        "G-LU-AUDIT-002",
+        "G-PD-3",
+        "G-PD-4A",
+        "G-PD-4B",
+        "G-DEPLOYMENT-CONFORMANCE"
+      ],
+      "requiredProductDecisions": [
+        "G-PD-3",
+        "G-PD-4A",
+        "G-PD-4B"
+      ],
+      "gateApplication": "Gate依其blocks、earliestRequiredPhase與實際分支適用；列出Gate不代表整個slice或所有工作必須等待。",
+      "capabilityScope": "Mapped IDs提供產品行為oracle和剩餘範圍；本slice完成不自動把CQ disposition改為Covered，部分leaf跨多slice交付。",
+      "sourceRefs": [
+        "AC-002:sealed-contracts",
+        "IR-001:capabilityIds",
+        "CQ-001:entries",
+        "MRDP-001:dependency-graph"
+      ],
+      "prerequisiteOutputs": [
+        {
+          "sliceId": "S01",
+          "output": "可獨立存在的Graph/Editor入口；Host不可用不丟模型。"
+        }
+      ]
+    },
+    {
+      "id": "S08",
+      "name": "安全交付 Shader、保留 last-good 並讀回",
+      "productBehaviorDelivered": "使用者將當前圖產物Apply至指定Target，取得revision/編譯結果；失敗可識別且保留可證last-good；需要時檢閱upgrade並重讀已套用圖。",
+      "capabilityIds": [
+        "LC-DATA-010",
+        "LC-DATA-012",
+        "LC-DATA-060",
+        "LC-DATA-061",
+        "LC-HOST-004",
+        "LC-HOST-014",
+        "LC-HOST-015",
+        "LC-HOST-016",
+        "LC-HOST-017",
+        "LC-HOST-018",
+        "LC-HOST-019",
+        "LC-HOST-020",
+        "LC-HOST-062",
+        "LC-UI-076",
+        "LC-UI-078",
+        "LC-UI-099",
+        "LC-UI-101"
+      ],
+      "architectureResponsibilities": [
+        "Updates/Generator/artifact snapshot",
+        "Binding/publication provider/FencedArtifactReceiver",
+        "Target/lease/receipt/ReviewTickets",
+        "Document lifecycle/Diagnostics"
+      ],
+      "prerequisites": [
+        "S01",
+        "S07"
+      ],
+      "implementationScope": [
+        "capture code/schema/document一致；candidate prepare/commit、epoch/sequence/revision/shape fence和late receipt。",
+        "先以最小可行nativeI確認TD接受、失敗與readback，再擴批次更新/來源/upgrade。",
+        "Reload Applied的draft/History/reset原子流程必經G-LU-UI-008；宿主保存不暗中Apply未套用草稿。",
+        "DEC-GRAPE-001: Graph Undo 後新的 conditional live-write 與 artifact publication 分離；publication 仍保留相容 current values，不用 resetSourceIds/default replay 實作 Undo 傳播。"
+      ],
+      "explicitNonGoals": [
+        "不承諾rollback必成功；不把indeterminate改報success，也不以記錄quarantine替代last-good證據。",
+        "不先大批改使用者原生資產才確認commit可行性；無權限時只保留圖可用。",
+        "不建立跨 Graph/native/live chronology coordinator、hidden mode 或 feature flag；此延後不解除 LC-UI-101／G-LU-UI-008、LU-UI-009、CAS、receipt/lifetime fences。"
+      ],
+      "acceptanceTests": [
+        {
+          "id": "AT-S08-01",
+          "given": "明確Target與可編譯artifactA",
+          "when": "Prepare/commit A後改Graph為B，延遲與逆序回覆",
+          "then": "receipt只對正確artifact/delivery/Target；不把B文件配A shader；舊結果不污染現在diagnostics。",
+          "evidenceKind": "product-behavior",
+          "status": "planned-not-executed-in-handoff"
+        },
+        {
+          "id": "AT-S08-02",
+          "given": "隔離TDfixture",
+          "when": "注入candidate/configure後/restore失敗與遺失回覆",
+          "then": "實際Par/OP、graph/meta/lastgood/receipt結果可核對；未知狀態明示且停止相關write，不虛構rollback保證。",
+          "evidenceKind": "native-runtime",
+          "status": "planned-not-executed-in-handoff"
+        },
+        {
+          "id": "AT-S08-03",
+          "given": "dirtyGraph+sessiondraft、reviewticket",
+          "when": "接受upgrade或Reload Applied時改base/revision、之後整頁reload",
+          "then": "過時票據拒絕；成功reset的draft/history/subscription一致；失敗沒有未定半state。",
+          "evidenceKind": "product-behavior",
+          "status": "planned-not-executed-in-handoff"
+        },
+        {
+          "id": "AT-S08-04",
+          "given": "只改node位置/名稱、同內容Undo與on-demand查看",
+          "when": "Observe Updates與Hostcompile次數",
+          "then": "必要更新與metadata/code產物界線正確；無多餘repeat物件身份；全圖error仍阻生成。",
+          "evidenceKind": "product-behavior",
+          "status": "planned-not-executed-in-handoff"
+        }
+      ],
+      "runtimeIntegrationEvidence": [
+        "首次nativepublication須真TD/build/native thread/compile/error/readback/rollback失敗紀錄。",
+        "批次更新、宿主save文件位置、timeout及coldrestart另列明，不用fakeprovider全部覆蓋。"
+      ],
+      "architectureConformanceChecks": [
+        "GraphHistory不兼任publicationqueue，Updates不持第二份model真值。",
+        "receiver必在副作用前驗權限/epoch/sequence，read-onlyinspection不能產生write grant。"
+      ],
+      "completionDefinition": "第一條native交付的可行性與failurecontract具真實證據；必要契約被否證則暫停依賴分支並提交architecturechange，不能靠bypass使測試綠燈。",
+      "mayProceedInParallel": [
+        "S05portable/部分native公式",
+        "S06UI",
+        "S10無副作用preview描述；有作用鏈待Target穩定"
+      ],
+      "coverageGroupIds": [
+        "CG-037c7b556c9f7c03",
+        "CG-09f0b0694a4a948b",
+        "CG-29fba37dd789f52a",
+        "CG-3f4e8c72a8cdf4e6",
+        "CG-423d55333496192f",
+        "CG-6db9b520528caaa0",
+        "CG-748678fff6807e7d",
+        "CG-8941d9190d518c9c",
+        "CG-9ce566cee4b071bb",
+        "CG-a2df9c20a950d3f7",
+        "CG-c8633fc86dece056",
+        "CG-d9ddff72655c4031",
+        "CG-db7486c1b0e79927",
+        "CG-e5088ef4c272405a",
+        "CG-e91b4690e3fc7dc4",
+        "CG-f2fede386da75238",
+        "CG-f4a7e0a4218de39a"
+      ],
+      "gates": [
+        "G-LU-DATA-003",
+        "G-LU-DATA-006",
+        "G-LU-NODE-001",
+        "G-LU-UI-007",
+        "G-LU-UI-008",
+        "G-LU-HOST-001",
+        "G-LU-HOST-005",
+        "G-LU-AUDIT-002",
+        "G-DEPLOYMENT-CONFORMANCE",
+        "G-HANDOFF-CQ-OWNERSHIP",
+        "G-LU-UI-009"
+      ],
+      "requiredProductDecisions": [],
+      "gateApplication": "Gate依其blocks、earliestRequiredPhase與實際分支適用；列出Gate不代表整個slice或所有工作必須等待。",
+      "capabilityScope": "Mapped IDs提供產品行為oracle和剩餘範圍；本slice完成不自動把CQ disposition改為Covered，部分leaf跨多slice交付。",
+      "sourceRefs": [
+        "AC-002:sealed-contracts",
+        "IR-001:capabilityIds",
+        "CQ-001:entries",
+        "MRDP-001:dependency-graph",
+        "DEC-GRAPE-001:accepted-product-scope"
+      ],
+      "prerequisiteOutputs": [
+        {
+          "sliceId": "S01",
+          "output": "同snapshot的Graph與生成產物捕捉。"
+        },
+        {
+          "sliceId": "S07",
+          "output": "明確Target/authority/epoch的基本成功失敗路徑；不要求share/nativewindow全部交付。"
+        }
+      ],
+      "scopeStatus": "SCOPE_ADJUSTED_NOT_STARTED",
+      "productDecisionRefs": [
+        {
+          "id": "DEC-GRAPE-001",
+          "file": "provenance/product-decisions/DEC-GRAPE-001.json",
+          "sha256": "c16771a0d2451deb48d1920f4d9b75d0eb54bfdc8cba1f7c6b8d034da342ea02",
+          "status": "accepted"
+        }
+      ],
+      "deferredGateIds": [
+        "G-MIXED-HISTORY"
+      ],
+      "relatedAcceptanceIds": [
+        "AT-DEC-GRAPE-001-04",
+        "AT-DEC-GRAPE-001-05",
+        "AT-DEC-GRAPE-001-07",
+        "AT-DEC-GRAPE-001-08",
+        "AT-DEC-GRAPE-001-10"
+      ]
+    }
+  ],
+  "sourceGateProjections": [
+    {
+      "id": "G-LU-UI-008",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-UI-008",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-101"
+      ],
+      "sliceIds": [
+        "S08"
+      ],
+      "unknownBehavior": "Reload Applied確認丟棄後的舊session draft是否會在下次整頁重載再提示restore；load取得state後的後續例外會否留下部分新state？",
+      "architectureImpact": "Explicit lifecycle replacement must own draft eviction/history reset and publish after successful validation; old accidental partial-load behavior not relied upon.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: discard/reload semantics; I: lifecycle/draft/history composition",
+      "requiredEvidence": [
+        "隔離fixture建立dirty+sessiondraft→確認Reload Applied→整頁reload，查是否再次restore提示；另在state成功後inject受控錯誤檢查部分state，保留真實結果與產品意圖差別。",
+        "未新增執行sessiondraft殘留/後段render例外測試，不能把fetch失敗保圖提升成所有reloadfailure都原子回復。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-UI-008",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ],
+      "retainedByProductDecision": {
+        "id": "DEC-GRAPE-001",
+        "file": "provenance/product-decisions/DEC-GRAPE-001.json",
+        "sha256": "c16771a0d2451deb48d1920f4d9b75d0eb54bfdc8cba1f7c6b8d034da342ea02",
+        "status": "accepted"
+      },
+      "requiredAcceptanceIds": [
+        "AT-S08-03",
+        "AT-DEC-GRAPE-001-10"
+      ]
+    },
+    {
+      "id": "G-LU-UI-009",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-UI-009",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-100"
+      ],
+      "sliceIds": [
+        "S08",
+        "S09"
+      ],
+      "unknownBehavior": "若非一般UI入口在live-restore await期間呼load，晚到回覆是否會對新圖呼mark/render？",
+      "architectureImpact": "Async native/live restores require same load/epoch guard; host qualification owns receipt handling.",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: domain-separated async restore/propagation lifetime guard before implementation; I: load/epoch/incarnation race evidence before runtime acceptance.",
+      "requiredEvidence": [
+        "只在隔離fixture延遲live-restore，呼load成功再放回覆，觀察新graph dirty/history/render；若產品不提供該並發入口則記為實作邊界，不改能力意圖。",
+        "未新增執行延遲live-restore與外部load交錯；不能以native restore的generation測試代表全部restore分支。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-UI-009",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ],
+      "previousHandoffTiming": "S: mixed History dispatch/order; I: load/restore race",
+      "retainedByProductDecision": {
+        "id": "DEC-GRAPE-001",
+        "file": "provenance/product-decisions/DEC-GRAPE-001.json",
+        "sha256": "c16771a0d2451deb48d1920f4d9b75d0eb54bfdc8cba1f7c6b8d034da342ea02",
+        "status": "accepted"
+      },
+      "independentSafetyScope": "Retained unresolved even though LC-UI-100 unified chronology is deferred. Protect all asynchronous native/live restores, Undo propagation and publication receipts.",
+      "requiredAcceptanceIds": [
+        "AT-DEC-GRAPE-001-07",
+        "AT-DEC-GRAPE-001-10"
+      ]
+    },
+    {
+      "id": "G-LU-HOST-001",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-HOST-001",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-002",
+        "LC-HOST-004",
+        "LC-HOST-007",
+        "LC-HOST-017",
+        "LC-HOST-024"
+      ],
+      "sliceIds": [
+        "S07",
+        "S08",
+        "S10",
+        "S11"
+      ],
+      "unknownBehavior": "本次未連TD／GPU／實際瀏覽器與多平台：原生渲染、冷啟動、刪manager後獨立性、相容版本與遠端實機完整性尚未再證實。",
+      "architectureImpact": "契約可分離環境，但不證明TD/GPU/瀏覽器/多平台實作成立；保持未通過。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "I: artifact reload/native lifecycle; R: promised platforms",
+      "requiredEvidence": [
+        "另行授權後使用隔離fixture分別測實機渲染/TOX冷重載/manager移除／重新加入、appwindow與LAN裝置；保留TDbuild、OS、GPU與像素/identity結果。",
+        "当前TD/macOS/iPad/Windows實機回報及保存重載完整測試；歷史文件不是本次執行。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-001",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-HOST-002",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-HOST-002",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-001"
+      ],
+      "sliceIds": [
+        "S07"
+      ],
+      "unknownBehavior": "單一非同managerID fallback採用目前是刻意產品行為還是相容意外？",
+      "architectureImpact": "跨不同manager身份採用需要明確產品範圍；Identity fence禁止把此fallback一般化。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: cross-identity adoption policy before implementing fallback",
+      "requiredEvidence": [
+        "在隔離工程以舊Shader+同ID/異ID一個/兩個manager逐例記錄OpenEditor結果及原資料是否改變；在確認前保留現行行為但不作任意adoption承諾。",
+        "較新需求／跨管理身分恢復的實機驗證與限制。"
+      ],
+      "disproofAction": "記錄產品決策及成功/拒絕範圍，不自動選擇；若必需行為不能在既有邊界表達，停止受影響分支並提交Architecture Change。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-002",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-HOST-003",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-HOST-003",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-008",
+        "LC-HOST-039"
+      ],
+      "sliceIds": [
+        "S07",
+        "S09"
+      ],
+      "unknownBehavior": "舊連線／live文件與現行runtime不一致，文件不能用來縮限或加強實作規格。",
+      "architectureImpact": "目前行為已知：可選token default off、外部Bind終端Constant可寫；不需重新問架構。新契約明確保留。",
+      "blocks": [
+        "將舊文件的always-token／owned-Bind-only說法當作現行產品oracle；宣稱新手冊已與當前實作行為一致。"
+      ],
+      "doesNotBlock": [
+        "依IR已確認的可選token default off與外部Bind終端Constant可寫行為實作。",
+        "HostDirectory/NativeDefinitions邊界與無關slice；這不是連線或Bind的額外未知產品政策。"
+      ],
+      "earliestRequiredPhase": "R: publishing connection/live behavior documentation; current recorded runtime semantics already usable",
+      "requiredEvidence": [
+        "以目前程式及對應測試已列出的行為為inventory；未經產品決策不把歷史always-token／owned-Bind-only當要求。",
+        "對外手冊是否已在別處更新；不是現行程式分支未知。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-003",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-HOST-004",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-HOST-004",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-021",
+        "LC-HOST-022"
+      ],
+      "sliceIds": [
+        "S07"
+      ],
+      "unknownBehavior": "native-viewer按鈕現在隱藏但API保留，native-parameters又可遠端觸發本機視窗；何者是目前正式對外入口？",
+      "architectureImpact": "Window action可各自授權/顯示；不能由架構擅自統一兩API的remote規則。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: each native-window action visibility/access scope",
+      "requiredEvidence": [
+        "先由目前可觀察UI與API分别記錄；在真正產品決策前不把隱藏視為刪除能力，也不保證LAN開nativeparameters是預期。",
+        "按鈕隱藏與API授權scope的已確認產品意圖；不可自行補新授權設計。"
+      ],
+      "disproofAction": "記錄產品決策及成功/拒絕範圍，不自動選擇；若必需行為不能在既有邊界表達，停止受影響分支並提交Architecture Change。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-004",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-HOST-005",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-HOST-005",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-015"
+      ],
+      "sliceIds": [
+        "S08"
+      ],
+      "unknownBehavior": "Apply在宿主异常导致rollback本身也失败時，能否完全恢复原生資源尚缺實證。",
+      "architectureImpact": "補indeterminate/quarantine可誠實表達宿主故障；不將未證明的rollback承諾改稱保證。HQ-06僅模型。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "I: first native commit/failure/readback, before extending dependent publication work",
+      "requiredEvidence": [
+        "只在隔離TD fixture注入候選失败、正式configure後失败、restore本身失败，核對lastgood與明示錯誤；不把正常exception路徑證據外推到宿主全面失效。",
+        "configure／restore階段故障注入，以及原生Par/OP與state/codemetadata的對照。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-005",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-HOST-008",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-HOST-008",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-061"
+      ],
+      "sliceIds": [
+        "S12"
+      ],
+      "unknownBehavior": "沒有serviceworker/PWA執行證據；無宿主時前端首次／重新載入與編輯是否可用不能從離線提案推定。",
+      "architectureImpact": "內嵌assets與獨立PWA分開；不把manifest當offline implementation。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "在必要證據缺失時將相關leaf稱為完整驗收。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。",
+        "沒有新增PWA產品承諾時，不能以PWA缺證據阻止embedded-host入口或host-free有網路首次載入。"
+      ],
+      "earliestRequiredPhase": "I: embedded assets/bootstrap; independent PWA not automatically required",
+      "requiredEvidence": [
+        "檢查發佈包以及實際網路請求，分開阻外網、停TD、清browsercache首次載入三情境；目前只記已實作的內嵌資產服務，不承諾PWA。",
+        "真正發佈包可離線啟動的瀏覽器驗證；當前證據只涵蓋host存活且資產內嵌。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-008",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-LU-AUDIT-002",
+      "kind": "legacy-unknown",
+      "sourceUnknownId": "LU-AUDIT-002",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "C",
+        "D",
+        "E"
+      ],
+      "capabilityIds": [],
+      "sliceIds": [
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "unknownBehavior": "現行平台、TD版本、GPU與瀏覽器的完整適用範圍？",
+      "architectureImpact": "三profile只做抽象邊界模型測試，非多OS/GPU/觸控/網路真實驗收。",
+      "blocks": [
+        "對應capability中由此未知決定的成功/拒絕、相容或runtime承諾；不預設阻擋slice所有分支。",
+        "宣稱Legacy已窮盡或對未解析內容作完整替代保證。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S/I: affected embedded scope; R: declared complete replacement/platform promise",
+      "requiredEvidence": [
+        "依每capability Environment Assumptions於矩陣環境跑對應驗收，記錄renderer、TD及browser build；歷史報告不能代替此版本結果。",
+        "只有本次Windows portable執行。macOS/Metal、iPad Safari、觸控筆、真實WebRTC、frame-time、native GPU行為未實測。"
+      ],
+      "disproofAction": "保留反例/版本/輸入；不得改oracle或假裝通過。若僅adapter缺陷則修該實作；若必要契約在既有邊界不可表達，升A並停止受影響依賴；新legacy行為須新IR/CQ修訂。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-AUDIT-002",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7"
+      ]
+    },
+    {
+      "id": "G-PD-3",
+      "kind": "product-decision-view",
+      "sourceUnknownId": "LU-HOST-002",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-001"
+      ],
+      "sliceIds": [
+        "S07"
+      ],
+      "unknownBehavior": "單一非同managerID fallback採用目前是刻意產品行為還是相容意外？",
+      "architectureImpact": "跨不同manager身份採用需要明確產品範圍；Identity fence禁止把此fallback一般化。",
+      "blocks": [
+        "唯一異ID manager adoption的對應行為實作定案與相容承諾。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: cross-identity adoption policy before implementing fallback",
+      "requiredEvidence": [
+        "產品owner對MRDP alternatives作明確選擇，保存決策版本及受影響成功/拒絕範圍。",
+        "在隔離工程以舊Shader+同ID/異ID一個/兩個manager逐例記錄OpenEditor結果及原資料是否改變；在確認前保留現行行為但不作任意adoption承諾。",
+        "較新需求／跨管理身分恢復的實機驗證與限制。"
+      ],
+      "disproofAction": "記錄產品決策及成功/拒絕範圍，不自動選擇；若必需行為不能在既有邊界表達，停止受影響分支並提交Architecture Change。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-002",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7",
+        "MRDP-001:section4"
+      ],
+      "aliasOf": "G-LU-HOST-002",
+      "name": "唯一異ID manager adoption"
+    },
+    {
+      "id": "G-PD-4A",
+      "kind": "product-decision-view",
+      "sourceUnknownId": "LU-HOST-004",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-021"
+      ],
+      "sliceIds": [
+        "S07"
+      ],
+      "unknownBehavior": "native-viewer按鈕現在隱藏但API保留，native-parameters又可遠端觸發本機視窗；何者是目前正式對外入口？",
+      "architectureImpact": "Window action可各自授權/顯示；不能由架構擅自統一兩API的remote規則。",
+      "blocks": [
+        "Native Viewer正式入口可見性的對應行為實作定案與相容承諾。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: each native-window action visibility/access scope",
+      "requiredEvidence": [
+        "產品owner對MRDP alternatives作明確選擇，保存決策版本及受影響成功/拒絕範圍。",
+        "先由目前可觀察UI與API分别記錄；在真正產品決策前不把隱藏視為刪除能力，也不保證LAN開nativeparameters是預期。",
+        "按鈕隱藏與API授權scope的已確認產品意圖；不可自行補新授權設計。"
+      ],
+      "disproofAction": "記錄產品決策及成功/拒絕範圍，不自動選擇；若必需行為不能在既有邊界表達，停止受影響分支並提交Architecture Change。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-004",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7",
+        "MRDP-001:section4"
+      ],
+      "aliasOf": "G-LU-HOST-004",
+      "name": "Native Viewer正式入口可見性"
+    },
+    {
+      "id": "G-PD-4B",
+      "kind": "product-decision-view",
+      "sourceUnknownId": "LU-HOST-004",
+      "status": "unresolved",
+      "architectureSignificant": true,
+      "classification": [
+        "B",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-022"
+      ],
+      "sliceIds": [
+        "S07"
+      ],
+      "unknownBehavior": "native-viewer按鈕現在隱藏但API保留，native-parameters又可遠端觸發本機視窗；何者是目前正式對外入口？",
+      "architectureImpact": "Window action可各自授權/顯示；不能由架構擅自統一兩API的remote規則。",
+      "blocks": [
+        "Native Parameters遠端開窗scope的對應行為實作定案與相容承諾。"
+      ],
+      "doesNotBlock": [
+        "有界planning。",
+        "不依賴此未知的slice或同slice其他已定分支。",
+        "取得證據所需的隔離integration實作；不得據此操作正式使用者資料。"
+      ],
+      "earliestRequiredPhase": "S: each native-window action visibility/access scope",
+      "requiredEvidence": [
+        "產品owner對MRDP alternatives作明確選擇，保存決策版本及受影響成功/拒絕範圍。",
+        "先由目前可觀察UI與API分别記錄；在真正產品決策前不把隱藏視為刪除能力，也不保證LAN開nativeparameters是預期。",
+        "按鈕隱藏與API授權scope的已確認產品意圖；不可自行補新授權設計。"
+      ],
+      "disproofAction": "記錄產品決策及成功/拒絕範圍，不自動選擇；若必需行為不能在既有邊界表達，停止受影響分支並提交Architecture Change。",
+      "sourceRefs": [
+        "CQ-001:unknowns/LU-HOST-004",
+        "IR-001:unknowns",
+        "MRDP-001:sections3,6,7",
+        "MRDP-001:section4"
+      ],
+      "aliasOf": "G-LU-HOST-004",
+      "name": "Native Parameters遠端開窗scope"
+    },
+    {
+      "id": "G-MIXED-HISTORY",
+      "name": "Graph/native/live混合Undo coordination",
+      "kind": "known-handoff-gate",
+      "status": "DEFERRED_BY_PRODUCT_DECISION",
+      "architectureSignificant": false,
+      "classification": [
+        "D",
+        "C",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-UI-100"
+      ],
+      "sliceIds": [
+        "S08",
+        "S09"
+      ],
+      "blocks": [
+        "任何未經新產品決策授權的 coordinated Mixed History 實作／對外等價承諾；不得以domain-separated測試稱此Gate已resolved/PASS。"
+      ],
+      "doesNotBlock": [
+        "目前S08安全publication/Reload及S09分域Undo規劃與授權後實作；其他receipt/CAS/lifetime Gates照舊。"
+      ],
+      "earliestRequiredPhase": "Deferred current product scope; reconsider only after a new explicit product decision. Protected receipt/lifetime evidence remains required in corresponding S08/S09 integration.",
+      "requiredEvidence": [
+        "重新納入coordinated chronology前需要新的產品決策、user-intent-level oracle與完整composition evidence；現有獨立History測試不構成closure。"
+      ],
+      "disproofAction": "反例保留；若須改責任邊界/新增未封存契約則走Architecture Change，不由handoff實作者靜默決定。",
+      "architectureImpact": "No coordinator in current scope. Existing domain ownership/authority retained; Graph Undo and conditional Host propagation have distinct completion.",
+      "sourceRefs": [
+        "AC-002:sealed-contracts",
+        "MRDP-001:sections3,6,7"
+      ],
+      "unknownBehavior": "Unified chronology remains unqualified but is outside current product scope by DEC-GRAPE-001; this disposition does not waive load/restore or Reload Applied safety.",
+      "sourceGateSnapshot": {
+        "id": "G-MIXED-HISTORY",
+        "name": "Graph/native/live混合Undo coordination",
+        "kind": "known-handoff-gate",
+        "status": "unresolved",
+        "architectureSignificant": false,
+        "classification": [
+          "D",
+          "C",
+          "E"
+        ],
+        "capabilityIds": [
+          "LC-UI-100",
+          "LC-UI-101"
+        ],
+        "sliceIds": [
+          "S08",
+          "S09"
+        ],
+        "blocks": [
+          "混合stack推進、重試去重、load與restore交錯、Reload Applied完整composition。"
+        ],
+        "doesNotBlock": [
+          "不依賴此契約的slice及有界planning。"
+        ],
+        "earliestRequiredPhase": "S: order/dispatch/retry contract; I: receipt/load race",
+        "requiredEvidence": [
+          "Graph/native/live交錯操作的完整序列oracle、遺失回覆/late reply/外部動畫情境；真native收據證據。"
+        ],
+        "disproofAction": "反例保留；若須改責任邊界/新增未封存契約則走Architecture Change，不由handoff實作者靜默決定。",
+        "architectureImpact": "各History的authority已分域，不等於上層順序與完整composition已定義/驗收。",
+        "sourceRefs": [
+          "AC-002:sealed-contracts",
+          "MRDP-001:sections3,6,7"
+        ],
+        "unknownBehavior": "Graph/native定義/live值三種獨立History如何在同一操作入口排序、dispatch、重試去重，及load/restore交錯時如何確認stack推進，尚未完成composition。"
+      },
+      "productDecisionRef": {
+        "id": "DEC-GRAPE-001",
+        "file": "provenance/product-decisions/DEC-GRAPE-001.json",
+        "sha256": "c16771a0d2451deb48d1920f4d9b75d0eb54bfdc8cba1f7c6b8d034da342ea02",
+        "status": "accepted"
+      },
+      "retainedObligations": [
+        {
+          "gateId": "G-LU-UI-009",
+          "acceptanceIds": [
+            "AT-DEC-GRAPE-001-07"
+          ]
+        },
+        {
+          "gateId": "G-LU-UI-008",
+          "capabilityId": "LC-UI-101",
+          "acceptanceIds": [
+            "AT-S08-03",
+            "AT-DEC-GRAPE-001-10"
+          ]
+        },
+        {
+          "gateId": "G-LU-HOST-007",
+          "acceptanceIds": [
+            "AT-S09-01",
+            "AT-S09-02",
+            "AT-DEC-GRAPE-001-04",
+            "AT-DEC-GRAPE-001-09"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "G-DEPLOYMENT-CONFORMANCE",
+      "name": "Static Web / Node-hosted / Electron真部署",
+      "kind": "known-handoff-gate",
+      "status": "unresolved",
+      "architectureSignificant": false,
+      "classification": [
+        "D",
+        "C",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-HOST-002",
+        "LC-HOST-008",
+        "LC-HOST-009",
+        "LC-HOST-010",
+        "LC-HOST-061",
+        "LC-HOST-062"
+      ],
+      "sliceIds": [
+        "S07",
+        "S08",
+        "S12"
+      ],
+      "blocks": [
+        "宣稱三profile能力相同、所有runtime/permission/Host provider已通過。"
+      ],
+      "doesNotBlock": [
+        "不依賴此契約的slice及有界planning。"
+      ],
+      "earliestRequiredPhase": "I: first declared profile bootstrap; R: each promised package/profile",
+      "requiredEvidence": [
+        "每profile真package/provider/permission/locality矩陣；applicationcore import邊界靜態審查與真啟動互補。"
+      ],
+      "disproofAction": "反例保留；若須改責任邊界/新增未封存契約則走Architecture Change，不由handoff實作者靜默決定。",
+      "architectureImpact": "平台adapter/bridge可不同，不能靠改寫applicationcore取得平台能力。",
+      "sourceRefs": [
+        "AC-002:sealed-contracts",
+        "MRDP-001:sections3,6,7"
+      ],
+      "unknownBehavior": "同一core在三種實際package/provider/權限與locality環境的結果尚未全面實測；抽象adapter存在不能證明打包相容。"
+    },
+    {
+      "id": "G-HANDOFF-CQ-OWNERSHIP",
+      "name": "HC-001：CQ摘要的mutation/persistence ownership混寫",
+      "kind": "source-baseline-conflict",
+      "status": "unresolved-source-wording-quarantined",
+      "architectureSignificant": false,
+      "classification": [
+        "D",
+        "E"
+      ],
+      "capabilityIds": [
+        "LC-DATA-001",
+        "LC-DATA-009",
+        "LC-DATA-010",
+        "LC-DATA-012",
+        "LC-DATA-013",
+        "LC-DATA-014",
+        "LC-DATA-015",
+        "LC-DATA-016",
+        "LC-DATA-017",
+        "LC-DATA-018",
+        "LC-DATA-019",
+        "LC-DATA-020",
+        "LC-DATA-021",
+        "LC-DATA-022",
+        "LC-DATA-023",
+        "LC-DATA-027",
+        "LC-DATA-028",
+        "LC-DATA-029",
+        "LC-DATA-030",
+        "LC-DATA-031",
+        "LC-DATA-032",
+        "LC-DATA-033",
+        "LC-DATA-034",
+        "LC-DATA-035",
+        "LC-DATA-037",
+        "LC-DATA-044",
+        "LC-DATA-045",
+        "LC-DATA-047",
+        "LC-DATA-048",
+        "LC-DATA-049",
+        "LC-DATA-050",
+        "LC-DATA-051",
+        "LC-DATA-052",
+        "LC-DATA-053",
+        "LC-DATA-054",
+        "LC-DATA-055",
+        "LC-DATA-057",
+        "LC-DATA-058",
+        "LC-DATA-059",
+        "LC-DATA-062",
+        "LC-DATA-063",
+        "LC-NODE-001",
+        "LC-NODE-002",
+        "LC-NODE-003",
+        "LC-NODE-004",
+        "LC-NODE-005",
+        "LC-NODE-006",
+        "LC-NODE-007",
+        "LC-NODE-008",
+        "LC-NODE-009",
+        "LC-NODE-010",
+        "LC-NODE-011",
+        "LC-NODE-012",
+        "LC-NODE-013",
+        "LC-NODE-014",
+        "LC-NODE-015",
+        "LC-NODE-016",
+        "LC-NODE-017",
+        "LC-NODE-018",
+        "LC-NODE-019",
+        "LC-NODE-020",
+        "LC-NODE-021",
+        "LC-NODE-022",
+        "LC-NODE-023",
+        "LC-NODE-024",
+        "LC-NODE-025",
+        "LC-NODE-026",
+        "LC-NODE-027",
+        "LC-NODE-028",
+        "LC-NODE-029",
+        "LC-NODE-030",
+        "LC-NODE-031",
+        "LC-NODE-032",
+        "LC-NODE-033",
+        "LC-NODE-034",
+        "LC-NODE-035",
+        "LC-NODE-036",
+        "LC-NODE-037",
+        "LC-NODE-038",
+        "LC-NODE-039",
+        "LC-NODE-040",
+        "LC-NODE-041",
+        "LC-NODE-042",
+        "LC-NODE-043",
+        "LC-NODE-044",
+        "LC-NODE-045",
+        "LC-NODE-046",
+        "LC-NODE-047",
+        "LC-NODE-048",
+        "LC-NODE-049",
+        "LC-NODE-050",
+        "LC-NODE-051",
+        "LC-NODE-052",
+        "LC-NODE-053",
+        "LC-NODE-054",
+        "LC-NODE-055",
+        "LC-NODE-056",
+        "LC-NODE-057",
+        "LC-NODE-058",
+        "LC-NODE-059",
+        "LC-NODE-060",
+        "LC-NODE-061",
+        "LC-NODE-062",
+        "LC-NODE-063",
+        "LC-NODE-064",
+        "LC-NODE-065",
+        "LC-NODE-066",
+        "LC-NODE-067",
+        "LC-NODE-068",
+        "LC-NODE-069",
+        "LC-NODE-070",
+        "LC-NODE-071",
+        "LC-NODE-072",
+        "LC-NODE-073",
+        "LC-NODE-074",
+        "LC-NODE-075",
+        "LC-NODE-076",
+        "LC-NODE-077",
+        "LC-NODE-078",
+        "LC-NODE-079",
+        "LC-NODE-080",
+        "LC-NODE-081",
+        "LC-NODE-082",
+        "LC-NODE-083",
+        "LC-NODE-084",
+        "LC-NODE-085",
+        "LC-NODE-086",
+        "LC-NODE-087",
+        "LC-NODE-088",
+        "LC-NODE-089",
+        "LC-NODE-090",
+        "LC-NODE-091",
+        "LC-NODE-092",
+        "LC-NODE-093",
+        "LC-NODE-094",
+        "LC-NODE-095",
+        "LC-NODE-096",
+        "LC-NODE-097",
+        "LC-NODE-098",
+        "LC-NODE-099",
+        "LC-NODE-100",
+        "LC-NODE-101",
+        "LC-NODE-102",
+        "LC-NODE-103",
+        "LC-NODE-104",
+        "LC-NODE-105",
+        "LC-NODE-106",
+        "LC-NODE-107",
+        "LC-NODE-108",
+        "LC-NODE-109",
+        "LC-NODE-110",
+        "LC-NODE-111",
+        "LC-NODE-112",
+        "LC-NODE-113",
+        "LC-NODE-114",
+        "LC-NODE-115",
+        "LC-NODE-116",
+        "LC-NODE-117",
+        "LC-NODE-118",
+        "LC-NODE-119",
+        "LC-NODE-120",
+        "LC-NODE-121",
+        "LC-NODE-122",
+        "LC-NODE-123",
+        "LC-NODE-124",
+        "LC-NODE-125",
+        "LC-NODE-126",
+        "LC-NODE-127",
+        "LC-NODE-128",
+        "LC-NODE-129",
+        "LC-NODE-130",
+        "LC-NODE-131",
+        "LC-NODE-132",
+        "LC-NODE-133",
+        "LC-NODE-134",
+        "LC-NODE-135",
+        "LC-NODE-136",
+        "LC-NODE-137",
+        "LC-NODE-138",
+        "LC-NODE-139",
+        "LC-NODE-140",
+        "LC-NODE-141",
+        "LC-NODE-142",
+        "LC-NODE-143",
+        "LC-NODE-144",
+        "LC-NODE-145",
+        "LC-NODE-146",
+        "LC-NODE-147",
+        "LC-NODE-148",
+        "LC-NODE-149",
+        "LC-NODE-150",
+        "LC-NODE-151",
+        "LC-NODE-152",
+        "LC-NODE-153",
+        "LC-NODE-154",
+        "LC-NODE-155",
+        "LC-NODE-156",
+        "LC-NODE-157",
+        "LC-NODE-158",
+        "LC-NODE-159",
+        "LC-NODE-160",
+        "LC-NODE-161",
+        "LC-NODE-162",
+        "LC-NODE-163",
+        "LC-NODE-164",
+        "LC-NODE-165",
+        "LC-NODE-166",
+        "LC-NODE-167",
+        "LC-NODE-168",
+        "LC-NODE-169",
+        "LC-NODE-170",
+        "LC-NODE-171",
+        "LC-NODE-172",
+        "LC-NODE-173",
+        "LC-NODE-174",
+        "LC-NODE-175",
+        "LC-NODE-176",
+        "LC-NODE-177",
+        "LC-NODE-178",
+        "LC-NODE-179",
+        "LC-NODE-180",
+        "LC-NODE-181",
+        "LC-NODE-182",
+        "LC-NODE-183",
+        "LC-NODE-184",
+        "LC-NODE-185",
+        "LC-NODE-186",
+        "LC-NODE-187",
+        "LC-NODE-188",
+        "LC-NODE-189",
+        "LC-NODE-190",
+        "LC-NODE-191",
+        "LC-NODE-192",
+        "LC-NODE-193",
+        "LC-NODE-194",
+        "LC-NODE-195",
+        "LC-NODE-196",
+        "LC-NODE-197",
+        "LC-NODE-198",
+        "LC-NODE-199",
+        "LC-NODE-200",
+        "LC-NODE-201",
+        "LC-NODE-202",
+        "LC-NODE-203",
+        "LC-NODE-204",
+        "LC-NODE-205",
+        "LC-NODE-206",
+        "LC-NODE-207",
+        "LC-NODE-208",
+        "LC-NODE-209",
+        "LC-NODE-210",
+        "LC-NODE-211",
+        "LC-NODE-212",
+        "LC-NODE-213",
+        "LC-NODE-214",
+        "LC-NODE-215",
+        "LC-NODE-216",
+        "LC-NODE-217",
+        "LC-NODE-218",
+        "LC-NODE-219",
+        "LC-NODE-220",
+        "LC-NODE-221",
+        "LC-NODE-222",
+        "LC-NODE-223",
+        "LC-NODE-224",
+        "LC-NODE-225",
+        "LC-NODE-226",
+        "LC-NODE-227",
+        "LC-NODE-228",
+        "LC-NODE-229",
+        "LC-NODE-230",
+        "LC-NODE-231",
+        "LC-NODE-232",
+        "LC-NODE-233",
+        "LC-NODE-234",
+        "LC-NODE-235",
+        "LC-NODE-236",
+        "LC-NODE-237",
+        "LC-NODE-238",
+        "LC-NODE-239",
+        "LC-NODE-240",
+        "LC-NODE-241",
+        "LC-NODE-242",
+        "LC-NODE-243",
+        "LC-NODE-244",
+        "LC-NODE-245",
+        "LC-NODE-246",
+        "LC-NODE-247",
+        "LC-NODE-248",
+        "LC-NODE-249",
+        "LC-NODE-250",
+        "LC-NODE-251",
+        "LC-NODE-252",
+        "LC-NODE-253",
+        "LC-NODE-254",
+        "LC-NODE-255",
+        "LC-NODE-256",
+        "LC-NODE-257",
+        "LC-NODE-258",
+        "LC-NODE-259",
+        "LC-NODE-260",
+        "LC-NODE-261",
+        "LC-NODE-262",
+        "LC-NODE-263",
+        "LC-NODE-264",
+        "LC-NODE-265",
+        "LC-NODE-266",
+        "LC-NODE-267",
+        "LC-NODE-268",
+        "LC-NODE-269",
+        "LC-NODE-270",
+        "LC-NODE-271",
+        "LC-NODE-272",
+        "LC-NODE-273",
+        "LC-NODE-274",
+        "LC-NODE-275",
+        "LC-NODE-276",
+        "LC-NODE-277",
+        "LC-NODE-278",
+        "LC-NODE-279",
+        "LC-NODE-280",
+        "LC-NODE-281",
+        "LC-NODE-282",
+        "LC-NODE-283",
+        "LC-NODE-284",
+        "LC-NODE-285",
+        "LC-NODE-286",
+        "LC-NODE-287",
+        "LC-NODE-288",
+        "LC-NODE-289",
+        "LC-NODE-290",
+        "LC-NODE-291",
+        "LC-NODE-292",
+        "LC-NODE-293",
+        "LC-NODE-294",
+        "LC-NODE-295",
+        "LC-NODE-296",
+        "LC-NODE-297",
+        "LC-NODE-298",
+        "LC-NODE-299",
+        "LC-NODE-300",
+        "LC-NODE-301",
+        "LC-NODE-302",
+        "LC-NODE-303",
+        "LC-NODE-304",
+        "LC-NODE-305",
+        "LC-NODE-306",
+        "LC-NODE-307",
+        "LC-NODE-308",
+        "LC-NODE-309",
+        "LC-NODE-310",
+        "LC-NODE-311",
+        "LC-NODE-312",
+        "LC-NODE-313",
+        "LC-NODE-314",
+        "LC-NODE-315",
+        "LC-NODE-316",
+        "LC-NODE-317",
+        "LC-NODE-318",
+        "LC-NODE-319",
+        "LC-NODE-320",
+        "LC-NODE-321",
+        "LC-NODE-322",
+        "LC-NODE-323",
+        "LC-NODE-324",
+        "LC-NODE-325",
+        "LC-NODE-326",
+        "LC-NODE-327",
+        "LC-NODE-328",
+        "LC-NODE-329",
+        "LC-NODE-330",
+        "LC-NODE-331",
+        "LC-NODE-332",
+        "LC-NODE-333",
+        "LC-NODE-334",
+        "LC-NODE-335",
+        "LC-NODE-336",
+        "LC-NODE-337",
+        "LC-NODE-338",
+        "LC-NODE-339",
+        "LC-NODE-340",
+        "LC-NODE-341",
+        "LC-NODE-342",
+        "LC-NODE-343",
+        "LC-NODE-344",
+        "LC-NODE-345",
+        "LC-NODE-346",
+        "LC-NODE-347",
+        "LC-NODE-348",
+        "LC-NODE-349",
+        "LC-NODE-350",
+        "LC-NODE-351",
+        "LC-NODE-352",
+        "LC-NODE-353",
+        "LC-NODE-354",
+        "LC-NODE-355",
+        "LC-NODE-356",
+        "LC-NODE-357",
+        "LC-NODE-358",
+        "LC-NODE-359",
+        "LC-NODE-360",
+        "LC-NODE-361",
+        "LC-NODE-362",
+        "LC-NODE-363",
+        "LC-NODE-364",
+        "LC-NODE-365",
+        "LC-NODE-366",
+        "LC-NODE-367",
+        "LC-NODE-368",
+        "LC-NODE-370",
+        "LC-NODE-371",
+        "LC-NODE-372",
+        "LC-NODE-373",
+        "LC-NODE-375",
+        "LC-NODE-377"
+      ],
+      "sliceIds": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S08",
+        "S09"
+      ],
+      "unknownBehavior": "CQ部分executionPath/newPersistence摘要把Graph修改寫在Generator，或把能力責任owner寫成Graph資料保存owner，並重用Legacy Apply後保存前提。這些不是可同時採用的canonical責任指令。",
+      "architectureImpact": "若照摘要字面實作會破壞只讀Generator與application canonical Graph。02/03/05的已明定契約及本次產品定位不變；封存摘要不得當作反向例外。原CQ文字修正/重新核准須另立來源revision，本輪沒有替來源做裁定。",
+      "blocks": [
+        "把CQ sourceSummary的混寫當成規範來產生API、mutation或儲存實作。",
+        "宣稱CQ來源已消除文字衝突或據此解除相關compatibility Gate。"
+      ],
+      "doesNotBlock": [
+        "按已明定的02/03/05/06契約實作S01及其他不採用衝突指令的分支。",
+        "使用IR行為oracle、CQ原disposition/caseIDs與本包compiled paths做相容追溯。"
+      ],
+      "earliestRequiredPhase": "Before importing any CQ summary wording into a production contract. Source correction may wait; quarantine must remain active from S01.",
+      "requiredEvidence": [
+        "來源負責者核對HC-001所列原文與AC責任，建立明示CQ修訂或解釋，不改IR/AC行為以遷就摘要。",
+        "每個受影響行為的實作證據確認Generator不改Graph、Graph保存不依Host Apply、schema owner不是instance state owner。"
+      ],
+      "disproofAction": "若後續證據顯示不只摘要錯置而是封存契約真衝突，停止受影響分支，提出architecture/source conflict；不可修改Graph ownership或默選一側。",
+      "sourceRefs": [
+        "CQ-001:entries executionPath/newPersistence",
+        "AC-002:CORE_API_CONTRACTS and Generator contracts",
+        "MRDP-001:canonical/legacy transformation boundaries",
+        "audit/HANDOFF_CONFLICTS.md#hc-001"
+      ]
+    }
+  ],
+  "failureReconnectOfflineMatrix": [
+    {
+      "id": "M01",
+      "trigger": "缺provider；零/一/多候選；無target根入口",
+      "expected": "只列候選；明確target才能connect；不選第一個／異ID唯一者",
+      "measurement": "candidate列表、selected Target前後、provider/receiver calls=0於無授權路徑；Graph/dirty/History不变",
+      "source": "AT-S07-01; LC001/012",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M02",
+      "trigger": "valid matching descriptor；expired或foreign identity；same path replacement",
+      "expected": "matching仍單獨授權；expiry/mismatch拒絕；同path新incarnation淘汰舊handle",
+      "measurement": "expected/actual identity、expiry、session/lease生成、denial，fixture target mutation counter",
+      "source": "AT-S07-01/02; 06 §identity",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M03",
+      "trigger": "一隔離Manager；兩client sessions；至少兩明確Targets",
+      "expected": "session各自；切Target不跨寫；錯Target grants不能用；不加全域singleton",
+      "measurement": "sessionA/B + targetA/B矩陣、每request送收路徑、Target側ledger；其餘對象無變",
+      "source": "owner-host-direction-02; AT-S07-02",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M04",
+      "trigger": "Requiretoken off/on、valid/missing/old credential、toggle",
+      "expected": "off仍受其餘guards；on讀寫皆拒bad credential且body零作用；toggle保port/token/queue",
+      "measurement": "政策前後及action outcomes；credential僅redacted/指紋、不記secret",
+      "source": "LC008; G-LU-HOST-003",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M05",
+      "trigger": "wrong origin/action/peer、invalid JSON/object/MIME/framing/size",
+      "expected": "先拒再排隊；無權/壞請求不能native mutation；缺Origin不自動等於cross-origin許可",
+      "measurement": "HTTP採用時400/401/403/413/415與no-store/nosniff/no-referrer/CSP；queue入列/TD mutation=0",
+      "source": "LC010; AT-S07-02",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M06",
+      "trigger": "正常connect、失敗connect/unknown target/deleted target/cancel",
+      "expected": "只成功readback+guards才改selection；其餘保前次有效Target，不guess其他Host",
+      "measurement": "selection/Graph document/selection/History before-after；cancel before dispatch calls=0",
+      "source": "AT-S07-01; LC003/012",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M07",
+      "trigger": "active Operation、dirty Graph、keepDraft寫入失败/讀回不同、並行edit/reload",
+      "expected": "busy守護；完整draft精確roundtrip後才switch；各await後驗load/rev/intent；失敗不離原對象",
+      "measurement": "operation timing、snapshot hash、stored/readback bytes、old/new loadId；舊Graph不被导航重寫",
+      "source": "HOST_QUALIFICATION §10; LC003",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M08",
+      "trigger": "apply-and-switch缺能力/retained/rejected/indeterminate；apply開始後cancel",
+      "expected": "未取得applied不可switch；開始後不聲稱物理取消；無pubprovider明示不可用",
+      "measurement": "receipt和native state分開；navigation維持原Target，後續write policy清楚",
+      "source": "S07/S08 dependency; LC003",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M09",
+      "trigger": "newer/corrupt/raw-empty target document；偽造inspection clone",
+      "expected": "readonly/recovery保原raw，不以demo覆寫；fresh須明示；copy-mode不能grant write；new raw/revision失效claim",
+      "measurement": "raw bytes/hash、parse結果、claim identity/invalidation、publish拒絕、native沒有改",
+      "source": "HOST_QUALIFICATION §10 HQ46/47 behavioral oracle",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M10",
+      "trigger": "瞬斷、visible/hidden、retry/online、auth/forbidden/changed",
+      "expected": "visible暫斷只讀>=5s；401/403/changed停止auto poll；compileerror不當掉線",
+      "measurement": "monotonic query timeline、operation kind、UI status；Graph可編輯ACK save且dirty/History符合本域",
+      "source": "LC013; AT-S07-02",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M11",
+      "trigger": "same revision恢復；revision changed；restart新incarnation",
+      "expected": "同rev只恢復；changed需review保draft；restart重驗instance/capabilities/authority、新lease/epoch、先readback",
+      "measurement": "old/new session/epoch/incarnation/rev與readback bytes；pending舊reply不影響current",
+      "source": "05 §5; LC013",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M12",
+      "trigger": "delay/duplicate/out-of-order reply、switch/load/rebind/unbind/dispose後舊reply",
+      "expected": "在接收側與Application雙端fence；不污染新Target/diagnostics/model",
+      "measurement": "request→Target/lease/load/epoch對照，actual writes、stale callback counts、Graph state对照",
+      "source": "AT-S07-02; G-LU-UI-009",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M13",
+      "trigger": "queue滿、未開始deadline expiry、stop、開始後timeout/lost response",
+      "expected": "滿busy、未開始expiry零執行；已開始未知不能定為未寫，readback/receipt查證、不重播Pulse/window/native edits",
+      "measurement": "enqueue/start/finish/drop monotonic timestamp、client20s/server15s路徑、native execution count、outcome",
+      "source": "LC013; HOST_QUALIFICATION §6",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M14",
+      "trigger": "disconnect/unbind/Panel hide/move/remount/close",
+      "expected": "解除自己的lease/subscriptions/mirror；不刪Graph、Host最後產物或他人session；UI移動不重連",
+      "measurement": "subscriber/timer counts、pointer/gesture cleanup（若能力啟用）、native resource identity、Graph Undo/Redo",
+      "source": "05 §5; 06 §preview/reconnect",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M15",
+      "trigger": "fixture ownership/project/workdir/peer缺失或不符；port衝突",
+      "expected": "正常startup核對不足就零native write；不沿用Legacy端點、不restart/save現有user TD；後續明確fixture可另選專用port",
+      "measurement": "assigned-vs-actual tuple、listener bind result；本輪NOT_EXECUTED；不以URL/PID單點等同權限",
+      "source": "human-native-isolation-control-01/02",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M16",
+      "trigger": "Allowlan strict同port rebind成功/失敗、舊keepalive listener",
+      "expected": "default loopback；失敗保舊mode/port/session/queue，不修改firewall；新操作不落old listener",
+      "measurement": "before/after bound policy、port/session IDs、graph/native/revision不變；實際遠端另驗",
+      "source": "LC009; later reachability batch",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M17",
+      "trigger": "share失敗/QR失敗/clipboard拒絕/app launcher失敗",
+      "expected": "保當前Target link、manual copy；share不改服務設定；launcher fallback一次、非http(s)拒絕",
+      "measurement": "link target/origin/secret-redaction、external action計数；真browser/provider另驗",
+      "source": "LC002/011; later entry/share batch",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M18",
+      "trigger": "首個declared deployment真bootstrap/provider；無Host／無write",
+      "expected": "同核心host-free可用、缺cap明示、作用設備正確；三profile不以模型測試互證",
+      "measurement": "profile/package/TD/browser/build/locality/permissions；實際startup+import-boundary evidence",
+      "source": "G-DEPLOYMENT-CONFORMANCE; 07",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M19",
+      "trigger": "停止fixture TD後已載入頁；断外網；空cache首次載入",
+      "expected": "分開三情境；已開頁可編輯存檔不等於PWA首次offline能啟動",
+      "measurement": "各場景assets requests/host availability/storage ACK，不改使用者cache/全機網路",
+      "source": "G-LU-HOST-008; S12 residual",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    },
+    {
+      "id": "M20",
+      "trigger": "G-PD-3 foreign-manager-only；Native UI/API分支",
+      "expected": "首批不作跨IDadoption判決、未交付分支清楚；兩退休buttons不出現，底層API不推定消失",
+      "measurement": "Gates/殘餘mapping；此分析不出AT-S07-03 PASS",
+      "source": "owner directions; AT-S07-03",
+      "status": "NOT_EXECUTED_PLANNING_REQUIREMENT"
+    }
+  ],
+  "minimumS08Prerequisites": [
+    {
+      "id": "S08-P1",
+      "requirement": "Target成功/失敗/reconnect基本路徑必有exact reviewed revision與native證據；share/windows無須先全交付。",
+      "source": "S07 prerequisite output; 08:376",
+      "status": "NOT_IMPLEMENTED_OR_VERIFIED_BY_THIS_REPORT"
+    },
+    {
+      "id": "S08-P2",
+      "requirement": "provider提供真正host-affine executor/queue與test-owned receiver；至少一fixture TOP、已知last-good、live scalar，第二Target驗wrong-target/incarnation。MAT另驗，不外推。",
+      "source": "06 §§publication/live; feasibility report §4",
+      "status": "NOT_IMPLEMENTED_OR_VERIFIED_BY_THIS_REPORT"
+    },
+    {
+      "id": "S08-P3",
+      "requirement": "定義真TD generation profile/shell與source binding map。現production functionProfile extends esProfile，輸出#version 300 es；把shader文字直接送TD不證相容。TD profile應透過既有GLSLProfile contribution，無TD字串條件散入Graph。",
+      "source": "production/src/modules/function-operations.ts:251–278; image.ts:85–149; 13 §4",
+      "status": "NOT_IMPLEMENTED_OR_VERIFIED_BY_THIS_REPORT"
+    },
+    {
+      "id": "S08-P4",
+      "requirement": "同snapshot捕捉Compilation document/artifacts/bindingSchema/provenance/profile/loadId/revision；不能await後取目前Graph拼舊code。complete signature包含generator/target/module及executable deps，hash不是ACK。",
+      "source": "compiler.ts:44–65; sdk/editing.ts:211–230; HOST_QUALIFICATION §3",
+      "status": "NOT_IMPLEMENTED_OR_VERIFIED_BY_THIS_REPORT"
+    },
+    {
+      "id": "S08-P5",
+      "requirement": "真正receiver在side-effect前驗Target、lease、requestId/payload、intentSeq、expectedHostRevision、sources id/type/reset；prepare與commit間可故意延遲，但prepare不可碰active。commit在native序列區重驗並取最新current values。",
+      "source": "06:27–46; AT-S08-01",
+      "status": "NOT_IMPLEMENTED_OR_VERIFIED_BY_THIS_REPORT"
+    },
+    {
+      "id": "S08-P6",
+      "requirement": "native讀回必對照active code/schema/applied document/meta、host revision、OP/Par實際identity/current values、last-good與receipt；stale前端ACK隔離不是receiver fence證據。",
+      "source": "AT-S08-02; G-LU-HOST-005",
+      "status": "NOT_IMPLEMENTED_OR_VERIFIED_BY_THIS_REPORT"
+    },
+    {
+      "id": "S08-P7",
+      "requirement": "第一個native I就測candidate失敗、正式configure後失敗、restore本身失敗、lost reply；retain/applied/indeterminate須以真狀態支撐。未知停該Target後續write，不能把quarantine當rollback成功。",
+      "source": "08:384–405; 10:545–563",
+      "status": "NOT_IMPLEMENTED_OR_VERIFIED_BY_THIS_REPORT"
+    },
+    {
+      "id": "S08-P8",
+      "requirement": "排序測A→B→Undo A cache命中仍新seq、prepare中live更改保留、同request同payload重試與改payload拒絕、document-only revision/receipt、不重compile、cleanup failure不抹applied。多session concurrency/expected revision必守。",
+      "source": "06 §publication; HOST_QUALIFICATION §3",
+      "status": "NOT_IMPLEMENTED_OR_VERIFIED_BY_THIS_REPORT"
+    },
+    {
+      "id": "S08-P9",
+      "requirement": "readback/inspection與ReviewTickets本身無write authority。Reload Applied獨立顯式確認；dirty/sessiondraft/History/subscriptions/load callback整體life-cycle依G-LU-UI-008/009驗，failed save不Apply新draft。",
+      "source": "05:42–51/87–101; AT-S08-03; AT-DEC001-07/10",
+      "status": "NOT_IMPLEMENTED_OR_VERIFIED_BY_THIS_REPORT"
+    },
+    {
+      "id": "S08-P10",
+      "requirement": "Graph Undo先完成模型；有active Binding才嘗試新的conditional live-write，沿原basis，衝突顯divergence、不rollback Graph Undo、不resetSourceIds回defaults；publication與live propagation分開。Mixed History維持deferred。",
+      "source": "05:83–85; 06:9–11; S08 related AT-DEC-GRAPE-001-04/05/07/08/10",
+      "status": "NOT_IMPLEMENTED_OR_VERIFIED_BY_THIS_REPORT"
+    }
+  ],
+  "productionSeams": [
+    {
+      "source": "production/src/sdk/public-surface.ts:243–304",
+      "present": "已有exact capability/HostIdentity宣告與9個初始IDs。",
+      "missing": "缺runtime directory、service-specific typed contracts/validators/providers；declaration不是服務實現。"
+    },
+    {
+      "source": "production/apps/web/main.ts:74–128,278",
+      "present": "bootstrap Definitions、browserIdentity、EditorApplication、Workspace；Host-free文字在:131。",
+      "missing": "新增provider injection/Host-facing application orchestration seam需writer設計；禁止靠core global/URL假target。"
+    },
+    {
+      "source": "production/src/application/editor.ts:435–478,758–798",
+      "present": "建構注入identity/kind/profile/storage/output；install/new/open已有Graph/context disposal與load identity。",
+      "missing": "尚无Host attach/unbind/reconnect/inspection claims及Binding lifecycle；接合須涵蓋UI與non-UI load入口。"
+    },
+    {
+      "source": "production/src/application/editor.ts:977–1022",
+      "present": "generate同時捕捉snapshot；save以storage.write ACK且loadId guarding；reopen驗base。",
+      "missing": "keepDraft需完整write+exact readback的新導航契約；不能僅呼save後假定可安全離target；不能將storage ACK當Host applied。"
+    },
+    {
+      "source": "production/src/generation/compiler.ts:44–65; production/src/sdk/editing.ts:211–230",
+      "present": "Compilation攜document/loadId/revision/profile/artifacts/bindingSchema/provenance。",
+      "missing": "缺Updates/Binding delivery與receiver receipts；generation success不是native compile acceptance。"
+    },
+    {
+      "source": "production/src/modules/image.ts:85–149; production/src/modules/function-operations.ts:251–278",
+      "present": "現有GLSL ES3.00/函式profile（portable輸出）。",
+      "missing": "最小native Apply需要明確TD shell/profile與actual build compile/readback，無證據不得重標為TD相容。"
+    },
+    {
+      "source": "production/src/persistence/codec.ts:94–164",
+      "present": "新格式version/unknown/raw recovery與512000-byte loader/writer boundary。",
+      "missing": "Target inspection以既有loader驗data；不把JSON.parse等同有效Graph、不把空raw認定fresh；無Host-grant發行功能。"
+    },
+    {
+      "source": "production/src/ui/workspace.ts:35–50,83–181,256–295,428–441",
+      "present": "Workspace管理Panel records/routing/mount與application subscriptions。",
+      "missing": "只呈現Host owner的public projection/commands；不可持第二份Graph/同步權威，不等同TD Manager。"
+    },
+    {
+      "source": "production/src/adapters/browser/identity.ts:4–23; production/package.json",
+      "present": "browser secure entropy與既有Node25.5.0/Vite/TypeScript工具。",
+      "missing": "無native adapter/runtime package或Electron包；既有工具不等於Native bootstrap已驗。"
+    }
+  ],
+  "planningAndDecisionBoundaries": [
+    {
+      "classification": "普通工程",
+      "finding": "選一個有界transport、typed contract名稱/locator、module/folder、queue容量與timeout實作、用新fixture專用port及startup核對、建立provider/receiver與fake negative harness。",
+      "route": "保持規範語意及oracle數字；名稱可調但capability id/version不可猜alias。不需新的Human Gate。"
+    },
+    {
+      "classification": "第一批建議",
+      "finding": "先交S07基本Host接合：一個新隔離TD Manager、兩clients/兩Targets、explicit descriptor、typed registry、identity/authority、Target query/inspection、clean/keep/cancel switch、故障/reconnect/load lifetime，真TD receiver只提供已宣告且獲權的操作。",
+      "route": "本報告不是派工或啟动；Coordinator待B01獨立技術ready後使用當時exact工程head重綁單一writer，不以本9357e21直接覆蓋並行工作。"
+    },
+    {
+      "classification": "後續S07義務",
+      "finding": "Requiretoken/Allowlan service config、launch/share/QR/clipboard、各宣告deployment、真正remote reachability、native APIs依範圍安排。",
+      "route": "首批loopback基本路徑不算11 leaves完整交付；未交付明列NOT_DELIVERED/NOT_EXECUTED，不寫state或Gate closure。"
+    },
+    {
+      "classification": "真產品未決",
+      "finding": "G-PD-3：唯一foreign manager時自動adopt、明確選擇/確認或無fallback，Owner未選。",
+      "route": "一個Manager可多連線的同意沒有解此policy；不得加永久binding/額外確認或自動adoption。只隔離該fallback分支。"
+    },
+    {
+      "classification": "已有Human UI方向",
+      "finding": "兩個Native Viewer/Native Parameters UI buttons退役；公開API/TD直接Pulse不能由此推論刪除。",
+      "route": "G-PD-4A UI可見性已有方向；精確API disposition/Parameters remote scope保留獨立殘餘，不替Human關Gate。"
+    },
+    {
+      "classification": "真架構衝突",
+      "finding": "目前沒有保存到必要契約在既定boundary不能表達的反例。",
+      "route": "若native結果否證，先判adapter defect；僅真正invariant conflict按08決策/Architecture Change，保存input/build/native actual。"
+    },
+    {
+      "classification": "現有實機權限",
+      "finding": "feasibility collection已解釋continuous run涵蓋ordinary disposable fixture engineering，Human又指定identity/workdir/port核對。",
+      "route": "後續writer按bounded packet執行正常startup safeguards；不是每次重新問批准。真的需要license/UI/device/access才只停受影響部分找Human。本scout仍一律不得runtime。"
+    },
+    {
+      "classification": "仍須對照的withdrawn範圍",
+      "finding": "S08 Updates基礎與OC09 withdrawn可見automatic generation不能混寫。",
+      "route": "原run accepted direction具權威；未準備可見自動觸發範圍前不擅自恢复，也不因此刪Updates整個責任。"
+    }
+  ],
+  "evidenceMinimum": [
+    "exact run/packet/I/R/build、profile/package hash、TD app/build、OS/GPU/driver/browser（未知照記）、fixture input/scripts hash。",
+    "assign-vs-actual fixture root、project file、working/source directory、process/instance witness、service receiver identity、port、Target tuple與session tuple；不得沿用prior feasibility PID當current authority。",
+    "每operation的request/intent、target、lease bindingId/graphId/loadId/epoch、seq、expected/actual revision、capability id/version、allow/deny原因；secrets與token不入log。",
+    "用monotonic時間記dispatch/enqueue/start/commit/reply/cancel/readback，證明poll/timeout/queue與native thread-affinity；只client stopwatch不足。",
+    "native側執行counter/OP/Par與applied document/meta/code/schema、current values、resource identity before/after；圖revision/dirty/Undo/Redo/selection/draft的獨立before/after。",
+    "每case列expected、actual、native run／pure model／unexecuted類型，失敗收據/recovery與受影響Gate；不得以fake/historical/install metadata標runtime PASS。",
+    "生命期清理記訂閱、pending jobs、timers、handles撤銷及其對他人session無影響；retarget/cancel未真正遠端取消須如實記錄。",
+    "首declared profile實際bootstrap及權限/作用設備證據；Static Web/Node-hosted/Electron與本機/遠端是各自matrix cells；舊LAN交付連結檢查已移除，不可偷復活。"
+  ],
+  "priorFeasibilityReuse": {
+    "refs": [
+      {
+        "file": "production/evidence/coordinator/continuous/20261005-01/host-feasibility-collection-01.json",
+        "bytes": 5323,
+        "sha256": "d1a6c11aad7f7794edff065aa28b04b8b781923e39cc4ab2c70c744c0c34f7a6"
+      },
+      {
+        "file": ".verification/continuous-host-feasibility-01/report.md",
+        "bytes": 17282,
+        "sha256": "07436b203c4540a830b9444c35dcfcb18f09291d140ffb89e3e7a0359e493951"
+      },
+      {
+        "file": ".verification/continuous-host-feasibility-01/report.json",
+        "bytes": 99190,
+        "sha256": "e8c7a6fb9e1ab21339138bc6328e673da604ac79e7232b41f83a5ec6701e8c4c"
+      }
+    ],
+    "priorObservation": {
+      "observedAtUtc": "2026-10-04T19:55:37.1989224Z",
+      "expectedWorkHead": "02313a0d0d6bd3d66cbfd9fe20c6df36c53909d6",
+      "metadata": {
+        "method": "Read-only registry installation records, exact executable FileVersionInfo, named-process metadata, Get-Command metadata, installed package.json files. No runtime execution.",
+        "touchDesignerVersions": [
+          {
+            "version": "2023.12000",
+            "productVersion": "0.99.2023.12000",
+            "fileVersion": "1, 0, 0, 1",
+            "executable": "C:\\Program Files\\Derivative\\TouchDesigner\\bin\\TouchDesigner.exe",
+            "observedExecutableExists": true
+          },
+          {
+            "version": "2025.30060",
+            "productVersion": "0.99.2025.30060",
+            "fileVersion": "1, 0, 0, 1",
+            "executable": "C:\\Program Files\\Derivative\\TouchDesigner.2025.30060\\bin\\TouchDesigner.exe",
+            "observedExecutableExists": true
+          },
+          {
+            "version": "2025.30960",
+            "productVersion": "0.99.2025.30960",
+            "fileVersion": "1, 0, 0, 1",
+            "executable": "C:\\Program Files\\Derivative\\TouchDesigner.2025.30960\\bin\\TouchDesigner.exe",
+            "observedExecutableExists": true
+          },
+          {
+            "version": "2025.32050",
+            "productVersion": "0.99.2025.32050",
+            "fileVersion": "1, 0, 0, 1",
+            "executable": "C:\\Program Files\\Derivative\\TouchDesigner.2025.32050\\bin\\TouchDesigner.exe",
+            "observedExecutableExists": true
+          },
+          {
+            "version": "2025.32460",
+            "productVersion": "0.99.2025.32460",
+            "fileVersion": "1, 0, 0, 1",
+            "executable": "C:\\Program Files\\Derivative\\TouchDesigner.2025.32460\\bin\\TouchDesigner.exe",
+            "observedExecutableExists": true
+          },
+          {
+            "version": "2025.32820",
+            "productVersion": "0.99.2025.32820",
+            "fileVersion": "1, 0, 0, 1",
+            "executable": "C:\\Program Files\\Derivative\\TouchDesigner.2025.32820\\bin\\TouchDesigner.exe",
+            "observedExecutableExists": true
+          }
+        ],
+        "runningProcess": {
+          "name": "TouchDesigner",
+          "pid": 12476,
+          "executable": "C:\\Program Files\\Derivative\\TouchDesigner.2025.32820\\bin\\TouchDesigner.exe",
+          "inspectedFields": [
+            "name",
+            "pid",
+            "path",
+            "fileVersion"
+          ],
+          "projectAndAuthority": "NOT_INSPECTED_NOT_AUTHORIZED_AS_FIXTURE"
+        },
+        "node": {
+          "path": "C:\\Program Files\\nodejs\\node.exe",
+          "fileVersion": "25.5.0.0",
+          "registryVersion": "25.5.0"
+        },
+        "python": {
+          "path": "C:\\Python314\\python.exe",
+          "fileVersion": "3.14.2150.1013",
+          "note": "No inference about TD embedded Python."
+        },
+        "packages": {
+          "@playwright/test": "1.62.1",
+          "vite": "7.3.1",
+          "typescript": "5.9.3"
+        },
+        "os": {
+          "registryProductName": "Windows 10 Pro",
+          "registryDisplayVersion": "25H2",
+          "registryCurrentBuild": "26200",
+          "registryUBR": 9457,
+          "environmentVersion": "Microsoft Windows NT 10.0.26200.0",
+          "note": "Raw metadata labels only; no OS marketing-name normalization."
+        },
+        "unavailableMetadata": [
+          "Win32_VideoController CIM: AccessDenied",
+          "Win32_OperatingSystem CIM: AccessDenied",
+          "GPU/driver/actual renderer/TD app.build/license feature availability NOT_VERIFIED"
+        ],
+        "callableMetadata": {
+          "touchDesignerSpecificMatches": [],
+          "nativeComputerApi": "disabled by exposed CUA tool instructions",
+          "execCommand": "available; runtime launch not exercised/authorized in scout",
+          "meaning": "No specialized TD connector observed; no claim that a future reviewed fixture adapter is impossible."
+        }
+      },
+      "sourceObservation": {
+        "productionSdk": "production/src/sdk/public-surface.ts:248 HostIdentity;295..301 capability IDs",
+        "nativeProvider": "No concrete native adapter found by bounded production/src inventory and HostIdentity/TargetSession/ArtifactPublication/InputValues/NativeDefinitions/PreviewSession/FencedArtifactReceiver/grape.host search.",
+        "diffGuard": "No diff output for inspected production/src/sdk/public-surface.ts and production/package.json at read; B01 files not mutated.",
+        "binaryInventory": "No .toe/.tox in normal nonignored rg listing under handoff and production. No broad/ignored/external directory scan.",
+        "referenceExample": "handoff/examples/minimal-host-adapter/README.md explicitly labels fake in-memory provider, not TD implementation."
+      },
+      "limitations": [
+        "Read-only engineering preparation; no implementation, test execution, independent technical verdict, Human acceptance or Gate closure.",
+        "No TD/native/Host process was started, connected to, stopped or modified; existing Legacy/Host endpoints were not contacted.",
+        "No installation, credential/license-secret inspection, machine setting change, network scan, broad filesystem scan or delegation.",
+        "Only .verification/continuous-host-feasibility-01/report.md and report.json are authored outputs.",
+        "Frozen reference and fake-provider results are behavioral oracles only; they do not certify actual TD/thread/GPU/rollback/Undo/preview/Electron behavior.",
+        "Current writer's B01 source/state/evidence remain exclusively owned by the designated Implementer; this report does not activate S07-S12."
+      ]
+    },
+    "note": "Prior metadata only, no re-enumeration or fresh claim. TD installation is plausible local fixture basis, not runtime/automation/GPU/permission proof. Existing user process is excluded; actual later fixture identity must be checked afresh under writer authorization."
+  },
+  "sourceManifest": [
+    {
+      "path": "README.md",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 14861,
+      "sha256": "2a195b5123af3ebc01e29cde2967b479ea7bedeeda966085d9f760b53abb5009",
+      "lineCount": 48
+    },
+    {
+      "path": "AGENTS.md",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 2902,
+      "sha256": "babfdd30f507c0b597c96751c62dbe72aae429ec55625c571b9a8466fa42d13e",
+      "lineCount": 11
+    },
+    {
+      "path": ".gitignore",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 129,
+      "sha256": "a1b0692dd1e463b4ff0c0bf695fc812727e612ba3a6ec25bb062670b1a02f376",
+      "lineCount": 12
+    },
+    {
+      "path": "workflow/COORDINATOR.md",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 12857,
+      "sha256": "e9b16b1a98868f4e29549a0ea0d9abfc75f460ca4e30fa1eb1ccd58393323d7e",
+      "lineCount": 74
+    },
+    {
+      "path": "workflow/CONTINUOUS_DELIVERY.md",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 14175,
+      "sha256": "faac9607081318c2d2caaa476adb14fc28ca56c583c2773df6df0873e1212189",
+      "lineCount": 92
+    },
+    {
+      "path": "implementation-state.json",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 44745,
+      "sha256": "35c8cd27bd61804e8c6239ef922794fd33f974d1d9e47aae225e38027b7bb270",
+      "lineCount": 626
+    },
+    {
+      "path": "handoff/05_DATA_AND_LIFECYCLE.md",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 12428,
+      "sha256": "70102a5988ebe3e23992faa54a13a4eed058628273611ceb945429c5b5573f8e",
+      "lineCount": 128
+    },
+    {
+      "path": "handoff/06_HOST_INTEGRATION.md",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 7630,
+      "sha256": "c302ba93ff02ac9870eb9aa8943f4fa6b817961eff03358b42d463e425df2348",
+      "lineCount": 70
+    },
+    {
+      "path": "handoff/07_DEPLOYMENT_MODEL.md",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 3791,
+      "sha256": "9d3f081a5569be3649b39f3e202bba7b18b25475c0cde9d5a7da0256733b1db7",
+      "lineCount": 35
+    },
+    {
+      "path": "handoff/08_IMPLEMENTATION_PLAN.md",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 45504,
+      "sha256": "df9ad6d9e05d762b767b1d536b97eb6f71c82b6c152c180bcf586cb6a713713d",
+      "lineCount": 587
+    },
+    {
+      "path": "handoff/09_ACCEPTANCE_AND_CONFORMANCE.md",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 28825,
+      "sha256": "d9c32c0a3ef1a47e2704c44e33e12d69ab1748cfd5cbb49e878f731671f6a7c2",
+      "lineCount": 257
+    },
+    {
+      "path": "handoff/10_KNOWN_GATES.md",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 64343,
+      "sha256": "8374d473c1534e3627d37573119a6488863d8992e0318c8e1f0d71d99b184b2b",
+      "lineCount": 813
+    },
+    {
+      "path": "handoff/13_PRODUCTION_CONTRACT_SURFACE.md",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 19338,
+      "sha256": "52be05f0db6eab935efc8869c703f20ce5bb8992ba583c311c9bc76d76a28294",
+      "lineCount": 149
+    },
+    {
+      "path": "handoff/contracts/public-surface.ts",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 10204,
+      "sha256": "5d6ab44a5b50dc691e0d0e7a61c491478bd043b9e9226da6885994263c3ed713",
+      "lineCount": 184
+    },
+    {
+      "path": "handoff/data/slices.json",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 105550,
+      "sha256": "0a11742f0cdda618a4543e99c7a5eb85c445f5b6826b54a00daa8b492771565a",
+      "lineCount": 2654
+    },
+    {
+      "path": "handoff/data/gates.json",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 118726,
+      "sha256": "94ed3cd38f6415e442470a9b241ded29fb6851215eaff3161bd0a80b7a1755c0",
+      "lineCount": 2997
+    },
+    {
+      "path": "handoff/data/production-contract-ledger.json",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 68574,
+      "sha256": "569d4dd5f003bdbdfe6b75a2b137db6f6a76fde2d190a878300183bf3daa374d",
+      "lineCount": 1494
+    },
+    {
+      "path": "handoff/compatibility/capabilities.json",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 6586414,
+      "sha256": "387fe3e5dc75f73dc711e867df18b292dcbf452569829767d1a2ccb835fa5a36",
+      "lineCount": 174422
+    },
+    {
+      "path": "handoff/executable-reference/HOST_QUALIFICATION_CONTRACTS.md",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 26629,
+      "sha256": "9bda8fc9edccd8716889e7928bb698024f00fa6ca621c9207e33f28bc5b9b098",
+      "lineCount": 187
+    },
+    {
+      "path": "handoff/examples/minimal-host-adapter/README.md",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 1087,
+      "sha256": "32867990f7c2ca9beee2e16915180b21e9ab3da9a9513cc6a4fb8037a855efb1",
+      "lineCount": 12
+    },
+    {
+      "path": "production/src/sdk/public-surface.ts",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 11103,
+      "sha256": "64602b22b69acfaa3335aa6b2155a4a3a8eec29100a7abe80a1db02a70303fce",
+      "lineCount": 304
+    },
+    {
+      "path": "production/src/sdk/editing.ts",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 9729,
+      "sha256": "9a48a94bd23dc4103a0b78c4d4f17bf4304e4b714d74be5831cbbd1601856fbe",
+      "lineCount": 291
+    },
+    {
+      "path": "production/src/application/editor.ts",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 52453,
+      "sha256": "a786da219dc566103c9f08a1a80b451a10aa9d5a12308517621f311b482e8856",
+      "lineCount": 1600
+    },
+    {
+      "path": "production/src/generation/compiler.ts",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 21586,
+      "sha256": "3a7c83a5f2d446227e3091c14ed2fc8497794a06deead2b35699b9cbe41f801f",
+      "lineCount": 549
+    },
+    {
+      "path": "production/src/persistence/codec.ts",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 5072,
+      "sha256": "4c33327f6e06f380bb44dc9296b8f3d6d2a2ec99053b1ba5d2cde6599e161d4f",
+      "lineCount": 165
+    },
+    {
+      "path": "production/src/ui/workspace.ts",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 13479,
+      "sha256": "3d808b7851a342f6edb9dca9efaab0ed4501eda39d75c1051dcfbbcf88c69d36",
+      "lineCount": 443
+    },
+    {
+      "path": "production/src/adapters/browser/identity.ts",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 846,
+      "sha256": "42435aba3b301d95cebf2c0b6a0a22f09135f65ed6bffc4e1216ce11180f5fbb",
+      "lineCount": 24
+    },
+    {
+      "path": "production/src/modules/image.ts",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 4738,
+      "sha256": "958d925b8acf175150e4cfb9089f7f426b495c328d8258b523f36d0222fe4e32",
+      "lineCount": 150
+    },
+    {
+      "path": "production/src/modules/function-networks.ts",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 3253,
+      "sha256": "fc062d22e93a67693fc1d91bd3ed036d2fe578d3fc53b521c9b616f4d5791f9e",
+      "lineCount": 100
+    },
+    {
+      "path": "production/apps/web/main.ts",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 28173,
+      "sha256": "4f6160d53ef4dbbf180fc74165b059594d832a3f391502926b4257be60b740fc",
+      "lineCount": 843
+    },
+    {
+      "path": "production/package.json",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 891,
+      "sha256": "b7653baca8900675dc70303d89061070927d9cfb5c3441fdb1e5a4e1793f4110",
+      "lineCount": 27
+    },
+    {
+      "path": "production/src/modules/function-operations.ts",
+      "readMode": "git show",
+      "commit": "9357e2152f0d1150d31cae7d7c25085af203d288",
+      "bytes": 8392,
+      "sha256": "2505739980cdd86d67533bf3a327a1d07d8ce7c0dac6fcd2d62ed1d31cb9a4fd",
+      "lineCount": 283
+    }
+  ],
+  "sourceAuthorityNote": "IH005 semantics and inherited DEC-GRAPE-001 govern. HOST_QUALIFICATION older coordinated-history wording is not authority to add mixed chronology. Example code is behavioral oracle only; no reference implementation read/copied into production.",
+  "verificationPerformed": [
+    "Packet and all eight exact inputRefs byte/hash checks.",
+    "Fixed Git blob source reading, source SHA256/byte manifests, source-only symbol inventory.",
+    "S07/S08 slice/gate/capability extraction; verified all eleven S07 operationSpec fields absent.",
+    "Report JSON syntax/internal-completeness checks and final two-file byte/SHA256 fingerprinting; no product tests or runtime evidence."
+  ],
+  "limitations": [
+    "No TD/Bridge/native/network/browser/service/installation/process-enumeration action.",
+    "No external Legacy source/project access; legacy paths inside frozen capability data are provenance only.",
+    "No production/state/frozen/committed-evidence changes; no commits/push; no additional agents.",
+    "Only named ignored report.md/report.json are outputs; no new Human questions.",
+    "No Slice activation/completion, technical PASS, independent verdict, Human acceptance or Gate decision.",
+    "Pinned 9357e21 report is not coverage of subsequent B01 changes; next writer packet must bind actual reviewed engineering base.",
+    "Actual native API/thread/GLSL shell/control path, renderer/license information, port allocation and first target mutation remain unexecuted.",
+    "First bounded explicit Target batch does not by itself deliver all S07 leaves/profiles or satisfy S08 native publication obligations."
+  ],
+  "conclusion": "Proceedable specification preparation under existing run; no demonstrated architecture contradiction. One isolated Manager with multiple sessions/Targets is permitted initial route; cross-ID adoption stays unresolved. STOP_WRITING.",
+  "sourceProjectionsStatusNote": "Frozen sourceSliceContracts/sourceGateProjections retain their source statuses and required evidence. They are not current outcomes, decisions, execution or Gate closure. Later exact Human controls constrain UI/fixture behavior as described, without this scout changing state.",
+  "s07ScopeRows": [
+    [
+      "LC-HOST-001",
+      "由Shader帶明確ID開正確Editor；Manager可辨識",
+      "matching明確入口可做；唯一異IDfallback維持G-PD-3，不能借候選唯一授write權。"
+    ],
+    [
+      "LC-HOST-002",
+      "Windows app launcher與一般browser一次fallback",
+      "後續optional launcher；http(s) only、最多10×300ms、code0 handoff；本scout不開browser。"
+    ],
+    [
+      "LC-HOST-003",
+      "registered合法唯一Target清單；clean/keep/apply/cancel安全切換",
+      "第一批list/inspect/clean/keep/cancel；apply分支等S08真applied；更版列表禁選和direct readonly不同。"
+    ],
+    [
+      "LC-HOST-008",
+      "credential optional/default off；on時read/write需當前token",
+      "首receiver必要authority matrix；完整service設定toggle保port/token/queue；不得偷偷全改必填token。"
+    ],
+    [
+      "LC-HOST-009",
+      "loopback default；可選LAN；strict同port rebind",
+      "第一批loopback；LAN/toggle為後續未交付義務，失敗保舊mode，不能漂移port或改firewall。"
+    ],
+    [
+      "LC-HOST-010",
+      "來源/action/format/size驗證後才排隊",
+      "首receiver必驗；HTTP具體status/header有oracle，transport本身仍工程選擇。"
+    ],
+    [
+      "LC-HOST-011",
+      "Share正確Target link、local QR、copy/manual fallback",
+      "後續optional share；不更LAN/token，壞origins去除，secret不入query/Graph/log。"
+    ],
+    [
+      "LC-HOST-012",
+      "無Target或失效ID不猜另一Shader",
+      "第一批；root入口繼續host-free/提示，deleted ID拒絕，與明確manager create入口分開。"
+    ],
+    [
+      "LC-HOST-013",
+      "中斷只讀recovery；revision變化review，lost write不重送",
+      "第一批；至少5s visible polling、401/403/changed停止、20s client/15s queue等待、busy與compileerror分開。"
+    ],
+    [
+      "LC-HOST-021",
+      "Native Viewer底層API有自己的local proof",
+      "Human已退役UI button；本批不還原；API／direct consumers不因此刪除，不宣稱Gate關閉。"
+    ],
+    [
+      "LC-HOST-022",
+      "Native Parameters／TD Glslparameters Pulse作用正確OP",
+      "Human已退役UI button；底層API/Pulse與remote scope另列，不借Viewer local-only規則。"
+    ]
+  ]
+}

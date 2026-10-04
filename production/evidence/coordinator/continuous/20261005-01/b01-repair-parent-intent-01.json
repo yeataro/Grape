@@ -1,0 +1,99 @@
+{
+  "packetVersion": 1,
+  "recordedAt": "2026-10-04T20:59:05.738Z",
+  "actionKey": "yeataro/Grape:continuous-20261005:B01:repair:270e50e:01",
+  "status": "INTENT_ONLY_NOT_DISPATCHED",
+  "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+  "parentTurnId": "01a108b3-dcd8-77f0-8ed0-44d29fc01e6d",
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "canonicalAgent": "/root/s03_implementer_resume"
+  },
+  "packet": {
+    "file": "production/evidence/coordinator/continuous/20261005-01/b01-repair-packet-01.json",
+    "bytes": 34404,
+    "sha256": "e9ae72ca2bab59842e8373f4a10753422bde2db2b1a888dc9003fef3cfca93c3"
+  },
+  "head": "270e50e77634b3a5665daf8f471a71371140533c",
+  "branch": "work",
+  "trackedAndIndexClean": true,
+  "remoteObservation": {
+    "main": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+    "work": "270e50e77634b3a5665daf8f471a71371140533c",
+    "method": "git ls-remote origin refs/heads/main refs/heads/work",
+    "commandChunk": "0308fd"
+  },
+  "priorWriter": {
+    "status": "idle",
+    "turnId": "01a1087a-81fd-7863-8d8c-a638fcc9d0c5",
+    "completed": true,
+    "stopWriting": true,
+    "finalMessageId": "msg_0f7ea6f2d846c6d3016ac2ba062e7887d0a1f641771a4a2db8"
+  },
+  "duplicateCheck": {
+    "parentIntentAndResultAbsentBeforeWrite": true,
+    "coordinatorReceipt": "b01-repair-dispatch-result-01.json",
+    "coordinatorReceiptIsParentTransportOnly": true
+  },
+  "verification": {
+    "packetReferences": 63,
+    "rawManifestEntries": 402,
+    "rawManifestBytes": 29197676,
+    "originalReportAndManifestAdditional": 2,
+    "allBytesAndHashesMatch": true,
+    "originalReview": {
+      "file": "C:/Users/user/.codex/worktrees/continuous-b01-review-01/Grape/.verification/continuous-b01-review-01/INDEPENDENT_REVIEW_RESULT.json",
+      "bytes": 30915,
+      "sha256": "157f55bc1f9325639142995afd26beeb7e82d9e8bbf6f61be2486d3e5637d493"
+    },
+    "originalManifest": {
+      "file": "C:/Users/user/.codex/worktrees/continuous-b01-review-01/Grape/.verification/continuous-b01-review-01/supporting-evidence-manifest-01.json",
+      "bytes": 79655,
+      "sha256": "db4f1e16a138a956abda18d9b3d8e5ca0bff4cfc14e74f8aa5279434e08000e3"
+    },
+    "reviewVerdict": "FAIL",
+    "reviewedI": "dc653519515e167c75d967930defafcf19422197",
+    "reviewedR": "270e50e77634b3a5665daf8f471a71371140533c",
+    "commandChunk": "0308fd"
+  },
+  "scope": "Repair the three collected B01 independent findings and affected workspace/Panel/current-layout regressions only; preserve prior exact review and pending authorized controls/analysis. No new product semantics or catalog/Host batch.",
+  "findingIds": [
+    "B01-FR01",
+    "B01-FR02",
+    "B01-FR03"
+  ],
+  "inheritedCounters": {
+    "workspace": {
+      "reviewAttempt": 4,
+      "repairAttempt": 3,
+      "unsuccessfulRepairReReviewRounds": 2
+    },
+    "debugHover": {
+      "reviewAttempt": 2,
+      "repairAttempt": 1,
+      "unsuccessfulRepairReReviewRounds": 0
+    },
+    "ownerCorrections": {
+      "reviewAttempt": 1,
+      "repairAttempt": 0,
+      "unsuccessfulRepairReReviewRounds": 0
+    },
+    "rule": "New B01 finding group is only new scope; recurrence of original underlying defect uses original budget. At3 unsuccessful diagnose; do not reset by changing group name."
+  },
+  "budgetApplication": {
+    "currentB01ReviewAttempt": 1,
+    "currentB01TargetedRepairAttempt": 1,
+    "unsuccessfulB01RepairReReviewRounds": 0,
+    "rule": "Preserve inherited workspace unsuccessful rounds2. FR01 shares DOM reinsert/focus mechanism with retained pre-final self-check counterexample; self-check iteration is not an independent repair/re-review round. Conservatively use inherited remaining repair budget for recurrence rather than granting a fresh budget by naming B01. If this repair re-review is unsuccessful on that underlying group, record third unsuccessful round and perform technical diagnosis before further repair attempts. Do not erase old findings or counts. New FR02/03 are distinct counterexamples, but this packet does not reset any inherited counter."
+  },
+  "action": "One followup_task to existing original child; confirm new turn and packet read; parent transport only",
+  "protections": [
+    "handoff/** immutable",
+    "production/debug.log untouched",
+    "preserve existing evidence and all unrelated work",
+    "preserve Coordinator 4203 and Legacy/TD services",
+    "no acceptance, main merge, release or new writer"
+  ],
+  "completionRoute": "Original writer submission then Coordinator Fresh targeted re-review; parent records transport only"
+}

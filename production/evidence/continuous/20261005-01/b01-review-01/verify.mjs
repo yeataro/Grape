@@ -1,0 +1,30 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {execFileSync,spawnSync} from 'node:child_process';
+const root=process.cwd(), out=path.join(root,'.verification/continuous-b01-review-01');
+const main='C:/Users/user/source/Grape';
+const rel='production/evidence/coordinator/continuous/20261005-01/b01-reviewer-packet-01.json';
+const packet=JSON.parse(fs.readFileSync(path.join(main,rel),'utf8'));
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const git=(...a)=>execFileSync('git',['-c','safe.directory='+root.replaceAll('\\','/'),...a],{cwd:root,encoding:'utf8',maxBuffer:30*1024*1024});
+const rows=[];
+function check(ref,base=root){const b=fs.readFileSync(path.join(base,ref.file)); const row={...ref,base,actualBytes:b.length,actualSha256:sha(b)};row.pass=b.length===ref.bytes&&row.actualSha256===ref.sha256; rows.push(row);}
+check({file:rel,bytes:18692,sha256:'90716a0c3a7e088787ed0b07a318f650f718039f1ee5307b8fba5c7a7ea18ec8'},main);
+const uncommitted=['b01-submission-collection-01.json','postcommit-result-01.json','publication-result-01.json'];
+for(const ref of [...packet.contractRefs,...packet.inputRefs,packet.authorizationRef,packet.prerequisite.review]) check(ref,uncommitted.some(x=>ref.file.endsWith(x))?main:root);
+for(const m of ['source-config-manifest-01.json','evidence-manifest-01.json']) for(const ref of read(path.join(root,'production/evidence/continuous/20261005-01/b01-workspace',m)).files) check(ref);
+const ir=git('diff','--name-only',packet.implementationI,packet.submittedHeadR,'--','production/apps','production/src','production/tests','production/tools','production/package.json','production/package-lock.json','production/tsconfig.json','production/conformance');
+const status=git('status','--short','--untracked-files=no');
+const result={head:git('rev-parse','HEAD').trim(),expected:packet.submittedHeadR,sourceIRequality:ir==='',sourceIRdiff:ir,trackedStatus:status,rows,counts:{checked:rows.length,failed:rows.filter(r=>!r.pass).length}};
+fs.writeFileSync(path.join(out,'identity-hashes-01.json'),JSON.stringify(result,null,2)+'\n');
+const archive=path.join(out,'archive');fs.mkdirSync(archive);
+execFileSync('tar',['-xzf',path.join(root,packet.build.archive.file),'-C',archive]);
+const buildRows=read(path.join(root,packet.build.manifest.file)).files.map(ref=>{const b=fs.readFileSync(path.join(archive,ref.file));return {...ref,actualBytes:b.length,actualSha256:sha(b),pass:b.length===ref.bytes&&sha(b)===ref.sha256};});
+fs.writeFileSync(path.join(out,'archive-hashes-01.json'),JSON.stringify(buildRows,null,2)+'\n');
+console.log(JSON.stringify({head:result.head,sourceIRequality:ir==='',trackedStatus:status,hashes:result.counts,archive:buildRows}));
+const commands=[['bootstrap',['tools/verify-bootstrap.mjs']],['state',['handoff/tools/check-implementation-state.mjs','--current']],['fixtures',['--test','tools/verify-bootstrap.test.mjs']],['typecheck',['production/node_modules/typescript/bin/tsc','--noEmit','-p','production/tsconfig.json']],['pins',['production/tools/module-pins.mjs']],['boundaries',['production/tools/boundaries.mjs']],['unit',['--experimental-transform-types','--test','--test-isolation=none',...fs.readdirSync(path.join(root,'production/tests/unit')).filter(x=>x.endsWith('.test.ts')).map(x=>'production/tests/unit/'+x),...fs.readdirSync(path.join(root,'production/tests/conformance')).filter(x=>x.endsWith('.test.ts')).map(x=>'production/tests/conformance/'+x)]]];
+const results=[];
+for(const [id,args] of commands){const start=Date.now();const r=spawnSync(process.execPath,args,{cwd:root,encoding:'utf8',maxBuffer:30*1024*1024});fs.writeFileSync(path.join(out,id+'.log'),(r.stdout??'')+(r.stderr??''));results.push({id,args,exit:r.status,error:r.error?.message,durationMs:Date.now()-start});console.log(JSON.stringify(results.at(-1)));}
+fs.writeFileSync(path.join(out,'checks-01.json'),JSON.stringify(results,null,2)+'\n');

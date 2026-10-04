@@ -1,0 +1,66 @@
+
+Running 27 tests using 1 worker
+
+(node:23100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover-lifetime.spec.ts:5:1 › S06 diagnostic mount revoke hide move update and late callback cannot revive old object data (444ms)
+  ok  2 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:15:1 › S06 F2-only all built-in readonly kinds and ordinary hints preserve document selection History Redo (2.2s)
+  ok  3 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:24:58 › S06 F2 ignores obsolete preference true (458ms)
+  ok  4 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:24:58 › S06 F2 ignores obsolete preference false (494ms)
+  ok  5 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:24:58 › S06 F2 ignores obsolete preference {broken} (478ms)
+  ok  6 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:24:58 › S06 F2 ignores obsolete preference denied (459ms)
+  ok  7 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:27:1 › S06 F2 scalar vector draft and multifield IME guards preserve current text (899ms)
+  ok  8 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:31:1 › S06 F2 stage deletion Undo same-ID document reopen discards old target (1.4s)
+  ok  9 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:34:1 › S06 F2 pending wire held drag readonly and natural Escape remain guarded (1.3s)
+  ok 10 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:37:1 › S06 F2 no inspection serialization or clone during 80 trusted pointer moves or focus navigation (2.0s)
+  ok 11 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:40:1 › S06 F2 complete long data narrow keyboard close and unchanged geometry (910ms)
+  ok 12 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:43:1 › S06 F2 busy Save acknowledgement does not intercept or corrupt save (726ms)
+  x  13 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:47:1 › S06 debug target follows nested occurrence and independent Canvas navigation (2.8s)
+(node:40428) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 14 [chromium] › ..\..\..\production\tests\browser\s06-floating.spec.ts:5:1 › S06 shared floating consumers bound alignments focus semantics and disposal independently (479ms)
+  ok 15 [chromium] › ..\..\..\production\tests\browser\s06-floating.spec.ts:143:1 › S06 scoped floating presentation is revoked independently across remounts (153ms)
+  ok 16 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:36:5 › S06 repair F2 focused control versus hovered node (504ms)
+  ok 17 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:36:5 › S06 repair F2 focused control versus hovered panel (462ms)
+  ok 18 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:36:5 › S06 repair F2 focused control versus hovered control (461ms)
+  ok 19 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:36:5 › S06 repair F2 focused node versus hovered node (663ms)
+  ok 20 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:36:5 › S06 repair F2 focused node versus hovered panel (696ms)
+  ok 21 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:36:5 › S06 repair F2 focused node versus hovered control (643ms)
+  ok 22 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:36:5 › S06 repair F2 focused port versus hovered node (646ms)
+  ok 23 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:36:5 › S06 repair F2 focused port versus hovered panel (645ms)
+  ok 24 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:36:5 › S06 repair F2 focused port versus hovered control (678ms)
+  ok 25 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:83:1 › S06 repair compact disclosures share presentation without model changes (696ms)
+  ok 26 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:118:1 › S06 grouped project actions preserve nested Personal and saved-dialog focus (597ms)
+  ok 27 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:170:1 › S06 output diagnostics locate current nodes and reject stale detached actions (712ms)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:47:1 › S06 debug target follows nested occurrence and independent Canvas navigation 
+
+    ReferenceError: documentJSON is not defined
+
+      101 |   await expect(second).toHaveAttribute("data-path", /.+/);
+      102 |   await expect(dialog(page)).not.toBeVisible();
+    > 103 |   expect(await documentJSON(page)).toEqual(before);
+          |          ^
+      104 |   save("nested-occurrences", records);
+      105 | });
+      106 |
+        at C:\Users\user\source\Grape\production\tests\browser\s06-debug-hover.spec.ts:103:10
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\focused-01\test-results\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\f2-only-01\focused-01\test-results\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\f2-only-01\focused-01\test-results\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\f2-only-01\focused-01\test-results\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:47:1 › S06 debug target follows nested occurrence and independent Canvas navigation 
+  26 passed (23.9s)

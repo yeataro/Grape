@@ -1,0 +1,979 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+      "s06-f2-isolation.spec.ts",
+      "s06-debug-hover.spec.ts",
+      "--output",
+      "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/f2-only-01/isolation-01/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s06-debug-hover.spec.ts",
+      "file": "s06-debug-hover.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 F2-only all built-in readonly kinds and ordinary hints preserve document selection History Redo",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 988,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"Node:\"\u001b[39m\nReceived string:    \u001b[31m\"Panel: Canvas\u001b[39m\n\u001b[31mIdentity: canvas-1\u001b[39m\n\u001b[31mState: UI-only · visible·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"type\\\": \\\"grape.panel.canvas\\\",\u001b[39m\n\u001b[31m  \\\"viewState\\\": {\u001b[39m\n\u001b[31m    \\\"x\\\": 24,\u001b[39m\n\u001b[31m    \\\"y\\\": 104,\u001b[39m\n\u001b[31m    \\\"zoom\\\": 1\u001b[39m\n\u001b[31m  }\u001b[39m\n\u001b[31m}\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"Node:\"\u001b[39m\nReceived string:    \u001b[31m\"Panel: Canvas\u001b[39m\n\u001b[31mIdentity: canvas-1\u001b[39m\n\u001b[31mState: UI-only · visible·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"type\\\": \\\"grape.panel.canvas\\\",\u001b[39m\n\u001b[31m  \\\"viewState\\\": {\u001b[39m\n\u001b[31m    \\\"x\\\": 24,\u001b[39m\n\u001b[31m    \\\"y\\\": 104,\u001b[39m\n\u001b[31m    \\\"zoom\\\": 1\u001b[39m\n\u001b[31m  }\u001b[39m\n\u001b[31m}\"\u001b[39m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:83:18",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                      "column": 18,
+                      "line": 83
+                    },
+                    "snippet": "  81 |   ] as const) {\n  82 |     const text = await read(page, t);\n> 83 |     expect(text).toContain(k + \":\");\n     |                  ^\n  84 |     expect(text).not.toMatch(/editToken|TargetLease|MountTicket|\"lease\"/);\n  85 |     if (k === \"UI control\") expect(text).toContain(\"未提供\");\n  86 |     records.push({ kind: k, text });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                        "column": 18,
+                        "line": 83
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"Node:\"\u001b[39m\nReceived string:    \u001b[31m\"Panel: Canvas\u001b[39m\n\u001b[31mIdentity: canvas-1\u001b[39m\n\u001b[31mState: UI-only · visible·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"type\\\": \\\"grape.panel.canvas\\\",\u001b[39m\n\u001b[31m  \\\"viewState\\\": {\u001b[39m\n\u001b[31m    \\\"x\\\": 24,\u001b[39m\n\u001b[31m    \\\"y\\\": 104,\u001b[39m\n\u001b[31m    \\\"zoom\\\": 1\u001b[39m\n\u001b[31m  }\u001b[39m\n\u001b[31m}\"\u001b[39m\n\n  81 |   ] as const) {\n  82 |     const text = await read(page, t);\n> 83 |     expect(text).toContain(k + \":\");\n     |                  ^\n  84 |     expect(text).not.toMatch(/editToken|TargetLease|MountTicket|\"lease\"/);\n  85 |     if (k === \"UI control\") expect(text).toContain(\"未提供\");\n  86 |     records.push({ kind: k, text });\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:83:18"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:33:01.361Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-F2-onl-b79a7-ment-selection-History-Redo-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-F2-onl-b79a7-ment-selection-History-Redo-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-F2-onl-b79a7-ment-selection-History-Redo-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                    "column": 18,
+                    "line": 83
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-5170393ed741d84ba1dc",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 53,
+          "column": 1
+        },
+        {
+          "title": "S06 F2 ignores obsolete preference true",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 516,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:33:02.764Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-1c4ccf3798c28ab9bf32",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 109,
+          "column": 3
+        },
+        {
+          "title": "S06 F2 ignores obsolete preference false",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 456,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:33:03.363Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-7b4b2f30461b206379bd",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 109,
+          "column": 3
+        },
+        {
+          "title": "S06 F2 ignores obsolete preference {broken}",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 446,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:33:03.827Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-e9d558befd3e3dd2993e",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 109,
+          "column": 3
+        },
+        {
+          "title": "S06 F2 ignores obsolete preference denied",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 426,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:33:04.278Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-0ab9375702ba0d5ac15e",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 109,
+          "column": 3
+        },
+        {
+          "title": "S06 F2 scalar vector draft and multifield IME guards preserve current text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1014,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:33:04.709Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-7ac05bb9a4aba51e8890",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 147,
+          "column": 1
+        },
+        {
+          "title": "S06 F2 stage deletion Undo same-ID document reopen discards old target",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 785,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"35df48e9-42c9-4f85-bfa2-a175f076579e\"\u001b[39m\nReceived string:    \u001b[31m\"Panel: Canvas\u001b[39m\n\u001b[31mIdentity: canvas-1\u001b[39m\n\u001b[31mState: UI-only · visible·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"type\\\": \\\"grape.panel.canvas\\\",\u001b[39m\n\u001b[31m  \\\"viewState\\\": {\u001b[39m\n\u001b[31m    \\\"x\\\": 24,\u001b[39m\n\u001b[31m    \\\"y\\\": 104,\u001b[39m\n\u001b[31m    \\\"zoom\\\": 1\u001b[39m\n\u001b[31m  }\u001b[39m\n\u001b[31m}\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"35df48e9-42c9-4f85-bfa2-a175f076579e\"\u001b[39m\nReceived string:    \u001b[31m\"Panel: Canvas\u001b[39m\n\u001b[31mIdentity: canvas-1\u001b[39m\n\u001b[31mState: UI-only · visible·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"type\\\": \\\"grape.panel.canvas\\\",\u001b[39m\n\u001b[31m  \\\"viewState\\\": {\u001b[39m\n\u001b[31m    \\\"x\\\": 24,\u001b[39m\n\u001b[31m    \\\"y\\\": 104,\u001b[39m\n\u001b[31m    \\\"zoom\\\": 1\u001b[39m\n\u001b[31m  }\u001b[39m\n\u001b[31m}\"\u001b[39m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:191:31",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                      "column": 31,
+                      "line": 191
+                    },
+                    "snippet": "  189 |     original = await doc(page),\n  190 |     id = await n.getAttribute(\"data-node\");\n> 191 |   expect(await read(page, n)).toContain(id!);\n      |                               ^\n  192 |   await close(page, n);\n  193 |   await c.getByRole(\"button\", { name: \"Vertex\", exact: true }).click();\n  194 |   await expect(n).toHaveCount(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                        "column": 31,
+                        "line": 191
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"35df48e9-42c9-4f85-bfa2-a175f076579e\"\u001b[39m\nReceived string:    \u001b[31m\"Panel: Canvas\u001b[39m\n\u001b[31mIdentity: canvas-1\u001b[39m\n\u001b[31mState: UI-only · visible·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"type\\\": \\\"grape.panel.canvas\\\",\u001b[39m\n\u001b[31m  \\\"viewState\\\": {\u001b[39m\n\u001b[31m    \\\"x\\\": 24,\u001b[39m\n\u001b[31m    \\\"y\\\": 104,\u001b[39m\n\u001b[31m    \\\"zoom\\\": 1\u001b[39m\n\u001b[31m  }\u001b[39m\n\u001b[31m}\"\u001b[39m\n\n  189 |     original = await doc(page),\n  190 |     id = await n.getAttribute(\"data-node\");\n> 191 |   expect(await read(page, n)).toContain(id!);\n      |                               ^\n  192 |   await close(page, n);\n  193 |   await c.getByRole(\"button\", { name: \"Vertex\", exact: true }).click();\n  194 |   await expect(n).toHaveCount(0);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:191:31"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:33:05.728Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-F2-sta-bbcb4--reopen-discards-old-target-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-F2-sta-bbcb4--reopen-discards-old-target-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-F2-sta-bbcb4--reopen-discards-old-target-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                    "column": 31,
+                    "line": 191
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-2a900ebe8286b64c485b",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 185,
+          "column": 1
+        },
+        {
+          "title": "S06 F2 pending wire held drag readonly and natural Escape remain guarded",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1017,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"Node:\"\u001b[39m\nReceived string:    \u001b[31m\"Panel: Canvas\u001b[39m\n\u001b[31mIdentity: canvas-1\u001b[39m\n\u001b[31mState: UI-only · visible·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"type\\\": \\\"grape.panel.canvas\\\",\u001b[39m\n\u001b[31m  \\\"viewState\\\": {\u001b[39m\n\u001b[31m    \\\"x\\\": 24,\u001b[39m\n\u001b[31m    \\\"y\\\": 104,\u001b[39m\n\u001b[31m    \\\"zoom\\\": 1\u001b[39m\n\u001b[31m  }\u001b[39m\n\u001b[31m}\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"Node:\"\u001b[39m\nReceived string:    \u001b[31m\"Panel: Canvas\u001b[39m\n\u001b[31mIdentity: canvas-1\u001b[39m\n\u001b[31mState: UI-only · visible·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"type\\\": \\\"grape.panel.canvas\\\",\u001b[39m\n\u001b[31m  \\\"viewState\\\": {\u001b[39m\n\u001b[31m    \\\"x\\\": 24,\u001b[39m\n\u001b[31m    \\\"y\\\": 104,\u001b[39m\n\u001b[31m    \\\"zoom\\\": 1\u001b[39m\n\u001b[31m  }\u001b[39m\n\u001b[31m}\"\u001b[39m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:235:31",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                      "column": 31,
+                      "line": 235
+                    },
+                    "snippet": "  233 |   await page.keyboard.press(\"Escape\");\n  234 |   await clickAction(page, \"Lock editing\");\n> 235 |   expect(await read(page, n)).toContain(\"Node:\");\n      |                               ^\n  236 |   await close(page, n);\n  237 |   await n.getByRole(\"heading\").click();\n  238 |   const r = page.getByRole(\"textbox\", { name: \"R\", exact: true });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                        "column": 31,
+                        "line": 235
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"Node:\"\u001b[39m\nReceived string:    \u001b[31m\"Panel: Canvas\u001b[39m\n\u001b[31mIdentity: canvas-1\u001b[39m\n\u001b[31mState: UI-only · visible·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"type\\\": \\\"grape.panel.canvas\\\",\u001b[39m\n\u001b[31m  \\\"viewState\\\": {\u001b[39m\n\u001b[31m    \\\"x\\\": 24,\u001b[39m\n\u001b[31m    \\\"y\\\": 104,\u001b[39m\n\u001b[31m    \\\"zoom\\\": 1\u001b[39m\n\u001b[31m  }\u001b[39m\n\u001b[31m}\"\u001b[39m\n\n  233 |   await page.keyboard.press(\"Escape\");\n  234 |   await clickAction(page, \"Lock editing\");\n> 235 |   expect(await read(page, n)).toContain(\"Node:\");\n      |                               ^\n  236 |   await close(page, n);\n  237 |   await n.getByRole(\"heading\").click();\n  238 |   const r = page.getByRole(\"textbox\", { name: \"R\", exact: true });\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:235:31"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:33:06.885Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-F2-pen-60845-tural-Escape-remain-guarded-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-F2-pen-60845-tural-Escape-remain-guarded-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-F2-pen-60845-tural-Escape-remain-guarded-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                    "column": 31,
+                    "line": 235
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-ef92761ffec1406e74d4",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 225,
+          "column": 1
+        },
+        {
+          "title": "S06 F2 no inspection serialization or clone during 80 trusted pointer moves or focus navigation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2112,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:286:28",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                      "column": 28,
+                      "line": 286
+                    },
+                    "snippet": "  284 |   await expect(dialog(page)).toBeVisible();\n  285 |   const counts = await page.evaluate(() => (window as any).__counts);\n> 286 |   expect(counts.stringify).toBe(1);\n      |                            ^\n  287 |   save(\"f2-on-demand-counts\", {\n  288 |     moves: 80,\n  289 |     before: { clone: 0, stringify: 0 },"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                        "column": 28,
+                        "line": 286
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n\n  284 |   await expect(dialog(page)).toBeVisible();\n  285 |   const counts = await page.evaluate(() => (window as any).__counts);\n> 286 |   expect(counts.stringify).toBe(1);\n      |                            ^\n  287 |   save(\"f2-on-demand-counts\", {\n  288 |     moves: 80,\n  289 |     before: { clone: 0, stringify: 0 },\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:286:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:33:08.322Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-F2-no--d8a6c-r-moves-or-focus-navigation-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-F2-no--d8a6c-r-moves-or-focus-navigation-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-F2-no--d8a6c-r-moves-or-focus-navigation-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                    "column": 28,
+                    "line": 286
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-d0024c54df76c1a72671",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 258,
+          "column": 1
+        },
+        {
+          "title": "S06 F2 complete long data narrow keyboard close and unchanged geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1007,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:33:10.857Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-d66a41c1e272200cc395",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 295,
+          "column": 1
+        },
+        {
+          "title": "S06 F2 busy Save acknowledgement does not intercept or corrupt save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 710,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:33:11.944Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-57d46891a5af19ac217e",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 326,
+          "column": 1
+        },
+        {
+          "title": "S06 debug target follows nested occurrence and independent Canvas navigation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2332,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"\\\"occurrence\\\"\"\u001b[39m\nReceived string:    \u001b[31m\"Panel: Canvas\u001b[39m\n\u001b[31mIdentity: canvas-1\u001b[39m\n\u001b[31mState: UI-only · visible·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"type\\\": \\\"grape.panel.canvas\\\",\u001b[39m\n\u001b[31m  \\\"viewState\\\": {\u001b[39m\n\u001b[31m    \\\"x\\\": 24,\u001b[39m\n\u001b[31m    \\\"y\\\": 104,\u001b[39m\n\u001b[31m    \\\"zoom\\\": 1\u001b[39m\n\u001b[31m  }\u001b[39m\n\u001b[31m}\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"\\\"occurrence\\\"\"\u001b[39m\nReceived string:    \u001b[31m\"Panel: Canvas\u001b[39m\n\u001b[31mIdentity: canvas-1\u001b[39m\n\u001b[31mState: UI-only · visible·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"type\\\": \\\"grape.panel.canvas\\\",\u001b[39m\n\u001b[31m  \\\"viewState\\\": {\u001b[39m\n\u001b[31m    \\\"x\\\": 24,\u001b[39m\n\u001b[31m    \\\"y\\\": 104,\u001b[39m\n\u001b[31m    \\\"zoom\\\": 1\u001b[39m\n\u001b[31m  }\u001b[39m\n\u001b[31m}\"\u001b[39m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:412:18",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                      "column": 18,
+                      "line": 412
+                    },
+                    "snippet": "  410 |       });\n  411 |     const text = await read(page, target);\n> 412 |     expect(text).toContain('\"occurrence\"');\n      |                  ^\n  413 |     records.push(text);\n  414 |     await close(page, target);\n  415 |   }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                        "column": 18,
+                        "line": 412
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"\\\"occurrence\\\"\"\u001b[39m\nReceived string:    \u001b[31m\"Panel: Canvas\u001b[39m\n\u001b[31mIdentity: canvas-1\u001b[39m\n\u001b[31mState: UI-only · visible·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"type\\\": \\\"grape.panel.canvas\\\",\u001b[39m\n\u001b[31m  \\\"viewState\\\": {\u001b[39m\n\u001b[31m    \\\"x\\\": 24,\u001b[39m\n\u001b[31m    \\\"y\\\": 104,\u001b[39m\n\u001b[31m    \\\"zoom\\\": 1\u001b[39m\n\u001b[31m  }\u001b[39m\n\u001b[31m}\"\u001b[39m\n\n  410 |       });\n  411 |     const text = await read(page, target);\n> 412 |     expect(text).toContain('\"occurrence\"');\n      |                  ^\n  413 |     records.push(text);\n  414 |     await close(page, target);\n  415 |   }\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:412:18"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:33:12.661Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-debug-hover-S06-debug--05057-dependent-Canvas-navigation-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts",
+                    "column": 18,
+                    "line": 412
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fb8935eb0a5bb3a3900d-03909189592b31e1bd56",
+          "file": "s06-debug-hover.spec.ts",
+          "line": 362,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "s06-f2-isolation.spec.ts",
+      "file": "s06-f2-isolation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 optional inspection absent preserves normal public editing save ACK generation Undo Redo",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30138,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-f2-isolation.spec.ts",
+                        "column": 49,
+                        "line": 55
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('article').filter({ has: getByRole('heading', { name: 'Color RGBA', exact: true }) }).locator('[data-port=\"color\"]')\u001b[22m\n\n\n  53 |       await r.fill(\"0.25\");\n  54 |       await r.press(\"Enter\");\n> 55 |       await node.locator('[data-port=\"color\"]').click();\n     |                                                 ^\n  56 |       await page\n  57 |         .locator('.canvas [data-direction=\"input\"][data-port=\"color\"]')\n  58 |         .click();\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-f2-isolation.spec.ts:55:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:33:15.412Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-f2-isolation-S06-optio-615aa-ve-ACK-generation-Undo-Redo-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-f2-isolation-S06-optio-615aa-ve-ACK-generation-Undo-Redo-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-f2-isolation-S06-optio-615aa-ve-ACK-generation-Undo-Redo-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e2ac8233d33d467077e4-b2c18cfae1fe6e42fcf2",
+          "file": "s06-f2-isolation.spec.ts",
+          "line": 8,
+          "column": 3
+        },
+        {
+          "title": "S06 optional inspection disposed preserves normal public editing save ACK generation Undo Redo",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30155,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-f2-isolation.spec.ts",
+                        "column": 49,
+                        "line": 55
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('article').filter({ has: getByRole('heading', { name: 'Color RGBA', exact: true }) }).locator('[data-port=\"color\"]')\u001b[22m\n\n\n  53 |       await r.fill(\"0.25\");\n  54 |       await r.press(\"Enter\");\n> 55 |       await node.locator('[data-port=\"color\"]').click();\n     |                                                 ^\n  56 |       await page\n  57 |         .locator('.canvas [data-direction=\"input\"][data-port=\"color\"]')\n  58 |         .click();\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-f2-isolation.spec.ts:55:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:33:46.007Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-f2-isolation-S06-optio-af691-ve-ACK-generation-Undo-Redo-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-f2-isolation-S06-optio-af691-ve-ACK-generation-Undo-Redo-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-f2-isolation-S06-optio-af691-ve-ACK-generation-Undo-Redo-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e2ac8233d33d467077e4-1d82f6e9c27ef98b0b85",
+          "file": "s06-f2-isolation.spec.ts",
+          "line": 8,
+          "column": 3
+        },
+        {
+          "title": "S06 optional inspection failed-construction preserves normal public editing save ACK generation Undo Redo",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30170,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-f2-isolation.spec.ts",
+                        "column": 49,
+                        "line": 55
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('article').filter({ has: getByRole('heading', { name: 'Color RGBA', exact: true }) }).locator('[data-port=\"color\"]')\u001b[22m\n\n\n  53 |       await r.fill(\"0.25\");\n  54 |       await r.press(\"Enter\");\n> 55 |       await node.locator('[data-port=\"color\"]').click();\n     |                                                 ^\n  56 |       await page\n  57 |         .locator('.canvas [data-direction=\"input\"][data-port=\"color\"]')\n  58 |         .click();\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-f2-isolation.spec.ts:55:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:34:16.633Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-f2-isolation-S06-optio-e9cff-ve-ACK-generation-Undo-Redo-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-f2-isolation-S06-optio-e9cff-ve-ACK-generation-Undo-Redo-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-f2-isolation-S06-optio-e9cff-ve-ACK-generation-Undo-Redo-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e2ac8233d33d467077e4-6586810328849964988a",
+          "file": "s06-f2-isolation.spec.ts",
+          "line": 8,
+          "column": 3
+        },
+        {
+          "title": "S06 readonly owner fault registration serialization invalidation and multi-instance disposal stay local",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 224,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 3\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"alive\": true,\u001b[22m\n\u001b[2m    \"before\": 0,\u001b[22m\n\u001b[2m    \"events\": 1,\u001b[22m\n\u001b[32m-   \"fresh\": true,\u001b[39m\n\u001b[31m+   \"fresh\": false,\u001b[39m\n\u001b[2m    \"guardBlocked\": true,\u001b[22m\n\u001b[2m    \"noStale\": true,\u001b[22m\n\u001b[32m-   \"normal\": true,\u001b[39m\n\u001b[31m+   \"normal\": false,\u001b[39m\n\u001b[2m    \"refreshClosed\": true,\u001b[22m\n\u001b[2m    \"serialBlocked\": true,\u001b[22m\n\u001b[32m-   \"unavailable\": true,\u001b[39m\n\u001b[31m+   \"unavailable\": false,\u001b[39m\n\u001b[2m  }\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 3\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"alive\": true,\u001b[22m\n\u001b[2m    \"before\": 0,\u001b[22m\n\u001b[2m    \"events\": 1,\u001b[22m\n\u001b[32m-   \"fresh\": true,\u001b[39m\n\u001b[31m+   \"fresh\": false,\u001b[39m\n\u001b[2m    \"guardBlocked\": true,\u001b[22m\n\u001b[2m    \"noStale\": true,\u001b[22m\n\u001b[32m-   \"normal\": true,\u001b[39m\n\u001b[31m+   \"normal\": false,\u001b[39m\n\u001b[2m    \"refreshClosed\": true,\u001b[22m\n\u001b[2m    \"serialBlocked\": true,\u001b[22m\n\u001b[32m-   \"unavailable\": true,\u001b[39m\n\u001b[31m+   \"unavailable\": false,\u001b[39m\n\u001b[2m  }\u001b[22m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-f2-isolation.spec.ts:257:18",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-f2-isolation.spec.ts",
+                      "column": 18,
+                      "line": 257
+                    },
+                    "snippet": "  255 |     };\n  256 |   });\n> 257 |   expect(result).toMatchObject({\n      |                  ^\n  258 |     before: 0,\n  259 |     normal: true,\n  260 |     unavailable: true,"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-f2-isolation.spec.ts",
+                        "column": 18,
+                        "line": 257
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 3\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"alive\": true,\u001b[22m\n\u001b[2m    \"before\": 0,\u001b[22m\n\u001b[2m    \"events\": 1,\u001b[22m\n\u001b[32m-   \"fresh\": true,\u001b[39m\n\u001b[31m+   \"fresh\": false,\u001b[39m\n\u001b[2m    \"guardBlocked\": true,\u001b[22m\n\u001b[2m    \"noStale\": true,\u001b[22m\n\u001b[32m-   \"normal\": true,\u001b[39m\n\u001b[31m+   \"normal\": false,\u001b[39m\n\u001b[2m    \"refreshClosed\": true,\u001b[22m\n\u001b[2m    \"serialBlocked\": true,\u001b[22m\n\u001b[32m-   \"unavailable\": true,\u001b[39m\n\u001b[31m+   \"unavailable\": false,\u001b[39m\n\u001b[2m  }\u001b[22m\n\n  255 |     };\n  256 |   });\n> 257 |   expect(result).toMatchObject({\n      |                  ^\n  258 |     before: 0,\n  259 |     normal: true,\n  260 |     unavailable: true,\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-f2-isolation.spec.ts:257:18"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T15:34:47.295Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-f2-isolation-S06-reado-509dd-nstance-disposal-stay-local-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-f2-isolation-S06-reado-509dd-nstance-disposal-stay-local-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\f2-only-01\\isolation-01\\test-results\\s06-f2-isolation-S06-reado-509dd-nstance-disposal-stay-local-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-f2-isolation.spec.ts",
+                    "column": 18,
+                    "line": 257
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e2ac8233d33d467077e4-505123673e0d26ade5e5",
+          "file": "s06-f2-isolation.spec.ts",
+          "line": 97,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T15:33:01.006Z",
+    "duration": 106663.96,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 9,
+    "flaky": 0
+  }
+}

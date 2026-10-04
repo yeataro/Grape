@@ -1,0 +1,1404 @@
+diff --git a/production/apps/web/build-info.ts b/production/apps/web/build-info.ts
+index 3e4d6cc..534b8e0 100644
+--- a/production/apps/web/build-info.ts
++++ b/production/apps/web/build-info.ts
+@@ -31,7 +31,9 @@ export function mountBuildInfo(brand: HTMLElement): void {
+     identity
+       ? `Implementation: ${identity.implementationI}`
+       : "Development source: no archived candidate identity declared.",
+-    "底部 Experimental features 可切換唯讀物件資訊；預設保留一般提示。",
++    "底部功能列集中 Project actions、Shader output、Hints 與 Experimental features；輸出預設收合，GLSL、診斷與 Locate 仍可取得。",
++    "Read object details 可沿連續滑鼠路徑到達；F2 讀取目前鍵盤焦點，兩者不再混用目標。",
++    "接線只點 socket 圓；名稱與型別分開。實心提示保留各型別顏色，選取與提示不改節點排版。",
+     "Node、Port、Edge、Parameter Widget、Panel 與一般控制項提供各自可讀的資料；未提供資料會明示。",
+     "Read object details（鍵盤 F2）可展開全文；Close 或 Escape 關閉。不改文件、選取或編輯歷史。",
+     "版號與本輪更新位於既有品牌列。這是候選版本，獨立審查與 Human 接受依各自精確紀錄，不由此畫面推定。",
+diff --git a/production/apps/web/main.ts b/production/apps/web/main.ts
+index 6509240..e775de2 100644
+--- a/production/apps/web/main.ts
++++ b/production/apps/web/main.ts
+@@ -1,3 +1,4 @@
++import { floatingSurface } from "../../src/ui/floating.ts";
+ import { mountBuildInfo } from "./build-info.ts";
+ import { icon } from "../../src/features/node-browser.ts";
+ import { mountHover } from "../../src/ui/hover.ts";
+@@ -116,12 +117,12 @@ const application = new EditorApplication(
+ );
+ const app = document.querySelector<HTMLElement>("#app")!;
+ app.innerHTML =
+-  '<header><div class="brand"><svg class="grape-mark" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><circle cx="20" cy="23" r="11" fill="#bfa5f4"/><circle cx="44" cy="23" r="11" fill="#a98be2"/><circle cx="32" cy="44" r="11" fill="#b499ef"/></svg> Grape <small>SHADER WORKSPACE</small></div><nav aria-label="Document actions"></nav><div class="status"><span id="save-state"></span><span class="host">Host-free</span></div></header><div id="message" role="status"></div><div id="actions"></div><main><section id="canvases"></section><aside id="inspector"></aside></main><section id="code"></section><footer><span>Click an output port, then an input to connect. Shift-click replaces a connection.</span><span>Scroll to zoom · Drag empty space to pan</span></footer><dialog id="open-dialog"><h2>Open saved document</h2><div id="saved-list"></div><button id="cancel-open">Cancel</button></dialog><dialog id="recovery"><h2>Document retained</h2><p id="recovery-message"></p><button id="export-original">Export original</button><button id="close-recovery">Close</button></dialog>';
++  '<header><div class="brand"><svg class="grape-mark" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><circle cx="20" cy="23" r="11" fill="#bfa5f4"/><circle cx="44" cy="23" r="11" fill="#a98be2"/><circle cx="32" cy="44" r="11" fill="#b499ef"/></svg> Grape <small>SHADER WORKSPACE</small></div><nav aria-label="Document actions"></nav><div class="status"><span id="save-state"></span><span class="host">Host-free</span></div></header><div id="message" role="status"></div><div id="actions"></div><main><section id="canvases"></section><aside id="inspector"></aside></main><section id="code"></section><footer><span data-hint="connections">Click an output port, then an input to connect. Shift-click replaces a connection.</span><span data-hint="navigation">Scroll to zoom · Drag empty space to pan</span></footer><dialog id="open-dialog"><h2>Open saved document</h2><div id="saved-list"></div><button id="cancel-open">Cancel</button></dialog><dialog id="recovery"><h2>Document retained</h2><p id="recovery-message"></p><button id="export-original">Export original</button><button id="close-recovery">Close</button></dialog>';
+ const staticText = [
+   [".brand small", "subtitle"],
+   [".host", "hostFree"],
+-  ["footer span:first-child", "connections"],
+-  ["footer span:last-child", "navigation"],
++  ["[data-hint=connections]", "connections"],
++  ["[data-hint=navigation]", "navigation"],
+   ["#open-dialog h2", "openTitle"],
+   ["#cancel-open", "cancel"],
+   ["#recovery h2", "recoveryTitle"],
+@@ -149,47 +150,30 @@ statusBar.className = "application-status";
+ statusBar.setAttribute("role", "status");
+ oldMessage.replaceWith(statusBar);
+ statusBar.append(message);
+-app.querySelector("footer")!.after(statusBar);
+-const statusDialog = document.createElement("dialog"),
+-  statusTitle = document.createElement("h2"),
+-  statusText = document.createElement("div"),
+-  statusClose = document.createElement("button");
+-statusDialog.className = "status-details";
+-statusDialog.ariaLabel = "Application status details";
+-statusTitle.textContent = "Application status details";
++app.querySelector("footer")!.append(statusBar);
++const statusText = document.createElement("div");
+ statusText.className = "status-details-text";
+ statusText.tabIndex = 0;
+ statusText.setAttribute("role", "region");
+ statusText.ariaLabel = "Full current application status";
+-statusClose.type = "button";
+-statusClose.textContent = "Close status details";
+-statusDialog.append(statusTitle, statusText, statusClose);
+-app.append(statusDialog);
+-const closeStatus = () => {
+-  if (!statusDialog.open) return;
+-  statusDialog.close();
+-  const fallback = Array.from(
+-    nav.querySelectorAll<HTMLButtonElement>("button"),
+-  ).find((b) => !b.disabled && b.isConnected && b.getClientRects().length);
+-  (message.disabled ? fallback : message)?.focus({ preventScroll: true });
+-};
++const statusView = floatingSurface({
++  host: app,
++  trigger: message,
++  content: statusText,
++  title: "Application status details",
++  closeLabel: "Close status details",
++  kind: "anchored",
++  width: 680,
++  maxHeight: 420,
++  beforeOpen: () => !!message.textContent,
++  fallbackFocus: () =>
++    nav.querySelector<HTMLButtonElement>("button:not(:disabled)"),
++});
++const closeStatus = () => statusView.close();
+ message.onclick = () => {
+-  if (!message.textContent) return;
+   statusText.textContent = message.textContent;
+-  statusDialog.showModal();
+-  statusText.focus();
++  statusView.toggle();
+ };
+-statusClose.onclick = closeStatus;
+-statusDialog.addEventListener("cancel", (e) => {
+-  e.preventDefault();
+-  closeStatus();
+-});
+-statusDialog.addEventListener("keydown", (e) => {
+-  if (e.key === "Tab" && !e.isComposing) {
+-    e.preventDefault();
+-    (document.activeElement === statusText ? statusClose : statusText).focus();
+-  }
+-});
+ const setMessage = (text: string) => {
+   message.textContent = text;
+   message.disabled = !text;
+@@ -251,6 +235,26 @@ const action = (
+ let workspace: Workspace | null = null,
+   renderer: PanelRenderer | null = null,
+   canvasCount = 0;
++const footer = app.querySelector<HTMLElement>("footer")!;
++const outputTrigger = document.createElement("button"),
++  output = app.querySelector<HTMLElement>("#code")!;
++outputTrigger.type = "button";
++outputTrigger.textContent = "Shader output";
++footer.append(outputTrigger);
++output.tabIndex = 0;
++const outputView = floatingSurface({
++  host: app,
++  trigger: outputTrigger,
++  content: output,
++  title: "Shader output and diagnostics",
++  closeLabel: "Close shader output",
++  kind: "anchored",
++  width: 860,
++  maxHeight: 550,
++  align: "end",
++  dismissOutside: false,
++});
++outputTrigger.onclick = () => outputView.toggle();
+ const hover = mountHover(
+   app,
+   app.querySelector("footer")!,
+@@ -586,7 +590,7 @@ action("second", () => {
+ const lockButton = action("lock", () =>
+   application.setReadonly(!application.readonly),
+ );
+-lockButton.setAttribute("aria-pressed", "false");
++lockButton.setAttribute("aria-checked", "false");
+ let original: string | ArrayBuffer | Blob = "";
+ let currentReview: DocumentInspection | null = null,
+   reviewTicket = 0;
+@@ -712,7 +716,7 @@ application.subscribe(() => {
+       ? text("dirty")
+       : text("saved");
+   saveButton.disabled = application.saving;
+-  lockButton.setAttribute("aria-pressed", String(application.readonly));
++  lockButton.setAttribute("aria-checked", String(application.readonly));
+ });
+ application.newDocument();
+ buildWorkspace();
+@@ -739,48 +743,75 @@ mountPersonal(
+   },
+ );
+ 
+-const overflow = document.createElement("details"),
+-  overflowLabel = document.createElement("summary"),
+-  overflowItems = document.createElement("div");
+-overflow.className = "action-overflow";
+-overflowLabel.textContent = "More actions";
+-overflowLabel.prepend(icon("more"));
+-overflowItems.className = "overflow-items";
+-overflow.append(overflowLabel, overflowItems);
+-const actionGroups = [
+-  document.createElement("div"),
+-  document.createElement("div"),
+-  document.createElement("div"),
+-];
+-actionGroups.forEach((g) => (g.className = "action-group"));
++// Existing document commands keep their own handlers and guards; only their
++// presentation moves into the shared owned disclosure.
++const menuTrigger = document.createElement("button"),
++  menuContent = document.createElement("div"),
++  hintsTrigger = document.createElement("button"),
++  hintsContent = document.createElement("div");
++menuTrigger.type = "button";
++menuTrigger.textContent = "Project actions";
++menuTrigger.className = "project-actions";
++menuContent.className = "function-actions";
++menuContent.tabIndex = -1;
++const documentGroup = document.createElement("div"),
++  workspaceGroup = document.createElement("div");
++for (const [group, label] of [
++  [documentGroup, "Documents and library"],
++  [workspaceGroup, "Workspace"],
++] as const) {
++  group.setAttribute("role", "group");
++  group.ariaLabel = label;
++  menuContent.append(group);
++}
+ for (const child of Array.from(nav.children)) {
+   const key = (child as HTMLElement).dataset.action;
+-  const index = key
+-    ? ["new", "save", "open", "file", "export", "png"].includes(key)
+-      ? 0
+-      : 1
+-    : 2;
+-  actionGroups[index]!.append(child);
+-}
+-nav.append(...actionGroups, overflow);
+-const groupWidths = actionGroups.map((g) => g.getBoundingClientRect().width);
+-const fitActions = () => {
+-  const capacity = nav.clientWidth;
+-  let used = 130;
+-  let hidden = 0;
+-  for (let i = 0; i < actionGroups.length; i++) {
+-    const g = actionGroups[i]!;
+-    const width = groupWidths[i]! + 8;
+-    if (used + width > capacity) {
+-      overflowItems.append(g);
+-      hidden++;
+-    } else {
+-      nav.insertBefore(g, overflow);
+-      used += width;
+-    }
++  if (!(child instanceof HTMLButtonElement)) app.append(child);
++  else if (key !== "save" && key !== "generate") {
++    child.setAttribute(
++      "role",
++      key === "lock" ? "menuitemcheckbox" : "menuitem",
++    );
++    (key === "second" || key === "lock"
++      ? workspaceGroup
++      : documentGroup
++    ).append(child);
+   }
+-  overflow.hidden = !hidden;
+-  if (!hidden) overflow.open = false;
+-};
+-new ResizeObserver(fitActions).observe(nav);
+-fitActions();
++}
++footer.prepend(menuTrigger);
++const projectMenu = floatingSurface({
++  host: app,
++  trigger: menuTrigger,
++  content: menuContent,
++  title: "Project actions",
++  closeLabel: "Close project actions",
++  kind: "menu",
++  width: 310,
++  maxHeight: 520,
++});
++menuTrigger.onclick = () => projectMenu.toggle();
++menuContent.addEventListener("click", (event) => {
++  const action = (event.target as Element).closest<HTMLButtonElement>("button")
++    ?.dataset.action;
++  // Dialog-opening callers retain their visible opener until their own Close.
++  if (action && ["new", "export", "file", "second", "lock"].includes(action))
++    projectMenu.close(false);
++});
++hintsTrigger.type = "button";
++hintsTrigger.textContent = "Hints";
++hintsContent.tabIndex = 0;
++for (const hint of Array.from(footer.querySelectorAll(":scope > span")))
++  hintsContent.append(hint);
++footer.append(hintsTrigger);
++const hintsView = floatingSurface({
++  host: app,
++  trigger: hintsTrigger,
++  content: hintsContent,
++  title: "Workspace hints",
++  closeLabel: "Close hints",
++  kind: "anchored",
++  width: 370,
++  maxHeight: 300,
++  align: "end",
++});
++hintsTrigger.onclick = () => hintsView.toggle();
+diff --git a/production/apps/web/style.css b/production/apps/web/style.css
+index 0f2b227..ad713fd 100644
+--- a/production/apps/web/style.css
++++ b/production/apps/web/style.css
+@@ -290,11 +290,18 @@ input[readonly] {
+   color: #ccb786;
+ }
+ footer {
+-  padding: 12px 24px;
++  position: sticky;
++  bottom: 0;
++  z-index: 30;
+   display: flex;
+-  justify-content: space-between;
+-  gap: 20px;
+-  color: #8d8498;
++  flex-wrap: wrap;
++  align-items: center;
++  justify-content: flex-start;
++  gap: 5px;
++  padding: 4px 8px;
++  background: #1b1922;
++  border-top: 1px solid #36323e;
++  color: rgb(255 255 255 / 65%);
+   font-size: 11px;
+ }
+ dialog {
+@@ -327,9 +334,6 @@ dialog::backdrop {
+   nav button {
+     font-size: 12px;
+   }
+-  footer {
+-    flex-direction: column;
+-  }
+   .canvas-pane {
+     min-height: 470px;
+   }
+@@ -471,50 +475,6 @@ header nav {
+   align-items: center;
+   gap: 8px;
+ }
+-.action-group {
+-  display: flex;
+-  flex-wrap: nowrap;
+-  gap: 5px;
+-  padding-right: 8px;
+-  border-right: 1px solid #35313f;
+-}
+-.action-group button {
+-  white-space: nowrap;
+-  font-size: 12px;
+-  padding: 7px 9px;
+-}
+-.action-overflow {
+-  position: relative;
+-  margin-left: auto;
+-}
+-.action-overflow summary {
+-  cursor: pointer;
+-  white-space: nowrap;
+-  padding: 8px;
+-  list-style: none;
+-  border: 1px solid #51465f;
+-  border-radius: 5px;
+-}
+-.overflow-items {
+-  position: absolute;
+-  z-index: 50;
+-  right: 0;
+-  top: 100%;
+-  min-width: 250px;
+-  max-width: 90vw;
+-  max-height: 70vh;
+-  overflow: auto;
+-  background: var(--panel);
+-  padding: 12px;
+-  box-shadow: 0 10px 40px #000a;
+-  border: 1px solid #60576e;
+-  border-radius: 7px;
+-}
+-.overflow-items .action-group {
+-  flex-direction: column;
+-  border: 0;
+-  padding: 6px 0;
+-}
+ .editing-actions {
+   padding: 6px 18px;
+   gap: 5px;
+@@ -631,9 +591,6 @@ main {
+   flex-direction: row;
+   justify-content: flex-end;
+ }
+-.port-row .port {
+-  color: #ffffffbd;
+-}
+ .node-value {
+   flex: 1;
+   min-width: 0;
+@@ -651,29 +608,63 @@ main {
+   font-size: 9px;
+   color: var(--port-color, #c4c1bc);
+ }
+-.port {
++.port-row .port {
++  position: absolute;
++  left: -10px;
++  top: calc(50% - 10px);
++  width: 20px;
++  height: 20px;
++  min-height: 0;
+   padding: 0;
+-  min-height: 29px;
+-  font-size: 11px;
+   border: 0;
++  border-radius: 50%;
+   background: transparent;
++  color: var(--port-color);
+ }
+-.socket {
++.port-row.output .port {
++  left: auto;
++  right: -10px;
++}
++.port-label {
++  font-size: 11px;
++  color: rgb(255 255 255 / 75%);
++}
++.port .socket {
+   position: absolute;
+-  left: -6px;
+-  top: calc(50% - 5.5px);
++  left: 4.5px;
++  top: 4.5px;
+   width: 11px;
+   height: 11px;
+-  border: 2px solid var(--port-color, #c4c1bc);
++  border: 2px solid var(--port-color);
+   border-radius: 50%;
+   background: #181822;
++  pointer-events: none;
+ }
+-.output .socket {
+-  right: -6px;
+-  left: auto;
++.port .socket.connected,
++.port:hover .socket,
++.port:active .socket,
++.port:focus-visible .socket,
++.port.wire-origin .socket,
++.port.wire-target .socket {
++  background: var(--port-color);
++}
++.port:hover .socket {
++  box-shadow: 0 0 0 2px color-mix(in srgb, var(--port-color) 35%, transparent);
++}
++.port:active .socket {
++  box-shadow: 0 0 0 3px var(--port-color);
+ }
+-.socket.connected {
+-  background: var(--port-color, #c4c1bc);
++.port:focus-visible {
++  outline: 1px solid var(--port-color);
++  outline-offset: 1px;
++}
++.port.wire-origin .socket {
++  box-shadow: 0 0 0 2px var(--port-color);
++}
++.port.wire-target .socket {
++  box-shadow:
++    0 0 0 4px var(--port-color),
++    0 0 12px var(--port-color);
+ }
+ .wires path {
+   stroke-width: 2;
+@@ -744,62 +735,37 @@ main {
+   pointer-events: none;
+ }
+ .hover-debug-ui {
++  margin-left: auto;
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
+   gap: 8px;
+   color: rgb(255 255 255 / 88%);
+   min-width: 0;
+-  flex-wrap: wrap;
+-}
+-footer:has(.hover-debug-ui) {
+-  flex-wrap: wrap;
+-  position: relative;
++  flex-wrap: nowrap;
+ }
+ .hover-summary {
+   display: inline-block;
+-  max-width: min(340px, 50vw);
++  max-width: min(200px, 22vw);
++  font-size: 11px;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   overflow: hidden;
+   color: rgb(255 255 255 / 75%);
+ }
+-.experimental-settings {
+-  position: relative;
+-}
+-.experimental-settings summary {
+-  cursor: pointer;
+-  padding: 7px 10px;
+-  border: 1px solid rgb(255 255 255 / 20%);
+-  border-radius: 5px;
+-  color: rgb(255 255 255 / 85%);
+-}
+-.experimental-settings fieldset {
+-  position: absolute;
+-  z-index: 40;
+-  bottom: calc(100% + 8px);
+-  right: 0;
++.experimental-options {
++  border: 0;
+   margin: 0;
+-  padding: 16px;
+-  width: min(360px, 88vw);
+-  box-sizing: border-box;
+-  background: #24232b;
+-  border: 1px solid rgb(255 255 255 / 24%);
+-  border-radius: 8px;
+-  box-shadow: 0 8px 30px #0007;
+-}
+-.experimental-settings legend {
+-  color: rgb(255 255 255 / 90%);
++  padding: 0;
+ }
+-.experimental-settings label {
++.experimental-options label {
+   display: flex;
+   align-items: flex-start;
+   gap: 8px;
+   line-height: 1.5;
+   white-space: normal;
+-  color: rgb(255 255 255 / 85%);
+ }
+-.experimental-settings input {
++.experimental-options input {
+   width: auto;
+   flex: none;
+   accent-color: #bfa5f4;
+@@ -1155,3 +1121,94 @@ footer:has(.hover-debug-ui) {
+     display: none;
+   }
+ }
++
++/* Shared owned floating surfaces; caller-supplied dimensions and alignment. */
++.floating-surface {
++  position: fixed;
++  box-sizing: border-box;
++  padding: 12px;
++  border: 1px solid rgb(255 255 255 / 24%);
++  border-radius: 8px;
++  background: #24232b;
++  color: rgb(255 255 255 / 88%);
++  box-shadow: 0 8px 30px #0007;
++  z-index: 70;
++  overflow: hidden;
++}
++.floating-surface[open] {
++  display: flex;
++  flex-direction: column;
++  gap: 10px;
++}
++.floating-surface:not([data-kind="modal"]) {
++  margin: 0;
++  right: auto;
++  bottom: auto;
++}
++.floating-surface h2 {
++  flex: none;
++  font-size: 14px;
++  margin: 0;
++}
++.floating-content {
++  min-height: 0;
++  overflow: auto;
++  overflow-wrap: anywhere;
++}
++.floating-surface > button {
++  align-self: flex-end;
++  flex: none;
++}
++.floating-content > span {
++  display: block;
++  margin-bottom: 10px;
++}
++.function-actions {
++  display: flex;
++  flex-direction: column;
++  gap: 5px;
++}
++.function-actions button {
++  text-align: left;
++}
++.function-actions [role="group"] {
++  display: flex;
++  flex-direction: column;
++  gap: 5px;
++}
++.function-actions [role="group"] + [role="group"] {
++  border-top: 1px solid rgb(255 255 255 / 18%);
++  padding-top: 8px;
++}
++#app > footer button {
++  font-size: 11px;
++  padding: 5px 7px;
++}
++.application-status {
++  flex: 1;
++  min-width: 80px;
++  border: 0;
++  order: 1;
++}
++.application-status #message {
++  height: 26px;
++  padding: 4px 8px;
++}
++#code .code {
++  padding: 0;
++  border: 0;
++}
++#code .code pre {
++  max-height: 220px;
++}
++@media (max-width: 700px) {
++  .hover-summary {
++    max-width: 120px;
++  }
++  #app > footer {
++    gap: 3px;
++  }
++  .application-status {
++    flex-basis: 100%;
++  }
++}
+diff --git a/production/src/features/canvas.ts b/production/src/features/canvas.ts
+index cc645a9..8984847 100644
+--- a/production/src/features/canvas.ts
++++ b/production/src/features/canvas.ts
+@@ -159,62 +159,33 @@ function mountCanvas(
+   const toolbar = document.createElement("div");
+   const noticeErrors = new Map<string, string>();
+   const noticeSummary = document.createElement("button"),
+-    statusDialog = document.createElement("dialog"),
+-    statusTitle = document.createElement("h2"),
+-    statusText = document.createElement("div"),
+-    statusClose = document.createElement("button");
++    statusText = document.createElement("div");
+   noticeSummary.type = "button";
+   noticeSummary.ariaLabel = "Read full Canvas status";
+   noticeSummary.setAttribute("aria-haspopup", "dialog");
+   notice.append(noticeSummary);
+-  statusDialog.className = "status-details";
+-  statusDialog.ariaLabel = "Canvas status details";
+-  statusTitle.textContent = "Canvas status details";
+   statusText.className = "status-details-text";
+   statusText.setAttribute("role", "region");
+   statusText.ariaLabel = "Full current Canvas status";
+   statusText.tabIndex = 0;
+-  statusClose.type = "button";
+-  statusClose.textContent = "Close status details";
+-  statusDialog.append(statusTitle, statusText, statusClose);
+-  root.append(statusDialog);
+-  const closeStatus = () => {
+-    if (!statusDialog.open) return;
+-    statusDialog.close();
+-    (noticeSummary.disabled || notice.hidden ? root : noticeSummary).focus({
+-      preventScroll: true,
+-    });
+-  };
++  demand(mount.floating, "FLOATING_PRESENTATION_UNAVAILABLE");
++  const statusView = mount.floating({
++    host: root,
++    trigger: noticeSummary,
++    content: statusText,
++    title: "Canvas status details",
++    closeLabel: "Close status details",
++    kind: "modal",
++    width: 680,
++    maxHeight: 680,
++  });
++  const closeStatus = () => statusView.close();
+   noticeSummary.onclick = mount.scope.event(() => {
+     clearConnection();
+     if (noticeSummary.disabled) return;
+     browser.cancel(false);
+     end(true);
+-    statusDialog.showModal();
+-    statusText.focus();
+-  });
+-  statusClose.onclick = mount.scope.event(closeStatus);
+-  statusDialog.addEventListener(
+-    "cancel",
+-    mount.scope.event((e) => {
+-      e.preventDefault();
+-      closeStatus();
+-    }),
+-  );
+-  statusDialog.addEventListener(
+-    "keydown",
+-    mount.scope.event((e: KeyboardEvent) => {
+-      if (e.key === "Tab" && !e.isComposing) {
+-        e.preventDefault();
+-        (document.activeElement === statusText
+-          ? statusClose
+-          : statusText
+-        ).focus();
+-      }
+-    }),
+-  );
+-  mount.scope.own(() => {
+-    if (statusDialog.open) statusDialog.close();
++    statusView.open();
+   });
+   let connectionNotice = "",
+     detailNotice = "";
+@@ -1067,6 +1038,27 @@ function mountCanvas(
+   const drawConnection = () => {
+     connectionPreview.replaceChildren();
+     const pending = portDrag ?? selectedPort;
++    const hit = pointerPoint
++      ? document
++          .elementFromPoint(pointerPoint.x, pointerPoint.y)
++          ?.closest<HTMLElement>("[data-port]")
++      : null;
++    for (const button of nodes.querySelectorAll<HTMLElement>("[data-port]")) {
++      button.classList.toggle(
++        "wire-origin",
++        !!pending &&
++          button.dataset.nodeId === pending.nodeId &&
++          button.dataset.port === pending.portKey &&
++          button.dataset.direction === pending.direction,
++      );
++      button.classList.toggle(
++        "wire-target",
++        !!pending &&
++          services.editing?.(lease().lease) !== false &&
++          button === hit &&
++          pending.direction !== button.dataset.direction,
++      );
++    }
+     if (!pending || !pointerPoint || browser.isOpen()) return;
+     const socket = Array.from(
+       nodes.querySelectorAll<HTMLElement>("[data-port]"),
+@@ -1099,6 +1091,10 @@ function mountCanvas(
+     ring.setAttribute("cx", String(x));
+     ring.setAttribute("cy", String(y));
+     ring.setAttribute("r", "8");
++    ring.setAttribute(
++      "style",
++      `stroke:${p.getAttribute("stroke")};fill:transparent`,
++    );
+     connectionPreview.append(p, ring);
+   };
+   const clearConnection = () => {
+@@ -1255,7 +1251,7 @@ function mountCanvas(
+         browser.isOpen() ||
+         !menu.hidden ||
+         helpDialog.open ||
+-        statusDialog.open
++        statusView.isOpen()
+       )
+         return;
+       if (!e.isPrimary) {
+@@ -1568,7 +1564,7 @@ function mountCanvas(
+         e.defaultPrevented ||
+         e.isComposing ||
+         e.repeat ||
+-        document.querySelector("dialog[open]") ||
++        document.querySelector("dialog:modal") ||
+         (e.target as HTMLElement).closest(
+           "input,textarea,select,[contenteditable=true],.node-browser,.canvas-menu",
+         )
+diff --git a/production/src/features/code.ts b/production/src/features/code.ts
+index 22d378f..af27ea2 100644
+--- a/production/src/features/code.ts
++++ b/production/src/features/code.ts
+@@ -51,12 +51,14 @@ export function codeType(
+               root.append(title, status, code, issues);
+               (surface.target as HTMLElement).append(root);
+               scope.own(() => root.remove());
++              let renderVersion = 0;
+               return {
+                 update: (
+                   p: ReturnType<typeof read>,
+                   frame: import("../sdk/view-mount.ts").ViewFrame,
+                 ) => {
+-                  const result = p.compilation;
++                  const version = ++renderVersion,
++                    result = p.compilation;
+                   title.textContent = frame.text({
+                     owner,
+                     key: "title",
+@@ -108,7 +110,9 @@ export function codeType(
+                       const subject = d.subject;
+                       if (
+                         subject?.nodeId &&
+-                        target.target?.scope.stageId === subject.stageId
++                        target.target?.scope.stageId === subject.stageId &&
++                        (p.snapshot.diagnostics.includes(d) ||
++                          result?.revision === p.snapshot.revision)
+                       ) {
+                         const button = document.createElement("button");
+                         button.textContent = frame.text({
+@@ -119,6 +123,11 @@ export function codeType(
+                         button.addEventListener(
+                           "click",
+                           scope.event(() => {
++                            if (
++                              version !== renderVersion ||
++                              !button.isConnected
++                            )
++                              return;
+                             const context = services.context(target.lease);
+                             if (
+                               context
+diff --git a/production/src/features/node-browser.ts b/production/src/features/node-browser.ts
+index 71a53bf..4e45041 100644
+--- a/production/src/features/node-browser.ts
++++ b/production/src/features/node-browser.ts
+@@ -104,10 +104,10 @@ export function nodePortRow(
+     "glsl.vec4": "#c5b2e2",
+   };
+   row.style.setProperty("--port-color", colors[port.type] ?? "#a1adb7");
+-  if (port.direction === "output") button.append(caption, socket);
+-  else button.append(socket, caption);
++  button.append(socket);
++  caption.className = "port-label";
+   type.textContent = port.type.replace("glsl.", "");
+-  row.append(button, type);
++  row.append(button, caption, type);
+   if (port.direction === "input" && !connected && value !== undefined) {
+     const display = document.createElement("span");
+     display.className = "node-value";
+diff --git a/production/src/sdk/view-mount.ts b/production/src/sdk/view-mount.ts
+index 1031ff2..31dd7c5 100644
+--- a/production/src/sdk/view-mount.ts
++++ b/production/src/sdk/view-mount.ts
+@@ -58,6 +58,23 @@ export interface HoverReadView {
+ /** Read-only Panels receive no command capability. Commands are application-owned and Panel-bound. */
+ export interface PanelMountContext extends MountContext {
+   readonly commands?: import("./panel-commands.ts").PanelCommands;
++  /** Optional platform presentation only; no Graph or command authority. */
++  readonly floating?: (options: FloatingPresentation) => {
++    isOpen(): boolean;
++    open(): boolean;
++    close(focus?: boolean): void;
++  };
++}
++export interface FloatingPresentation {
++  readonly host: unknown;
++  readonly trigger: unknown;
++  readonly content: unknown;
++  readonly title: string;
++  readonly closeLabel: string;
++  readonly kind: "anchored" | "modal";
++  readonly width: number;
++  readonly maxHeight: number;
++  readonly align?: "start" | "end";
+ }
+ export interface MountedView<P = unknown> {
+   /** Synchronous projection delivery. Async work must use scope.ticket/accept and scope.own. */
+diff --git a/production/src/ui/floating.ts b/production/src/ui/floating.ts
+new file mode 100644
+index 0000000..50532eb
+--- /dev/null
++++ b/production/src/ui/floating.ts
+@@ -0,0 +1,203 @@
++let surfaceOrder = 70;
++/** DOM presentation only. Callers retain content, data and command ownership. */
++export interface FloatingOptions {
++  host: HTMLElement;
++  trigger: HTMLElement;
++  content: HTMLElement;
++  title: string;
++  closeLabel: string;
++  kind: "anchored" | "modal" | "menu";
++  width: number;
++  maxHeight: number;
++  align?: "start" | "end";
++  dismissOutside?: boolean;
++  beforeOpen?: () => boolean;
++  closed?: () => void;
++  fallbackFocus?: () => HTMLElement | null;
++}
++export function floatingSurface(options: FloatingOptions) {
++  const { host, trigger, content } = options;
++  const surface = document.createElement("dialog"),
++    heading = document.createElement("h2"),
++    closeButton = document.createElement("button");
++  surface.className = "floating-surface";
++  surface.dataset.kind = options.kind;
++  surface.ariaLabel = options.title;
++  if (options.kind === "menu") surface.setAttribute("role", "menu");
++  heading.textContent = options.title;
++  closeButton.type = "button";
++  closeButton.textContent = options.closeLabel;
++  content.classList.add("floating-content");
++  surface.append(heading, content, closeButton);
++  host.append(surface);
++  trigger.setAttribute(
++    "aria-haspopup",
++    options.kind === "menu" ? "menu" : "dialog",
++  );
++  trigger.setAttribute("aria-expanded", "false");
++  let disposed = false,
++    opener: HTMLElement | SVGElement | null = null;
++  const cleanups: (() => void)[] = [];
++  const listen = (
++    target: EventTarget,
++    name: string,
++    fn: EventListener,
++    capture = false,
++  ) => {
++    target.addEventListener(name, fn, capture);
++    cleanups.push(() => target.removeEventListener(name, fn, capture));
++  };
++  const visible = (e: Element) =>
++    e.isConnected && e.getClientRects().length > 0;
++  const position = () => {
++    if (!surface.open) return;
++    const margin = 8,
++      width = Math.min(options.width, innerWidth - margin * 2),
++      height = Math.min(options.maxHeight, innerHeight - margin * 2);
++    surface.style.width = width + "px";
++    surface.style.maxHeight = height + "px";
++    if (options.kind === "modal") return;
++    const a = trigger.getBoundingClientRect();
++    const left = options.align === "end" ? a.right - width : a.left;
++    surface.style.left =
++      Math.max(margin, Math.min(left, innerWidth - width - margin)) + "px";
++    const h = surface.getBoundingClientRect().height;
++    surface.style.top =
++      Math.max(margin, Math.min(a.top - h - margin, innerHeight - h - margin)) +
++      "px";
++  };
++  const close = (focus = true) => {
++    if (!surface.open) return;
++    surface.close();
++    trigger.setAttribute("aria-expanded", "false");
++    options.closed?.();
++    const available = (
++      e: HTMLElement | SVGElement | null,
++    ): e is HTMLElement | SVGElement =>
++      !!e && visible(e) && !(e as HTMLButtonElement).disabled;
++    const target = available(opener)
++      ? opener
++      : available(trigger)
++        ? trigger
++        : (options.fallbackFocus?.() ?? host);
++    if (focus && available(target)) target.focus({ preventScroll: true });
++  };
++  const open = (focusTarget: HTMLElement | null = content) => {
++    if (disposed || !visible(trigger) || options.beforeOpen?.() === false)
++      return false;
++    if (surface.open) return true;
++    opener =
++      document.activeElement instanceof HTMLElement ||
++      document.activeElement instanceof SVGElement
++        ? document.activeElement
++        : trigger;
++    surface.style.zIndex = String(++surfaceOrder);
++    if (options.kind === "modal") surface.showModal();
++    else surface.show();
++    trigger.setAttribute("aria-expanded", "true");
++    position();
++    (options.kind === "menu"
++      ? content.querySelector<HTMLElement>("[role^=menuitem]:not(:disabled)")
++      : focusTarget
++    )?.focus({ preventScroll: true });
++    return true;
++  };
++  listen(closeButton, "click", () => close());
++  listen(surface, "cancel", (event) => {
++    event.preventDefault();
++    close();
++  });
++  listen(surface, "keydown", (event) => {
++    const e = event as KeyboardEvent;
++    if (e.key === "Escape" && !e.isComposing) {
++      e.preventDefault();
++      e.stopPropagation();
++      close();
++    }
++    if (!e.isComposing && options.kind === "menu") {
++      const items = [
++        ...content.querySelectorAll<HTMLElement>(
++          "[role^=menuitem]:not(:disabled)",
++        ),
++      ].filter(visible);
++      if (
++        items.length &&
++        ["ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)
++      ) {
++        e.preventDefault();
++        const i = items.indexOf(document.activeElement as HTMLElement);
++        const next =
++          e.key === "Home"
++            ? 0
++            : e.key === "End"
++              ? items.length - 1
++              : (i + (e.key === "ArrowDown" ? 1 : -1) + items.length) %
++                items.length;
++        items[next]!.focus();
++      }
++      if (e.key === "Tab") close(false);
++    }
++    if (e.key === "Tab" && !e.isComposing && options.kind === "modal") {
++      const items = [
++        ...surface.querySelectorAll<HTMLElement>(
++          "button,input,select,textarea,a[href],[tabindex]",
++        ),
++      ].filter(
++        (el) =>
++          el.tabIndex >= 0 &&
++          visible(el) &&
++          !(el as HTMLButtonElement).disabled,
++      );
++      const first = items[0],
++        last = items.at(-1);
++      if (
++        first &&
++        last &&
++        (e.shiftKey
++          ? document.activeElement === first
++          : document.activeElement === last)
++      ) {
++        e.preventDefault();
++        (e.shiftKey ? last : first).focus();
++      }
++    }
++  });
++  // A nonmodal disclosure never traps focus. Outside interaction closes only itself.
++  if (options.kind !== "modal" && options.dismissOutside !== false)
++    listen(
++      document,
++      "pointerdown",
++      (e) => {
++        if (document.querySelector("dialog:modal")) return;
++        if (
++          surface.open &&
++          e.target instanceof Node &&
++          !surface.contains(e.target) &&
++          !trigger.contains(e.target)
++        )
++          close(false);
++      },
++      true,
++    );
++  listen(window, "resize", position);
++  listen(document, "scroll", position, true);
++  const observer = new ResizeObserver(position);
++  observer.observe(content);
++  observer.observe(trigger);
++  return {
++    surface,
++    closeButton,
++    open,
++    close,
++    position,
++    toggle: () => (surface.open ? close() : open()),
++    dispose: () => {
++      if (disposed) return;
++      disposed = true;
++      close(false);
++      observer.disconnect();
++      cleanups.forEach((f) => f());
++      surface.remove();
++    },
++  };
++}
+diff --git a/production/src/ui/hover.ts b/production/src/ui/hover.ts
+index ce4b0a1..5205c2e 100644
+--- a/production/src/ui/hover.ts
++++ b/production/src/ui/hover.ts
+@@ -1,3 +1,4 @@
++import { floatingSurface } from "./floating.ts";
+ import type {
+   HoverBlock,
+   MountScope,
+@@ -50,8 +51,8 @@ export function mountHover(
+   busy: () => boolean,
+ ) {
+   const ui = document.createElement("div"),
+-    settings = document.createElement("details"),
+-    summary = document.createElement("summary"),
++    settings = document.createElement("div"),
++    summary = document.createElement("button"),
+     group = document.createElement("fieldset"),
+     legend = document.createElement("legend"),
+     label = document.createElement("label"),
+@@ -59,12 +60,10 @@ export function mountHover(
+     issue = document.createElement("p"),
+     hint = document.createElement("span"),
+     expand = document.createElement("button"),
+-    dialog = document.createElement("dialog"),
+-    heading = document.createElement("h2"),
+-    content = document.createElement("pre"),
+-    close = document.createElement("button");
++    content = document.createElement("pre");
+   ui.className = "hover-debug-ui";
+   settings.className = "experimental-settings";
++  summary.type = "button";
+   summary.textContent = "Experimental features";
+   legend.textContent = "Hover information";
+   checkbox.type = "checkbox";
+@@ -75,8 +74,10 @@ export function mountHover(
+   );
+   issue.setAttribute("role", "status");
+   issue.className = "experimental-issue";
++  group.className = "experimental-options";
++  group.tabIndex = -1;
+   group.append(legend, label, issue);
+-  settings.append(summary, group);
++  settings.append(summary);
+   hint.className = "hover-summary";
+   hint.setAttribute("aria-live", "off");
+   expand.type = "button";
+@@ -85,24 +86,19 @@ export function mountHover(
+   expand.setAttribute("aria-haspopup", "dialog");
+   expand.setAttribute("aria-keyshortcuts", "F2");
+   expand.title = "Read the focused object's information with F2";
+-  dialog.className = "status-details hover-details";
+-  dialog.ariaLabel = "Object information";
+-  heading.textContent = "Object information — read only";
+   content.className = "status-details-text";
+   content.tabIndex = 0;
+   content.setAttribute("role", "region");
+   content.ariaLabel = "Current object data";
+-  close.type = "button";
+-  close.textContent = "Close object details";
+-  dialog.append(heading, content, close);
+-  ui.append(settings, hint, expand, dialog);
++  ui.append(settings, hint, expand);
+   footer.append(ui);
+   const initial = preference.load();
+   checkbox.checked = initial.enabled;
+   issue.textContent = initial.issue;
+   let active: { element: Element; entry: Entry | null } | null = null,
+     disposed = false,
+-    opener: HTMLElement | SVGElement | null = null;
++    pending: ReturnType<typeof setTimeout> | undefined;
++  let pendingTarget: Element | null = null;
+   const cleanups: (() => void)[] = [];
+   const listen = (
+     target: EventTarget,
+@@ -123,18 +119,44 @@ export function mountHover(
+     (!active.entry ||
+       (active.entry.owner.live &&
+         active.entry.owner.root.contains(active.element)));
+-  const finish = (focus: boolean) => {
+-    if (!dialog.open) return;
+-    dialog.close();
+-    if (focus)
+-      (opener && visible(opener) && !(opener as HTMLButtonElement).disabled
+-        ? opener
+-        : expand.disabled
+-          ? summary
+-          : expand
+-      ).focus({ preventScroll: true });
++  const preferenceView = floatingSurface({
++    host: root,
++    trigger: summary,
++    content: group,
++    title: "Hover preferences",
++    closeLabel: "Close experimental features",
++    kind: "anchored",
++    width: 360,
++    maxHeight: 340,
++    align: "end",
++    dismissOutside: false,
++    beforeOpen: () => {
++      const reason = blocked();
++      if (reason) issue.textContent = reason;
++      return !reason;
++    },
++  });
++  const detailsView = floatingSurface({
++    host: root,
++    trigger: expand,
++    content,
++    title: "Object information",
++    closeLabel: "Close object details",
++    kind: "modal",
++    width: 680,
++    maxHeight: 700,
++  });
++  const dialog = detailsView.surface;
++  dialog.classList.add("hover-details", "hover-owned-surface");
++  preferenceView.surface.classList.add("hover-owned-surface");
++  const finish = (focus: boolean) => detailsView.close(focus);
++  const cancelPending = () => {
++    clearTimeout(pending);
++    pending = undefined;
++    pendingTarget = null;
+   };
+   const clear = () => {
++    cancelPending();
+     const wasOpen = dialog.open;
+     finish(false);
+     active = null;
+@@ -197,12 +219,11 @@ export function mountHover(
+       role: element.getAttribute("role") || element.tagName.toLowerCase(),
+     },
+   });
+-  const show = (event: Event) => {
+-    const target = event.target;
++  const showTarget = (target: Element) => {
+     if (
+       disposed ||
+       !(target instanceof Element) ||
+-      target.closest(".hover-debug-ui") ||
++      target.closest(".hover-debug-ui,.hover-owned-surface") ||
+       dialog.open
+     )
+       return;
+@@ -210,7 +231,7 @@ export function mountHover(
+       clear();
+       return;
+     }
+-    if ((event as PointerEvent).buttons || busy()) {
++    if (busy()) {
+       clear();
+       return;
+     }
+@@ -240,20 +261,54 @@ export function mountHover(
+     hint.textContent = `${info.kind} · ${info.name} · ${info.state}`;
+     expand.disabled = false;
+   };
+-  listen(root, "pointerover", show);
+-  listen(root, "focusin", show);
++  // Hold a valid target during continuous travel to its explicit reader. Settling
++  // over a different object hands off after a short dwell; movement reads no data.
++  const queueTarget = (target: Element) => {
++    cancelPending();
++    if (target.closest(".hover-debug-ui,.hover-owned-surface") || dialog.open)
++      return;
++    if (!active) {
++      showTarget(target);
++      return;
++    }
++    pendingTarget = target;
++    pending = setTimeout(() => {
++      pendingTarget = null;
++      showTarget(target);
++    }, 140);
++  };
++  listen(root, "pointerover", (e) => {
++    if ((e as PointerEvent).buttons) {
++      clear();
++      return;
++    }
++    if (e.target instanceof Element) queueTarget(e.target);
++  });
++  listen(root, "pointermove", () => {
++    if (pendingTarget) queueTarget(pendingTarget);
++  });
++  listen(root, "focusin", (e) => {
++    if (e.target instanceof Element) {
++      cancelPending();
++      showTarget(e.target);
++    }
++  });
+   listen(root, "pointerleave", () => {
+     if (!dialog.open) clear();
+   });
+   listen(root, "input", (e) => {
+-    if (!(e.target as Element)?.closest(".hover-debug-ui")) clear();
++    if (!(e.target as Element)?.closest(".hover-debug-ui,.hover-owned-surface"))
++      clear();
+   });
+   listen(root, "compositionstart", () => clear());
+   listen(
+     root,
+     "pointerdown",
+     (e) => {
+-      if (!(e.target as Element)?.closest(".hover-debug-ui")) clear();
++      if (
++        !(e.target as Element)?.closest(".hover-debug-ui,.hover-owned-surface")
++      )
++        clear();
+     },
+     true,
+   );
+@@ -280,9 +335,13 @@ export function mountHover(
+       hint.textContent = reason;
+     }
+   };
++  listen(summary, "click", () => preferenceView.toggle());
+   listen(settings, "pointerdown", guardPreference, true);
+   listen(settings, "mousedown", guardPreference, true);
+   listen(settings, "click", guardPreference, true);
++  listen(group, "pointerdown", guardPreference, true);
++  listen(group, "mousedown", guardPreference, true);
++  listen(group, "click", guardPreference, true);
+   listen(settings, "keydown", (e) => {
+     const k = e as KeyboardEvent;
+     if (["Enter", " "].includes(k.key)) guardPreference(e);
+@@ -302,8 +361,7 @@ export function mountHover(
+   listen(settings, "keydown", (e) => {
+     if ((e as KeyboardEvent).key === "Escape") {
+       e.preventDefault();
+-      settings.open = false;
+-      summary.focus();
++      preferenceView.close();
+     }
+   });
+   listen(
+@@ -318,7 +376,8 @@ export function mountHover(
+     },
+     true,
+   );
+-  listen(expand, "click", () => {
++  const openDetails = () => {
++    cancelPending();
+     if (!valid() || busy()) {
+       clear();
+       return;
+@@ -333,19 +392,14 @@ export function mountHover(
+         ? active!.entry.read()
+         : fallback(active!.element);
+       content.textContent = `${info.kind}: ${info.name}\nIdentity: ${info.identity}\nState: ${info.state}\n\n${info.data === undefined ? "未提供" : JSON.stringify(info.data, null, 2)}`;
+-      opener =
+-        document.activeElement instanceof HTMLElement ||
+-        document.activeElement instanceof SVGElement
+-          ? document.activeElement
+-          : null;
+-      settings.open = false;
+-      dialog.showModal();
+-      content.focus();
++      preferenceView.close(false);
++      detailsView.open();
+     } catch {
+       clear();
+       issue.textContent = "Current object data: 未提供";
+     }
+-  });
++  };
++  listen(expand, "click", openDetails);
+   listen(root, "keydown", (event) => {
+     const e = event as KeyboardEvent;
+     if (
+@@ -354,23 +408,17 @@ export function mountHover(
+       !e.isComposing &&
+       !e.repeat &&
+       !e.defaultPrevented &&
+-      !dialog.open &&
+-      !expand.disabled
++      !dialog.open
+     ) {
+       e.preventDefault();
+-      expand.click();
+-    }
+-  });
+-  listen(close, "click", () => finish(true));
+-  listen(dialog, "cancel", (e) => {
+-    e.preventDefault();
+-    finish(true);
+-  });
+-  listen(dialog, "keydown", (e) => {
+-    const k = e as KeyboardEvent;
+-    if (k.key === "Tab" && !k.isComposing) {
+-      k.preventDefault();
+-      (document.activeElement === content ? close : content).focus();
++      const focused = document.activeElement;
++      if (
++        focused instanceof Element &&
++        !focused.closest(".hover-debug-ui,.hover-owned-surface")
++      )
++        showTarget(focused);
++      else return;
++      openDetails();
+     }
+   });
+   return {
+@@ -380,6 +428,8 @@ export function mountHover(
+       disposed = true;
+       clear();
+       for (const cleanup of cleanups.reverse()) cleanup();
++      preferenceView.dispose();
++      detailsView.dispose();
+       ui.remove();
+     },
+   };
+diff --git a/production/src/ui/mount.ts b/production/src/ui/mount.ts
+index 4e3e8ee..14162b5 100644
+--- a/production/src/ui/mount.ts
++++ b/production/src/ui/mount.ts
+@@ -1,3 +1,4 @@
++import { floatingSurface } from "./floating.ts";
+ import type {
+   HoverBlock,
+   MountScope,
+@@ -132,6 +133,36 @@ export class PresentationSession {
+         scope,
+         ...(surface.protocol === "grape.dom.v1"
+           ? {
++              floating: (
++                options: import("../sdk/view-mount.ts").FloatingPresentation,
++              ) => {
++                if (
++                  !(surface.target instanceof HTMLElement) ||
++                  !(options.host instanceof HTMLElement) ||
++                  !surface.target.contains(options.host) ||
++                  !(options.trigger instanceof HTMLElement) ||
++                  !(options.content instanceof HTMLElement)
++                )
++                  throw Error("FLOATING_SURFACE_PROTOCOL");
++                const view = floatingSurface({
++                  ...options,
++                  host: options.host,
++                  trigger: options.trigger,
++                  content: options.content,
++                });
++                let live = true;
++                scope.own(() => {
++                  live = false;
++                  view.dispose();
++                });
++                return {
++                  isOpen: () => live && view.surface.open,
++                  open: () => live && view.open(),
++                  close: (focus = true) => {
++                    if (live) view.close(focus);
++                  },
++                };
++              },
+               hover: (target: unknown, blocked?: () => HoverBlock | null) =>
+                 hoverOwner(target, scope, blocked),
+             }

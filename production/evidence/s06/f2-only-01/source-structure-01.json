@@ -1,0 +1,85 @@
+{
+  "implementationI": "e8c477ec511637f71646b79272422c72e40bd680",
+  "principle": "Optional presentation helper over already owned public readonly projections. No Graph/Application/generator/module/dependency/source codec changes.",
+  "interfaces": [
+    {
+      "file": "production/src/ui/hover.ts",
+      "entry": "hoverOwner / invalidateHover",
+      "responsibility": "Mount-owned readonly callback registry only. Registration is inert for invalid targets; renderers may register before append. Current containment/live entry is required at read. Invalidation failures are isolated from publisher/cleanup."
+    },
+    {
+      "file": "production/src/ui/hover.ts",
+      "entry": "mountHover",
+      "responsibility": "Only F2 resolves document.activeElement through registered owner metadata and ordinary UI-control fallback. Blockers checked locally; one read and one bounded formatting path; validity rechecked after formatting. No pointerover/move/focusin readers, timers or preferences. Optional creation faults release resources and return inert handle."
+    },
+    {
+      "file": "production/src/ui/floating.ts",
+      "entry": "FloatingOptions.trigger optional for modal only",
+      "responsibility": "Keyboard-only modal needs no second visible opener. Existing pointer-triggered anchored/menu consumers retain required anchors. Native modal/Tab/Close/Escape and exact HTML/SVG opener focus remain owned here; partial ResizeObserver failure cleans listeners/surface."
+    },
+    {
+      "file": "production/apps/web/main.ts",
+      "entry": "mountHover(app,busy)",
+      "responsibility": "Web composition provides only root and readonly busy state. Removes preference adapter and empty experimental controls; no storage access. Existing workspace invalidations remain."
+    }
+  ],
+  "consumers": [
+    {
+      "feature": "Canvas Node/Port/Edge",
+      "seam": "existing mount.hover callback",
+      "projection": "already delivered EditorContext projection; no per-pointer snapshot",
+      "changed": "only Help F2 row; owner callbacks unchanged"
+    },
+    {
+      "feature": "Widget",
+      "seam": "existing mount.hover binding",
+      "projection": "committed projection versus current local draft; existing blockers",
+      "changed": false
+    },
+    {
+      "feature": "Panel",
+      "seam": "existing mount public record/viewState",
+      "projection": "public identity/incarnation/visibility",
+      "changed": false
+    },
+    {
+      "feature": "Status/Shader Output/Hints/Project actions",
+      "seam": "same floatingSurface",
+      "changed": "no interaction semantics changed; default compact and responsive regression verified"
+    }
+  ],
+  "lifetime": "Scope owned revoke/refresh/hide/move/dispose invalidates current detail. Registry entries weak; owners removed on cleanup; helper observers/listeners removed on disposal or construction failure. Read/guard/serialization failures remain local, and a reentrant serialization invalidation cannot reopen old content.",
+  "failureEvidence": {
+    "file": "production/evidence/s06/f2-only-01/final-source-01/owner-faults.json",
+    "bytes": 419,
+    "sha256": "8911c3080f3fad3e2a8532353077d861a0d48e3dc3ead705ba382468c400b423"
+  },
+  "absenceEvidence": [
+    {
+      "file": "production/evidence/s06/f2-only-01/final-source-01/isolation-absent.json",
+      "bytes": 250,
+      "sha256": "9436b3e4c4fa6288a6cdb902ea8f1ef1ed02195a967dcbd04052152caceb8249"
+    },
+    {
+      "file": "production/evidence/s06/f2-only-01/final-source-01/isolation-disposed.json",
+      "bytes": 252,
+      "sha256": "e32885ae0900725988227670d72a52d5ddc1b83b197583210dcfe485232dd6f2"
+    },
+    {
+      "file": "production/evidence/s06/f2-only-01/final-source-01/isolation-failed-construction.json",
+      "bytes": 263,
+      "sha256": "6792320c0ce0ca0a46cbd6b1be9071101a6aaada279e1e4ab1907968d78bcf3f"
+    },
+    {
+      "file": "production/evidence/s06/f2-only-01/final-source-01/isolation-consumed-key.json",
+      "bytes": 256,
+      "sha256": "d36a7ac00851fcf792f6e99d7f7f6b935d7f446f0e07c08825bca0daae110b4a"
+    }
+  ],
+  "counterEvidence": {
+    "file": "production/evidence/s06/f2-only-01/final-source-01/f2-on-demand-counts.json",
+    "bytes": 210,
+    "sha256": "231ae1d6c89d09da1636973f2c118696bb5a3c827c1c19df7cc34f1e2b912b70"
+  },
+  "limits": "Trusted owner callbacks; no security sandbox against arbitrary malicious closures. No zero-CPU or global platform claim. Source injected adaptations are explicitly testing optional presentation only."
+}

@@ -1,0 +1,140 @@
+{
+  "implementationI": "e8c477ec511637f71646b79272422c72e40bd680",
+  "requirements": [
+    {
+      "id": "F2_ONLY",
+      "authority": {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-f2-only-01.json",
+        "bytes": 3211,
+        "sha256": "3485a4d5c7f81ef49d3999fe0abeb631c2324f34ebf790cc924c488fbb5b26ac"
+      },
+      "behavior": "Only F2 opens live focused object details; removed button/checkbox/empty experimental UI; no obsolete preference reads/writes/deletion.",
+      "tests": [
+        "S06 F2-only all built-in readonly kinds",
+        "S06 F2 ignores obsolete preference true/false/{broken}/denied",
+        "S06 repair F2 focused control/node/port versus hovered node/panel/control"
+      ],
+      "evidence": [
+        "archive-public-01/f2-kinds.json",
+        "archive-public-01/f2-control-node.json",
+        "delivery-01/result.json"
+      ]
+    },
+    {
+      "id": "READONLY_FOCUS_LIFETIME",
+      "authority": {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-f2-only-01.json",
+        "bytes": 3211,
+        "sha256": "3485a4d5c7f81ef49d3999fe0abeb631c2324f34ebf790cc924c488fbb5b26ac"
+      },
+      "behavior": "Node/Port/Edge/Widget/Panel/control data, missing data explicit; Close/Escape returns live HTML/SVG opener. Guard draft/IME/busy/gesture/readonly, nested/stage/delete/reopen/remount.",
+      "tests": [
+        "S06 F2 scalar vector draft and multifield IME guards",
+        "S06 F2 busy Save acknowledgement",
+        "S06 F2 pending wire held drag readonly",
+        "S06 F2 stage deletion Undo same-ID document reopen",
+        "S06 debug target follows nested occurrence",
+        "S06 diagnostic mount revoke hide move update and late callback"
+      ],
+      "evidence": [
+        "archive-public-01/f2-drafts.json",
+        "archive-public-01/f2-public-lifetime.json",
+        "archive-public-01/nested-occurrences.json",
+        "final-source-01/mount-lifetime.json"
+      ]
+    },
+    {
+      "id": "OPTIONAL_HELPER_ISOLATION",
+      "authority": {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-inspection-isolation-01.json",
+        "bytes": 2991,
+        "sha256": "3d9b9d0309169c762f13360af9ec57c5aef3861f3bf55c3a641239cd22a58871"
+      },
+      "behavior": "No pointer/focus inspection read; explicit one-read. No helper/private core coupling; absent/disposed/faulted/consumed-key preserves real editing/selection/saveACK/generate/Undo/Redo.",
+      "tests": [
+        "S06 optional inspection absent/disposed/failed-construction/consumed-key",
+        "S06 readonly owner fault registration serialization invalidation and multi-instance disposal",
+        "S06 F2 no inspection serialization or clone during 80 trusted pointer moves"
+      ],
+      "evidence": [
+        "final-source-01/owner-faults.json",
+        "final-source-01/isolation-absent.json",
+        "final-source-01/isolation-disposed.json",
+        "final-source-01/isolation-failed-construction.json",
+        "final-source-01/isolation-consumed-key.json",
+        "archive-public-01/f2-on-demand-counts.json"
+      ]
+    },
+    {
+      "id": "EXISTING_UI",
+      "behavior": "Shared footer/status/Output/Locate/menu, type-color circle socket positive/label negative hits, stable selection geometry, temporary-wire cleanup/keyboard endpoint, Help/naturalEscape and truthful build/update text retained.",
+      "tests": [
+        "s06-socket-bottom.spec.ts",
+        "s06-status-pointer.spec.ts",
+        "s06-connection-view.spec.ts",
+        "s06-help.spec.ts",
+        "s06-brand-info.spec.ts",
+        "s05-escape-focus.spec.ts"
+      ],
+      "evidence": [
+        "archive-public-01/browser-results.json",
+        "archive-smoke-01/result.json",
+        "delivery-01/result.json"
+      ]
+    }
+  ],
+  "independentVerdict": "PENDING",
+  "historicalReview": {
+    "review": {
+      "file": "C:/Users/user/.codex/worktrees/s06-debug-hover-review-02/Grape/.verification/s06-debug-hover-review-02/INDEPENDENT_REVIEW_RESULT.json",
+      "bytes": 22138,
+      "sha256": "39c698665e47289bb4f5dc1835a6615123d13bef79bf2ce52a4b790093805a03"
+    },
+    "manifest": {
+      "file": "C:/Users/user/.codex/worktrees/s06-debug-hover-review-02/Grape/.verification/s06-debug-hover-review-02/supporting-evidence-manifest-01.json",
+      "bytes": 94148,
+      "sha256": "0932d7c75555144392d46f1955ba361b237c10a91d2c3bdc2d4f9156c0aad697"
+    },
+    "scope": {
+      "implementationI": "528c4f76149fad6da53c3c4da701cf1e8e121750",
+      "reviewedR": "571f04a7dcdc1567aff53e530e48170f1a86870c",
+      "buildId": "S06-debug-528c4f7",
+      "reviewId": "S06-DEBUG-HOVER-INDEPENDENT-REVIEW-02",
+      "verdict": "PASS_FOR_PINNED_PRE_REVISION_SCOPE"
+    },
+    "rawObjects": 525,
+    "relocation": {
+      "file": "production/evidence/s06/f2-only-01/review-relocation-01.json",
+      "bytes": 224512,
+      "sha256": "34bf22e1813e0de4867c26475b671e3b1dd5d19b12d2a5b57b606115f9a7feab"
+    }
+  },
+  "supersession": "Pointer-opening reachability remains PASS only at prior I/R; removal now follows explicit post-R Human requirement. No retroactive finding rewrite.",
+  "counters": {
+    "implementationAttempt": 2,
+    "transientRetries": 0,
+    "unsuccessfulRepairReReviewRounds": 0,
+    "distinctIdentityBasis": "New Human-authorized debug-hover feature after all three workspace-entry review3 findings closed at I4/R4. This does not rename or reset the old group.",
+    "retainedPriorGroup": {
+      "id": "S06-FG-WORKSPACE-ENTRY-01",
+      "reviewAttempt": 4,
+      "repairRound": 3,
+      "unsuccessfulRepairReReviewRounds": 2,
+      "currentScopedVerdict": "PASS"
+    },
+    "retainedEscape": {
+      "id": "S05-FG-ESCAPE-FOCUS-01",
+      "repairAttempt": 1,
+      "unsuccessfulRepairReReviewRounds": 0
+    },
+    "policy": "Two transient retries maximum; third unsuccessful repair/re-review routes technical diagnosis, no restart reset.",
+    "reviewAttempt": 2,
+    "repairRound": 1,
+    "automaticBrowserRetries": 0,
+    "explanation": "This is the first independent review of the new debug-hover feature. Initial technical FAIL does not count as an unsuccessful repair/re-review. Diagnosed reviewer runtime/launcher corrections above are explicitly retained, not resets of product repair counters.",
+    "reviewerOperationalCorrections": 2,
+    "comment": "SameS06-FG-DEBUG-HOVER-01 repairRound1/reviewAttempt2. Both original findings close here. Retained prior group unsuccessful rounds2 and originalS05Escape record remain unchanged; no counter reset.",
+    "nextReviewAttempt": 3,
+    "revisionReason": "Human accepted F2-only requirement after successful repairRound1/review2. This is a requirement revision, not an unsuccessful repair or reset; retain all historical operational correction counts."
+  }
+}

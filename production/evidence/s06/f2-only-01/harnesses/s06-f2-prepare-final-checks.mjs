@@ -1,0 +1,1 @@
+import fs from 'node:fs';let s=fs.readFileSync('.verification/s06-dhr-final-checks.mjs','utf8').replaceAll('debug-hover-repair-01','f2-only-01').replaceAll('528c4f76149fad6da53c3c4da701cf1e8e121750','e8c477ec511637f71646b79272422c72e40bd680').replaceAll('checks-final-01','checks-final-03');fs.writeFileSync('.verification/s06-f2-final-checks.mjs',s);

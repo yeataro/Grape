@@ -1,0 +1,13 @@
+# F2 唯讀物件資訊候選
+
+版本：S06-debug-e8c477e。Implementation I：`e8c477ec511637f71646b79272422c72e40bd680`。此為待獨立審查候選，S06 尚未驗收；目前既有4202仍是舊候選，請勿把舊站當成本版。Coordinator 收件後會提供綁定新R的 localhost 入口。
+
+- 開啟本候選後，品牌列顯示上述版本；「本輪更新」可開啟說明，Escape 關閉並回到按鈕。底部不再有 Experimental features、診斷 hover 勾選或 Read object details 按鈕。一般 hover 操作提示保留。
+- 在 Canvas 建立 Color RGBA，或從 Project actions → Open file 載入同資料夾 samples/workspace-color.grape.json，Review document → Open in new session。這份範例已用本版公開流程匯出／匯入。
+- 以 Tab／Shift+Tab 將焦點移到節點、socket 圓、已接線的 Edge、Canvas、Inspector 欄位或一般按鈕，再按 F2。顯示的是目前焦點物件，不是滑鼠停留的別物件。資料缺席會明示未提供；內容不可直接編輯。
+- Close 或 Escape 關閉物件資訊，回到有效原焦點。窄畫面完整資料可換行並捲動。單純查看不改選取、文件、Undo/Redo 或已儲存狀態。
+- Inspector 未提交文字仍可標示 draft 與 committed 的差別；組字、未完成接線、按住拖曳或儲存進行中，F2 不搶走操作。完成或取消後可再讀取。舊的 hover 偏好不再讀寫，也不清除其他本機資料。
+- Shader output、Hints、Project actions 與底部完整狀態仍可展開、Escape 關閉；適用診斷的 Locate node 維持原有效目標檢查。socket 標籤不變成大片按鈕，型別顏色與選取幾何保持。
+- 可修改範例 R/G/B、Generate GLSL、Save，接著 Export JSON，再 Open file → Open in new session；實際驗證包含WebGL2編譯與像素讀回，不只是字串檢查。
+
+這份導覽不是要求Human重複批准開始；新候選先交Fresh Review。自動測試的故障注入／mount生命週期是隔離測試，並非實體裝置或所有平台的保證。LAN/Tailscale義務已由Owner移除，歷史NOT_EXECUTED不改PASS。未交付multi-workspace、fullcatalog、nativeHost與其他S06未定範圍。

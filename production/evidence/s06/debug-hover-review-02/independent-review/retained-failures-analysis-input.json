@@ -1,0 +1,605 @@
+[
+  {
+    "name": "affected-01",
+    "stats": {
+      "startTime": "2026-10-04T14:32:39.304Z",
+      "duration": 303816.253,
+      "expected": 39,
+      "skipped": 0,
+      "unexpected": 11,
+      "flaky": 0
+    },
+    "failures": [
+      {
+        "title": "s05-escape-focus.spec.ts / S05 natural Escape cancels direct without Export drag with no History entry",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   at s05-escape-flow.ts:82\n\n  80 |     });\n  81 |   const exportDocument = async () => {\n> 82 |     const downloaded = page.waitForEvent(\"download\");\n     |                             ^\n  83 |     await app.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n  84 |     return JSON.parse(\n  85 |       fs.readFileSync((await (await downloaded).path())!, \"utf8\"),\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:82:29)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:163:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   at s05-escape-flow.ts:83\n\n  81 |   const exportDocument = async () => {\n  82 |     const downloaded = page.waitForEvent(\"download\");\n> 83 |     await app.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n     |                                                                         ^\n  84 |     return JSON.parse(\n  85 |       fs.readFileSync((await (await downloaded).path())!, \"utf8\"),\n  86 |     );\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:83:73)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:163:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7"
+        ]
+      },
+      {
+        "title": "s05-escape-focus.spec.ts / S05 natural Escape cancels direct after Export drag with no History entry",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   at s05-escape-flow.ts:82\n\n  80 |     });\n  81 |   const exportDocument = async () => {\n> 82 |     const downloaded = page.waitForEvent(\"download\");\n     |                             ^\n  83 |     await app.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n  84 |     return JSON.parse(\n  85 |       fs.readFileSync((await (await downloaded).path())!, \"utf8\"),\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:82:29)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:97:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   at s05-escape-flow.ts:83\n\n  81 |   const exportDocument = async () => {\n  82 |     const downloaded = page.waitForEvent(\"download\");\n> 83 |     await app.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n     |                                                                         ^\n  84 |     return JSON.parse(\n  85 |       fs.readFileSync((await (await downloaded).path())!, \"utf8\"),\n  86 |     );\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:83:73)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:97:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7"
+        ]
+      },
+      {
+        "title": "s05-escape-focus.spec.ts / S05 natural Escape cancels wrapper without Export drag with no History entry",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   at s05-escape-flow.ts:82\n\n  80 |     });\n  81 |   const exportDocument = async () => {\n> 82 |     const downloaded = page.waitForEvent(\"download\");\n     |                             ^\n  83 |     await app.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n  84 |     return JSON.parse(\n  85 |       fs.readFileSync((await (await downloaded).path())!, \"utf8\"),\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:82:29)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:163:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('iframe').contentFrame().getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   at s05-escape-flow.ts:83\n\n  81 |   const exportDocument = async () => {\n  82 |     const downloaded = page.waitForEvent(\"download\");\n> 83 |     await app.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n     |                                                                         ^\n  84 |     return JSON.parse(\n  85 |       fs.readFileSync((await (await downloaded).path())!, \"utf8\"),\n  86 |     );\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:83:73)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:163:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7"
+        ]
+      },
+      {
+        "title": "s05-escape-focus.spec.ts / S05 natural Escape cancels wrapper after Export drag with no History entry",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   at s05-escape-flow.ts:82\n\n  80 |     });\n  81 |   const exportDocument = async () => {\n> 82 |     const downloaded = page.waitForEvent(\"download\");\n     |                             ^\n  83 |     const exportButton = app.getByRole(\"button\", { name: \"Export JSON\", exact: true });\n  84 |     if (!(await exportButton.isVisible())) await app.getByRole(\"button\", { name: \"Project actions\", exact: true }).click();\n  85 |     await exportButton.click();\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:82:29)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:97:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('iframe').contentFrame().getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   at s05-escape-flow.ts:83\n\n  81 |   const exportDocument = async () => {\n  82 |     const downloaded = page.waitForEvent(\"download\");\n> 83 |     const exportButton = app.getByRole(\"button\", { name: \"Export JSON\", exact: true });\n     |                                                                         ^\n  84 |     if (!(await exportButton.isVisible())) await app.getByRole(\"button\", { name: \"Project actions\", exact: true }).click();\n  85 |     await exportButton.click();\n  86 |     return JSON.parse(\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:83:73)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:97:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7"
+        ]
+      },
+      {
+        "title": "s06-connection-view.spec.ts / S06 connection notice compact geometry 1440 and successful inverse routes one Undo",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().locator('[data-direction=\"output\"][data-port=\"out\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"port\" type=\"button\" data-port=\"out\" data-direction=\"output\" aria-label=\"Color RGBA output out\" data-node-id=\"17efb72c-ffd9-4337-ac38-7fd1d289dcf5\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button>Upgrade subgraph owners</button> from <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Project actions\">…</dialog> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <button>Upgrade subgraph owners</button> from <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Project actions\">…</dialog> subtree intercepts pointer events\u001b[22m\n\u001b[2m  2 × retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"stage-switch\" data-key=\"50d00dcb-0b63-4573-a31d-f0369c64c9b0:vertex|612e72f3-5dad-4e81-a1b3-f8c585b98ca0:pixel\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m  14 × retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <button>Upgrade subgraph owners</button> from <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Project actions\">…</dialog> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <button>Upgrade subgraph owners</button> from <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Project actions\">…</dialog> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"stage-switch\" data-key=\"50d00dcb-0b63-4573-a31d-f0369c64c9b0:vertex|612e72f3-5dad-4e81-a1b3-f8c585b98ca0:pixel\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"stage-switch\" data-key=\"50d00dcb-0b63-4573-a31d-f0369c64c9b0:vertex|612e72f3-5dad-4e81-a1b3-f8c585b98ca0:pixel\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\n\n  66 |     const { c, out, input } = await color(page),\n  67 |       before = await doc(page);\n> 68 |     await out.click();\n     |               ^\n  69 |     const g = await geometry(c);\n  70 |     output(`notice-${width}`, g);\n  71 |     await page.screenshot({\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts:68:15"
+        ]
+      },
+      {
+        "title": "s06-connection-view.spec.ts / S06 selection geometry remains fixed at zoom 1",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 4\u001b[39m\n\u001b[31m+ Received  + 4\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"height\": 79,\u001b[22m\n\u001b[2m      \"name\": \"Image output\",\u001b[22m\n\u001b[2m      \"width\": 190,\u001b[22m\n\u001b[32m-     \"x\": 716.3380126953125,\u001b[39m\n\u001b[32m-     \"y\": 414.11407470703125,\u001b[39m\n\u001b[31m+     \"x\": 650.3380126953125,\u001b[39m\n\u001b[31m+     \"y\": 322.11407470703125,\u001b[39m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"height\": 79,\u001b[22m\n\u001b[2m      \"name\": \"Color RGBA\",\u001b[22m\n\u001b[2m      \"width\": 190,\u001b[22m\n\u001b[32m-     \"x\": 114.3380355834961,\u001b[39m\n\u001b[32m-     \"y\": 330.11407470703125,\u001b[39m\n\u001b[31m+     \"x\": 48.338035583496094,\u001b[39m\n\u001b[31m+     \"y\": 238.11407470703125,\u001b[39m\n\u001b[2m    },\u001b[22m\n\u001b[2m  ]\u001b[22m\n\n  127 |     const restored = await geometry(c);\n  128 |     output(`selection-${zoom}`, { unselected, selected, restored });\n> 129 |     expect(selected.nodes).toEqual(unselected.nodes);\n      |                            ^\n  130 |     expect(selected.sockets).toEqual(unselected.sockets);\n  131 |     expect(selected.wires).toEqual(unselected.wires);\n  132 |     expect(restored.nodes).toEqual(unselected.nodes);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts:129:28"
+        ]
+      },
+      {
+        "title": "s06-connection-view.spec.ts / S06 selection geometry remains fixed at zoom 1.2",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().getByRole('heading', { name: 'Color RGBA', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <h3>Color RGBA</h3>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Project actions\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Project actions\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m  2 × retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button title=\"Pixel Stage\" aria-pressed=\"true\" data-stage-id=\"d29f25a7-3bc0-448f-9f47-e3b1a4324b7e\">Pixel</button> from <div class=\"stage-switch\" data-key=\"bce81447-3dfb-4d0c-a13e-7def1603a5b8:vertex|d29f25a7-3bc0-448f-9f47-e3b1a4324b7e:pixel\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Project actions\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\u001b[2m  - element was detached from the DOM, retrying\u001b[22m\n\n\n  118 |     const before = await doc(page),\n  119 |       unselected = await geometry(c);\n> 120 |     await c.getByRole(\"heading\", { name: \"Color RGBA\", exact: true }).click();\n      |                                                                       ^\n  121 |     const selected = await geometry(c);\n  122 |     await expect(c).not.toHaveAttribute(\"data-selection\", \"\");\n  123 |     await page.screenshot({\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts:120:71"
+        ]
+      },
+      {
+        "title": "s06-guards.spec.ts / S06 advertised view and edit shortcuts preserve gesture, draft and History boundaries",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"transform: translate(\u001b[7m358px, 64.25\u001b[27mpx) scale(1.\u001b[7m5\u001b[27m);\"\u001b[39m\nReceived: \u001b[31m\"transform: translate(\u001b[7m-24.5455px, 72.161\u001b[27mpx) scale(1.\u001b[7m3447\u001b[27m);\"\u001b[39m\n\n  34 |   await page.keyboard.press(\"?\");\n  35 |   await page.keyboard.press(\"Tab\");\n> 36 |   expect(await canvas.locator(\".viewport\").getAttribute(\"style\")).toBe(view);\n     |                                                                   ^\n  37 |   await expect(page.getByRole(\"dialog\", { name: \"Node catalog\" })).toBeHidden();\n  38 |   await expect(\n  39 |     page.getByRole(\"dialog\", { name: \"Keyboard shortcuts\" }),\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts:36:67"
+        ]
+      },
+      {
+        "title": "s06-guards.spec.ts / S06 Personal search and inspect are readonly, malformed import survives unrelated success, and insert restores one Undo",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('dialog[open]')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('dialog[open]')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  155 |     .getByRole(\"button\", { name: \"Insert Subgraph\", exact: true })\n  156 |     .click();\n> 157 |   await expect(dialog).toHaveCount(0);\n      |                        ^\n  158 |   const after = await doc(page);\n  159 |   await clickAction(page, \"Undo\");\n  160 |   expect(await doc(page)).toEqual(before);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts:157:24"
+        ]
+      },
+      {
+        "title": "s06-hover-repair.spec.ts / S06 repair compact disclosures share presentation without model changes",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Project actions', exact: true })\nExpected: \u001b[32m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Project actions', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" aria-haspopup=\"menu\" aria-expanded=\"false\" class=\"project-actions\">Project actions</button>\u001b[22m\n\u001b[2m       - unexpected value \"false\"\u001b[22m\n\n\n  80 |   for (const name of [\"Project actions\", \"Shader output\", \"Hints\", \"Experimental features\"]) {\n  81 |     const button = page.getByRole(\"button\", {name,exact:true}); await button.click();\n> 82 |     await expect(button).toHaveAttribute(\"aria-expanded\",\"true\");\n     |                          ^\n  83 |     await page.keyboard.press(\"Escape\"); await expect(button).toBeFocused();\n  84 |     await expect(button).toHaveAttribute(\"aria-expanded\",\"false\");\n  85 |   }\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:82:26"
+        ]
+      },
+      {
+        "title": "s06-status-pointer.spec.ts / S06 complete persistent loss details have a keyboard read path at 620",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').first().getByText('Subgraph interface', { exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <summary>Subgraph interface</summary>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    57 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  40 |   await c.getByRole(\"heading\", { name: \"Shared arithmetic\", exact: true }).last().click();\n  41 |   await c.getByRole(\"button\", { name: \"Enter subgraph\", exact: true }).click();\n> 42 |   await c.getByText(\"Subgraph interface\", { exact: true }).click();\n     |                                                            ^\n  43 |   const before = await doc(page);\n  44 |   await c.getByLabel(\"Subgraph emission mode\").selectOption(\"function\");\n  45 |   const after = await doc(page), losses = after.graph.losses.filter((l: any) => l.code === \"FUNCTION_CONSTANT_DETACHED\");\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:42:60"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "affected-02",
+    "stats": {
+      "startTime": "2026-10-04T14:42:03.249Z",
+      "duration": 248479.101,
+      "expected": 36,
+      "skipped": 0,
+      "unexpected": 6,
+      "flaky": 0
+    },
+    "failures": [
+      {
+        "title": "s06-help.spec.ts / S06 Help natural outside-to-inside gesture preserves document and History",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   5 |\n   6 | async function documentOf(page: Page) {\n>  7 |   const wait = page.waitForEvent(\"download\");\n     |                     ^\n   8 |   await page.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n   9 |   return JSON.parse(fs.readFileSync((await (await wait).path())!, \"utf8\"));\n  10 | }\n    at documentOf (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:7:21)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:72:26",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   6 | async function documentOf(page: Page) {\n   7 |   const wait = page.waitForEvent(\"download\");\n>  8 |   await page.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n     |                                                                        ^\n   9 |   return JSON.parse(fs.readFileSync((await (await wait).path())!, \"utf8\"));\n  10 | }\n  11 | test.beforeEach(async ({ page }) => {\n    at documentOf (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:8:72)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:72:26"
+        ]
+      },
+      {
+        "title": "s06-help.spec.ts / S06 Help natural inside-to-outside gesture preserves document and History",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   5 |\n   6 | async function documentOf(page: Page) {\n>  7 |   const wait = page.waitForEvent(\"download\");\n     |                     ^\n   8 |   await page.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n   9 |   return JSON.parse(fs.readFileSync((await (await wait).path())!, \"utf8\"));\n  10 | }\n    at documentOf (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:7:21)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:72:26",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   6 | async function documentOf(page: Page) {\n   7 |   const wait = page.waitForEvent(\"download\");\n>  8 |   await page.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n     |                                                                        ^\n   9 |   return JSON.parse(fs.readFileSync((await (await wait).path())!, \"utf8\"));\n  10 | }\n  11 | test.beforeEach(async ({ page }) => {\n    at documentOf (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:8:72)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:72:26"
+        ]
+      },
+      {
+        "title": "s06-help.spec.ts / S06 Help natural outside-to-outside gesture preserves document and History",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   5 |\n   6 | async function documentOf(page: Page) {\n>  7 |   const wait = page.waitForEvent(\"download\");\n     |                     ^\n   8 |   await page.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n   9 |   return JSON.parse(fs.readFileSync((await (await wait).path())!, \"utf8\"));\n  10 | }\n    at documentOf (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:7:21)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:72:26",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   6 | async function documentOf(page: Page) {\n   7 |   const wait = page.waitForEvent(\"download\");\n>  8 |   await page.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n     |                                                                        ^\n   9 |   return JSON.parse(fs.readFileSync((await (await wait).path())!, \"utf8\"));\n  10 | }\n  11 | test.beforeEach(async ({ page }) => {\n    at documentOf (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:8:72)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:72:26"
+        ]
+      },
+      {
+        "title": "s06-help.spec.ts / S06 Help pointercancel disarms incomplete backdrop gesture and allows a new click",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   5 | import { clickAction } from \"../fixtures/public-actions.ts\";\n   6 |\n>  7 | async function documentOf(page: Page) {\n     |                     ^\n   8 |   const wait = page.waitForEvent(\"download\");\n   9 |   await clickAction(page, \"Export JSON\");\n  10 |   return JSON.parse(fs.readFileSync((await (await wait).path())!, \"utf8\"));\n    at documentOf (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:7:21)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:106:26",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   6 |\n   7 | async function documentOf(page: Page) {\n>  8 |   const wait = page.waitForEvent(\"download\");\n     |                                              ^\n   9 |   await clickAction(page, \"Export JSON\");\n  10 |   return JSON.parse(fs.readFileSync((await (await wait).path())!, \"utf8\"));\n  11 | }\n    at documentOf (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:8:72)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:106:26"
+        ]
+      },
+      {
+        "title": "s06-help.spec.ts / S06 Help blur disarms incomplete backdrop gesture and allows a new click",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   5 | import { clickAction } from \"../fixtures/public-actions.ts\";\n   6 |\n>  7 | async function documentOf(page: Page) {\n     |                     ^\n   8 |   const wait = page.waitForEvent(\"download\");\n   9 |   await clickAction(page, \"Export JSON\");\n  10 |   return JSON.parse(fs.readFileSync((await (await wait).path())!, \"utf8\"));\n    at documentOf (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:7:21)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:106:26",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   6 |\n   7 | async function documentOf(page: Page) {\n>  8 |   const wait = page.waitForEvent(\"download\");\n     |                                              ^\n   9 |   await clickAction(page, \"Export JSON\");\n  10 |   return JSON.parse(fs.readFileSync((await (await wait).path())!, \"utf8\"));\n  11 | }\n    at documentOf (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:8:72)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:106:26"
+        ]
+      },
+      {
+        "title": "s06-help.spec.ts / S06 Help readonly interaction and remounted document retain scoped lifetime",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'New document', exact: true })\u001b[22m\n\n\n  198 |   await clickAction(page, \"Lock editing\");\n  199 |   page.once(\"dialog\", (dialog) => dialog.accept());\n> 200 |   await page.getByRole(\"button\", { name: \"New document\", exact: true }).click();\n      |                                                                         ^\n  201 |   expect(await old!.evaluate((e) => e.isConnected)).toBe(false);\n  202 |   await page.getByRole(\"button\", { name: \"Shortcuts\", exact: true }).click();\n  203 |   await old!.evaluate((e) => {\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:200:73"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "archive-public-01",
+    "stats": {
+      "startTime": "2026-10-04T14:51:33.954Z",
+      "duration": 142559.39800000002,
+      "expected": 94,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "failures": []
+  },
+  {
+    "name": "final-focused-01",
+    "stats": {
+      "startTime": "2026-10-04T14:45:05.109Z",
+      "duration": 156955.17,
+      "expected": 52,
+      "skipped": 0,
+      "unexpected": 3,
+      "flaky": 0
+    },
+    "failures": [
+      {
+        "title": "s06-debug-hover.spec.ts / S06 debug target follows nested occurrence and independent Canvas navigation",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Image output input color', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"port\" type=\"button\" data-port=\"color\" data-direction=\"input\" aria-label=\"Image output input color\" data-node-id=\"6d979997-7547-4ef4-a730-f3bd388810fd\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"node-value\" title=\"Current local value; edit in Inspector\">1</span> from <article tabindex=\"0\" role=\"group\" aria-label=\"Compose\" class=\"node selected\" data-role=\"operation\" aria-description=\"Selected\" data-node=\"49875345-1b13-4d87-8ed8-95958559f10c\">…</article> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"node-value\" title=\"Current local value; edit in Inspector\">1</span> from <article tabindex=\"0\" role=\"group\" aria-label=\"Compose\" class=\"node selected\" data-role=\"operation\" aria-description=\"Selected\" data-node=\"49875345-1b13-4d87-8ed8-95958559f10c\">…</article> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    57 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <span class=\"node-value\" title=\"Current local value; edit in Inspector\">1</span> from <article tabindex=\"0\" role=\"group\" aria-label=\"Compose\" class=\"node selected\" data-role=\"operation\" aria-description=\"Selected\" data-node=\"49875345-1b13-4d87-8ed8-95958559f10c\">…</article> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  492 |   ]) {\n  493 |     await page.getByRole(\"button\", { name: a, exact: true }).click();\n> 494 |     await page.getByRole(\"button\", { name: b, exact: true }).click();\n      |                                                              ^\n  495 |   }\n  496 |   const first = page.locator(\".canvas\").first();\n  497 |   await first.getByRole(\"heading\", { name: \"Multiply\", exact: true }).click();\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:494:62"
+        ]
+      },
+      {
+        "title": "s06-help.spec.ts / S06 Help readonly interaction and remounted document retain scoped lifetime",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'New document', exact: true })\u001b[22m\n\n\n  198 |   await clickAction(page, \"Lock editing\");\n  199 |   page.once(\"dialog\", (dialog) => dialog.accept());\n> 200 |   await page.getByRole(\"button\", { name: \"New document\", exact: true }).click();\n      |                                                                         ^\n  201 |   expect(await old!.evaluate((e) => e.isConnected)).toBe(false);\n  202 |   await page.getByRole(\"button\", { name: \"Shortcuts\", exact: true }).click();\n  203 |   await old!.evaluate((e) => {\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:200:73"
+        ]
+      },
+      {
+        "title": "s06-workspace.spec.ts / S06 wired creation is preview-only until snap placement and one Undo restores occupied input",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.nodes [data-direction=input]').filter({ hasText: 'color' }).first()\u001b[22m\n\n\n  124 |     .first();\n  125 |   await source.click();\n> 126 |   await destination.click();\n      |                     ^\n  127 |   const before = await documentOf(page),\n  128 |     canvas = page.locator(\".canvas\"),\n  129 |     r = (await canvas.boundingBox())!,\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-workspace.spec.ts:126:21"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "final-lifetime-01",
+    "stats": {
+      "startTime": "2026-10-04T14:49:46.750Z",
+      "duration": 1513.148,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "failures": []
+  },
+  {
+    "name": "final-source-01",
+    "stats": {
+      "startTime": "2026-10-04T14:47:53.172Z",
+      "duration": 146624.883,
+      "expected": 97,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "failures": [
+      {
+        "title": "s06-floating.spec.ts / S06 shared floating consumers bound alignments focus semantics and disposal independently",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m372\u001b[39m\nReceived:    \u001b[31m869\u001b[39m\n\n  76 |     expect(box!.x).toBeGreaterThanOrEqual(8);\n  77 |     expect(box!.x + box!.width).toBeLessThanOrEqual(width - 8);\n> 78 |     expect(box!.y + box!.height).toBeLessThanOrEqual(372);\n     |                                  ^\n  79 |     records.push(box);\n  80 |   }\n  81 |   await page\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-floating.spec.ts:78:34"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "focus-01",
+    "stats": {
+      "startTime": "2026-10-04T14:25:55.376Z",
+      "duration": 150900.804,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 9,
+      "flaky": 0
+    },
+    "failures": [
+      {
+        "title": "s06-debug-hover-lifetime.spec.ts / S06 diagnostic mount revoke hide move update and late callback cannot revive old object data",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Object information', exact: true })\nTimeout: 5000ms\n\u001b[32m- Expected substring  - 1\u001b[39m\n\u001b[31m+ Received string     + 8\u001b[39m\n\n\u001b[32m- \"old\"\u001b[39m\n\u001b[31m+ Object informationUI control: New subgraph\u001b[39m\n\u001b[31m+ Identity: 未提供\u001b[39m\n\u001b[31m+ State: UI-only · available\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+ {\u001b[39m\n\u001b[31m+   \"modelData\": \"未提供\",\u001b[39m\n\u001b[31m+   \"role\": \"button\"\u001b[39m\n\u001b[31m+ }Close object details\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Object information', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <dialog open=\"\" data-kind=\"modal\" aria-label=\"Object information\" class=\"floating-surface hover-details\">…</dialog>\u001b[22m\n\u001b[2m       - unexpected value \"Object informationUI control: New subgraph\u001b[22m\n\u001b[2mIdentity: 未提供\u001b[22m\n\u001b[2mState: UI-only · available\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m{\u001b[22m\n\u001b[2m  \"modelData\": \"未提供\",\u001b[22m\n\u001b[2m  \"role\": \"button\"\u001b[22m\n\u001b[2m}Close object details\"\u001b[22m\n\n\n  111 |     .getByRole(\"button\", { name: \"Read object details\", exact: true })\n  112 |     .click();\n> 113 |   await expect(details).toContainText('\"old\"');\n      |                         ^\n  114 |   await page.evaluate(() => (window as any).__hoverLifetime.change());\n  115 |   await expect(details).not.toBeVisible();\n  116 |   expect(\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover-lifetime.spec.ts:113:25"
+        ]
+      },
+      {
+        "title": "s06-debug-hover.spec.ts / S06 normal debug normal checkbox preserves graph history selection and covers built-in objects",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"Parameter Widget\"\u001b[39m\nReceived string:    \u001b[31m\"Panel: Canvas\u001b[39m\n\u001b[31mIdentity: canvas-1\u001b[39m\n\u001b[31mState: UI-only · visible·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"type\\\": \\\"grape.panel.canvas\\\",\u001b[39m\n\u001b[31m  \\\"viewState\\\": {\u001b[39m\n\u001b[31m    \\\"x\\\": 24,\u001b[39m\n\u001b[31m    \\\"y\\\": 104,\u001b[39m\n\u001b[31m    \\\"zoom\\\": 1\u001b[39m\n\u001b[31m  }\u001b[39m\n\u001b[31m}\"\u001b[39m\n\n  92 |   await value.hover();\n  93 |   const widget = await read(page);\n> 94 |   expect(widget).toContain(\"Parameter Widget\");\n     |                  ^\n  95 |   expect(widget).toContain('\"committed\"');\n  96 |   records.push({ kind: \"Parameter Widget\", details: widget });\n  97 |   await close(page);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:94:18"
+        ]
+      },
+      {
+        "title": "s06-debug-hover.spec.ts / S06 scalar and vector committed values stay distinct from unfinished drafts and IME guards",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('checkbox', { name: 'Show object information instead of normal hover hints' })\u001b[22m\n\n\n  125 |   await input.fill(\"7.25\");\n  126 |   // Refusal is tested through an actual click, not a check() retry that hides rejection.\n> 127 |   await checkbox(page).click();\n      |                        ^\n  128 |   await expect(checkbox(page)).toBeChecked();\n  129 |   await expect(input).toHaveValue(\"7.25\");\n  130 |   await expect(input).toBeFocused();\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:127:24"
+        ]
+      },
+      {
+        "title": "s06-debug-hover.spec.ts / S06 hover detail invalidation follows selection stage deletion Undo and same-ID reopen",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"661f911a-d7eb-4933-b284-9324e7151d9b\"\u001b[39m\nReceived string:    \u001b[31m\"Panel: Canvas\u001b[39m\n\u001b[31mIdentity: canvas-1\u001b[39m\n\u001b[31mState: UI-only · visible·\u001b[39m\n\u001b[31m{\u001b[39m\n\u001b[31m  \\\"type\\\": \\\"grape.panel.canvas\\\",\u001b[39m\n\u001b[31m  \\\"viewState\\\": {\u001b[39m\n\u001b[31m    \\\"x\\\": 24,\u001b[39m\n\u001b[31m    \\\"y\\\": 104,\u001b[39m\n\u001b[31m    \\\"zoom\\\": 1\u001b[39m\n\u001b[31m  }\u001b[39m\n\u001b[31m}\"\u001b[39m\n\n  174 |     id = await n.getAttribute(\"data-node\");\n  175 |   await n.getByRole(\"heading\").hover();\n> 176 |   expect(await read(page)).toContain(id!);\n      |                            ^\n  177 |   await close(page);\n  178 |   await c.getByRole(\"button\", { name: \"Vertex\", exact: true }).click();\n  179 |   await expect(\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:176:28"
+        ]
+      },
+      {
+        "title": "s06-debug-hover.spec.ts / S06 pending connection and held gesture reject preference changes while readonly inspection remains",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('checkbox', { name: 'Show object information instead of normal hover hints' })\u001b[22m\n\n\n  219 |   await page.getByText(\"Experimental features\", { exact: true }).click();\n  220 |   await n.locator('[data-direction=\"output\"]').click();\n> 221 |   await checkbox(page).click();\n      |                        ^\n  222 |   await expect(checkbox(page)).toBeChecked();\n  223 |   await expect(page.locator(\".experimental-issue\")).toContainText(\"connection\");\n  224 |   await page.keyboard.press(\"Escape\");\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:221:24"
+        ]
+      },
+      {
+        "title": "s06-debug-hover.spec.ts / S06 preference malformed visibly falls back without touching other keys",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.experimental-issue')\nExpected substring: \u001b[32m\"invalid\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.experimental-issue')\u001b[22m\n\u001b[2m    14 × locator resolved to <p role=\"status\" class=\"experimental-issue\"></p>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  281 |     await expect(checkbox(page)).not.toBeChecked();\n  282 |     if (bad === \"malformed\")\n> 283 |       await expect(page.locator(\".experimental-issue\")).toContainText(\n      |                                                         ^\n  284 |         \"invalid\",\n  285 |       );\n  286 |     else if (bad === \"denied\") {\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:283:57"
+        ]
+      },
+      {
+        "title": "s06-debug-hover.spec.ts / S06 preference read-denied visibly falls back without touching other keys",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.experimental-issue')\nExpected substring: \u001b[32m\"unavailable\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.experimental-issue')\u001b[22m\n\u001b[2m    14 × locator resolved to <p role=\"status\" class=\"experimental-issue\"></p>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  291 |       );\n  292 |     } else\n> 293 |       await expect(page.locator(\".experimental-issue\")).toContainText(\n      |                                                         ^\n  294 |         \"unavailable\",\n  295 |       );\n  296 |     expect(await page.evaluate(() => localStorage.getItem(\"other-app\"))).toBe(\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:293:57"
+        ]
+      },
+      {
+        "title": "s06-debug-hover.spec.ts / S06 saving blocks preference changes without discarding current document",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('checkbox', { name: 'Show object information instead of normal hover hints' })\u001b[22m\n\n\n  463 |   await clickAction(page, \"Save\");\n  464 |   await expect(page.locator(\"#save-state\")).toHaveText(\"Saving…\");\n> 465 |   await checkbox(page).click();\n      |                        ^\n  466 |   await expect(checkbox(page)).toBeChecked();\n  467 |   await expect(page.locator(\".experimental-issue\")).toContainText(\"operation\");\n  468 |   await page.waitForFunction(\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:465:24"
+        ]
+      },
+      {
+        "title": "s06-debug-hover.spec.ts / S06 debug target follows nested occurrence and independent Canvas navigation",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Float output value', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"port\" type=\"button\" data-port=\"value\" data-direction=\"output\" aria-label=\"Float output value\" data-node-id=\"6cb4dd22-9f5f-4683-ace5-339525a71f87\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button class=\"port\" type=\"button\" data-port=\"a\" data-direction=\"input\" aria-label=\"Multiply input a\" data-node-id=\"08d12d27-2ad3-4c97-8e84-3b8d74ec4128\">…</button> from <article class=\"node\" tabindex=\"0\" role=\"group\" aria-description=\"\" data-role=\"operation\" aria-label=\"Multiply\" data-node=\"08d12d27-2ad3-4c97-8e84-3b8d74ec4128\">…</article> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button class=\"port\" type=\"button\" data-port=\"a\" data-direction=\"input\" aria-label=\"Multiply input a\" data-node-id=\"08d12d27-2ad3-4c97-8e84-3b8d74ec4128\">…</button> from <article class=\"node\" tabindex=\"0\" role=\"group\" aria-description=\"\" data-role=\"operation\" aria-label=\"Multiply\" data-node=\"08d12d27-2ad3-4c97-8e84-3b8d74ec4128\">…</article> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    57 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <button class=\"port\" type=\"button\" data-port=\"a\" data-direction=\"input\" aria-label=\"Multiply input a\" data-node-id=\"08d12d27-2ad3-4c97-8e84-3b8d74ec4128\">…</button> from <article class=\"node\" tabindex=\"0\" role=\"group\" aria-description=\"\" data-role=\"operation\" aria-label=\"Multiply\" data-node=\"08d12d27-2ad3-4c97-8e84-3b8d74ec4128\">…</article> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  489 |     [\"Compose output result\", \"Image output input color\"],\n  490 |   ]) {\n> 491 |     await page.getByRole(\"button\", { name: a, exact: true }).click();\n      |                                                              ^\n  492 |     await page.getByRole(\"button\", { name: b, exact: true }).click();\n  493 |   }\n  494 |   const first = page.locator(\".canvas\").first();\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:491:62"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "focus-02",
+    "stats": {
+      "startTime": "2026-10-04T14:28:46.901Z",
+      "duration": 49008.43199999999,
+      "expected": 14,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "failures": [
+      {
+        "title": "s06-debug-hover.spec.ts / S06 debug target follows nested occurrence and independent Canvas navigation",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Float output value', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"port\" type=\"button\" data-port=\"value\" data-direction=\"output\" aria-label=\"Float output value\" data-node-id=\"8168b966-b73a-465b-81dd-c9902c3ed53c\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button class=\"port\" type=\"button\" data-port=\"a\" data-direction=\"input\" aria-label=\"Multiply input a\" data-node-id=\"373726bb-c510-439f-b234-cc997111fe28\">…</button> from <article class=\"node\" tabindex=\"0\" role=\"group\" aria-description=\"\" data-role=\"operation\" aria-label=\"Multiply\" data-node=\"373726bb-c510-439f-b234-cc997111fe28\">…</article> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button class=\"port\" type=\"button\" data-port=\"a\" data-direction=\"input\" aria-label=\"Multiply input a\" data-node-id=\"373726bb-c510-439f-b234-cc997111fe28\">…</button> from <article class=\"node\" tabindex=\"0\" role=\"group\" aria-description=\"\" data-role=\"operation\" aria-label=\"Multiply\" data-node=\"373726bb-c510-439f-b234-cc997111fe28\">…</article> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    57 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <button class=\"port\" type=\"button\" data-port=\"a\" data-direction=\"input\" aria-label=\"Multiply input a\" data-node-id=\"373726bb-c510-439f-b234-cc997111fe28\">…</button> from <article class=\"node\" tabindex=\"0\" role=\"group\" aria-description=\"\" data-role=\"operation\" aria-label=\"Multiply\" data-node=\"373726bb-c510-439f-b234-cc997111fe28\">…</article> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  491 |     [\"Compose output result\", \"Image output input color\"],\n  492 |   ]) {\n> 493 |     await page.getByRole(\"button\", { name: a, exact: true }).click();\n      |                                                              ^\n  494 |     await page.getByRole(\"button\", { name: b, exact: true }).click();\n  495 |   }\n  496 |   const first = page.locator(\".canvas\").first();\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-debug-hover.spec.ts:493:62"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "presentation-01",
+    "stats": {
+      "startTime": "2026-10-04T14:31:37.729Z",
+      "duration": 98235.856,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 4,
+      "flaky": 0
+    },
+    "failures": [
+      {
+        "title": "s06-floating.spec.ts / S06 shared floating consumers bound alignments focus semantics and disposal independently",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  34 |   await page.getByRole(\"button\", {name:\"Fixture modal\",exact:true}).click();\n  35 |   const modal = page.getByRole(\"dialog\", {name:\"modal fixture\",exact:true});\n> 36 |   for (let i=0;i<5;i++) { await page.keyboard.press(\"Tab\"); expect(await modal.evaluate(e => e.contains(document.activeElement))).toBe(true); }\n     |                                                                                                                                   ^\n  37 |   await page.keyboard.press(\"Escape\"); await expect(page.getByRole(\"button\",{name:\"Fixture modal\",exact:true})).toBeFocused();\n  38 |   await page.evaluate(() => (window as any).__floatingFixture.dispose());\n  39 |   const late = await page.evaluate(() => (window as any).__floatingFixture.consumers.map((c:any) => c.view.open()));\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-floating.spec.ts:36:131"
+        ]
+      },
+      {
+        "title": "s06-socket-bottom.spec.ts / S06 circle-only type-colored socket states preserve geometry at 0.65",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Vector2', exact: true })\u001b[22m\n\n\n   at create-node.ts:17\n\n  15 |   await browser\n  16 |     .getByRole(\"button\", { name: \"Add \" + label, exact: true })\n> 17 |     .click();\n     |      ^\n  18 |   const point = await canvas.evaluate((el, n) => {\n  19 |     const r = el.getBoundingClientRect(),\n  20 |       v = el.querySelector<HTMLElement>(\".viewport\")!,\n    at createNode (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts:17:6)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:16:84"
+        ]
+      },
+      {
+        "title": "s06-socket-bottom.spec.ts / S06 circle-only type-colored socket states preserve geometry at 1",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Vector2', exact: true })\u001b[22m\n\n\n   at create-node.ts:17\n\n  15 |   await browser\n  16 |     .getByRole(\"button\", { name: \"Add \" + label, exact: true })\n> 17 |     .click();\n     |      ^\n  18 |   const point = await canvas.evaluate((el, n) => {\n  19 |     const r = el.getBoundingClientRect(),\n  20 |       v = el.querySelector<HTMLElement>(\".viewport\")!,\n    at createNode (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts:17:6)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:16:84"
+        ]
+      },
+      {
+        "title": "s06-socket-bottom.spec.ts / S06 circle-only type-colored socket states preserve geometry at 1.25",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Vector2', exact: true })\u001b[22m\n\n\n   at create-node.ts:17\n\n  15 |   await browser\n  16 |     .getByRole(\"button\", { name: \"Add \" + label, exact: true })\n> 17 |     .click();\n     |      ^\n  18 |   const point = await canvas.evaluate((el, n) => {\n  19 |     const r = el.getBoundingClientRect(),\n  20 |       v = el.querySelector<HTMLElement>(\".viewport\")!,\n    at createNode (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts:17:6)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:16:84"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "presentation-02",
+    "stats": {
+      "startTime": "2026-10-04T14:33:51.020Z",
+      "duration": 142352.12,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 7,
+      "flaky": 0
+    },
+    "failures": [
+      {
+        "title": "s06-socket-bottom.spec.ts / S06 circle-only type-colored socket states preserve geometry at 0.65",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Multiply', exact: true })\u001b[22m\n\n\n   at create-node.ts:17\n\n  15 |   await browser\n  16 |     .getByRole(\"button\", { name: \"Add \" + label, exact: true })\n> 17 |     .click();\n     |      ^\n  18 |   const point = await canvas.evaluate((el, n) => {\n  19 |     const r = el.getBoundingClientRect(),\n  20 |       v = el.querySelector<HTMLElement>(\".viewport\")!,\n    at createNode (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts:17:6)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:16:86"
+        ]
+      },
+      {
+        "title": "s06-socket-bottom.spec.ts / S06 circle-only type-colored socket states preserve geometry at 1",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Multiply', exact: true })\u001b[22m\n\n\n   at create-node.ts:17\n\n  15 |   await browser\n  16 |     .getByRole(\"button\", { name: \"Add \" + label, exact: true })\n> 17 |     .click();\n     |      ^\n  18 |   const point = await canvas.evaluate((el, n) => {\n  19 |     const r = el.getBoundingClientRect(),\n  20 |       v = el.querySelector<HTMLElement>(\".viewport\")!,\n    at createNode (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts:17:6)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:16:86"
+        ]
+      },
+      {
+        "title": "s06-socket-bottom.spec.ts / S06 circle-only type-colored socket states preserve geometry at 1.25",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Multiply', exact: true })\u001b[22m\n\n\n   at create-node.ts:17\n\n  15 |       .selectOption(fixed ? \"grape.nodes.fixed-values\" : \"grape.nodes.basic\");\n  16 |   await browser\n> 17 |     .getByRole(\"button\", { name: \"Add \" + label, exact: true })\n     |      ^\n  18 |     .click();\n  19 |   const point = await canvas.evaluate((el, n) => {\n  20 |     const r = el.getBoundingClientRect(),\n    at createNode (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts:17:6)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:16:86"
+        ]
+      },
+      {
+        "title": "s06-socket-bottom.spec.ts / S06 compact bottom actions and complete output are reachable 1920x1000",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   6 | const out = process.env.GRAPE_EVIDENCE_DIR!;\n   7 | const save = (n:string,v:unknown) => fs.writeFileSync(path.join(out,n+\".json\"),JSON.stringify(v,null,2));\n>  8 | async function doc(p:Page) { const w=p.waitForEvent(\"download\"); await clickAction(p,\"Export JSON\"); return JSON.parse(fs.readFileSync((await (await w).path())!,\"utf8\")); }\n     |                                        ^\n   9 | async function center(l:Locator) { const b=(await l.boundingBox())!;return {x:b.x+b.width/2,y:b.y+b.height/2}; }\n  10 | async function geometry(c:Locator) { return c.evaluate(el => {\n  11 |   const r=el.getBoundingClientRect();\n    at doc (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:8:40)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:48:22",
+          "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   at ..\\fixtures\\public-actions.ts:16\n\n  14 |       await menu.locator(\"summary\").click();\n  15 |   }\n> 16 |   await button.click();\n     |                ^\n  17 | }\n  18 |\n    at clickAction (C:\\Users\\user\\source\\Grape\\production\\tests\\fixtures\\public-actions.ts:16:16)\n    at doc (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:8:66)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:48:16"
+        ]
+      },
+      {
+        "title": "s06-socket-bottom.spec.ts / S06 compact bottom actions and complete output are reachable 1440x1000",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.floating-surface[open]').last()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.floating-surface[open]').last()\u001b[22m\n\n\n  49 |   for(const name of [\"Project actions\",\"Shader output\",\"Hints\",\"Experimental features\"]) {\n  50 |     const trigger=page.getByRole(\"button\",{name,exact:true});await trigger.click();\n> 51 |     const popup=page.locator(\".floating-surface[open]\").last();await expect(popup).toBeVisible();\n     |                                                                                    ^\n  52 |     const b=(await popup.boundingBox())!;expect(b.x).toBeGreaterThanOrEqual(0);expect(b.y).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width!);expect(b.y+b.height).toBeLessThanOrEqual(height!);\n  53 |     await page.screenshot({path:path.join(out,`bottom-${width}-${height}-${name.replaceAll(\" \",\"-\")}.png`)});\n  54 |     await page.keyboard.press(\"Escape\");await expect(trigger).toBeFocused();records.push({name,b});\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:51:84"
+        ]
+      },
+      {
+        "title": "s06-socket-bottom.spec.ts / S06 compact bottom actions and complete output are reachable 620x800",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.floating-surface[open]').last()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.floating-surface[open]').last()\u001b[22m\n\n\n  49 |   for(const name of [\"Project actions\",\"Shader output\",\"Hints\",\"Experimental features\"]) {\n  50 |     const trigger=page.getByRole(\"button\",{name,exact:true});await trigger.click();\n> 51 |     const popup=page.locator(\".floating-surface[open]\").last();await expect(popup).toBeVisible();\n     |                                                                                    ^\n  52 |     const b=(await popup.boundingBox())!;expect(b.x).toBeGreaterThanOrEqual(0);expect(b.y).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width!);expect(b.y+b.height).toBeLessThanOrEqual(height!);\n  53 |     await page.screenshot({path:path.join(out,`bottom-${width}-${height}-${name.replaceAll(\" \",\"-\")}.png`)});\n  54 |     await page.keyboard.press(\"Escape\");await expect(trigger).toBeFocused();records.push({name,b});\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:51:84"
+        ]
+      },
+      {
+        "title": "s06-socket-bottom.spec.ts / S06 compact bottom actions and complete output are reachable 620x380",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.floating-surface[open]').last()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.floating-surface[open]').last()\u001b[22m\n\n\n  49 |   for(const name of [\"Project actions\",\"Shader output\",\"Hints\",\"Experimental features\"]) {\n  50 |     const trigger=page.getByRole(\"button\",{name,exact:true});await trigger.click();\n> 51 |     const popup=page.locator(\".floating-surface[open]\").last();await expect(popup).toBeVisible();\n     |                                                                                    ^\n  52 |     const b=(await popup.boundingBox())!;expect(b.x).toBeGreaterThanOrEqual(0);expect(b.y).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width!);expect(b.y+b.height).toBeLessThanOrEqual(height!);\n  53 |     await page.screenshot({path:path.join(out,`bottom-${width}-${height}-${name.replaceAll(\" \",\"-\")}.png`)});\n  54 |     await page.keyboard.press(\"Escape\");await expect(trigger).toBeFocused();records.push({name,b});\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:51:84"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "presentation-03",
+    "stats": {
+      "startTime": "2026-10-04T14:35:40.662Z",
+      "duration": 75107.752,
+      "expected": 19,
+      "skipped": 0,
+      "unexpected": 6,
+      "flaky": 0
+    },
+    "failures": [
+      {
+        "title": "s06-hover-repair.spec.ts / S06 repair compact disclosures share presentation without model changes",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Project actions', exact: true })\nExpected: \u001b[32m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Project actions', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" aria-haspopup=\"menu\" aria-expanded=\"false\" class=\"project-actions\">Project actions</button>\u001b[22m\n\u001b[2m       - unexpected value \"false\"\u001b[22m\n\n\n  80 |   for (const name of [\"Project actions\", \"Shader output\", \"Hints\", \"Experimental features\"]) {\n  81 |     const button = page.getByRole(\"button\", {name,exact:true}); await button.click();\n> 82 |     await expect(button).toHaveAttribute(\"aria-expanded\",\"true\");\n     |                          ^\n  83 |     await page.keyboard.press(\"Escape\"); await expect(button).toBeFocused();\n  84 |     await expect(button).toHaveAttribute(\"aria-expanded\",\"false\");\n  85 |   }\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:82:26"
+        ]
+      },
+      {
+        "title": "s06-hover-repair.spec.ts / S06 grouped project actions preserve nested Personal and saved-dialog focus",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Personal Library', exact: true }).getByRole('searchbox')\u001b[22m\n\n\n  101 |   const personal=page.getByRole(\"menuitem\",{name:\"Personal Library\",exact:true});\n  102 |   await personal.click(); const dialog=page.getByRole(\"dialog\",{name:\"Personal Library\",exact:true});\n> 103 |   await dialog.getByRole(\"searchbox\").fill(\"unavailable-entry\");\n      |                                       ^\n  104 |   await dialog.getByRole(\"button\",{name:\"Close\",exact:true}).click();\n  105 |   await expect(personal).toBeVisible();await expect(personal).toBeFocused();\n  106 |   await page.keyboard.press(\"Escape\");await expect(trigger).toBeFocused();\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:103:39"
+        ]
+      },
+      {
+        "title": "s06-socket-bottom.spec.ts / S06 circle-only type-colored socket states preserve geometry at 0.65",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 2\u001b[39m\n\u001b[31m+ Received  + 2\u001b[39m\n\n\u001b[33m@@ -4,11 +4,11 @@\u001b[39m\n\u001b[2m        448.6,\u001b[22m\n\u001b[2m        216.1,\u001b[22m\n\u001b[2m        123.5,\u001b[22m\n\u001b[2m        51.35,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[32m-     \"class\": \"node\",\u001b[39m\n\u001b[31m+     \"class\": \"node selected\",\u001b[39m\n\u001b[2m      \"tag\": \"ARTICLE\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[2m        449.25,\u001b[22m\n\u001b[33m@@ -254,11 +254,11 @@\u001b[39m\n\u001b[2m        197.7,\u001b[22m\n\u001b[2m        301.9,\u001b[22m\n\u001b[2m        123.5,\u001b[22m\n\u001b[2m        89.05,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[32m-     \"class\": \"node selected\",\u001b[39m\n\u001b[31m+     \"class\": \"node\",\u001b[39m\n\u001b[2m      \"tag\": \"ARTICLE\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[2m        198.35,\u001b[22m\n\n  27 |     const label=n.locator(\".port-label\").first(); expect(await port.evaluate(e=>e.textContent)).toBe(\"\");\n  28 |     await label.click();await expect(c.locator(\".connection-preview path\")).toHaveCount(0);\n> 29 |     expect(await geometry(c)).toEqual(idle);\n     |                               ^\n  30 |     records.push({name:await n.getAttribute(\"aria-label\"),style,point});\n  31 |   }\n  32 |   const start=c.getByRole(\"button\",{name:\"Color RGBA output out\",exact:true}),end=c.getByRole(\"button\",{name:\"Image output input color\",exact:true});\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:29:31"
+        ]
+      },
+      {
+        "title": "s06-socket-bottom.spec.ts / S06 circle-only type-colored socket states preserve geometry at 1",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 2\u001b[39m\n\u001b[31m+ Received  + 2\u001b[39m\n\n\u001b[33m@@ -4,11 +4,11 @@\u001b[39m\n\u001b[2m        674,\u001b[22m\n\u001b[2m        284,\u001b[22m\n\u001b[2m        190,\u001b[22m\n\u001b[2m        79,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[32m-     \"class\": \"node\",\u001b[39m\n\u001b[31m+     \"class\": \"node selected\",\u001b[39m\n\u001b[2m      \"tag\": \"ARTICLE\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[2m        675,\u001b[22m\n\u001b[33m@@ -254,11 +254,11 @@\u001b[39m\n\u001b[2m        288,\u001b[22m\n\u001b[2m        416,\u001b[22m\n\u001b[2m        190,\u001b[22m\n\u001b[2m        137,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[32m-     \"class\": \"node selected\",\u001b[39m\n\u001b[31m+     \"class\": \"node\",\u001b[39m\n\u001b[2m      \"tag\": \"ARTICLE\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[2m        289,\u001b[22m\n\n  27 |     const label=n.locator(\".port-label\").first(); expect(await port.evaluate(e=>e.textContent)).toBe(\"\");\n  28 |     await label.click();await expect(c.locator(\".connection-preview path\")).toHaveCount(0);\n> 29 |     expect(await geometry(c)).toEqual(idle);\n     |                               ^\n  30 |     records.push({name:await n.getAttribute(\"aria-label\"),style,point});\n  31 |   }\n  32 |   const start=c.getByRole(\"button\",{name:\"Color RGBA output out\",exact:true}),end=c.getByRole(\"button\",{name:\"Image output input color\",exact:true});\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:29:31"
+        ]
+      },
+      {
+        "title": "s06-socket-bottom.spec.ts / S06 circle-only type-colored socket states preserve geometry at 1.25",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 76\u001b[39m\n\u001b[31m+ Received  + 76\u001b[39m\n\n\u001b[33m@@ -1,380 +1,380 @@\u001b[39m\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       835,\u001b[39m\n\u001b[32m-       332.5,\u001b[39m\n\u001b[31m+       406,\u001b[39m\n\u001b[31m+       78.5,\u001b[39m\n\u001b[2m        237.5,\u001b[22m\n\u001b[2m        98.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"node\",\u001b[22m\n\u001b[2m      \"tag\": \"ARTICLE\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       836.25,\u001b[39m\n\u001b[32m-       333.75,\u001b[39m\n\u001b[31m+       407.25,\u001b[39m\n\u001b[31m+       79.75,\u001b[39m\n\u001b[2m        235,\u001b[22m\n\u001b[2m        51.25,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"\",\u001b[22m\n\u001b[2m      \"tag\": \"H3\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       829.38,\u001b[39m\n\u001b[32m-       405,\u001b[39m\n\u001b[31m+       400.38,\u001b[39m\n\u001b[31m+       151,\u001b[39m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"socket\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       852.5,\u001b[39m\n\u001b[32m-       403.13,\u001b[39m\n\u001b[31m+       423.5,\u001b[39m\n\u001b[31m+       149.13,\u001b[39m\n\u001b[2m        32.46,\u001b[22m\n\u001b[2m        17.5,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"port-label\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       892.46,\u001b[39m\n\u001b[32m-       405,\u001b[39m\n\u001b[31m+       463.46,\u001b[39m\n\u001b[31m+       151,\u001b[39m\n\u001b[2m        26.11,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"\",\u001b[22m\n\u001b[2m      \"tag\": \"SMALL\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       82.5,\u001b[39m\n\u001b[32m-       227.5,\u001b[39m\n\u001b[31m+       -346.5,\u001b[39m\n\u001b[31m+       -26.5,\u001b[39m\n\u001b[2m        237.5,\u001b[22m\n\u001b[2m        98.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"node\",\u001b[22m\n\u001b[2m      \"tag\": \"ARTICLE\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       83.75,\u001b[39m\n\u001b[32m-       228.75,\u001b[39m\n\u001b[31m+       -345.25,\u001b[39m\n\u001b[31m+       -25.25,\u001b[39m\n\u001b[2m        235,\u001b[22m\n\u001b[2m        51.25,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"\",\u001b[22m\n\u001b[2m      \"tag\": \"H3\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       311.88,\u001b[39m\n\u001b[32m-       300,\u001b[39m\n\u001b[31m+       -117.12,\u001b[39m\n\u001b[31m+       46,\u001b[39m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"socket\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       251.17,\u001b[39m\n\u001b[32m-       298.13,\u001b[39m\n\u001b[31m+       -177.83,\u001b[39m\n\u001b[31m+       44.13,\u001b[39m\n\u001b[2m        21.19,\u001b[22m\n\u001b[2m        17.5,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"port-label\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       279.86,\u001b[39m\n\u001b[32m-       300,\u001b[39m\n\u001b[31m+       -149.14,\u001b[39m\n\u001b[31m+       46,\u001b[39m\n\u001b[2m        23.89,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"\",\u001b[22m\n\u001b[2m      \"tag\": \"SMALL\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       352.5,\u001b[39m\n\u001b[32m-       227.5,\u001b[39m\n\u001b[31m+       -76.5,\u001b[39m\n\u001b[31m+       -26.5,\u001b[39m\n\u001b[2m        237.5,\u001b[22m\n\u001b[2m        98.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"node\",\u001b[22m\n\u001b[2m      \"tag\": \"ARTICLE\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       353.75,\u001b[39m\n\u001b[32m-       228.75,\u001b[39m\n\u001b[31m+       -75.25,\u001b[39m\n\u001b[31m+       -25.25,\u001b[39m\n\u001b[2m        235,\u001b[22m\n\u001b[2m        51.25,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"\",\u001b[22m\n\u001b[2m      \"tag\": \"H3\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       581.88,\u001b[39m\n\u001b[32m-       300,\u001b[39m\n\u001b[31m+       152.88,\u001b[39m\n\u001b[31m+       46,\u001b[39m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"socket\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       519.38,\u001b[39m\n\u001b[32m-       298.13,\u001b[39m\n\u001b[31m+       90.38,\u001b[39m\n\u001b[31m+       44.13,\u001b[39m\n\u001b[2m        21.19,\u001b[22m\n\u001b[2m        17.5,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"port-label\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       548.07,\u001b[39m\n\u001b[32m-       300,\u001b[39m\n\u001b[31m+       119.07,\u001b[39m\n\u001b[31m+       46,\u001b[39m\n\u001b[2m        25.68,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"\",\u001b[22m\n\u001b[2m      \"tag\": \"SMALL\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       652.5,\u001b[39m\n\u001b[32m-       227.5,\u001b[39m\n\u001b[31m+       223.5,\u001b[39m\n\u001b[31m+       -26.5,\u001b[39m\n\u001b[2m        237.5,\u001b[22m\n\u001b[2m        98.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"node\",\u001b[22m\n\u001b[2m      \"tag\": \"ARTICLE\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       653.75,\u001b[39m\n\u001b[32m-       228.75,\u001b[39m\n\u001b[31m+       224.75,\u001b[39m\n\u001b[31m+       -25.25,\u001b[39m\n\u001b[2m        235,\u001b[22m\n\u001b[2m        51.25,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"\",\u001b[22m\n\u001b[2m      \"tag\": \"H3\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       881.88,\u001b[39m\n\u001b[32m-       300,\u001b[39m\n\u001b[31m+       452.88,\u001b[39m\n\u001b[31m+       46,\u001b[39m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"socket\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       819.02,\u001b[39m\n\u001b[32m-       298.13,\u001b[39m\n\u001b[31m+       390.02,\u001b[39m\n\u001b[31m+       44.13,\u001b[39m\n\u001b[2m        21.19,\u001b[22m\n\u001b[2m        17.5,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"port-label\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       847.71,\u001b[39m\n\u001b[32m-       300,\u001b[39m\n\u001b[31m+       418.71,\u001b[39m\n\u001b[31m+       46,\u001b[39m\n\u001b[2m        26.04,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"\",\u001b[22m\n\u001b[2m      \"tag\": \"SMALL\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       82.5,\u001b[39m\n\u001b[32m-       497.5,\u001b[39m\n\u001b[31m+       -346.5,\u001b[39m\n\u001b[31m+       243.5,\u001b[39m\n\u001b[2m        237.5,\u001b[22m\n\u001b[2m        98.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"node\",\u001b[22m\n\u001b[2m      \"tag\": \"ARTICLE\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       83.75,\u001b[39m\n\u001b[32m-       498.75,\u001b[39m\n\u001b[31m+       -345.25,\u001b[39m\n\u001b[31m+       244.75,\u001b[39m\n\u001b[2m        235,\u001b[22m\n\u001b[2m        51.25,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"\",\u001b[22m\n\u001b[2m      \"tag\": \"H3\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       311.88,\u001b[39m\n\u001b[32m-       570,\u001b[39m\n\u001b[31m+       -117.12,\u001b[39m\n\u001b[31m+       316,\u001b[39m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"socket\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       248.95,\u001b[39m\n\u001b[32m-       568.13,\u001b[39m\n\u001b[31m+       -180.05,\u001b[39m\n\u001b[31m+       314.13,\u001b[39m\n\u001b[2m        21.19,\u001b[22m\n\u001b[2m        17.5,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"port-label\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       277.64,\u001b[39m\n\u001b[32m-       570,\u001b[39m\n\u001b[31m+       -151.36,\u001b[39m\n\u001b[31m+       316,\u001b[39m\n\u001b[2m        26.11,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"\",\u001b[22m\n\u001b[2m      \"tag\": \"SMALL\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       352.5,\u001b[39m\n\u001b[32m-       497.5,\u001b[39m\n\u001b[31m+       -76.5,\u001b[39m\n\u001b[31m+       243.5,\u001b[39m\n\u001b[2m        237.5,\u001b[22m\n\u001b[2m        171.25,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"node selected\",\u001b[22m\n\u001b[2m      \"tag\": \"ARTICLE\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       353.75,\u001b[39m\n\u001b[32m-       498.75,\u001b[39m\n\u001b[31m+       -75.25,\u001b[39m\n\u001b[31m+       244.75,\u001b[39m\n\u001b[2m        235,\u001b[22m\n\u001b[2m        51.25,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"\",\u001b[22m\n\u001b[2m      \"tag\": \"H3\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       346.88,\u001b[39m\n\u001b[32m-       570,\u001b[39m\n\u001b[31m+       -82.12,\u001b[39m\n\u001b[31m+       316,\u001b[39m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"socket\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       370,\u001b[39m\n\u001b[32m-       568.13,\u001b[39m\n\u001b[31m+       -59,\u001b[39m\n\u001b[31m+       314.13,\u001b[39m\n\u001b[2m        7.75,\u001b[22m\n\u001b[2m        17.5,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"port-label\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       385.25,\u001b[39m\n\u001b[32m-       570,\u001b[39m\n\u001b[31m+       -43.75,\u001b[39m\n\u001b[31m+       316,\u001b[39m\n\u001b[2m        23.89,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"\",\u001b[22m\n\u001b[2m      \"tag\": \"SMALL\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       416.64,\u001b[39m\n\u001b[32m-       561.88,\u001b[39m\n\u001b[31m+       -12.36,\u001b[39m\n\u001b[31m+       307.88,\u001b[39m\n\u001b[2m        157.11,\u001b[22m\n\u001b[2m        30,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"node-value\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       346.88,\u001b[39m\n\u001b[32m-       606.25,\u001b[39m\n\u001b[31m+       -82.12,\u001b[39m\n\u001b[31m+       352.25,\u001b[39m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"socket\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       370,\u001b[39m\n\u001b[32m-       604.38,\u001b[39m\n\u001b[31m+       -59,\u001b[39m\n\u001b[31m+       350.38,\u001b[39m\n\u001b[2m        8.54,\u001b[22m\n\u001b[2m        17.5,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"port-label\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       386.04,\u001b[39m\n\u001b[32m-       606.25,\u001b[39m\n\u001b[31m+       -42.96,\u001b[39m\n\u001b[31m+       352.25,\u001b[39m\n\u001b[2m        23.89,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"\",\u001b[22m\n\u001b[2m      \"tag\": \"SMALL\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       417.42,\u001b[39m\n\u001b[32m-       598.13,\u001b[39m\n\u001b[31m+       -11.58,\u001b[39m\n\u001b[31m+       344.13,\u001b[39m\n\u001b[2m        156.33,\u001b[22m\n\u001b[2m        30,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"node-value\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       581.88,\u001b[39m\n\u001b[32m-       642.5,\u001b[39m\n\u001b[31m+       152.88,\u001b[39m\n\u001b[31m+       388.5,\u001b[39m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"socket\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       506.04,\u001b[39m\n\u001b[32m-       640.63,\u001b[39m\n\u001b[31m+       77.04,\u001b[39m\n\u001b[31m+       386.63,\u001b[39m\n\u001b[2m        36.33,\u001b[22m\n\u001b[2m        17.5,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"port-label\",\u001b[22m\n\u001b[2m      \"tag\": \"SPAN\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"box\": Array [\u001b[22m\n\u001b[32m-       549.86,\u001b[39m\n\u001b[32m-       642.5,\u001b[39m\n\u001b[31m+       120.86,\u001b[39m\n\u001b[31m+       388.5,\u001b[39m\n\u001b[2m        23.89,\u001b[22m\n\u001b[2m        13.75,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"class\": \"\",\u001b[22m\n\u001b[2m      \"tag\": \"SMALL\",\u001b[22m\n\n  22 |     const idle=await geometry(c); await port.hover();\n  23 |     const style=await socket.evaluate(e=>{const s=getComputedStyle(e);return {fill:s.backgroundColor,border:s.borderColor,shadow:s.boxShadow};});\n> 24 |     expect(style.fill).toBe(style.border); expect(await geometry(c)).toEqual(idle);\n     |                                                                      ^\n  25 |     const point=await center(port);await page.mouse.down();\n  26 |     expect(await geometry(c)).toEqual(idle);await page.mouse.up();await page.keyboard.press(\"Escape\");\n  27 |     const label=n.locator(\".port-label\").first(); expect(await port.evaluate(e=>e.textContent)).toBe(\"\");\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:24:70"
+        ]
+      },
+      {
+        "title": "s06-socket-bottom.spec.ts / S06 compact bottom actions and complete output are reachable 1920x1000",
+        "status": "unexpected",
+        "errors": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.floating-surface[open]').last()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.floating-surface[open]').last()\u001b[22m\n\n\n  49 |   for(const name of [\"Project actions\",\"Shader output\",\"Hints\",\"Experimental features\"]) {\n  50 |     const trigger=page.getByRole(\"button\",{name,exact:true});await trigger.click();\n> 51 |     const popup=page.locator(\".floating-surface[open]\").last();await expect(popup).toBeVisible();\n     |                                                                                    ^\n  52 |     const b=(await popup.boundingBox())!;expect(b.x).toBeGreaterThanOrEqual(0);expect(b.y).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width!);expect(b.y+b.height).toBeLessThanOrEqual(height!);\n  53 |     await page.screenshot({path:path.join(out,`bottom-${width}-${height}-${name.replaceAll(\" \",\"-\")}.png`)});\n  54 |     await page.keyboard.press(\"Escape\");await expect(trigger).toBeFocused();records.push({name,b});\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:51:84"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "presentation-04",
+    "stats": {
+      "startTime": "2026-10-04T14:37:53.852Z",
+      "duration": 37085.337999999996,
+      "expected": 25,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "failures": []
+  },
+  {
+    "name": "targeted-01",
+    "stats": {
+      "startTime": "2026-10-04T14:26:14.441Z",
+      "duration": 63884.541000000005,
+      "expected": 9,
+      "skipped": 0,
+      "unexpected": 7,
+      "flaky": 0
+    },
+    "failures": [
+      {
+        "title": "s06-hover-repair.spec.ts / S06 repair F2 focused control versus hovered control",
+        "status": "unexpected",
+        "errors": [
+          "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+          "Error: locator.hover: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Save locally', exact: true })\u001b[22m\n\n\n  63 |     const identity = await focus.getAttribute(\"data-node\") ?? await focus.getAttribute(\"data-node-id\");\n  64 |     const other = hoverKind === \"node\" ? page.getByRole(\"heading\", {name:\"Image output\",exact:true}) : hoverKind === \"panel\" ? page.locator(\".inspector h2\") : page.getByRole(\"button\", {name:\"Save locally\",exact:true});\n> 65 |     await other.hover();\n     |                 ^\n  66 |     await expect(focus).toBeFocused();\n  67 |     await page.keyboard.press(\"F2\");\n  68 |     const dialog = page.getByRole(\"dialog\", {name:\"Object information\",exact:true});\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:65:17"
+        ]
+      },
+      {
+        "title": "s06-hover-repair.spec.ts / S06 repair F2 focused node versus hovered node",
+        "status": "unexpected",
+        "errors": [
+          "Error: Target unreachable by trusted Tab\n\n  26 |     await p.keyboard.press(\"Tab\");\n  27 |   }\n> 28 |   throw Error(\"Target unreachable by trusted Tab\");\n     |         ^\n  29 | }\n  30 | for (const width of [1440, 1920]) for (const kind of [\"Node\", \"Port\", \"Parameter Widget\"]) {\n  31 |   test(`S06 repair continuous 80-step ${kind} details ${width}`, async ({page}) => {\n    at keyboardFocus (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:28:9)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:62:5"
+        ]
+      },
+      {
+        "title": "s06-hover-repair.spec.ts / S06 repair F2 focused node versus hovered panel",
+        "status": "unexpected",
+        "errors": [
+          "Error: Target unreachable by trusted Tab\n\n  26 |     await p.keyboard.press(\"Tab\");\n  27 |   }\n> 28 |   throw Error(\"Target unreachable by trusted Tab\");\n     |         ^\n  29 | }\n  30 | for (const width of [1440, 1920]) for (const kind of [\"Node\", \"Port\", \"Parameter Widget\"]) {\n  31 |   test(`S06 repair continuous 80-step ${kind} details ${width}`, async ({page}) => {\n    at keyboardFocus (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:28:9)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:62:5"
+        ]
+      },
+      {
+        "title": "s06-hover-repair.spec.ts / S06 repair F2 focused node versus hovered control",
+        "status": "unexpected",
+        "errors": [
+          "Error: Target unreachable by trusted Tab\n\n  26 |     await p.keyboard.press(\"Tab\");\n  27 |   }\n> 28 |   throw Error(\"Target unreachable by trusted Tab\");\n     |         ^\n  29 | }\n  30 | for (const width of [1440, 1920]) for (const kind of [\"Node\", \"Port\", \"Parameter Widget\"]) {\n  31 |   test(`S06 repair continuous 80-step ${kind} details ${width}`, async ({page}) => {\n    at keyboardFocus (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:28:9)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:62:5"
+        ]
+      },
+      {
+        "title": "s06-hover-repair.spec.ts / S06 repair F2 focused port versus hovered node",
+        "status": "unexpected",
+        "errors": [
+          "Error: Target unreachable by trusted Tab\n\n  26 |     await p.keyboard.press(\"Tab\");\n  27 |   }\n> 28 |   throw Error(\"Target unreachable by trusted Tab\");\n     |         ^\n  29 | }\n  30 | for (const width of [1440, 1920]) for (const kind of [\"Node\", \"Port\", \"Parameter Widget\"]) {\n  31 |   test(`S06 repair continuous 80-step ${kind} details ${width}`, async ({page}) => {\n    at keyboardFocus (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:28:9)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:62:5"
+        ]
+      },
+      {
+        "title": "s06-hover-repair.spec.ts / S06 repair F2 focused port versus hovered panel",
+        "status": "unexpected",
+        "errors": [
+          "Error: Target unreachable by trusted Tab\n\n  26 |     await p.keyboard.press(\"Tab\");\n  27 |   }\n> 28 |   throw Error(\"Target unreachable by trusted Tab\");\n     |         ^\n  29 | }\n  30 | for (const width of [1440, 1920]) for (const kind of [\"Node\", \"Port\", \"Parameter Widget\"]) {\n  31 |   test(`S06 repair continuous 80-step ${kind} details ${width}`, async ({page}) => {\n    at keyboardFocus (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:28:9)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:62:5"
+        ]
+      },
+      {
+        "title": "s06-hover-repair.spec.ts / S06 repair F2 focused port versus hovered control",
+        "status": "unexpected",
+        "errors": [
+          "Error: Target unreachable by trusted Tab\n\n  26 |     await p.keyboard.press(\"Tab\");\n  27 |   }\n> 28 |   throw Error(\"Target unreachable by trusted Tab\");\n     |         ^\n  29 | }\n  30 | for (const width of [1440, 1920]) for (const kind of [\"Node\", \"Port\", \"Parameter Widget\"]) {\n  31 |   test(`S06 repair continuous 80-step ${kind} details ${width}`, async ({page}) => {\n    at keyboardFocus (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:28:9)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:62:5"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "targeted-02",
+    "stats": {
+      "startTime": "2026-10-04T14:27:53.284Z",
+      "duration": 23210.517,
+      "expected": 16,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "failures": []
+  }
+]

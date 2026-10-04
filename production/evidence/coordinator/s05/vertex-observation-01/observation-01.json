@@ -1,0 +1,61 @@
+{
+  "packetType": "COORDINATOR_OWNER_OBSERVATION",
+  "observationId": "S05-OBS-VERTEX-01",
+  "recordedAt": "2026-10-04T04:10:15.529Z",
+  "source": {
+    "threadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "messageId": null,
+    "exactHumanText": "在 Vertex Stage 怎麼沒有辦法再新增節點。",
+    "screenshot": {
+      "file": "production/evidence/coordinator/s05/vertex-observation-01/human-screenshot-01.png",
+      "sha256": "f30d858429f6f61a4e88a3443b72b550a6a40eabdc2dcc5e4eaa4925916d3bf5",
+      "bytes": 66639
+    }
+  },
+  "displayedBuild": "S05-web-9230f96",
+  "displayedReviewedR": "4df5492",
+  "observedMessage": "NODE_ELIGIBILITY: NODE_ELIGIBILITY",
+  "specificClickedButton": "Unknown; concise clarification asked, not answered at registration",
+  "readOnlyFacts": {
+    "basicNodeDeclaration": {
+      "file": "production/src/modules/nodes.ts",
+      "sha256": "7c24ec13c9dd4931f4b59440ba0dd3bcc051db6b0c5b83bb07f45c4d39005a2d",
+      "bytes": 8151
+    },
+    "basicNumericDefaultStageKindIds": [
+      "grape.stage.pixel"
+    ],
+    "affectedExamples": [
+      "Float",
+      "Multiply",
+      "Compose"
+    ],
+    "functionOperationDeclaration": {
+      "file": "production/src/modules/function-operations.ts",
+      "sha256": "2505739980cdd86d67533bf3a327a1d07d8ce7c0dac6fcd2d62ed1d31cb9a4fd",
+      "bytes": 8392
+    },
+    "functionOperationDefaultStageKindIds": [
+      "grape.stage.vertex",
+      "grape.stage.pixel"
+    ],
+    "vertexPositionOverride": [
+      "grape.stage.vertex"
+    ],
+    "scopeEvidence": {
+      "file": "production/evidence/s05/repair-01/coverage-01.json",
+      "sha256": "de09239b438ee3757a54ebd5b2882686eaeed9f9e7b33db130bd7de9e00b0a1b",
+      "bytes": 33133
+    }
+  },
+  "interpretation": "Current basic numeric module stage eligibility is Pixel-only; screenshot alone does not identify which add action failed. Cross-stage general catalog support is not claimed by first function batch. Do not infer that every Vertex add is broken or override eligibility without scoped implementation/version analysis.",
+  "productVerdict": "No independent review or new reproduced runtime finding asserted by Coordinator",
+  "route": "Retain for S05 remaining node/stage packet planning or concrete defect triage after clicked-node clarification. Current legacy fixture repair continues unchanged.",
+  "authority": "Existing S05 authorization; this observation adds no implementation dispatch or product semantic change.",
+  "humanAcceptance": "NOT_INFERRED",
+  "limitations": [
+    "No button-specific runtime reproduction yet",
+    "No stage admission relaxation",
+    "No S06 UI scope activation"
+  ]
+}

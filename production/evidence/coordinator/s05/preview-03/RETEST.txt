@@ -1,0 +1,15 @@
+Grape S05 — 只重試舊版子圖升級範例
+版本：S05-web-b0d61c6；受審版本：cfcde2a
+
+這次只需重試這個流程，其他已測項目不用重做。
+ZIP 解壓後，legacy-owner.grape.json 就在最外層，和本說明放在一起。
+請選這次重新下載的檔案（10296 bytes），不要使用先前同名的舊檔。
+
+1. 先保存目前工作。在新版測試頁確認上方顯示 S05-web-b0d61c6。
+2. 按 Open file，選本包的 legacy-owner.grape.json。Review document 應顯示 DOCUMENT_VALID。按右下角 Open in new session；若詢問放棄未保存內容，確認工作已保存後再確認。
+3. 點 Subgraph 節點 → Enter subgraph → 展開 Subgraph interface。升級前 Subgraph emission mode 選單不可用，表示仍保留舊版身分。
+4. 按頂端 Upgrade subgraph owners，再進入 Subgraph → Enter subgraph → Subgraph interface。模式應可用，並顯示 Expand；原本的節點、連線及內容保留。
+5. 按 Generate GLSL，應成功生成。按 Save，再重新整理，使用 Open saved 開回文件，應仍能生成與編輯。
+
+新版範例已接好 Image Output，因此這條升級流程不再夾帶未接線的 INPUT_REQUIRED 診斷。
+如遇問題，回報哪一步、畫面訊息即可。

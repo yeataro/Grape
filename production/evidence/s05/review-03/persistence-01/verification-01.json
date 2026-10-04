@@ -1,0 +1,126 @@
+{
+  "reviewedI": "b0d61c61d35908f6332b439aae539ce87bf854c5",
+  "reviewedR": "cfcde2ac26908c1850ade4d387d5ab41ab72ee11",
+  "recordedAt": "2026-10-04T04:35:04.961Z",
+  "status": "EVIDENCE_PRESERVATION_CHECKS_PASS",
+  "checks": [
+    {
+      "name": "bootstrap-01",
+      "cwd": ".",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tools/verify-bootstrap.mjs"
+      ],
+      "startedAt": "2026-10-04T04:33:42.481Z",
+      "endedAt": "2026-10-04T04:33:43.357Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/review-03/persistence-01/checks/bootstrap-01.json",
+        "sha256": "cf2ed3a6125a3b5a113a2af3cd6eda65de0912c0a49856b3498a85c241f37d4a",
+        "bytes": 319
+      },
+      "log": {
+        "file": "production/evidence/s05/review-03/persistence-01/checks/bootstrap-01.log",
+        "sha256": "1e2d78e52cb20d835933b6bbdb25af8c5deaae1933ad58400f28c841576a47b3",
+        "bytes": 1564
+      }
+    },
+    {
+      "name": "state-01",
+      "cwd": ".",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "handoff/tools/check-implementation-state.mjs",
+        "--current"
+      ],
+      "startedAt": "2026-10-04T04:33:42.758Z",
+      "endedAt": "2026-10-04T04:33:42.807Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/review-03/persistence-01/checks/state-01.json",
+        "sha256": "0a1a370f46690eee4940ee7fd4a2b20eba5117b26c55ab634711280eb62d75c1",
+        "bytes": 350
+      },
+      "log": {
+        "file": "production/evidence/s05/review-03/persistence-01/checks/state-01.log",
+        "sha256": "fd12e301d9d816e3ca874fc8245e641a703c784359ca22f434faaa37d6e22618",
+        "bytes": 7752
+      }
+    },
+    {
+      "name": "fixtures-01",
+      "cwd": ".",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "--test-isolation=none",
+        "tools/verify-bootstrap.test.mjs"
+      ],
+      "startedAt": "2026-10-04T04:33:43.015Z",
+      "endedAt": "2026-10-04T04:33:48.476Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/review-03/persistence-01/checks/fixtures-01.json",
+        "sha256": "1bbfcd58f5b97084332d6bdb53a8f11f0e4218b5ec84666e9c04849f563eef10",
+        "bytes": 366
+      },
+      "log": {
+        "file": "production/evidence/s05/review-03/persistence-01/checks/fixtures-01.log",
+        "sha256": "dce896ca874124f22c75698ac104f6ca06172e287d40d249bd92dc53eb34fe5e",
+        "bytes": 1089
+      }
+    }
+  ],
+  "counts": {
+    "bootstrapChecks": 471,
+    "indexedFiles": 411,
+    "frozenFiles": 412,
+    "bootstrapFixtures": 10
+  },
+  "originalReviewCopiedFiles": 152,
+  "allExistingRFilesUnchanged": 2522,
+  "originalUntrackedPreimagesUnchanged": 123,
+  "coordinatorInputsUnchanged": 33,
+  "boundManifests": {
+    "sourceFiles": 120,
+    "evidenceFiles": 234,
+    "protectedIdentities": 2281,
+    "originalRepairPreimages": 98
+  },
+  "buildBytesUnchanged": true,
+  "originalIndependentPASS": "Attributed only to original reviewer and exact I/R; not a new product PASS for this metadata commit.",
+  "productSuites": "NOT_RERUN_FOR_PURE_EVIDENCE_ADDITIONS",
+  "state": {
+    "file": "implementation-state.json",
+    "sha256": "084489937782a8c485bb7ca0aea1b6c9aa698100fe611a9fa277bd6594faaf6e",
+    "bytes": 20770
+  },
+  "README": {
+    "file": "README.md",
+    "sha256": "b62d2b3c5b5d0a0a874e151c7f374fe56d521e855e703664421dd52ca1f743c9",
+    "bytes": 8330
+  },
+  "activeSlices": [
+    "S05"
+  ],
+  "humanAcceptance": "NOT_GRANTED",
+  "serviceReadback": {
+    "file": "production/evidence/s05/review-03/persistence-01/service-readback-01.json",
+    "sha256": "12665b46f549b4a61eb794921344f3dd0f1a4c4dee7ca74c375158e94571e648",
+    "bytes": 1602
+  },
+  "serviceActions": [],
+  "remoteActions": []
+}

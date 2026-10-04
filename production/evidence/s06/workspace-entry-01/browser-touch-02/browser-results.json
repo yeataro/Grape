@@ -1,0 +1,171 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:/Users/user/source/Grape/production/tools/s06-playwright.config.ts",
+      "s06-creation.spec.ts",
+      "--grep",
+      "touch emulation",
+      "--output",
+      "C:/Users/user/source/Grape/production/evidence/s06/workspace-entry-01/browser-touch-02/test-output"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/workspace-entry-01/browser-touch-02/test-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-touch-02\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s06-creation.spec.ts",
+      "file": "s06-creation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 touch emulation: blank double-tap, row inspect and plus drag insert once without a trailing click",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5872,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.nodes .node')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.nodes .node')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.nodes .node')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.nodes .node')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-creation.spec.ts:56:45",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-creation.spec.ts",
+                      "column": 45,
+                      "line": 56
+                    },
+                    "snippet": "  54 |  await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});\n  55 |  fs.writeFileSync(path.join(evidence,'touch-before-assert.json'),JSON.stringify(await page.evaluate(() => ({events:(window as any).touchEvidence,notice:document.querySelector('.canvas-notice')?.textContent,preview:document.querySelector('.creation-preview')?.outerHTML,menu:document.querySelector('.node-browser')?.getAttribute('hidden')})),null,2),{flag:'wx'});\n> 56 |  await expect(page.locator('.nodes .node')).toHaveCount(network(before).nodes.length+1);const after=await doc(page);await clickAction(page,'Undo');expect(await doc(page)).toEqual(before);await clickAction(page,'Redo');expect(await doc(page)).toEqual(after);\n     |                                             ^\n  57 |  const events=await page.evaluate(()=>(window as any).touchEvidence);expect(events.some((e:any)=>e.pointerType==='touch'&&e.trusted)).toBe(true);fs.writeFileSync(path.join(evidence,'touch-emulation-01.json'),JSON.stringify({limitation:'Chromium trusted touch emulation; no physical device qualification',events,before,after},null,2),{flag:'wx'});\n  58 |  }finally{await context.close();}\n  59 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-creation.spec.ts",
+                        "column": 45,
+                        "line": 56
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.nodes .node')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.nodes .node')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  54 |  await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});\n  55 |  fs.writeFileSync(path.join(evidence,'touch-before-assert.json'),JSON.stringify(await page.evaluate(() => ({events:(window as any).touchEvidence,notice:document.querySelector('.canvas-notice')?.textContent,preview:document.querySelector('.creation-preview')?.outerHTML,menu:document.querySelector('.node-browser')?.getAttribute('hidden')})),null,2),{flag:'wx'});\n> 56 |  await expect(page.locator('.nodes .node')).toHaveCount(network(before).nodes.length+1);const after=await doc(page);await clickAction(page,'Undo');expect(await doc(page)).toEqual(before);await clickAction(page,'Redo');expect(await doc(page)).toEqual(after);\n     |                                             ^\n  57 |  const events=await page.evaluate(()=>(window as any).touchEvidence);expect(events.some((e:any)=>e.pointerType==='touch'&&e.trusted)).toBe(true);fs.writeFileSync(path.join(evidence,'touch-emulation-01.json'),JSON.stringify({limitation:'Chromium trusted touch emulation; no physical device qualification',events,before,after},null,2),{flag:'wx'});\n  58 |  }finally{await context.close();}\n  59 | });\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-creation.spec.ts:56:45"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T09:18:20.228Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-touch-02\\test-output\\s06-creation-S06-touch-emu-5a41d-ce-without-a-trailing-click-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-touch-02\\test-output\\s06-creation-S06-touch-emu-5a41d-ce-without-a-trailing-click-chromium\\test-failed-2.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-touch-02\\test-output\\s06-creation-S06-touch-emu-5a41d-ce-without-a-trailing-click-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-entry-01\\browser-touch-02\\test-output\\s06-creation-S06-touch-emu-5a41d-ce-without-a-trailing-click-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-creation.spec.ts",
+                    "column": 45,
+                    "line": 56
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "10aa611b4a02a37179c3-e82df6098cd847d01278",
+          "file": "s06-creation.spec.ts",
+          "line": 44,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T09:18:19.888Z",
+    "duration": 6559.153,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

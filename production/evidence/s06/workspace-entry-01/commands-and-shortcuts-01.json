@@ -1,0 +1,128 @@
+{
+  "implementationI": "cc920485e005825fea007863f0815cf7c0a5437b",
+  "scope": "Only actual exposed actions. Authority/History semantics retained through Application Panel command routes.",
+  "rows": [
+    {
+      "actions": [
+        "Add Node",
+        "Tab on Canvas",
+        "blank double-click/double-tap",
+        "port context Create connected node"
+      ],
+      "behavior": "Open at captured graph point; rank/filter/inspect without document writes; preview then blank placement; Escape/Tab/right/outside/blur/resize cancels; stale scope/revision/other Canvas cannot commit",
+      "history": "Accepted create and optional replace/connect one Undo",
+      "tests": [
+        "s06-creation.spec.ts",
+        "s06-workspace.spec.ts",
+        "s06-workspace.test.ts"
+      ]
+    },
+    {
+      "actions": [
+        "Browse nodes",
+        "row inspect",
+        "plus/double-click/drag",
+        "category/source/type filters"
+      ],
+      "behavior": "Inspect detached current exact owner catalog; Project references and new source creation stay Graph-owned; only valid blank drop inserts",
+      "history": "Inspect/move/filter none; accepted insertion one",
+      "tests": [
+        "s06-creation.spec.ts",
+        "s06-guards.spec.ts"
+      ]
+    },
+    {
+      "actions": [
+        "Pixel",
+        "Vertex",
+        "Enter subgraph",
+        "Up",
+        "breadcrumb"
+      ],
+      "behavior": "Current graph stage and occurrence navigation; cancels stale drafts/ports; independent Canvas selection and view",
+      "history": "None",
+      "tests": [
+        "s03.spec.ts",
+        "s06-workspace.spec.ts",
+        "s06-workspace.test.ts"
+      ]
+    },
+    {
+      "actions": [
+        "Shortcuts",
+        "?",
+        "help Tab/Escape",
+        "object menu arrows/Home/End/Escape/Tab",
+        "Shift+F10"
+      ],
+      "behavior": "Honest existing bindings; focus return/trap; no capture from text/IME/dialog/active gesture; object context captures scope/revision/selection",
+      "history": "None",
+      "tests": [
+        "s06-workspace.spec.ts",
+        "s06-creation.spec.ts",
+        "s06-guards.spec.ts"
+      ]
+    },
+    {
+      "actions": [
+        "H",
+        "F",
+        "Delete",
+        "Ctrl+Z",
+        "Ctrl+Shift+Z",
+        "Escape during primary drag"
+      ],
+      "behavior": "Frame graph/selection is view-only; delete and undo/redo through existing application; drag Escape naturally cancels operation with no refocus/no committed drag History",
+      "history": "Edit command one operation; cancelled drag none",
+      "tests": [
+        "s06-guards.spec.ts",
+        "s05-escape-focus.spec.ts",
+        "s01.spec.ts"
+      ]
+    },
+    {
+      "actions": [
+        "New document",
+        "Save",
+        "Open saved",
+        "Export JSON",
+        "Export PNG",
+        "Open file",
+        "Generate GLSL",
+        "Second Canvas",
+        "Lock editing",
+        "More actions"
+      ],
+      "behavior": "Original controls moved in whole groups with same identities/listeners; small width retains reachable Stage/Undo; errors keyed by operation persist across unrelated success",
+      "history": "Document session/storage/export and view semantics unchanged; replacements retain one full-content Undo",
+      "tests": [
+        "s01.spec.ts",
+        "s02.spec.ts",
+        "s05-replacement.spec.ts",
+        "s06-workspace.spec.ts"
+      ]
+    },
+    {
+      "actions": [
+        "New subgraph",
+        "Library subgraph",
+        "Encapsulate",
+        "Make independent",
+        "Arrange nodes",
+        "Frame selection",
+        "Local clipboard",
+        "Structures",
+        "Personal Library"
+      ],
+      "behavior": "Existing owner-defined workflows remain public and reachable; Personal query normalized; delayed tasks cannot close/rewrite reopened dialog; readonly/busy independent guards retained",
+      "history": "Existing domain-separated Graph transactions; browsing none",
+      "tests": [
+        "s03.spec.ts",
+        "s04.spec.ts",
+        "s05-delivered.spec.ts",
+        "s06-guards.spec.ts"
+      ]
+    }
+  ],
+  "unimplemented": "P/X or broader catalog shortcuts, submenu hierarchy, user-defined toolbar/layout presets and native Host actions are not exposed or claimed."
+}

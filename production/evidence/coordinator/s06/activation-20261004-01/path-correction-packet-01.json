@@ -1,0 +1,94 @@
+{
+  "packetVersion": 1,
+  "packetType": "IMPLEMENTER_DISPATCH",
+  "packetId": "S06-WORKSPACE-ENTRY-01-PATH-CORRECTION-01",
+  "actionKey": "yeataro/Grape:S06:workspace-entry:ad31676:01",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0826de5a9cca7cf200d843435985a7dc624634a2",
+  "recordedAt": "2026-10-04 10:14:54 UTC",
+  "sliceId": "S06",
+  "acceptedMain": "ad31676b555120cf455fc2a7677be38791b62b64",
+  "expectedWorkHead": "294db471a5e92a576bc39f1e8d67f1d23b940b7f",
+  "remoteMain": "ad31676b555120cf455fc2a7677be38791b62b64",
+  "remoteWork": "ad31676b555120cf455fc2a7677be38791b62b64",
+  "PR": "No S06 PR; S05 PR6 merged",
+  "authorizationRef": "production/evidence/coordinator/s06/activation-20261004-01/human-authorization-01.json",
+  "originalPacket": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/implementer-packet-01.json",
+    "bytes": 14605,
+    "sha256": "f1780732ae23680a21ac8602d4eeffb861e8988541cda3d703f67258b12fd082",
+    "preserveBytes": true
+  },
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "displayTitle": "Grape S06 實作與維護",
+    "priorStatus": "idle; STOP_WRITING_FOR_COORDINATOR_PATH_RECONCILIATION, work-progress-01.json"
+  },
+  "classification": "Ordinary engineering path correction within already-authorized product scope; not HG_PRODUCT/HG_ARCHITECTURE/HG_SCOPE and not technical PASS",
+  "reason": "Original packet requiredBehavior already requires LC-UI-034/036 selected variant, preview and atomic create+connect to agree. allowedPaths accidentally omitted the responsible Graph implementation path. No new type, conversion policy, leaf or product behavior is being introduced.",
+  "allowedPathDelta": {
+    "path": "production/src/model/graph.ts",
+    "boundary": "Only necessary Graph-owned validated initial state-choice creation, before ports/schema/connection planning, and affected invariants of that path. Application calls remain in prior allowed scope. Other unrelated model work is not authorized."
+  },
+  "contracts": [
+    "handoff/04_EXTENSION_MODEL.md NodeType lifecycle: initialize then state-derived ports/parameters/validate; instance data remains Graph-owned.",
+    "handoff/13_PRODUCTION_CONTRACT_SURFACE.md NodeType exact definitions and restricted read-only ModuleContext; no dispatch by private type names.",
+    "handoff/compatibility/behavior-contracts.md LC-UI-034/B01 and LC-UI-036/B01 selected variant and atomic create+connect/oneUndo/cancel.",
+    "handoff/compatibility/capabilities.json and handoff/tools/find-capability.mjs are full oracle lookup; preserve earlier reference-correction-01.json."
+  ],
+  "inputRefs": [
+    {
+      "file": "production/evidence/s06/workspace-entry-01/path-reconciliation-01.json",
+      "bytes": 2807,
+      "sha256": "b5239c7c8e0e6e8ce5bfea232e179a77f6600a4084e4b9f65d7db8553daa0ab9"
+    },
+    {
+      "file": "production/evidence/s06/workspace-entry-01/configured-creation-counterexample-01.json",
+      "bytes": 10743,
+      "sha256": "97f7ce83b721c9293f76360a00575a25c33017ae9035850559d43493459a6b1a"
+    },
+    {
+      "file": "production/evidence/s06/workspace-entry-01/configured-creation-proposal-02.patch",
+      "bytes": 2888,
+      "sha256": "24b6797a2f384e01b79e7dbb112ab4fffcdc7fb5de34fef54ec7c53628303d0a"
+    },
+    {
+      "file": "production/evidence/s06/workspace-entry-01/configured-creation-proposal-result-02.json",
+      "bytes": 1574,
+      "sha256": "ba5435b12492f3be29f7331181c4fb779c7ff888c84468ef75bc45ee8eda81fd"
+    }
+  ],
+  "requestedAction": [
+    "Verify current head, same stopped writer, preserved dirty source and exact input refs; do not redo activation or discard work.",
+    "Reconcile/apply the minimal correct Graph-owned creation change with existing Application selection/preview path. Prepared patch is a proposal, not Coordinator technical approval. Implementer remains responsible for correctness.",
+    "Add actual public wired Compose vec2 creation regression asserting preview/actual schema and edge match, atomic oneUndo/Redo and no intermediate half-state. Verify invalid/missing/non-choice input rollback/no events/history and affected initialization/fork/reference/lifetime safeguards.",
+    "Reuse prior exact preintegration evidence with explicit change/impact mapping. Run new integration and affected production unit/conformance/browser regressions, build and final archive checks. Do not repeat unaffected historic checks without reason; if Graph creation affects a broader family, substantiate and run that family.",
+    "Produce final implementationI/submissionR/build plus source/config/assets/evidence manifests, current state progress, coverage/residual mapping, exact archived usable localhost candidate and guide. Preserve all original preintegration/counterexample/accepted evidence.",
+    "STOP_WRITING only after complete submission (or genuine concrete unresolved prerequisite). Coordinator will collect and immediately dispatch fresh isolated review; no Human pre-review."
+  ],
+  "exclusions": [
+    "Original packet exclusions unchanged; no new catalog/codec/conversion/admission policy, no hardcoded Compose-only special case bypassing generic owner validation.",
+    "No UI direct Graph state mutation, whole-document paste replacement or weaker model validation to bypass the problem.",
+    "No S06 acceptance, push, PR, merge or next Slice.",
+    "No LAN/Tailscale obligation or retry; Owner removed requirement; localhost delivery remains."
+  ],
+  "counters": {
+    "productAttempt": 1,
+    "transientRetries": 0,
+    "usageRecovery": 1,
+    "escapeRepairAttempt": 1,
+    "escapeUnsuccessfulRounds": 0,
+    "newTechnicalReviewAttempt": false
+  },
+  "priorActionReceipt": "production/evidence/s06/workspace-entry-01/work-progress-01.json",
+  "outputLocation": "production/evidence/s06/workspace-entry-01/submission-01.json",
+  "stopConditions": [
+    "Unexpected head/parallel writer or preservation mismatch: retain all work and reconcile.",
+    "True accepted-contract/invariant conflict: preserve precise counterexample and route only affected branch.",
+    "Exact completed final submission: STOP_WRITING for Fresh Review."
+  ],
+  "coordinatorDetermination": "Graph-owned initialization is the already-correct responsibility boundary; omitted path is now included narrowly. No true contract conflict was identified from the cited existing rules. This is routing and scope reconciliation only, not a Fresh Reviewer verdict.",
+  "dispatchStatus": "PREPARED_BEFORE_SINGLE_RESUME"
+}

@@ -1,0 +1,16 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import cp from 'node:child_process';
+const root=process.cwd(), base='production/evidence/s06/workspace-entry-01/', dir='production/evidence/coordinator/s06/activation-20261004-01/';
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const record=file=>{const b=fs.readFileSync(file);return {file,bytes:b.length,sha256:hash(b)}};
+const verify=r=>{const a=record(r.file);if(a.sha256!==r.sha256||(r.bytes!==undefined&&a.bytes!==r.bytes))throw Error('IDENTITY '+r.file);return a};
+const packet=dir+'path-correction-packet-01.json';verify({file:packet,bytes:6658,sha256:'13fdae0d27dd2574db2c113a55226f0966ef4dbdf32f8edfe2bcbb72cd410fbf'});
+const p=JSON.parse(fs.readFileSync(packet));const inputs=[p.originalPacket,...p.inputRefs].map(verify);
+inputs.push(verify({file:dir+'parent-path-intent-01.json',sha256:'892db13af92315de7612b60b5e3002ac1a109f803dbb65555e83163c12cc4a20'}));
+inputs.push(record(dir+'parent-path-result-01.json'));
+const head=cp.execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();if(head!==p.expectedWorkHead)throw Error('HEAD');if(cp.execFileSync('git',['diff','--cached','--name-only'],{encoding:'utf8'}).trim())throw Error('INDEX');
+const sources=JSON.parse(fs.readFileSync(base+'build-preintegration-02/source-manifest.json')).files.map(verify);
+const files=cp.execFileSync('git',['ls-files','--cached','--others','--exclude-standard','-z'],{maxBuffer:32e6}).toString().split('\0').filter(Boolean).map(record);
+const result={actionKey:p.actionKey,packetId:p.packetId,at:new Date().toISOString(),status:'RESUMED_PATH_CORRECTION_IMPLEMENTATION',head,indexEmpty:true,inputs,sourcePreimages:sources,preimages:files,counters:p.counters,note:'Same writer; activation checkpoint preserved. Coordinator proposal is not technical approval. Product integration and final submission follow.'};
+fs.writeFileSync(base+'path-resume-start-01.json',JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({head,inputs:inputs.length,sources:sources.length,preimages:files.length}));

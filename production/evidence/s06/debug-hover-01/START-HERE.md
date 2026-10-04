@@ -1,0 +1,16 @@
+# S06 唯讀物件資訊
+
+候選 **S06-debug-5df6eaa**；實作 **5df6eaa8a009926c897d6a3542231aa729666a15**。本批等待獨立審查，S06 尚未接受。Coordinator 會提供對應的 localhost 入口；舊4200等入口仍是原來版本，本次沒有替換服務。
+
+- 先看左上 Grape 旁版號，應是 **S06-debug-5df6eaa**。按 **本輪更新** 閱讀這輪變更；Close／Escape 關閉並返回按鈕。直接入口與包裝入口均只有產品品牌列。
+- 在頁面底部展開 **Experimental features**。預設未勾選，保留一般提示。勾選 **Show object information instead of normal hover hints** 後，游標停在節點、插孔、連線、Inspector 參數、Panel 或一般按鈕時，底部顯示簡短物件資訊，不用按 Alt。
+- 按 **Read object details** 展開全文；也可正常 Tab 到物件後按 **F2**。全文可換行／捲動，Close／Escape 關閉並返回原控制項。無公開資料會顯示「未提供」。這些操作不選取、修改文件或增加 Undo。
+- 用 **Open file → Review document → Open in new session** 載入 [Color 範例](samples/workspace-color.grape.json)。選節點只為顯示 Inspector，再停在 R 等欄位查看 committed value。輸入尚未提交文字後，可讀取分開標示的 draft；Escape 取消後舊 draft 資訊會退役。組字、連線、拖曳或儲存等待時，切換設定會被保護，不丟棄進行中工作。
+- 取消勾選恢復一般提示。設定僅存本瀏覽器的專用偏好 key，不跟文件、版面或 Undo。若儲存被拒或原值壞掉，顯示原因並回到未啟用，不清除其他網站資料。
+- 切換 Pixel／Vertex、进入／离开子图、刪除／Undo、重新開啟同ID文件後，舊物件內容會退役；新的 hover 必須讀目前出現位置。
+
+自動證據：242單元／一致性、10根目錄fixture、69封存公開案例、5封存smoke、4直接／包裝×窄／桌面檢查，另有來源lifetime與受影響回歸。不同組有重疊，不相加宣稱涵蓋率。80次游標移動的限定計數為 structuredClone0、JSON.stringify0，並非一般FPS承諾。原始失敗和測試資料修正均保留於impact-and-coverage-01.json。
+
+環境：Windows Chromium151／SwiftShader；合成IME、生命週期和儲存fault已明標，不代表真實裝置或所有輸入法。沒有私人反射、所有第三方物件保證、全catalog／multiworkspace／preset／native資格。本批不是S06接受或發布；原Review4 PASS仍只綁原I/R。LAN／Tailscale交付要求由Owner移除，歷史未執行不改PASS。
+
+重建：以 Node25.5.0 在production使用 tools/build-candidate.mjs，傳入全新絕對輸出目錄和 build-01/build-metadata.json 的絕對路徑。核對149項source/config與build檔案hash。瀏覽器重跑使用封存harnesses/s06-debug-browser.mjs複製到repo .verification、archive模式、全新run name與build manifest；精確參數在archive-public-01/execution.json。必須保留GRAPE_EVIDENCE_DIR／--output絕對新路徑與隔離profile，不用Human storage。

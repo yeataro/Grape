@@ -1,0 +1,54 @@
+
+Running 10 tests using 1 worker
+
+(node:12384) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover-lifetime.spec.ts:4:1 › S06 diagnostic mount revoke hide move update and late callback cannot revive old object data (717ms)
+  ok  2 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:15:1 › S06 normal debug normal checkbox preserves graph history selection and covers built-in objects (2.1s)
+  ok  3 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:35:1 › S06 scalar and vector committed values stay distinct from unfinished drafts and IME guards (1.2s)
+  ok  4 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:49:1 › S06 hover detail invalidation follows selection stage deletion Undo and same-ID reopen (1.2s)
+  x   5 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:62:1 › S06 pending connection and held gesture reject preference changes while readonly inspection remains (30.1s)
+(node:51816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  6 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:75:59 › S06 preference malformed visibly falls back without touching other keys (339ms)
+  ok  7 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:75:59 › S06 preference denied visibly falls back without touching other keys (292ms)
+  ok  8 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:75:59 › S06 preference read-denied visibly falls back without touching other keys (258ms)
+  ok  9 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:84:1 › S06 diagnostic preference persists separately and rapid hover performs no per-move capture or serialization (2.2s)
+  ok 10 [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:95:1 › S06 keyboard details and bounded long owner data are readable without selection layout changes (1.2s)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:62:1 › S06 pending connection and held gesture reject preference changes while readonly inspection remains 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.dispatchEvent: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('checkbox', { name: 'Show object information instead of normal hover hints' })
+
+
+      68 |   await clickAction(page, "Lock editing"); await n.getByRole("heading").click(); const b = (await n.getByRole("heading").boundingBox())!;
+      69 |   await page.mouse.move(b.x + 20, b.y + 10); await page.mouse.down(); await page.mouse.move(b.x + 60, b.y + 40, { steps: 5 });
+    > 70 |   await checkbox(page).dispatchEvent("click"); await expect(checkbox(page)).toBeChecked(); // synthetic concurrent UI event while real mouse gesture is held
+         |                        ^
+      71 |   await page.keyboard.press("Escape"); await page.mouse.up(); expect(await documentJSON(page)).toEqual(before);
+      72 |   save("gesture-preference-guard", { actualMouseDrag: true, concurrentCheckbox: "Synthetic click while held; no second physical pointer claim", naturalEscape: true });
+      73 | });
+        at C:\Users\user\source\Grape\production\tests\browser\s06-debug-hover.spec.ts:70:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-01\focused-03\test-results\s06-debug-hover-S06-pendin-4ec1d-readonly-inspection-remains-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-01\focused-03\test-results\s06-debug-hover-S06-pendin-4ec1d-readonly-inspection-remains-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-01\focused-03\test-results\s06-debug-hover-S06-pendin-4ec1d-readonly-inspection-remains-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-01\focused-03\test-results\s06-debug-hover-S06-pendin-4ec1d-readonly-inspection-remains-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-debug-hover.spec.ts:62:1 › S06 pending connection and held gesture reject preference changes while readonly inspection remains 
+  9 passed (40.9s)

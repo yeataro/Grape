@@ -1,0 +1,253 @@
+{
+  "implementationI": "5df6eaa8a009926c897d6a3542231aa729666a15",
+  "requirementAuthority": {
+    "file": "production/evidence/coordinator/s06/debug-hover-01/human-decision-01.json",
+    "bytes": 4434,
+    "sha256": "4894e66f777b81f7a6aba479504b52bdb727bca77d491639eabe3ad4de2168a4"
+  },
+  "versionAuthority": {
+    "file": "production/evidence/coordinator/s06/debug-hover-01/human-version-placement-01.json",
+    "bytes": 4106,
+    "sha256": "b439c538d9dc3ff3ce0dadbd636a7c100f8a65872815721f078d6748009ec237"
+  },
+  "requirements": [
+    {
+      "index": 1,
+      "requirement": "Expose one explicitly labeled experimental checkbox in a footer-anchored grouped settings surface. Default unchecked preserves ordinary hints; checked shows object kind/name-or-stable-identity/current readable state. No requirement to press keyboard Alt. Do not copy the whole Legacy experiments catalog.",
+      "evidence": [
+        "archive-public-01: normal debug normal; preference persistence",
+        "settings-visual-01/settings-620.png"
+      ],
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "index": 2,
+      "requirement": "Information comes from each owning feature's existing public read-only projection. Node/Port/Edge use current scoped document/context snapshots already supplied; Widget uses authorized read binding; Panel uses its public identity/presentation/exportable UI state without leaking live authority. UI-only controls may identify their feature/action and availability without fabricating a model object.",
+      "evidence": [
+        "archive-public-01/built-in-objects.json",
+        "archive-public-01/nested-occurrences.json"
+      ],
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "index": 3,
+      "requirement": "Mark committed values, unfinished field drafts and UI-only state distinctly when those are exposed. Unavailable data says 未提供 rather than traversing private internals or changing core APIs just to expose it.",
+      "evidence": [
+        "archive-public-01/drafts.json",
+        "archive-public-01/multi-field-composition.json"
+      ],
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "index": 4,
+      "requirement": "Keep hover concise. Provide an accessible explicit way to expand long data in a bounded wrapping/scrolling read-only view, with Close/Escape and safe focus return. Avoid a large tooltip obscuring work. Normal accessible labels and operation instructions remain available; mode switching changes presentation only.",
+      "evidence": [
+        "archive-public-01/keyboard-long-details.json",
+        "archive-public-01/debug-details-narrow.png"
+      ],
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "index": 5,
+      "requirement": "No model mutation, no duplicate synchronized object-state store, no serialization of DOM/functions/tokens/live leases, no general object reflection framework and no persisted diagnostic snapshots. Local experimental preference follows accepted Preferences isolation from graph/layout/Graph History and visible failure behavior; document default/storage choice.",
+      "evidence": [
+        "checks-final-01/boundaries.log",
+        "tests/unit/hover-preferences.test.ts",
+        "archive-public-01: export/history equality"
+      ],
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "index": 6,
+      "requirement": "Avoid whole-Graph capture or serialization on every pointermove. Reuse current feature projection and compute bounded target detail on demand; prove with instrumented counts or equivalent meaningful evidence.",
+      "evidence": [
+        "archive-public-01/rapid-hover-counts.json"
+      ],
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "index": 7,
+      "requirement": "Delete, selection/target change, Stage/occurrence change, document replacement/reload, same-ID reuse, hide/move/remount/dispose and late callbacks must not leave stale object details or write paths. Cancel the view or show unavailable as appropriate.",
+      "evidence": [
+        "final-focused-01/mount-lifetime.json",
+        "archive-public-01/lifetime-public.json",
+        "archive-public-01/nested-occurrences.json"
+      ],
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "index": 8,
+      "requirement": "Hover does not select, focus, begin gestures, connect, edit, dirty the graph or add History. Checkbox interaction is guarded during unfinished gestures per accepted experiments policy and does not discard focused drafts/IME state.",
+      "evidence": [
+        "archive-public-01/gesture-preference-guard.json",
+        "archive-public-01/busy-guard.json",
+        "archive-public-01/multi-field-composition.json"
+      ],
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "index": 9,
+      "requirement": "Retain the Owner's selection geometry and white-with-alpha text direction in newly introduced UI. Existing typed socket/wire coloring policy is not removed.",
+      "evidence": [
+        "archive-public-01/selection-geometry-current.json",
+        "settings-visual-01/settings-620.png"
+      ],
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    }
+  ],
+  "contractScope": [
+    "LC-UI-047 existing readonly presentation",
+    "LC-UI-068 experiment checkbox default/off, guard and isolated preference",
+    "LC-UI-072 popup/keyboard/current mount lifetime",
+    "LC-UI-091 current read-only state presentation"
+  ],
+  "notWholeLeafQualification": true,
+  "productPaths": [
+    {
+      "file": "production/apps/web/main.ts",
+      "bytes": 26349,
+      "sha256": "d0f299a0df4af21b87e71cdf3aa67c3fa76d592020bd9b456177262f17d28fbc"
+    },
+    {
+      "file": "production/apps/web/style.css",
+      "bytes": 19966,
+      "sha256": "c63cc76afe35a46d1b6e9262eacc3503b579d634df03ece2a8947e9675443f36"
+    },
+    {
+      "file": "production/apps/web/experimental-preferences.ts",
+      "bytes": 1400,
+      "sha256": "e18157ee956ad0ac705a90d0cb90984c8159014ddfc6124ef37125065f671b31"
+    },
+    {
+      "file": "production/apps/web/build-info.ts",
+      "bytes": 2615,
+      "sha256": "a56cbf09fefba0bd971e4b0404cceffbc1dc4a3776de4dad4a0f0045674ed1f6"
+    },
+    {
+      "file": "production/src/ui/hover.ts",
+      "bytes": 12032,
+      "sha256": "ced32477d0ac6105e91992adcde641a05499af7810bb9e7339d5b7b3dff76634"
+    },
+    {
+      "file": "production/src/ui/mount.ts",
+      "bytes": 13053,
+      "sha256": "8f96ee2270732a3f9bc322f00bee2fee0435da87f322be0cea0b82615618b6e5"
+    },
+    {
+      "file": "production/src/sdk/view-mount.ts",
+      "bytes": 4737,
+      "sha256": "05df3d6427a6042800a27d565b66ab1580d1d8591cfd30a9ecd65bb66aaa28c3"
+    },
+    {
+      "file": "production/src/features/canvas.ts",
+      "bytes": 70071,
+      "sha256": "96bdf2faca074d79296f5121f5718c6c8e3059ab0374d42d54902d4702377ec5"
+    },
+    {
+      "file": "production/src/features/controls.ts",
+      "bytes": 10976,
+      "sha256": "6f9819448083c57daf3b28059c8fdadb8dbcadc110ace7e5ca867bc3b94d7e6b"
+    },
+    {
+      "file": "production/src/features/vector-control.ts",
+      "bytes": 7603,
+      "sha256": "1fe896b8c2dca2b6c0dd1b7ea467fe8bab26ff1e31bd37e35d28d2380e84029f"
+    },
+    {
+      "file": "production/conformance/ownership.json",
+      "bytes": 19374,
+      "sha256": "dea7c92491a1741bac4fc879d392e8e205fcd28437f4a51cd9ac4c383cf4d291"
+    },
+    {
+      "file": "production/tests/browser/s06-debug-hover.spec.ts",
+      "bytes": 20162,
+      "sha256": "e82fe45b2c9282c76eaa8a6e73a6533db56f035e4e0c525d258b26b82bb25dc9"
+    },
+    {
+      "file": "production/tests/browser/s06-debug-hover-lifetime.spec.ts",
+      "bytes": 5351,
+      "sha256": "fc32834cfdac0915e7a314acab3ecc2983e54d970f9d7c19f12b995be03ef7d1"
+    },
+    {
+      "file": "production/tests/browser/s06-brand-info.spec.ts",
+      "bytes": 1852,
+      "sha256": "edffedd83b76ac14d3324b968c54a139dc2e8b4e636bfb1616aebef772c1c3d7"
+    },
+    {
+      "file": "production/tests/unit/hover-preferences.test.ts",
+      "bytes": 1780,
+      "sha256": "4f83f30de89b0da9a5811d4f85a28731ee0a411bfadc459868523ed3af83face"
+    },
+    {
+      "file": "production/tools/build-candidate.mjs",
+      "bytes": 907,
+      "sha256": "274e4351c6b3d0105c1730d693fefd08b0d7eb3ca5b89903753b7ce4f86745f5"
+    }
+  ],
+  "ownership": {
+    "model": "Graph/Application/editor/generator/modules/dependencies unchanged; all data selected by owning features from already delivered projections.",
+    "presentation": "Optional MountContext.hover is injected by PresentationSession, scope-owned and readonly. HoverInfo has explicit JSON data; HoverBlock distinguishes draft/composition/gesture for view eligibility. No edit token/lease serialized. Feature owner guards all checked; a draft cannot mask another field composition.",
+    "mount": "Owner root containment/live fence; update/unmount invalidation; visible/connected observer, changed source/load selection invalidation. Fresh ticket accepts before publication, rejects after publication; rearmed live ticket rejects after remount; direct revoked registration stays ineffective.",
+    "preference": "Dedicated grape.preferences.hover.v1 localStorage key. Default false. Malformed or refused storage returns false with visible issue, leaves other keys unchanged. Not persisted in document/layout/History.",
+    "performance": "No pointermove listener. Entry uses already delivered target projection; explicit details serializes only selected target.80 trusted moves after target entry measured structuredClone0/JSON.stringify0. No general FPS/device claim.",
+    "integration": "main.ts composes hover and build presentation; ownership.json truthfully registers new apps/ui and sdk export surfaces; validators unchanged."
+  },
+  "version": {
+    "buildId": "S06-debug-5df6eaa",
+    "metadata": {
+      "file": "production/evidence/s06/debug-hover-01/build-01/build-metadata.json",
+      "bytes": 102,
+      "sha256": "2f5b6d6a3569da2c63a094d4f87aad3471670962e3416a5e6927ad6d697c33fc"
+    },
+    "helper": {
+      "file": "production/tools/build-candidate.mjs",
+      "bytes": 907,
+      "sha256": "274e4351c6b3d0105c1730d693fefd08b0d7eb3ca5b89903753b7ce4f86745f5"
+    },
+    "placement": "Existing Grape brand whitespace with one product header, 本輪更新 dialog, full I within details. Source dev fallback explicitly unversioned.",
+    "wrapper": {
+      "file": "production/evidence/coordinator/s06/preview-05/serve-local-preview.mjs",
+      "bytes": 4848,
+      "sha256": "001d3b995dc08e4a100413fe2aa653a423f441d9201c465aaae2efff11cba97f"
+    },
+    "deliveryEvidence": "delivery-01/result.json: direct/wrapped ×620/1440, actual helper no extra header, served files hash match; engineering config submittedR=I pending R, no deployment claim."
+  },
+  "affectedRegressions": {
+    "source": "103 passed in105; only two incorrect broad header selectors failed. Corrected2 pass in final-focused-01. No product changes after these103 source passes.",
+    "archive": "69/69 exact I public cases:12 debug-hover,2 brand,55 affected status/wire/Help/naturalEscape/creation/navigation/geometry/Personal cases. Counts overlap source.",
+    "sourceOnly": "One public mount fixture and Personal late insertion import source. Both passed; not mislabeled static archive.",
+    "invariants": "Selection bounds, body/content/socket/wire endpoints across0.65/1/1.25, oneUndoRedo, focused drafts/IME, readonly/busy, independent Canvas/nested occurrences, natural Escape four cases, late callbacks and storage fail preserve existing rules."
+  },
+  "unchanged": "Original review04 PASS belongs only40af655/95a9260; original three FAIL rounds intact. No multiworkspace/layout/new catalog/inline editor/native changes; current new batch requires independent review.",
+  "retainedFailures": [
+    {
+      "run": "focused-01",
+      "disposition": "Actual draft focus-transfer weakness corrected by preventing preference default focus while blocked; two test setup/navigation assumptions corrected. Original artifacts retained."
+    },
+    {
+      "run": "focused-02",
+      "disposition": "8/8 passed at earlier candidate; not substituted for final evidence."
+    },
+    {
+      "run": "focused-03",
+      "disposition": "9passed/1 timeout: checkbox hidden after dialog intentionally closed settings. Test reopens settings before starting held drag."
+    },
+    {
+      "run": "focused-04",
+      "disposition": "10/10 passed before later multi-field/lifetime strengthening."
+    },
+    {
+      "run": "source-public-01",
+      "disposition": "103passed/2 failed: broad header locator counted hidden catalog header; scoped #app > header assertion passes subsequently."
+    },
+    {
+      "run": "final-focused-01",
+      "disposition": "14passed/1 failed: empty-interface nested fixture did not create the assumed second caller. Established connected Float→Multiply→Compose fixture used; public nested occurrence case passes final-nested-02 and exact archive. No admission rule changed to make fixture pass."
+    }
+  ],
+  "developmentNotes": [
+    "Initial forbidden feature→ui helper imports were rejected by unchanged boundary check; replaced with optional public mount presentation injection. Initial command output was not saved as a log; final boundary59 and tests provide actual corrected evidence.",
+    "Read-only implementation scout found multi-field blocker priority and local draft-cancel summary invalidation; both corrected before I with final tests. This was not independent Fresh Review.",
+    "Existing raw logs contain historical CRLF/whitespace; original bytes preserved."
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "packetType": "PARENT_S06_DEBUG_HOVER_DISPATCH_RESULT",
+  "recordedAt": "2026-10-04T13:24:51.108Z",
+  "actionKey": "yeataro/Grape:S06:debug-hover:95a9260:01",
+  "packetId": "S06-DEBUG-HOVER-IMPLEMENTATION-01",
+  "status": "DISPATCHED_RUNNING_DEBUG_HOVER_PACKET_READ",
+  "packet": {
+    "file": "production/evidence/coordinator/s06/debug-hover-01/implementer-packet-01.json",
+    "bytes": 16377,
+    "sha256": "d99f7a8c3028af0c45784d105adf166cd3e956bb6da87520b3e714dc66e4ed94"
+  },
+  "intent": {
+    "file": "production/evidence/coordinator/s06/debug-hover-01/parent-intent-01.json",
+    "bytes": 6025,
+    "sha256": "ac8b55bbc0b6485e1812c7f6561f034e3e194dc653552b67f5b44b35e62082e8"
+  },
+  "coordinatorTransport": {
+    "file": "production/evidence/coordinator/s06/debug-hover-01/dispatch-result-01.json",
+    "bytes": 661,
+    "sha256": "e732732fad2c331d3593a568fd65bddeecf5a9c76a624fafaefb33d56e9036f8"
+  },
+  "transport": "collaboration.followup_task",
+  "actualWriterDispatches": 1,
+  "newWriter": false,
+  "duplicateDispatch": false,
+  "duplicateReconciliation": "Coordinator existing result is parent-message acceptance only. Fresh child idle and absence of feature/parent outputs checked before one child followup.",
+  "expectedStartingHead": "95a9260f35dd2ad4cdf7bba93d53c35bd5c7170f",
+  "startingBaseline": {
+    "I": "40af6555f475d37c2da12a630655831f73ef9e33",
+    "R": "95a9260f35dd2ad4cdf7bba93d53c35bd5c7170f",
+    "build": "S06-repair3-40af655"
+  },
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "displayTitle": "Grape S06 實作與維護",
+    "stateMaintainer": "same original Implementer",
+    "verified": "Idle STOP_WRITING at completed turn 01a106f5-17fb-7931-928c-298f51d48046, cursor911; parent idle cursor208. No replacement or second writer."
+  },
+  "before": {
+    "status": "idle",
+    "lastTurnId": "01a106f5-17fb-7931-928c-298f51d48046",
+    "lastTurnStatus": "completed",
+    "result": "Repair03 STOP_WRITING; Review04 scoped PASS collected and verified"
+  },
+  "actualObservation": {
+    "tools": [
+      "collaboration.list_agents",
+      "mcp__codex_app__read_thread"
+    ],
+    "agentStatus": "running",
+    "threadStatus": "active",
+    "turnId": "01a10716-06ba-7da0-86dc-6590006efa71",
+    "turnStatus": "inProgress",
+    "acknowledgementMessageId": "msg_0f7ea6f2d846c6d3016ac25378d45c87d0bcd60827655c11d4",
+    "acknowledgement": "Writer begins bounded debug-hover batch by checking packet/current commit/Review04; preserves normal hints and previews and will deliver a new exact candidate for independent review.",
+    "packetAndHumanDecisionReadCommandId": "exec-7f42dee5-3760-45f1-8a9e-1f2c41116a8f",
+    "packetReadCommandStatus": "completed",
+    "packetReadExitCode": 0,
+    "packetHashAndHumanDecisionActuallyRead": true
+  },
+  "authority": {
+    "file": "production/evidence/coordinator/s06/debug-hover-01/human-decision-01.json",
+    "bytes": 4434,
+    "sha256": "4894e66f777b81f7a6aba479504b52bdb727bca77d491639eabe3ad4de2168a4"
+  },
+  "counters": {
+    "implementationAttempt": 1,
+    "transientRetries": 0,
+    "unsuccessfulRepairReReviewRounds": 0,
+    "distinctIdentityBasis": "New Human-authorized debug-hover feature after all three workspace-entry review3 findings closed at I4/R4. This does not rename or reset the old group.",
+    "retainedPriorGroup": {
+      "id": "S06-FG-WORKSPACE-ENTRY-01",
+      "reviewAttempt": 4,
+      "repairRound": 3,
+      "unsuccessfulRepairReReviewRounds": 2,
+      "currentScopedVerdict": "PASS"
+    },
+    "retainedEscape": {
+      "id": "S05-FG-ESCAPE-FOCUS-01",
+      "repairAttempt": 1,
+      "unsuccessfulRepairReReviewRounds": 0
+    },
+    "policy": "Two transient retries maximum; third unsuccessful repair/re-review routes technical diagnosis, no restart reset."
+  },
+  "verifiedBeforeDispatch": {
+    "priorReviewVerdict": "PASS at exact I40af655/R95a9260 only",
+    "supportingEntries": 173,
+    "supportingBytes": 14609129,
+    "reportIncludedInManifest": true,
+    "authorizationHumanDecisionControlsAndInputRefs": true,
+    "trackedAndIndexClean": true
+  },
+  "priorFailuresAndCountersPreserved": true,
+  "wholeS06Accepted": false,
+  "parentProductWrites": false,
+  "parentStateWrites": false,
+  "parentGitMutations": [],
+  "parentRemoteActions": [],
+  "parentServiceActions": [],
+  "preview": "4200 repair03 and all existing previews unchanged by parent; wrappers not product implementation",
+  "completionClaim": "Actual running dispatch and completed exact packet/Human decision read only; new feature implementation/tests/I/R/build/evidence and independent verdict pending.",
+  "submission": "production/evidence/s06/debug-hover-01/submission-01.json",
+  "nextRoute": "Coordinator collects complete submission, immediately dispatches fresh isolated independent review with no Human pre-review, then deploys exact candidate with updated 本輪更新. After this bounded batch, rebind prepared multi-workspace work to actual reviewed baseline; no generic Human-start stop."
+}

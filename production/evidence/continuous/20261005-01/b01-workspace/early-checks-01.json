@@ -1,0 +1,86 @@
+{
+  "phase": "preintegration iterative self-checks",
+  "facts": [
+    {
+      "check": "first typecheck",
+      "exit": 1,
+      "errors": [
+        "duplicate context local id",
+        "plain(route) TypeScript narrowing"
+      ]
+    },
+    {
+      "check": "second integration typecheck",
+      "exit": 1,
+      "errors": [
+        "buildWorkspace replacement not applied due newline mismatch",
+        "PanelRoute callback narrowing"
+      ]
+    },
+    {
+      "check": "subsequent typecheck",
+      "exit": 0
+    },
+    {
+      "check": "initial conformance ui10",
+      "pass": 9,
+      "fail": 1,
+      "cause": "Provider route guard preceded the required origin-busy guard; reordered, all10 pass"
+    },
+    {
+      "check": "initial B01 unit12",
+      "pass": 11,
+      "fail": 1,
+      "cause": "Fixture selected an already-selected node then expected a new lease; corrected to begin with empty selection"
+    },
+    {
+      "check": "focused unit02",
+      "pass": 21,
+      "fail": 1,
+      "cause": "New fixture used nonexistent app.undo; corrected to existing authorized execute seam",
+      "raw": "unit-focused-02.log"
+    },
+    {
+      "check": "focused unit03",
+      "pass": 22,
+      "fail": 0,
+      "raw": "unit-focused-03.log"
+    },
+    {
+      "check": "source-browser01",
+      "pass": 5,
+      "fail": 2,
+      "raw": "source-browser-01/browser-results.json",
+      "causes": [
+        "Close veto deliberately leaves options open; test must close before reopening",
+        "Upper float overlapped second Parameters header; added ordinary Panels control using the same options presentation"
+      ]
+    },
+    {
+      "operation": "process observation",
+      "default": "Get-CimInstance denied",
+      "resolution": "standard require_escalated read of exact runner46236 descendants; no processes killed, run finished naturally with exit1"
+    },
+    {
+      "operation": "initial disposable browser probe",
+      "error": "Windows ESM absolute import requires file URL",
+      "resolution": "correct file URL then probe success, no product failure"
+    }
+  ],
+  "changedFiles": [
+    "production/src/ui/workspace.ts",
+    "production/src/ui/workspace-view.ts",
+    "production/src/ui/divider.ts",
+    "production/src/sdk/ui.ts",
+    "production/src/application/editor.ts",
+    "production/apps/web/main.ts",
+    "production/apps/web/style.css",
+    "production/src/features/inspector.ts",
+    "production/src/ui/mount.ts",
+    "production/src/ui/floating.ts",
+    "production/tests/unit/b01-workspace.test.ts",
+    "production/tests/browser/b01-workspace.spec.ts",
+    "production/tests/conformance/ui.test.ts",
+    "production/tools/b01-playwright.config.ts"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "iterativeSelfChecks": true,
+  "notIndependentReview": true,
+  "runs": [
+    {
+      "dir": "s06-affected-source-final-02",
+      "passedObserved": 19,
+      "failedObserved": 3,
+      "interrupted": true,
+      "reporterIncomplete": true,
+      "changes": "Old test helpers used hidden Export/Open saved/Second Canvas and collapsed Shader output controls. Corrected public menu/disclosure access, retained behavioral assertions.",
+      "candidate": "Pre-final. Workspace pane reorder focus repair was applied before this run was interrupted; do not claim exact-I suite."
+    },
+    {
+      "dir": "s06-affected-source-final-03",
+      "passedObserved": 7,
+      "failedObserved": 4,
+      "interrupted": true,
+      "reporterIncomplete": true,
+      "defect": "Pane-order implementation re-appended unchanged DOM nodes on every graph publication, losing native focus during drag and breaking natural Escape.",
+      "fix": "Only move DOM pane when actual order differs; retain native focused subtree on model-only updates.",
+      "originalTracesRetained": true
+    }
+  ],
+  "environmentNote": "final-02 browser runner accidentally used repository cwd; Chromium contexts remained disposable. Original production/debug.log and other original preimages must pass final hash guard; later runs use explicit runtime-01 cwd."
+}

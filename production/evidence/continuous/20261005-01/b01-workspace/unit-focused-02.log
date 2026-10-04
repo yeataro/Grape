@@ -1,0 +1,48 @@
+(node:13228) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ PC authority: declaration is not grant; render/async/outside event denied, same mounted event succeeds (8.7064ms)
+✔ PC gesture: origin guard, one operation, cross-Panel lease rejection and latest lease required (7.6123ms)
+✔ PC move/hide cancel pointer gesture and drain new leases before workspace action returns (9.9354ms)
+✔ PC render failure cancels only unfinished operation after publication, with no reentrant mutation (3.4718ms)
+✔ PC same ID reuse and old scope registrations remain revoked (1.7966ms)
+✔ VM resources: cleanup in reverse order, failure isolation, stale async tickets, no render reentrancy (0.2552ms)
+✔ two independently registered Panels and two Widget view shapes share lifecycle without feature dispatch (1.1276ms)
+✔ VM mount/capture/update reentrancy revokes scope and preserves placeholder; explicit retry recovers (0.2535ms)
+✔ VM subscription failure releases acquired subscriptions and cannot pretend to mount (0.1504ms)
+✔ PC application denies every editing command while readonly or history busy; field binding invalidates (4.5451ms)
+(node:51860) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ B01 group0, positive groups and fixed Canvas routes distinguish activation, hide and close (8.6331ms)
+✖ B01 direct Context changes and revision update routed targets, unchanged placement does not repeat receive (4.2589ms)
+✔ B01 close and retarget veto keep logical instances and placement intact (4.2633ms)
+✔ B01 provider borrowing guards direct disposal; closing releases borrow without deleting Context (1.1566ms)
+✔ B01 move, float, collapse, hide/show preserve Panel and exported draft; upper slot returns prior owner to dock (1.1933ms)
+✔ B01 save/restore mints Context and leases, preserves inert identities and no runtime activation (3.7664ms)
+✔ B01 application restore resolves exact graph/stage/occurrence, never names or first stage (1.1894ms)
+✔ B01 missing type/version and unresolved target retain opaque data with retry using one registry (2.0752ms)
+✔ B01 full layout validation refuses malformed candidates before any factory or live mutation (3.1068ms)
+✔ B01 invalid open/move route does not call factory or change tabs; reentry rejected in factory (1.3438ms)
+✔ B01 export callback failure is whole-save failure without graph/history changes (1.0235ms)
+✔ B01 same-ID close/reopen rejects old services and restores detached state only (0.9283ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 21
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 226.7473
+
+✖ failing tests:
+
+test at ..\..\..\..\..\tests\unit\b01-workspace.test.ts:20:1
+✖ B01 direct Context changes and revision update routed targets, unchanged placement does not repeat receive (4.2589ms)
+  TypeError: f.app.undo is not a function
+      at TestContext.<anonymous> (C:\Users\user\source\Grape\production\tests\unit\b01-workspace.test.ts:22:129)
+      at Test.runInAsyncScope (node:async_hooks:212:14)
+      at Test.run (node:internal/test_runner/test:1109:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:786:18)
+      at Test.postRun (node:internal/test_runner/test:1238:19)
+      at Test.run (node:internal/test_runner/test:1166:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3)

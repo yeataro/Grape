@@ -1,0 +1,91 @@
+{
+  "implementationI": "dc653519515e167c75d967930defafcf19422197",
+  "status": "SELF_CHECK_EVIDENCE_FOR_INDEPENDENT_REVIEW",
+  "mapping": [
+    {
+      "branches": [
+        "AT-S06-01 bounded",
+        "LC-UI-042",
+        "LC-UI-047"
+      ],
+      "behavior": "Public 2 Canvas/2 Parameters; independent selection/navigation/Stage/camera; shared Graph/History; group0/positive/fixed routing; hide retains/close removes provider",
+      "tests": [
+        "B01 public two Canvas and two Parameters",
+        "B01 public groups fixed follow hide close",
+        "unit group0/positive/fixed and direct Context/close-retarget veto"
+      ],
+      "residual": "No arbitrary third-party Panel qualification"
+    },
+    {
+      "branches": [
+        "LC-UI-061",
+        "AT-S06-02 bounded"
+      ],
+      "behavior": "Native Tab drag/order/group/split and group order; hide/show/close; live Panel/contribution/draft preserved; old mount revoked before anchor movement and cleanup publications drained",
+      "tests": [
+        "B01 public draft survives move hide collapse float",
+        "B01 public Tab drag groups and orders",
+        "B01 trusted keyboard placement during primary drag",
+        "B01 synthetic composition and detached callback",
+        "ui.test.ts same-pane movement and subscription retry"
+      ],
+      "residual": "Synthetic composition/lifecycle is not physical IME qualification"
+    },
+    {
+      "branches": [
+        "LC-UI-062"
+      ],
+      "behavior": "Left180..520/right300..640; preferred width distinct from narrow clamp; pointer/keyboard8/Shift32/Home/End/Escape/doubleclick; adjacent-pair weights",
+      "tests": [
+        "B01 divider keyboard pointer cancel targeted reset",
+        "B01 adjacent divider changes only its pair"
+      ],
+      "residual": "No physical touch/device-scale qualification"
+    },
+    {
+      "branches": [
+        "LC-UI-064",
+        "LC-UI-065"
+      ],
+      "behavior": "Parameters-only one upper-slot float, top/right12/default320/min280; collapse/resize/cancel/dock; stale divider cleanup cannot write into removed placement",
+      "tests": [
+        "B01 float upper slot dimensions one owner",
+        "B01 float resize superseded by keyboard dock",
+        "B01 readonly placement and scoped F2"
+      ],
+      "residual": "No free-drag or arbitrary Panel float"
+    },
+    {
+      "branches": [
+        "LC-UI-063"
+      ],
+      "behavior": "One current layout; complete pane/tab/version/private-state/routes/groups/hidden/weights/float/dock; Application resolves inert hints into fresh Contexts; no runtime authority restored; atomic malformed refusal; opaque unavailable target/type/version and retry; visible storage/export failure",
+      "tests": [
+        "B01 full layout validation matrix",
+        "B01 exact resolver and opaque retry",
+        "B01 owned Context same-target and receive retry",
+        "B01 public current layout roundtrip and malformed rejection",
+        "B01 storage refusal",
+        "archive-visual-01 public save/restore/export equality"
+      ],
+      "residual": "G-PD-2 named-preset retention and whole AT-S06-03 excluded"
+    },
+    {
+      "branches": [
+        "LC-UI-060",
+        "LC-UI-066",
+        "LC-UI-072"
+      ],
+      "behavior": "Narrow side overlays close transiently and revoke mounts; desktop preferences preserved; P/text/IME/modifier guards; F2 readonly/current focus; compact footer/build identity retained",
+      "tests": [
+        "B01 narrow hide revokes field callbacks",
+        "S06 F2/Help/guard/status/geometry regressions",
+        "four natural Escape cases",
+        "direct/wrapped1440/620 archive visual walkthrough"
+      ],
+      "residual": "Portable Windows Chromium profile only"
+    }
+  ],
+  "countsMeaning": "159 unique final source cases; 35 archive cases repeat a subset on compiled bytes, not additional unique behaviors. Four direct/wrapped visual walkthroughs are smoke operations.",
+  "wholeSliceOrGateClosure": false
+}

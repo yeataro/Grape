@@ -1,0 +1,392 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:/Users/user/source/Grape/production/tools/b01-playwright.config.ts",
+      "b01-workspace.spec.ts",
+      "--output",
+      "C:/Users/user/source/Grape/production/evidence/continuous/20261005-01/b01-workspace/source-browser-01/test-output"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\b01-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/continuous/20261005-01/b01-workspace/source-browser-01/test-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 40000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\continuous\\20261005-01\\b01-workspace\\source-browser-01\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "b01-workspace.spec.ts",
+      "file": "b01-workspace.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "B01 public two Canvas and two Parameters share edits but retain selection Stage and camera",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 40000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1271,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T20:09:31.417Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "430a9f6f730dc158e998-5029f5aae94190ca9ab7",
+          "file": "b01-workspace.spec.ts",
+          "line": 13,
+          "column": 1
+        },
+        {
+          "title": "B01 public groups fixed follow hide close and Parameters activation have explicit missing state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 40000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1161,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T20:09:32.901Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "430a9f6f730dc158e998-b0e5136cbda726d0a413",
+          "file": "b01-workspace.spec.ts",
+          "line": 22,
+          "column": 1
+        },
+        {
+          "title": "B01 public draft survives move hide collapse float while close and route change veto",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 40000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 40084,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 40000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 40000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 40000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\b01-workspace.spec.ts",
+                        "column": 115,
+                        "line": 8
+                      },
+                      "message": "Error: locator.click: Test timeout of 40000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Panel options in inspector', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" aria-label=\"Panel options in inspector\">⋯</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Panel options\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Panel options\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    76 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Panel options\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   6 | const save=(name:string,value:unknown)=>fs.writeFileSync(path.join(evidence,name+\".json\"),JSON.stringify(value,null,2)+\"\\n\");\n   7 | async function download(p:Page,action:string){const pending=p.waitForEvent(\"download\");await clickAction(p,action);return JSON.parse(fs.readFileSync((await (await pending).path())!,\"utf8\"));}\n>  8 | async function options(p:Page,pane:string){await p.getByRole(\"button\",{name:\"Panel options in \"+pane,exact:true}).click();return p.getByRole(\"dialog\",{name:\"Panel options\",exact:true});}\n     |                                                                                                                   ^\n   9 | async function option(p:Page,pane:string,label:string){const menu=await options(p,pane);await menu.getByRole(\"button\",{name:label,exact:true}).click();}\n  10 | async function importLayout(p:Page,value:any){const chooser=p.waitForEvent(\"filechooser\");await clickAction(p,\"Import current layout\");await(await chooser).setFiles({name:\"current-layout.json\",mimeType:\"application/json\",buffer:Buffer.from(JSON.stringify(value))});}\n  11 | async function setup(p:Page){await p.goto(\"/\");await createNode(p,\"Float\");await expect(p.locator(\"#canvas-1 .node.selected\")).toHaveCount(1);}\n    at options (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\b01-workspace.spec.ts:8:115)\n    at option (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\b01-workspace.spec.ts:9:73)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\b01-workspace.spec.ts:33:9"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T20:09:34.067Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\continuous\\20261005-01\\b01-workspace\\source-browser-01\\test-output\\b01-workspace-B01-public-d-54e6a-close-and-route-change-veto-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\continuous\\20261005-01\\b01-workspace\\source-browser-01\\test-output\\b01-workspace-B01-public-d-54e6a-close-and-route-change-veto-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\continuous\\20261005-01\\b01-workspace\\source-browser-01\\test-output\\b01-workspace-B01-public-d-54e6a-close-and-route-change-veto-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "430a9f6f730dc158e998-15801f2243c31aded669",
+          "file": "b01-workspace.spec.ts",
+          "line": 30,
+          "column": 1
+        },
+        {
+          "title": "B01 public current layout roundtrip fresh context mapping and malformed atomic rejection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 40000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3060,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T20:10:14.504Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "430a9f6f730dc158e998-e92cc1c696ef3ae7a281",
+          "file": "b01-workspace.spec.ts",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "B01 divider keyboard pointer cancel targeted reset preferred width and narrow clamp preserve Graph",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 40000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1869,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T20:10:17.774Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "430a9f6f730dc158e998-74dfd5ff9462c385bce6",
+          "file": "b01-workspace.spec.ts",
+          "line": 48,
+          "column": 1
+        },
+        {
+          "title": "B01 float upper slot dimensions one owner and keyboard collapse do not change graph",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 40000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 40109,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 40000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 40000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 40000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\b01-workspace.spec.ts",
+                        "column": 115,
+                        "line": 8
+                      },
+                      "message": "Error: locator.click: Test timeout of 40000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Panel options in parameters-1', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" aria-label=\"Panel options in parameters-1\">⋯</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" data-kind=\"upper-slot\" aria-label=\"Inspector · inspector\" class=\"floating-surface workspace-float\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" data-kind=\"upper-slot\" aria-label=\"Inspector · inspector\" class=\"floating-surface workspace-float\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    76 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <dialog open=\"\" data-kind=\"upper-slot\" aria-label=\"Inspector · inspector\" class=\"floating-surface workspace-float\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   6 | const save=(name:string,value:unknown)=>fs.writeFileSync(path.join(evidence,name+\".json\"),JSON.stringify(value,null,2)+\"\\n\");\n   7 | async function download(p:Page,action:string){const pending=p.waitForEvent(\"download\");await clickAction(p,action);return JSON.parse(fs.readFileSync((await (await pending).path())!,\"utf8\"));}\n>  8 | async function options(p:Page,pane:string){await p.getByRole(\"button\",{name:\"Panel options in \"+pane,exact:true}).click();return p.getByRole(\"dialog\",{name:\"Panel options\",exact:true});}\n     |                                                                                                                   ^\n   9 | async function option(p:Page,pane:string,label:string){const menu=await options(p,pane);await menu.getByRole(\"button\",{name:label,exact:true}).click();}\n  10 | async function importLayout(p:Page,value:any){const chooser=p.waitForEvent(\"filechooser\");await clickAction(p,\"Import current layout\");await(await chooser).setFiles({name:\"current-layout.json\",mimeType:\"application/json\",buffer:Buffer.from(JSON.stringify(value))});}\n  11 | async function setup(p:Page){await p.goto(\"/\");await createNode(p,\"Float\");await expect(p.locator(\"#canvas-1 .node.selected\")).toHaveCount(1);}\n    at options (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\b01-workspace.spec.ts:8:115)\n    at option (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\b01-workspace.spec.ts:9:73)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\b01-workspace.spec.ts:58:9"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T20:10:19.648Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\continuous\\20261005-01\\b01-workspace\\source-browser-01\\test-output\\b01-workspace-B01-float-up-4b737-ollapse-do-not-change-graph-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\continuous\\20261005-01\\b01-workspace\\source-browser-01\\test-output\\b01-workspace-B01-float-up-4b737-ollapse-do-not-change-graph-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\continuous\\20261005-01\\b01-workspace\\source-browser-01\\test-output\\b01-workspace-B01-float-up-4b737-ollapse-do-not-change-graph-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "430a9f6f730dc158e998-813b501d0819f86db99d",
+          "file": "b01-workspace.spec.ts",
+          "line": 54,
+          "column": 1
+        },
+        {
+          "title": "B01 current layout storage refusal is visible and never reports saved",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 40000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 819,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T20:11:00.166Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "430a9f6f730dc158e998-26eef88441ee4b3e9b5f",
+          "file": "b01-workspace.spec.ts",
+          "line": 61,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T20:09:31.123Z",
+    "duration": 90125.732,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

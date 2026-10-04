@@ -1,0 +1,103 @@
+{
+  "implementationI": "dc653519515e167c75d967930defafcf19422197",
+  "status": "SELF_CHECKS_COMPLETE_NOT_INDEPENDENT_PASS",
+  "root": {
+    "command": "node tools/verify-bootstrap.mjs",
+    "file": "bootstrap-final-01.log",
+    "checks": 488,
+    "indexedFiles": 411,
+    "status": "PASS"
+  },
+  "state": {
+    "command": "node handoff/tools/check-implementation-state.mjs --current",
+    "file": "state-final-01.log",
+    "status": "CURRENT_RECORD_VALID"
+  },
+  "fixtures": {
+    "command": "node --test tools/verify-bootstrap.test.mjs",
+    "file": "fixtures-final-01.log",
+    "pass": 10
+  },
+  "typecheck": {
+    "command": "npm --prefix production run typecheck",
+    "file": "typecheck-final-02.log",
+    "exit": 0
+  },
+  "conformance": {
+    "command": "npm --prefix production run conformance",
+    "file": "conformance-final-02.log",
+    "exit": 0,
+    "checkedFiles": 63
+  },
+  "unit": {
+    "command": "npm --prefix production test",
+    "file": "unit-final-01.log",
+    "pass": 263,
+    "failed": 0
+  },
+  "build": {
+    "command": "npm --prefix production run build -- --outDir <fresh absolute path>",
+    "file": "build-standard-01.log",
+    "exit": 0,
+    "actualCandidateCommand": "node production/tools/build-candidate.mjs <absolute web output> <absolute metadata.json>",
+    "actualCandidateLog": "build-candidate-01.log"
+  },
+  "browser": {
+    "command": "GRAPE_EVIDENCE_DIR=<fresh absolute>; GRAPE_BASE_URL=<loopback>; node production/node_modules/@playwright/test/cli.js test --config production/tools/b01-playwright.config.ts <explicit files> --output <fresh absolute output>",
+    "source": [
+      {
+        "file": "source-focus-final-01/browser-results.json",
+        "pass": 54,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 81891.90999999999
+      },
+      {
+        "file": "s06-affected-source-final-04/browser-results.json",
+        "pass": 105,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 191576.095
+      }
+    ],
+    "uniqueSourceCases": 159,
+    "archive": {
+      "file": "archive-browser-01/browser-results.json",
+      "pass": 35,
+      "failed": 0,
+      "skipped": 0,
+      "durationMs": 59052.017
+    },
+    "archiveMeaning": "Repeated subset on immutable compiled bytes, not35 additional unique behaviors",
+    "visual": {
+      "file": "archive-visual-01/result-01.json",
+      "operations": 4
+    }
+  },
+  "diffCheck": {
+    "file": "diff-check-final-01.log",
+    "exit": 0
+  },
+  "oldFailedAndInterruptedRunsRetained": [
+    "early-checks-01.json",
+    "affected-run-disposition-01.json",
+    "late-check-dispositions-01.json"
+  ],
+  "helperFailures": [
+    {
+      "operation": "archive visual harness creation",
+      "error": "Relative output from disposable cwd did not exist; no file/test executed",
+      "resolution": "Absolute workspace write; harness then passed4 cases"
+    },
+    {
+      "operation": "metadata packaging",
+      "attempts": 3,
+      "retriesUsed": 2,
+      "errors": [
+        "git ls-tree default buffer ENOBUFS before any writes",
+        "script import had one extra parent directory before execution"
+      ],
+      "resolution": "Scoped git paths/bounded buffer and exact module path; third execution succeeded"
+    }
+  ]
+}

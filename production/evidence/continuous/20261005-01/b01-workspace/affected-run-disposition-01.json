@@ -1,0 +1,23 @@
+{
+  "operation": "s06-affected-source-final-01",
+  "status": "STOPPED_AFTER_OBSOLETE_PUBLIC_HELPERS_CONFIRMED",
+  "observedCompleted": {
+    "passed": 16,
+    "failed": 2
+  },
+  "remainingNotClaimed": true,
+  "reporter": "Interrupted with Ctrl-C; browser-results.json not produced; raw failure screenshots/traces retained",
+  "failures": [
+    {
+      "test": "S04 Canvas four shapes",
+      "reason": "Legacy direct Export JSON role=button selector ignores present menuitem",
+      "fix": "clickAction existing public menu seam"
+    },
+    {
+      "test": "S04 Personal UI",
+      "reason": "Assert all dialog elements closed also counted Project actions menu",
+      "fix": "Assert only actual Personal dialog closed, original Graph assertions unchanged"
+    }
+  ],
+  "s05Helper": "Same obsolete Export/Open saved/Second Canvas selectors corrected before further replay; no product/admission change"
+}

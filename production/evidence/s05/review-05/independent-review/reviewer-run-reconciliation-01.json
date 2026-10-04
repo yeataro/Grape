@@ -1,0 +1,66 @@
+{
+  "sourceAndTestsUnmodified": true,
+  "incidents": [
+    {
+      "id": "PREPARATION-01",
+      "kind": "reviewer environment preparation",
+      "result": "Windows tar failed to extract historical Unicode paths; byte-for-byte copy from exact-R checkout repaired disposable runtime. All tracked source copies then verified exact.",
+      "evidence": "identity-verification-01.json"
+    },
+    {
+      "id": "BROWSER-01",
+      "kind": "reviewer configuration",
+      "rawPassed": 106,
+      "rawFailed": 2,
+      "reason": "Reviewer bound dev server to 127.0.0.1 while two unchanged tests navigate machine LAN and Tailscale addresses; both ERR_CONNECTION_REFUSED. Product assertions for these two were not reached.",
+      "resolution": "Independent static-archive public equivalents executed successfully after direct Human authority verification and approved reevaluation.",
+      "raw": "browser-full-01/browser-results.json",
+      "equivalent": "archive-origin-approved-02/result.json"
+    },
+    {
+      "id": "MODEL-PROBE-01",
+      "kind": "reviewer incorrect expectation",
+      "raw": "checks/reviewer-model-negatives-01.log",
+      "reason": "Reviewer included legal vec2 [1,2] in invalid-count table.",
+      "resolution": "Retained raw failing script/log; revision 02 uses component-count-minus-one for invalid array. Four leaf negative groups pass.",
+      "final": "reviewer-model-negatives-02.json"
+    },
+    {
+      "id": "ARCHIVE-ORIGIN-PROBE-01",
+      "kind": "reviewer incorrect diagnostic name",
+      "raw": "archive-origin-approved-01/result.json",
+      "reason": "Expected PERSONAL_HASH but product correctly reported PERSONAL_CHECKSUM.",
+      "resolution": "Corrected only probe diagnostic expectation, retained first failure; second exact same bounded smoke succeeds.",
+      "final": "archive-origin-approved-02/result.json"
+    }
+  ],
+  "historicalCountersPreserved": {
+    "current": "NONE for new settled catalog implementation; this is not a retry of the prior replacement repair",
+    "preserved": "S05-FG-LEGACY-IMPORT-01 repairAttempt2/unsuccessful0/globalReview4 PASS; S05-FG-RESOURCE-01 initialFAIL1/repair1/review2PASS remain unchanged",
+    "limits": "max2 retries per transient operation; max3 unsuccessful repair/review rounds per underlying group, never reset by new wording"
+  },
+  "implementerDevelopmentCounters": {
+    "catalogParentTransportAttempt": 2,
+    "catalogParentRetries": 1,
+    "actualImplementerDispatch": 1,
+    "implementerRetries": 0,
+    "uniform": "initialFAIL1/repair1/review2PASS",
+    "legacyImport": "repairAttempt2/unsuccessful0/globalReview4PASS",
+    "performance": "OPEN_DEFERRED;diagnosisAttempt1/retries0/repair0;no measurement"
+  },
+  "performance": {
+    "status": "OPEN_DEFERRED",
+    "diagnosticAttempt": 1,
+    "retries": 0,
+    "repairs": 0,
+    "measurements": 0,
+    "next": "Coordinator routes after this catalog round under direct Human sequencing; no parallel writer or preemptive optimization"
+  },
+  "reviewAttempt": 1,
+  "globalReviewSequence": 5,
+  "productRepairOrFailedReviewRoundsAdded": 0,
+  "permissionRefusals": 2,
+  "permissionReevaluationWithNewHumanEvidence": 1,
+  "reviewerModelProbeExecutions": 2,
+  "reviewerArchiveOriginProbeExecutions": 2
+}

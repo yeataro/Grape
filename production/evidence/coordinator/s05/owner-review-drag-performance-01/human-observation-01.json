@@ -1,0 +1,48 @@
+{
+  "packetType": "HUMAN_OWNER_OBSERVATION",
+  "recordedAt": "2026-10-04T06:09:39.961Z",
+  "sliceId": "S05",
+  "source": {
+    "threadId": "01a1010f-2b35-7861-bb35-0e7e9b0b42a9",
+    "threadTitle": "Grape PM",
+    "humanMessageIds": [
+      "01a10585-c938-78d1-9e72-372d86cfade8",
+      "01a10587-343d-7ca0-8f90-0aa6f3ae62e9"
+    ],
+    "quote": "拖動節點的位置的時候，有夠卡。...大概性能會在 30 FPS 左右。...拖動節點位置，性能很怪。",
+    "followupExactQuote": "簡單來講就是拖動 butterfly 之類的運算節點性能很卡，拖動 image output 的位置的時候根本沒事。",
+    "provenance": "Forwarded by PM then independently read direct Human messages via read_thread; quote ellipses explicitly omit intervening speech.",
+    "exactOperationNode": "Human-called butterfly; exact type not established by cropped screenshot. Do not silently assume a new Butterfly catalog operation."
+  },
+  "screenshot": {
+    "file": "production/evidence/coordinator/s05/owner-review-drag-performance-01/human-fps-observation-01.png",
+    "sha256": "6012e50bbae8239a3f6c09c54583fdc6dda4561ddcc3057a7299ac0e30208b0a",
+    "bytes": 37850
+  },
+  "screenshotObservation": "Cropped screenshot shows25.2fps and S05-web-ee12...; source/destination comparison comes from direct Human followup, not inferred from image.",
+  "candidate": {
+    "I": "ee1212fdc54359f1ceba4c4b09f6e7cc06cddc41",
+    "R": "29695b3c25e2d200856d780b31e20e23f24efb6d",
+    "P": "676c33930e82b5bacc2fd69f8d70e535837449bf",
+    "build": "S05-web-ee1212f",
+    "entry": "http://127.0.0.1:4195/review.html"
+  },
+  "pmFindings": {
+    "provenance": "PM read-only code tracing; measured attribution not yet done",
+    "hypotheses": [
+      "pointermove gesture.update -> Graph.change -> whole-document clone/reconcile/validate/analyzeConstants",
+      "Canvas update rebuilds nodes/edges and reads geometry",
+      "Context and Application route notifications may duplicate panel updates",
+      "Operation-node vs Image Output asymmetry requires comparing Inspector/widget updates and selection-sensitive paths"
+    ],
+    "notEstablished": [
+      "Dominant bottleneck and percentages",
+      "Regression introduced specifically by S05",
+      "Dragging triggers GPU shader compilation",
+      "Hardware-independent FPS promise"
+    ]
+  },
+  "disposition": "OPEN_OWNER_PERFORMANCE_OBSERVATION_REQUIRES_BOUNDED_MEASUREMENT",
+  "productAcceptance": "NOT_GRANTED_BY_THIS_OBSERVATION",
+  "priorReplacementConfirmation": "Separate Coordinator Human confirmation remains limited to Replace part; PM OK OK about upgrade explanation is not S05 acceptance."
+}

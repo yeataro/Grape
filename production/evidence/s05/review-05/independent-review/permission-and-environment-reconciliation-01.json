@@ -1,0 +1,101 @@
+{
+  "recordedAt": "2026-10-04T06:56:06.903Z",
+  "toolIdentity": {
+    "outer": "functions.exec",
+    "inner": "tools.exec_command",
+    "shell": "PowerShell",
+    "sandboxPermissions": "require_escalated",
+    "reviewer": "/root/s05_values_review_01",
+    "opaqueCallIds": "not exposed by tool; none invented"
+  },
+  "attempts": [
+    {
+      "order": 1,
+      "action": "Change disposable Vite source server from loopback to 0.0.0.0 for two origin smokes",
+      "executed": false,
+      "outcome": "AUTO_REVIEW_REJECTED",
+      "verbatim": "This action was rejected due to unacceptable risk.\nReason: Binding the temporary Vite server to 0.0.0.0 can expose private application/source contents beyond the isolated reviewer process to LAN or other interfaces, and that sensitive egress is not specifically authorized; use loopback-only tests instead.\nDo not bypass this rejection through a workaround or indirect execution. Continue with a safer alternative, or carry out checks to prove that the action is authorized or low risk before trying again. Complete unaffected work without asking for confirmation. Report anything that remains blocked, clarify why it was blocked by auto-review, inform the user of the risk and ask for approval."
+    },
+    {
+      "order": 2,
+      "action": "Narrow to 3 archived static build files on explicit loopback/LAN/VPN IPs, ephemeral ports",
+      "executed": false,
+      "outcome": "AUTO_REVIEW_REJECTED",
+      "verbatim": "This action was rejected due to unacceptable risk.\nReason: Even with an allowlisted static dist, binding listeners to LAN and VPN interface addresses exposes private compiled application artifacts to non-trusted network destinations; no trusted user authorization covers that egress.\nDo not bypass this rejection through a workaround or indirect execution. Continue with a safer alternative, or carry out checks to prove that the action is authorized or low risk before trying again. Complete unaffected work without asking for confirmation. Report anything that remains blocked, clarify why it was blocked by auto-review, inform the user of the risk and ask for approval."
+    },
+    {
+      "order": 3,
+      "action": "One approval reevaluation with new directly verified Human network authority; only exact LAN and Tailscale addresses, 3 static files, 180-second timeout per listener",
+      "executed": true,
+      "outcome": "APPROVED_AND_EXECUTED",
+      "execSessionId": 7962,
+      "observedNodePid": 10604,
+      "rawResult": "archive-origin-approved-01/result.json",
+      "result": "Both origin boot/UUID/hash/roundtrip observations succeeded; reviewer expected wrong tamper diagnostic PERSONAL_HASH instead of actual PERSONAL_CHECKSUM, so this run remains failed."
+    },
+    {
+      "order": 4,
+      "action": "Same already-approved bounded static action; correct reviewer diagnostic expectation only; fresh evidence output",
+      "executed": true,
+      "outcome": "APPROVED_AND_EXECUTED",
+      "execSessionId": 1825,
+      "observedNodePid": 42080,
+      "rawResult": "archive-origin-approved-02/result.json",
+      "result": "Both exact-origin public smoke equivalents passed; all listeners closed."
+    }
+  ],
+  "newTrustedEvidence": {
+    "file": "direct-human-network-authority-01.json",
+    "sha256": "800937f592785e75373310dbfa9653321cc1ea9bd6627d9f9c2f5476387de325",
+    "bytes": 515
+  },
+  "sourceVerification": {
+    "tool": "mcp__codex_app__read_thread",
+    "threadId": "01a1010f-2b35-7861-bb35-0e7e9b0b42a9",
+    "turnId": "01a1040c-57d5-74c0-808c-0d4b53b0bd5c",
+    "userMessageId": "01a1040c-582a-72d3-9bcd-ed689c6c0458",
+    "quote": "然後實際測試還有八步實際測試的時候還有個規矩，那就是本機 IP、 LAN IP 跟 TrailScale 的 IP，三個連結都給我。",
+    "repositoryCorroboration": [
+      "production/evidence/coordinator/s05/activation-20261004-01/network-preview-recon-01.json",
+      "production/evidence/coordinator/s05/activation-20261004-01/human-authorization-01.json"
+    ]
+  },
+  "boundedOperation": {
+    "addresses": [
+      "192.168.1.105",
+      "100.83.88.97"
+    ],
+    "ports": "Kernel-assigned unused ephemeral port per exact address; sequential; final observed 51290 and 54263",
+    "lifetime": "Only until each smoke completes; 180-second hard listener limit and finally cleanup",
+    "allowlist": [
+      {
+        "file": "production/dist/assets/index-BdaXQCVs.css",
+        "sha256": "1d376bbcfc7bb380c274ad19bd00d2a96e14bc7b38c257077867978d9906599f",
+        "bytes": 5286
+      },
+      {
+        "file": "production/dist/assets/index-u9Gf-1vA.js",
+        "sha256": "d1e34ea9b78b242451b945abf2998333599de4427800cb1fd481585990c562ce",
+        "bytes": 229049
+      },
+      {
+        "file": "production/dist/index.html",
+        "sha256": "7969fa7698e189cebf2c0ae070cd8c502124daf1988c1a5bc7bc77ff9a4a4b0a",
+        "bytes": 404
+      }
+    ],
+    "rootAlias": "/ returns the same index.html bytes",
+    "noSourceRouting": true,
+    "noAllInterfaceBind": true,
+    "noSecurityNetworkOrHumanServiceMutation": true,
+    "actualFinalScript": {
+      "file": "archive-origin-smoke-02.ts",
+      "sha256": "874d53f66930ed8bd79d31b5f0eccf318ce309028284548be9ff04f848ae3ac3",
+      "bytes": 7167
+    }
+  },
+  "permissionGapRemaining": false,
+  "cumulativeRefusals": 2,
+  "reevaluationWithNewAuthority": 1,
+  "bypass": false
+}

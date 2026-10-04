@@ -1,0 +1,65 @@
+{
+  "recordedAt": "2026-10-04T08:25:26.244Z",
+  "actionKey": "yeataro/Grape:S05:bounded-closeout:ed7683d:01",
+  "PR": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "url": "https://github.com/yeataro/Grape/pull/6",
+        "number": 6,
+        "state": "open",
+        "merged": false,
+        "mergeable": true,
+        "draft": true,
+        "body": "This PR publishes the currently tested S05 delivery: function-mode subgraphs and their constant/Uniform handling, document import/replacement corrections, four fixed-value nodes (Float, Vector2, Vector3 and ColorRGBA), and the measured drag-performance improvement. Snapshot reuse is limited to one synchronous editor read; existing publication, validation and History protections are retained.\n\nThe candidate is implementation `aa4c86e20b0b4b54218b9992921578e7f24a28a2` (I6), reviewed submission `6c3a734325d0db2d924356a9614e971d80a966c8` (R6), build `S05-drag-aa4c86e`. Any later publication commit contains only evidence/status bookkeeping. The Owner confirmed the current round and explicitly requested this PR; the in-progress Escape repair is excluded and preserved for the next round.\n\nValidation and limits:\n\n- Earlier independent PASS reports remain bound to their original candidates, including function-mode/Uniform, legacy import, replacement eligibility and fixed-value deliveries.\n- The I6 independent review executed 227 unit/contract checks, local browser/archive flows and drag-performance measurements. Its overall verdict remains **BLOCKED**, because the two exact LAN/Tailscale archive checks were denied by automatic tool approval and were not executed.\n- A subsequent independent check found that natural Escape can lose Canvas keyboard focus during dragging. The Owner explicitly deferred this finding to the next round; the original FAIL evidence is preserved. The uncommitted fix and its tests are not part of this PR.\n- Local preview delivery and archive hashes were checked. This is not a claim of LAN/Tailscale availability, native GPU/TouchDesigner qualification, complete catalog parity or whole-S05 completion.\n\nEvidence: `production/evidence/s05/review-06/independent-review/`, `production/evidence/s05/review-06/escape-focus/`, and `production/evidence/coordinator/s05/owner-pr-01/`. The Owner has directly authorized this exact payload and GitHub destination, PR creation, and merge after closeout checks, followed by S06. The PR remains draft while the original independent Reviewer reconciles the bounded closeout scope; this authorization does not rewrite any historical review verdict.\n\r\n",
+        "title": "S05: function-mode delivery, fixed values and drag performance",
+        "base": "main",
+        "base_sha": "6aa6abbdc46d55753111d5ef5ca9899870a8805a",
+        "head": "work",
+        "head_sha": "ed7683de5c8836afe6142bab7be46a5cb0a8f389",
+        "head_repo_id": 1400803369,
+        "head_repo_full_name": "yeataro/Grape",
+        "merge_commit_sha": "9f9dcd0b8557022ee1e86ab094287944491e4c37",
+        "user": {
+          "login": "yeataro",
+          "name": "yeataro",
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/13723054?v=4",
+          "id": 13723054
+        },
+        "requested_reviewers": null,
+        "requested_team_reviewers": null,
+        "diff": null,
+        "comments": null,
+        "created_at": "2026-10-04T08:15:55Z",
+        "updated_at": "2026-10-04T08:15:55Z",
+        "closed_at": null,
+        "merged_at": null,
+        "commits": 21,
+        "changed_files": 3303,
+        "additions": 2127983,
+        "deletions": 84,
+        "display_url": "https://github.com/yeataro/Grape/pull/6",
+        "display_title": "S05: function-mode delivery, fixed values and drag performance"
+      },
+      "isError": false
+    }
+  },
+  "refs": {
+    "status": "fulfilled",
+    "value": {
+      "chunk_id": "712e71",
+      "wall_time_seconds": 0.7075319,
+      "exit_code": 0,
+      "original_token_count": 29,
+      "output": "6aa6abbdc46d55753111d5ef5ca9899870a8805a\trefs/heads/main\ned7683de5c8836afe6142bab7be46a5cb0a8f389\trefs/heads/work\n"
+    }
+  },
+  "guard": "MATCH; no remote writes performed; current PM publisher ownership retained"
+}

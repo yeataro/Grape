@@ -1,0 +1,582 @@
+{
+  "schema": "grape-ux-canvas-acceptance/1",
+  "revision": "CANVAS-005",
+  "atlasRevision": "ATLAS-005",
+  "date": "2026-10-03",
+  "purpose": "UX behavior reference and acceptance plan, not production implementation status",
+  "sourceCommit": "e005f08badff8caef6331de5312809e4cab09cc2",
+  "spec": "CANVAS_INTERACTION_SPEC.md",
+  "policy": {
+    "runtimePassNotInferredFromSource": true,
+    "originalCoverageIDsPreserved": true,
+    "architectureChanged": false,
+    "legacyCodeChanged": false
+  },
+  "entries": [
+    {
+      "id": "UX-CANVAS-C01",
+      "title": "空白平移",
+      "existingUXEntry": "UX-CANVAS-004",
+      "trigger": "空白左拖；Box Select off、無Shift",
+      "preconditions": "無其他控件消費pointer",
+      "expected": "相機平移，node graph positions不變",
+      "cancellation": "pointercancel不保證相機rollback；Esc僅freeze動畫",
+      "stateScope": "view",
+      "history": "No Graph History",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-navigation-evidence-005.md"
+        },
+        {
+          "kind": "live-observed-bounded",
+          "path": "../research/canvas-live-005.md",
+          "section": "CL-01"
+        }
+      ],
+      "validation": {
+        "status": "BOUNDED_OBSERVATION",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C02",
+      "title": "游標錨定wheel",
+      "existingUXEntry": "UX-CANVAS-004",
+      "trigger": "Canvas wheel",
+      "preconditions": "wheel未被嵌入控件攔截",
+      "expected": "同graph point保持游標錨點；clamp normal25–170%、overview20–170%",
+      "cancellation": "沒有wheel rollback；Esc凍結動畫",
+      "stateScope": "view",
+      "history": "No Graph History",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-navigation-evidence-005.md"
+        },
+        {
+          "kind": "live-observed-bounded",
+          "path": "../research/canvas-live-005.md",
+          "section": "CL-05"
+        }
+      ],
+      "validation": {
+        "status": "BOUNDED_OBSERVATION",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C03",
+      "title": "百分比選單",
+      "existingUXEntry": "UX-CANVAS-004",
+      "trigger": "百分比按鈕或方向鍵開啟",
+      "preconditions": "loaded graph；有效preset",
+      "expected": "Canvas中心錨定；開關選單不改view；鍵盤focus返回",
+      "cancellation": "Esc/outside關閉，不改選擇前view",
+      "stateScope": "view",
+      "history": "No Graph History",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-navigation-evidence-005.md"
+        }
+      ],
+      "validation": {
+        "status": "NOT_EXECUTED_THIS_ROUND",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C04",
+      "title": "中鍵Dolly",
+      "existingUXEntry": "UX-CANVAS-004",
+      "trigger": "空白MMB拖曳",
+      "preconditions": "精確背景surface；無競爭gesture",
+      "expected": "右上放大左下縮小，原pointer錨點；release完成target",
+      "cancellation": "Esc/lostcapture/blur等在同context恢復起點；不同context不寫回",
+      "stateScope": "view",
+      "history": "No Graph History",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-navigation-evidence-005.md"
+        }
+      ],
+      "validation": {
+        "status": "NOT_EXECUTED_THIS_ROUND",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C05",
+      "title": "Home/Frame/Center",
+      "existingUXEntry": "UX-CANVAS-004",
+      "trigger": "H/Home、F/Frame、navigation Center",
+      "preconditions": "有效graph scope與命令焦點",
+      "expected": "Home立即全圖；F選取或全圖、最多100%；Center不改zoom",
+      "cancellation": "Home中止舊motion；empty graph no-op邊界另列OPEN",
+      "stateScope": "view",
+      "history": "No Graph History",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-navigation-evidence-005.md"
+        },
+        {
+          "kind": "live-observed-bounded",
+          "path": "../research/canvas-live-005.md",
+          "section": "CL-02"
+        }
+      ],
+      "validation": {
+        "status": "BOUNDED_OBSERVATION",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C06",
+      "title": "相機阻尼",
+      "existingUXEntry": "UX-CANVAS-004",
+      "trigger": "連續pan/zoom或Frame",
+      "preconditions": "設定分開：一般150ms／Frame333ms，source defaults on",
+      "expected": "同類動作更新target；連續wheel依pending target累積；pan/Frame為絕對目標retarget；相同Frame target不重計時",
+      "cancellation": "Esc/new canvas pointer凍結；blur/resize/hidden完成target",
+      "stateScope": "view",
+      "history": "No Graph History",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-navigation-evidence-005.md"
+        }
+      ],
+      "validation": {
+        "status": "NOT_EXECUTED_THIS_ROUND",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C07",
+      "title": "Focus graph與fullscreen",
+      "existingUXEntry": "UX-CANVAS-004",
+      "trigger": "Focus按鈕或Ctrl/Cmd+Enter；Alt+Enter另為fullscreen",
+      "preconditions": "各自keyboard guard；fullscreen視runtime支援",
+      "expected": "Focus隱藏chrome不fit；兩能力獨立；Esc不退出focus",
+      "cancellation": "Focus再toggle回布局；fullscreen denied要顯示失敗",
+      "stateScope": "view",
+      "history": "No Graph History",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-navigation-evidence-005.md"
+        },
+        {
+          "kind": "live-observed-bounded",
+          "path": "../research/canvas-live-005.md",
+          "section": "CL-03"
+        }
+      ],
+      "validation": {
+        "status": "BOUNDED_OBSERVATION",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C08",
+      "title": "選取與primary",
+      "existingUXEntry": "UX-CANVAS-001",
+      "trigger": "click、Ctrl/Cmd/Shift toggle、空白click",
+      "preconditions": "不在連線/編輯控件消費事件中",
+      "expected": "集合與primary coherence；相關投影更新；edge/node選取區分",
+      "cancellation": "空白clear；不把view選取當Graph undo",
+      "stateScope": "selection",
+      "history": "No Graph History",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-selection-evidence-005.md"
+        },
+        {
+          "kind": "live-observed-bounded",
+          "path": "../research/canvas-live-005.md",
+          "section": "CL-07"
+        }
+      ],
+      "validation": {
+        "status": "BOUNDED_OBSERVATION",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C09",
+      "title": "框選",
+      "existingUXEntry": "UX-CANVAS-002",
+      "trigger": "空白右拖／Shift拖／Box Select左拖",
+      "preconditions": "起點非node/port/control",
+      "expected": "兩方向intersection含碰邊；Ctrl/Cmd加選、Shift本身replace",
+      "cancellation": "mouse cancel無完整rollback；touch有restore，需UX review",
+      "stateScope": "selection",
+      "history": "No Graph History",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-selection-evidence-005.md"
+        },
+        {
+          "kind": "live-observed-bounded",
+          "path": "../research/canvas-live-005.md",
+          "section": "CL-04"
+        }
+      ],
+      "validation": {
+        "status": "BOUNDED_OBSERVATION",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C10",
+      "title": "節點拖動",
+      "existingUXEntry": "UX-CANVAS-003",
+      "trigger": "標題或允許的body拖曳",
+      "preconditions": "非readonly；控件優先；有效gesture context",
+      "expected": "≥3px啟preview；24-unit起手node snap；有實際位置變更且仍可編輯才release一筆layout；snap後原位無History",
+      "cancellation": "Node: Esc/pointercancel/lostcapture/blur/resize/rerender restores position preview, not necessarily prior selection; Group additional protections differ",
+      "stateScope": "layout",
+      "history": "Layout/model committed changes only; domain-separated; see spec",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-selection-evidence-005.md"
+        },
+        {
+          "kind": "live-observed-bounded",
+          "path": "../research/canvas-live-005.md",
+          "section": "CL-06"
+        }
+      ],
+      "validation": {
+        "status": "BOUNDED_OBSERVATION",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C11",
+      "title": "Group與排列交界",
+      "existingUXEntry": "UX-CANVAS-003",
+      "trigger": "Group標題drag；選取排列",
+      "preconditions": "明確membership與selection guards",
+      "expected": "member一起移動；frame身為背景；Arrange只改選取",
+      "cancellation": "各專章gesture取消，不能泛化成所有操作相同",
+      "stateScope": "layout",
+      "history": "Layout/model committed changes only; domain-separated; see spec",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/groups-evidence-004.md"
+        }
+      ],
+      "validation": {
+        "status": "NOT_EXECUTED_THIS_ROUND",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C12",
+      "title": "方向／Link導航",
+      "existingUXEntry": "UX-CANVAS-007",
+      "trigger": "方向鍵、Ctrl/Cmd+方向鍵、Link箭頭",
+      "preconditions": "graph navigation focus；有對象",
+      "expected": "普通單選node方向鍵：可配置Frame/Center/keep；connected-selection：遞迴分量或分量外補集，更新selection不移相機；Link：直接peers固定Frame",
+      "cancellation": "stale menu不導航舊target；不創Graph history",
+      "stateScope": "selection",
+      "history": "No Graph History",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-selection-evidence-005.md"
+        }
+      ],
+      "validation": {
+        "status": "NOT_EXECUTED_THIS_ROUND",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C13",
+      "title": "Stage/子圖scope",
+      "existingUXEntry": "UX-CANVAS-004",
+      "trigger": "Stage、進子圖、Alt+Up返回",
+      "preconditions": "current target有效；scope transition允許",
+      "expected": "新scope更新view/selection；不保證camera stack restore",
+      "cancellation": "舊gesture/pointer/menu不得寫入新scope",
+      "stateScope": "view",
+      "history": "No Graph History",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-selection-evidence-005.md"
+        }
+      ],
+      "validation": {
+        "status": "NOT_EXECUTED_THIS_ROUND",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C14",
+      "title": "Creator與接線優先",
+      "existingUXEntry": "UX-CANVAS-005",
+      "trigger": "Tab、click/drag port、落空白",
+      "preconditions": "公開命令/型別/gesture guards",
+      "expected": "armed link空白走wire drop，不先清selection；不同surface入口分開",
+      "cancellation": "Esc取消link/Creator；不可推斷所有drop會disconnect",
+      "stateScope": "model",
+      "history": "Layout/model committed changes only; domain-separated; see spec",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-selection-evidence-005.md"
+        }
+      ],
+      "validation": {
+        "status": "NOT_EXECUTED_THIS_ROUND",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C15",
+      "title": "Touch交接",
+      "existingUXEntry": "UX-CANVAS-003",
+      "trigger": "單指拖／兩指pinch→放一指",
+      "preconditions": "touch eligible surface，8px slop，context有效",
+      "expected": "第二指撤銷編輯preview；midpoint錨定；放一指rebase不跳",
+      "cancellation": "取消edit preview不等於camera origin rollback",
+      "stateScope": "mixed",
+      "history": "Layout/model committed changes only; domain-separated; see spec",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-navigation-evidence-005.md"
+        }
+      ],
+      "validation": {
+        "status": "NOT_EXECUTED_THIS_ROUND",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C16",
+      "title": "網格與倍率",
+      "existingUXEntry": "UX-CANVAS-004",
+      "trigger": "graph zoom/UI scale變動",
+      "preconditions": "不同倍率單位不可混用",
+      "expected": "24 snap不變；displayGrid倍增保密度；點半徑依zoom",
+      "cancellation": "無圖內容操作或Undo",
+      "stateScope": "view",
+      "history": "No Graph History",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-navigation-evidence-005.md"
+        }
+      ],
+      "validation": {
+        "status": "NOT_EXECUTED_THIS_ROUND",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C17",
+      "title": "Overview",
+      "existingUXEntry": "UX-CANVAS-004",
+      "trigger": "開啟可選Overview；zoom<30%",
+      "preconditions": "瀏覽器偏好，source default off",
+      "expected": "保尺寸/接口，簡化外觀；可到20%；off時最低25%",
+      "cancellation": "off即時中心修正、捨棄舊低zoom target",
+      "stateScope": "preference",
+      "history": "No Graph History",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-navigation-evidence-005.md"
+        }
+      ],
+      "validation": {
+        "status": "NOT_EXECUTED_THIS_ROUND",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C18",
+      "title": "保存邊界",
+      "existingUXEntry": "UX-CANVAS-004",
+      "trigger": "reload/stage/scope切換或偏好修改",
+      "preconditions": "區分Graph layout、camera、browser preferences",
+      "expected": "Legacy camera/focus無document寫入；偏好storage失敗不得宣稱持久化",
+      "cancellation": "重構依既定EditorContext/Persistence，非新增owner",
+      "stateScope": "view",
+      "history": "No Graph History",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-navigation-evidence-005.md"
+        }
+      ],
+      "validation": {
+        "status": "NOT_EXECUTED_THIS_ROUND",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C19",
+      "title": "Readonly",
+      "existingUXEntry": "UX-CANVAS-003",
+      "trigger": "唯讀圖上選取/導航/嘗試layout edit",
+      "preconditions": "readonly/mutation guard",
+      "expected": "選取相機可用；layout/model mutation不提交",
+      "cancellation": "拒絕mutation不應封鎖閱讀",
+      "stateScope": "mixed",
+      "history": "Layout/model committed changes only; domain-separated; see spec",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-selection-evidence-005.md"
+        }
+      ],
+      "validation": {
+        "status": "NOT_EXECUTED_THIS_ROUND",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    },
+    {
+      "id": "UX-CANVAS-C20",
+      "title": "焦點/命令/History",
+      "existingUXEntry": "UX-CANVAS-001",
+      "trigger": "keyboard與scope/gesture切換",
+      "preconditions": "IME/text/Panel/Viewer/dialog等guard",
+      "expected": "新public commands尊重domain；runtime observation不進Graph history",
+      "cancellation": "舊shortcut guards不一致，不能複製為新authority",
+      "stateScope": "mixed",
+      "history": "Layout/model committed changes only; domain-separated; see spec",
+      "persistence": "See spec §14; camera/selection are not canonical graph edits",
+      "spec": "CANVAS_INTERACTION_SPEC.md",
+      "evidence": [
+        {
+          "kind": "source-backed",
+          "path": "../research/canvas-selection-evidence-005.md"
+        }
+      ],
+      "validation": {
+        "status": "NOT_EXECUTED_THIS_ROUND",
+        "method": "Run trigger, capture before/intermediate/after/cancel and compare model/view/history independently",
+        "limits": "No complete device/lifecycle/readonly/reload qualification; illustrated/source/test-intent evidence never constitutes runtime PASS"
+      }
+    }
+  ],
+  "openItems": [
+    {
+      "id": "CANVAS-OPEN-U01",
+      "title": "Damping old tests",
+      "unknown": "test_canvas_damping default/reset-off assertions disagree with current defaults and framing tests",
+      "disposition": "SRC conflicts recorded; no legacy test edits or fabricated PASS"
+    },
+    {
+      "id": "CANVAS-OPEN-U02",
+      "title": "Mouse pan cancellation",
+      "unknown": "pointercancel lacks origin restore; near-origin return may clear selection",
+      "disposition": "Preserve observation; product UX review before promising uniform cancellation"
+    },
+    {
+      "id": "CANVAS-OPEN-U03",
+      "title": "Mouse marquee cancellation",
+      "unknown": "mouse clears handlers but does not restore old selection; touch cancels differently",
+      "disposition": "Record separately; do not infer universal rollback"
+    },
+    {
+      "id": "CANVAS-OPEN-U04",
+      "title": "Keyboard guards",
+      "unknown": "Older Tab/Delete/Alt+Up/Mod+A/D/Z do not share full newer graphCommandReady",
+      "disposition": "New implementation uses accepted command authority; validate without copying weak listener"
+    },
+    {
+      "id": "CANVAS-OPEN-U05",
+      "title": "Devices and timing",
+      "unknown": "deltaMode/trackpad/MMB/touch/pen/CEF/IME/accessibility not qualified",
+      "disposition": "Run corresponding integration/device cases before claiming support"
+    },
+    {
+      "id": "CANVAS-OPEN-U06",
+      "title": "Scope/persistence/lifetime",
+      "unknown": "nested return, readonly, reload, capture loss, stale gestures lack full runtime evidence",
+      "disposition": "Use required per-case checks; no global canvas PASS"
+    },
+    {
+      "id": "CANVAS-OPEN-U07",
+      "title": "Empty graph motion",
+      "unknown": "fitNodes empty returns before pending-animation cancellation",
+      "disposition": "Do not claim Home always cancels pending motion in empty graph"
+    }
+  ],
+  "summary": {
+    "behaviorCases": 20,
+    "boundedLiveCases": 7,
+    "fullyQualifiedCases": 0,
+    "openItems": 7
+  }
+}

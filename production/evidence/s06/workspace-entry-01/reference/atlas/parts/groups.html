@@ -1,0 +1,68 @@
+<section id="groups" class="gf-section" aria-labelledby="gf-title">
+  <header class="section-head">
+    <p class="kicker">GROUP FRAME · VISUAL ORGANIZATION</p>
+    <h2 id="gf-title">框住一組節點，保留原本的圖。</h2>
+    <p class="lede">Group Frame 是有名字、顏色與明確成員的視覺群組。它讓使用者一起選取、移動與整理節點；線仍直接連到原來的節點，框沒有輸入／輸出接口。</p>
+  </header>
+  <p class="gf-evidence"><b>SOURCE-DERIVED</b> 以下規則由 Legacy 原始碼與既有測試內容整理；協作主代理另觀察到 Pixel Output 框的標題、更名、色點、移除框與角落選取入口。手勢細節仍標為 Source-derived。圖中樣式為局部重繪，互動只發生在本頁。</p>
+
+  <div class="gf-distinction" id="gf-frame-vs-subgraph">
+    <article><span class="gf-index">01 / FRAME</span><h3>Group Frame</h3><p>同一張圖上的視覺組織。成員仍可個別選取、移動與接線；移除框會留下節點和線。</p><span class="gf-shortcut">Create group frame <kbd>Ctrl / Cmd + G</kbd></span></article>
+    <article><span class="gf-index">02 / SUBGRAPH</span><h3>Subgraph</h3><p>把可提取的節點與內部連線放進另一張圖，建立 Input／Output 與呼叫節點。這是一個改變圖結構的獨立操作。</p><span class="gf-shortcut">Selection to subgraph <kbd>Ctrl / Cmd + Shift + G</kbd></span></article>
+  </div>
+
+  <article id="gf-membership-demo" class="gf-artboard">
+    <div class="gf-artboard-heading"><div><span class="gf-index">G01 / MEMBERSHIP &amp; BOUNDS</span><h3>在框裡，不等於已加入。</h3></div><span class="gf-badge">LOCAL DEMO · 非產品操作</span></div>
+    <div class="gf-demo-controls" aria-label="圖冊試操作">
+      <button type="button" data-gf-select-frame="">Select members</button>
+      <button type="button" data-gf-include-c="">Select frame + C</button>
+      <button type="button" data-gf-join="">Join selected</button>
+      <button type="button" data-gf-detach="">Detach selected</button>
+      <button type="button" data-gf-create="">Create frame</button>
+      <button type="button" data-gf-reset="">Reset demo</button>
+    </div>
+    <div class="gf-scene-wrap">
+      <svg class="gf-scene" viewBox="0 0 840 410" role="group" aria-label="可操作的 Group Frame 成員與範圍示意" data-gf-scene="">
+        <defs><pattern id="gf-dot-grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="1" fill="#37333f"/></pattern></defs>
+        <rect width="840" height="410" fill="#14141c"/><rect width="840" height="410" fill="url(#gf-dot-grid)"/>
+        <g data-gf-frame=""><rect class="gf-frame-body" data-gf-frame-body="" rx="10"/><g class="gf-frame-heading" data-gf-heading="" tabindex="0" role="button" aria-label="Select or drag group members; double-click or F2 to rename"><path class="gf-frame-head-bg" data-gf-head-bg=""/><text class="gf-frame-name" data-gf-name="" x="10" y="18">Lighting controls</text><foreignObject data-gf-name-foreign="" x="8" y="3" height="23" hidden=""><input xmlns="http://www.w3.org/1999/xhtml" data-gf-name-input="" aria-label="Group frame name" maxlength="80"/></foreignObject></g><g data-gf-color="" role="button" tabindex="0" aria-label="Frame color presets"><circle r="7" class="gf-header-color"/></g><g data-gf-rename="" role="button" tabindex="0" aria-label="Rename group frame"><path d="m-6 3-1 4 4-1L7-4 3-8-6 3Zm7-9 4 4"/></g><g data-gf-remove="" role="button" tabindex="0" aria-label="Remove frame; keep nodes"><path d="m-5-5 10 10M5-5-5 5"/></g><g class="gf-corner" data-gf-corner="" role="button" tabindex="0" aria-label="Select group members; not a resize handle"><path d="M-12 0A12 12 0 0 0 0-12"/></g></g>
+        <path class="gf-wire" data-gf-wire=""/>
+        <g data-gf-nodes=""></g>
+      </svg>
+      <div class="gf-palette" data-gf-palette="" hidden="" aria-label="Frame preset colors"><p>Frame color</p><div data-gf-swatches=""></div><a href="#color">Custom… · 色彩面板見該章節</a></div>
+    </div>
+    <div class="gf-demo-readout"><p data-gf-state="" aria-live="polite"></p><p data-gf-message="" role="status">試著拖曳框的標題列。Float C 雖然位於框內，仍會留在原地。</p></div>
+    <div class="gf-secondary-controls" aria-label="其他圖冊示範">
+      <button type="button" data-gf-move="">Move members →</button><button type="button" data-gf-move-a="">Move Float A ↑</button><button type="button" data-gf-collapse="">Collapse member nodes</button><button type="button" data-gf-undo="">Undo demo edit</button>
+      <label><input type="checkbox" data-gf-corner-setting="" checked> Corner select entry</label><label><input type="checkbox" data-gf-readonly=""> Read-only example</label>
+    </div>
+    <p class="gf-caption">圖冊操作：點節點選取，Shift／Ctrl／Cmd 加選；點框標題選全部成員，拖曳標題一起移動。框標題雙擊／F2 可更名，Enter／失焦提交，Escape 取消；色點開啟本頁預設色。上方文字按鈕與狀態說明是圖冊輔助控件，不是重新設計產品工具列。示範有可視範圍限制；未模擬 Canvas pan／zoom、接線操作、Host 或完整歷史。接口填色沿用本圖冊方向：已接線實心、未接線空心；不是 Legacy 的方向填色規則。</p>
+  </article>
+
+  <div class="gf-rule-grid" id="gf-frame-rules">
+    <article><span class="gf-index">G02 / EXPLICIT MEMBERS</span><h3>成員關係要明確</h3><ul><li>建立框需至少兩個尚未屬於任何框的節點。</li><li>節點在同一張圖只屬於一個框；框不以另一個框作為成員。</li><li>Join 依選取中「已有成員數最多」且沒有平手的框決定目的地；沒有目的地、平手或沒有新成員時不可用。</li><li>Detach 只解除選中節點的成員關係；位置、值與線保留。單一成員的框可保留，最後一位離開後框消失。</li></ul></article>
+    <article><span class="gf-index">G03 / AUTO BOUNDS</span><h3>範圍跟著成員走</h3><ul><li>使用成員卡片目前的顯示範圍，加上四周 24 graph-space px 與上方 28 px 標題高度。</li><li>個別成員移動、調整大小或收合，框會跟著重算；框本身沒有自由拖拉尺寸的接口。</li><li>右下角弧線是「選取全部成員」入口，不是 resize。</li><li>框空白區讓命中測試穿透到 Canvas；拖曳移動群組的區域是標題列。</li></ul></article>
+    <article><span class="gf-index">G04 / COLLAPSE &amp; REMOVE</span><h3>收合成員；移除框</h3><ul><li>Legacy 沒有獨立的「整個 Group Frame 收合成一張卡」狀態。</li><li>選取全部成員後，可用既有 Collapse／Expand 操作收合或展開支援的節點；連線與成員關係不變。</li><li>框標題的 × 移除框；成員節點與連線留下。選取成員後的 Delete 是刪節點，兩個動作不同。</li><li>框本身沒有 Shader socket，也不替成員產生新的資料邊界。</li></ul></article>
+  </div>
+
+  <article id="gf-entries" class="gf-artboard gf-entry-board">
+    <div class="gf-artboard-heading"><div><span class="gf-index">G05 / CAPABILITY &amp; ENTRY</span><h3>保留能力，入口與顯示設定分開。</h3></div></div>
+    <div class="gf-table-scroll"><table class="gf-table"><thead><tr><th>能力／效果</th><th>Legacy 入口參考</th><th>顯示與配置的界線</th></tr></thead><tbody>
+      <tr><td>建立、加入、移出視覺群組</td><td>選取工具列／Graph actions；<kbd>Mod+G</kbd>、<kbd>Alt+Shift+G</kbd>、<kbd>Alt+G</kbd></td><td>工具列位置可配置；可用性仍取決於選取與明確目的地。</td></tr>
+      <tr><td>選取成員、一起移動</td><td>標題列；Enter／Space 選取。右下角另提供選取快捷入口。</td><td><code>groupCornerSelect = true</code> 是原始碼預設；關閉只隱藏角落入口，不刪除標題列選取能力。</td></tr>
+      <tr><td>更名、換色、移除框</td><td>標題列 pencil／色點／×；雙擊或 F2 更名。</td><td>名稱和色彩屬於框。換色不改成員節點的型別色。Custom 共用 RGB 色彩面板。</td></tr>
+      <tr><td>看清群組與目前選取</td><td>框有自己的邊界；選取系統另畫多選框與工具列。</td><td><code>hideGroupedSelectionBounds = false</code> 是原始碼預設；開啟時只在恰好完整選取一個框時隱藏重複的多選框。</td></tr>
+      <tr><td>批次收合／展開節點</td><td>既有 Selection Collapse／Expand 與 Graph actions。</td><td><code>selectionCollapseTools = true</code> 為原始碼預設；這是成員節點能力，不新增 Frame 收合狀態。</td></tr>
+      <tr><td>保留與搬運群組標示</td><td>文件保存；完整成員 Copy／Paste；提取 Subgraph。</td><td>複製全部成員才附帶 Frame；部分複製不附帶。完整 Frame 可隨成員進入 Subgraph，仍只在所屬圖顯示。</td></tr>
+    </tbody></table></div>
+    <p class="gf-caption">以上預設值是本輪讀到的 Legacy 原始碼，不是這台瀏覽器目前偏好或新產品預設的推定。可配置入口不等於可刪除已要求保留的能力；本章不指定新架構或命令 API。</p>
+  </article>
+
+  <details id="gf-evidence" class="gf-evidence-details"><summary>證據、已知限制與後續驗證</summary><div>
+    <p><b>Observed / UI-advertised：</b><a href="../research/live-observations-001.md">LIVE-001</a> 的快捷鍵對話觀察（第 53–63 行）列出 Frame、Join、Detach 與 Subgraph 提取；協作主代理另回報 Pixel Output 框的可見控件。入口可見不等於所有手勢已驗證。</p>
+    <p><b>Source-derived：</b>Legacy <code>src/editor/frames_ui.js</code>：成員／bounds 9–19、建立與 membership 23–63、移除／選取／更名 178–202、拖曳與取消 202–235、顯示與鍵盤 243–273。<code>functions_model.js</code> 8–49：所屬圖、排他成員與完整複製；<code>functions_ui.js</code> 277–307：Subgraph 提取。行號、快照版本與不依賴 Legacy 倉庫的事實摘錄，見 <a href="../research/groups-evidence-004.md">GROUPS-004 證據記錄</a>。</p>
+    <p><b>Existing test source：</b><code>test_group_frames.cjs</code>、<code>test_group_membership.cjs</code>、<code>test_note_group_geometry.cjs</code> 與 <code>test_graph_frames.py</code> 包含 layout Undo、取消、唯讀、成員轉移、編譯不變、clipboard 與 scoped frame 檢查；本輪只讀其內容，沒有把它們當作新執行的 PASS。</p>
+    <p><b>本頁互動範圍：</b>示範明確成員、自動範圍、標題移動、選取、Join／Detach、名稱／預設色、移除框、成員收合、只讀與本頁 Undo。只在記憶體中變更，重整即重置。</p>
+    <p><b>尚待實機驗證：</b>不同縮放／UI scale 的命中與字級、Touch／筆、焦點離開與 Canvas 操作的完整取消序列、顏色選單的邊緣位置、完整 clipboard／Subgraph 往返，以及實際工具列配置。多框 Join 的平手規則只有來源與既有測試內容證據，本頁只有一個框；不據此增補拖入自動加入、跨圖群組、巢狀框或 Frame 專屬折疊。</p>
+  </div></details>
+</section>

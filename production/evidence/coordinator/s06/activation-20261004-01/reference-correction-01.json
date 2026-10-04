@@ -1,0 +1,31 @@
+{
+  "packetVersion": 1,
+  "packetType": "DISPATCH_REFERENCE_CORRECTION",
+  "actionKey": "yeataro/Grape:S06:workspace-entry:ad31676:01",
+  "packetId": "S06-WORKSPACE-ENTRY-01",
+  "reason": "Original packet contractRefs included absent handoff/compatibility/LEGACY_CAPABILITIES.md. That filename also appears as a historical detail link in frozen behavior-contracts; no such file is indexed in this repository.",
+  "replaceReference": {
+    "from": "handoff/compatibility/LEGACY_CAPABILITIES.md",
+    "to": [
+      "handoff/compatibility/capabilities.json",
+      "handoff/data/capability-coverage.json",
+      "handoff/data/acceptance-index.json"
+    ],
+    "lookup": "node handoff/tools/find-capability.mjs LC-UI-034 (substitute each included capability ID)",
+    "authority": "handoff/11_LEGACY_COMPATIBILITY.md: canonical capabilities.json includes full trigger/precondition/failure/persistence/Undo/edge-case oracle; source paths are historical locators, not setup dependencies."
+  },
+  "effect": "Locator correction only; no scope expansion, product decision, acceptance or frozen edit. Existing selected leaf behavior and exact source/config evidence remain required.",
+  "selectedLeaves": [
+    "LC-UI-034",
+    "LC-UI-035",
+    "LC-UI-036",
+    "LC-UI-072",
+    "LC-UI-073",
+    "LC-UI-081",
+    "LC-UI-082",
+    "LC-UI-083",
+    "LC-UI-090",
+    "LC-UI-091"
+  ],
+  "originalPacket": "Preserve original packet bytes/hash and read this correction alongside it. Existing writer remains running; no new dispatch or retry."
+}

@@ -1,0 +1,367 @@
+{
+  "schema": "grape-design-atlas-verification/1",
+  "revision": "ATLAS-004",
+  "date": "2026-10-02",
+  "result": "PASS_FOR_STATIC_AND_LOCAL_LOGIC_ONLY",
+  "humanReview": "READY_FOR_OWNER_REVIEW_NOT_ACCEPTED",
+  "checks": [
+    {
+      "command": "python build.py",
+      "result": "PASS",
+      "scope": "37-artboard offline integrated atlas"
+    },
+    {
+      "command": "python check.py",
+      "result": "PASS",
+      "htmlIds": 84,
+      "artboards": 37,
+      "inlineSvg": 98,
+      "localReferences": 35,
+      "scope": "HTML/SVG/source locators and combined JavaScript syntax"
+    },
+    {
+      "command": "node check-atlas.cjs",
+      "result": "PASS",
+      "checks": 8,
+      "scope": "Local workspace/dynamic-interface/review-export DOM doubles"
+    },
+    {
+      "command": "node check-fields.cjs",
+      "result": "PASS",
+      "checks": 4,
+      "scope": "Static inline numeric/component reference checks"
+    },
+    {
+      "command": "node check-links.cjs",
+      "result": "PASS",
+      "checks": 6,
+      "scope": "Local direct-peer diagram, menu, visibility and reset; no Frame motion or Graph"
+    },
+    {
+      "command": "node check-groups.cjs",
+      "result": "PASS",
+      "checks": 46,
+      "scope": "Pure Node VM/DOM/event doubles; membership, bounds, local gestures, rename/cancel, read-only and manifest evidence"
+    },
+    {
+      "command": "node check-arrange.cjs",
+      "result": "PASS",
+      "checks": 29,
+      "scope": "Pure Node/DOM doubles;11 commands, bounded formulas/source goldens, selected scope, read-only, local undo, locators"
+    },
+    {
+      "command": "node check-color.cjs",
+      "result": "PASS",
+      "checks": 33,
+      "scope": "Pure Node/DOM/canvas doubles; RGB/RGBA, live/constant commit/cancel, precision, invalid drafts, stale pointers"
+    },
+    {
+      "command": "python ../check-material.py",
+      "result": "PASS",
+      "jsonFilesParsed": 15,
+      "markdownLocalTargetsChecked": 84,
+      "historicalImageHashesChecked": 5,
+      "scope": "Portable documentation and evidence integrity"
+    }
+  ],
+  "localLogicChecks": 126,
+  "failuresDuringWork": [
+    {
+      "issue": "Fragment evidence paths/anchors interpreted as filenames and one link used parts-relative path in integrated HTML",
+      "resolution": "Separate section from file identity and use integrated-relative link",
+      "status": "FIXED_AND_RECHECKED"
+    },
+    {
+      "issue": "HTML boolean data attributes inside SVG failed the explicit XML integrity check",
+      "resolution": "Write explicit empty attribute values; no runtime semantics change",
+      "status": "FIXED_AND_RECHECKED"
+    },
+    {
+      "issue": "Link peer menu illustration incorrectly included port labels; direction triangles were not midpoint-aligned",
+      "resolution": "Use node titles; distinguish tooltip port information; rotate exact triangle polygon at segment midpoint",
+      "status": "FIXED_SOURCE_REVIEW"
+    },
+    {
+      "issue": "Current color status still described wholly pending implementation in old documents/manifest",
+      "resolution": "Differentiate prior preview0.8.273 evidence from new atlas checks and remaining CEF/rewrite scope",
+      "status": "FIXED_DOCUMENTATION"
+    }
+  ],
+  "browserVisualQA": {
+    "status": "NOT_QUALIFIED",
+    "reason": "CUA refused current file URL protocol. No alternate browser path was used after that rejection by the coordinator. Earlier isolated helper render probes are described separately and are not counted as accepted integrated browser evidence."
+  },
+  "excludedHelperEvidence": {
+    "method": "Subtask authors reported isolated headless Edge fragment render probes",
+    "qualification": "EXCLUDED_FROM_CURRENT_INTEGRATED_BROWSER_ACCEPTANCE",
+    "reason": "Not the required CUA workflow; does not prove integrated file rendering or product runtime. Current reproducible check scripts use only Node DOM/event/canvas doubles."
+  },
+  "realBrowserCEFDeviceValidation": "NOT_RUN_THIS_DESIGN_ROUND",
+  "productAutomatedTestsRun": false,
+  "architectureTestsRun": false,
+  "productCodeChanged": false,
+  "readOnlyRewriteRepositoryWritten": false,
+  "productBehaviorAcceptanceClaimed": false,
+  "liveMeasurement": "../research/link-evidence-004.md",
+  "temporaryDisposableGraphStyleEdit": {
+    "occurred": true,
+    "visibleRestorationViaUndoAndHome": true,
+    "hostPublicationQualified": false,
+    "documentByteEqualityClaimed": false
+  },
+  "priorProductEvidence": "../research/color-implementation-004.md",
+  "limits": [
+    "Node/Group/Layout diagrams are bounded illustrations, not complete editor reimplementations.",
+    "126 checks include structural assertions and do not mean126 independently qualified product scenarios.",
+    "Real rendering, IME/touch, accessibility, full product save/undo and Host authority need separate runtime validation.",
+    "The approved compact appearance and owner-defined policies do not approve every remaining illustration."
+  ],
+  "historicalVerifications": [
+    {
+      "revision": "ATLAS-002",
+      "checks": [
+        {
+          "command": "python build.py",
+          "result": "PASS",
+          "scope": "Generated offline atlas from source fragments"
+        },
+        {
+          "command": "python check.py",
+          "result": "PASS",
+          "htmlIds": 82,
+          "artboards": 24,
+          "inlineSvg": 83,
+          "localReferences": 22,
+          "scope": "File/anchor/evidence locators, SVG, duplicate IDs, phrase and mark checks, source + combined JS syntax"
+        },
+        {
+          "command": "node check-atlas.cjs",
+          "result": "PASS",
+          "checks": 8,
+          "scope": "DOM-double local layout/dynamic-interface/review-export transitions"
+        },
+        {
+          "command": "node check-fields.cjs",
+          "result": "PASS",
+          "checks": 27,
+          "scope": "DOM-double color draft/cancel/validation/HSV-RGB-SV, invalid-field preservation, three component labels, S/V readout synchronization"
+        }
+      ],
+      "latestOwnerReviewRefinement": {
+        "date": "2026-10-02",
+        "items": [
+          "Node-local selected-toolbar anchor; observed 12 CSS px gap, x1.2 specimen magnification",
+          "True overflowing dark Scroller sample with measured track/thumb colors; no white atlas navigation recoloring",
+          "Adjacent SV axes and live values; keep compact SV + H/A design"
+        ],
+        "liveEvidence": "evidence.json / LIVE-007",
+        "liveActions": "Select existing node; inspect geometry/computed styles; 100% zoom; Home. No model changes or Apply.",
+        "checks": "Static PASS; color 27/27; atlas 8/8. Visual QA still human review; no browser rendering test of atlas."
+      }
+    },
+    {
+      "schema": "grape-design-atlas-verification/1",
+      "revision": "ATLAS-003",
+      "date": "2026-10-02",
+      "result": "PASS_FOR_STATIC_AND_LOCAL_LOGIC_ONLY",
+      "humanReview": "INTEGRATED_DRAFT_READY_FOR_OWNER_REVIEW",
+      "checks": [
+        {
+          "command": "python build.py",
+          "result": "PASS",
+          "scope": "Offline ATLAS-003 assembled with compact color fragment"
+        },
+        {
+          "command": "python check.py",
+          "result": "PASS",
+          "htmlIds": 50,
+          "artboards": 24,
+          "inlineSvg": 87,
+          "localReferences": 26,
+          "scope": "File/anchor/evidence indexes, SVG, IDs, no host-runtime dependency, JavaScript syntax"
+        },
+        {
+          "command": "node check-atlas.cjs",
+          "result": "PASS",
+          "checks": 8,
+          "scope": "Local layout/dynamic interface/review export DOM doubles"
+        },
+        {
+          "command": "node check-fields.cjs",
+          "result": "PASS",
+          "checks": 4,
+          "scope": "Retained static field references; no obsolete picker behavior claimed"
+        },
+        {
+          "command": "node check-color.cjs",
+          "result": "PASS",
+          "checks": 23,
+          "scope": "Current actual color source with DOM/canvas doubles, including RGB/RGBA HEX, palette, linked components, invalid drafts and stale pointer events"
+        }
+      ],
+      "failuresDuringWork": [
+        {
+          "issue": "Manifest normalization assumed every sourceReference had a path",
+          "resolution": "Preserve owner-review evidence records without path; normalize file paths only",
+          "status": "FIXED"
+        },
+        {
+          "issue": "First static check found missing verification.json",
+          "resolution": "Created this explicit check record and reran checker",
+          "status": "FIXED"
+        },
+        {
+          "issue": "Color invalid draft silently lost on cross-control actions",
+          "evidence": "Four new local DOM-double cases failed before repair",
+          "resolution": "Fence non-owning controls until the invalid field is repaired or explicit Reset/Cancel",
+          "status": "FIXED"
+        },
+        {
+          "issue": "Transplanted HEX could bypass another invalid input",
+          "resolution": "Guard non-owning HEX events; direct case12 passes",
+          "status": "FIXED"
+        },
+        {
+          "issue": "Active pointer-up could overwrite invalid HEX",
+          "resolution": "Retire pointer when draft becomes invalid; direct case22 passes",
+          "status": "FIXED"
+        },
+        {
+          "issue": "Late old-pointer cancellation could cancel a newer gesture",
+          "resolution": "Match cancellation/lost-capture pointer ID; direct case23 passes",
+          "status": "FIXED"
+        }
+      ],
+      "browserVisualQA": {
+        "status": "NOT_RUN",
+        "reason": "Local file URL rejected by browser tool URL policy; no alternate route used."
+      },
+      "realBrowserCEFDeviceValidation": "NOT_RUN",
+      "liveMeasurement": "evidence.json",
+      "productAutomatedTestsRun": false,
+      "architectureTestsRun": false,
+      "readOnlyRewriteRepositoryWritten": false,
+      "productBehaviorAcceptanceClaimed": false,
+      "limits": [
+        "Pass means artifact checks only, not product functionality, real rendering, IME/touch, lifecycle/Host/CAS qualification.",
+        "SVG and typography need human visual review at intended scale.",
+        "Only product mark and named live icon shapes are exact geometric references; other pictograms are reconstruction candidates.",
+        "Expanded native select popup is not styled/qualified by the local SVG trigger.",
+        "Color management/HDR behavior remains unresolved; candidate limits cannot clamp production Graph values."
+      ],
+      "productCodeChanged": false,
+      "temporaryDisposableGraphStyleEdit": {
+        "occurred": true,
+        "restoredLocallyUsingUndo": true,
+        "hostPublicationQualified": false,
+        "reason": "Read both Link styles; product auto-update reported external-window conflict; no force apply/reload."
+      },
+      "sourceReview": {
+        "scope": "Read-only source/semantic review, not browser rendering",
+        "findings": [
+          "Color invalid draft could be overwritten by another control",
+          "Footer revision label stale"
+        ],
+        "status": "FIXED_WITH_LOCAL_CHECKS; HUMAN_VISUAL_REVIEW_PENDING",
+        "evidence": "Cross-control invalid-draft checks added; footer changed to02",
+        "latest": "Three residual local input/pointer guards found by direct checks and repaired; no product code touched."
+      },
+      "scopeChanges": [
+        {
+          "removed": "fd-number-lab",
+          "reason": "Owner review: invented standalone numeric control was outside the fidelity brief",
+          "testsRemovedWithSpecimen": 7,
+          "newColorLabelTests": 1,
+          "currentColorTests": 24,
+          "notCountedAsProductAcceptance": true
+        },
+        {
+          "superseded": "ATLAS-002 mode-switch/ApplyCancel picker and27 historical local checks",
+          "reason": "Owner chose refined compact design; previous tests no longer describe current specimen",
+          "replacement": "parts/color.html/css/js and23 direct checks",
+          "productAcceptanceClaimed": false
+        }
+      ],
+      "documentationChecks": {
+        "jsonFilesParsed": 12,
+        "markdownEntryFilesWithNoMissingLocalTargets": [
+          "../README.md",
+          "README.md",
+          "COLOR_PICKER_SPEC.md",
+          "../design/DESIGN_PREMISES.md",
+          "../design/UX_UI_REPORT.md"
+        ]
+      },
+      "latestOwnerReviewRefinement": {
+        "date": "2026-10-02",
+        "items": [
+          "Approved compact conversation color picker integrated into atlas",
+          "RGB noAlpha/6HEX; RGBA Alpha/8HEX includingFF",
+          "100px square, corner add, TD44 palette, saved swatches beside HEX",
+          "HSV/RGB six rows simultaneous; same-region swatches/surfaces"
+        ],
+        "productChanged": false,
+        "checks": "Static integrity PASS; atlas8/8; static fields4/4; color23/23. Human visual review of integrated atlas pending."
+      }
+    }
+  ],
+  "finalReadOnlyReview": {
+    "scope": "Color policy/evidence consistency and source-level selector/global listener conflicts",
+    "result": "One stale blanket runtime-pending note corrected to bounded preview evidence versus CEF/device/rewrite gaps; no further concrete issue identified.",
+    "newRuntimeEvidence": false
+  },
+  "latestCanvasSupplement": {
+    "revision": "ATLAS-005",
+    "date": "2026-10-03",
+    "record": "../research/canvas-verification-005.json",
+    "materialChecks": "PASS",
+    "localDemoChecks": 126,
+    "canvasTraceabilityChecks": 354,
+    "boundedLiveSequences": 7,
+    "fullyQualifiedCanvasCases": 0,
+    "browserVisualQA": "NOT_QUALIFIED: file protocol blocked",
+    "productSourceWritten": false,
+    "rewriteRepositoryWritten": false
+  },
+  "historicalRecordNote": "Existing top-level ATLAS-004 / earlier dates are retained historical results. Latest supplement is separately indexed; no product regression claimed.",
+  "latestVisualCorrection": {
+    "revision": "ATLAS-005",
+    "date": "2026-10-03",
+    "scope": "Owner review correction: floating Parameter background and existing Arrange icons only",
+    "changes": [
+      "Floating Inspector content #1B1B23 -> #2E2C3A; reference placement clarified",
+      "11 existing product Arrange SVG paths restored; 16px / 1.75 / round"
+    ],
+    "sourceSectionChanged": false,
+    "productSourceWritten": false,
+    "rewriteRepositoryWritten": false,
+    "validation": {
+      "python atlas/check.py": {
+        "status": "PASS",
+        "htmlIds": 119,
+        "artboards": 42,
+        "svgCount": 124
+      },
+      "python check-material.py": {
+        "status": "PASS",
+        "jsonFiles": 18,
+        "markdownTargets": 115,
+        "imageHashes": 5
+      },
+      "node atlas/check-fields.cjs": {
+        "status": "PASS",
+        "checks": 4
+      },
+      "node atlas/check-arrange.cjs": {
+        "status": "PASS",
+        "checks": 29
+      },
+      "readonlySourceIconComparison": {
+        "status": "PASS",
+        "matchedCommands": 11
+      }
+    },
+    "browserVisualQA": "NOT_QUALIFIED: prior file URL policy restriction remains; no workaround attempted",
+    "productRuntimeTestsRun": false
+  }
+}

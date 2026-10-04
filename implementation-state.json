@@ -3,14 +3,14 @@
   "recordRole": "current",
   "handoffRevision": "IH-005",
   "currentRecord": "../implementation-state.json",
-  "status": "complete",
+  "status": "active",
   "project": {
     "id": "grape",
     "root": "production"
   },
   "implementationBaseline": {
-    "id": "S05-IH005-DEC003-AC002-EARLY-FUNCTION",
-    "revision": "aa4c86e20b0b4b54218b9992921578e7f24a28a2",
+    "id": "S06-IH005-WORKSPACE-ENTRY",
+    "revision": "ad31676b555120cf455fc2a7677be38791b62b64",
     "decisionReferenceIds": [
       "DEC-GRAPE-002",
       "AC-GRAPE-001",
@@ -19,13 +19,10 @@
       "DEC-GRAPE-004"
     ]
   },
-  "build": {
-    "id": "S05-drag-aa4c86e",
-    "revision": "aa4c86e20b0b4b54218b9992921578e7f24a28a2",
-    "profile": "static-web/win32-x64/chromium-151.0.7922.34/GLSL-ES300-WebGL2-functions",
-    "artifact": "production/evidence/s05/drag-performance-repair-01/candidate-web-01.tar.gz"
-  },
-  "activeSlices": [],
+  "build": null,
+  "activeSlices": [
+    "S06"
+  ],
   "completedSlices": [
     {
       "sliceId": "S01",
@@ -246,7 +243,7 @@
     }
   ],
   "latestAcceptedEvidenceId": "S05-PRODUCT-aa4c86e",
-  "updatedAt": "2026-10-04T08:23:58.522Z",
+  "updatedAt": "2026-10-04T08:48:59.729Z",
   "decisionReferences": [
     {
       "id": "DEC-GRAPE-002",
@@ -330,6 +327,22 @@
       "evidenceIds": [],
       "acceptedBy": "Human Owner (product policy; implementation and review pending)",
       "acceptedAt": "2026-10-03T21:14:55Z"
+    },
+    {
+      "id": "OWNER-NETWORK-DELIVERY-REMOVED-20261004",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "OWNER_REMOVED_REQUIREMENT: LAN/Tailscale preview links and the two exact-origin archive checks are removed from current and future delivery prerequisites until an explicit later Owner change. Localhost delivery and product verification remain required.",
+      "reason": "Direct Human control recorded by Coordinator. Historical S05-DRAG-FR-GAP-001 remains NOT_EXECUTED and all original permission refusals and review verdicts remain unchanged; removal is not TEST_PASS and grants no network permission.",
+      "file": "production/evidence/coordinator/s06/activation-20261004-01/network-delivery-control-01.json",
+      "sha256": "54d4ae2ddc14e205bb679c5dd6b108a0d76308e6066fa298a0886571e9c9c1bd",
+      "sliceIds": [
+        "S06"
+      ],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (direct control preserved in source receipt)",
+      "acceptedAt": "2026-10-04T08:38:43Z"
     }
   ]
 }

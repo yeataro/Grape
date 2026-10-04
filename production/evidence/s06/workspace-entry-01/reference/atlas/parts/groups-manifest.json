@@ -1,0 +1,233 @@
+{
+  "schema": "grape-ux-atlas-part/1",
+  "part": "group-frames",
+  "date": "2026-10-02",
+  "status": "reviewable-offline-design-evidence-not-production-ui",
+  "files": [
+    "groups.html",
+    "groups.css",
+    "groups.js"
+  ],
+  "sections": [
+    "groups"
+  ],
+  "fragmentMarker": "<!-- GROUPS_FRAGMENT -->",
+  "sourceSnapshot": {
+    "legacyCommit": "e005f08",
+    "evidence": "../../research/groups-evidence-004.md"
+  },
+  "sourceReferences": [
+    {
+      "path": "../../research/groups-evidence-004.md",
+      "sections": [
+        "Provenance and authority",
+        "Frame and Subgraph are different",
+        "Atlas scope and gaps"
+      ]
+    },
+    {
+      "path": "../../research/live-observations-001.md",
+      "sections": [
+        "Displayed interaction contracts — not yet exercised"
+      ]
+    }
+  ],
+  "artboards": [
+    {
+      "id": "gf-frame-vs-subgraph",
+      "section": "groups",
+      "title": "Frame and Subgraph are distinct",
+      "kind": "explanatory-comparison",
+      "sourceReferences": [
+        {
+          "path": "../../research/groups-evidence-004.md",
+          "sections": [
+            "Frame and Subgraph are different"
+          ]
+        }
+      ],
+      "interactions": [],
+      "preserve": [
+        "Visual membership versus computational graph extraction"
+      ],
+      "configurable": [],
+      "limits": [
+        "No subgraph operation in demo"
+      ]
+    },
+    {
+      "id": "gf-membership-demo",
+      "section": "groups",
+      "title": "Explicit membership and automatic bounds",
+      "kind": "interactive-local-svg",
+      "sourceReferences": [
+        {
+          "path": "../../research/groups-evidence-004.md",
+          "sections": [
+            "Membership actions",
+            "Geometry, selection and gestures",
+            "Header, color and configurable entries"
+          ]
+        }
+      ],
+      "interactions": [
+        "Select/member modifier toggle",
+        "Join/detach",
+        "Drag title; cancel with Escape",
+        "Move member/auto bounds",
+        "Rename Enter/blur/Escape",
+        "Preset color",
+        "Remove frame keeps nodes",
+        "Collapse member nodes",
+        "Readonly example",
+        "Local Undo/reset"
+      ],
+      "preserve": [
+        "Explicit members",
+        "Node positions and wires remain through membership edits",
+        "Title movement only",
+        "Corner selects, not resize"
+      ],
+      "configurable": [
+        "Corner entry shown/hidden"
+      ],
+      "limits": [
+        "One frame only; multi-frame tie rule text only",
+        "No real graph/Host/clipboard/history",
+        "No pan/zoom/snapping/full cancellation suite"
+      ]
+    },
+    {
+      "id": "gf-frame-rules",
+      "section": "groups",
+      "title": "Membership, geometry and member collapse",
+      "kind": "rule-cards",
+      "sourceReferences": [
+        {
+          "path": "../../research/groups-evidence-004.md",
+          "sections": [
+            "Membership actions",
+            "Geometry, selection and gestures"
+          ]
+        }
+      ],
+      "interactions": [],
+      "preserve": [
+        "No geometric automatic capture",
+        "Empty frame pruned; one member survives",
+        "No distinct Frame collapse"
+      ],
+      "configurable": [],
+      "limits": [
+        "Source-derived, not newly exercised Legacy gestures"
+      ]
+    },
+    {
+      "id": "gf-entries",
+      "section": "groups",
+      "title": "Capabilities versus entries and preferences",
+      "kind": "capability-mapping",
+      "sourceReferences": [
+        {
+          "path": "../../research/groups-evidence-004.md",
+          "sections": [
+            "Header, color and configurable entries"
+          ]
+        }
+      ],
+      "interactions": [],
+      "preserve": [
+        "Source defaults do not imply current user preferences",
+        "Preserve capability when optional entry is hidden"
+      ],
+      "configurable": [
+        "Corner select",
+        "Hide duplicate multi-selection bounds",
+        "Selection Collapse tools",
+        "Selection toolbar location"
+      ],
+      "limits": [
+        "No new defaults prescribed"
+      ]
+    },
+    {
+      "id": "gf-evidence",
+      "section": "groups",
+      "title": "Evidence and gaps",
+      "kind": "expandable-provenance",
+      "sourceReferences": [
+        {
+          "path": "../../research/groups-evidence-004.md",
+          "sections": [
+            "Provenance and authority",
+            "Existing test evidence, not a new PASS",
+            "Atlas scope and gaps"
+          ]
+        }
+      ],
+      "interactions": [
+        "Expand evidence notes"
+      ],
+      "preserve": [
+        "Observed versus source-derived versus illustrative"
+      ],
+      "configurable": [],
+      "limits": [
+        "Legacy test sources read only"
+      ]
+    }
+  ],
+  "globalLimits": [
+    "No product/API/Host/storage/network mutation.",
+    "Behavior is source-derived unless explicitly labeled observed or UI-advertised.",
+    "Local single-frame drawing is not Legacy qualification or production UI.",
+    "No Group Frame collapse state is introduced; member collapse remains separate.",
+    "No architecture prescription; capability, entry, preference and style remain distinct."
+  ],
+  "presentationNotes": {
+    "socketFill": "Atlas direction: connected solid, unconnected hollow on inputs and outputs; not Legacy observed fill.",
+    "localControls": "Helper text buttons and local Undo/readout are review scaffolding, not a product toolbar design.",
+    "bounds": "24px union padding and 28px header reflect source; finite demo movement fence and node dimensions are illustration choices."
+  },
+  "integrationNotes": [
+    "Insert groups.html at <!-- GROUPS_FRAGMENT -->; append groups.css and groups.js through existing offline shell.",
+    "All IDs/classes/data attributes are gf-/groups scoped.",
+    "No shell/build/root-manifest edits made by this author.",
+    "Evidence doc is self-contained with exact Legacy file/line locators and no access dependency on Legacy repo."
+  ],
+  "validation": {
+    "script": "../check-groups.cjs",
+    "command": "node atlas/check-groups.cjs",
+    "method": "Pure Node VM with minimal DOM/event doubles; executes actual groups.js against parsed groups.html fixture. Node built-ins only.",
+    "scope": "offline artifact behavior and manifest references only; no browser/Legacy/Host operations",
+    "result": "PASS — 46 assertions on 2026-10-02",
+    "assertionCount": 46,
+    "checks": [
+      "explicit members and SVG coordinate enclosure (not rendered geometry)",
+      "selection and keyboard modifier toggle",
+      "member move/local Undo",
+      "Join/Detach/single-member survival/empty-frame pruning",
+      "new frame from two unframed selections",
+      "member collapse recalculates SVG bounds",
+      "rename Enter/blur/Escape and invalid empty name",
+      "twelve presets/frame color update",
+      "remove frame preserves nodes and wire",
+      "corner preference",
+      "readonly selection and mutation guard",
+      "drag threshold/previews/one local edit/Escape/blur cancellation",
+      "reinitialization guard",
+      "5 artboard IDs and 5 evidence paths"
+    ],
+    "limits": [
+      "No browser or CSS/layout engine",
+      "No rendered geometry, hit testing, native focus/event propagation or touch/pen validation",
+      "No screenshot or CUA UI acceptance",
+      "No fresh Legacy product PASS"
+    ],
+    "historicalNonAcceptance": {
+      "method": "Earlier isolated headless Edge local-HTML helper",
+      "result": "29 assertions and zero page errors; desktop 1280 px and mobile 390 px captures were visually read",
+      "status": "Not accepted CUA UI qualification, product gesture verification or fresh Legacy PASS. Replaced helper does not launch a browser. No further browser automation followed the coordinator clarification."
+    }
+  }
+}

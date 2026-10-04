@@ -1,0 +1,247 @@
+{
+  "packetVersion": 1,
+  "packetType": "TARGETED_REPAIR_OR_REREVIEW",
+  "mode": "REPAIR",
+  "packetId": "S05-REPAIR-S05-FR-001-01",
+  "actionKey": "yeataro/Grape:S05:repair:S05-FR-001:04403a2:01",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0826de5a9cca7cf200d843435985a7dc624634a2",
+  "acceptedMain": "6aa6abbdc46d55753111d5ef5ca9899870a8805a",
+  "expectedWorkHead": "04403a22adbd6f751c078ee4208db71ba7df223b",
+  "PR": null,
+  "authorizationRef": {
+    "file": "production/evidence/coordinator/s05/activation-20261004-01/human-authorization-01.json",
+    "sha256": "d74d8dd03147b2cf528f79bd2bba1000f179154426bd4d828609971137bed576"
+  },
+  "sliceId": "S05",
+  "writer": {
+    "displayTitle": "Grape S05 實作與維護",
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "priorStatus": "Verified idle / STOP_WRITING; S04 delivered and merged; rename does not reassign ownership"
+  },
+  "originalReview": {
+    "file": "C:/Users/user/.codex/worktrees/s05-fresh-review-01/Grape/.verification/s05-fresh-review-01/INDEPENDENT_REVIEW_RESULT.json",
+    "sha256": "01cf25eaaed4d5210ed41ee7ace171e3b149cb3e48fc3846e15781a49e96eb05",
+    "bytes": 38599
+  },
+  "supportingEvidence": {
+    "root": "C:/Users/user/.codex/worktrees/s05-fresh-review-01/Grape/.verification/s05-fresh-review-01",
+    "manifest": {
+      "file": "C:/Users/user/.codex/worktrees/s05-fresh-review-01/Grape/.verification/s05-fresh-review-01/supporting-evidence-manifest-01.json",
+      "sha256": "8ea2b5bf70374a6b3d75cfcd96d270c36e0a53370e762b623c2f4b11085c940c",
+      "bytes": 19976
+    },
+    "destination": "production/evidence/s05/review-01/independent-review",
+    "preservation": "Copy report, manifest and every117 listed supporting file byte-for-byte by explicit manifest with containment/hash verification. Preserve original paths/author/verdict inside raw files; add separate relocation receipt. No normalizing historical CRLF or overwritten findings."
+  },
+  "priorI": "a5033d0b6a223250337fd1a2eeb98b2fd1f9e145",
+  "priorR": "04403a22adbd6f751c078ee4208db71ba7df223b",
+  "currentExpectedHead": "04403a22adbd6f751c078ee4208db71ba7df223b",
+  "findingGroup": "S05-FG-RESOURCE-01",
+  "findingIds": [
+    "S05-FR-001"
+  ],
+  "round": {
+    "initialReview": 1,
+    "initialVerdict": "FAIL",
+    "failedReviewRoundsRetained": 1,
+    "repairAttempt": 1,
+    "targetedReviewRound": 2,
+    "maxUnsuccessfulReviewRounds": 3,
+    "failedRepairRereviewRoundsBeforeThis": 0,
+    "interpretation": "Retain reviewer failedRounds=1; conservative total unsuccessful-review budget max3. Do not reset counters by renaming/transport/recovery."
+  },
+  "attempt": 1,
+  "retriesUsed": 0,
+  "priorActionReceipt": {
+    "file": "production/evidence/coordinator/s05/repair-01/review-reconciliation-01.json",
+    "sha256": "5b5dc5cb3c48700c4b02eb14509baa79678cf18616f5f92244646f1ce9110866",
+    "bytes": 1372
+  },
+  "requestedAction": "Resume SAME designated writer; preserve independent report/evidence, implement bounded S05-FR-001 repair, add meaningful linked-program regressions and new exact I/R/build/evidence, then STOP_WRITING for immediate independent targeted re-review.",
+  "authorizedScope": "Existing authorized early S05 batch only. Ordinary in-scope shader resource repair, no product/architecture decision needed.",
+  "counterexamples": [
+    {
+      "id": "S05-FR-001",
+      "severity": "P1",
+      "status": "OPEN_BLOCKING",
+      "title": "Distinct vertex and pixel Uniform resources alias one linked GLSL uniform",
+      "affectedScope": [
+        "AT-DEC-GRAPE-003-08",
+        "AT-DEC-GRAPE-003-03 ordinary Uniform semantics",
+        "AT-S05-03 bounded supported profile",
+        "AT-S05-04 bounded numeric/binding behavior"
+      ],
+      "location": {
+        "file": "production/src/generation/compiler.ts",
+        "lines": [
+          205,
+          211,
+          320,
+          323
+        ]
+      },
+      "counterexample": {
+        "recipe": [
+          "Use the shipped stageFixture: one function-mode vec4 pass-through definition is shared by live vertex and pixel calls.",
+          "Create a distinct glsl.float uniform Source for each stage through Draft.createSource and the shipped function-operations Source node. Supply 0.25 to the vertex call and 0.75 to the pixel call using the admitted scalar-to-vec4 edge conversion.",
+          "Compile using shipped es300-functions profile. Compiler returns success and zero diagnostics; its two bindingSchema rows have different resourceId/stageId but the identical symbol u_grape_0.",
+          "Compile and link both exact generated shaders with actual WebGL2. There is only one active uniform. Apply both defaults per the emitted bindingSchema, then capture gl_Position using transform feedback."
+        ],
+        "generatedStatus": "success",
+        "diagnostics": [],
+        "bindings": [
+          {
+            "stageId": "id-17",
+            "resourceId": "id-34",
+            "symbol": "u_grape_0",
+            "defaultValue": 0.25
+          },
+          {
+            "stageId": "id-20",
+            "resourceId": "id-37",
+            "symbol": "u_grape_0",
+            "defaultValue": 0.75
+          }
+        ],
+        "actual": {
+          "linkStatus": true,
+          "activeUniforms": 1,
+          "uniformReadbackForBothResources": 0.75,
+          "vertexPosition": [
+            0.75,
+            0.75,
+            0.75,
+            0.75
+          ],
+          "glError": 0
+        },
+        "expected": {
+          "separateResourcesIndependentlyBindable": true,
+          "vertexPosition": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "pixelResourceValue": 0.75
+        },
+        "evidence": [
+          "cross-stage-uniform-01.json",
+          "browser-adversarial-01/results.json",
+          "adversarial-01.ts",
+          "adversarial-browser-01.mjs"
+        ]
+      },
+      "contract": [
+        {
+          "file": "decisions/AC-GRAPE-002.md",
+          "section": "Shared function emission",
+          "requirement": "Preserve resource bindings and stage/profile semantics; distinct captured resource environments must not merge."
+        },
+        {
+          "file": "decisions/DEC-GRAPE-003.md",
+          "section": "AT-DEC-GRAPE-003-08",
+          "requirement": "Delivered stages/profiles/resources retain semantics with actual shader and result verification."
+        },
+        {
+          "file": "handoff/executable-reference/COMPUTE_QUALIFICATION_CONTRACTS.md",
+          "section": "6: uniform(resourceId,type)",
+          "requirement": "Uniform declarations follow stable resource identity."
+        }
+      ],
+      "cause": "uniforms is recreated inside doc.graph.stages.map, and u_grape_ + uniforms.size restarts from zero for each stage. GLSL program linkage merges same-name uniforms across vertex and fragment stages, so stage-local ordinal identity does not preserve distinct resources.",
+      "expectedBehavior": "Generated binding symbols must preserve resource identity across the complete linked shader program. Distinct resources cannot alias; one resource used across stages must keep coherent type/default/binding semantics. Generate correct shaders and schema or explicitly reject an unsupported combination before reporting success.",
+      "repairBoundary": "Fix resource/symbol allocation and corresponding binding validation in this bounded portable compiler path; add actual linked-program regression for distinct resources across stages, same resource with different encounter order, and affected same-stage/function/nested cases. Do not alter accepted semantics, frozen evidence or unrelated catalog scope.",
+      "humanDecisionRequired": false
+    }
+  ],
+  "acceptedExpectedBehavior": "Generated binding symbols must preserve resource identity across the complete linked shader program. Distinct resources cannot alias; one resource used across stages must keep coherent type/default/binding semantics. Generate correct shaders and schema or explicitly reject an unsupported combination before reporting success.",
+  "allowedRepairScope": "Fix resource/symbol allocation and corresponding binding validation in this bounded portable compiler path; add actual linked-program regression for distinct resources across stages, same resource with different encounter order, and affected same-stage/function/nested cases. Do not alter accepted semantics, frozen evidence or unrelated catalog scope.",
+  "contractRefs": [
+    {
+      "file": "decisions/AC-GRAPE-002.md",
+      "section": "Shared function emission",
+      "requirement": "Preserve resource bindings and stage/profile semantics; distinct captured resource environments must not merge."
+    },
+    {
+      "file": "decisions/DEC-GRAPE-003.md",
+      "section": "AT-DEC-GRAPE-003-08",
+      "requirement": "Delivered stages/profiles/resources retain semantics with actual shader and result verification."
+    },
+    {
+      "file": "handoff/executable-reference/COMPUTE_QUALIFICATION_CONTRACTS.md",
+      "section": "6: uniform(resourceId,type)",
+      "requirement": "Uniform declarations follow stable resource identity."
+    }
+  ],
+  "exclusions": [
+    "No Q003 multi-target/version product choice",
+    "No S06 UI/appearance project",
+    "No S07/S08/nativeTD controls",
+    "No S02 legacy converter/global catalog parity",
+    "No performance guarantee/general cache rewrite",
+    "No remote publication/PR before exact Human OK; no S05 merge or nextSlice authorization"
+  ],
+  "allowedPaths": [
+    "production/src/generation/compiler.ts and genuinely necessary same-boundary resource/binding implementation",
+    "production/tests/** meaningful finding regression and affected tests",
+    "production/tools/** only necessary evidence/sample reproduction",
+    "production/evidence/s05/review-01/independent-review/** exact reviewer raw bytes",
+    "production/evidence/s05/repair-01/** append-only repair submission",
+    "production/evidence/coordinator/s05/** exact existing Coordinator receipts and original writer append-only results",
+    "implementation-state.json sole-maintainer exact candidate adoption, preserving active S05/not accepted",
+    "README.md bounded status navigation if necessary preserving English"
+  ],
+  "prohibitedPaths": [
+    "handoff/**",
+    "original S01-S04 and S05 submission-01 evidence overwrite",
+    "references/**",
+    "unrelated Human files",
+    "decisions semantic changes",
+    ".github/** and external/network/security settings"
+  ],
+  "requirements": [
+    "Check exact head, current writer status and untracked preimages before any write. Preserve original dispatch attempt2/retries1 separately; this repair transport is new operation attempt1.",
+    "Use original reviewer counterexample and real linked shaders: distinct vertex/pixel resources independently bind0.25/0.75; same resource across stages with different encounter order retains coherent identity/type/default; same-stage/function/nested/expand combinations retain semantics. Do not resolve supported case by silently rejecting, broadening scope or weakening tests.",
+    "Preserve canonical Graph/Application/History/snapshot/receipt/lifetime invariants. Change only technical symbol/binding allocation needed by finding and actual regressions.",
+    "Preserve original reviewer probes unchanged. Any modified reproduction harness is a new file; trace its adaptation and run against new I. Source labels/text snapshots are insufficient: real WebGL link/activeUniforms/readback/transform-feedback or equivalent actual stage results.",
+    "Run root integrity/state/fixture checks, production typecheck/conformance/unit/build, required finding checks and affected generation/browser regressions including existing S01-S04. Use new absolute S05 GRAPE_EVIDENCE_DIR/output; leave Human4174/4192 services untouched.",
+    "Produce new I/R, changed-path/finding-to-fix mapping, exact source/config/evidence/build manifest/archive, environment, coverage and guide/samples binding. New archive must be replayed for actual operations; retain prior failed I/R/archive and all original review evidence.",
+    "S05 stays active and not accepted; full391 catalog completion/globalGate closure/PR/merge not authorized. No S05 Human preview until exact new PASS. Preserve current accepted S04 baseline evidence."
+  ],
+  "preserveCoordinatorInputs": [
+    "production/evidence/coordinator/s05/review-01/* explicit existing receipt manifest",
+    "production/evidence/coordinator/s05/preview-01/preparation-01.json (historical PREPARED_NOT_DEPLOYED failed candidate, never relabel)",
+    "production/evidence/coordinator/s05/repair-01/* explicit existing packet/receipt allowlist"
+  ],
+  "repairSubmission": "Exact new I/R, original finding mapping, source/evidence/artifact hashes, actual regression execution, retained limitations/counters and readiness/STOP_WRITING. Do not claim independent PASS.",
+  "reReviewCoverage": [
+    "Replay exact cross-stage resource isolation counterexample with actual WebGL link/uniform readback/vertex output.",
+    "Test distinct and shared Uniform resources across vertex/pixel stage encounter orders, with function/expanded and nested bodies, coherent type/default metadata.",
+    "Retain same-stage Uniform, per-caller values, helper deduplication, stage/profile/effect and existing S01-S04 regressions.",
+    "Bind repair to a new exact candidate and evidence; no weakened rejection rules, unrelated catalog work or rewritten old evidence."
+  ],
+  "outputLocation": "production/evidence/s05/repair-01 plus exact raw review preservation location",
+  "stopConditions": [
+    "Stale/unknown head/writer/authority or input mismatch: preserve and reconcile.",
+    "True product/architecture conflict only with concrete counterexample; ordinary defect handled autonomously.",
+    "At complete new R stop product/state/evidence writes and return for independent review.",
+    "No push/PR/merge/Human acceptance/catalog completion or nextSlice activation."
+  ],
+  "nextRoute": "Same independent reviewer in a separate exact-new-R checkout, targeted finding+affected regressions and unchanged coverage assessment. No Human pre-review.",
+  "provenance": "Direct independently authored FAIL verified by Coordinator. Human S05 start authorizes ordinary repair; Coordinator does not decide implementation or rewrite verdict.",
+  "limitations": [
+    "First complete DEC003/AC002 function-mode batch only; S05 remains active and391leaf catalog is not complete.",
+    "No Human acceptance, publication, PR, merge or nextSlice authority; no S06 appearance or native TD work.",
+    "S02 AT-S02-03 converter remains NOT_DELIVERED/BLOCKED and G-VERSION-COMPAT unchanged.",
+    "Domain-separated History and all accepted S01-S04 evidence retained.",
+    "Supported portable ES300 WebGL2 exact profile only; no arrays-of-arrays/native sampler/TOP/general catalog parity.",
+    "Three actual HTTP origins exercised on one machine; second-device access not proven. Separate origins have independent browser data.",
+    "Renderer reports WebKit WebGL; no physical GPU/native backend/performance guarantee.",
+    "No global Gate closure. CQ readiness matrix enumerates unresolved later catalog/oracle work without issuing it.",
+    "No S05 Human service deployed by Implementer. Coordinator must bind exact independent PASS/R before using archived preview helper."
+  ]
+}

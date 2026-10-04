@@ -1,0 +1,138 @@
+[
+  {
+    "id": "bootstrap-01",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "tools/verify-bootstrap.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-fresh-review-01\\Grape",
+    "start": "2026-10-04T00:22:49.557Z",
+    "end": "2026-10-04T00:22:50.367Z",
+    "exitCode": 0,
+    "log": "bootstrap-01.log"
+  },
+  {
+    "id": "state-01",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "handoff/tools/check-implementation-state.mjs",
+      "--current"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-fresh-review-01\\Grape",
+    "start": "2026-10-04T00:22:50.368Z",
+    "end": "2026-10-04T00:22:50.415Z",
+    "exitCode": 0,
+    "log": "state-01.log"
+  },
+  {
+    "id": "bootstrap-tests-01",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "--test",
+      "--test-isolation=none",
+      "tools/verify-bootstrap.test.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-fresh-review-01\\Grape",
+    "start": "2026-10-04T00:22:50.416Z",
+    "end": "2026-10-04T00:22:55.521Z",
+    "exitCode": 0,
+    "log": "bootstrap-tests-01.log"
+  },
+  {
+    "id": "diff-check-raw-01",
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "6aa6abbdc46d55753111d5ef5ca9899870a8805a..HEAD"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-fresh-review-01\\Grape",
+    "start": "2026-10-04T00:22:55.522Z",
+    "end": "2026-10-04T00:22:55.597Z",
+    "exitCode": 2,
+    "log": "diff-check-raw-01.log"
+  },
+  {
+    "id": "diff-check-product-01",
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "6aa6abbdc46d55753111d5ef5ca9899870a8805a..HEAD",
+      "--",
+      "production/src",
+      "production/apps",
+      "production/tests",
+      "production/tools",
+      "production/package.json",
+      "production/package-lock.json",
+      "production/conformance",
+      "README.md",
+      "implementation-state.json"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-fresh-review-01\\Grape",
+    "start": "2026-10-04T00:22:55.598Z",
+    "end": "2026-10-04T00:22:55.636Z",
+    "exitCode": 0,
+    "log": "diff-check-product-01.log"
+  },
+  {
+    "id": "typecheck-01",
+    "command": [
+      "npm.cmd",
+      "--prefix",
+      "production",
+      "run",
+      "typecheck"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-fresh-review-01\\Grape",
+    "start": "2026-10-04T00:22:55.637Z",
+    "end": "2026-10-04T00:22:56.845Z",
+    "exitCode": 0,
+    "log": "typecheck-01.log"
+  },
+  {
+    "id": "conformance-01",
+    "command": [
+      "npm.cmd",
+      "--prefix",
+      "production",
+      "run",
+      "conformance"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-fresh-review-01\\Grape",
+    "start": "2026-10-04T00:22:56.845Z",
+    "end": "2026-10-04T00:22:57.665Z",
+    "exitCode": 0,
+    "log": "conformance-01.log"
+  },
+  {
+    "id": "test-01",
+    "command": [
+      "npm.cmd",
+      "--prefix",
+      "production",
+      "test"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-fresh-review-01\\Grape",
+    "start": "2026-10-04T00:22:57.665Z",
+    "end": "2026-10-04T00:23:05.051Z",
+    "exitCode": 0,
+    "log": "test-01.log"
+  },
+  {
+    "id": "build-01",
+    "command": [
+      "npm.cmd",
+      "--prefix",
+      "production",
+      "run",
+      "build"
+    ],
+    "cwd": "C:\\Users\\user\\.codex\\worktrees\\s05-fresh-review-01\\Grape",
+    "start": "2026-10-04T00:23:05.052Z",
+    "end": "2026-10-04T00:23:06.976Z",
+    "exitCode": 0,
+    "log": "build-01.log"
+  }
+]

@@ -1,0 +1,45 @@
+{
+  "dependencySetup": {
+    "command": "npm ci --prefix production",
+    "node": "v25.5.0",
+    "npm": "11.8.0",
+    "exitCode": 0,
+    "addedPackages": 20,
+    "auditDiagnostic": "1 low and 1 high reported; no unrelated remediation performed"
+  },
+  "permission": {
+    "normalScratchMkdir": "Access denied outside writable root",
+    "authorizedEscalation": "Scratch creation, committed-lock dependency setup and test/browser/build execution succeeded with require_escalated",
+    "globalSafeDirectoryChanged": false,
+    "settingsChanged": false
+  },
+  "archiveAttempts": [
+    {
+      "attempt": 1,
+      "status": "REVIEWER_HARNESS_FAILURE",
+      "log": "archive-check-01.log",
+      "reason": "Clicked Generate while Open saved picker remained open; omitted saved entry selection. Product defect not inferred.",
+      "cleanup": "Browser and owned server closed in finally."
+    },
+    {
+      "attempt": 2,
+      "status": "REVIEWER_HARNESS_FAILURE",
+      "log": "archive-check-02.log",
+      "reason": "Incorrectly used file-import confirmation label for saved-document picker. Actual handler was then read; correct control is #saved-list button.",
+      "cleanup": "Browser and owned server closed in finally."
+    },
+    {
+      "attempt": 3,
+      "status": "PASS_ARCHIVE_SMOKE_ONLY",
+      "result": "browser-archive-03/result.json",
+      "reason": "Used verified saved-document picker; all three origins passed.",
+      "cleanup": "Owned listener closed and listening=false asserted after every origin."
+    }
+  ],
+  "humanServices": "No requests to stop or alter existing 4174/4192 services",
+  "productWrites": false,
+  "stateWrites": false,
+  "handoffWrites": false,
+  "commits": false,
+  "pushes": false
+}

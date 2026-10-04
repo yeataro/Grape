@@ -1,0 +1,25 @@
+import fs from 'node:fs';import path from 'node:path';import http from 'node:http';import crypto from 'node:crypto';import assert from 'node:assert/strict';import {execFileSync} from 'node:child_process';
+import {chromium} from '../../production/node_modules/@playwright/test/index.mjs';
+const source='production/evidence/s05/submission-01', output='.verification/s05-fresh-review-01/browser-archive-03';fs.mkdirSync(output);
+const archiveRoot=output+'/assets';fs.mkdirSync(archiveRoot);
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const manifest=JSON.parse(fs.readFileSync(source+'/build-manifest-01.json'));
+assert.equal(hash(fs.readFileSync(manifest.archive.file)),manifest.archive.sha256);
+execFileSync('tar',['-xzf',manifest.archive.file,'-C',archiveRoot]);
+const map=new Map(),verified=[];for(const row of manifest.files){const f=row.file.slice('production/dist/'.length),b=fs.readFileSync(path.join(archiveRoot,f));assert.equal(hash(b),row.sha256);assert.equal(hash(fs.readFileSync(row.file)),row.sha256);map.set('/'+f,{bytes:b,type:f.endsWith('.js')?'text/javascript':f.endsWith('.css')?'text/css':'text/html'});verified.push({file:f,archivedAndRebuiltSha256:hash(b)});}map.set('/',map.get('/index.html'));
+const browser=await chromium.launch(),rows=[];
+try{for(const address of ['127.0.0.1','192.168.1.105','100.83.88.97']){
+ const server=http.createServer((req,res)=>{const f=map.get(req.url);if(!f){res.writeHead(404);res.end();return;}res.writeHead(200,{'Content-Type':f.type,'Cache-Control':'no-store'});res.end(f.bytes);});await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,address,resolve);});
+ const context=await browser.newContext({viewport:{width:1440,height:1000}});
+ try{const page=await context.newPage();page.on('dialog',d=>d.accept());const errors=[];page.on('pageerror',e=>errors.push(e.message));const url='http://'+address+':'+server.address().port;
+  await page.goto(url);await page.getByLabel('Open document file').setInputFiles(source+'/samples/shared-function.grape.json');await page.getByRole('button',{name:'Open in new session',exact:true}).click();await page.getByRole('button',{name:'Generate GLSL',exact:true}).click();assert.match(await page.getByLabel('Generated GLSL').textContent(),/void grape_function_0/);
+  const canvas=page.locator('.canvas').first();await canvas.getByRole('heading',{name:'Shared arithmetic',exact:true}).first().click();await canvas.getByRole('button',{name:'Enter subgraph',exact:true}).click();await canvas.getByText('Subgraph interface',{exact:true}).click();assert.equal(await canvas.getByLabel('Subgraph emission mode').inputValue(),'function');
+  await canvas.getByRole('button',{name:'Add interface port',exact:true}).click();await canvas.getByRole('button',{name:'Apply interface',exact:true}).click();
+  await page.getByRole('button',{name:'Personal Library',exact:true}).click();await page.getByLabel('Import Personal package').setInputFiles(source+'/samples/shared-function.personal.json');await page.locator('[data-personal-file]').waitFor();assert.equal(await page.locator('[data-personal-file]').count(),1);await page.getByRole('button',{name:'Insert Shared arithmetic',exact:true}).click();
+  await page.getByRole('button',{name:'Save',exact:true}).click();await page.locator('#save-state').filter({hasText:'Saved'}).waitFor();await page.reload();await page.getByRole('button',{name:'Open saved',exact:true}).click();await page.locator('#saved-list button').first().click();await page.getByRole('button',{name:'Generate GLSL',exact:true}).click();assert.match(await page.getByLabel('Generated GLSL').textContent(),/void grape_function_/);
+  const facts=await page.evaluate(()=>({secure:isSecureContext,subtle:typeof crypto.subtle,uuid:typeof crypto.randomUUID,entropy:typeof crypto.getRandomValues}));if(address!=='127.0.0.1'){assert.equal(facts.secure,false);assert.equal(facts.subtle,'undefined');}assert.equal(facts.entropy,'function');
+  for(const [route,data] of map){const res=await page.request.get(url+route);assert.equal(hash(await res.body()),hash(data.bytes));}assert.deepEqual(errors,[]);await page.screenshot({path:output+'/archive-'+address+'.png',fullPage:true});rows.push({address,url,...facts,loadedSample:true,functionGeneration:true,interfaceIdentityOperation:true,personalImportInsert:true,saveReloadGeneration:true,servedAssetHashesMatched:true,pageErrors:errors});
+ }finally{await context.close();await new Promise(resolve=>server.close(resolve));assert.equal(server.listening,false);}
+}}finally{await browser.close();}
+const result={status:'PASS_ARCHIVE_SMOKE_ONLY',implementationI:manifest.implementationI,buildManifestSha256:hash(fs.readFileSync(source+'/build-manifest-01.json')),archive:manifest.archive,browser:'Chromium151.0.7922.34',verified,sameMachine:true,secondDevice:false,isolatedContexts:true,listenersClosed:true,humanPortsUntouched:[4174,4192],rows};fs.writeFileSync(output+'/result.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result));
+

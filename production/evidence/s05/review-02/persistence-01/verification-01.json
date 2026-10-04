@@ -1,0 +1,120 @@
+{
+  "reviewedI": "9230f9652c2affd4c20a7dda1033baaa0d61f7e1",
+  "reviewedR": "4df5492d4283c2fac7005fc583760ebe143f13bd",
+  "recordedAt": "2026-10-04T01:10:11.007Z",
+  "status": "EVIDENCE_PRESERVATION_CHECKS_PASS",
+  "checks": [
+    {
+      "name": "bootstrap-01",
+      "cwd": ".",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tools/verify-bootstrap.mjs"
+      ],
+      "startedAt": "2026-10-04T01:09:18.355Z",
+      "endedAt": "2026-10-04T01:09:19.202Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/review-02/persistence-01/checks/bootstrap-01.json",
+        "sha256": "282c0c21b62d45d77743e0cb550d582c803650ec575276c7b12fec01e1280f76",
+        "bytes": 319
+      },
+      "log": {
+        "file": "production/evidence/s05/review-02/persistence-01/checks/bootstrap-01.log",
+        "sha256": "1e2d78e52cb20d835933b6bbdb25af8c5deaae1933ad58400f28c841576a47b3",
+        "bytes": 1564
+      }
+    },
+    {
+      "name": "state-01",
+      "cwd": ".",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "handoff/tools/check-implementation-state.mjs",
+        "--current"
+      ],
+      "startedAt": "2026-10-04T01:09:18.612Z",
+      "endedAt": "2026-10-04T01:09:18.659Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/review-02/persistence-01/checks/state-01.json",
+        "sha256": "1c06abc5ce22e19e52268116fc3eb51f95946943d5def9f4eddfdb3205964826",
+        "bytes": 350
+      },
+      "log": {
+        "file": "production/evidence/s05/review-02/persistence-01/checks/state-01.log",
+        "sha256": "fd12e301d9d816e3ca874fc8245e641a703c784359ca22f434faaa37d6e22618",
+        "bytes": 7752
+      }
+    },
+    {
+      "name": "fixtures-01",
+      "cwd": ".",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "--test-isolation=none",
+        "tools/verify-bootstrap.test.mjs"
+      ],
+      "startedAt": "2026-10-04T01:09:18.865Z",
+      "endedAt": "2026-10-04T01:09:24.250Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/review-02/persistence-01/checks/fixtures-01.json",
+        "sha256": "071d6dfaff997dadc774d57ddacfd9272e6a42d5893621a87be5ad92175dd84c",
+        "bytes": 366
+      },
+      "log": {
+        "file": "production/evidence/s05/review-02/persistence-01/checks/fixtures-01.log",
+        "sha256": "cfba08578f8bb8992988dde8e68b38fbd07a0b474f48b6b91c4bc6264f1cad60",
+        "bytes": 1088
+      }
+    }
+  ],
+  "counts": {
+    "bootstrapChecks": 471,
+    "indexedFiles": 411,
+    "frozenFiles": 412,
+    "bootstrapFixtures": 10
+  },
+  "originalReviewCopiedFiles": 113,
+  "allExistingRFilesUnchanged": 2130,
+  "originalUntrackedPreimagesUnchanged": 115,
+  "coordinatorInputsUnchanged": 25,
+  "buildBytesUnchanged": true,
+  "originalIndependentPASS": "Attributed only to original reviewer and exact I/R; not a new product PASS for this metadata commit.",
+  "productSuites": "NOT_RERUN_FOR_PURE_EVIDENCE_ADDITIONS",
+  "state": {
+    "file": "implementation-state.json",
+    "sha256": "d96be6d0b1bb661ebf895025450411dee737ef3aaa8abe37db10a5d75d156fb4",
+    "bytes": 20878
+  },
+  "README": {
+    "file": "README.md",
+    "sha256": "5f28e6f6497a29670b2df3bf74a0e2ab5bf9066bbeda5c751e6ece133908c0a1",
+    "bytes": 8230
+  },
+  "activeSlices": [
+    "S05"
+  ],
+  "humanAcceptance": "NOT_GRANTED",
+  "serviceReadback": {
+    "file": "production/evidence/s05/review-02/persistence-01/service-readback-01.json",
+    "sha256": "5b0ea54b03c8ad2170b1aa894fd8e0665617abc698ffa90a3edcb9742fc39382",
+    "bytes": 533
+  },
+  "serviceActions": [],
+  "remoteActions": []
+}

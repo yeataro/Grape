@@ -1,0 +1,50 @@
+Grape S05 第一批實機測試 — S05-web-9230f96
+
+目前狀態：本批已通過獨立技術複審，等待你的實機測試與接受。
+實作 I：9230f9652c2affd4c20a7dda1033baaa0d61f7e1
+受審 R：4df5492d4283c2fac7005fc583760ebe143f13bd
+範圍：DEC-GRAPE-003 / AC-GRAPE-002 子圖 Function 模式及相關保存、常量、History、Personal、跨階段資源修復。S05 仍在進行，這不是整份 S05 節點目錄完成。
+
+開始
+1. 解壓縮 s05-test-files.zip。頁面上方應顯示 S05-web-9230f96。
+2. 如果畫面有要保留的工作，先用 Export JSON 匯出。
+3. 以下 .grape.json 範例一律使用 Open document file 選檔，再按 Open in new session。
+4. 每項可重新開啟指定範例，不必接續上一項的編輯。這輪介面提供 GLSL 產生結果；數值與實際 shader 執行已有自動化獨立證據。
+
+測試 1：共用子圖切換模式
+開啟 shared-expand.grape.json。選取 Shared arithmetic，按 Enter subgraph，再點 Subgraph interface。
+把 Subgraph emission mode 改為 Function。回到父圖，檢查其他共用呼叫者也使用 Function。
+按 Generate GLSL 應成功；Undo / Redo 應能往返模式。
+
+測試 2：獨立副本
+開啟 shared-function.grape.json，選取一個 Shared arithmetic，按 Make independent。
+進入此副本，其模式仍應是 Function；把它切到 Expand，原本另一個共用子圖仍應是 Function。
+
+測試 3：常量接線失效與復原
+開啟 constant-detach.grape.json，將 Shared arithmetic 改成 Function。
+應顯示受影響接收端的損失訊息，移除新失效的常量接線。Generate GLSL 顯示 INPUT_REQUIRED；Export JSON 仍可使用。
+Undo / Redo 應一併復原或重做模式、接線與損失狀態。
+再切回 Expand 不會自動重接已移除的線。
+
+測試 4：拒絕不合法的啟用
+開啟 activation-rejected.grape.json，嘗試切換 Function。
+應顯示 CONSTANT_REQUIRED，維持 Expand，並且不增加一筆編輯 History。
+
+測試 5：Personal 與保存
+先開啟 shared-function.grape.json。按 Personal Library，以 Import Personal package 匯入 shared-function.personal.json，再按 Insert Shared arithmetic。
+插入項目的 Function 模式應保留。首次編輯會建立本地副本，不改動原 Personal 資產。
+可用 Save selected subgraph 保存並 Export Shared arithmetic 匯出。按 Save，重新整理，再 Open saved 開啟；模式及內容應保留，Generate GLSL 應成功。
+
+測試 6：舊版子圖升級
+開啟 legacy-owner.grape.json。升級前沒有新模式控制。
+明確執行 Upgrade subgraph owners，再進入子圖，初始模式應為 Expand。
+此範例原本就沒有接 Image Output，因此 INPUT_REQUIRED 是預期的初始條件。
+
+其他範例
+nested-function、uniform-function、shape-array、shape-nominal、pixel-effects、vertex-pixel 及兩個 cross-stage-uniform 範例皆應能 Generate GLSL。
+兩個 cross-stage-uniform 範例對應本次修復：不同資源保持獨立，同一資源跨階段仍一致。其數值、Uniform 與實際繪製結果由獨立自動化證據驗證。
+
+環境與回報
+建議使用桌面 Chromium / Chrome。localhost、區網、Tailscale 為不同來源，保存資料互相獨立。
+部署驗證使用同一台 Windows 的三個網路入口及隔離瀏覽器；不宣稱已在第二台裝置或實體 GPU / TouchDesigner 驗證。
+回報時請附範例名稱、操作、看到的結果。你的明確接受只適用於本批及上述範圍；未接受前不登記完成，也不建立本批 PR。

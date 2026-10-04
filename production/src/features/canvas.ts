@@ -129,13 +129,15 @@ function mountCanvas(
   root.dataset.panel = lease().lease.panelId;
   anchor.append(root);
   mount.scope.own(() => root.remove());
-  const viewport = document.createElement("div"),
+  const scene = document.createElement("div"),
+    viewport = document.createElement("div"),
     nodes = document.createElement("div"),
     frameLayer = document.createElement("div"),
     wires = document.createElementNS("http://www.w3.org/2000/svg", "svg"),
     notice = document.createElement("div"),
     breadcrumb = document.createElement("div");
   viewport.className = "viewport";
+  scene.className = "canvas-scene";
   nodes.className = "nodes";
   wires.classList.add("wires");
   notice.className = "canvas-notice";
@@ -143,20 +145,69 @@ function mountCanvas(
   breadcrumb.className = "canvas-breadcrumb";
   frameLayer.className = "canvas-frames";
   viewport.append(frameLayer, wires, nodes);
-  root.append(viewport, breadcrumb, notice);
+  scene.append(viewport);
+  root.append(scene, breadcrumb, notice);
   const toolbar = document.createElement("div");
   const noticeErrors = new Map<string, string>();
+  const noticeSummary = document.createElement("button"),
+    statusDialog = document.createElement("dialog"),
+    statusTitle = document.createElement("h2"),
+    statusText = document.createElement("div"),
+    statusClose = document.createElement("button");
+  noticeSummary.type = "button";
+  noticeSummary.ariaLabel = "Read full Canvas status";
+  noticeSummary.setAttribute("aria-haspopup", "dialog");
+  notice.append(noticeSummary);
+  statusDialog.className = "status-details";
+  statusDialog.ariaLabel = "Canvas status details";
+  statusTitle.textContent = "Canvas status details";
+  statusText.className = "status-details-text";
+  statusText.setAttribute("role", "region");
+  statusText.ariaLabel = "Full current Canvas status";
+  statusText.tabIndex = 0;
+  statusClose.type = "button";
+  statusClose.textContent = "Close status details";
+  statusDialog.append(statusTitle, statusText, statusClose);
+  root.append(statusDialog);
+  const closeStatus = () => {
+    if (!statusDialog.open) return;
+    statusDialog.close();
+    (noticeSummary.disabled || notice.hidden ? root : noticeSummary).focus({ preventScroll: true });
+  };
+  noticeSummary.onclick = mount.scope.event(() => {
+    clearConnection();
+    if (noticeSummary.disabled) return;
+    browser.cancel(false);
+    end(true);
+    statusDialog.showModal();
+    statusText.focus();
+  });
+  statusClose.onclick = mount.scope.event(closeStatus);
+  statusDialog.addEventListener("cancel", mount.scope.event(e => { e.preventDefault(); closeStatus(); }));
+  statusDialog.addEventListener("keydown", mount.scope.event((e: KeyboardEvent) => {
+    if (e.key === "Tab" && !e.isComposing) {
+      e.preventDefault();
+      (document.activeElement === statusText ? statusClose : statusText).focus();
+    }
+  }));
+  mount.scope.own(() => { if (statusDialog.open) statusDialog.close(); });
   let connectionNotice = "",
     detailNotice = "";
   const showNoticeErrors = () => {
-    notice.textContent = [
+    const persistent = [...noticeErrors.values(), detailNotice].filter(Boolean);
+    noticeSummary.textContent = [
       ...noticeErrors.values(),
       detailNotice,
       connectionNotice,
     ]
       .filter(Boolean)
       .join(" · ");
+    notice.hidden = !noticeSummary.textContent;
+    noticeSummary.disabled = !persistent.length;
+    statusText.textContent = persistent.join("\n\n");
+    if (!persistent.length) closeStatus();
   };
+  showNoticeErrors();
   toolbar.className = "network-toolbar";
   root.append(toolbar);
   toolbar.addEventListener("click", (event) => event.stopPropagation());
@@ -491,21 +542,6 @@ function mountCanvas(
       });
       const after = capture().context!;
       emissionMode.value = after.definition?.emissionMode ?? "expand";
-      const losses = after.graph.document.graph.losses.filter(
-        (l) =>
-          l.code === "FUNCTION_CONSTANT_DETACHED" &&
-          !c.graph.document.graph.losses.some((old) => old.id === l.id),
-      );
-      if (losses.length)
-        detailNotice = losses
-          .map(
-            (l) =>
-              l.reason +
-              (l.payload.kind === "edge"
-                ? ` Receiver ${l.payload.edge.to.nodeId}/${l.payload.edge.to.portKey}; edge ${l.payload.edge.id}.`
-                : ""),
-          )
-          .join(" ");
       showNoticeErrors();
     }),
   );
@@ -1106,6 +1142,12 @@ function mountCanvas(
   listen(document, "pointerdown", (e: PointerEvent) => {
     if (!menu.hidden && !menu.contains(e.target as Node)) closeMenu();
   });
+  const outsidePortEnd = (e: PointerEvent) => {
+    if (portDrag?.id === e.pointerId && !root.contains(e.target as Node))
+      clearConnection();
+  };
+  listen(document, "pointerup", outsidePortEnd, { capture: true });
+  listen(document, "pointercancel", outsidePortEnd, { capture: true });
   listen(window, "blur", () => {
     backdropPointer = null;
     clearConnection();
@@ -1184,7 +1226,7 @@ function mountCanvas(
   listen(root, "pointerdown", (event) =>
     run(() => {
       const e = event as PointerEvent;
-      if (browser.isOpen() || !menu.hidden || helpDialog.open) return;
+      if (browser.isOpen() || !menu.hidden || helpDialog.open || statusDialog.open) return;
       if (!e.isPrimary) {
         clearConnection();
         end(true);
@@ -1270,6 +1312,8 @@ function mountCanvas(
   listen(root, "pointermove", (event) =>
     run(() => {
       const e = event as PointerEvent;
+      if (portDrag?.id === e.pointerId && (e.buttons & 1) === 0)
+        clearConnection();
       if (portDrag || selectedPort) {
         pointerPoint = { x: e.clientX, y: e.clientY };
         drawConnection();
@@ -1448,7 +1492,7 @@ function mountCanvas(
       };
       if (!selectedPort) {
         selectedPort = port;
-        pointerPoint = {
+        pointerPoint = (event as MouseEvent).detail === 0 ? null : {
           x: (event as MouseEvent).clientX,
           y: (event as MouseEvent).clientY,
         };
@@ -1672,6 +1716,7 @@ function mountCanvas(
       const c = projection.context;
       if (!c) {
         clearConnection();
+        closeStatus();
         nodes.replaceChildren();
         wires.replaceChildren();
         return;
@@ -1692,12 +1737,20 @@ function mountCanvas(
         structs.open = false;
         noticeErrors.clear();
         detailNotice = "";
-        notice.textContent = "";
+        showNoticeErrors();
         if (drag && root.hasPointerCapture(drag.id))
           root.releasePointerCapture(drag.id);
         drag = null;
       }
       renderedScope = scopeKey;
+      // Project current loss facts, including Undo/Redo; this is not a status log.
+      detailNotice = c.graph.document.graph.losses
+        .filter(l => l.code === "FUNCTION_CONSTANT_DETACHED")
+        .map(l => l.reason + (l.payload.kind === "edge"
+          ? ` Receiver ${l.payload.edge.to.nodeId}/${l.payload.edge.to.portKey}; edge ${l.payload.edge.id}.`
+          : ""))
+        .join(" ");
+      showNoticeErrors();
       const network = c.network;
       if (
         selectedPort &&

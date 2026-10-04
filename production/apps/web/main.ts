@@ -132,17 +132,71 @@ const renderShell = () => {
 };
 renderShell();
 locale.subscribe(renderShell);
-const message = document.querySelector<HTMLElement>("#message")!,
+const oldMessage = document.querySelector<HTMLElement>("#message")!,
+  message = document.createElement("button"),
+  statusBar = document.createElement("div"),
   nav = app.querySelector("nav")!,
   saveState = document.querySelector<HTMLElement>("#save-state")!;
+message.id = "message";
+message.type = "button";
+message.ariaLabel = "Read full application status";
+message.setAttribute("aria-haspopup", "dialog");
+statusBar.className = "application-status";
+statusBar.setAttribute("role", "status");
+oldMessage.replaceWith(statusBar);
+statusBar.append(message);
+app.querySelector("footer")!.after(statusBar);
+const statusDialog = document.createElement("dialog"),
+  statusTitle = document.createElement("h2"),
+  statusText = document.createElement("div"),
+  statusClose = document.createElement("button");
+statusDialog.className = "status-details";
+statusDialog.ariaLabel = "Application status details";
+statusTitle.textContent = "Application status details";
+statusText.className = "status-details-text";
+statusText.tabIndex = 0;
+statusText.setAttribute("role", "region");
+statusText.ariaLabel = "Full current application status";
+statusClose.type = "button";
+statusClose.textContent = "Close status details";
+statusDialog.append(statusTitle, statusText, statusClose);
+app.append(statusDialog);
+const closeStatus = () => {
+  if (!statusDialog.open) return;
+  statusDialog.close();
+  const fallback = Array.from(nav.querySelectorAll<HTMLButtonElement>("button"))
+    .find(b => !b.disabled && b.isConnected && b.getClientRects().length);
+  (message.disabled ? fallback : message)?.focus({ preventScroll: true });
+};
+message.onclick = () => {
+  if (!message.textContent) return;
+  statusText.textContent = message.textContent;
+  statusDialog.showModal();
+  statusText.focus();
+};
+statusClose.onclick = closeStatus;
+statusDialog.addEventListener("cancel", e => { e.preventDefault(); closeStatus(); });
+statusDialog.addEventListener("keydown", e => {
+  if (e.key === "Tab" && !e.isComposing) {
+    e.preventDefault();
+    (document.activeElement === statusText ? statusClose : statusText).focus();
+  }
+});
+const setMessage = (text: string) => {
+  message.textContent = text;
+  message.disabled = !text;
+  statusText.textContent = text;
+  if (!text) closeStatus();
+};
+setMessage("");
 const errors = new Map<string, string>();
 const success = (text: string) => {
-  if (!errors.size) message.textContent = text;
+  if (!errors.size) setMessage(text);
 };
 const renderErrors = () => {
-  message.textContent = [...errors.values()].join(" · ");
+  setMessage([...errors.values()].join(" · "));
   message.classList.toggle("error", !!errors.size);
-  message.setAttribute("role", errors.size ? "alert" : "status");
+  statusBar.setAttribute("role", errors.size ? "alert" : "status");
 };
 const report = (error: unknown, key = "operation") => {
   errors.set(key, error instanceof Error ? error.message : String(error));
@@ -326,8 +380,7 @@ upgradeButton.onclick = () => {
     prepareReplace();
     application.upgradeOwners();
     buildWorkspace();
-    message.textContent =
-      "Subgraph owners upgraded explicitly; existing definitions remain expanded. Save to retain the upgraded document.";
+    setMessage("Subgraph owners upgraded explicitly; existing definitions remain expanded. Save to retain the upgraded document.");
   } catch (error) {
     report(error);
   }

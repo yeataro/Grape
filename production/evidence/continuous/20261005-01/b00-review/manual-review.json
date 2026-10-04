@@ -1,0 +1,65 @@
+{
+  "reviewer": "/root/continuous_s06_fresh_review_01",
+  "contractsRead": [
+    "README.md",
+    "AGENTS.md",
+    "workflow/COORDINATOR.md",
+    "workflow/PACKETS.md",
+    "workflow/CONTINUOUS_DELIVERY.md",
+    "handoff/02_ARCHITECTURE_SPEC.md ownership/mutation/identity/generation",
+    "handoff/04_EXTENSION_MODEL.md exact pin/Node/Panel/view boundaries",
+    "handoff/09_ACCEPTANCE_AND_CONFORMANCE.md S06 plus adjacent scoped limits",
+    "handoff/13_PRODUCTION_CONTRACT_SURFACE.md GraphKind/registry/boundary",
+    "handoff/14_DOCUMENT_FORMAT.md canonical shape and exact persistence",
+    "handoff/16_VIEW_MOUNT_CONTRACT.md lifecycle/event/readonly seam",
+    "handoff/17_PANEL_COMMAND_CONTRACT.md",
+    "decisions/DEC-GRAPE-005.md",
+    "decisions/DEC-GRAPE-002.md and AC-GRAPE-001.md pinned unchanged conversion/required historical behavior"
+  ],
+  "sourceInspected": [
+    "production/src/ui/hover.ts",
+    "production/src/ui/floating.ts",
+    "production/src/ui/mount.ts",
+    "production/src/features/canvas.ts",
+    "production/src/features/node-browser.ts",
+    "production/src/features/wire-geometry.ts",
+    "production/src/application/editor.ts",
+    "production/src/modules/image-zero.ts",
+    "production/src/modules/image-current.ts",
+    "production/src/modules/image.ts",
+    "production/src/model/graph.ts",
+    "production/src/sdk/public-surface.ts",
+    "production/apps/web/main.ts",
+    "production/apps/web/style.css",
+    "production/apps/web/build-info.ts",
+    "production/conformance/ownership.json"
+  ],
+  "assessments": [
+    {
+      "area": "F2",
+      "result": "Reader invocation is confined to explicit guarded F2. Focused target and serialized readonly data are captured before modal.open; pointer/focus readers and old preference access absent. Registration/invalidation/serialization faults stay within optional helper. Presentation owns registrations; no Graph/History/private state import added to helper."
+    },
+    {
+      "area": "Graph and command ownership",
+      "result": "Canvas translates input blank release to instance-bound grape.edge.disconnect; wire creation uses grape.node.add existing atomic create/connect authority. replaceConnections belongs to view composition and is explicit in requests; Graph.connect still defaults false. No second Graph or History was introduced."
+    },
+    {
+      "area": "Exact migration",
+      "result": "New image-zero contribution uses additive 0.3 pins and exact owner-supplied upgrade. Editor validates detached candidate in new Graph and checks original load/revision/document/readonly/busy before installation. DEC005 specifically authorizes new-load migration; old definitions are unchanged. Existing edge plans/IDs/inactive evidence are preserved; no import-time repinning."
+    },
+    {
+      "area": "Geometry",
+      "result": "Real, temporary and creation-preview wires call shared display-only wireCurve. Endpoint ownership stays with caller. Socket body colors and circle-only hit geometry retained; purple shadow uses #aa84d64d (77/255 alpha), consistent with current Human soft-translucent control, not a 50-percent claim. No replace-specific outer ring."
+    }
+  ],
+  "visualInspections": [
+    {
+      "file": "archive-probes-browser-02/reviewer-footer-true-620.png",
+      "observation": "620x380 wrapper retains full-width footer at child viewport bottom and visible focus. Small canvas area at short height remains an explicit limitation."
+    },
+    {
+      "file": "archive-browser-02/f2-node.png",
+      "observation": "Build S06-debug-30c8679 visible; modal shows the clicked Color RGBA node identity and readonly data with scrollable bounded content, not Canvas."
+    }
+  ]
+}

@@ -1,0 +1,351 @@
+{
+  "packetVersion": 1,
+  "packetType": "INDEPENDENT_REVIEW_RESULT",
+  "workflowMode": "continuous-contract",
+  "runId": "GRAPE-CONTINUOUS-20261005-01",
+  "reviewId": "CONTINUOUS-B00-S06-INDEPENDENT-REVIEW-01",
+  "actionKey": "yeataro/Grape:continuous-20261005:B00:review:9003c00:01",
+  "reviewerRole": "Fresh Reviewer",
+  "reviewerIdentity": {
+    "canonicalAgent": "/root/continuous_s06_fresh_review_01",
+    "parentCoordinator": "/root",
+    "threadId": null,
+    "unknownReason": "No separate user-owned thread identity exposed; actual canonical subagent attribution recorded."
+  },
+  "provenance": {
+    "freshContext": true,
+    "implementationChatRead": false,
+    "priorPassInherited": false,
+    "reviewerDelegation": false,
+    "checkout": "C:\\Users\\user\\.codex\\worktrees\\continuous-s06-review-01\\Grape",
+    "checkoutHead": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+    "scratch": "C:\\Users\\user\\.codex\\worktrees\\continuous-s06-review-01\\Grape\\.verification\\continuous-s06-review-01",
+    "productWrites": false,
+    "stateWrites": false,
+    "handoffWrites": false,
+    "publication": false,
+    "method": "Direct independent contract/source inspection, pinned dependency replay, exact archive rebuild, current source/archive browser execution and reviewer-authored negative probes."
+  },
+  "independenceStatement": "Fresh independent context and isolated checkout pinned to checkpointR; only normalized repository controls and candidate artifacts read, no implementation conversation; all authored review files remain in own scratch. No candidate edits.",
+  "dispatch": {
+    "file": "C:\\Users\\user\\source\\Grape\\production\\evidence\\coordinator\\continuous\\20261005-01\\s06-reviewer-packet-01.json",
+    "bytes": 9420,
+    "sha256": "f84f04ebb487624429de302621a09550f2c2d59134c2f702a4ba7b7794ff9efa"
+  },
+  "authorizationRef": {
+    "file": "C:\\Users\\user\\source\\Grape\\production\\evidence\\coordinator\\continuous\\20261005-01\\human-run-authorization-01.json",
+    "bytes": 22400,
+    "sha256": "49dd9a0500ae2a07e868fc1cc58c6528f0b50ab0c349f33c9bea8442aa9922fa"
+  },
+  "scopeReconciliationRef": {
+    "file": "C:\\Users\\user\\source\\Grape\\production\\evidence\\coordinator\\continuous\\20261005-01\\s06-scope-reconciliation-01.json",
+    "bytes": 1672,
+    "sha256": "f89e769778345823fcbfc4e5ec23c6fbcfba06605aa361919c47d7bd3268611d"
+  },
+  "policyRevision": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+  "checkpoint": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+  "PR": "not required",
+  "sliceId": "S06",
+  "batch": "B00",
+  "reviewedI": "30c867945c992d25956a2a32825de34571f7749e",
+  "reviewedR": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+  "historicalSubmissionR": "a4a6e72b1a7ade9ee3c4b2f782c1da4358faa3e3",
+  "build": "S06-debug-30c8679",
+  "recordedAt": "2026-10-04T19:47:20.108Z",
+  "environment": {
+    "node": "v25.5.0",
+    "platform": "win32",
+    "arch": "x64",
+    "browser": "151.0.7922.34",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+    "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "osRelease": "10.0.26200",
+    "playwright": "1.62.1",
+    "sourceURL": "http://127.0.0.1:46260",
+    "archiveURL": "http://127.0.0.1:46261",
+    "probeURL": "http://127.0.0.1:46262",
+    "ownedServersClosed": {
+      "46260": "CLOSED",
+      "46261": "CLOSED",
+      "46262": "CLOSED"
+    }
+  },
+  "reviewedScope": [
+    {
+      "scope": "F2_ONLY / READONLY_FOCUS_LIFETIME / OC10",
+      "result": "PASS",
+      "evidence": [
+        "source-browser-02/f2-kinds.json",
+        "source-browser-02/f2-on-demand-counts.json",
+        "archive-browser-02/focus-routes.json",
+        "archive-browser-02/oc10-target-captured.json",
+        "archive-probes-browser-02/reviewer-cross-panel-readonly.json",
+        "executed-browser-checks.json"
+      ],
+      "basis": "All built-in kinds, physical Node/Port click, focusA-hoverB, modal movement, readonly/cross-Canvas, draft/IME/busy/pending-wire/gesture, remount/load/stage/delete invalidation; one explicit serialization and no pointer-triggered reads."
+    },
+    {
+      "scope": "OPTIONAL_HELPER_ISOLATION",
+      "result": "PASS",
+      "evidence": [
+        "source-browser-02/isolation-absent.json",
+        "source-browser-02/isolation-disposed.json",
+        "source-browser-02/isolation-failed-construction.json",
+        "source-browser-02/isolation-consumed-key.json",
+        "source-browser-02/owner-faults.json"
+      ],
+      "basis": "Source-only presentation fault fixtures preserve actual public create/edit/connect/generate/save ACK/Undo/Redo/export; synthetic lifecycle fixture is labeled and not physical-device evidence."
+    },
+    {
+      "scope": "OC01 / DEC-GRAPE-005",
+      "result": "PASS",
+      "evidence": [
+        "archive-browser-02/oc01-zero-upgrade.json",
+        "archive-browser-02/oc01-conversions.json",
+        "reviewer-unit-results.json",
+        "reviewer-domain.log",
+        "unit-conformance.log"
+      ],
+      "basis": "New exact output produces RGBA0 including alpha on actual WebGL2/SwiftShader. Old0.1/0.2 remain required until explicit new-load upgrade, unrelated and Vertex required inputs retained, compatible sources and exact refs preserved; save/reopen and numerical conversions executed."
+    },
+    {
+      "scope": "OC02",
+      "result": "PASS",
+      "evidence": [
+        "archive-browser-02/oc02-footer-620.json",
+        "archive-browser-02/oc02-footer-1440.json",
+        "archive-browser-02/oc02-footer-1920.json",
+        "archive-probes-browser-02/reviewer-footer-true-620.json",
+        "archive-probes-browser-02/reviewer-footer-false-1440.json",
+        "executed-browser-checks.json"
+      ],
+      "basis": "Full-width compact footer direct/wrapped, no reserved collapsed output block, Escape/Enter focus, complete status/output and Locate paths in current tests. Short viewport remains visually constrained but accessible."
+    },
+    {
+      "scope": "OC03",
+      "result": "PASS",
+      "evidence": [
+        "archive-browser-02/oc03-single-click.json",
+        "archive-browser-02/oc03-cancel-stale-readonly.json",
+        "archive-probes-corrected-browser-02/reviewer-clamp--180.json",
+        "archive-probes-corrected-browser-02/reviewer-clamp-280.json"
+      ],
+      "basis": "One entry click commits at captured graph coordinate under pan/zoom/menu clamp/move, one Undo restores prior document and Redo restores exact after; cancel/stale/readonly yields no partial model/history."
+    },
+    {
+      "scope": "OC04",
+      "result": "PASS",
+      "evidence": [
+        "archive-browser-02/oc04-disconnect.json",
+        "archive-probes-browser-02/reviewer-disconnect-noop.json"
+      ],
+      "basis": "Only target connected input removed in one command/Undo; other edges, nodes and resources unchanged; already-empty input drop adds no History. Escape/outside/blur/readonly preserve document."
+    },
+    {
+      "scope": "OC05",
+      "result": "PASS",
+      "evidence": [
+        "archive-browser-02/oc05-replace-feedback.json",
+        "source-browser-02/config-false.json",
+        "manual-review.json"
+      ],
+      "basis": "Default view true replaces without Shift with exact Undo/Redo; explicitly configured false rejects INPUT_OCCUPIED without changing model/history. Model command retains explicit replace policy."
+    },
+    {
+      "scope": "OC06 / OC07",
+      "result": "PASS_FOR_RECONCILED_HUMAN_REQUIREMENT",
+      "evidence": [
+        "scope-reconciliation.json",
+        "archive-browser-02/oc05-replace-feedback.json",
+        "archive-browser-02/socket-0.65.json",
+        "archive-browser-02/socket-1.json",
+        "archive-browser-02/socket-1.25.json"
+      ],
+      "basis": "No replace-specific ring; solid type bodies, distinct ordinary hover and soft purple origin/target feedback, circle-only hit/label-negative and stable row/node geometry at three scales. No 50-percent alpha claim."
+    },
+    {
+      "scope": "OC08",
+      "result": "PASS_FOR_GEOMETRY_ONLY",
+      "evidence": [
+        "unit-conformance.log",
+        "archive-browser-02/wire-input.json",
+        "archive-browser-02/wire-output.json",
+        "manual-review.json"
+      ],
+      "basis": "Single cubic display generator with horizontal tangents and distance-aware extent; real/temporary/preview endpoint and zoom behavior tested. No aesthetic identity or later styling obligation added."
+    },
+    {
+      "scope": "Affected prior S06 workspace/debug fixes and core regressions",
+      "result": "PASS_FOR_TESTED_SCOPE",
+      "evidence": [
+        "source-browser-02/browser-results.json",
+        "archive-browser-02/browser-results.json",
+        "unit-conformance.log",
+        "boundaries.log",
+        "module-pins.log"
+      ],
+      "basis": "Current catalog/help/backdrop/status readability/Locate/keyboard endpoint/cross-boundary cleanup/selection/natural Escape paths executed; module pin, model/history/transfer/persistence/lifetime conformance executed. Historical PASS labels not transferred."
+    }
+  ],
+  "identity": {
+    "inputAndEvidenceHashComparisons": 259,
+    "initialMismatch": "One historical README metadata ref explained by later checkpoint addition; original blob at historicalR matches its bytes/hash.",
+    "sourceManifestFiles": 160,
+    "finalSourceMatches": true,
+    "archiveFiles": 3,
+    "archiveAndIndependentRebuildMatch": true,
+    "implementationAncestor": true,
+    "frozenUnchanged": true,
+    "trackedReviewCheckoutClean": true,
+    "evidence": "identity-reconciliation.json"
+  },
+  "executedChecks": {
+    "rootIntegrity": {
+      "checks": 483,
+      "status": "PASS",
+      "indexed": 411,
+      "frozen": 412
+    },
+    "rootState": "CURRENT_RECORD_VALID",
+    "rootTests": {
+      "passed": 10,
+      "failed": 0
+    },
+    "typecheck": "PASS",
+    "modulePins": "PASS",
+    "productionBoundaries": "PASS",
+    "unitConformance": {
+      "passed": 247,
+      "failed": 0
+    },
+    "reviewerDomain": {
+      "passed": 3,
+      "failed": 0
+    },
+    "sourceBrowser": {
+      "passed": 109,
+      "failed": 0,
+      "skipped": 0,
+      "raw": "source-browser-02/browser-results.json"
+    },
+    "archiveBrowser": {
+      "publicCasesPassed": 99,
+      "sourceOnlyFixtureSetupFailures": 1,
+      "rawExitCode": 1,
+      "raw": "archive-browser-02/browser-results.json",
+      "classification": "All required packaged public cases passed; the one source import fixture is source-only and passed in source suite. Raw failure preserved."
+    },
+    "reviewerArchiveProbes": {
+      "uniqueCases": 8,
+      "initialPassed": 6,
+      "initialOracleFailures": 2,
+      "targetedCorrectedPassed": 2,
+      "raw": [
+        "archive-probes-browser-02/browser-results.json",
+        "archive-probes-corrected-browser-02/browser-results.json"
+      ],
+      "notSummedWithOverlappingProductSuites": true
+    },
+    "exactCommands": "commands.json and executed-browser-checks.json",
+    "manualReview": "manual-review.json"
+  },
+  "results": "All required behavior and conformance checks for the reconciled bounded scope are covered. No blocking product finding or required evidence gap remains. Raw harness failures are retained and classified; no prior candidate PASS was reused.",
+  "verdict": "PASS",
+  "findings": [],
+  "remainingFindings": [],
+  "requiredEvidenceGaps": [],
+  "observations": [
+    {
+      "id": "OBS-01",
+      "classification": "NONBLOCKING_TEST_MAINTENANCE",
+      "status": "OPEN_OUTSIDE_THIS_BOUNDED_PRODUCT_REVIEW",
+      "description": "The broader historical S01 browser helper still addresses Open saved as a direct button; current grouped Project actions requires the public menu path. Its replay was stopped, preserved, and not counted as PASS. Current S06 and unit/conformance coverage supplies the affected bounded regression evidence."
+    },
+    {
+      "id": "OBS-02",
+      "classification": "RESOLVED_SCOPE_NORMALIZATION",
+      "status": "RESOLVED_BY_EXISTING_HUMAN_CONTROL",
+      "description": "OC07 alpha percentage transcription corrected by supplemental Coordinator receipt; reviewed soft translucent purple, not obsolete 50-percent requirement."
+    }
+  ],
+  "operationalHistory": [
+    {
+      "id": "OP01",
+      "kind": "reviewer environment setup",
+      "status": "resolved",
+      "detail": "Initial default-sandbox scratch mkdir/copy denied. No files written; subsequent targeted escalation succeeded for the expressly authorized isolated scratch. No product/state/handoff writes."
+    },
+    {
+      "id": "OP02",
+      "kind": "obsolete historical test path",
+      "status": "preserved, not product verdict",
+      "detail": "Initial broader source batch aborted after s01 beforeEach timeout locating retired direct Open saved button. Current UI places that action in Project actions and exposes menuitem semantics. One failing trace and console retained. No old S01/S02/S03/S04/S05 full-browser PASS claimed. Affected paths instead covered by the current 109 S06/Escape cases, 247 unit/conformance cases, migration and public probes."
+    },
+    {
+      "id": "OP03",
+      "kind": "source-only fixture misrouted to archive",
+      "status": "classified; no repeat of passing cases",
+      "detail": "Archive run preserved raw exit1: 99 public cases passed; Personal late insertion synthetic fixture failed only at dynamic import /apps/web/personal.ts, which is deliberately absent from packaged assets. The identical synthetic source fixture independently passed in source109. It is not claimed as archive runtime PASS and is not a required missing public behavior check."
+    },
+    {
+      "id": "OP04",
+      "kind": "reviewer measurement oracle correction",
+      "status": "resolved with targeted rerun",
+      "detail": "Two independent placement probes initially required 0.00005 graph units from DOMMatrix of serialized CSS transform. Measured deltas 0.0022303/0.0014256 and 0.00008564 graph units result from rounded CSS camera coefficients. Original test/results/traces preserved. Corrected only tolerance to <0.01 graph units (well below one pixel), saved raw measurements, reran those two cases only; both passed including one Undo/Redo."
+    },
+    {
+      "id": "OP05",
+      "kind": "Coordinator scope normalization",
+      "status": "resolved",
+      "detail": "Dispatch OC07 accidentally retained superseded 50 percent wording. Current pinned Human control and implementer packet explicitly supersede that percentage. Coordinator supplemental receipt confirms transcription correction; no product requirement or candidate changed."
+    }
+  ],
+  "notExecuted": [
+    {
+      "scope": "Whole frozen/reference full qualification replay",
+      "reason": "Not required for this bounded production review; read-only integrity and production conformance used, no frozen runner in place."
+    },
+    {
+      "scope": "Full historical S01-S05 browser suites",
+      "reason": "Initial stale direct-selector helper diagnosed; no full prior-slice runtime PASS claimed. Current affected S06 paths and all production unit/conformance rerun."
+    },
+    {
+      "scope": "Source-only optional/lifecycle/config fault fixture inside built archive",
+      "reason": "No development modules in archive; executed on identical pinned source. Archive exercised public equivalent core behavior."
+    },
+    {
+      "scope": "Physical nativeHost/GPU/touch/nativeIME and LAN/Tailscale",
+      "reason": "Outside declared profile or Owner-removed prerequisite."
+    }
+  ],
+  "limitations": [
+    "Bounded current S06 F2-only + Owner corrections + affected regressions only; not wholeS06, complete contract inventory, full catalog or global CQ qualification.",
+    "Windows x64 Node25.5.0, Playwright1.62.1 Chromium151.0.7922.34 headless, ANGLE SwiftShader WebGL2/portable ES3 only; no native Host/TouchDesigner or physical GPU/runtime evidence.",
+    "Trusted automated mouse/keyboard exercised; composition, blur, pointercancel, touch emulation and source seam fault fixtures explicitly synthetic. No physical touch/nativeIME/all-browser/device accessibility qualification.",
+    "LAN/Tailscale requirements removed by Owner; not executed and not relabeled PASS. Existing localhost/Legacy services and historical review checkouts preserved.",
+    "Original stopped historical browser batch, archive source-fixture failure and reviewer precision-oracle failures remain in raw evidence. No claim every launched test passed. Their classifications and targeted resolutions are explicit.",
+    "OC09 automatic code generation withdrawn; OC11 layering/right-click socket ghost-follow placement and broad workspace/full catalog/native obligations excluded.",
+    "Short620x380 viewport (wrapper child620x348) has reduced Canvas working area; footer/focus paths verified, no general mobile-device claim.",
+    "No final Human acceptance, release, publication, main merge or Gate closure granted."
+  ],
+  "acceptanceEligibility": "Eligible only as revision-bound technical readiness for next authorized continuous batch. Full contract completion and final Human acceptance remain pending.",
+  "boundedExclusions": [
+    "No Human-first/no-AI-review stop: explicitly superseded by run authority",
+    "OC09 automatic codegen withdrawn, OC11 layering deferred; right-click socket ghost-follow create deferred",
+    "Do not promote notes/Legacy references/later unregistered suggestions into requirements",
+    "No global catalog/nativeHost/physical runtime qualification claim",
+    "LAN/Tailscale link prerequisites removed; preserve historical NOT_EXECUTED",
+    "No main product/state/handoff edits, commits/push, acceptance, release, reviewer delegation"
+  ],
+  "residualGates": "Unchanged; no scoped/global Gate closure inferred. Historical runtime and network limitations retain their original dispositions.",
+  "technicalOrEnvironmentClassification": "TECHNICAL_PASS_FOR_BOUNDED_RECONCILED_S06_SCOPE",
+  "nextAction": "Coordinator validates/persists the original report and manifest bytes through the designated maintainer, then advances the next eligible authorized batch under the run. Do not rewrite as Human acceptance.",
+  "productAcceptance": "NOT_GRANTED",
+  "reviewerState": "STOP_WRITING",
+  "supportingEvidenceManifest": {
+    "file": "C:\\Users\\user\\.codex\\worktrees\\continuous-s06-review-01\\Grape\\.verification\\continuous-s06-review-01\\supporting-evidence-manifest-01.json",
+    "bytes": 74521,
+    "sha256": "c8aa970332e7a4cd43a4f7c7b3155dd542b2d14247a22984a58b2c1171a8266b"
+  }
+}

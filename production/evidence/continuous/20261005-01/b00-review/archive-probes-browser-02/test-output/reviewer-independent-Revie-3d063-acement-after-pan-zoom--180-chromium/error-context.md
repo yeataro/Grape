@@ -1,0 +1,146 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: reviewer-independent.spec.ts >> Reviewer archived clamped wire entry placement after pan zoom -180
+- Location: tests\browser\reviewer-independent.spec.ts:7:31
+
+# Error details
+
+```
+Error: expect(received).toBeCloseTo(expected, precision)
+
+Expected: 1025.6677392203871
+Received: 1025.669969511039
+
+Expected precision:    4
+Expected difference: < 0.00005
+Received difference:   0.002230290651823452
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - text: Grape
+      - generic [ref=e9]: SHADER WORKSPACE
+      - generic "Implementation 30c867945c992d25956a2a32825de34571f7749e" [ref=e10]: S06-debug-30c8679
+      - button "本輪更新" [ref=e11] [cursor=pointer]
+    - navigation "Document actions" [ref=e12]:
+      - button "Save" [ref=e13] [cursor=pointer]
+      - button "Generate GLSL" [ref=e16] [cursor=pointer]
+    - generic [ref=e19]:
+      - generic [ref=e20]: Unsaved changes
+      - generic [ref=e21]: Host-free
+  - generic [ref=e23]:
+    - button "Undo" [ref=e24] [cursor=pointer]
+    - button "Redo" [disabled] [ref=e27]
+    - button "Delete selected" [ref=e30] [cursor=pointer]
+    - alert
+  - main [ref=e31]:
+    - generic [ref=e33]:
+      - generic: Canvas 1
+      - generic "Shader graph canvas" [ref=e34]:
+        - generic:
+          - generic:
+            - img:
+              - generic "Edge 653e4102-e4e0-4ba4-be94-691615c418b9" [ref=e35]
+            - generic:
+              - group "Image output" [ref=e36]:
+                - heading "Image output" [level=3] [ref=e37]
+                - generic [ref=e38]:
+                  - button "Image output input color" [ref=e39] [cursor=pointer]
+                  - generic [ref=e40]: color
+                  - generic [ref=e41]: vec4
+                  - generic "Current local value; edit in Inspector" [ref=e42]: "[0,0,0,0]"
+              - group "Color RGBA" [ref=e43]:
+                - heading "Color RGBA" [level=3] [ref=e44]
+                - generic [ref=e45]:
+                  - button "Color RGBA output out" [ref=e46] [cursor=pointer]
+                  - generic [ref=e47]: out
+                  - generic [ref=e48]: vec4
+              - group "Multiply" [ref=e49]:
+                - heading "Multiply" [level=3] [ref=e50]
+                - generic [ref=e51]:
+                  - button "Multiply input a" [ref=e52] [cursor=pointer]
+                  - generic [ref=e53]: a
+                  - generic [ref=e54]: float
+                - generic [ref=e55]:
+                  - button "Multiply input b" [ref=e56] [cursor=pointer]
+                  - generic [ref=e57]: b
+                  - generic [ref=e58]: float
+                  - generic "Current local value; edit in Inspector" [ref=e59]: "2"
+                - generic [ref=e60]:
+                  - button "Multiply output result" [ref=e61] [cursor=pointer]
+                  - generic [ref=e62]: result
+                  - generic [ref=e63]: float
+        - generic:
+          - button "Untitled shader / pixel" [disabled]
+        - generic [ref=e64]:
+          - button "New subgraph" [ref=e65] [cursor=pointer]
+          - button "Library subgraph" [ref=e66] [cursor=pointer]
+          - button "Encapsulate" [ref=e67] [cursor=pointer]
+          - button "Make independent" [ref=e68] [cursor=pointer]
+          - button "Enter subgraph" [ref=e69] [cursor=pointer]
+          - button "Arrange nodes" [ref=e70] [cursor=pointer]
+          - button "Frame selection" [ref=e71] [cursor=pointer]
+          - group [ref=e72]:
+            - generic "Local clipboard" [ref=e73] [cursor=pointer]
+          - group [ref=e74]:
+            - generic "Structures" [ref=e75] [cursor=pointer]
+            - option "New structure" [selected]
+        - generic [ref=e76]:
+          - button "Vertex" [ref=e77] [cursor=pointer]
+          - button "Pixel" [pressed] [ref=e78] [cursor=pointer]
+        - generic [ref=e79]:
+          - button "Add Node" [ref=e80] [cursor=pointer]
+          - button "Browse nodes" [ref=e83] [cursor=pointer]
+          - button "Up" [disabled] [ref=e86]
+          - button "Shortcuts" [ref=e89] [cursor=pointer]
+    - complementary [ref=e92]:
+      - generic [ref=e93]:
+        - heading "Inspector" [level=2] [ref=e94]
+        - paragraph [ref=e95]: Multiply
+        - button "Rename node" [ref=e96] [cursor=pointer]
+        - generic [ref=e97]:
+          - generic [ref=e99]:
+            - generic [ref=e100]: A
+            - textbox "A" [ref=e101]: "1"
+            - alert [ref=e102]: Connected input — local value retained.
+          - generic [ref=e104]:
+            - generic [ref=e105]: B
+            - textbox "B" [ref=e106]: "2"
+            - alert
+        - generic [ref=e108]:
+          - text: From Color RGBA
+          - button "Disconnect" [ref=e109] [cursor=pointer]
+  - contentinfo [ref=e110]:
+    - button "Project actions" [active] [ref=e111] [cursor=pointer]
+    - status [ref=e112]:
+      - button "Read full application status" [ref=e113] [cursor=pointer]: Export started. Saved status is unchanged.
+    - button "Shader output" [ref=e114] [cursor=pointer]
+    - button "Hints" [ref=e115] [cursor=pointer]
+```
+
+# Test source
+
+```ts
+  1  | import {test,expect,type Page,type Locator} from '@playwright/test'; import fs from 'node:fs'; import path from 'node:path'; import {createNode} from './create-node.ts'; import {clickAction} from '../fixtures/public-actions.ts';
+  2  | const save=(n:string,data:any)=>fs.writeFileSync(path.join(process.env.GRAPE_EVIDENCE_DIR!,n+'.json'),JSON.stringify(data,null,2));
+  3  | const net=(d:any)=>d.graph.stages.find((x:any)=>x.key==='pixel').network;
+  4  | async function documentJSON(p:Page,a:any=p){const d=p.waitForEvent('download');await clickAction(a,'Export JSON');return JSON.parse(fs.readFileSync((await (await d).path())!,'utf8'));}
+  5  | async function center(l:Locator){const r=(await l.boundingBox())!;return{x:r.x+r.width/2,y:r.y+r.height/2};}
+  6  | async function drag(p:Page,l:Locator,end:any){const a=await center(l);await p.mouse.move(a.x,a.y);await p.mouse.down();await p.mouse.move(end.x,end.y,{steps:22});await p.mouse.up();}
+> 7  | for(const wheel of [-180,280])test('Reviewer archived clamped wire entry placement after pan zoom '+wheel,async({page})=>{await page.goto('/');await createNode(page,'Color RGBA');const c=page.locator('.canvas');const r=(await c.boundingBox())!;await page.mouse.move(r.x+r.width*.5,r.y+r.height*.65);await page.mouse.down({button:'middle'});await page.mouse.move(r.x+r.width*.5+45,r.y+r.height*.65+18,{steps:12});await page.mouse.up({button:'middle'});await page.mouse.wheel(0,wheel);await expect.poll(()=>c.locator('.viewport').getAttribute('style')).toContain('scale');const point={x:r.x+r.width-10,y:r.y+r.height-12};const expected=await c.evaluate((el,p)=>{const r=el.getBoundingClientRect(),m=new DOMMatrix((el.querySelector('.viewport') as HTMLElement).style.transform);return[(p.x-r.left-m.e)/m.a,(p.y-r.top-m.f)/m.d,m.a]},point);const before=await documentJSON(page);await drag(page,c.locator('[data-direction=output]'),point);const menu=c.getByRole('dialog',{name:'Node catalog'});await expect(menu).toBeVisible();const box=(await menu.boundingBox())!;expect(box.x+box.width).toBeLessThanOrEqual(r.x+r.width+1);expect(box.y+box.height).toBeLessThanOrEqual(r.y+r.height+1);await menu.getByLabel('Search nodes',{exact:true}).fill('Multiply');await menu.getByRole('button',{name:'Create Multiply',exact:true}).click();await expect(menu).toBeHidden();const after=await documentJSON(page);const made=net(after).nodes.find((n:any)=>!net(before).nodes.some((x:any)=>x.id===n.id));expect(made.position[0]).toBeCloseTo(expected[0],4);expect(made.position[1]).toBeCloseTo(expected[1],4);expect(net(after).edges).toHaveLength(1);await clickAction(page,'Undo');expect(await documentJSON(page)).toEqual(before);await clickAction(page,'Redo');expect(await documentJSON(page)).toEqual(after);save('reviewer-clamp-'+wheel,{point,expected,menu:box,before,after});});
+     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ^ Error: expect(received).toBeCloseTo(expected, precision)
+  8  | test('Reviewer disconnect only target input and empty-input drop adds no Undo entry',async({page})=>{await page.goto('/');for(const n of ['Float (fixed)','Multiply','Color RGBA'])await createNode(page,n);const c=page.locator('.canvas'),mul=c.locator('article[aria-label="Multiply"]'),output=c.locator('article[aria-label="Image output"] [data-port=color]');await c.locator('article[aria-label="Float"] [data-direction=output]').click();await mul.locator('[data-port=a][data-direction=input]').click();await c.locator('article[aria-label="Color RGBA"] [data-direction=output]').click();await output.click();const before=await documentJSON(page),r=(await c.boundingBox())!,b={x:r.x+r.width*.7,y:r.y+r.height*.8};expect(net(before).edges).toHaveLength(2);await drag(page,output,b);const after=await documentJSON(page);expect(net(after).nodes).toEqual(net(before).nodes);expect(net(after).edges).toEqual(net(before).edges.filter((e:any)=>e.to.nodeId!==net(before).nodes.find((n:any)=>n.type.typeId==='image-output').id));expect(after.graph.resources).toEqual(before.graph.resources);await drag(page,output,b);expect(await documentJSON(page)).toEqual(after);await clickAction(page,'Undo');expect(await documentJSON(page)).toEqual(before);await clickAction(page,'Redo');expect(await documentJSON(page)).toEqual(after);save('reviewer-disconnect-noop',{before,after});});
+  9  | test('Reviewer locked cross-Canvas F2 snapshot cannot retarget through hover or modal movement',async({page})=>{await page.goto('/');await createNode(page,'Color RGBA');await clickAction(page,'Second Canvas');await clickAction(page,'Lock editing');const a=page.locator('.canvas').first(),b=page.locator('.canvas').last(),node=a.locator('article[aria-label="Color RGBA"]');const before=await documentJSON(page);await node.getByRole('heading').click();await b.getByRole('heading',{name:'Image output',exact:true}).hover();await page.keyboard.press('F2');const dialog=page.getByRole('dialog',{name:'Object information',exact:true});await expect(dialog).toContainText('Node: Color RGBA');const captured=await dialog.innerText();await page.mouse.move(5,5,{steps:15});await page.keyboard.press('F2');expect(await dialog.innerText()).toBe(captured);await page.keyboard.press('Escape');await expect(node).toBeFocused();expect(await documentJSON(page)).toEqual(before);save('reviewer-cross-panel-readonly',{captured,before});});
+  10 | for(const wrapper of [false,true])for(const [width,height] of [[620,380],[1440,1000]])test('Reviewer footer direct/wrapper keyboard coverage '+wrapper+' '+width+'x'+height,async({page})=>{await page.setViewportSize({width,height});await page.goto(wrapper?'/review-wrapper':'/');const a:any=wrapper?page.frames().find(f=>f!==page.mainFrame())!:page;await expect(a.locator('.build-identity')).toHaveText('S06-debug-30c8679');const before=await documentJSON(page,a);const geometry=await a.evaluate(()=>{const f=document.querySelector('footer')!.getBoundingClientRect(),m=document.querySelector('main')!.getBoundingClientRect();return{footer:f.toJSON(),main:m.toJSON(),width:innerWidth,height:innerHeight,scroll:document.documentElement.scrollHeight}});expect(geometry.footer.x).toBe(0);expect(geometry.footer.width).toBe(geometry.width);expect(geometry.footer.bottom).toBe(geometry.height);expect(geometry.main.bottom).toBe(geometry.footer.y);expect(geometry.scroll).toBe(geometry.height);for(const name of ['Project actions','Hints','Shader output']){const button=a.getByRole('button',{name,exact:true});await button.click();await page.keyboard.press('Escape');await expect(button).toBeFocused();await page.keyboard.press('Enter');await page.keyboard.press('Escape');}await page.screenshot({path:path.join(process.env.GRAPE_EVIDENCE_DIR!,'reviewer-footer-'+wrapper+'-'+width+'.png')});expect(await documentJSON(page,a)).toEqual(before);save('reviewer-footer-'+wrapper+'-'+width,geometry);});
+  11 | 
+```

@@ -1,0 +1,117 @@
+[
+  {
+    "scope": "F2_ONLY / READONLY_FOCUS_LIFETIME / OC10",
+    "result": "PASS",
+    "evidence": [
+      "source-browser-02/f2-kinds.json",
+      "source-browser-02/f2-on-demand-counts.json",
+      "archive-browser-02/focus-routes.json",
+      "archive-browser-02/oc10-target-captured.json",
+      "archive-probes-browser-02/reviewer-cross-panel-readonly.json",
+      "executed-browser-checks.json"
+    ],
+    "basis": "All built-in kinds, physical Node/Port click, focusA-hoverB, modal movement, readonly/cross-Canvas, draft/IME/busy/pending-wire/gesture, remount/load/stage/delete invalidation; one explicit serialization and no pointer-triggered reads."
+  },
+  {
+    "scope": "OPTIONAL_HELPER_ISOLATION",
+    "result": "PASS",
+    "evidence": [
+      "source-browser-02/isolation-absent.json",
+      "source-browser-02/isolation-disposed.json",
+      "source-browser-02/isolation-failed-construction.json",
+      "source-browser-02/isolation-consumed-key.json",
+      "source-browser-02/owner-faults.json"
+    ],
+    "basis": "Source-only presentation fault fixtures preserve actual public create/edit/connect/generate/save ACK/Undo/Redo/export; synthetic lifecycle fixture is labeled and not physical-device evidence."
+  },
+  {
+    "scope": "OC01 / DEC-GRAPE-005",
+    "result": "PASS",
+    "evidence": [
+      "archive-browser-02/oc01-zero-upgrade.json",
+      "archive-browser-02/oc01-conversions.json",
+      "reviewer-unit-results.json",
+      "reviewer-domain.log",
+      "unit-conformance.log"
+    ],
+    "basis": "New exact output produces RGBA0 including alpha on actual WebGL2/SwiftShader. Old0.1/0.2 remain required until explicit new-load upgrade, unrelated and Vertex required inputs retained, compatible sources and exact refs preserved; save/reopen and numerical conversions executed."
+  },
+  {
+    "scope": "OC02",
+    "result": "PASS",
+    "evidence": [
+      "archive-browser-02/oc02-footer-620.json",
+      "archive-browser-02/oc02-footer-1440.json",
+      "archive-browser-02/oc02-footer-1920.json",
+      "archive-probes-browser-02/reviewer-footer-true-620.json",
+      "archive-probes-browser-02/reviewer-footer-false-1440.json",
+      "executed-browser-checks.json"
+    ],
+    "basis": "Full-width compact footer direct/wrapped, no reserved collapsed output block, Escape/Enter focus, complete status/output and Locate paths in current tests. Short viewport remains visually constrained but accessible."
+  },
+  {
+    "scope": "OC03",
+    "result": "PASS",
+    "evidence": [
+      "archive-browser-02/oc03-single-click.json",
+      "archive-browser-02/oc03-cancel-stale-readonly.json",
+      "archive-probes-corrected-browser-02/reviewer-clamp--180.json",
+      "archive-probes-corrected-browser-02/reviewer-clamp-280.json"
+    ],
+    "basis": "One entry click commits at captured graph coordinate under pan/zoom/menu clamp/move, one Undo restores prior document and Redo restores exact after; cancel/stale/readonly yields no partial model/history."
+  },
+  {
+    "scope": "OC04",
+    "result": "PASS",
+    "evidence": [
+      "archive-browser-02/oc04-disconnect.json",
+      "archive-probes-browser-02/reviewer-disconnect-noop.json"
+    ],
+    "basis": "Only target connected input removed in one command/Undo; other edges, nodes and resources unchanged; already-empty input drop adds no History. Escape/outside/blur/readonly preserve document."
+  },
+  {
+    "scope": "OC05",
+    "result": "PASS",
+    "evidence": [
+      "archive-browser-02/oc05-replace-feedback.json",
+      "source-browser-02/config-false.json",
+      "manual-review.json"
+    ],
+    "basis": "Default view true replaces without Shift with exact Undo/Redo; explicitly configured false rejects INPUT_OCCUPIED without changing model/history. Model command retains explicit replace policy."
+  },
+  {
+    "scope": "OC06 / OC07",
+    "result": "PASS_FOR_RECONCILED_HUMAN_REQUIREMENT",
+    "evidence": [
+      "scope-reconciliation.json",
+      "archive-browser-02/oc05-replace-feedback.json",
+      "archive-browser-02/socket-0.65.json",
+      "archive-browser-02/socket-1.json",
+      "archive-browser-02/socket-1.25.json"
+    ],
+    "basis": "No replace-specific ring; solid type bodies, distinct ordinary hover and soft purple origin/target feedback, circle-only hit/label-negative and stable row/node geometry at three scales. No 50-percent alpha claim."
+  },
+  {
+    "scope": "OC08",
+    "result": "PASS_FOR_GEOMETRY_ONLY",
+    "evidence": [
+      "unit-conformance.log",
+      "archive-browser-02/wire-input.json",
+      "archive-browser-02/wire-output.json",
+      "manual-review.json"
+    ],
+    "basis": "Single cubic display generator with horizontal tangents and distance-aware extent; real/temporary/preview endpoint and zoom behavior tested. No aesthetic identity or later styling obligation added."
+  },
+  {
+    "scope": "Affected prior S06 workspace/debug fixes and core regressions",
+    "result": "PASS_FOR_TESTED_SCOPE",
+    "evidence": [
+      "source-browser-02/browser-results.json",
+      "archive-browser-02/browser-results.json",
+      "unit-conformance.log",
+      "boundaries.log",
+      "module-pins.log"
+    ],
+    "basis": "Current catalog/help/backdrop/status readability/Locate/keyboard endpoint/cross-boundary cleanup/selection/natural Escape paths executed; module pin, model/history/transfer/persistence/lifetime conformance executed. Historical PASS labels not transferred."
+  }
+]

@@ -1,0 +1,278 @@
+{
+  "packetVersion": 1,
+  "packetType": "HUMAN_CONTRACT_RUN_AUTHORIZATION",
+  "workflowMode": "continuous-contract",
+  "runId": "GRAPE-CONTINUOUS-20261005-01",
+  "id": "GRAPE-CONTINUOUS-20261005-01",
+  "recordedAt": "2026-10-04T19:34:05.432Z",
+  "authority": "Human Owner",
+  "source": {
+    "threadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "kind": "Direct latest Human message in Coordinator conversation; normalized preserving scope",
+    "text": "這是 Human Owner 的直接授權：現在啟動完整契約的連續實作流程，由你統一協調、派工、收件與推進。Checkpoint 已透過 PR #7 合併，固定恢復點 9003c00b214ac29cafcb6cc22ac10693ac92a0bf。目標是完整實作、跑通並驗證 checkpoint 所包含的 IH-005 與已接受修訂，包含先前各 Slice 尚未交付的契約範圍；提案、筆記、已撤回或明確延後的能力不得自動加入。繼續 work 分支，授權正常提交並推送 https://github.com/yeataro/Grape.git 的 work。Coordinator 自行派實作者與獨立 Fresh Reviewer，維持單一寫入責任者及隔離；先處理目前 S06 尚未獨立審查成果，再依相依性推進。取代逐 Slice 授權、驗收、PR、merge 及逐批人類預覽停點；技術 PASS 後直接下一已授權批次。普通缺陷/測試/證據/派工問題由 Coordinator 修復複查收件。保留 checkpoint/歷史/未解限制，禁止強推、丟棄、frozen handoff 改動、把技術 PASS 記成人類驗收。只有真正產品/架構決策、Human 權限或實機才找 Human，只停受影響部分。全部完成獨立審查後提供可操作測試環境、可見版號、localhost 與簡短完整清單作整體驗收。未授權最終 merge main 或正式發布。核對登記後直接開始，不必再問啟動或 PM 轉交。"
+  },
+  "checkpoint": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+  "policyRevision": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+  "repository": "https://github.com/yeataro/Grape",
+  "recovery": {
+    "file": "production/evidence/coordinator/continuous/20261005-01/recovery-01.json",
+    "bytes": 2179,
+    "sha256": "a74e391de46564a8ec7cf9c57f6bbaf482d9eb971ceae82b40818fa82690bc63"
+  },
+  "inventoryRef": {
+    "file": "production/evidence/coordinator/continuous/20261005-01/inventory-plan-01.json",
+    "bytes": 1358,
+    "sha256": "1ed0ae23307337bb2c0e4b0f0416df26859cb33811afc5d02a88aa48766da3a4"
+  },
+  "contractSet": {
+    "IH005": {
+      "file": "handoff/HANDOFF_FILE_INDEX.json",
+      "bytes": 66519,
+      "sha256": "b66c46c4ad12f85d7b70b177c79d7db57a80a6d8892a9287cf04fe007a020bbd"
+    },
+    "adoption": {
+      "file": "HANDOFF_ACCEPTANCE.json",
+      "bytes": 1957,
+      "sha256": "5ff88ef9e913f58d45599ab0a47a2d015714d6700d11032fc480a0c1b234336b"
+    },
+    "acceptedAmendments": [
+      {
+        "file": "decisions/DEC-GRAPE-002.md",
+        "bytes": 8075,
+        "sha256": "ef2492ba16e5c96cede2d9b70e638033f80ecb7825b2d2c8c2dbe36d24fad848",
+        "id": "DEC-GRAPE-002",
+        "kind": "product-decision",
+        "scope": "Implemented and Human Owner accepted within bounded S04 at I 0c13932150bf1b78f215e25721292962e6c4263a, independently reviewed R 985357be67cce2f2ecc232e827e83e5cdbb521ab. See S04 accepted evidence and closeout registration. No retroactive S03 adoption or global Gate closure.",
+        "acceptedBy": "Human Owner (accepted semantic/contract decision; not runtime verification)"
+      },
+      {
+        "file": "decisions/AC-GRAPE-001.md",
+        "bytes": 9288,
+        "sha256": "00c21f29fb66c07e1db1a7ea6dce2dbffadb47682c534f3019e2dc984057be00",
+        "id": "AC-GRAPE-001",
+        "kind": "architecture-change",
+        "scope": "Implemented and Human Owner accepted within bounded S04 at I 0c13932150bf1b78f215e25721292962e6c4263a, independently reviewed R 985357be67cce2f2ecc232e827e83e5cdbb521ab. See S04 accepted evidence and closeout registration. No retroactive S03 adoption or global Gate closure.",
+        "acceptedBy": "Human Owner (accepted semantic/contract decision; not runtime verification)"
+      },
+      {
+        "file": "decisions/DEC-GRAPE-003.md",
+        "bytes": 13101,
+        "sha256": "9a0acb74ee0bac36f23784db7743c45e2b3f36023ca329400b7f65711ee4428e",
+        "id": "DEC-GRAPE-003",
+        "kind": "product-decision",
+        "scope": "Implemented and Human Owner accepted within bounded S05 local selected scope at I aa4c86e20b0b4b54218b9992921578e7f24a28a2, independently assessed R 6c3a734325d0db2d924356a9614e971d80a966c8 by S05-SCOPED-CLOSEOUT-FR-6c3a734-01 (PASS). All ten DEC003/AC002 function-mode criteria and supporting corrected local behavior, exactly fixed Float/Vector2/Vector3/ColorRGBA LC-NODE-011..014, and synchronous editor snapshot reuse are registered in production/evidence/acceptance/s05/closeout-20261004-01/accepted-scope-01.json. Original broader review6 remains BLOCKED/WF_PERMISSION; S05-DRAG-FR-GAP-001 remains OPEN/NOT_EXECUTED for two LAN/Tailscale archive checks. S05-FR-ESCAPE-FOCUS-001 remains OPEN/FAIL, explicitly Owner-deferred and independently nonblocking only for this local scope; pending repair is excluded. No full catalog/CQ/native/physical-GPU/second-device or global Gate completion. Earlier review and accepted-evidence identities and all finding counters remain unchanged. S06 is separately authorized after closeout and actual merge, but is not activated here.",
+        "acceptedBy": "Human Owner (accepted requirements; no runtime verification)"
+      },
+      {
+        "file": "decisions/AC-GRAPE-002.md",
+        "bytes": 15010,
+        "sha256": "ab1e4067f479f640c2fd59c3bc994413475a0dfc2b0e8259c4b5319f03c60c4a",
+        "id": "AC-GRAPE-002",
+        "kind": "architecture-change",
+        "scope": "Implemented and Human Owner accepted within bounded S05 local selected scope at I aa4c86e20b0b4b54218b9992921578e7f24a28a2, independently assessed R 6c3a734325d0db2d924356a9614e971d80a966c8 by S05-SCOPED-CLOSEOUT-FR-6c3a734-01 (PASS). All ten DEC003/AC002 function-mode criteria and supporting corrected local behavior, exactly fixed Float/Vector2/Vector3/ColorRGBA LC-NODE-011..014, and synchronous editor snapshot reuse are registered in production/evidence/acceptance/s05/closeout-20261004-01/accepted-scope-01.json. Original broader review6 remains BLOCKED/WF_PERMISSION; S05-DRAG-FR-GAP-001 remains OPEN/NOT_EXECUTED for two LAN/Tailscale archive checks. S05-FR-ESCAPE-FOCUS-001 remains OPEN/FAIL, explicitly Owner-deferred and independently nonblocking only for this local scope; pending repair is excluded. No full catalog/CQ/native/physical-GPU/second-device or global Gate completion. Earlier review and accepted-evidence identities and all finding counters remain unchanged. S06 is separately authorized after closeout and actual merge, but is not activated here.",
+        "acceptedBy": "Human Owner (accepted requirements; no runtime verification)"
+      },
+      {
+        "file": "decisions/DEC-GRAPE-004.md",
+        "bytes": 9555,
+        "sha256": "9d1af8aba9e1e65d9318590f601b89e094404eeea09e3670382d42b171e57238",
+        "id": "DEC-GRAPE-004",
+        "kind": "product-decision",
+        "scope": "Implemented and Human Owner accepted within bounded S04 at I 0c13932150bf1b78f215e25721292962e6c4263a, independently reviewed R 985357be67cce2f2ecc232e827e83e5cdbb521ab. See S04 accepted evidence and closeout registration. No retroactive S03 adoption or global Gate closure.",
+        "acceptedBy": "Human Owner (product policy; implementation and review pending)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/activation-20261004-01/network-delivery-control-01.json",
+        "bytes": 3056,
+        "sha256": "54d4ae2ddc14e205bb679c5dd6b108a0d76308e6066fa298a0886571e9c9c1bd",
+        "id": "OWNER-NETWORK-DELIVERY-REMOVED-20261004",
+        "kind": "product-decision",
+        "scope": "OWNER_REMOVED_REQUIREMENT: LAN/Tailscale preview links and the two exact-origin archive checks are removed from current and future delivery prerequisites until an explicit later Owner change. Localhost delivery and product verification remain required.",
+        "acceptedBy": "Human Owner (direct control preserved in source receipt)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/debug-hover-01/human-decision-01.json",
+        "bytes": 4434,
+        "sha256": "4894e66f777b81f7a6aba479504b52bdb727bca77d491639eabe3ad4de2168a4",
+        "id": "OWNER-S06-DEBUG-HOVER-20261004",
+        "kind": "product-decision",
+        "scope": "Bounded initial requirement accepted; prior repair I528c4f7/R571f04a independently PASS for pre-revision scope. Current Human F2-only requirements supersede alternate pointer entry/preference only. Candidate I e8c477ec511637f71646b79272422c72e40bd680 awaits new independent review; no implementation acceptance or wholeS06 completion. Current Owner corrections I 30c867945c992d25956a2a32825de34571f7749e follow Human-first preview control; no AI review started or new implementation acceptance.",
+        "acceptedBy": "Human Owner (requirements only; no implementation acceptance)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-feedback-01.json",
+        "bytes": 5733,
+        "sha256": "d0e16600b45d3f439a12533f19a2632f3bf022bc63e505b25b590b8d67aeab0f",
+        "id": "OWNER-S06-DHR-FEEDBACK-01",
+        "kind": "product-decision",
+        "scope": "Bounded S06 presentation requirement only: Useful kind/name/identity/current state first; precise circular socket hit controls and independent labels. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+        "acceptedBy": "Human Owner (requirements only; no implementation acceptance)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-solid-socket-01.json",
+        "bytes": 2798,
+        "sha256": "c676c126dc1d7483a06c66b9f062bd7a01abb5538bf0cfe4249de15945323027",
+        "id": "OWNER-S06-DHR-SOLID-SOCKET-01",
+        "kind": "product-decision",
+        "scope": "Bounded S06 presentation requirement only: Solid type-preserving hover/pressed/focus/origin/target socket fills; unchanged endpoints. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+        "acceptedBy": "Human Owner (requirements only; no implementation acceptance)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-type-color-01.json",
+        "bytes": 1852,
+        "sha256": "16eaf5e2c50f892efdbd4d91a5cf6cf71727cc0ab965b4175f6d1a6713308742",
+        "id": "OWNER-S06-DHR-TYPE-COLOR-01",
+        "kind": "product-decision",
+        "scope": "Bounded S06 presentation requirement only: Existing scalar/vector type colors retained instead of uniform color. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+        "acceptedBy": "Human Owner (requirements only; no implementation acceptance)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-reference-units-01.json",
+        "bytes": 4250,
+        "sha256": "5a7b2335ccf48453fa5d8a367deb7a5a30d27c56077398d9c9813cac6bfa2768",
+        "id": "OWNER-S06-DHR-REFERENCE-UNITS-01",
+        "kind": "product-decision",
+        "scope": "Bounded S06 presentation requirement only: Shared nodePortRow for real/catalog sockets; current button/input primitives reused; no new numeric gestures. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+        "acceptedBy": "Human Owner (requirements only; no implementation acceptance)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-mouse-reference-01.json",
+        "bytes": 1437,
+        "sha256": "e798715bf314bda9f6a39ca75eb9b157fed91e35eac6135d173fa780c9f64b5e",
+        "id": "OWNER-S06-DHR-MOUSE-REFERENCE-01",
+        "kind": "product-decision",
+        "scope": "Bounded S06 presentation requirement only: Context-sensitive reference inspection only, no blanket Legacy interaction parity or copied UI. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+        "acceptedBy": "Human Owner (requirements only; no implementation acceptance)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-bottom-bar-01.json",
+        "bytes": 3055,
+        "sha256": "7ffe01d7c5db27971ef0b3746364de392c338e085ece44d013d3ab19cb86f123",
+        "id": "OWNER-S06-DHR-BOTTOM-BAR-01",
+        "kind": "product-decision",
+        "scope": "Bounded S06 presentation requirement only: Compact footer, default collapsed output, complete current status, accessible disclosures. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+        "acceptedBy": "Human Owner (requirements only; no implementation acceptance)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-newer-status-reference-01.json",
+        "bytes": 3326,
+        "sha256": "c1504009160fc8d30e7b5cd9f12457f6e994cd5d3cb3b65c6e817c937e4599a1",
+        "id": "OWNER-S06-DHR-NEWER-STATUS-REFERENCE-01",
+        "kind": "product-decision",
+        "scope": "Bounded S06 presentation requirement only: Anchored full current status; meaningful diagnostics Locate via existing output owner; stale node callbacks fenced. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+        "acceptedBy": "Human Owner (requirements only; no implementation acceptance)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-bottom-actions-01.json",
+        "bytes": 3615,
+        "sha256": "47279cda3734f95ae6dd997cfc4dc3fb1fec5f2657b9867347ffcb63e7de1239",
+        "id": "OWNER-S06-DHR-BOTTOM-ACTIONS-01",
+        "kind": "product-decision",
+        "scope": "Bounded S06 presentation requirement only: Bottom-left grouped existing commands with menu keyboard, visible labels and readonly toggle state. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+        "acceptedBy": "Human Owner (requirements only; no implementation acceptance)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-unified-floating-entry-01.json",
+        "bytes": 3371,
+        "sha256": "c65f15fb85f50b0465f391d04493b2c531c9947d3993222549af317f0af7add1",
+        "id": "OWNER-S06-DHR-UNIFIED-FLOATING-ENTRY-01",
+        "kind": "product-decision",
+        "scope": "Bounded S06 presentation requirement only: One bounded caller-configured floating mechanism; owner content and semantic differences preserved. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+        "acceptedBy": "Human Owner (requirements only; no implementation acceptance)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-caller-variants-01.json",
+        "bytes": 2402,
+        "sha256": "dd5f5bb6b932fef152959ab8d57e20888429ce5688a20623f6c24fb7f2eb2921",
+        "id": "OWNER-S06-DHR-CALLER-VARIANTS-01",
+        "kind": "product-decision",
+        "scope": "Bounded S06 presentation requirement only: Caller supplies content/title/dimensions/anchor/alignment; no feature-name branches. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+        "acceptedBy": "Human Owner (requirements only; no implementation acceptance)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-f2-only-01.json",
+        "bytes": 3211,
+        "sha256": "3485a4d5c7f81ef49d3999fe0abeb631c2324f34ebf790cc924c488fbb5b26ac",
+        "id": "OWNER-S06-F2-ONLY-20261004",
+        "kind": "product-decision",
+        "scope": "Object information uses F2 as the sole opening interaction. Preserve current live-keyboard-focus identity policy, readonly owner projections, detail content, Close/Escape and safe focus return. Remove the separate Read object details opening button and alternate diagnostic-hover presentation/checkbox. Ordinary hover operation hints and accessible names remain. No replacement gesture or extra entry invented. F2 must work directly without first enabling the removed diagnostic-hover preference. Existing readonly availability, unfinished text/draft/IME/gesture and lifetime guards remain; this is not permission to steal editing keys or revive invalid targets. Keep bottom status, Shader Output, Locate, existing grouped actions, type-color solid socket states and clean reusable floating ownership unchanged. Help and 本輪更新 must accurately describe F2-only behavior. Candidate I e8c477ec511637f71646b79272422c72e40bd680 pending independent review; requirement acceptance only.",
+        "acceptedBy": "Human Owner (requirements only; no implementation acceptance)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-inspection-isolation-01.json",
+        "bytes": 2991,
+        "sha256": "3d9b9d0309169c762f13360af9ec57c5aef3861f3bf55c3a641239cd22a58871",
+        "id": "OWNER-S06-INSPECTION-ISOLATION-20261004",
+        "kind": "product-decision",
+        "scope": "Object inspection is an optional outer presentation/development helper using existing owner-provided public readonly projections. No new Graph/model ownership, core reflection API, synchronized mirror store or serialization authority. Obtain detail on explicit F2 action; do not add whole-model capture/serialization on normal pointer movement or make core editing depend on inspection registration. Preserve ordinary hints. Inspection cannot change selection, Graph values/revision/dirty/History/Redo, document storage/ACK or shader generation. Focus/text/draft/IME/gesture guards remain; closing returns safe focus. Failure, unavailable targets, projection errors, same-ID replacement, unmount/dispose or late callbacks remain isolated to the helper. No stale authority, leaked listener/timer, core command suppression or core crash. Use the accepted public view/mount optional presentation seam, caller-owned data and common surface lifecycle. Disabled/absent/disposed inspector must leave normal application flow functional. Do not create new private traversal or feature-specific core branches. Candidate I e8c477ec511637f71646b79272422c72e40bd680 pending independent review; requirement acceptance only.",
+        "acceptedBy": "Human Owner (requirements only; no implementation acceptance)"
+      },
+      {
+        "file": "decisions/DEC-GRAPE-005.md",
+        "bytes": 2278,
+        "sha256": "776e1c9e35daff2a57e8fc8947b5efd1d6d9b8926cced35337fc869ed73ef069",
+        "id": "DEC-GRAPE-005",
+        "kind": "product-decision",
+        "scope": "OC01 new exact0.3 Image Output zero RGBA includingalpha0; oldDEC002/AC001 andexactpins immutable; explicitvalidated new-load upgrade only. Adopted at candidate I 30c867945c992d25956a2a32825de34571f7749e; requirement acceptance only, implementation not accepted or independently reviewed.",
+        "acceptedBy": "Human Owner (requirements only)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/owner-corrections-01/human-control-01.json",
+        "bytes": 9106,
+        "sha256": "b1e1efcb141795df3555a10ff62783669f26831b6787ad35d56b0ad0e7f75527",
+        "id": "OWNER-S06-CORRECTIONS-01",
+        "kind": "product-decision",
+        "scope": "Bounded OC01..08/10 requirements; OC09withdrawn,OC11deferred; general Add/Browse andrightclickplacement unchanged. F2ordinaryNodeclick focustransfer underexistinglivekeyboardfocuspolicy. Adopted at candidate I 30c867945c992d25956a2a32825de34571f7749e; requirement acceptance only, implementation not accepted or independently reviewed.",
+        "acceptedBy": "Human Owner (requirements only)"
+      },
+      {
+        "file": "production/evidence/coordinator/s06/owner-corrections-01/human-layer-deferral-01.json",
+        "bytes": 1053,
+        "sha256": "6a0d4387cd91e1a7d785476131c825987ee57a999f8e090154bdb1594d3d6ff3",
+        "id": "OWNER-S06-LAYER-DEFERRAL-01",
+        "kind": "product-decision",
+        "scope": "OC11stacking deferred; selfchecks then exactarchive for Human-first localhost preview. Do not start AI independent review this round. Adopted at candidate I 30c867945c992d25956a2a32825de34571f7749e; requirement acceptance only, implementation not accepted or independently reviewed.",
+        "acceptedBy": "Human Owner (requirements only)"
+      }
+    ]
+  },
+  "scope": "All required unfinished checkpoint IH-005 and accepted amendments including previously bounded Slice residuals; verify integrated runnable implementation.",
+  "exclusions": [
+    "Proposals, notes, withdrawn or explicitly deferred capabilities are not automatically activated",
+    "No final Human acceptance impersonation",
+    "No final main merge/formal release",
+    "No force push/discard/frozen changes",
+    "No background scheduler"
+  ],
+  "coordinator": {
+    "threadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "title": "Grape Coordinator"
+  },
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "title": "Grape S06 實作與維護"
+  },
+  "publication": {
+    "commit": true,
+    "push": {
+      "remote": "https://github.com/yeataro/Grape.git",
+      "branch": "work",
+      "force": false
+    },
+    "mainMerge": false,
+    "formalRelease": false
+  },
+  "overrides": [
+    "Per-Slice start/acceptance/PR/merge waits",
+    "Prior Human-first no-AI-review stops"
+  ],
+  "preserves": [
+    "All original I/R/verdict/acceptance and counters",
+    "One writer per bounded batch",
+    "Fresh context and isolated checkout",
+    "Only Human final acceptance"
+  ],
+  "nextAction": "Register authority in existing state fields, collect B00 current S06 independent review; technical PASS advances eligible batches"
+}

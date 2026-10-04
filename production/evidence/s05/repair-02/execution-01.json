@@ -1,0 +1,426 @@
+{
+  "implementationI": "b0d61c61d35908f6332b439aae539ce87bf854c5",
+  "status": "IMPLEMENTER_CHECKS_PASS_NOT_INDEPENDENT_REVIEW",
+  "counts": {
+    "unitAndConformance": 200,
+    "browser": 90,
+    "newPublicFlowBrowser": 15,
+    "deliveredSamples": 14,
+    "negativeAdmissionCases": 6,
+    "bootstrapFixtures": 10,
+    "bootstrapChecks": 471,
+    "indexedFiles": 411,
+    "frozenFiles": 412,
+    "ownershipFiles": 53,
+    "finalFailures": 0,
+    "skipped": 0,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "name": "archive-public-flows-01",
+      "cwd": ".",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--experimental-transform-types",
+        ".verification/s05-import-archive-flows-01.mjs",
+        "--output",
+        "C:/Users/user/source/Grape/production/evidence/s05/repair-02/archive-public-flows-01/result.json"
+      ],
+      "startedAt": "2026-10-04T04:09:41.511Z",
+      "endedAt": "2026-10-04T04:09:54.264Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/repair-02/checks/archive-public-flows-01.json",
+        "sha256": "ed1e3309d1c82517c9bf40bc815d7ba9ba0ea5e4cfcc565fb1525e13dcdc3a2e",
+        "bytes": 507
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-02/checks/archive-public-flows-01.log",
+        "sha256": "2443fe43f81081777b88ecb3eb1459f6cda3ca53c1a0646ab4517002144a9408",
+        "bytes": 404
+      }
+    },
+    {
+      "name": "bootstrap-01",
+      "cwd": ".",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tools/verify-bootstrap.mjs"
+      ],
+      "startedAt": "2026-10-04T04:06:14.049Z",
+      "endedAt": "2026-10-04T04:06:15.171Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/repair-02/checks/bootstrap-01.json",
+        "sha256": "309f155028123d31c3db1364395d43c7c5e349d16e3e7d7c19acd34fa28fd15f",
+        "bytes": 319
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-02/checks/bootstrap-01.log",
+        "sha256": "1e2d78e52cb20d835933b6bbdb25af8c5deaae1933ad58400f28c841576a47b3",
+        "bytes": 1564
+      }
+    },
+    {
+      "name": "bootstrap-adopted-01",
+      "cwd": ".",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tools/verify-bootstrap.mjs"
+      ],
+      "startedAt": "2026-10-04T04:10:08.674Z",
+      "endedAt": "2026-10-04T04:10:09.531Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/repair-02/checks/bootstrap-adopted-01.json",
+        "sha256": "2b99a650c49069f6a588ce1a7832539fda394297072f0ed8e177578c0f26a549",
+        "bytes": 327
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-02/checks/bootstrap-adopted-01.log",
+        "sha256": "1e2d78e52cb20d835933b6bbdb25af8c5deaae1933ad58400f28c841576a47b3",
+        "bytes": 1564
+      }
+    },
+    {
+      "name": "browser-final-01",
+      "cwd": "production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "--config",
+        "tools/s05-playwright.config.ts",
+        "--output",
+        "C:/Users/user/source/Grape/production/evidence/s05/repair-02/browser-final-01/test-results"
+      ],
+      "startedAt": "2026-10-04T04:06:52.225Z",
+      "endedAt": "2026-10-04T04:08:18.710Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/repair-02/checks/browser-final-01.json",
+        "sha256": "09c12c8604abde3474bb7ca8504d269576cce51bec082e27063d524e3c7655a0",
+        "bytes": 522
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-02/checks/browser-final-01.log",
+        "sha256": "023c9dfe8a8f41087654c08ff4022ddbe0f6421bdc1692eff182a1895be1c766",
+        "bytes": 14082
+      }
+    },
+    {
+      "name": "browser-targeted-01",
+      "cwd": "production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "--config",
+        "tools/s05-playwright.config.ts",
+        "tests/browser/s05-delivered.spec.ts",
+        "--output",
+        "C:/Users/user/source/Grape/production/evidence/s05/repair-02/browser-targeted-01/test-results"
+      ],
+      "startedAt": "2026-10-04T04:06:03.153Z",
+      "endedAt": "2026-10-04T04:06:21.617Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/repair-02/checks/browser-targeted-01.json",
+        "sha256": "76453f574eae8dae593873e0da21e3d44053f76ed29d19518978647ae54ec150",
+        "bytes": 571
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-02/checks/browser-targeted-01.log",
+        "sha256": "1f10e7b9d617a3ec4c98e050026ffb351a756e444e6012cf81649234b6d10307",
+        "bytes": 2731
+      }
+    },
+    {
+      "name": "build-01",
+      "cwd": "production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "startedAt": "2026-10-04T04:07:03.093Z",
+      "endedAt": "2026-10-04T04:07:03.779Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/repair-02/checks/build-01.json",
+        "sha256": "948ee7ab7021a1d0855699dd20bce218fc4142d524eba763264fe6e516b1cea7",
+        "bytes": 340
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-02/checks/build-01.log",
+        "sha256": "985fbc0d4e8c1c86fe3f11815492a4f164558d4ed95f72f23f4ca618a0c02de0",
+        "bytes": 347
+      }
+    },
+    {
+      "name": "fixtures-01",
+      "cwd": ".",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "--test-isolation=none",
+        "tools/verify-bootstrap.test.mjs"
+      ],
+      "startedAt": "2026-10-04T04:06:14.400Z",
+      "endedAt": "2026-10-04T04:06:20.980Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/repair-02/checks/fixtures-01.json",
+        "sha256": "199178fcc4c92a8cf83657ba37ea37d8930d54d0474c50136981197df431f87e",
+        "bytes": 366
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-02/checks/fixtures-01.log",
+        "sha256": "c27c582e0988298eb8adbe4649f9343a05d46979cecb2bfb8ae7eb5eb97af608",
+        "bytes": 1089
+      }
+    },
+    {
+      "name": "fixtures-adopted-01",
+      "cwd": ".",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "--test-isolation=none",
+        "tools/verify-bootstrap.test.mjs"
+      ],
+      "startedAt": "2026-10-04T04:10:08.674Z",
+      "endedAt": "2026-10-04T04:10:13.904Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/repair-02/checks/fixtures-adopted-01.json",
+        "sha256": "209d8db306eef3a940056b89932ca064550de33d9f61baca5dbaded92dbde02b",
+        "bytes": 374
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-02/checks/fixtures-adopted-01.log",
+        "sha256": "df6352a968a6fb574731d6b6d16db793f59f49baaffdc4fcfeabd395f5165757",
+        "bytes": 1089
+      }
+    },
+    {
+      "name": "ownership-01",
+      "cwd": "production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tools/boundaries.mjs"
+      ],
+      "startedAt": "2026-10-04T04:07:03.088Z",
+      "endedAt": "2026-10-04T04:07:03.626Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/repair-02/checks/ownership-01.json",
+        "sha256": "d13dcb668b39433c8e0629b8984c63b58d1d30ac2c1eb15ca1ff96b637122447",
+        "bytes": 322
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-02/checks/ownership-01.log",
+        "sha256": "13b96f77fe0f1c1d7a287842fcc5a9b18ae1a1468397a63ad44f73c23b6716f6",
+        "bytes": 450
+      }
+    },
+    {
+      "name": "pins-01",
+      "cwd": "production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tools/module-pins.mjs"
+      ],
+      "startedAt": "2026-10-04T04:07:03.089Z",
+      "endedAt": "2026-10-04T04:07:03.140Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/repair-02/checks/pins-01.json",
+        "sha256": "7ef40c42ef50c4d6967366bd29d6c8d7f702eedda66fd6541d4e8ae51aacf8c1",
+        "bytes": 318
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-02/checks/pins-01.log",
+        "sha256": "cd2a97cf23fcf560209a93a444a86257a503fb4e9dbd60c93ca9eecf11d73f3e",
+        "bytes": 1500
+      }
+    },
+    {
+      "name": "state-01",
+      "cwd": ".",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "handoff/tools/check-implementation-state.mjs",
+        "--current"
+      ],
+      "startedAt": "2026-10-04T04:06:14.052Z",
+      "endedAt": "2026-10-04T04:06:14.113Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/repair-02/checks/state-01.json",
+        "sha256": "227aea8d682ca05aa2355206369fd58ca9fed83a39547617829033a7c785ee97",
+        "bytes": 350
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-02/checks/state-01.log",
+        "sha256": "fd12e301d9d816e3ca874fc8245e641a703c784359ca22f434faaa37d6e22618",
+        "bytes": 7752
+      }
+    },
+    {
+      "name": "state-adopted-01",
+      "cwd": ".",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "handoff/tools/check-implementation-state.mjs",
+        "--current"
+      ],
+      "startedAt": "2026-10-04T04:10:08.675Z",
+      "endedAt": "2026-10-04T04:10:08.725Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/repair-02/checks/state-adopted-01.json",
+        "sha256": "6de44e072fefa8af08859ca0bd8dc2b6cf7639a5d80dc3838e16dd56ece72405",
+        "bytes": 358
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-02/checks/state-adopted-01.log",
+        "sha256": "fd12e301d9d816e3ca874fc8245e641a703c784359ca22f434faaa37d6e22618",
+        "bytes": 7752
+      }
+    },
+    {
+      "name": "typecheck-01",
+      "cwd": "production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "startedAt": "2026-10-04T04:05:46.920Z",
+      "endedAt": "2026-10-04T04:05:47.809Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/repair-02/checks/typecheck-01.json",
+        "sha256": "36cf45a8fb7fc1b7e19ab58828301b707d5ad99f47f7ef73b41a5015d90e9347",
+        "bytes": 349
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-02/checks/typecheck-01.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "unit-01",
+      "cwd": "production",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--experimental-transform-types",
+        "--test",
+        "--test-isolation=none",
+        "tests/unit/*.test.ts",
+        "tests/conformance/*.test.ts"
+      ],
+      "startedAt": "2026-10-04T04:06:14.717Z",
+      "endedAt": "2026-10-04T04:06:24.218Z",
+      "exitCode": 0,
+      "signal": null,
+      "node": "v25.5.0",
+      "platform": "win32",
+      "arch": "x64",
+      "receipt": {
+        "file": "production/evidence/s05/repair-02/checks/unit-01.json",
+        "sha256": "aa247aa2e15ea9a49d284d6d00ca402aeb42a387b71ff36b6f54f23ea8e40766",
+        "bytes": 433
+      },
+      "log": {
+        "file": "production/evidence/s05/repair-02/checks/unit-01.log",
+        "sha256": "79b12f40461358e2a3f601c66580dba039d12b4af00bd6d3b3eb1ebaf12cb40b",
+        "bytes": 22190
+      }
+    }
+  ],
+  "browserJSON": {
+    "file": "production/evidence/s05/repair-02/browser-final-01/browser-results.json",
+    "sha256": "c1c5caad875208c1764157fff234da783d0edbbe6ef58c15aaa632478d9bcf15",
+    "bytes": 181505
+  },
+  "browserEnv": {
+    "GRAPE_EVIDENCE_DIR": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\repair-02\\browser-final-01",
+    "output": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\repair-02\\browser-final-01\\test-results"
+  },
+  "archive": {
+    "file": "production/evidence/s05/repair-02/archive-public-flows-01/result.json",
+    "sha256": "62467eb83ab77683c3f78a30ab1bbd68fa39de525baf9cf389d173018f88a140",
+    "bytes": 7300
+  },
+  "originalReproduction": {
+    "file": "production/evidence/s05/repair-02/original-reproduction-01/result.json",
+    "sha256": "3dee204ca7c2d297dfa67741c7177245e96316227c24e305354210eb0209cd21",
+    "bytes": 2474
+  },
+  "originalContinuation": {
+    "file": "production/evidence/s05/repair-02/original-continuation-02/result.json",
+    "sha256": "d301b6feb22db19d90ed9db597969ca0ef555c794e5bc9dbb34115fc1beef257",
+    "bytes": 2851
+  },
+  "harnessDiagnostic": {
+    "file": "production/evidence/s05/repair-02/original-continuation-01/harness-outcome.json",
+    "sha256": "8374d71f86bba7fa0d38f124b0bf2f13356e74cab97d5b336378538988a14f39",
+    "bytes": 492
+  }
+}

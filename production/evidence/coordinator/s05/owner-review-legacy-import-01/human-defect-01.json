@@ -1,0 +1,45 @@
+{
+  "packetType": "HUMAN_REPORTED_ACCEPTANCE_DEFECT",
+  "recordedAt": "2026-10-04T03:58:35.968Z",
+  "findingId": "S05-OWNER-001",
+  "findingGroup": "S05-FG-LEGACY-IMPORT-01",
+  "status": "OWNER_REPORTED_REPRODUCTION_PENDING",
+  "source": {
+    "threadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "messageId": null,
+    "attribution": "Direct Human message in this Coordinator conversation; screenshot plus selected START-HERE test6 lines38-41",
+    "screenshot": {
+      "file": "production/evidence/coordinator/s05/owner-review-legacy-import-01/human-screenshot-01.png",
+      "sha256": "42520483b57e281bf8105d2ec3e4b1d913166327f9beb62f2b0fab858a6a0ecb",
+      "bytes": 67632
+    }
+  },
+  "observed": "Review document displays blocked: IMPORT_ERRORS; current graph not replaced; import report candidate:null. The screenshot does not include detailed error list or browser URL.",
+  "expected": "Provided legacy-owner sample can be opened through public Open file / Open in new session then explicitly upgraded to Expand; INPUT_REQUIRED refers only to an unconnected Image Output after import, not import blocking.",
+  "candidate": {
+    "I": "9230f9652c2affd4c20a7dda1033baaa0d61f7e1",
+    "R": "4df5492d4283c2fac7005fc583760ebe143f13bd",
+    "P": "7590935c0b11f351561c832adb19f03248c0517e",
+    "build": "S05-web-9230f96",
+    "deployment": {
+      "file": "production/evidence/coordinator/s05/owner-review-legacy-import-01/deployment-readback-01.json",
+      "sha256": "392968c7fcd11429cca81a5251e87a7b96d7575e0c3765e9696f5917db3c09af",
+      "bytes": 4019
+    },
+    "sample": {
+      "file": "production/evidence/s05/repair-01/samples/legacy-owner.grape.json",
+      "sha256": "9acc5011baa073918d7e7bfdf2577de5ed545cabe991d2359eb1994321fdd485",
+      "bytes": 9692
+    }
+  },
+  "acceptance": "NOT_GRANTED; pause dependent early-batch acceptance pending bounded diagnosis/repair/re-review",
+  "originalPass": "Preserve original R2 PASS and raw evidence unchanged; investigate coverage of actual legacy sample import, do not rewrite reviewer verdict.",
+  "counter": {
+    "attempt": 1,
+    "retriesUsed": 0,
+    "repairAttempt": 1,
+    "unsuccessfulRepairReviewRounds": 0,
+    "priorResourceFindingGroup": "S05-FG-RESOURCE-01 retained separately with initialFailure1 repairAttempt1 reviewRound2 PASS",
+    "newGroupReason": "First owner-reported legacy document import/upgrade failure, separate from linked-program Uniform identity defect; same underlying import issue retains this group across diagnosis and retries."
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "packetVersion": 1,
+  "workflowMode": "continuous-contract",
+  "runId": "GRAPE-CONTINUOUS-20261005-01",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+  "checkpoint": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+  "acceptedMain": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+  "acceptedMainMeaning": "Explicit recovery checkpoint; not S06 acceptance",
+  "expectedWorkHead": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+  "PR": "not required",
+  "authorizationRef": {
+    "file": "production/evidence/coordinator/continuous/20261005-01/human-run-authorization-01.json",
+    "bytes": 22400,
+    "sha256": "49dd9a0500ae2a07e868fc1cc58c6528f0b50ab0c349f33c9bea8442aa9922fa"
+  },
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "canonicalAgent": "/root/s03_implementer_resume"
+  },
+  "attempt": 1,
+  "findingGroup": "continuous-B00",
+  "priorActionReceipt": {
+    "file": "production/evidence/coordinator/continuous/20261005-01/recovery-01.json",
+    "bytes": 2179,
+    "sha256": "a74e391de46564a8ec7cf9c57f6bbaf482d9eb971ceae82b40818fa82690bc63"
+  },
+  "packetType": "IMPLEMENTER_DISPATCH",
+  "packetId": "CONTINUOUS-B00-REGISTRATION-01",
+  "actionKey": "yeataro/Grape:continuous-20261005:B00:registration:9003c00:01",
+  "sliceId": "S06",
+  "authorizedScope": "State/authority registration and guard-checked work backup only; product remains unchanged while independent review starts.",
+  "requestedAction": "Same original writer registers this run as accepted engineering-decision reference in existing decisionReferences with exact receipt hash, and implementationBaseline.decisionReferenceIds. Keep actual I/build and active S06 unchanged; no acceptedEvidence/completion/gate edits. Add concise current routing note to README if needed so historical Human-first wording is clearly superseded by this run. Atomic validate state; commit explicit authorized files/evidence with B00 identification and normally push work after rereading remote main/work. Preserve production/debug.log. Return commit, remote confirmation, state hash and STOP_WRITING.",
+  "inputRefs": [
+    {
+      "file": "production/evidence/coordinator/continuous/20261005-01/human-run-authorization-01.json",
+      "bytes": 22400,
+      "sha256": "49dd9a0500ae2a07e868fc1cc58c6528f0b50ab0c349f33c9bea8442aa9922fa"
+    },
+    {
+      "file": "production/evidence/coordinator/continuous/20261005-01/recovery-01.json",
+      "bytes": 2179,
+      "sha256": "a74e391de46564a8ec7cf9c57f6bbaf482d9eb971ceae82b40818fa82690bc63"
+    },
+    {
+      "file": "production/evidence/coordinator/continuous/20261005-01/inventory-plan-01.json",
+      "bytes": 1358,
+      "sha256": "1ed0ae23307337bb2c0e4b0f0416df26859cb33811afc5d02a88aa48766da3a4"
+    }
+  ],
+  "allowedPaths": [
+    "implementation-state.json",
+    "README.md",
+    "production/evidence/coordinator/continuous/20261005-01/**",
+    "production/evidence/continuous/20261005-01/registration/**"
+  ],
+  "prohibitedPaths": [
+    "handoff/**",
+    "production/src/**",
+    "production/apps/**",
+    "production/tests/**",
+    "historical evidence/decisions"
+  ],
+  "exclusions": [
+    "No product change before B00 review result",
+    "No delegate writer",
+    "No acceptance/main merge/release"
+  ],
+  "verificationCommands": [
+    "node tools/verify-bootstrap.mjs",
+    "node handoff/tools/check-implementation-state.mjs --current",
+    "git diff --check (preserve original CRLF history)"
+  ],
+  "evidenceRequirements": "One compact registration receipt, exact commit/push state; no full runtime replay for metadata registration",
+  "outputLocation": "production/evidence/continuous/20261005-01/registration/",
+  "stopConditions": [
+    "After guarded commit/push and receipt stop writing pending bounded next assignment",
+    "Unexpected refs or writer conflict: preserve, report, reconcile"
+  ],
+  "nextRoute": "Coordinator collects registered authority and review result; no Human gate"
+}

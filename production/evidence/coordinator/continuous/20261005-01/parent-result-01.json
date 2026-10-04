@@ -1,0 +1,99 @@
+{
+  "recordType": "PARENT_CONTINUOUS_B00_REGISTRATION_DELIVERY_RESULT",
+  "recordedAt": "2026-10-04T19:36:50.578Z",
+  "status": "DISPATCHED_RUNNING_PACKET_AND_AUTHORITY_READ",
+  "workflowMode": "continuous-contract",
+  "runId": "GRAPE-CONTINUOUS-20261005-01",
+  "actionKey": "yeataro/Grape:continuous-20261005:B00:registration:9003c00:01",
+  "packetId": "CONTINUOUS-B00-REGISTRATION-01",
+  "packet": {
+    "file": "production/evidence/coordinator/continuous/20261005-01/registration-packet-01.json",
+    "bytes": 4063,
+    "sha256": "407c2562c6c0369a3101a52a1dfac7ab806a4653c084ade508ba27341b9fe691"
+  },
+  "intent": {
+    "file": "production/evidence/coordinator/continuous/20261005-01/parent-intent-01.json",
+    "bytes": 9842,
+    "sha256": "2dda1166a2170aa009608f288a952e3e2c17a486c290578fde941e6196a03ef0"
+  },
+  "transport": {
+    "tool": "collaboration.followup_task",
+    "parentTurnId": "01a10869-239d-7631-b49a-ece660d3aa11",
+    "activityId": "call_vboExQj5gRuGJ4YLuUv1wAyK",
+    "toolReturnedWithoutError": true,
+    "actualDispatches": 1,
+    "duplicateDispatch": false,
+    "newWriter": false,
+    "parentReviewerDispatch": false
+  },
+  "child": {
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "previousCompletedTurn": "01a1082e-92d3-7681-9ea1-73ee03ef4192",
+    "newTurnId": "01a1086a-7d19-7c51-bb16-0fd4a949511c",
+    "observedStatus": "active / inProgress",
+    "observationTool": "mcp__codex_app__read_thread",
+    "acknowledgmentId": "msg_0f7ea6f2d846c6d3016ac2aaa282a087d0a57b30718d93fba0",
+    "packetRead": {
+      "id": "exec-bd983f51-fd6c-44b8-8893-428bce4ceb03",
+      "status": "completed",
+      "exitCode": 0
+    },
+    "authorityRead": {
+      "id": "exec-bc6917d2-536b-442a-aeb7-a7f96d67b1fd",
+      "status": "completed",
+      "exitCode": 0
+    },
+    "continuousPolicyRead": {
+      "id": "exec-daf5a714-3d30-4f6c-8f9f-3f998ec41721",
+      "status": "completed",
+      "exitCode": 0
+    }
+  },
+  "authorization": {
+    "receipt": {
+      "file": "production/evidence/coordinator/continuous/20261005-01/human-run-authorization-01.json",
+      "bytes": 22400,
+      "sha256": "49dd9a0500ae2a07e868fc1cc58c6528f0b50ab0c349f33c9bea8442aa9922fa"
+    },
+    "humanMessageId": "01a10866-b531-7960-896c-e1accf684b1f",
+    "directHumanReadByParent": true,
+    "workCommitAndNormalPushAuthorized": true,
+    "finalMainMergeAuthorized": false,
+    "humanAcceptanceGranted": false,
+    "priorHumanFirstStopsSupersededForThisRun": true
+  },
+  "guardsVerifiedBeforeDispatch": {
+    "head": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+    "localMain": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+    "remoteMain": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+    "remoteWork": "9003c00b214ac29cafcb6cc22ac10693ac92a0bf",
+    "trackedAndIndexClean": true,
+    "packetInputRefs": 3,
+    "authorityNestedReferences": 26,
+    "productSourceAppsTestsEqualI30c8679": true
+  },
+  "attempt": 1,
+  "findingGroup": "continuous-B00",
+  "scope": {
+    "registrationOnly": true,
+    "productI": "30c867945c992d25956a2a32825de34571f7749e",
+    "productBuild": "S06-debug-30c8679",
+    "preserveActiveS06AndAcceptedEvidence": true,
+    "preserveDebugLogAndHistory": true,
+    "writerRechecksRemoteBeforePush": true
+  },
+  "outcomeLimits": {
+    "registrationComplete": false,
+    "commitComplete": false,
+    "pushComplete": false,
+    "independentReviewComplete": false,
+    "humanAcceptance": false
+  },
+  "parentProductWrites": false,
+  "parentStateWrites": false,
+  "parentGitMutations": [],
+  "parentRemoteMutations": [],
+  "parentServiceActions": [],
+  "next": "Original writer performs only guarded B00 registration/normal work backup and returns actual commit/remote/state identities, then STOP_WRITING. Coordinator collects actual registration and independently arranged B00 review before selecting next eligible bounded work."
+}

@@ -1,0 +1,55 @@
+
+Running 8 tests using 1 worker
+
+(node:13128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › ..\..\..\production\tests\browser\s06-help.spec.ts:32:3 › S06 Help natural outside-to-inside gesture preserves document and History (1.1s)
+  ok 2 [chromium] › ..\..\..\production\tests\browser\s06-help.spec.ts:32:3 › S06 Help natural inside-to-outside gesture preserves document and History (959ms)
+  ok 3 [chromium] › ..\..\..\production\tests\browser\s06-help.spec.ts:32:3 › S06 Help natural outside-to-outside gesture preserves document and History (967ms)
+  ok 4 [chromium] › ..\..\..\production\tests\browser\s06-help.spec.ts:53:3 › S06 Help pointercancel disarms incomplete backdrop gesture and allows a new click (524ms)
+  ok 5 [chromium] › ..\..\..\production\tests\browser\s06-help.spec.ts:53:3 › S06 Help blur disarms incomplete backdrop gesture and allows a new click (573ms)
+  ok 6 [chromium] › ..\..\..\production\tests\browser\s06-help.spec.ts:68:1 › S06 Help Escape Close and reopen consume old gestures and restore usable focus (551ms)
+  ok 7 [chromium] › ..\..\..\production\tests\browser\s06-help.spec.ts:81:1 › S06 Help keyboard menu returns focus to Canvas and remains independent across two Canvas contexts (328ms)
+  x  8 [chromium] › ..\..\..\production\tests\browser\s06-help.spec.ts:97:1 › S06 Help readonly interaction and remounted document retain scoped lifetime (5.7s)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-help.spec.ts:97:1 › S06 Help readonly interaction and remounted document retain scoped lifetime 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('dialog', { name: 'Keyboard shortcuts' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Keyboard shortcuts' })
+
+
+      105 |   await page.getByRole("button", { name: "Shortcuts", exact: true }).click();
+      106 |   await old!.evaluate((e) => { e.dispatchEvent(new PointerEvent("pointerdown", { clientX: -10, clientY: -10, button: 0, isPrimary: true, pointerId: 1 })); e.dispatchEvent(new PointerEvent("click", { clientX: -10, clientY: -10, pointerId: 1 })); });
+    > 107 |   await expect(page.getByRole("dialog", { name: "Keyboard shortcuts" })).toBeVisible();
+          |                                                                          ^
+      108 |   await page.keyboard.press("Escape");
+      109 | });
+      110 |
+        at C:\Users\user\source\Grape\production\tests\browser\s06-help.spec.ts:107:74
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-01\source-help-01\test-results\s06-help-S06-Help-readonly-4aec2-ment-retain-scoped-lifetime-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-01\source-help-01\test-results\s06-help-S06-Help-readonly-4aec2-ment-retain-scoped-lifetime-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-01\source-help-01\test-results\s06-help-S06-Help-readonly-4aec2-ment-retain-scoped-lifetime-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-01\source-help-01\test-results\s06-help-S06-Help-readonly-4aec2-ment-retain-scoped-lifetime-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-help.spec.ts:97:1 › S06 Help readonly interaction and remounted document retain scoped lifetime 
+  7 passed (11.4s)

@@ -1,0 +1,11 @@
+import fs from 'node:fs';import path from 'node:path';import cp from 'node:child_process';import crypto from 'node:crypto';import assert from 'node:assert/strict';
+const root=process.cwd(),out='production/evidence/s06/workspace-repair-01/build-01',build=path.resolve('.verification/s06-repair-build-01');
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex'),record=file=>{const b=fs.readFileSync(file);return{file,bytes:b.length,sha256:hash(b)}};
+const I=cp.execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();assert.equal(cp.execFileSync('git',['diff','--name-only'],{encoding:'utf8'}).trim(),'');assert(!fs.existsSync(out)&&!fs.existsSync(build));fs.mkdirSync(out,{recursive:true});
+const tracked=cp.execFileSync('git',['ls-files','production'],{encoding:'utf8'}).trim().split('\n').filter(f=>/^production\/(src|apps|tests|tools|conformance)\//.test(f)||/^production\/(package(?:-lock)?\.json|tsconfig\.json|playwright\.config\.ts|index\.html)$/.test(f));
+const sources=tracked.sort().map(file=>{const r=record(file),blob=cp.execFileSync('git',['show',I+':'+file],{maxBuffer:4e6});assert.equal(hash(blob),r.sha256,file);return r});
+fs.writeFileSync(out+'/source-config-manifest.json',JSON.stringify({implementationI:I,files:sources},null,2)+'\n',{flag:'wx'});
+const args=['node_modules/vite/bin/vite.js','build','--outDir',build],r=cp.spawnSync(process.execPath,args,{cwd:path.join(root,'production'),encoding:'utf8',maxBuffer:8e6});fs.writeFileSync(out+'/build.log',r.stdout+r.stderr,{flag:'wx'});assert.equal(r.status,0,r.stderr);
+function walk(dir,prefix=''){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(d=>d.isDirectory()?walk(path.join(dir,d.name),prefix+d.name+'/'):[prefix+d.name]);}
+const files=walk(build).map(file=>({...record(path.join(build,file)),file})),archive=out+'/candidate-web.tar.gz';cp.execFileSync('tar',['-czf',path.resolve(archive),'-C',build,'.']);
+fs.writeFileSync(out+'/build-manifest.json',JSON.stringify({implementationI:I,buildId:'S06-repair-'+I.slice(0,7),status:'CANDIDATE_FOR_INDEPENDENT_REVIEW',command:{executable:process.execPath,args,cwd:path.join(root,'production')},sourceManifest:record(out+'/source-config-manifest.json'),archive:record(archive),files},null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({I,sources:sources.length,files:files.length,archive:record(archive)}));

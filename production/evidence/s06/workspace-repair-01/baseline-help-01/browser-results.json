@@ -1,0 +1,166 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+      "s06-help.spec.ts",
+      "--grep",
+      "natural outside-to-inside",
+      "--output",
+      "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-01\\baseline-help-01\\test-results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/workspace-repair-01/baseline-help-01/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-01\\baseline-help-01\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s06-help.spec.ts",
+      "file": "s06-help.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 Help natural outside-to-inside gesture preserves document and History",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5763,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Keyboard shortcuts' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Keyboard shortcuts' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Keyboard shortcuts' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Keyboard shortcuts' })\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:44:31",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts",
+                      "column": 31,
+                      "line": 44
+                    },
+                    "snippet": "  42 |     await page.mouse.up();\n  43 |     if (closes) { await expect(help).toBeHidden(); await expect(opener).toBeFocused(); }\n> 44 |     else { await expect(help).toBeVisible(); await page.keyboard.press(\"Escape\"); await expect(opener).toBeFocused(); }\n     |                               ^\n  45 |     expect(await documentOf(page)).toEqual(before);\n  46 |     await page.getByRole(\"button\", { name: \"Undo\", exact: true }).click();\n  47 |     await expect(page.getByRole(\"heading\", { name: \"Multiply\", exact: true })).toHaveCount(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts",
+                        "column": 31,
+                        "line": 44
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Keyboard shortcuts' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Keyboard shortcuts' })\u001b[22m\n\n\n  42 |     await page.mouse.up();\n  43 |     if (closes) { await expect(help).toBeHidden(); await expect(opener).toBeFocused(); }\n> 44 |     else { await expect(help).toBeVisible(); await page.keyboard.press(\"Escape\"); await expect(opener).toBeFocused(); }\n     |                               ^\n  45 |     expect(await documentOf(page)).toEqual(before);\n  46 |     await page.getByRole(\"button\", { name: \"Undo\", exact: true }).click();\n  47 |     await expect(page.getByRole(\"heading\", { name: \"Multiply\", exact: true })).toHaveCount(0);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts:44:31"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T11:51:39.659Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-01\\baseline-help-01\\test-results\\s06-help-S06-Help-natural--3baaf-serves-document-and-History-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-01\\baseline-help-01\\test-results\\s06-help-S06-Help-natural--3baaf-serves-document-and-History-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\workspace-repair-01\\baseline-help-01\\test-results\\s06-help-S06-Help-natural--3baaf-serves-document-and-History-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-help.spec.ts",
+                    "column": 31,
+                    "line": 44
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fc4489d4ce96492f1eeb-8e33b2f07f42e97750f9",
+          "file": "s06-help.spec.ts",
+          "line": 32,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T11:51:39.298Z",
+    "duration": 7778.276,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

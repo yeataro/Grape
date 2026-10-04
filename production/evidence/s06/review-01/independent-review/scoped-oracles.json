@@ -1,0 +1,627 @@
+[
+  {
+    "capability": {
+      "id": "LC-UI-034",
+      "domain": "Create UI",
+      "name": "開啟Add Node並篩選候選",
+      "classification": "Portable",
+      "legacyBehavior": "以graph座標記住建立點，搜尋重置，category路徑/source/type篩選；顯示標籤、來源badge及匹配port。wired模式列真正可規劃的連線變體，精確型別優先，每node顯示最佳變體；新source和已存在source有不同標示。",
+      "triggerInput": "Tab／空白doubleclick/doubletap／右鍵Add／落線空白",
+      "preconditions": [
+        "已載入圖；觸發入口目前可用。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "目前以瀏覽器 DOM、Pointer/Keyboard Events 呈現；行為本身沒有宿主專屬前提。"
+      ],
+      "observableResult": "以graph座標記住建立點，搜尋重置，category路徑/source/type篩選；顯示標籤、來源badge及匹配port。wired模式列真正可規劃的連線變體，精確型別優先，每node顯示最佳變體；新source和已存在source有不同標示。",
+      "stateTransition": "不改图模型；以graph座標記住建立點，搜尋重置，category路徑/source/type篩選；顯示標籤、來源badge及匹配port。wired模式列真正可規劃的連線變體，精確型別優先，每node顯示最佳變體；新source和已存在source有不同標示。",
+      "failureBehavior": "條件不成立時忽略操作；不建立模型變更。",
+      "persistenceBehavior": "只改目前編輯器的暫時狀態；不寫入圖 JSON。",
+      "undoRedoBehavior": "不建立圖的 Undo/Redo 步驟。",
+      "importantEdgeCases": [
+        "readonly不開；拖線遇不相容目標不改成Add。",
+        "來源CRUD／library內容由LC-DATA域描述，本項只描述選取入口。",
+        "鍵盤UpDown/Enter選擇，Esc回canvas。"
+      ],
+      "legacyCoupling": "沒有必須依賴 TouchDesigner 的使用者行為。",
+      "preservedProductIntent": "開啟Add Node並篩選候選",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "src/editor/graph_ui.js",
+          "lineStart": 2182,
+          "lineEnd": 2224,
+          "kind": "source",
+          "observation": "以graph座標記住建立點，搜尋重置，category路徑/source/type篩選；顯示標籤、來源badge及匹配port。wired模式列真正可規劃的連線變體，精確型別優先，每node顯示最佳變體；新source和已存在source有不同標示。"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀指定 snapshot 原始碼及所附測試／文件；本子任務未執行瀏覽器測試。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "已載入圖且入口可用",
+          "when": "Tab／空白doubleclick/doubletap／右鍵Add／落線空白",
+          "then": "以graph座標記住建立點，搜尋重置，category路徑/source/type篩選；顯示標籤、來源badge及匹配port。wired模式列真正可規劃的連線變體，精確型別優先，每node顯示最佳變體；新source和已存在source有不同標示。"
+        }
+      ]
+    },
+    "owner": "workspace.presentation",
+    "ownership": {
+      "model": "Graph owns document, Node instances, values/defaults, references, graph-local definitions and History. Modules own code/schema, not mutable instance data.",
+      "view": "EditorContext owns selection/navigation; Panel owns view state/drafts; Layout owns placement; all are separate from the canonical document.",
+      "runtime": "Target provider owns actual values/native resources; Binding owns session intent, receipts and disposable mirrors. Observations do not mutate Graph.",
+      "scope": "Only the state domains used by this leaf are involved; accountable owner is not an aggregate owner.",
+      "contract": "03_RESPONSIBILITY_AND_DEPENDENCY.md"
+    },
+    "gateIds": [],
+    "sliceIds": [
+      "S01",
+      "S06"
+    ]
+  },
+  {
+    "capability": {
+      "id": "LC-UI-035",
+      "domain": "Create UI",
+      "name": "移动Create面板不改建立點",
+      "classification": "Portable",
+      "legacyBehavior": "3 CSS px後移動面板，viewport內夾住，獨立記住graph建立點。取消drag回原位置；移動不建節點、不改線。縮放／圖context變動使stale選擇失效。",
+      "triggerInput": "拖Create標題非控制區",
+      "preconditions": [
+        "已載入圖；觸發入口目前可用。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "目前以瀏覽器 DOM、Pointer/Keyboard Events 呈現；行為本身沒有宿主專屬前提。"
+      ],
+      "observableResult": "3 CSS px後移動面板，viewport內夾住，獨立記住graph建立點。取消drag回原位置；移動不建節點、不改線。縮放／圖context變動使stale選擇失效。",
+      "stateTransition": "不改图模型；3 CSS px後移動面板，viewport內夾住，獨立記住graph建立點。取消drag回原位置；移動不建節點、不改線。縮放／圖context變動使stale選擇失效。",
+      "failureBehavior": "條件不成立時忽略操作；不建立模型變更。",
+      "persistenceBehavior": "只改目前編輯器的暫時狀態；不寫入圖 JSON。",
+      "undoRedoBehavior": "不建立圖的 Undo/Redo 步驟。",
+      "importantEdgeCases": [
+        "touch可拖，search保留原生text；第二pointer、resize、hidden、blur、Escape取消。"
+      ],
+      "legacyCoupling": "沒有必須依賴 TouchDesigner 的使用者行為。",
+      "preservedProductIntent": "移动Create面板不改建立點",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "src/editor/graph_ui.js",
+          "lineStart": 2137,
+          "lineEnd": 2181,
+          "kind": "source",
+          "observation": "3 CSS px後移動面板，viewport內夾住，獨立記住graph建立點。取消drag回原位置；移動不建節點、不改線。縮放／圖context變動使stale選擇失效。"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀指定 snapshot 原始碼及所附測試／文件；本子任務未執行瀏覽器測試。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "已載入圖且入口可用",
+          "when": "拖Create標題非控制區",
+          "then": "3 CSS px後移動面板，viewport內夾住，獨立記住graph建立點。取消drag回原位置；移動不建節點、不改線。縮放／圖context變動使stale選擇失效。"
+        }
+      ]
+    },
+    "owner": "workspace.presentation",
+    "ownership": {
+      "model": "Graph owns document, Node instances, values/defaults, references, graph-local definitions and History. Modules own code/schema, not mutable instance data.",
+      "view": "EditorContext owns selection/navigation; Panel owns view state/drafts; Layout owns placement; all are separate from the canonical document.",
+      "runtime": "Target provider owns actual values/native resources; Binding owns session intent, receipts and disposable mirrors. Observations do not mutate Graph.",
+      "scope": "Only the state domains used by this leaf are involved; accountable owner is not an aggregate owner.",
+      "contract": "03_RESPONSIBILITY_AND_DEPENDENCY.md"
+    },
+    "gateIds": [],
+    "sliceIds": [
+      "S06"
+    ]
+  },
+  {
+    "capability": {
+      "id": "LC-UI-036",
+      "domain": "Create UI",
+      "name": "從接孔右鍵建立後放置",
+      "classification": "Portable",
+      "legacyBehavior": "先測量候選真實port與卡尺寸，顯示輪廓/預覽線，不實際加node/source。位置snap24；左擊有效canvas處一次提交節點+連線。Escape/Tab/右擊/外部點/換圖/版本變更取消。",
+      "triggerInput": "port context Create候選，移cursor再左擊canvas",
+      "preconditions": [
+        "已載入圖；觸發入口目前可用。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "目前以瀏覽器 DOM、Pointer/Keyboard Events 呈現；行為本身沒有宿主專屬前提。"
+      ],
+      "observableResult": "先測量候選真實port與卡尺寸，顯示輪廓/預覽線，不實際加node/source。位置snap24；左擊有效canvas處一次提交節點+連線。Escape/Tab/右擊/外部點/換圖/版本變更取消。",
+      "stateTransition": "先測量候選真實port與卡尺寸，顯示輪廓/預覽線，不實際加node/source。位置snap24；左擊有效canvas處一次提交節點+連線。Escape/Tab/右擊/外部點/換圖/版本變更取消。",
+      "failureBehavior": "條件不成立時忽略操作；不建立模型變更。",
+      "persistenceBehavior": "只有最後確認才保存節點/來源/連線；預覽無保存。",
+      "undoRedoBehavior": "確認建立+接線為一次Undo；取消無步驟。",
+      "importantEdgeCases": [
+        "singleton、dynamictyped節點使用preview投影，不可為測量偷改source。",
+        "拖面板位置與落點不同；確認後尾隨click被吞避免重複選取／連線。"
+      ],
+      "legacyCoupling": "沒有必須依賴 TouchDesigner 的使用者行為。",
+      "preservedProductIntent": "從接孔右鍵建立後放置",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "src/editor/graph_ui.js",
+          "lineStart": 2230,
+          "lineEnd": 2320,
+          "kind": "source",
+          "observation": "先測量候選真實port與卡尺寸，顯示輪廓/預覽線，不實際加node/source。位置snap24；左擊有效canvas處一次提交節點+連線。Escape/Tab/右擊/外部點/換圖/版本變更取消。"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀指定 snapshot 原始碼及所附測試／文件；本子任務未執行瀏覽器測試。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "已載入圖且入口可用",
+          "when": "port context Create候選，移cursor再左擊canvas",
+          "then": "先測量候選真實port與卡尺寸，顯示輪廓/預覽線，不實際加node/source。位置snap24；左擊有效canvas處一次提交節點+連線。Escape/Tab/右擊/外部點/換圖/版本變更取消。"
+        }
+      ]
+    },
+    "owner": "workspace.commands",
+    "ownership": {
+      "model": "Graph owns document, Node instances, values/defaults, references, graph-local definitions and History. Modules own code/schema, not mutable instance data.",
+      "view": "EditorContext owns selection/navigation; Panel owns view state/drafts; Layout owns placement; all are separate from the canonical document.",
+      "runtime": "Target provider owns actual values/native resources; Binding owns session intent, receipts and disposable mirrors. Observations do not mutate Graph.",
+      "scope": "Only the state domains used by this leaf are involved; accountable owner is not an aggregate owner.",
+      "contract": "03_RESPONSIBILITY_AND_DEPENDENCY.md"
+    },
+    "gateIds": [],
+    "sliceIds": [
+      "S06"
+    ]
+  },
+  {
+    "capability": {
+      "id": "LC-UI-072",
+      "domain": "Help and chrome",
+      "name": "快捷鍵說明與事件隔離",
+      "classification": "Portable",
+      "legacyBehavior": "列現有操作與實際OS modifier、shortcut metadata，群組雙欄短screen內容scroll；開時關popovers，Tab留dialog，Escape/close及完整外部down+click關閉回opener，drag-out不關。",
+      "triggerInput": "Help shortcuts按鈕；modal鍵盤／close／backdrop",
+      "preconditions": [
+        "已載入圖；觸發入口目前可用。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "目前以瀏覽器 DOM、Pointer/Keyboard Events 呈現；行為本身沒有宿主專屬前提。"
+      ],
+      "observableResult": "列現有操作與實際OS modifier、shortcut metadata，群組雙欄短screen內容scroll；開時關popovers，Tab留dialog，Escape/close及完整外部down+click關閉回opener，drag-out不關。",
+      "stateTransition": "不改图模型；列現有操作與實際OS modifier、shortcut metadata，群組雙欄短screen內容scroll；開時關popovers，Tab留dialog，Escape/close及完整外部down+click關閉回opener，drag-out不關。",
+      "failureBehavior": "條件不成立時忽略操作；不建立模型變更。",
+      "persistenceBehavior": "只改目前編輯器的暫時狀態；不寫入圖 JSON。",
+      "undoRedoBehavior": "不建立圖的 Undo/Redo 步驟。",
+      "importantEdgeCases": [
+        "H/F/P/X及導航等graphCommandReady有IME、contenteditable、gesture guards；一般編輯hotkey另靠input/dialog排除與各widget stopPropagation，不能僅由一個guard聲稱所有快捷IME交叉皆已验证（LU-UI-003）。",
+        "具體各快捷shortcut trace分項，不將快捷只列泛稱。"
+      ],
+      "legacyCoupling": "沒有必須依賴 TouchDesigner 的使用者行為。",
+      "preservedProductIntent": "快捷鍵說明與事件隔離",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "src/editor/shortcuts_ui.js",
+          "lineStart": 1,
+          "lineEnd": 95,
+          "kind": "source",
+          "observation": "列現有操作與實際OS modifier、shortcut metadata，群組雙欄短screen內容scroll；開時關popovers，Tab留dialog，Escape/close及完整外部down+click關閉回opener，drag-out不關。"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀指定 snapshot 原始碼及所附測試／文件；本子任務未執行瀏覽器測試。"
+      },
+      "unknownRefs": [
+        "LU-UI-003"
+      ],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "已載入圖且入口可用",
+          "when": "Help shortcuts按鈕；modal鍵盤／close／backdrop",
+          "then": "列現有操作與實際OS modifier、shortcut metadata，群組雙欄短screen內容scroll；開時關popovers，Tab留dialog，Escape/close及完整外部down+click關閉回opener，drag-out不關。"
+        }
+      ]
+    },
+    "owner": "workspace.presentation",
+    "ownership": {
+      "model": "Graph owns document, Node instances, values/defaults, references, graph-local definitions and History. Modules own code/schema, not mutable instance data.",
+      "view": "EditorContext owns selection/navigation; Panel owns view state/drafts; Layout owns placement; all are separate from the canonical document.",
+      "runtime": "Target provider owns actual values/native resources; Binding owns session intent, receipts and disposable mirrors. Observations do not mutate Graph.",
+      "scope": "Only the state domains used by this leaf are involved; accountable owner is not an aggregate owner.",
+      "contract": "03_RESPONSIBILITY_AND_DEPENDENCY.md"
+    },
+    "gateIds": [
+      "G-LU-UI-003",
+      "G-UI-CONFORMANCE"
+    ],
+    "sliceIds": [
+      "S06"
+    ]
+  },
+  {
+    "capability": {
+      "id": "LC-UI-073",
+      "domain": "Help and chrome",
+      "name": "Toolbar響應式overflow",
+      "classification": "Portable",
+      "legacyBehavior": "按實際空間整組移入dropdown，保Undo/Redo組合、stage/breadcrumb/Up可達；足夠時移回原control無duplicate。overflow支持keyboard且可打開原Arrange，customnames/GLSL等引用原action。",
+      "triggerInput": "canvas寬度不足／UIscale與density改變",
+      "preconditions": [
+        "已載入圖；觸發入口目前可用。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "目前以瀏覽器 DOM、Pointer/Keyboard Events 呈現；行為本身沒有宿主專屬前提。"
+      ],
+      "observableResult": "按實際空間整組移入dropdown，保Undo/Redo組合、stage/breadcrumb/Up可達；足夠時移回原control無duplicate。overflow支持keyboard且可打開原Arrange，customnames/GLSL等引用原action。",
+      "stateTransition": "不改图模型；按實際空間整組移入dropdown，保Undo/Redo組合、stage/breadcrumb/Up可達；足夠時移回原control無duplicate。overflow支持keyboard且可打開原Arrange，customnames/GLSL等引用原action。",
+      "failureBehavior": "條件不成立時忽略操作；不建立模型變更。",
+      "persistenceBehavior": "只改目前編輯器的暫時狀態；不寫入圖 JSON。",
+      "undoRedoBehavior": "不建立圖的 Undo/Redo 步驟。",
+      "importantEdgeCases": [
+        "不預留空dropdown；selectiontoolbar所屬控制不被重複搬走；無idle layoutloop。"
+      ],
+      "legacyCoupling": "沒有必須依賴 TouchDesigner 的使用者行為。",
+      "preservedProductIntent": "Toolbar響應式overflow",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "src/editor/selection_ui.js",
+          "lineStart": 474,
+          "lineEnd": 552,
+          "kind": "source",
+          "observation": "按實際空間整組移入dropdown，保Undo/Redo組合、stage/breadcrumb/Up可達；足夠時移回原control無duplicate。overflow支持keyboard且可打開原Arrange，customnames/GLSL等引用原action。"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀指定 snapshot 原始碼及所附測試／文件；本子任務未執行瀏覽器測試。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "已載入圖且入口可用",
+          "when": "canvas寬度不足／UIscale與density改變",
+          "then": "按實際空間整組移入dropdown，保Undo/Redo組合、stage/breadcrumb/Up可達；足夠時移回原control無duplicate。overflow支持keyboard且可打開原Arrange，customnames/GLSL等引用原action。"
+        }
+      ]
+    },
+    "owner": "workspace.presentation",
+    "ownership": {
+      "model": "Graph owns document, Node instances, values/defaults, references, graph-local definitions and History. Modules own code/schema, not mutable instance data.",
+      "view": "EditorContext owns selection/navigation; Panel owns view state/drafts; Layout owns placement; all are separate from the canonical document.",
+      "runtime": "Target provider owns actual values/native resources; Binding owns session intent, receipts and disposable mirrors. Observations do not mutate Graph.",
+      "scope": "Only the state domains used by this leaf are involved; accountable owner is not an aggregate owner.",
+      "contract": "03_RESPONSIBILITY_AND_DEPENDENCY.md"
+    },
+    "gateIds": [],
+    "sliceIds": [
+      "S06"
+    ]
+  },
+  {
+    "capability": {
+      "id": "LC-UI-081",
+      "domain": "Node browser",
+      "name": "分類樹、library範圍与inspect詳情",
+      "classification": "Portable",
+      "legacyBehavior": "分類樹使用primary與secondarycategory（同一路徑去重），沿預定category/branch順序，再字串排序。branch展開狀態跨filter/render保留於會話；單擊只inspect signature/categorypath/help/aliases，不建立。subgraph列inputs/outputs而非假裝GLSL函數。",
+      "triggerInput": "左側Add Node Categories/Library accordion；branch展開；點entry",
+      "preconditions": [
+        "已載入圖；觸發入口目前可用。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "目前以瀏覽器 DOM、Pointer/Keyboard Events 呈現；行為本身沒有宿主專屬前提。"
+      ],
+      "observableResult": "分類樹使用primary與secondarycategory（同一路徑去重），沿預定category/branch順序，再字串排序。branch展開狀態跨filter/render保留於會話；單擊只inspect signature/categorypath/help/aliases，不建立。subgraph列inputs/outputs而非假裝GLSL函數。",
+      "stateTransition": "不改图模型；分類樹使用primary與secondarycategory（同一路徑去重），沿預定category/branch順序，再字串排序。branch展開狀態跨filter/render保留於會話；單擊只inspect signature/categorypath/help/aliases，不建立。subgraph列inputs/outputs而非假裝GLSL函數。",
+      "failureBehavior": "條件不成立時忽略操作；不建立模型變更。",
+      "persistenceBehavior": "只改目前編輯器的暫時狀態；不寫入圖 JSON。",
+      "undoRedoBehavior": "不建立圖的 Undo/Redo 步驟。",
+      "importantEdgeCases": [
+        "readonly仍inspect，+禁插；detail關閉不改graphselection。",
+        "只sourcefilter影響visibleentries，不改實際graph；Library可選all/project/personal/builtin並有獨立template區。"
+      ],
+      "legacyCoupling": "沒有必須依賴 TouchDesigner 的使用者行為。",
+      "preservedProductIntent": "分類樹、library範圍与inspect詳情",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "src/editor/graph_ui.js",
+          "lineStart": 1941,
+          "lineEnd": 2089,
+          "kind": "source",
+          "observation": "分類樹使用primary與secondarycategory（同一路徑去重），沿預定category/branch順序，再字串排序。branch展開狀態跨filter/render保留於會話；單擊只inspect signature/categorypath/help/aliases，不建立。subgraph列inputs/outputs而非假裝GLSL函數。"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀指定 snapshot 原始碼及所附測試／文件；本子任務未執行瀏覽器測試。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "已載入圖且入口可用",
+          "when": "左側Add Node Categories/Library accordion；branch展開；點entry",
+          "then": "分類樹使用primary與secondarycategory（同一路徑去重），沿預定category/branch順序，再字串排序。branch展開狀態跨filter/render保留於會話；單擊只inspect signature/categorypath/help/aliases，不建立。subgraph列inputs/outputs而非假裝GLSL函數。"
+        }
+      ]
+    },
+    "owner": "workspace.presentation",
+    "ownership": {
+      "model": "Graph owns document, Node instances, values/defaults, references, graph-local definitions and History. Modules own code/schema, not mutable instance data.",
+      "view": "EditorContext owns selection/navigation; Panel owns view state/drafts; Layout owns placement; all are separate from the canonical document.",
+      "runtime": "Target provider owns actual values/native resources; Binding owns session intent, receipts and disposable mirrors. Observations do not mutate Graph.",
+      "scope": "Only the state domains used by this leaf are involved; accountable owner is not an aggregate owner.",
+      "contract": "03_RESPONSIBILITY_AND_DEPENDENCY.md"
+    },
+    "gateIds": [],
+    "sliceIds": [
+      "S06"
+    ]
+  },
+  {
+    "capability": {
+      "id": "LC-UI-082",
+      "domain": "Node browser",
+      "name": "全域搜尋排序與來源filter",
+      "classification": "Portable",
+      "legacyBehavior": "NFKC+lowercase+trim；優先精確name/GLSLname(0)、精確alias(1)、nameprefix(2)、所有詞存在name(3)、name+alias(4)、再category/path/tag(5)、再description(6)。多詞可分散於欄位但必全命中；平手label/key。搜尋跨展開branch/library，仍遵守sourcefilter；empty復原樹。",
+      "triggerInput": "Add Node search／Create search輸入多詞；Escape/clear",
+      "preconditions": [
+        "已載入圖；觸發入口目前可用。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "目前以瀏覽器 DOM、Pointer/Keyboard Events 呈現；行為本身沒有宿主專屬前提。"
+      ],
+      "observableResult": "NFKC+lowercase+trim；優先精確name/GLSLname(0)、精確alias(1)、nameprefix(2)、所有詞存在name(3)、name+alias(4)、再category/path/tag(5)、再description(6)。多詞可分散於欄位但必全命中；平手label/key。搜尋跨展開branch/library，仍遵守sourcefilter；empty復原樹。",
+      "stateTransition": "不改图模型；NFKC+lowercase+trim；優先精確name/GLSLname(0)、精確alias(1)、nameprefix(2)、所有詞存在name(3)、name+alias(4)、再category/path/tag(5)、再description(6)。多詞可分散於欄位但必全命中；平手label/key。搜尋跨展開branch/library，仍遵守sourcefilter；empty復原樹。",
+      "failureBehavior": "條件不成立時忽略操作；不建立模型變更。",
+      "persistenceBehavior": "只改目前編輯器的暫時狀態；不寫入圖 JSON。",
+      "undoRedoBehavior": "不建立圖的 Undo/Redo 步驟。",
+      "importantEdgeCases": [
+        "固定type遇精確其他type查詢排除；無regex/wildcard語法。",
+        "結果以entry identity去重，同源library版本篩選由資料domain。",
+        "沒有匹配顯noResults，不偷偷改圖或全圖typeplanning。"
+      ],
+      "legacyCoupling": "沒有必須依賴 TouchDesigner 的使用者行為。",
+      "preservedProductIntent": "全域搜尋排序與來源filter",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "src/editor/graph_ui.js",
+          "lineStart": 1985,
+          "lineEnd": 2006,
+          "kind": "source",
+          "observation": "NFKC+lowercase+trim；優先精確name/GLSLname(0)、精確alias(1)、nameprefix(2)、所有詞存在name(3)、name+alias(4)、再category/path/tag(5)、再description(6)。多詞可分散於欄位但必全命中；平手label/key。搜尋跨展開branch/library，仍遵守sourcefilter；empty復原樹。"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀指定 snapshot 原始碼及所附測試／文件；本子任務未執行瀏覽器測試。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "已載入圖且入口可用",
+          "when": "Add Node search／Create search輸入多詞；Escape/clear",
+          "then": "NFKC+lowercase+trim；優先精確name/GLSLname(0)、精確alias(1)、nameprefix(2)、所有詞存在name(3)、name+alias(4)、再category/path/tag(5)、再description(6)。多詞可分散於欄位但必全命中；平手label/key。搜尋跨展開branch/library，仍遵守sourcefilter；empty復原樹。"
+        }
+      ]
+    },
+    "owner": "workspace.presentation",
+    "ownership": {
+      "model": "Graph owns document, Node instances, values/defaults, references, graph-local definitions and History. Modules own code/schema, not mutable instance data.",
+      "view": "EditorContext owns selection/navigation; Panel owns view state/drafts; Layout owns placement; all are separate from the canonical document.",
+      "runtime": "Target provider owns actual values/native resources; Binding owns session intent, receipts and disposable mirrors. Observations do not mutate Graph.",
+      "scope": "Only the state domains used by this leaf are involved; accountable owner is not an aggregate owner.",
+      "contract": "03_RESPONSIBILITY_AND_DEPENDENCY.md"
+    },
+    "gateIds": [],
+    "sliceIds": [
+      "S06"
+    ]
+  },
+  {
+    "capability": {
+      "id": "LC-UI-083",
+      "domain": "Node browser",
+      "name": "從列表加節點／拖入畫布",
+      "classification": "Portable",
+      "legacyBehavior": "+與doubleclick在目前viewport偏移(180,160)換graph座標加一節點；drag有效canvas以落點建。rowtouch單tap只inspect避免誤拖；+支持touchdrag。新增Auto遵現有選項；readonly禁insert。窄螢幕成功後收browser。",
+      "triggerInput": "entry +點擊／doubleclick；mouse拖row／mouse或touch拖+",
+      "preconditions": [
+        "已載入圖；觸發入口目前可用。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "目前以瀏覽器 DOM、Pointer/Keyboard Events 呈現；行為本身沒有宿主專屬前提。"
+      ],
+      "observableResult": "+與doubleclick在目前viewport偏移(180,160)換graph座標加一節點；drag有效canvas以落點建。rowtouch單tap只inspect避免誤拖；+支持touchdrag。新增Auto遵現有選項；readonly禁insert。窄螢幕成功後收browser。",
+      "stateTransition": "+與doubleclick在目前viewport偏移(180,160)換graph座標加一節點；drag有效canvas以落點建。rowtouch單tap只inspect避免誤拖；+支持touchdrag。新增Auto遵現有選項；readonly禁insert。窄螢幕成功後收browser。",
+      "failureBehavior": "條件不成立時忽略操作；不建立模型變更。",
+      "persistenceBehavior": "真正新增node/source寫圖；inspect/dragpreview不存。",
+      "undoRedoBehavior": "每次成功新增一筆Undo；無效落點/cancel不新增。",
+      "importantEdgeCases": [
+        "library重覆insert的引用復用由資料domain；此入口不得重複fire onclick與drag。"
+      ],
+      "legacyCoupling": "沒有必須依賴 TouchDesigner 的使用者行為。",
+      "preservedProductIntent": "從列表加節點／拖入畫布",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "src/editor/graph_ui.js",
+          "lineStart": 2058,
+          "lineEnd": 2070,
+          "kind": "source",
+          "observation": "+與doubleclick在目前viewport偏移(180,160)換graph座標加一節點；drag有效canvas以落點建。rowtouch單tap只inspect避免誤拖；+支持touchdrag。新增Auto遵現有選項；readonly禁insert。窄螢幕成功後收browser。"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀指定 snapshot 原始碼及所附測試／文件；本子任務未執行瀏覽器測試。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "已載入圖且入口可用",
+          "when": "entry +點擊／doubleclick；mouse拖row／mouse或touch拖+",
+          "then": "+與doubleclick在目前viewport偏移(180,160)換graph座標加一節點；drag有效canvas以落點建。rowtouch單tap只inspect避免誤拖；+支持touchdrag。新增Auto遵現有選項；readonly禁insert。窄螢幕成功後收browser。"
+        }
+      ]
+    },
+    "owner": "workspace.presentation",
+    "ownership": {
+      "model": "Graph owns document, Node instances, values/defaults, references, graph-local definitions and History. Modules own code/schema, not mutable instance data.",
+      "view": "EditorContext owns selection/navigation; Panel owns view state/drafts; Layout owns placement; all are separate from the canonical document.",
+      "runtime": "Target provider owns actual values/native resources; Binding owns session intent, receipts and disposable mirrors. Observations do not mutate Graph.",
+      "scope": "Only the state domains used by this leaf are involved; accountable owner is not an aggregate owner.",
+      "contract": "03_RESPONSIBILITY_AND_DEPENDENCY.md"
+    },
+    "gateIds": [],
+    "sliceIds": [
+      "S06"
+    ]
+  },
+  {
+    "capability": {
+      "id": "LC-UI-090",
+      "domain": "Context menus",
+      "name": "畫布／節點／線context安全與鍵盤",
+      "classification": "Portable",
+      "legacyBehavior": "按對象建立不同menu；右擊未選node/edge取代selection，已選保batch；捕捉graph/network/selectedIDs避免staleaction。keyboardanchor畫布中心上1/3，arrow/Home/End循環enableditems，Right/Left開關submenu，Esc回opener，Tab/外點/blur/resize關閉。",
+      "triggerInput": "rightclick／touchhold／ShiftF10/ContextMenu",
+      "preconditions": [
+        "已載入圖；觸發入口目前可用。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "目前以瀏覽器 DOM、Pointer/Keyboard Events 呈現；行為本身沒有宿主專屬前提。"
+      ],
+      "observableResult": "按對象建立不同menu；右擊未選node/edge取代selection，已選保batch；捕捉graph/network/selectedIDs避免staleaction。keyboardanchor畫布中心上1/3，arrow/Home/End循環enableditems，Right/Left開關submenu，Esc回opener，Tab/外點/blur/resize關閉。",
+      "stateTransition": "不改图模型；按對象建立不同menu；右擊未選node/edge取代selection，已選保batch；捕捉graph/network/selectedIDs避免staleaction。keyboardanchor畫布中心上1/3，arrow/Home/End循環enableditems，Right/Left開關submenu，Esc回opener，Tab/外點/blur/resize關閉。",
+      "failureBehavior": "條件不成立時忽略操作；不建立模型變更。",
+      "persistenceBehavior": "只改目前編輯器的暫時狀態；不寫入圖 JSON。",
+      "undoRedoBehavior": "不建立圖的 Undo/Redo 步驟。",
+      "importantEdgeCases": [
+        "toolbar/popover/輸入欄不讓背景再開第二個menu。",
+        "touchrow最少44 CSS px；viewport+UIscale修正位置。"
+      ],
+      "legacyCoupling": "沒有必須依賴 TouchDesigner 的使用者行為。",
+      "preservedProductIntent": "畫布／節點／線context安全與鍵盤",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "src/editor/graph_ui.js",
+          "lineStart": 2836,
+          "lineEnd": 2950,
+          "kind": "source",
+          "observation": "按對象建立不同menu；右擊未選node/edge取代selection，已選保batch；捕捉graph/network/selectedIDs避免staleaction。keyboardanchor畫布中心上1/3，arrow/Home/End循環enableditems，Right/Left開關submenu，Esc回opener，Tab/外點/blur/resize關閉。"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀指定 snapshot 原始碼及所附測試／文件；本子任務未執行瀏覽器測試。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "已載入圖且入口可用",
+          "when": "rightclick／touchhold／ShiftF10/ContextMenu",
+          "then": "按對象建立不同menu；右擊未選node/edge取代selection，已選保batch；捕捉graph/network/selectedIDs避免staleaction。keyboardanchor畫布中心上1/3，arrow/Home/End循環enableditems，Right/Left開關submenu，Esc回opener，Tab/外點/blur/resize關閉。"
+        }
+      ]
+    },
+    "owner": "workspace.presentation",
+    "ownership": {
+      "model": "Graph owns document, Node instances, values/defaults, references, graph-local definitions and History. Modules own code/schema, not mutable instance data.",
+      "view": "EditorContext owns selection/navigation; Panel owns view state/drafts; Layout owns placement; all are separate from the canonical document.",
+      "runtime": "Target provider owns actual values/native resources; Binding owns session intent, receipts and disposable mirrors. Observations do not mutate Graph.",
+      "scope": "Only the state domains used by this leaf are involved; accountable owner is not an aggregate owner.",
+      "contract": "03_RESPONSIBILITY_AND_DEPENDENCY.md"
+    },
+    "gateIds": [],
+    "sliceIds": [
+      "S06"
+    ]
+  },
+  {
+    "capability": {
+      "id": "LC-UI-091",
+      "domain": "Help and chrome",
+      "name": "狀態列不被暫時成功訊息遮掉錯誤",
+      "classification": "Portable",
+      "legacyBehavior": "持續state/compileerror有優先性；一般操作提示不能覆蓋不同kind的persistenterror，只有匹配recovery可清。saved/applied瞬時訊息不反覆刷，持續badge保留讓使用者辨識graph-saved與shader-applied。",
+      "triggerInput": "提交／連線／保存等status事件",
+      "preconditions": [
+        "已載入圖；觸發入口目前可用。"
+      ],
+      "legacyEnvironmentAssumptions": [
+        "目前以瀏覽器 DOM、Pointer/Keyboard Events 呈現；行為本身沒有宿主專屬前提。"
+      ],
+      "observableResult": "持續state/compileerror有優先性；一般操作提示不能覆蓋不同kind的persistenterror，只有匹配recovery可清。saved/applied瞬時訊息不反覆刷，持續badge保留讓使用者辨識graph-saved與shader-applied。",
+      "stateTransition": "不改图模型；持續state/compileerror有優先性；一般操作提示不能覆蓋不同kind的persistenterror，只有匹配recovery可清。saved/applied瞬時訊息不反覆刷，持續badge保留讓使用者辨識graph-saved與shader-applied。",
+      "failureBehavior": "條件不成立時忽略操作；不建立模型變更。",
+      "persistenceBehavior": "只改目前編輯器的暫時狀態；不寫入圖 JSON。",
+      "undoRedoBehavior": "不建立圖的 Undo/Redo 步驟。",
+      "importantEdgeCases": [
+        "不同錯誤來源不能以任意成功狀態抹掉；診斷詳情另LC-UI-076。"
+      ],
+      "legacyCoupling": "沒有必須依賴 TouchDesigner 的使用者行為。",
+      "preservedProductIntent": "狀態列不被暫時成功訊息遮掉錯誤",
+      "transformationRequired": false,
+      "evidence": [
+        {
+          "path": "src/editor/app.js",
+          "lineStart": 56,
+          "lineEnd": 94,
+          "kind": "source",
+          "observation": "持續state/compileerror有優先性；一般操作提示不能覆蓋不同kind的persistenterror，只有匹配recovery可清。saved/applied瞬時訊息不反覆刷，持續badge保留讓使用者辨識graph-saved與shader-applied。"
+        }
+      ],
+      "confidence": {
+        "level": "HIGH",
+        "basis": "已閱讀指定 snapshot 原始碼及所附測試／文件；本子任務未執行瀏覽器測試。"
+      },
+      "unknownRefs": [],
+      "possiblyAccidentalBehavior": false,
+      "contracts": [
+        {
+          "given": "已載入圖且入口可用",
+          "when": "提交／連線／保存等status事件",
+          "then": "持續state/compileerror有優先性；一般操作提示不能覆蓋不同kind的persistenterror，只有匹配recovery可清。saved/applied瞬時訊息不反覆刷，持續badge保留讓使用者辨識graph-saved與shader-applied。"
+        }
+      ]
+    },
+    "owner": "workspace.presentation",
+    "ownership": {
+      "model": "Graph owns document, Node instances, values/defaults, references, graph-local definitions and History. Modules own code/schema, not mutable instance data.",
+      "view": "EditorContext owns selection/navigation; Panel owns view state/drafts; Layout owns placement; all are separate from the canonical document.",
+      "runtime": "Target provider owns actual values/native resources; Binding owns session intent, receipts and disposable mirrors. Observations do not mutate Graph.",
+      "scope": "Only the state domains used by this leaf are involved; accountable owner is not an aggregate owner.",
+      "contract": "03_RESPONSIBILITY_AND_DEPENDENCY.md"
+    },
+    "gateIds": [],
+    "sliceIds": [
+      "S01",
+      "S06"
+    ]
+  }
+]

@@ -1,0 +1,359 @@
+{
+  "packetVersion": 1,
+  "packetType": "TARGETED_REPAIR_OR_REREVIEW",
+  "mode": "REPAIR",
+  "packetId": "S06-WORKSPACE-REPAIR-01",
+  "actionKey": "yeataro/Grape:S06:repair:workspace-entry:276a427:01",
+  "repository": "https://github.com/yeataro/Grape",
+  "policyRevision": "0826de5a9cca7cf200d843435985a7dc624634a2",
+  "recordedAt": "2026-10-04T11:46:10.391Z",
+  "sliceId": "S06",
+  "acceptedMain": "ad31676b555120cf455fc2a7677be38791b62b64",
+  "expectedWorkHead": "276a427c1e70db05d652488700c361f86e72d3e7",
+  "priorI": "cc920485e005825fea007863f0815cf7c0a5437b",
+  "priorR": "276a427c1e70db05d652488700c361f86e72d3e7",
+  "PR": "No S06 PR; no S06 remote publication/merge authority",
+  "authorizationRef": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/human-authorization-01.json",
+    "bytes": 4537,
+    "sha256": "1fe0f74dd43a6406c21d43fe57fa2d3fa03cee9248feac4f421b852b7b7984ab"
+  },
+  "workflowControl": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/coordinator-consolidation-control-01.json",
+    "bytes": 2241,
+    "sha256": "1d06f3aa977901784bb24fe3fb2937a074b00eb354a67a3df6cac483b0422744"
+  },
+  "networkControl": {
+    "file": "production/evidence/coordinator/s06/activation-20261004-01/network-delivery-control-01.json",
+    "bytes": 3056,
+    "sha256": "54d4ae2ddc14e205bb679c5dd6b108a0d76308e6066fa298a0886571e9c9c1bd"
+  },
+  "writer": {
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "parentThreadId": "01a0fd87-65fd-7633-9f34-eea1516301ea",
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "displayTitle": "Grape S06 實作與維護",
+    "verifiedStatus": "Idle / STOP_WRITING at cursor790; parent idle cursor186"
+  },
+  "originalReview": {
+    "file": "C:/Users/user/.codex/worktrees/s06-workspace-review-01/Grape/.verification/s06-workspace-review-01/INDEPENDENT_REVIEW_RESULT.json",
+    "bytes": 38575,
+    "sha256": "1ee25d7b6729f269fa8418f572a540e601abfdb62755fd5300bf6ea3249f53d5"
+  },
+  "supportingManifest": {
+    "file": "C:/Users/user/.codex/worktrees/s06-workspace-review-01/Grape/.verification/s06-workspace-review-01/supporting-evidence-manifest-01.json",
+    "bytes": 68957,
+    "sha256": "3da74760b41fece0ffce88250aded5b97da408853db8eec242298d4ba8211b71"
+  },
+  "priorActionReceipt": {
+    "file": "production/evidence/coordinator/s06/review-01/dispatch-result-01.json",
+    "bytes": 1685,
+    "sha256": "a8676f82d541c470b6c30c7e7d01f2b12e77616c78f3fb654648bfb7fb05762f"
+  },
+  "findingGroup": "S06-FG-WORKSPACE-ENTRY-01",
+  "counters": {
+    "initialReviewAttempt": 1,
+    "initialReviewVerdict": "FAIL",
+    "repairRound": 1,
+    "unsuccessfulRepairReReviewRounds": 0,
+    "transientRetries": 0,
+    "escapeFindingGroup": "S05-FG-ESCAPE-FOCUS-01",
+    "escapeRepairAttempt": 1,
+    "escapeUnsuccessfulRounds": 0,
+    "escapeDisposition": "Independent current report passes all four at priorI; historical S05 FAIL remains unchanged; affected regressions only if touched"
+  },
+  "findings": [
+    {
+      "id": "S06-FR-EVIDENCE-AVAILABILITY-001",
+      "severity": "P2",
+      "status": "OPEN",
+      "classification": "EVIDENCE_PACKAGING",
+      "affectedScope": "Revision-bound submission evidence and retained unsuccessful integration attempts",
+      "summary": "The submitted 995-entry evidence manifest names 14 files absent from exact R.",
+      "expected": "Every file claimed by the final immutable evidence manifest must be available with the declared bytes, including the preserved failed-run attachments; a fresh checkout must reproduce the evidence package.",
+      "actual": {
+        "declared": 995,
+        "presentHashMatched": 981,
+        "missing": 14,
+        "missingFiles": [
+          "production/evidence/s06/workspace-entry-01/archive-browser-final-01/test-results/.last-run.json",
+          "production/evidence/s06/workspace-entry-01/browser-final-02/test-results/.last-run.json",
+          "production/evidence/s06/workspace-entry-01/browser-integration-01/test-results/.last-run.json",
+          "production/evidence/s06/workspace-entry-01/browser-integration-01/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/error-context.md",
+          "production/evidence/s06/workspace-entry-01/browser-integration-01/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/test-failed-1.png",
+          "production/evidence/s06/workspace-entry-01/browser-integration-01/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/trace.zip",
+          "production/evidence/s06/workspace-entry-01/browser-integration-02/test-results/.last-run.json",
+          "production/evidence/s06/workspace-entry-01/browser-integration-02/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/error-context.md",
+          "production/evidence/s06/workspace-entry-01/browser-integration-02/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/test-failed-1.png",
+          "production/evidence/s06/workspace-entry-01/browser-integration-02/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/trace.zip",
+          "production/evidence/s06/workspace-entry-01/browser-integration-03/test-results/.last-run.json",
+          "production/evidence/s06/workspace-entry-01/browser-integration-03/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/error-context.md",
+          "production/evidence/s06/workspace-entry-01/browser-integration-03/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/test-failed-1.png",
+          "production/evidence/s06/workspace-entry-01/browser-integration-03/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/trace.zip"
+        ],
+        "hashMismatchesAmongPresent": 0,
+        "trackedAtR": 0
+      },
+      "counterexample": [
+        "Create a fresh checkout of R 276a427c1e70db05d652488700c361f86e72d3e7.",
+        "Read production/evidence/s06/workspace-entry-01/evidence-manifest-01.json.",
+        "The five test-results/.last-run.json entries and nine error-context/screenshot/trace files under browser-integration-01/02/03 cannot be opened and are not in git ls-files."
+      ],
+      "contract": [
+        "workflow/PACKETS.md Independent review result: no required evidence gaps for PASS",
+        "reviewer packet requiredChecks 1, 9, 11: exact evidence identity, actual checks and preserved failures"
+      ],
+      "evidence": [
+        {
+          "file": "identity-checks.json",
+          "bytes": 393441,
+          "sha256": "4217a6b1ab899feccd58b6ca1a8afa1ef1b5155a71fdaa773f42410ff98476a8"
+        },
+        {
+          "file": "final-identity-checks.json",
+          "bytes": 829,
+          "sha256": "e759bb1dd6ac21903a684b8285c9665a890b9264d5ea1b04a99a4f67ff25a312"
+        },
+        {
+          "file": "preparation.log",
+          "bytes": 404,
+          "sha256": "3606097a6294d07947398bc3792b2df09bbd2a2185ebd5f9fa369a40af8e97d9"
+        }
+      ],
+      "requiredRepair": "Original writer must publish the exact missing originals at their declared paths or submit an explicitly reconciled new evidence manifest with honest availability/history. Do not pretend the absent files existed at R or reconstruct old failures as new originals.",
+      "acceptanceBlocking": true
+    },
+    {
+      "id": "S06-FR-HELP-BACKDROP-001",
+      "severity": "P3",
+      "status": "OPEN",
+      "classification": "PRODUCT_BEHAVIOR",
+      "affectedScope": "LC-UI-072 included shortcut-help backdrop dismissal",
+      "summary": "Dragging from the backdrop into the shortcut dialog closes it even though the release/click coordinates are inside the dialog.",
+      "expected": "Dismiss only a completed outside pointerdown and outside click; an inside release must leave the help dialog open.",
+      "actual": "At viewport 1440x1000 the dialog is x=440,y=283,w=560,h=434. Pointerdown at (420,303) targets DIALOG; pointerup at (450,293) targets H2. Chromium retargets the click to DIALOG at (450,293); the handler closes the dialog. Reproduced in two fresh archived sessions.",
+      "counterexample": [
+        "Open the exact archived build in a fresh context.",
+        "Click Shortcuts.",
+        "Move to 20px left of the dialog, 20px below its top; press the primary mouse button.",
+        "Drag to 10px inside its top-left corner; release.",
+        "Observe the dialog close. The drag-out and true outside-click controls pass."
+      ],
+      "source": {
+        "file": "production/src/features/canvas.ts",
+        "line": 271,
+        "detail": "The click handler tests backdropDown and event.target===helpDialog, but never tests whether the click coordinates are outside; click target retargeting is insufficient."
+      },
+      "contract": [
+        "handoff/compatibility/capabilities.json LC-UI-072 observableResult: complete outside down+click closes; drag-out does not",
+        "handoff/compatibility/behavior-contracts.md LC-UI-072/B01",
+        "Included LC-UI-072 branch has no declared backdrop-dismissal exclusion"
+      ],
+      "evidence": [
+        {
+          "file": "reviewer-public-02/help-backdrop-drag-in-observed.json",
+          "bytes": 403,
+          "sha256": "4b694a8f1e639196e6a475488c1509ba185e33f8171dc25d2f5cdc0a2ba333a8"
+        },
+        {
+          "file": "reviewer-public-02/help-backdrop-drag-in.zip",
+          "bytes": 199965,
+          "sha256": "ed9b331bf02184a47b496107dfa0a3285c2927cfaec5ee1235188c59d2f6221c"
+        },
+        {
+          "file": "reviewer-public-02/help-backdrop-drag-in-failure.png",
+          "bytes": 71241,
+          "sha256": "61bd8537ed51ffc484fda931c0ad8126598003a5dc2f793ac6c1392e27258002"
+        },
+        {
+          "file": "reviewer-public-03/help-drag-in-confirmation.json",
+          "bytes": 135,
+          "sha256": "0d76472e3c9c357ef751748521f6c3fa645065f1686e3e99561f8faa8676c1d2"
+        },
+        {
+          "file": "reviewer-public-03/help-drag-in-confirmation.zip",
+          "bytes": 160388,
+          "sha256": "42bb11628aad34a15413a156a426f099cec495e6588d2e07a4369812504bd9e9"
+        }
+      ],
+      "requiredRepair": "Correct the dismissal predicate/gesture state through the existing view event boundary and add outside→inside, inside→outside, outside→outside, Escape and focus-return coverage. No model or architectural change is needed.",
+      "acceptanceBlocking": "Included behavior remains unfulfilled; no reviewer authority to waive it. Severity is low and there is no data loss."
+    }
+  ],
+  "acceptedExpectedBehavior": [
+    {
+      "findingId": "S06-FR-EVIDENCE-AVAILABILITY-001",
+      "expected": "Every file claimed by the final immutable evidence manifest must be available with the declared bytes, including the preserved failed-run attachments; a fresh checkout must reproduce the evidence package.",
+      "contract": [
+        "workflow/PACKETS.md Independent review result: no required evidence gaps for PASS",
+        "reviewer packet requiredChecks 1, 9, 11: exact evidence identity, actual checks and preserved failures"
+      ]
+    },
+    {
+      "findingId": "S06-FR-HELP-BACKDROP-001",
+      "expected": "Dismiss only a completed outside pointerdown and outside click; an inside release must leave the help dialog open.",
+      "contract": [
+        "handoff/compatibility/capabilities.json LC-UI-072 observableResult: complete outside down+click closes; drag-out does not",
+        "handoff/compatibility/behavior-contracts.md LC-UI-072/B01",
+        "Included LC-UI-072 branch has no declared backdrop-dismissal exclusion"
+      ]
+    }
+  ],
+  "coordinatorEvidenceRecovery": {
+    "supportingFilesVerified": 347,
+    "missingOriginals": [
+      {
+        "file": "production/evidence/s06/workspace-entry-01/archive-browser-final-01/test-results/.last-run.json",
+        "bytes": 45,
+        "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "presentInPrimary": true,
+        "absentFromReviewedR": true,
+        "ignoreRule": "production/.gitignore:4:test-results/\tproduction/evidence/s06/workspace-entry-01/archive-browser-final-01/test-results/.last-run.json"
+      },
+      {
+        "file": "production/evidence/s06/workspace-entry-01/browser-final-02/test-results/.last-run.json",
+        "bytes": 45,
+        "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "presentInPrimary": true,
+        "absentFromReviewedR": true,
+        "ignoreRule": "production/.gitignore:4:test-results/\tproduction/evidence/s06/workspace-entry-01/browser-final-02/test-results/.last-run.json"
+      },
+      {
+        "file": "production/evidence/s06/workspace-entry-01/browser-integration-01/test-results/.last-run.json",
+        "bytes": 96,
+        "sha256": "547522a32efdea0eafce22a21cdb23b7e66ca45ab327969edcd9645eeb77c8c6",
+        "presentInPrimary": true,
+        "absentFromReviewedR": true,
+        "ignoreRule": "production/.gitignore:4:test-results/\tproduction/evidence/s06/workspace-entry-01/browser-integration-01/test-results/.last-run.json"
+      },
+      {
+        "file": "production/evidence/s06/workspace-entry-01/browser-integration-01/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/error-context.md",
+        "bytes": 11346,
+        "sha256": "25356707d268b17d570ee812f9b5f83356edf75bb37e8868deab3715e676922f",
+        "presentInPrimary": true,
+        "absentFromReviewedR": true,
+        "ignoreRule": "production/.gitignore:4:test-results/\tproduction/evidence/s06/workspace-entry-01/browser-integration-01/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/error-context.md"
+      },
+      {
+        "file": "production/evidence/s06/workspace-entry-01/browser-integration-01/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/test-failed-1.png",
+        "bytes": 70821,
+        "sha256": "daf32593e9627c4b249572a44eb351e41f1881b6be280b9203a0fb4b36d51e30",
+        "presentInPrimary": true,
+        "absentFromReviewedR": true,
+        "ignoreRule": "production/.gitignore:4:test-results/\tproduction/evidence/s06/workspace-entry-01/browser-integration-01/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/test-failed-1.png"
+      },
+      {
+        "file": "production/evidence/s06/workspace-entry-01/browser-integration-01/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/trace.zip",
+        "bytes": 440841,
+        "sha256": "4490db7bdc7b0b3f875b57a9dd2d1014d26b02c45f8888ed912c93923e9d28d6",
+        "presentInPrimary": true,
+        "absentFromReviewedR": true,
+        "ignoreRule": "production/.gitignore:4:test-results/\tproduction/evidence/s06/workspace-entry-01/browser-integration-01/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/trace.zip"
+      },
+      {
+        "file": "production/evidence/s06/workspace-entry-01/browser-integration-02/test-results/.last-run.json",
+        "bytes": 96,
+        "sha256": "547522a32efdea0eafce22a21cdb23b7e66ca45ab327969edcd9645eeb77c8c6",
+        "presentInPrimary": true,
+        "absentFromReviewedR": true,
+        "ignoreRule": "production/.gitignore:4:test-results/\tproduction/evidence/s06/workspace-entry-01/browser-integration-02/test-results/.last-run.json"
+      },
+      {
+        "file": "production/evidence/s06/workspace-entry-01/browser-integration-02/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/error-context.md",
+        "bytes": 11919,
+        "sha256": "7fef69e9c594d9cf33bf99ba2feee4a98fb8a41e0e6d57224cbbccc446dac5c5",
+        "presentInPrimary": true,
+        "absentFromReviewedR": true,
+        "ignoreRule": "production/.gitignore:4:test-results/\tproduction/evidence/s06/workspace-entry-01/browser-integration-02/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/error-context.md"
+      },
+      {
+        "file": "production/evidence/s06/workspace-entry-01/browser-integration-02/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/test-failed-1.png",
+        "bytes": 80469,
+        "sha256": "f99bfc73c3df68015fb50d66eac5020e95c5e2931c3cda3bb5af884790894ee2",
+        "presentInPrimary": true,
+        "absentFromReviewedR": true,
+        "ignoreRule": "production/.gitignore:4:test-results/\tproduction/evidence/s06/workspace-entry-01/browser-integration-02/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/test-failed-1.png"
+      },
+      {
+        "file": "production/evidence/s06/workspace-entry-01/browser-integration-02/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/trace.zip",
+        "bytes": 443542,
+        "sha256": "de0b4098709bfa98be514dd6a204897e5b110ef2cc6274fa417a2e625829f6f2",
+        "presentInPrimary": true,
+        "absentFromReviewedR": true,
+        "ignoreRule": "production/.gitignore:4:test-results/\tproduction/evidence/s06/workspace-entry-01/browser-integration-02/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/trace.zip"
+      },
+      {
+        "file": "production/evidence/s06/workspace-entry-01/browser-integration-03/test-results/.last-run.json",
+        "bytes": 96,
+        "sha256": "547522a32efdea0eafce22a21cdb23b7e66ca45ab327969edcd9645eeb77c8c6",
+        "presentInPrimary": true,
+        "absentFromReviewedR": true,
+        "ignoreRule": "production/.gitignore:4:test-results/\tproduction/evidence/s06/workspace-entry-01/browser-integration-03/test-results/.last-run.json"
+      },
+      {
+        "file": "production/evidence/s06/workspace-entry-01/browser-integration-03/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/error-context.md",
+        "bytes": 8535,
+        "sha256": "a1a938c68a85ada7cd4fad9506f15f2c9dc67c3d09216ed8827469df98c7ed97",
+        "presentInPrimary": true,
+        "absentFromReviewedR": true,
+        "ignoreRule": "production/.gitignore:4:test-results/\tproduction/evidence/s06/workspace-entry-01/browser-integration-03/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/error-context.md"
+      },
+      {
+        "file": "production/evidence/s06/workspace-entry-01/browser-integration-03/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/test-failed-1.png",
+        "bytes": 91974,
+        "sha256": "b9f4366062bd5ae03e0b4a5e0e1f3c8080fdfd05eec04c36c18e051ef65c5e52",
+        "presentInPrimary": true,
+        "absentFromReviewedR": true,
+        "ignoreRule": "production/.gitignore:4:test-results/\tproduction/evidence/s06/workspace-entry-01/browser-integration-03/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/test-failed-1.png"
+      },
+      {
+        "file": "production/evidence/s06/workspace-entry-01/browser-integration-03/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/trace.zip",
+        "bytes": 645133,
+        "sha256": "5aaddc88b9571031b865216dc5ff650cc3cb23e76168635fcace0688dac964ab",
+        "presentInPrimary": true,
+        "absentFromReviewedR": true,
+        "ignoreRule": "production/.gitignore:4:test-results/\tproduction/evidence/s06/workspace-entry-01/browser-integration-03/test-results/s06-creation-S06-public-wi-d1ce6-ity-edge-with-one-Undo-Redo-chromium/trace.zip"
+      }
+    ],
+    "note": "All fourteen original bytes remain in primary and match immutable manifest; excluded by production/.gitignore test-results/. Commit exact originals at their declared paths. Never regenerate failed attempts or claim present at R."
+  },
+  "allowedRepairScope": [
+    "production/src/features/canvas.ts: only shortcut-help backdrop gesture dismissal and associated focus/lifetime guards",
+    "production/tests/: meaningful targeted help gesture and affected focus/Escape/lifetime regressions",
+    "production/evidence/s06/workspace-entry-01/: add the exact fourteen ignored originals without changing existing files",
+    "production/evidence/s06/review-01/independent-review/: persist original report, supporting manifest and all supporting files byte-for-byte",
+    "production/evidence/s06/workspace-repair-01/: new repair evidence, source/config/build/evidence manifests, finding-to-fix map, guide and exact revision-bound submission",
+    "implementation-state.json and README.md: designated maintainer current progress only; no completion/acceptance or historical evidence relabeling",
+    "production/evidence/coordinator/s06/review-01 and repair-01: persist existing operational receipts without altering authorship/bytes"
+  ],
+  "contractRefs": [
+    "workflow/COORDINATOR.md",
+    "workflow/RUNBOOK.md",
+    "workflow/PACKETS.md",
+    "handoff/compatibility/capabilities.json LC-UI-072",
+    "handoff/compatibility/behavior-contracts.md LC-UI-072/B01"
+  ],
+  "requestedAction": [
+    "Reconcile exact R, sole writer and protected/untracked work before mutation; no second implementer.",
+    "Persist reviewer report and all 347 supporting files at the new review destination with exact hashes; retain original isolated outputs.",
+    "Record failed exact R and add the fourteen original ignored files under their original paths using a narrow explicit Git allowlist, with fresh-checkout availability validation. Do not remove old manifest claims or rewrite originals.",
+    "Repair help dismissal through existing view event boundary. Require complete outside down and outside click; preserve outside-to-inside, inside-to-outside, true outside-to-outside, Escape, focus-return and pointer cancellation behavior without model changes.",
+    "Run targeted source and archived-build public browser regressions, affected guards and required root identity checks. Retain original passing scope with explicit impact analysis; do not rerun all unrelated history.",
+    "Create new I and R with build/archive and source/evidence identities. Verify every claimed file is actually in R using Git object/fresh checkout, not just primary filesystem. Maintain S06 active and unaccepted.",
+    "Return full submission, repair-to-finding mapping and exact I/R; STOP_WRITING for targeted independent review. Coordinator manages local preview and immediate review; no Human pre-review needed."
+  ],
+  "exclusions": [
+    "No new product scope, catalog leaves, numeric admission/Graph/History contract changes.",
+    "No handoff or accepted evidence edits, no loss of prior failures or counts.",
+    "No S06 acceptance, push, PR, merge, next Slice or permanent service.",
+    "LAN/Tailscale requirements were removed by Owner. Do not retry or stop localhost delivery for them."
+  ],
+  "outputLocation": "production/evidence/s06/workspace-repair-01/submission-01.json",
+  "reReviewCoverage": "Exact findings plus affected help/focus/lifetime/Escape regressions, archived build/public path and evidence availability at new R. Review remains independent; old PASS does not automatically cover changed code.",
+  "stopConditions": [
+    "Unexpected head or writer: retain work and return concrete reconciliation.",
+    "Genuine accepted contract conflict: preserve counterexample and pause affected dependency only.",
+    "Complete exact submission: STOP_WRITING for targeted reviewer."
+  ],
+  "limitations": "Coordinator verified identities and routes findings; no self-review verdict. Ordinary authorized repairs do not require renewed Human permission."
+}

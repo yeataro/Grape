@@ -1,0 +1,47 @@
+
+Running 1 test using 1 worker
+
+(node:42116) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 [chromium] › ..\..\..\production\tests\browser\s06-help.spec.ts:32:3 › S06 Help natural outside-to-inside gesture preserves document and History (5.8s)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-help.spec.ts:32:3 › S06 Help natural outside-to-inside gesture preserves document and History 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('dialog', { name: 'Keyboard shortcuts' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Keyboard shortcuts' })
+
+
+      42 |     await page.mouse.up();
+      43 |     if (closes) { await expect(help).toBeHidden(); await expect(opener).toBeFocused(); }
+    > 44 |     else { await expect(help).toBeVisible(); await page.keyboard.press("Escape"); await expect(opener).toBeFocused(); }
+         |                               ^
+      45 |     expect(await documentOf(page)).toEqual(before);
+      46 |     await page.getByRole("button", { name: "Undo", exact: true }).click();
+      47 |     await expect(page.getByRole("heading", { name: "Multiply", exact: true })).toHaveCount(0);
+        at C:\Users\user\source\Grape\production\tests\browser\s06-help.spec.ts:44:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-01\baseline-help-01\test-results\s06-help-S06-Help-natural--3baaf-serves-document-and-History-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\workspace-repair-01\baseline-help-01\test-results\s06-help-S06-Help-natural--3baaf-serves-document-and-History-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\workspace-repair-01\baseline-help-01\test-results\s06-help-S06-Help-natural--3baaf-serves-document-and-History-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\workspace-repair-01\baseline-help-01\test-results\s06-help-S06-Help-natural--3baaf-serves-document-and-History-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-help.spec.ts:32:3 › S06 Help natural outside-to-inside gesture preserves document and History 

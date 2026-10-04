@@ -232,15 +232,31 @@ function mountCanvas(
     helpContent.append(k, d);
   }
   let helpOpener: HTMLElement | null = null,
-    backdropDown = false;
+    backdropPointer: number | null = null;
+  const outsideHelp = (event: MouseEvent) => {
+    const rect = helpDialog.getBoundingClientRect();
+    return (
+      event.target === helpDialog &&
+      (event.clientX < rect.left ||
+        event.clientX > rect.right ||
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom)
+    );
+  };
   const closeHelp = () => {
+    backdropPointer = null;
+    if (!helpDialog.open) return;
     helpDialog.close();
-    (helpOpener?.isConnected ? helpOpener : root).focus({
+    (helpOpener?.isConnected && helpOpener.getClientRects().length
+      ? helpOpener
+      : root
+    ).focus({
       preventScroll: true,
     });
   };
   const showHelp = () => {
     browser.cancel(false);
+    backdropPointer = null;
     helpOpener = document.activeElement as HTMLElement;
     helpDialog.showModal();
   };
@@ -256,21 +272,26 @@ function mountCanvas(
   helpDialog.addEventListener(
     "pointerdown",
     mount.scope.event((e) => {
-      backdropDown =
-        e.target === helpDialog &&
-        !(
-          e.clientX >= helpDialog.getBoundingClientRect().left &&
-          e.clientX <= helpDialog.getBoundingClientRect().right &&
-          e.clientY >= helpDialog.getBoundingClientRect().top &&
-          e.clientY <= helpDialog.getBoundingClientRect().bottom
-        );
+      backdropPointer =
+        helpDialog.open && e.isPrimary && e.button === 0 && outsideHelp(e)
+          ? e.pointerId
+          : null;
+    }),
+  );
+  helpDialog.addEventListener(
+    "pointercancel",
+    mount.scope.event(() => {
+      backdropPointer = null;
     }),
   );
   helpDialog.addEventListener(
     "click",
     mount.scope.event((e) => {
-      if (backdropDown && e.target === helpDialog) closeHelp();
-      backdropDown = false;
+      const pointer = backdropPointer;
+      backdropPointer = null;
+      // Native clicks can be retargeted to DIALOG after an inside release.
+      if (pointer !== null && e.pointerId === pointer && outsideHelp(e))
+        closeHelp();
     }),
   );
   const menu = document.createElement("div");
@@ -359,7 +380,10 @@ function mountCanvas(
       item("Encapsulate", () => execute("grape.network.encapsulate"), editing);
     } else item("Add Node", () => browser.open(x, y), editing);
     item("Browse nodes", () => browser.open(x, y, "browse"));
-    item("Keyboard shortcuts", showHelp);
+    item("Keyboard shortcuts", () => {
+      closeMenu(true);
+      showHelp();
+    });
     const r = root.getBoundingClientRect();
     menu.hidden = false;
     menu.style.left =
@@ -1014,12 +1038,14 @@ function mountCanvas(
     if (!menu.hidden && !menu.contains(e.target as Node)) closeMenu();
   });
   listen(window, "blur", () => {
+    backdropPointer = null;
     clearHold();
     closeMenu();
     end(true);
   });
   listen(document, "visibilitychange", () => {
     if (document.hidden) {
+      backdropPointer = null;
       clearHold();
       closeMenu();
       end(true);

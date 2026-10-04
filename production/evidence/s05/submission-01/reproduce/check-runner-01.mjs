@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+const [name, cwd, ...args] = process.argv.slice(2);
+const out = path.resolve('production/evidence/s05/submission-01/checks');
+fs.mkdirSync(out,{recursive:true});
+const target = path.join(out,name);
+if(fs.existsSync(target+'.json') || fs.existsSync(target+'.log')) throw Error('IMMUTABLE_CHECK_EXISTS');
+const start = new Date().toISOString();
+const result=spawnSync(process.execPath,args,{cwd,encoding:'utf8',maxBuffer:64*1024*1024,env:process.env});
+fs.writeFileSync(target+'.log',(result.stdout??'')+(result.stderr??''),{flag:'wx'});
+const receipt={name,cwd,command:[process.execPath,...args],startedAt:start,endedAt:new Date().toISOString(),exitCode:result.status,signal:result.signal,error:result.error?.message,node:process.version,platform:process.platform,arch:process.arch};
+fs.writeFileSync(target+'.json',JSON.stringify(receipt,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify(receipt));
+console.log((result.stdout??'').slice(-1800));
+if(result.stderr)console.log(result.stderr.slice(-1200));
+process.exitCode=result.status??1;

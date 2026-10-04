@@ -1,0 +1,186 @@
+{
+  "browser": "151.0.7922.34",
+  "rows": [
+    {
+      "kind": "expanded",
+      "pixels": [
+        51,
+        102,
+        153,
+        255
+      ],
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "WebKit WebGL",
+      "artifacts": [
+        {
+          "key": "vertex",
+          "stageId": "id-17",
+          "mediaType": "text/x-glsl",
+          "text": "#version 300 es\nlayout(location=0) in vec2 position;\nvoid main() { gl_Position = vec4(position, 0.0, 1.0); }\n"
+        },
+        {
+          "key": "pixel",
+          "stageId": "id-20",
+          "mediaType": "text/x-glsl",
+          "text": "#version 300 es\nprecision highp float;\nout vec4 fragColor;\n\nvoid main() {\n  const float n_s0_0_p0 = 0.2;\n  const float n_s1_2_p2 = (n_s0_0_p0 + n_s0_0_p0);\n  const float n_1_p1 = n_s0_0_p0;\n  const float n_1_p2 = n_s1_2_p2;\n  const float n_s2_0_p0 = 0.3;\n  const float n_s3_2_p2 = (n_s2_0_p0 + n_s2_0_p0);\n  const float n_3_p1 = n_s2_0_p0;\n  const float n_3_p2 = n_s3_2_p2;\n  const vec4 n_2_p4 = vec4(n_1_p1, n_1_p2, n_3_p2, 1.0);\n  fragColor = n_2_p4;\n}\n"
+        }
+      ],
+      "bindings": [],
+      "expected": [
+        51,
+        102,
+        153,
+        255
+      ],
+      "unchanged": true
+    },
+    {
+      "kind": "shared",
+      "pixels": [
+        51,
+        102,
+        153,
+        255
+      ],
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "WebKit WebGL",
+      "artifacts": [
+        {
+          "key": "vertex",
+          "stageId": "id-17",
+          "mediaType": "text/x-glsl",
+          "text": "#version 300 es\nlayout(location=0) in vec2 position;\nvoid main() { gl_Position = vec4(position, 0.0, 1.0); }\n"
+        },
+        {
+          "key": "pixel",
+          "stageId": "id-20",
+          "mediaType": "text/x-glsl",
+          "text": "#version 300 es\nprecision highp float;\nout vec4 fragColor;\nvoid grape_function_0(float arg_0, out float out_0, out float out_1) {\n  float n_s0_0_p0 = arg_0;\n  float n_s1_2_p2 = (n_s0_0_p0 + n_s0_0_p0);\n  out_0 = n_s0_0_p0;\n  out_1 = n_s1_2_p2;\n}\nvoid main() {\n  float call_2;\n  float call_3;\n  grape_function_0(0.2, call_2, call_3);\n  float n_1_p1 = call_2;\n  float n_1_p2 = call_3;\n  float call_4;\n  float call_5;\n  grape_function_0(0.3, call_4, call_5);\n  float n_3_p1 = call_4;\n  float n_3_p2 = call_5;\n  vec4 n_2_p4 = vec4(n_1_p1, n_1_p2, n_3_p2, 1.0);\n  fragColor = n_2_p4;\n}\n"
+        }
+      ],
+      "bindings": [],
+      "expected": [
+        51,
+        102,
+        153,
+        255
+      ],
+      "unchanged": true
+    },
+    {
+      "kind": "nested",
+      "pixels": [
+        51,
+        102,
+        153,
+        255
+      ],
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "WebKit WebGL",
+      "artifacts": [
+        {
+          "key": "vertex",
+          "stageId": "id-17",
+          "mediaType": "text/x-glsl",
+          "text": "#version 300 es\nlayout(location=0) in vec2 position;\nvoid main() { gl_Position = vec4(position, 0.0, 1.0); }\n"
+        },
+        {
+          "key": "pixel",
+          "stageId": "id-20",
+          "mediaType": "text/x-glsl",
+          "text": "#version 300 es\nprecision highp float;\nout vec4 fragColor;\nvoid grape_function_1(float arg_0, out float out_0, out float out_1) {\n  float n_s0_0_p0 = arg_0;\n  float n_s1_2_p2 = (n_s0_0_p0 + n_s0_0_p0);\n  out_0 = n_s0_0_p0;\n  out_1 = n_s1_2_p2;\n}\nvoid grape_function_0(out float out_0, out float out_1, out float out_2) {\n  float call_2;\n  float call_3;\n  grape_function_1(0.2, call_2, call_3);\n  float n_s4_2_p1 = call_2;\n  float n_s5_2_p2 = call_3;\n  float call_6;\n  float call_7;\n  grape_function_1(0.3, call_6, call_7);\n  float n_s8_3_p1 = call_6;\n  float n_s9_3_p2 = call_7;\n  out_0 = n_s4_2_p1;\n  out_1 = n_s5_2_p2;\n  out_2 = n_s9_3_p2;\n}\nvoid main() {\n  float call_10;\n  float call_11;\n  float call_12;\n  grape_function_0(call_10, call_11, call_12);\n  float n_2_p0 = call_10;\n  float n_2_p1 = call_11;\n  float n_2_p2 = call_12;\n  vec4 n_1_p4 = vec4(n_2_p0, n_2_p1, n_2_p2, 1.0);\n  fragColor = n_1_p4;\n}\n"
+        }
+      ],
+      "bindings": [],
+      "expected": [
+        51,
+        102,
+        153,
+        255
+      ],
+      "unchanged": true
+    },
+    {
+      "kind": "uniform",
+      "pixels": [
+        102,
+        204,
+        153,
+        255
+      ],
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "WebKit WebGL",
+      "artifacts": [
+        {
+          "key": "vertex",
+          "stageId": "id-17",
+          "mediaType": "text/x-glsl",
+          "text": "#version 300 es\nlayout(location=0) in vec2 position;\nvoid main() { gl_Position = vec4(position, 0.0, 1.0); }\n"
+        },
+        {
+          "key": "pixel",
+          "stageId": "id-20",
+          "mediaType": "text/x-glsl",
+          "text": "#version 300 es\nprecision highp float;\nout vec4 fragColor;\nuniform float u_grape_0;\nvoid grape_function_0(float arg_0, out float out_0, out float out_1) {\n  float n_s0_0_p0 = arg_0;\n  float n_s1_2_p2 = (n_s0_0_p0 + n_s0_0_p0);\n  out_0 = n_s0_0_p0;\n  out_1 = n_s1_2_p2;\n}\nvoid main() {\n  float n_4_p0 = u_grape_0;\n  float call_2;\n  float call_3;\n  grape_function_0(n_4_p0, call_2, call_3);\n  float n_1_p1 = call_2;\n  float n_1_p2 = call_3;\n  float call_4;\n  float call_5;\n  grape_function_0(0.3, call_4, call_5);\n  float n_3_p1 = call_4;\n  float n_3_p2 = call_5;\n  vec4 n_2_p4 = vec4(n_1_p1, n_1_p2, n_3_p2, 1.0);\n  fragColor = n_2_p4;\n}\n"
+        }
+      ],
+      "bindings": [
+        {
+          "stageId": "id-20",
+          "resourceId": "id-38",
+          "symbol": "u_grape_0",
+          "type": "glsl.float",
+          "defaultValue": 0.4
+        }
+      ],
+      "expected": [
+        102,
+        204,
+        153,
+        255
+      ],
+      "unchanged": true
+    },
+    {
+      "kind": "uniform-live-value",
+      "pixels": [
+        26,
+        51,
+        153,
+        255
+      ],
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "WebKit WebGL",
+      "artifacts": [
+        {
+          "key": "vertex",
+          "stageId": "id-17",
+          "mediaType": "text/x-glsl",
+          "text": "#version 300 es\nlayout(location=0) in vec2 position;\nvoid main() { gl_Position = vec4(position, 0.0, 1.0); }\n"
+        },
+        {
+          "key": "pixel",
+          "stageId": "id-20",
+          "mediaType": "text/x-glsl",
+          "text": "#version 300 es\nprecision highp float;\nout vec4 fragColor;\nuniform float u_grape_0;\nvoid grape_function_0(float arg_0, out float out_0, out float out_1) {\n  float n_s0_0_p0 = arg_0;\n  float n_s1_2_p2 = (n_s0_0_p0 + n_s0_0_p0);\n  out_0 = n_s0_0_p0;\n  out_1 = n_s1_2_p2;\n}\nvoid main() {\n  float n_4_p0 = u_grape_0;\n  float call_2;\n  float call_3;\n  grape_function_0(n_4_p0, call_2, call_3);\n  float n_1_p1 = call_2;\n  float n_1_p2 = call_3;\n  float call_4;\n  float call_5;\n  grape_function_0(0.3, call_4, call_5);\n  float n_3_p1 = call_4;\n  float n_3_p2 = call_5;\n  vec4 n_2_p4 = vec4(n_1_p1, n_1_p2, n_3_p2, 1.0);\n  fragColor = n_2_p4;\n}\n"
+        }
+      ],
+      "bindings": [
+        {
+          "stageId": "id-20",
+          "resourceId": "id-38",
+          "symbol": "u_grape_0",
+          "type": "glsl.float",
+          "defaultValue": 0.4
+        }
+      ],
+      "expected": [
+        26,
+        51,
+        153,
+        255
+      ],
+      "unchanged": true
+    }
+  ]
+}

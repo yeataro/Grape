@@ -1,0 +1,36 @@
+{
+  "recordType": "S05_TEST_ENTRY_PREPARATION",
+  "recordedAt": "2026-10-03T23:29:54.050Z",
+  "authority": {
+    "humanStartMessage": "01a10415-459d-72a2-b943-d130cbfeb35a",
+    "threeLinks": {
+      "threadId": "01a1010f-2b35-7861-bb35-0e7e9b0b42a9",
+      "messageId": "01a1040c-582a-72d3-9bcd-ed689c6c0458",
+      "quote": "然後實際測試還有八步實際測試的時候還有個規矩，那就是本機 IP、 LAN IP 跟 TrailScale 的 IP，三個連結都給我。",
+      "directlyVerified": true
+    }
+  },
+  "observations": {
+    "loopback": "127.0.0.1",
+    "lanIPv4": "192.168.1.105",
+    "tailscaleIPv4": "100.83.88.97",
+    "tailscaleDnsName": "ncase-x3d.tailb97005.ts.net",
+    "tailscaleOnline": true,
+    "magicDnsEnabled": true,
+    "certDomains": null,
+    "existingServe": {
+      "TCP8765": "127.0.0.1:8766"
+    },
+    "matchingLocalDevCertificateMetadata": "No matching certificate returned from CurrentUser/My, CurrentUser/Root, LocalMachine/My or LocalMachine/Root filter for Grape/mkcert/localhost/these IPs; not proof no usable certificate exists elsewhere.",
+    "currentPreview": "S04 localhost4192 remains; no S05 candidate yet"
+  },
+  "secureContextDependencies": [
+    "production/src/application/personal.ts crypto.subtle.digest",
+    "production/src/features/canvas.ts crypto.randomUUID",
+    "S04 versioned deployment entry crypto.subtle.digest"
+  ],
+  "analysis": "Literal LAN/Tailscale HTTP IP origins are not secure contexts. Existing product operations require secure APIs. TCP reachability or HTTP200 alone cannot establish usable test delivery; Tailscale DNS certificate alone also does not validate a literal IP HTTPS URL.",
+  "actions": "Read-only inspection only. No certificate issuance/trust install, Tailscale setting/Serve mutation, firewall/ACL/public deployment or product change. Existing TCP8765 retained.",
+  "followup": "Prepare exact S05 runnable build after independent review; verify local browser; resolve trusted network entry within authorized deployment boundary or present exact trust/HTTPS prerequisite when Human help is truly required. Do not block unrelated S05 engineering or weaken hashes/browser security.",
+  "status": "NETWORK_ENTRY_SECURE_CONTEXT_PREREQUISITE_OPEN; IMPLEMENTATION_CONTINUES"
+}

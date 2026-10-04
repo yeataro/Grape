@@ -1,0 +1,1375 @@
+{
+  "changed": {
+    "format": "grape.document",
+    "formatVersion": {
+      "major": 2,
+      "minor": 1
+    },
+    "graph": {
+      "id": "22f8d417-60ea-4a8e-9f80-2a7cbe3d4f78",
+      "name": "Untitled shader",
+      "kind": {
+        "moduleId": "grape.graph-kinds",
+        "version": "0.2.0",
+        "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+        "kindId": "grape.image"
+      },
+      "kindSettings": {},
+      "modules": [
+        {
+          "moduleId": "grape.nodes.basic",
+          "version": "0.1.0",
+          "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292"
+        },
+        {
+          "moduleId": "grape.nodes.networks",
+          "version": "0.1.0",
+          "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2"
+        },
+        {
+          "moduleId": "grape.resources.extents",
+          "version": "0.1.0",
+          "fingerprint": "sha256:bcfaaca3ef01c57070e05b26e09bbcacde5d51f6ba0091b8b6aaf3d83efa3c60"
+        },
+        {
+          "moduleId": "grape.resources.image-sources",
+          "version": "0.2.0",
+          "fingerprint": "sha256:bb0ff902b36d7a07fc104412d0ccb11e4e7efed0106aa3c8595026dbcef8b212"
+        },
+        {
+          "moduleId": "grape.resources.function-networks",
+          "version": "0.1.0",
+          "fingerprint": "sha256:5b5c21ebbe8c7f1dbab1b5bfd43dcaa2841e4c5fcb8fb4a6f52c075b06bfbd74"
+        },
+        {
+          "moduleId": "grape.nodes.function-operations",
+          "version": "0.1.0",
+          "fingerprint": "sha256:7e8e97f518d293b3515e89faed207708907407da22d4fe44c777568b1d6d6bee"
+        },
+        {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.1.0",
+          "fingerprint": "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3"
+        },
+        {
+          "moduleId": "grape.nodes.image-output",
+          "version": "0.2.0",
+          "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+        },
+        {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.2.0",
+          "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+        }
+      ],
+      "stages": [
+        {
+          "id": "72af5112-7056-493a-8462-8a9d57e79e2f",
+          "key": "vertex",
+          "stageKindId": "grape.stage.vertex",
+          "implementation": "profile-default",
+          "network": {
+            "id": "46feeec4-c0f4-4490-83b3-d8750da64262",
+            "nodes": [],
+            "edges": [],
+            "extensions": {}
+          },
+          "extensions": {}
+        },
+        {
+          "id": "157104c3-2b1e-4d58-9c3e-959c9b898260",
+          "key": "pixel",
+          "stageKindId": "grape.stage.pixel",
+          "implementation": "network",
+          "network": {
+            "id": "b23e6855-e863-4856-a7b6-e69bec319f47",
+            "nodes": [
+              {
+                "id": "79ba8158-2bef-4dc7-95c1-aae087055593",
+                "name": "Image output",
+                "type": {
+                  "moduleId": "grape.nodes.image-output",
+                  "version": "0.2.0",
+                  "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+                  "typeId": "image-output"
+                },
+                "state": {},
+                "inputValues": {},
+                "ports": [
+                  {
+                    "key": "color",
+                    "direction": "input",
+                    "type": "glsl.vec4",
+                    "supply": "required",
+                    "connectionPolicy": "numeric"
+                  }
+                ],
+                "references": [],
+                "referencesComplete": true,
+                "position": [
+                  650,
+                  180
+                ],
+                "extensions": {}
+              },
+              {
+                "id": "e50a937b-fb6a-4101-b987-9619eed41782",
+                "name": "Subgraph",
+                "type": {
+                  "moduleId": "grape.nodes.networks",
+                  "version": "0.1.0",
+                  "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                  "typeId": "call"
+                },
+                "state": {
+                  "definition": "4c3ae609-336f-4b1a-915e-efa0271d878d"
+                },
+                "inputValues": {
+                  "value": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "ports": [
+                  {
+                    "key": "value",
+                    "direction": "input",
+                    "type": "glsl.vec4",
+                    "supply": "local",
+                    "defaultValue": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "key": "value",
+                    "direction": "output",
+                    "type": "glsl.vec4",
+                    "defaultValue": [
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                ],
+                "references": [
+                  {
+                    "slot": "definition",
+                    "kind": "resource",
+                    "targetId": "4c3ae609-336f-4b1a-915e-efa0271d878d"
+                  }
+                ],
+                "referencesComplete": true,
+                "position": [
+                  160,
+                  120
+                ],
+                "extensions": {}
+              }
+            ],
+            "edges": [],
+            "extensions": {}
+          },
+          "extensions": {}
+        }
+      ],
+      "resources": [
+        {
+          "id": "4c3ae609-336f-4b1a-915e-efa0271d878d",
+          "type": {
+            "moduleId": "grape.resources.function-networks",
+            "version": "0.1.0",
+            "fingerprint": "sha256:5b5c21ebbe8c7f1dbab1b5bfd43dcaa2841e4c5fcb8fb4a6f52c075b06bfbd74",
+            "typeId": "definition"
+          },
+          "data": {
+            "name": "Subgraph",
+            "local": true,
+            "origin": null,
+            "network": {
+              "id": "b3e7e8a1-2f82-4816-8f4a-d90a6ca0ef8d",
+              "nodes": [
+                {
+                  "id": "bb0eab70-d506-4de0-8bdb-b944e623a5fa",
+                  "name": "Inputs",
+                  "type": {
+                    "moduleId": "grape.nodes.networks",
+                    "version": "0.1.0",
+                    "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                    "typeId": "network-input"
+                  },
+                  "state": {
+                    "definition": "4c3ae609-336f-4b1a-915e-efa0271d878d"
+                  },
+                  "inputValues": {},
+                  "ports": [
+                    {
+                      "key": "value",
+                      "direction": "output",
+                      "type": "glsl.vec4",
+                      "supply": "local",
+                      "defaultValue": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  ],
+                  "references": [
+                    {
+                      "slot": "definition",
+                      "kind": "resource",
+                      "targetId": "4c3ae609-336f-4b1a-915e-efa0271d878d"
+                    }
+                  ],
+                  "referencesComplete": true,
+                  "position": [
+                    0,
+                    0
+                  ],
+                  "extensions": {}
+                },
+                {
+                  "id": "c83c7617-0783-4ccd-9d2b-f960787dd702",
+                  "name": "Outputs",
+                  "type": {
+                    "moduleId": "grape.nodes.networks",
+                    "version": "0.1.0",
+                    "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                    "typeId": "network-output"
+                  },
+                  "state": {
+                    "definition": "4c3ae609-336f-4b1a-915e-efa0271d878d"
+                  },
+                  "inputValues": {
+                    "value": [
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  },
+                  "ports": [
+                    {
+                      "key": "value",
+                      "direction": "input",
+                      "type": "glsl.vec4",
+                      "defaultValue": [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      "supply": "local"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "slot": "definition",
+                      "kind": "resource",
+                      "targetId": "4c3ae609-336f-4b1a-915e-efa0271d878d"
+                    }
+                  ],
+                  "referencesComplete": true,
+                  "position": [
+                    600,
+                    0
+                  ],
+                  "extensions": {}
+                }
+              ],
+              "edges": [
+                {
+                  "id": "485eb879-096f-403d-bc27-927dadf3ae01",
+                  "from": {
+                    "nodeId": "bb0eab70-d506-4de0-8bdb-b944e623a5fa",
+                    "portKey": "value"
+                  },
+                  "to": {
+                    "nodeId": "c83c7617-0783-4ccd-9d2b-f960787dd702",
+                    "portKey": "value"
+                  },
+                  "adaptation": {
+                    "schema": "grape.edge-adaptation",
+                    "version": 1,
+                    "sourceType": "glsl.vec4",
+                    "targetType": "glsl.vec4",
+                    "operation": "identity",
+                    "extensions": {}
+                  },
+                  "extensions": {}
+                }
+              ],
+              "extensions": {}
+            },
+            "interface": [
+              {
+                "key": "value",
+                "name": "Value",
+                "direction": "input",
+                "type": "glsl.vec4",
+                "supply": "local",
+                "defaultValue": [
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              {
+                "key": "value",
+                "name": "Value",
+                "direction": "output",
+                "type": "glsl.vec4",
+                "defaultValue": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "dependencies": [],
+            "emissionMode": "function"
+          },
+          "references": [],
+          "referencesComplete": true,
+          "extensions": {}
+        }
+      ],
+      "losses": [],
+      "recovery": [],
+      "extensions": {}
+    }
+  },
+  "independent": {
+    "format": "grape.document",
+    "formatVersion": {
+      "major": 2,
+      "minor": 1
+    },
+    "graph": {
+      "id": "22f8d417-60ea-4a8e-9f80-2a7cbe3d4f78",
+      "name": "Untitled shader",
+      "kind": {
+        "moduleId": "grape.graph-kinds",
+        "version": "0.2.0",
+        "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+        "kindId": "grape.image"
+      },
+      "kindSettings": {},
+      "modules": [
+        {
+          "moduleId": "grape.nodes.basic",
+          "version": "0.1.0",
+          "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292"
+        },
+        {
+          "moduleId": "grape.nodes.networks",
+          "version": "0.1.0",
+          "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2"
+        },
+        {
+          "moduleId": "grape.resources.extents",
+          "version": "0.1.0",
+          "fingerprint": "sha256:bcfaaca3ef01c57070e05b26e09bbcacde5d51f6ba0091b8b6aaf3d83efa3c60"
+        },
+        {
+          "moduleId": "grape.resources.image-sources",
+          "version": "0.2.0",
+          "fingerprint": "sha256:bb0ff902b36d7a07fc104412d0ccb11e4e7efed0106aa3c8595026dbcef8b212"
+        },
+        {
+          "moduleId": "grape.resources.function-networks",
+          "version": "0.1.0",
+          "fingerprint": "sha256:5b5c21ebbe8c7f1dbab1b5bfd43dcaa2841e4c5fcb8fb4a6f52c075b06bfbd74"
+        },
+        {
+          "moduleId": "grape.nodes.function-operations",
+          "version": "0.1.0",
+          "fingerprint": "sha256:7e8e97f518d293b3515e89faed207708907407da22d4fe44c777568b1d6d6bee"
+        },
+        {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.1.0",
+          "fingerprint": "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3"
+        },
+        {
+          "moduleId": "grape.nodes.image-output",
+          "version": "0.2.0",
+          "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+        },
+        {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.2.0",
+          "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+        }
+      ],
+      "stages": [
+        {
+          "id": "72af5112-7056-493a-8462-8a9d57e79e2f",
+          "key": "vertex",
+          "stageKindId": "grape.stage.vertex",
+          "implementation": "profile-default",
+          "network": {
+            "id": "46feeec4-c0f4-4490-83b3-d8750da64262",
+            "nodes": [],
+            "edges": [],
+            "extensions": {}
+          },
+          "extensions": {}
+        },
+        {
+          "id": "157104c3-2b1e-4d58-9c3e-959c9b898260",
+          "key": "pixel",
+          "stageKindId": "grape.stage.pixel",
+          "implementation": "network",
+          "network": {
+            "id": "b23e6855-e863-4856-a7b6-e69bec319f47",
+            "nodes": [
+              {
+                "id": "79ba8158-2bef-4dc7-95c1-aae087055593",
+                "name": "Image output",
+                "type": {
+                  "moduleId": "grape.nodes.image-output",
+                  "version": "0.2.0",
+                  "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+                  "typeId": "image-output"
+                },
+                "state": {},
+                "inputValues": {},
+                "ports": [
+                  {
+                    "key": "color",
+                    "direction": "input",
+                    "type": "glsl.vec4",
+                    "supply": "required",
+                    "connectionPolicy": "numeric"
+                  }
+                ],
+                "references": [],
+                "referencesComplete": true,
+                "position": [
+                  650,
+                  180
+                ],
+                "extensions": {}
+              },
+              {
+                "id": "e50a937b-fb6a-4101-b987-9619eed41782",
+                "name": "Subgraph",
+                "type": {
+                  "moduleId": "grape.nodes.networks",
+                  "version": "0.1.0",
+                  "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                  "typeId": "call"
+                },
+                "state": {
+                  "definition": "3d701917-3136-4873-9d17-e1b9d1bc228b"
+                },
+                "inputValues": {
+                  "value": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "ports": [
+                  {
+                    "key": "value",
+                    "direction": "input",
+                    "type": "glsl.vec4",
+                    "supply": "local",
+                    "defaultValue": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "key": "value",
+                    "direction": "output",
+                    "type": "glsl.vec4",
+                    "defaultValue": [
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                ],
+                "references": [
+                  {
+                    "slot": "definition",
+                    "kind": "resource",
+                    "targetId": "3d701917-3136-4873-9d17-e1b9d1bc228b"
+                  }
+                ],
+                "referencesComplete": true,
+                "position": [
+                  160,
+                  120
+                ],
+                "extensions": {}
+              }
+            ],
+            "edges": [],
+            "extensions": {}
+          },
+          "extensions": {}
+        }
+      ],
+      "resources": [
+        {
+          "id": "4c3ae609-336f-4b1a-915e-efa0271d878d",
+          "type": {
+            "moduleId": "grape.resources.function-networks",
+            "version": "0.1.0",
+            "fingerprint": "sha256:5b5c21ebbe8c7f1dbab1b5bfd43dcaa2841e4c5fcb8fb4a6f52c075b06bfbd74",
+            "typeId": "definition"
+          },
+          "data": {
+            "name": "Subgraph",
+            "local": true,
+            "origin": null,
+            "network": {
+              "id": "b3e7e8a1-2f82-4816-8f4a-d90a6ca0ef8d",
+              "nodes": [
+                {
+                  "id": "bb0eab70-d506-4de0-8bdb-b944e623a5fa",
+                  "name": "Inputs",
+                  "type": {
+                    "moduleId": "grape.nodes.networks",
+                    "version": "0.1.0",
+                    "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                    "typeId": "network-input"
+                  },
+                  "state": {
+                    "definition": "4c3ae609-336f-4b1a-915e-efa0271d878d"
+                  },
+                  "inputValues": {},
+                  "ports": [
+                    {
+                      "key": "value",
+                      "direction": "output",
+                      "type": "glsl.vec4",
+                      "supply": "local",
+                      "defaultValue": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  ],
+                  "references": [
+                    {
+                      "slot": "definition",
+                      "kind": "resource",
+                      "targetId": "4c3ae609-336f-4b1a-915e-efa0271d878d"
+                    }
+                  ],
+                  "referencesComplete": true,
+                  "position": [
+                    0,
+                    0
+                  ],
+                  "extensions": {}
+                },
+                {
+                  "id": "c83c7617-0783-4ccd-9d2b-f960787dd702",
+                  "name": "Outputs",
+                  "type": {
+                    "moduleId": "grape.nodes.networks",
+                    "version": "0.1.0",
+                    "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                    "typeId": "network-output"
+                  },
+                  "state": {
+                    "definition": "4c3ae609-336f-4b1a-915e-efa0271d878d"
+                  },
+                  "inputValues": {
+                    "value": [
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  },
+                  "ports": [
+                    {
+                      "key": "value",
+                      "direction": "input",
+                      "type": "glsl.vec4",
+                      "defaultValue": [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      "supply": "local"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "slot": "definition",
+                      "kind": "resource",
+                      "targetId": "4c3ae609-336f-4b1a-915e-efa0271d878d"
+                    }
+                  ],
+                  "referencesComplete": true,
+                  "position": [
+                    600,
+                    0
+                  ],
+                  "extensions": {}
+                }
+              ],
+              "edges": [
+                {
+                  "id": "485eb879-096f-403d-bc27-927dadf3ae01",
+                  "from": {
+                    "nodeId": "bb0eab70-d506-4de0-8bdb-b944e623a5fa",
+                    "portKey": "value"
+                  },
+                  "to": {
+                    "nodeId": "c83c7617-0783-4ccd-9d2b-f960787dd702",
+                    "portKey": "value"
+                  },
+                  "adaptation": {
+                    "schema": "grape.edge-adaptation",
+                    "version": 1,
+                    "sourceType": "glsl.vec4",
+                    "targetType": "glsl.vec4",
+                    "operation": "identity",
+                    "extensions": {}
+                  },
+                  "extensions": {}
+                }
+              ],
+              "extensions": {}
+            },
+            "interface": [
+              {
+                "key": "value",
+                "name": "Value",
+                "direction": "input",
+                "type": "glsl.vec4",
+                "supply": "local",
+                "defaultValue": [
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              {
+                "key": "value",
+                "name": "Value",
+                "direction": "output",
+                "type": "glsl.vec4",
+                "defaultValue": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "dependencies": [],
+            "emissionMode": "function"
+          },
+          "references": [],
+          "referencesComplete": true,
+          "extensions": {}
+        },
+        {
+          "id": "3d701917-3136-4873-9d17-e1b9d1bc228b",
+          "type": {
+            "moduleId": "grape.resources.function-networks",
+            "version": "0.1.0",
+            "fingerprint": "sha256:5b5c21ebbe8c7f1dbab1b5bfd43dcaa2841e4c5fcb8fb4a6f52c075b06bfbd74",
+            "typeId": "definition"
+          },
+          "data": {
+            "name": "Subgraph",
+            "local": true,
+            "origin": "4c3ae609-336f-4b1a-915e-efa0271d878d",
+            "network": {
+              "id": "e82b7bc5-7233-4944-8581-8680e789c40b",
+              "nodes": [
+                {
+                  "id": "8159d9ff-e2da-4d44-b0a2-514b66ae17cd",
+                  "name": "Inputs",
+                  "type": {
+                    "moduleId": "grape.nodes.networks",
+                    "version": "0.1.0",
+                    "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                    "typeId": "network-input"
+                  },
+                  "state": {
+                    "definition": "3d701917-3136-4873-9d17-e1b9d1bc228b"
+                  },
+                  "inputValues": {},
+                  "ports": [
+                    {
+                      "key": "value",
+                      "direction": "output",
+                      "type": "glsl.vec4",
+                      "supply": "local",
+                      "defaultValue": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  ],
+                  "references": [
+                    {
+                      "slot": "definition",
+                      "kind": "resource",
+                      "targetId": "3d701917-3136-4873-9d17-e1b9d1bc228b"
+                    }
+                  ],
+                  "referencesComplete": true,
+                  "position": [
+                    0,
+                    0
+                  ],
+                  "extensions": {}
+                },
+                {
+                  "id": "4d608a05-c481-4de6-8678-7a5eeb8bc9dd",
+                  "name": "Outputs",
+                  "type": {
+                    "moduleId": "grape.nodes.networks",
+                    "version": "0.1.0",
+                    "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                    "typeId": "network-output"
+                  },
+                  "state": {
+                    "definition": "3d701917-3136-4873-9d17-e1b9d1bc228b"
+                  },
+                  "inputValues": {
+                    "value": [
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  },
+                  "ports": [
+                    {
+                      "key": "value",
+                      "direction": "input",
+                      "type": "glsl.vec4",
+                      "defaultValue": [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      "supply": "local"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "slot": "definition",
+                      "kind": "resource",
+                      "targetId": "3d701917-3136-4873-9d17-e1b9d1bc228b"
+                    }
+                  ],
+                  "referencesComplete": true,
+                  "position": [
+                    600,
+                    0
+                  ],
+                  "extensions": {}
+                }
+              ],
+              "edges": [
+                {
+                  "id": "0e1e93ab-c96b-4462-994d-8bac71d1bacd",
+                  "from": {
+                    "nodeId": "8159d9ff-e2da-4d44-b0a2-514b66ae17cd",
+                    "portKey": "value"
+                  },
+                  "to": {
+                    "nodeId": "4d608a05-c481-4de6-8678-7a5eeb8bc9dd",
+                    "portKey": "value"
+                  },
+                  "adaptation": {
+                    "schema": "grape.edge-adaptation",
+                    "version": 1,
+                    "sourceType": "glsl.vec4",
+                    "targetType": "glsl.vec4",
+                    "operation": "identity",
+                    "extensions": {}
+                  },
+                  "extensions": {}
+                }
+              ],
+              "extensions": {}
+            },
+            "interface": [
+              {
+                "key": "value",
+                "name": "Value",
+                "direction": "input",
+                "type": "glsl.vec4",
+                "supply": "local",
+                "defaultValue": [
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              {
+                "key": "value",
+                "name": "Value",
+                "direction": "output",
+                "type": "glsl.vec4",
+                "defaultValue": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "dependencies": [],
+            "emissionMode": "function"
+          },
+          "references": [],
+          "referencesComplete": true,
+          "extensions": {}
+        }
+      ],
+      "losses": [],
+      "recovery": [],
+      "extensions": {}
+    }
+  },
+  "separated": {
+    "format": "grape.document",
+    "formatVersion": {
+      "major": 2,
+      "minor": 1
+    },
+    "graph": {
+      "id": "22f8d417-60ea-4a8e-9f80-2a7cbe3d4f78",
+      "name": "Untitled shader",
+      "kind": {
+        "moduleId": "grape.graph-kinds",
+        "version": "0.2.0",
+        "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+        "kindId": "grape.image"
+      },
+      "kindSettings": {},
+      "modules": [
+        {
+          "moduleId": "grape.nodes.basic",
+          "version": "0.1.0",
+          "fingerprint": "sha256:011f48f4ebe044a2391d335ac3cff7c52791f1ee485fd47d211211991e7a2292"
+        },
+        {
+          "moduleId": "grape.nodes.networks",
+          "version": "0.1.0",
+          "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2"
+        },
+        {
+          "moduleId": "grape.resources.extents",
+          "version": "0.1.0",
+          "fingerprint": "sha256:bcfaaca3ef01c57070e05b26e09bbcacde5d51f6ba0091b8b6aaf3d83efa3c60"
+        },
+        {
+          "moduleId": "grape.resources.image-sources",
+          "version": "0.2.0",
+          "fingerprint": "sha256:bb0ff902b36d7a07fc104412d0ccb11e4e7efed0106aa3c8595026dbcef8b212"
+        },
+        {
+          "moduleId": "grape.resources.function-networks",
+          "version": "0.1.0",
+          "fingerprint": "sha256:5b5c21ebbe8c7f1dbab1b5bfd43dcaa2841e4c5fcb8fb4a6f52c075b06bfbd74"
+        },
+        {
+          "moduleId": "grape.nodes.function-operations",
+          "version": "0.1.0",
+          "fingerprint": "sha256:7e8e97f518d293b3515e89faed207708907407da22d4fe44c777568b1d6d6bee"
+        },
+        {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.1.0",
+          "fingerprint": "sha256:30d1266c367648c97b57a6cf77eec9d0bf14ac8bdb057fa4eef457539adb98c3"
+        },
+        {
+          "moduleId": "grape.nodes.image-output",
+          "version": "0.2.0",
+          "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+        },
+        {
+          "moduleId": "grape.graph-kinds",
+          "version": "0.2.0",
+          "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93"
+        }
+      ],
+      "stages": [
+        {
+          "id": "72af5112-7056-493a-8462-8a9d57e79e2f",
+          "key": "vertex",
+          "stageKindId": "grape.stage.vertex",
+          "implementation": "profile-default",
+          "network": {
+            "id": "46feeec4-c0f4-4490-83b3-d8750da64262",
+            "nodes": [],
+            "edges": [],
+            "extensions": {}
+          },
+          "extensions": {}
+        },
+        {
+          "id": "157104c3-2b1e-4d58-9c3e-959c9b898260",
+          "key": "pixel",
+          "stageKindId": "grape.stage.pixel",
+          "implementation": "network",
+          "network": {
+            "id": "b23e6855-e863-4856-a7b6-e69bec319f47",
+            "nodes": [
+              {
+                "id": "79ba8158-2bef-4dc7-95c1-aae087055593",
+                "name": "Image output",
+                "type": {
+                  "moduleId": "grape.nodes.image-output",
+                  "version": "0.2.0",
+                  "fingerprint": "sha256:5e996954cafb09b5816b3e1b0ea4e62cb1668822931e86c8ea0c794406a4ac93",
+                  "typeId": "image-output"
+                },
+                "state": {},
+                "inputValues": {},
+                "ports": [
+                  {
+                    "key": "color",
+                    "direction": "input",
+                    "type": "glsl.vec4",
+                    "supply": "required",
+                    "connectionPolicy": "numeric"
+                  }
+                ],
+                "references": [],
+                "referencesComplete": true,
+                "position": [
+                  650,
+                  180
+                ],
+                "extensions": {}
+              },
+              {
+                "id": "e50a937b-fb6a-4101-b987-9619eed41782",
+                "name": "Subgraph",
+                "type": {
+                  "moduleId": "grape.nodes.networks",
+                  "version": "0.1.0",
+                  "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                  "typeId": "call"
+                },
+                "state": {
+                  "definition": "3d701917-3136-4873-9d17-e1b9d1bc228b"
+                },
+                "inputValues": {
+                  "value": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "ports": [
+                  {
+                    "key": "value",
+                    "direction": "input",
+                    "type": "glsl.vec4",
+                    "supply": "local",
+                    "defaultValue": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "key": "value",
+                    "direction": "output",
+                    "type": "glsl.vec4",
+                    "defaultValue": [
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                ],
+                "references": [
+                  {
+                    "slot": "definition",
+                    "kind": "resource",
+                    "targetId": "3d701917-3136-4873-9d17-e1b9d1bc228b"
+                  }
+                ],
+                "referencesComplete": true,
+                "position": [
+                  160,
+                  120
+                ],
+                "extensions": {}
+              }
+            ],
+            "edges": [],
+            "extensions": {}
+          },
+          "extensions": {}
+        }
+      ],
+      "resources": [
+        {
+          "id": "4c3ae609-336f-4b1a-915e-efa0271d878d",
+          "type": {
+            "moduleId": "grape.resources.function-networks",
+            "version": "0.1.0",
+            "fingerprint": "sha256:5b5c21ebbe8c7f1dbab1b5bfd43dcaa2841e4c5fcb8fb4a6f52c075b06bfbd74",
+            "typeId": "definition"
+          },
+          "data": {
+            "name": "Subgraph",
+            "local": true,
+            "origin": null,
+            "network": {
+              "id": "b3e7e8a1-2f82-4816-8f4a-d90a6ca0ef8d",
+              "nodes": [
+                {
+                  "id": "bb0eab70-d506-4de0-8bdb-b944e623a5fa",
+                  "name": "Inputs",
+                  "type": {
+                    "moduleId": "grape.nodes.networks",
+                    "version": "0.1.0",
+                    "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                    "typeId": "network-input"
+                  },
+                  "state": {
+                    "definition": "4c3ae609-336f-4b1a-915e-efa0271d878d"
+                  },
+                  "inputValues": {},
+                  "ports": [
+                    {
+                      "key": "value",
+                      "direction": "output",
+                      "type": "glsl.vec4",
+                      "supply": "local",
+                      "defaultValue": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  ],
+                  "references": [
+                    {
+                      "slot": "definition",
+                      "kind": "resource",
+                      "targetId": "4c3ae609-336f-4b1a-915e-efa0271d878d"
+                    }
+                  ],
+                  "referencesComplete": true,
+                  "position": [
+                    0,
+                    0
+                  ],
+                  "extensions": {}
+                },
+                {
+                  "id": "c83c7617-0783-4ccd-9d2b-f960787dd702",
+                  "name": "Outputs",
+                  "type": {
+                    "moduleId": "grape.nodes.networks",
+                    "version": "0.1.0",
+                    "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                    "typeId": "network-output"
+                  },
+                  "state": {
+                    "definition": "4c3ae609-336f-4b1a-915e-efa0271d878d"
+                  },
+                  "inputValues": {
+                    "value": [
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  },
+                  "ports": [
+                    {
+                      "key": "value",
+                      "direction": "input",
+                      "type": "glsl.vec4",
+                      "defaultValue": [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      "supply": "local"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "slot": "definition",
+                      "kind": "resource",
+                      "targetId": "4c3ae609-336f-4b1a-915e-efa0271d878d"
+                    }
+                  ],
+                  "referencesComplete": true,
+                  "position": [
+                    600,
+                    0
+                  ],
+                  "extensions": {}
+                }
+              ],
+              "edges": [
+                {
+                  "id": "485eb879-096f-403d-bc27-927dadf3ae01",
+                  "from": {
+                    "nodeId": "bb0eab70-d506-4de0-8bdb-b944e623a5fa",
+                    "portKey": "value"
+                  },
+                  "to": {
+                    "nodeId": "c83c7617-0783-4ccd-9d2b-f960787dd702",
+                    "portKey": "value"
+                  },
+                  "adaptation": {
+                    "schema": "grape.edge-adaptation",
+                    "version": 1,
+                    "sourceType": "glsl.vec4",
+                    "targetType": "glsl.vec4",
+                    "operation": "identity",
+                    "extensions": {}
+                  },
+                  "extensions": {}
+                }
+              ],
+              "extensions": {}
+            },
+            "interface": [
+              {
+                "key": "value",
+                "name": "Value",
+                "direction": "input",
+                "type": "glsl.vec4",
+                "supply": "local",
+                "defaultValue": [
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              {
+                "key": "value",
+                "name": "Value",
+                "direction": "output",
+                "type": "glsl.vec4",
+                "defaultValue": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "dependencies": [],
+            "emissionMode": "function"
+          },
+          "references": [],
+          "referencesComplete": true,
+          "extensions": {}
+        },
+        {
+          "id": "3d701917-3136-4873-9d17-e1b9d1bc228b",
+          "type": {
+            "moduleId": "grape.resources.function-networks",
+            "version": "0.1.0",
+            "fingerprint": "sha256:5b5c21ebbe8c7f1dbab1b5bfd43dcaa2841e4c5fcb8fb4a6f52c075b06bfbd74",
+            "typeId": "definition"
+          },
+          "data": {
+            "name": "Subgraph",
+            "local": true,
+            "origin": "4c3ae609-336f-4b1a-915e-efa0271d878d",
+            "network": {
+              "id": "e82b7bc5-7233-4944-8581-8680e789c40b",
+              "nodes": [
+                {
+                  "id": "8159d9ff-e2da-4d44-b0a2-514b66ae17cd",
+                  "name": "Inputs",
+                  "type": {
+                    "moduleId": "grape.nodes.networks",
+                    "version": "0.1.0",
+                    "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                    "typeId": "network-input"
+                  },
+                  "state": {
+                    "definition": "3d701917-3136-4873-9d17-e1b9d1bc228b"
+                  },
+                  "inputValues": {},
+                  "ports": [
+                    {
+                      "key": "value",
+                      "direction": "output",
+                      "type": "glsl.vec4",
+                      "supply": "local",
+                      "defaultValue": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  ],
+                  "references": [
+                    {
+                      "slot": "definition",
+                      "kind": "resource",
+                      "targetId": "3d701917-3136-4873-9d17-e1b9d1bc228b"
+                    }
+                  ],
+                  "referencesComplete": true,
+                  "position": [
+                    0,
+                    0
+                  ],
+                  "extensions": {}
+                },
+                {
+                  "id": "4d608a05-c481-4de6-8678-7a5eeb8bc9dd",
+                  "name": "Outputs",
+                  "type": {
+                    "moduleId": "grape.nodes.networks",
+                    "version": "0.1.0",
+                    "fingerprint": "sha256:fdd67aaa5341ce6c29d05e6b6d3220b90f367e910730ba517899fcf59a3b36d2",
+                    "typeId": "network-output"
+                  },
+                  "state": {
+                    "definition": "3d701917-3136-4873-9d17-e1b9d1bc228b"
+                  },
+                  "inputValues": {
+                    "value": [
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  },
+                  "ports": [
+                    {
+                      "key": "value",
+                      "direction": "input",
+                      "type": "glsl.vec4",
+                      "defaultValue": [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      "supply": "local"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "slot": "definition",
+                      "kind": "resource",
+                      "targetId": "3d701917-3136-4873-9d17-e1b9d1bc228b"
+                    }
+                  ],
+                  "referencesComplete": true,
+                  "position": [
+                    600,
+                    0
+                  ],
+                  "extensions": {}
+                }
+              ],
+              "edges": [
+                {
+                  "id": "0e1e93ab-c96b-4462-994d-8bac71d1bacd",
+                  "from": {
+                    "nodeId": "8159d9ff-e2da-4d44-b0a2-514b66ae17cd",
+                    "portKey": "value"
+                  },
+                  "to": {
+                    "nodeId": "4d608a05-c481-4de6-8678-7a5eeb8bc9dd",
+                    "portKey": "value"
+                  },
+                  "adaptation": {
+                    "schema": "grape.edge-adaptation",
+                    "version": 1,
+                    "sourceType": "glsl.vec4",
+                    "targetType": "glsl.vec4",
+                    "operation": "identity",
+                    "extensions": {}
+                  },
+                  "extensions": {}
+                }
+              ],
+              "extensions": {}
+            },
+            "interface": [
+              {
+                "key": "value",
+                "name": "Value",
+                "direction": "input",
+                "type": "glsl.vec4",
+                "supply": "local",
+                "defaultValue": [
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              {
+                "key": "value",
+                "name": "Value",
+                "direction": "output",
+                "type": "glsl.vec4",
+                "defaultValue": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "dependencies": [],
+            "emissionMode": "expand"
+          },
+          "references": [],
+          "referencesComplete": true,
+          "extensions": {}
+        }
+      ],
+      "losses": [],
+      "recovery": [],
+      "extensions": {}
+    }
+  }
+}

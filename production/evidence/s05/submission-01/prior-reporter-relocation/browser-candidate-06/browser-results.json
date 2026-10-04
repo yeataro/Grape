@@ -1,0 +1,399 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "tools/s05-playwright.config.ts",
+      "s05.spec.ts",
+      "--output",
+      "evidence/s05/browser-candidate-06/results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s05-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s05/browser-candidate-06/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "evidence/s05/browser-candidate-06/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node node_modules/vite/bin/vite.js --host 0.0.0.0 --port 4195 --strictPort",
+      "url": "http://127.0.0.1:4195",
+      "reuseExistingServer": false,
+      "cwd": "C:\\Users\\user\\source\\Grape\\production"
+    }
+  },
+  "suites": [
+    {
+      "title": "s05.spec.ts",
+      "file": "s05.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S05 AT04 AT05 real mode command reports precise loss and Undo restores entire graph; rejected activation leaves UI and history unchanged",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30071,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05.spec.ts",
+                        "column": 22,
+                        "line": 8
+                      },
+                      "message": "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   6 | });\n   7 | async function exported(page: any) {\n>  8 |   const event = page.waitForEvent(\"download\");\n     |                      ^\n   9 |   await page.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n  10 |   return JSON.parse(await fs.readFile((await (await event).path())!, \"utf8\"));\n  11 | }\n    at exported (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05.spec.ts:8:22)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05.spec.ts:64:25"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T23:59:16.248Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\browser-candidate-06\\results\\s05-S05-AT04-AT05-real-mod-19ada-es-UI-and-history-unchanged-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\browser-candidate-06\\results\\s05-S05-AT04-AT05-real-mod-19ada-es-UI-and-history-unchanged-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s05\\browser-candidate-06\\results\\s05-S05-AT04-AT05-real-mod-19ada-es-UI-and-history-unchanged-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "57dc48ff28ab4764e511-72052f85f6bc8983b2b2",
+          "file": "s05.spec.ts",
+          "line": 24,
+          "column": 1
+        },
+        {
+          "title": "S05 AT07 legacy mode UI requires explicit owner upgrade preserving original data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 795,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T23:59:46.714Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57dc48ff28ab4764e511-5b064f5b3768a818f574",
+          "file": "s05.spec.ts",
+          "line": 97,
+          "column": 1
+        },
+        {
+          "title": "S05 AT03 AT08 WebGL2 fixed shape nominal effects unconsumed nested effects and independent stage helpers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 317,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T23:59:47.587Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57dc48ff28ab4764e511-f697d0a7a1846dddd49f",
+          "file": "s05.spec.ts",
+          "line": 136,
+          "column": 1
+        },
+        {
+          "title": "S05 AT02 AT03 real WebGL2 distinct shared and nested caller values and Uniform parameters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 257,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T23:59:47.910Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57dc48ff28ab4764e511-b63355c37134578a875b",
+          "file": "s05.spec.ts",
+          "line": 188,
+          "column": 1
+        },
+        {
+          "title": "S05 mode UI persists shared choice and Make independent and Undo through real commands",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1058,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T23:59:48.174Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57dc48ff28ab4764e511-f660c9558d3568bc3003",
+          "file": "s05.spec.ts",
+          "line": 273,
+          "column": 1
+        },
+        {
+          "title": "S05 served HTTP 127.0.0.1 boots with secure IDs and exact Personal digest",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1447,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T23:59:49.238Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57dc48ff28ab4764e511-2f0c0dffbf51bb611647",
+          "file": "s05.spec.ts",
+          "line": 322,
+          "column": 3
+        },
+        {
+          "title": "S05 served HTTP 192.168.1.105 boots with secure IDs and exact Personal digest",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1443,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T23:59:50.690Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57dc48ff28ab4764e511-9c86a1a038c46807074f",
+          "file": "s05.spec.ts",
+          "line": 322,
+          "column": 3
+        },
+        {
+          "title": "S05 served HTTP 100.83.88.97 boots with secure IDs and exact Personal digest",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1478,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T23:59:52.139Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57dc48ff28ab4764e511-ce5e498690ae04119f36",
+          "file": "s05.spec.ts",
+          "line": 322,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-03T23:59:15.531Z",
+    "duration": 38322.265,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

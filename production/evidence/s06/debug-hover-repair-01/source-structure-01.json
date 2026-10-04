@@ -1,0 +1,79 @@
+{
+  "implementationI": "528c4f76149fad6da53c3c4da701cf1e8e121750",
+  "sharedInterface": {
+    "file": "production/src/ui/floating.ts",
+    "name": "floatingSurface(FloatingOptions)",
+    "owner": "DOM presentation; no Graph/Application/module values",
+    "callerInputs": [
+      "host",
+      "trigger (anchor)",
+      "content",
+      "title",
+      "closeLabel",
+      "kind anchored/modal/menu",
+      "width/maxHeight",
+      "align start/end",
+      "beforeOpen/closed/fallbackFocus only where used"
+    ],
+    "mechanism": "Native dialog semantics, clamped anchor positioning, open/close/toggle, z-order, ResizeObserver/window resize/document scroll, Escape/Close/focus return, menu arrows and checkbox items, explicit modal Tab containment. Nonmodal disclosures never add focus trap.",
+    "cleanup": "Each instance owns listeners and observer; dispose closes/removes/disconnects and fences late opens. Closed-position callbacks return immediately. Owner closes current details on invalidation; no retained editable authority."
+  },
+  "consumers": [
+    {
+      "caller": "apps/web/main.ts",
+      "surfaces": [
+        "Application status",
+        "Shader output",
+        "Project actions",
+        "Workspace hints"
+      ],
+      "ownership": "Application retains existing command handlers/error map; CodePanel remains mounted and owns current GLSL/diagnostics/Locate. Menu caller groups buttons, supplies menu variant and size. No command rebinding or feature-name switch in shared helper.",
+      "lifetime": "Application root lifetime; stable singleton controls, independent shared instances. Status close uses enabled caller fallback if matching recovery removes its trigger."
+    },
+    {
+      "caller": "src/ui/hover.ts",
+      "surfaces": [
+        "Object information modal",
+        "Hover preferences anchored"
+      ],
+      "ownership": "Hover registry resolves current public owner projection only. Modal full text bounded/readonly. Preference adapter remains dedicated browser-local key.140ms target dwell holds valid target while moving toward details, cancels on owner/lifecycle changes; F2 resolves document.activeElement.",
+      "lifetime": "Owner invalidate and mutation/visibility/blurring fences clear active; dispose clears dwell timer, listeners, observer and both surfaces. No data read per pointermove."
+    },
+    {
+      "caller": "src/features/canvas.ts via PanelMountContext.floating",
+      "surfaces": [
+        "Canvas status details"
+      ],
+      "ownership": "Feature owns complete message and operation-kind recovery; optional public readonly platform seam avoids forbidden feature→ui import.",
+      "lifetime": "PresentationSession validates containment/protocol, registers disposer in MountScope, old methods/create-after-revoke cannot reopen. No command authority passed."
+    }
+  ],
+  "primitiveReuse": {
+    "sockets": "nodePortRow supplies circle-only button with accessible name + separate label/type for actual/catalog rows; common port/socket CSS. Inspector has no newly invented connection control.",
+    "controls": "Existing native styled buttons/select/numeric inputs remain shared. No framework dependency, full app/docking rewrite or new input-ladder semantics."
+  },
+  "diagnosticLocate": "code.ts adds per-render serial and connected-node check, excludes stale compilation location. Scope.event and existing context node lookup remain final authority. Detached callbacks cannot act on a new current projection.",
+  "sourceChecks": {
+    "file": "production/evidence/s06/debug-hover-repair-01/checks-final-01/production-results.json",
+    "bytes": 1353,
+    "sha256": "018c9cd4dab48f62eb66fe3d18ad222a809e511b57e8c0e931048600c946f0ec"
+  },
+  "behavior": [
+    {
+      "file": "production/evidence/s06/debug-hover-repair-01/final-lifetime-01/floating-lifetime.json",
+      "bytes": 351,
+      "sha256": "4db1b0e3317720cf3f63c37200cb40b2f6e4c021b3fb7364d61ff1d2db489026"
+    },
+    {
+      "file": "production/evidence/s06/debug-hover-repair-01/final-lifetime-01/floating-mount-lifetime.json",
+      "bytes": 251,
+      "sha256": "379205f81101b3119875c68c33c92b00a71714f4f87b267adf108722bbc1951f"
+    },
+    {
+      "file": "production/evidence/s06/debug-hover-repair-01/archive-public-01/current-diagnostic-locate.json",
+      "bytes": 214,
+      "sha256": "3ec3433baa142db3777adf5e81a61440007f3086683940a171fc68a4900cf35e"
+    }
+  ],
+  "limits": "Read-only scout supplied concrete leads for UA menu margin and accessible toggle state; Implementer fixed and tested. This is not independent architecture PASS. Existing catalog movable window remains its own prior owner; no new movable window variant was invented."
+}

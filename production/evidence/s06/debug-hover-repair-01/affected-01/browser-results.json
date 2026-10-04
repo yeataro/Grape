@@ -1,0 +1,2242 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+      "s06-status-pointer.spec.ts",
+      "s06-connection-view.spec.ts",
+      "s06-hover-repair.spec.ts",
+      "s06-guards.spec.ts",
+      "s05-escape-focus.spec.ts",
+      "--output",
+      "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/debug-hover-repair-01/affected-01/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s05-escape-focus.spec.ts",
+      "file": "s05-escape-focus.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S05 natural Escape cancels direct without Export drag with no History entry",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30133,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts",
+                        "column": 29,
+                        "line": 82
+                      },
+                      "message": "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   at s05-escape-flow.ts:82\n\n  80 |     });\n  81 |   const exportDocument = async () => {\n> 82 |     const downloaded = page.waitForEvent(\"download\");\n     |                             ^\n  83 |     await app.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n  84 |     return JSON.parse(\n  85 |       fs.readFileSync((await (await downloaded).path())!, \"utf8\"),\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:82:29)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:163:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts",
+                        "column": 73,
+                        "line": 83
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   at s05-escape-flow.ts:83\n\n  81 |   const exportDocument = async () => {\n  82 |     const downloaded = page.waitForEvent(\"download\");\n> 83 |     await app.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n     |                                                                         ^\n  84 |     return JSON.parse(\n  85 |       fs.readFileSync((await (await downloaded).path())!, \"utf8\"),\n  86 |     );\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:83:73)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:163:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:32:39.676Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s05-escape-focus-S05-natur-df7fc--drag-with-no-History-entry-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s05-escape-focus-S05-natur-df7fc--drag-with-no-History-entry-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s05-escape-focus-S05-natur-df7fc--drag-with-no-History-entry-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6c60222641889953920e-7608e59bfa57dfb8e189",
+          "file": "s05-escape-focus.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "S05 natural Escape cancels direct after Export drag with no History entry",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30066,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts",
+                        "column": 29,
+                        "line": 82
+                      },
+                      "message": "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   at s05-escape-flow.ts:82\n\n  80 |     });\n  81 |   const exportDocument = async () => {\n> 82 |     const downloaded = page.waitForEvent(\"download\");\n     |                             ^\n  83 |     await app.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n  84 |     return JSON.parse(\n  85 |       fs.readFileSync((await (await downloaded).path())!, \"utf8\"),\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:82:29)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:97:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts",
+                        "column": 73,
+                        "line": 83
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   at s05-escape-flow.ts:83\n\n  81 |   const exportDocument = async () => {\n  82 |     const downloaded = page.waitForEvent(\"download\");\n> 83 |     await app.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n     |                                                                         ^\n  84 |     return JSON.parse(\n  85 |       fs.readFileSync((await (await downloaded).path())!, \"utf8\"),\n  86 |     );\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:83:73)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:97:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:33:10.439Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s05-escape-focus-S05-natur-4b139--drag-with-no-History-entry-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s05-escape-focus-S05-natur-4b139--drag-with-no-History-entry-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s05-escape-focus-S05-natur-4b139--drag-with-no-History-entry-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6c60222641889953920e-a0995b959d0787da2358",
+          "file": "s05-escape-focus.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "S05 natural Escape cancels wrapper without Export drag with no History entry",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30121,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts",
+                        "column": 29,
+                        "line": 82
+                      },
+                      "message": "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   at s05-escape-flow.ts:82\n\n  80 |     });\n  81 |   const exportDocument = async () => {\n> 82 |     const downloaded = page.waitForEvent(\"download\");\n     |                             ^\n  83 |     await app.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n  84 |     return JSON.parse(\n  85 |       fs.readFileSync((await (await downloaded).path())!, \"utf8\"),\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:82:29)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:163:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts",
+                        "column": 73,
+                        "line": 83
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('iframe').contentFrame().getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   at s05-escape-flow.ts:83\n\n  81 |   const exportDocument = async () => {\n  82 |     const downloaded = page.waitForEvent(\"download\");\n> 83 |     await app.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n     |                                                                         ^\n  84 |     return JSON.parse(\n  85 |       fs.readFileSync((await (await downloaded).path())!, \"utf8\"),\n  86 |     );\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:83:73)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:163:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:33:41.088Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s05-escape-focus-S05-natur-82ada--drag-with-no-History-entry-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s05-escape-focus-S05-natur-82ada--drag-with-no-History-entry-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s05-escape-focus-S05-natur-82ada--drag-with-no-History-entry-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6c60222641889953920e-662df0c903da5b2c1e9d",
+          "file": "s05-escape-focus.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "S05 natural Escape cancels wrapper after Export drag with no History entry",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30081,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts",
+                        "column": 29,
+                        "line": 82
+                      },
+                      "message": "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   at s05-escape-flow.ts:82\n\n  80 |     });\n  81 |   const exportDocument = async () => {\n> 82 |     const downloaded = page.waitForEvent(\"download\");\n     |                             ^\n  83 |     const exportButton = app.getByRole(\"button\", { name: \"Export JSON\", exact: true });\n  84 |     if (!(await exportButton.isVisible())) await app.getByRole(\"button\", { name: \"Project actions\", exact: true }).click();\n  85 |     await exportButton.click();\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:82:29)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:97:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts",
+                        "column": 73,
+                        "line": 83
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('iframe').contentFrame().getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   at s05-escape-flow.ts:83\n\n  81 |   const exportDocument = async () => {\n  82 |     const downloaded = page.waitForEvent(\"download\");\n> 83 |     const exportButton = app.getByRole(\"button\", { name: \"Export JSON\", exact: true });\n     |                                                                         ^\n  84 |     if (!(await exportButton.isVisible())) await app.getByRole(\"button\", { name: \"Project actions\", exact: true }).click();\n  85 |     await exportButton.click();\n  86 |     return JSON.parse(\n    at exportDocument (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:83:73)\n    at naturalEscapeFlow (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-flow.ts:97:26)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s05-escape-focus.spec.ts:21:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:34:11.805Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s05-escape-focus-S05-natur-0c2f4--drag-with-no-History-entry-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s05-escape-focus-S05-natur-0c2f4--drag-with-no-History-entry-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s05-escape-focus-S05-natur-0c2f4--drag-with-no-History-entry-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6c60222641889953920e-9949fa639696f03a3ef4",
+          "file": "s05-escape-focus.spec.ts",
+          "line": 8,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "s06-connection-view.spec.ts",
+      "file": "s06-connection-view.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 connection notice compact geometry 1280 and successful inverse routes one Undo",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1871,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:34:42.505Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-e21214e545e55b6aa3ff",
+          "file": "s06-connection-view.spec.ts",
+          "line": 62,
+          "column": 3
+        },
+        {
+          "title": "S06 connection notice compact geometry 1440 and successful inverse routes one Undo",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30124,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts",
+                        "column": 15,
+                        "line": 68
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().locator('[data-direction=\"output\"][data-port=\"out\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"port\" type=\"button\" data-port=\"out\" data-direction=\"output\" aria-label=\"Color RGBA output out\" data-node-id=\"17efb72c-ffd9-4337-ac38-7fd1d289dcf5\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button>Upgrade subgraph owners</button> from <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Project actions\">…</dialog> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <button>Upgrade subgraph owners</button> from <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Project actions\">…</dialog> subtree intercepts pointer events\u001b[22m\n\u001b[2m  2 × retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"stage-switch\" data-key=\"50d00dcb-0b63-4573-a31d-f0369c64c9b0:vertex|612e72f3-5dad-4e81-a1b3-f8c585b98ca0:pixel\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m  14 × retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <button>Upgrade subgraph owners</button> from <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Project actions\">…</dialog> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <button>Upgrade subgraph owners</button> from <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Project actions\">…</dialog> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"stage-switch\" data-key=\"50d00dcb-0b63-4573-a31d-f0369c64c9b0:vertex|612e72f3-5dad-4e81-a1b3-f8c585b98ca0:pixel\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"stage-switch\" data-key=\"50d00dcb-0b63-4573-a31d-f0369c64c9b0:vertex|612e72f3-5dad-4e81-a1b3-f8c585b98ca0:pixel\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\n\n  66 |     const { c, out, input } = await color(page),\n  67 |       before = await doc(page);\n> 68 |     await out.click();\n     |               ^\n  69 |     const g = await geometry(c);\n  70 |     output(`notice-${width}`, g);\n  71 |     await page.screenshot({\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts:68:15"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:34:44.639Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-connection-view-S06-co-dd6a6-ful-inverse-routes-one-Undo-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-connection-view-S06-co-dd6a6-ful-inverse-routes-one-Undo-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-connection-view-S06-co-dd6a6-ful-inverse-routes-one-Undo-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-6d6ad3d4c31cd4f84c70",
+          "file": "s06-connection-view.spec.ts",
+          "line": 62,
+          "column": 3
+        },
+        {
+          "title": "S06 connection notice compact geometry 620 and successful inverse routes one Undo",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1621,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:35:15.156Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-e5c81fd6960e49fdd449",
+          "file": "s06-connection-view.spec.ts",
+          "line": 62,
+          "column": 3
+        },
+        {
+          "title": "S06 selection geometry remains fixed at zoom 1",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1059,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 4\u001b[39m\n\u001b[31m+ Received  + 4\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"height\": 79,\u001b[22m\n\u001b[2m      \"name\": \"Image output\",\u001b[22m\n\u001b[2m      \"width\": 190,\u001b[22m\n\u001b[32m-     \"x\": 716.3380126953125,\u001b[39m\n\u001b[32m-     \"y\": 414.11407470703125,\u001b[39m\n\u001b[31m+     \"x\": 650.3380126953125,\u001b[39m\n\u001b[31m+     \"y\": 322.11407470703125,\u001b[39m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"height\": 79,\u001b[22m\n\u001b[2m      \"name\": \"Color RGBA\",\u001b[22m\n\u001b[2m      \"width\": 190,\u001b[22m\n\u001b[32m-     \"x\": 114.3380355834961,\u001b[39m\n\u001b[32m-     \"y\": 330.11407470703125,\u001b[39m\n\u001b[31m+     \"x\": 48.338035583496094,\u001b[39m\n\u001b[31m+     \"y\": 238.11407470703125,\u001b[39m\n\u001b[2m    },\u001b[22m\n\u001b[2m  ]\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 4\u001b[39m\n\u001b[31m+ Received  + 4\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"height\": 79,\u001b[22m\n\u001b[2m      \"name\": \"Image output\",\u001b[22m\n\u001b[2m      \"width\": 190,\u001b[22m\n\u001b[32m-     \"x\": 716.3380126953125,\u001b[39m\n\u001b[32m-     \"y\": 414.11407470703125,\u001b[39m\n\u001b[31m+     \"x\": 650.3380126953125,\u001b[39m\n\u001b[31m+     \"y\": 322.11407470703125,\u001b[39m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"height\": 79,\u001b[22m\n\u001b[2m      \"name\": \"Color RGBA\",\u001b[22m\n\u001b[2m      \"width\": 190,\u001b[22m\n\u001b[32m-     \"x\": 114.3380355834961,\u001b[39m\n\u001b[32m-     \"y\": 330.11407470703125,\u001b[39m\n\u001b[31m+     \"x\": 48.338035583496094,\u001b[39m\n\u001b[31m+     \"y\": 238.11407470703125,\u001b[39m\n\u001b[2m    },\u001b[22m\n\u001b[2m  ]\u001b[22m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts:129:28",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts",
+                      "column": 28,
+                      "line": 129
+                    },
+                    "snippet": "  127 |     const restored = await geometry(c);\n  128 |     output(`selection-${zoom}`, { unselected, selected, restored });\n> 129 |     expect(selected.nodes).toEqual(unselected.nodes);\n      |                            ^\n  130 |     expect(selected.sockets).toEqual(unselected.sockets);\n  131 |     expect(selected.wires).toEqual(unselected.wires);\n  132 |     expect(restored.nodes).toEqual(unselected.nodes);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts",
+                        "column": 28,
+                        "line": 129
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 4\u001b[39m\n\u001b[31m+ Received  + 4\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"height\": 79,\u001b[22m\n\u001b[2m      \"name\": \"Image output\",\u001b[22m\n\u001b[2m      \"width\": 190,\u001b[22m\n\u001b[32m-     \"x\": 716.3380126953125,\u001b[39m\n\u001b[32m-     \"y\": 414.11407470703125,\u001b[39m\n\u001b[31m+     \"x\": 650.3380126953125,\u001b[39m\n\u001b[31m+     \"y\": 322.11407470703125,\u001b[39m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"height\": 79,\u001b[22m\n\u001b[2m      \"name\": \"Color RGBA\",\u001b[22m\n\u001b[2m      \"width\": 190,\u001b[22m\n\u001b[32m-     \"x\": 114.3380355834961,\u001b[39m\n\u001b[32m-     \"y\": 330.11407470703125,\u001b[39m\n\u001b[31m+     \"x\": 48.338035583496094,\u001b[39m\n\u001b[31m+     \"y\": 238.11407470703125,\u001b[39m\n\u001b[2m    },\u001b[22m\n\u001b[2m  ]\u001b[22m\n\n  127 |     const restored = await geometry(c);\n  128 |     output(`selection-${zoom}`, { unselected, selected, restored });\n> 129 |     expect(selected.nodes).toEqual(unselected.nodes);\n      |                            ^\n  130 |     expect(selected.sockets).toEqual(unselected.sockets);\n  131 |     expect(selected.wires).toEqual(unselected.wires);\n  132 |     expect(restored.nodes).toEqual(unselected.nodes);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts:129:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:35:17.020Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-connection-view-S06-se-6da2c-try-remains-fixed-at-zoom-1-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-connection-view-S06-se-6da2c-try-remains-fixed-at-zoom-1-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-connection-view-S06-se-6da2c-try-remains-fixed-at-zoom-1-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts",
+                    "column": 28,
+                    "line": 129
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-ae8e912ad451ac87cc61",
+          "file": "s06-connection-view.spec.ts",
+          "line": 104,
+          "column": 3
+        },
+        {
+          "title": "S06 selection geometry remains fixed at zoom 1.2",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30087,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts",
+                        "column": 71,
+                        "line": 120
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().getByRole('heading', { name: 'Color RGBA', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <h3>Color RGBA</h3>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Project actions\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Project actions\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m  2 × retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button title=\"Pixel Stage\" aria-pressed=\"true\" data-stage-id=\"d29f25a7-3bc0-448f-9f47-e3b1a4324b7e\">Pixel</button> from <div class=\"stage-switch\" data-key=\"bce81447-3dfb-4d0c-a13e-7def1603a5b8:vertex|d29f25a7-3bc0-448f-9f47-e3b1a4324b7e:pixel\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <dialog open=\"\" data-kind=\"anchored\" class=\"floating-surface\" aria-label=\"Project actions\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\u001b[2m  - element was detached from the DOM, retrying\u001b[22m\n\n\n  118 |     const before = await doc(page),\n  119 |       unselected = await geometry(c);\n> 120 |     await c.getByRole(\"heading\", { name: \"Color RGBA\", exact: true }).click();\n      |                                                                       ^\n  121 |     const selected = await geometry(c);\n  122 |     await expect(c).not.toHaveAttribute(\"data-selection\", \"\");\n  123 |     await page.screenshot({\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-connection-view.spec.ts:120:71"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:35:18.434Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-connection-view-S06-se-a3d81-y-remains-fixed-at-zoom-1-2-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-connection-view-S06-se-a3d81-y-remains-fixed-at-zoom-1-2-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-connection-view-S06-se-a3d81-y-remains-fixed-at-zoom-1-2-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-28747dc995dced5423eb",
+          "file": "s06-connection-view.spec.ts",
+          "line": 104,
+          "column": 3
+        },
+        {
+          "title": "S06 PORT_TARGET and same-direction refusal remain visible until matching recovery; compiler error stays",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1639,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:35:49.150Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-9b2c61b18f5e0e2c51c8",
+          "file": "s06-connection-view.spec.ts",
+          "line": 136,
+          "column": 1
+        },
+        {
+          "title": "S06 temporary output wire follows pointer and zoom without touching real edges",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1095,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:35:51.102Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-572ef68981cfe3aa1353",
+          "file": "s06-connection-view.spec.ts",
+          "line": 174,
+          "column": 3
+        },
+        {
+          "title": "S06 temporary input wire follows pointer and zoom without touching real edges",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1169,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:35:52.203Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-a0fbcb398c95a562a0bd",
+          "file": "s06-connection-view.spec.ts",
+          "line": 174,
+          "column": 3
+        },
+        {
+          "title": "S06 connection cancellation stale scope readonly and two Canvas status stay independent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2776,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:35:53.379Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-6e12174ce3d609dac161",
+          "file": "s06-connection-view.spec.ts",
+          "line": 233,
+          "column": 1
+        },
+        {
+          "title": "S06 catalog pointer hover follows row while keyboard selection and Browse inspect remain view only",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 771,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:35:56.161Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-28a9a7b62245f9fa7842",
+          "file": "s06-connection-view.spec.ts",
+          "line": 290,
+          "column": 1
+        },
+        {
+          "title": "S06 public port drag both directions commits once and cancelled held release adds no History",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2980,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:35:56.937Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-e2ee6b7bc711193034c8",
+          "file": "s06-connection-view.spec.ts",
+          "line": 318,
+          "column": 1
+        },
+        {
+          "title": "S06 pending connection expires on shared revision and new load without stale endpoint reuse",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1209,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:35:59.923Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-1cc5f577fe9341e63568",
+          "file": "s06-connection-view.spec.ts",
+          "line": 363,
+          "column": 1
+        },
+        {
+          "title": "S06 subthreshold port release outside the button leaves no orphan wire or History",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 904,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:01.138Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd6d4b71e2a58629bdbd-974ba8113822fdc48544",
+          "file": "s06-connection-view.spec.ts",
+          "line": 393,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "s06-guards.spec.ts",
+      "file": "s06-guards.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 advertised view and edit shortcuts preserve gesture, draft and History boundaries",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1416,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"transform: translate(\u001b[7m358px, 64.25\u001b[27mpx) scale(1.\u001b[7m5\u001b[27m);\"\u001b[39m\nReceived: \u001b[31m\"transform: translate(\u001b[7m-24.5455px, 72.161\u001b[27mpx) scale(1.\u001b[7m3447\u001b[27m);\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"transform: translate(\u001b[7m358px, 64.25\u001b[27mpx) scale(1.\u001b[7m5\u001b[27m);\"\u001b[39m\nReceived: \u001b[31m\"transform: translate(\u001b[7m-24.5455px, 72.161\u001b[27mpx) scale(1.\u001b[7m3447\u001b[27m);\"\u001b[39m\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts:36:67",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts",
+                      "column": 67,
+                      "line": 36
+                    },
+                    "snippet": "  34 |   await page.keyboard.press(\"?\");\n  35 |   await page.keyboard.press(\"Tab\");\n> 36 |   expect(await canvas.locator(\".viewport\").getAttribute(\"style\")).toBe(view);\n     |                                                                   ^\n  37 |   await expect(page.getByRole(\"dialog\", { name: \"Node catalog\" })).toBeHidden();\n  38 |   await expect(\n  39 |     page.getByRole(\"dialog\", { name: \"Keyboard shortcuts\" }),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts",
+                        "column": 67,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"transform: translate(\u001b[7m358px, 64.25\u001b[27mpx) scale(1.\u001b[7m5\u001b[27m);\"\u001b[39m\nReceived: \u001b[31m\"transform: translate(\u001b[7m-24.5455px, 72.161\u001b[27mpx) scale(1.\u001b[7m3447\u001b[27m);\"\u001b[39m\n\n  34 |   await page.keyboard.press(\"?\");\n  35 |   await page.keyboard.press(\"Tab\");\n> 36 |   expect(await canvas.locator(\".viewport\").getAttribute(\"style\")).toBe(view);\n     |                                                                   ^\n  37 |   await expect(page.getByRole(\"dialog\", { name: \"Node catalog\" })).toBeHidden();\n  38 |   await expect(\n  39 |     page.getByRole(\"dialog\", { name: \"Keyboard shortcuts\" }),\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts:36:67"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:02.056Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-guards-S06-advertised--181da-raft-and-History-boundaries-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-guards-S06-advertised--181da-raft-and-History-boundaries-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-guards-S06-advertised--181da-raft-and-History-boundaries-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts",
+                    "column": 67,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4f827f537a877e208594-5f2a33e0041d72b22913",
+          "file": "s06-guards.spec.ts",
+          "line": 14,
+          "column": 1
+        },
+        {
+          "title": "S06 Canvas connection failure persists across movement and unrelated successful actions until matching recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1215,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:03.911Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4f827f537a877e208594-10be4b607f7dbcf81095",
+          "file": "s06-guards.spec.ts",
+          "line": 58,
+          "column": 1
+        },
+        {
+          "title": "S06 category collapse survives query changes and whitespace uses the tree without a Graph edit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 660,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:05.383Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4f827f537a877e208594-d3d54c2577131731ad67",
+          "file": "s06-guards.spec.ts",
+          "line": 79,
+          "column": 1
+        },
+        {
+          "title": "S06 Personal search and inspect are readonly, malformed import survives unrelated success, and insert restores one Undo",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6810,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('dialog[open]')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('dialog[open]')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('dialog[open]')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('dialog[open]')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts:157:24",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts",
+                      "column": 24,
+                      "line": 157
+                    },
+                    "snippet": "  155 |     .getByRole(\"button\", { name: \"Insert Subgraph\", exact: true })\n  156 |     .click();\n> 157 |   await expect(dialog).toHaveCount(0);\n      |                        ^\n  158 |   const after = await doc(page);\n  159 |   await clickAction(page, \"Undo\");\n  160 |   expect(await doc(page)).toEqual(before);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts",
+                        "column": 24,
+                        "line": 157
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('dialog[open]')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('dialog[open]')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  155 |     .getByRole(\"button\", { name: \"Insert Subgraph\", exact: true })\n  156 |     .click();\n> 157 |   await expect(dialog).toHaveCount(0);\n      |                        ^\n  158 |   const after = await doc(page);\n  159 |   await clickAction(page, \"Undo\");\n  160 |   expect(await doc(page)).toEqual(before);\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts:157:24"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:06.051Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-guards-S06-Personal-se-97897-nd-insert-restores-one-Undo-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-guards-S06-Personal-se-97897-nd-insert-restores-one-Undo-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-guards-S06-Personal-se-97897-nd-insert-restores-one-Undo-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-guards.spec.ts",
+                    "column": 24,
+                    "line": 157
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4f827f537a877e208594-79a228905c5a89731a41",
+          "file": "s06-guards.spec.ts",
+          "line": 101,
+          "column": 1
+        },
+        {
+          "title": "S06 pending touch menu cancels on blur and second touch, while a completed blank hold is view only",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3257,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:13.330Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4f827f537a877e208594-bfadae1b2cca9f25120f",
+          "file": "s06-guards.spec.ts",
+          "line": 169,
+          "column": 1
+        },
+        {
+          "title": "S06 native field context menu remains unprevented and touch hold never opens an object menu from a control",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1143,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:16.914Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4f827f537a877e208594-42d4c53292c92153ca95",
+          "file": "s06-guards.spec.ts",
+          "line": 224,
+          "column": 1
+        },
+        {
+          "title": "S06 Personal late insertion and refresh results cannot close or overwrite a reopened dialog",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 465,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:18.065Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4f827f537a877e208594-1ba5cd4933ea75a8a275",
+          "file": "s06-guards.spec.ts",
+          "line": 268,
+          "column": 1
+        },
+        {
+          "title": "S06 competing touch cancels a primary node drag without a committed History entry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1270,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:18.537Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4f827f537a877e208594-3f132330d268936b51b3",
+          "file": "s06-guards.spec.ts",
+          "line": 354,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "s06-hover-repair.spec.ts",
+      "file": "s06-hover-repair.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 repair continuous 80-step Node details 1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2442,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:19.821Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-40926853beab23d77dd7",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 31,
+          "column": 3
+        },
+        {
+          "title": "S06 repair continuous 80-step Port details 1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2462,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:22.268Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-8c6eed258f6d7d235381",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 31,
+          "column": 3
+        },
+        {
+          "title": "S06 repair continuous 80-step Parameter Widget details 1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2436,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:24.736Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-14d86bf6b1b03a7ad8a8",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 31,
+          "column": 3
+        },
+        {
+          "title": "S06 repair continuous 80-step Node details 1920",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2436,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:27.177Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-41cafe5a0192be377530",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 31,
+          "column": 3
+        },
+        {
+          "title": "S06 repair continuous 80-step Port details 1920",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2453,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:29.619Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-32683c4748f5ce69d16e",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 31,
+          "column": 3
+        },
+        {
+          "title": "S06 repair continuous 80-step Parameter Widget details 1920",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2413,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:32.078Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-e8ec6a3c7a626f7eaa60",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 31,
+          "column": 3
+        },
+        {
+          "title": "S06 repair F2 focused control versus hovered node",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 778,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:34.496Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-c6b304c1808f05cc3f47",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 59,
+          "column": 3
+        },
+        {
+          "title": "S06 repair F2 focused control versus hovered panel",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 797,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:35.279Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-8f36c517f889b4a11f94",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 59,
+          "column": 3
+        },
+        {
+          "title": "S06 repair F2 focused control versus hovered control",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 776,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:36.083Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-bc13ca4e2412a3f639ed",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 59,
+          "column": 3
+        },
+        {
+          "title": "S06 repair F2 focused node versus hovered node",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 696,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:36.864Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-e5d777fa11d28c860ace",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 59,
+          "column": 3
+        },
+        {
+          "title": "S06 repair F2 focused node versus hovered panel",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 710,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:37.566Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-80ec4dc44a7c381a8630",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 59,
+          "column": 3
+        },
+        {
+          "title": "S06 repair F2 focused node versus hovered control",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 694,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:38.281Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-c3fe883af9ba9f07967d",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 59,
+          "column": 3
+        },
+        {
+          "title": "S06 repair F2 focused port versus hovered node",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 727,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:38.980Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-d6e76ab12b948cc7654e",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 59,
+          "column": 3
+        },
+        {
+          "title": "S06 repair F2 focused port versus hovered panel",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 748,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:39.712Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-29580d6d0feee8e7f2ac",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 59,
+          "column": 3
+        },
+        {
+          "title": "S06 repair F2 focused port versus hovered control",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 760,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:40.466Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-80d10b58fe97409082d4",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 59,
+          "column": 3
+        },
+        {
+          "title": "S06 repair compact disclosures share presentation without model changes",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5412,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Project actions', exact: true })\nExpected: \u001b[32m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Project actions', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" aria-haspopup=\"menu\" aria-expanded=\"false\" class=\"project-actions\">Project actions</button>\u001b[22m\n\u001b[2m       - unexpected value \"false\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Project actions', exact: true })\nExpected: \u001b[32m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Project actions', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" aria-haspopup=\"menu\" aria-expanded=\"false\" class=\"project-actions\">Project actions</button>\u001b[22m\n\u001b[2m       - unexpected value \"false\"\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:82:26",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts",
+                      "column": 26,
+                      "line": 82
+                    },
+                    "snippet": "  80 |   for (const name of [\"Project actions\", \"Shader output\", \"Hints\", \"Experimental features\"]) {\n  81 |     const button = page.getByRole(\"button\", {name,exact:true}); await button.click();\n> 82 |     await expect(button).toHaveAttribute(\"aria-expanded\",\"true\");\n     |                          ^\n  83 |     await page.keyboard.press(\"Escape\"); await expect(button).toBeFocused();\n  84 |     await expect(button).toHaveAttribute(\"aria-expanded\",\"false\");\n  85 |   }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts",
+                        "column": 26,
+                        "line": 82
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Project actions', exact: true })\nExpected: \u001b[32m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Project actions', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" aria-haspopup=\"menu\" aria-expanded=\"false\" class=\"project-actions\">Project actions</button>\u001b[22m\n\u001b[2m       - unexpected value \"false\"\u001b[22m\n\n\n  80 |   for (const name of [\"Project actions\", \"Shader output\", \"Hints\", \"Experimental features\"]) {\n  81 |     const button = page.getByRole(\"button\", {name,exact:true}); await button.click();\n> 82 |     await expect(button).toHaveAttribute(\"aria-expanded\",\"true\");\n     |                          ^\n  83 |     await page.keyboard.press(\"Escape\"); await expect(button).toBeFocused();\n  84 |     await expect(button).toHaveAttribute(\"aria-expanded\",\"false\");\n  85 |   }\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts:82:26"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:41.232Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-hover-repair-S06-repai-d60f2-ation-without-model-changes-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-hover-repair-S06-repai-d60f2-ation-without-model-changes-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-hover-repair-S06-repai-d60f2-ation-without-model-changes-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-hover-repair.spec.ts",
+                    "column": 26,
+                    "line": 82
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a7d8b5088e35101bb997-cfe8dfc271a260c1d775",
+          "file": "s06-hover-repair.spec.ts",
+          "line": 77,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "s06-status-pointer.spec.ts",
+      "file": "s06-status-pointer.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 complete persistent loss details have a keyboard read path at 620",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30079,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts",
+                        "column": 60,
+                        "line": 42
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').first().getByText('Subgraph interface', { exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <summary>Subgraph interface</summary>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    57 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  40 |   await c.getByRole(\"heading\", { name: \"Shared arithmetic\", exact: true }).last().click();\n  41 |   await c.getByRole(\"button\", { name: \"Enter subgraph\", exact: true }).click();\n> 42 |   await c.getByText(\"Subgraph interface\", { exact: true }).click();\n     |                                                            ^\n  43 |   const before = await doc(page);\n  44 |   await c.getByLabel(\"Subgraph emission mode\").selectOption(\"function\");\n  45 |   const after = await doc(page), losses = after.graph.losses.filter((l: any) => l.code === \"FUNCTION_CONSTANT_DETACHED\");\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-status-pointer.spec.ts:42:60"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:47.093Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\affected-01\\test-results\\s06-status-pointer-S06-com-7059a-a-keyboard-read-path-at-620-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-b0805a555fd463f6023d",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 34,
+          "column": 34
+        },
+        {
+          "title": "S06 complete persistent loss details have a keyboard read path at 1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2413,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:37:17.780Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-07afa74c943b601bb29e",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 34,
+          "column": 34
+        },
+        {
+          "title": "S06 bottom application error summary opens complete current text without clearing or History",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1268,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:37:20.415Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-7e37dd38347a76dc596a",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 91,
+          "column": 1
+        },
+        {
+          "title": "S06 synthetic outside pointercancel is pointer-specific; click pending survives unpressed motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 876,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:37:21.689Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-990b5755f5968e00e61f",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 118,
+          "column": 1
+        },
+        {
+          "title": "S06 delayed matching storage recovery retires open error details with usable focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 522,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:37:22.571Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-e21593d790e45e750508",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 133,
+          "column": 1
+        },
+        {
+          "title": "S06 actual 3px uncaptured port release across Canvas Inspector retires wire and ring",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1256,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:37:23.099Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-b426a004c4317647ca96",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 164,
+          "column": 1
+        },
+        {
+          "title": "S06 trusted Enter socket activation waits for real pointer and preserves keyboard connection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1580,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:37:24.361Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-546b82f73f21e4b338e9",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 182,
+          "column": 39
+        },
+        {
+          "title": "S06 trusted Space socket activation waits for real pointer and preserves keyboard connection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1562,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:37:25.946Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-09a2810c05fb1e2d8096",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 182,
+          "column": 39
+        },
+        {
+          "title": "S06 selection changes no body content field socket or wire geometry across pan and zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15450,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:37:27.515Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0123711bbc19d1366519-6be4f640f937d4167e78",
+          "file": "s06-status-pointer.spec.ts",
+          "line": 204,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T14:32:39.304Z",
+    "duration": 303816.253,
+    "expected": 39,
+    "skipped": 0,
+    "unexpected": 11,
+    "flaky": 0
+  }
+}

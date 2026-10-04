@@ -1,0 +1,30 @@
+{
+  "recordedAt": "2026-10-04T13:59:09.027Z",
+  "recordType": "COORDINATOR_DELIVERY_OBSERVATION_NOT_VERDICT",
+  "implementationI": "5df6eaa8a009926c897d6a3542231aa729666a15",
+  "submittedR": "ba0683b742de6c28f6f0b425564292c6603bd551",
+  "url": "http://127.0.0.1:4201/review.html",
+  "browser": "Codex IAB 2 tab6",
+  "sequence": [
+    "Fresh delivered app, click 本輪更新 then Escape; focus returned button.",
+    "Open footer Experimental features and check Show object information instead of normal hover hints through grounded Playwright checkbox.",
+    "Call frameLocator(iframe).getByRole(button,{name:Generate GLSL,exact:true}).press(F2). No click/Generate performed.",
+    "Object information dialog showed Panel:Canvas, identity canvas-1, UI-only visible; it did not show Generate GLSL control information.",
+    "Escape closed details; current AX focus was Generate GLSL button; no model action invoked."
+  ],
+  "expectedForReviewerAssessment": "Guide says F2 reads focused object; determine independently whether focus/hover precedence shows wrong target after scroll/checkbox interaction. This is observation requiring reproduction, not Coordinator verdict.",
+  "evidence": [
+    {
+      "file": "production/evidence/coordinator/s06/preview-05/f2-observation-state.txt",
+      "bytes": 692,
+      "sha256": "90c96ae8ed3f3ad92121631b64f408c09acc8c75cc3369555f9355a411ca3670"
+    },
+    {
+      "file": "production/evidence/coordinator/s06/preview-05/f2-observation.jpg",
+      "bytes": 48527,
+      "sha256": "ed755c9afa685a4b01124b5c1b9e399d68e4573995712ef5122929545ae0082d"
+    }
+  ],
+  "next": "Fresh reviewer independently reproduce relevant focus versus pointer target sequence in isolated archive profile; assess within current packet.",
+  "productWrites": false
+}

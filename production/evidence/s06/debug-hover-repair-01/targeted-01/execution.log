@@ -1,0 +1,246 @@
+
+Running 16 tests using 1 worker
+
+(node:37764) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:31:3 › S06 repair continuous 80-step Node details 1440 (2.6s)
+  ok  2 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:31:3 › S06 repair continuous 80-step Port details 1440 (2.4s)
+  ok  3 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:31:3 › S06 repair continuous 80-step Parameter Widget details 1440 (2.4s)
+  ok  4 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:31:3 › S06 repair continuous 80-step Node details 1920 (2.4s)
+  ok  5 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:31:3 › S06 repair continuous 80-step Port details 1920 (2.4s)
+  ok  6 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:31:3 › S06 repair continuous 80-step Parameter Widget details 1920 (2.4s)
+  ok  7 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused control versus hovered node (555ms)
+  ok  8 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused control versus hovered panel (545ms)
+  x   9 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused control versus hovered control (30.1s)
+(node:52756) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  10 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused node versus hovered node (2.0s)
+(node:45600) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  11 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused node versus hovered panel (2.0s)
+(node:7156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  12 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused node versus hovered control (2.0s)
+(node:436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  13 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused port versus hovered node (2.0s)
+(node:59200) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  14 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused port versus hovered panel (1.9s)
+(node:45796) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  15 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused port versus hovered control (2.1s)
+(node:55348) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 16 [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:77:1 › S06 repair compact disclosures share presentation without model changes (889ms)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused control versus hovered control 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.hover: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Save locally', exact: true })
+
+
+      63 |     const identity = await focus.getAttribute("data-node") ?? await focus.getAttribute("data-node-id");
+      64 |     const other = hoverKind === "node" ? page.getByRole("heading", {name:"Image output",exact:true}) : hoverKind === "panel" ? page.locator(".inspector h2") : page.getByRole("button", {name:"Save locally",exact:true});
+    > 65 |     await other.hover();
+         |                 ^
+      66 |     await expect(focus).toBeFocused();
+      67 |     await page.keyboard.press("F2");
+      68 |     const dialog = page.getByRole("dialog", {name:"Object information",exact:true});
+        at C:\Users\user\source\Grape\production\tests\browser\s06-hover-repair.spec.ts:65:17
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-1113b-trol-versus-hovered-control-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-1113b-trol-versus-hovered-control-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-1113b-trol-versus-hovered-control-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-1113b-trol-versus-hovered-control-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused node versus hovered node 
+
+    Error: Target unreachable by trusted Tab
+
+      26 |     await p.keyboard.press("Tab");
+      27 |   }
+    > 28 |   throw Error("Target unreachable by trusted Tab");
+         |         ^
+      29 | }
+      30 | for (const width of [1440, 1920]) for (const kind of ["Node", "Port", "Parameter Widget"]) {
+      31 |   test(`S06 repair continuous 80-step ${kind} details ${width}`, async ({page}) => {
+        at keyboardFocus (C:\Users\user\source\Grape\production\tests\browser\s06-hover-repair.spec.ts:28:9)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-hover-repair.spec.ts:62:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-f9ab7-ed-node-versus-hovered-node-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-f9ab7-ed-node-versus-hovered-node-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-f9ab7-ed-node-versus-hovered-node-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-f9ab7-ed-node-versus-hovered-node-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused node versus hovered panel 
+
+    Error: Target unreachable by trusted Tab
+
+      26 |     await p.keyboard.press("Tab");
+      27 |   }
+    > 28 |   throw Error("Target unreachable by trusted Tab");
+         |         ^
+      29 | }
+      30 | for (const width of [1440, 1920]) for (const kind of ["Node", "Port", "Parameter Widget"]) {
+      31 |   test(`S06 repair continuous 80-step ${kind} details ${width}`, async ({page}) => {
+        at keyboardFocus (C:\Users\user\source\Grape\production\tests\browser\s06-hover-repair.spec.ts:28:9)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-hover-repair.spec.ts:62:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-238c8-d-node-versus-hovered-panel-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-238c8-d-node-versus-hovered-panel-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-238c8-d-node-versus-hovered-panel-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-238c8-d-node-versus-hovered-panel-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused node versus hovered control 
+
+    Error: Target unreachable by trusted Tab
+
+      26 |     await p.keyboard.press("Tab");
+      27 |   }
+    > 28 |   throw Error("Target unreachable by trusted Tab");
+         |         ^
+      29 | }
+      30 | for (const width of [1440, 1920]) for (const kind of ["Node", "Port", "Parameter Widget"]) {
+      31 |   test(`S06 repair continuous 80-step ${kind} details ${width}`, async ({page}) => {
+        at keyboardFocus (C:\Users\user\source\Grape\production\tests\browser\s06-hover-repair.spec.ts:28:9)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-hover-repair.spec.ts:62:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-805ae-node-versus-hovered-control-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-805ae-node-versus-hovered-control-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-805ae-node-versus-hovered-control-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-805ae-node-versus-hovered-control-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused port versus hovered node 
+
+    Error: Target unreachable by trusted Tab
+
+      26 |     await p.keyboard.press("Tab");
+      27 |   }
+    > 28 |   throw Error("Target unreachable by trusted Tab");
+         |         ^
+      29 | }
+      30 | for (const width of [1440, 1920]) for (const kind of ["Node", "Port", "Parameter Widget"]) {
+      31 |   test(`S06 repair continuous 80-step ${kind} details ${width}`, async ({page}) => {
+        at keyboardFocus (C:\Users\user\source\Grape\production\tests\browser\s06-hover-repair.spec.ts:28:9)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-hover-repair.spec.ts:62:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-d6b1f-ed-port-versus-hovered-node-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-d6b1f-ed-port-versus-hovered-node-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-d6b1f-ed-port-versus-hovered-node-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-d6b1f-ed-port-versus-hovered-node-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused port versus hovered panel 
+
+    Error: Target unreachable by trusted Tab
+
+      26 |     await p.keyboard.press("Tab");
+      27 |   }
+    > 28 |   throw Error("Target unreachable by trusted Tab");
+         |         ^
+      29 | }
+      30 | for (const width of [1440, 1920]) for (const kind of ["Node", "Port", "Parameter Widget"]) {
+      31 |   test(`S06 repair continuous 80-step ${kind} details ${width}`, async ({page}) => {
+        at keyboardFocus (C:\Users\user\source\Grape\production\tests\browser\s06-hover-repair.spec.ts:28:9)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-hover-repair.spec.ts:62:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-f1839-d-port-versus-hovered-panel-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-f1839-d-port-versus-hovered-panel-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-f1839-d-port-versus-hovered-panel-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-f1839-d-port-versus-hovered-panel-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused port versus hovered control 
+
+    Error: Target unreachable by trusted Tab
+
+      26 |     await p.keyboard.press("Tab");
+      27 |   }
+    > 28 |   throw Error("Target unreachable by trusted Tab");
+         |         ^
+      29 | }
+      30 | for (const width of [1440, 1920]) for (const kind of ["Node", "Port", "Parameter Widget"]) {
+      31 |   test(`S06 repair continuous 80-step ${kind} details ${width}`, async ({page}) => {
+        at keyboardFocus (C:\Users\user\source\Grape\production\tests\browser\s06-hover-repair.spec.ts:28:9)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-hover-repair.spec.ts:62:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-30599-port-versus-hovered-control-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-30599-port-versus-hovered-control-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-30599-port-versus-hovered-control-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\targeted-01\test-results\s06-hover-repair-S06-repai-30599-port-versus-hovered-control-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused control versus hovered control 
+    [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused node versus hovered node 
+    [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused node versus hovered panel 
+    [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused node versus hovered control 
+    [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused port versus hovered node 
+    [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused port versus hovered panel 
+    [chromium] › ..\..\..\production\tests\browser\s06-hover-repair.spec.ts:59:3 › S06 repair F2 focused port versus hovered control 
+  9 passed (1.1m)

@@ -1,0 +1,33 @@
+{
+  "packetVersion": 1,
+  "packetType": "HUMAN_OWNER_FEEDBACK_SUPPLEMENT",
+  "packetId": "S06-UI-CALLER-VARIANTS-01",
+  "actionKey": "yeataro/Grape:S06:repair:debug-hover:ba0683b:01",
+  "recordedAt": "2026-10-04T14:21:02.328Z",
+  "sliceId": "S06",
+  "authority": {
+    "role": "Human Owner",
+    "source": "Direct current messages",
+    "threadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "messageIds": null,
+    "quotes": [
+      "就是 UI 的部分不要搞成一大堆義大利麵，這個是嚴格禁止的。",
+      "如果要有差異的話，就由發起的那個扣來給差異。怎麼說呢，就是大小啊之類的，內容啊之類的。"
+    ]
+  },
+  "prior": {
+    "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-unified-floating-entry-01.json",
+    "bytes": 3371,
+    "sha256": "c65f15fb85f50b0465f391d04493b2c531c9947d3993222549af317f0af7add1"
+  },
+  "requiredBehavior": [
+    "Treat non-spaghetti UI structure as a strict implementation/review requirement for the changed scope, not an optional polish item.",
+    "The initiating caller provides legitimate differences such as content, title, size constraints, anchor and alignment through a clear shared interface. Preserve semantic surface kind/modal behavior where necessary.",
+    "Common presentation mechanism owns reusable behavior; it must not branch on caller/panel names or reach into feature private state. Caller-owned content/state and command authority remain with their owners.",
+    "No copied listener trees, cross-module DOM/private-state mutation, location-only CSS overrides or ad-hoc selector chains substituting for the shared interface. Avoid moving duplicated spaghetti into a single oversized catch-all helper.",
+    "Only introduce options required by real current consumers; future differences can be added when justified. Existing inherited implementation outside actual repair impact is not retroactively a full app rewrite."
+  ],
+  "reviewRequirement": "Require source-level evidence of a small cohesive common interface and actual caller-configured reuse, plus independent instance cleanup and behavioral checks. Visual similarity alone cannot PASS this requirement.",
+  "routing": "Ongoing message to same original writer, include in fresh re-review packet. No additional writer/task or retry reset.",
+  "separateControls": "No acceptance, next Slice, push/PR/merge."
+}

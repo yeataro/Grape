@@ -1,0 +1,35 @@
+{
+  "packetVersion": 1,
+  "packetType": "HUMAN_OWNER_FEEDBACK_SUPPLEMENT",
+  "packetId": "S06-SOCKET-SOLID-HIGHLIGHT-01",
+  "recordedAt": "2026-10-04T14:06:54.837Z",
+  "sliceId": "S06",
+  "parent": {
+    "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-feedback-01.json",
+    "bytes": 5733,
+    "sha256": "d0e16600b45d3f439a12533f19a2632f3bf022bc63e505b25b590b8d67aeab0f"
+  },
+  "candidateI": "5df6eaa8a009926c897d6a3542231aa729666a15",
+  "candidateR": "ba0683b742de6c28f6f0b425564292c6603bd551",
+  "authority": {
+    "role": "Human Owner",
+    "threadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "source": "Direct current messages",
+    "messageIds": null,
+    "quotes": [
+      "對，但 Legacy的接孔的高亮其實也還不夠明顯啦。你自己想一個美觀漂亮的，或許也可以是跟選取區一樣有光韻，但那個光韻可能不是綠色的。你自己做一個你覺得好看的。",
+      "然后美观上面不管怎样，他如果接孔是高亮状态的话，他应该要是实心的接孔，不是空心的接孔。"
+    ]
+  },
+  "acceptedRequirements": [
+    "Every highlighted socket must have a solid fill, not a hollow ring. Applies to actual hover/active/connection-origin/keyboard-highlight states introduced or retained.",
+    "Human delegates bounded appearance choices; Legacy glow is not the required exact appearance and needs stronger visibility. Preserve readable idle versus hover versus active versus keyboard focus states.",
+    "Aesthetic implementation may use a localized violet/lavender glow and brighter solid center, stronger during active connection, rather than selection green. This is the Coordinator proposed engineering direction within delegated style choice, not a required pixel/color recipe.",
+    "Socket button remains on the socket circle, labels separate. Glow/outline cannot move layout or wire endpoints and must not cover adjacent input controls. Preserve accessible socket naming, keyboard operation and existing port/type semantics."
+  ],
+  "proof": "Capture meaningful idle/hover/active/keyboard states with actual trusted input at narrow/desktop/fractional zoom; assert solid fill and unchanged centers/body geometry, normal hit targets and connection cancellation.",
+  "referenceBoundary": "Observe Legacy interactions/layout only; do not copy its DOM/implementation or whole style sheet.",
+  "routing": "Include in next bounded original-writer repair packet, then independently review changed scope. Do not retroactively treat this newly accepted visual detail as an original current-I technical finding.",
+  "separateAuthority": "No acceptance, remote publication/merge, next Slice or permanent service.",
+  "counterHandling": "Existing hover finding-group retry counters remain unchanged."
+}

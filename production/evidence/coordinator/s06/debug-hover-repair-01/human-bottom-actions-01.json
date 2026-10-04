@@ -1,0 +1,52 @@
+{
+  "packetVersion": 1,
+  "packetType": "HUMAN_OWNER_FEEDBACK_SUPPLEMENT",
+  "packetId": "S06-BOTTOM-FUNCTION-MENU-01",
+  "actionKey": "yeataro/Grape:S06:repair:debug-hover:ba0683b:01",
+  "recordedAt": "2026-10-04T14:19:48.393Z",
+  "sliceId": "S06",
+  "authority": {
+    "role": "Human Owner",
+    "threadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "source": "Direct current message",
+    "messageId": null,
+    "quote": "然後你可以看一下左下角的功能列按鈕，很多東西其實可以收合在裡面。"
+  },
+  "supplements": {
+    "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-bottom-bar-01.json",
+    "bytes": 3055,
+    "sha256": "7ffe01d7c5db27971ef0b3746364de392c338e085ece44d013d3ab19cb86f123"
+  },
+  "reference": {
+    "url": "http://100.83.88.97:51178/shader/c574e2c5c37d41648cc38210974c5d59/",
+    "dom": {
+      "file": "production/evidence/coordinator/s06/legacy-live-observation-01/newer-bottom-actions-01-dom.json",
+      "bytes": 1243,
+      "sha256": "6dbf4b2ba9d05b3229119cfabceac46bb85372b933d7604c0d753f45bc1f9e46"
+    },
+    "screenshot": {
+      "file": "production/evidence/coordinator/s06/legacy-live-observation-01/newer-bottom-actions-01.jpg",
+      "bytes": 100395,
+      "sha256": "fbbeed30a7159fa1da77927f3e694961a0a53cda4b7cc0ba6bf12b5133317ab6"
+    },
+    "afterClose": {
+      "file": "production/evidence/coordinator/s06/legacy-live-observation-01/newer-after-menu-01.jpg",
+      "bytes": 92682,
+      "sha256": "119c8f03ddbcdfc5d0b8283b968af594474d2e751615ff29e9e4daf471cbc7d3"
+    }
+  },
+  "observedBehavior": [
+    "Bottom-left Project and graph actions trigger opens upward an anchored220px-wide menu in the observed1078px viewport, with separators between maintenance, import/export and Host actions. These sizes/content are reference observations, not wholesale new contract.",
+    "Opening did not execute actions. Clicking the same trigger again left it open in this observed version; Escape closed it and returned focus to trigger. Do not reproduce that toggle quirk merely to mimic Legacy.",
+    "Reference contains Reload editor page, Reload applied graph, Reset browser settings, Import graph, Export graph, Save TD project, Apply Shader. New app must only expose its own existing authorized actions, not add Legacy Host/TD/reset operations by copying this list."
+  ],
+  "requiredOutcome": "Use a compact bottom-left function menu to group appropriate existing low-frequency app/document operations. Keep frequent graph-editing controls and meaningful current status accessible; retain visible labels/accessible names, disabled/busy/readonly semantics and existing action authority. Reuse the same owned anchored-menu/button primitives, not per-location copies.",
+  "scopeBoundary": "Presentation/grouping only in current repair. No new command semantics, Host feature, broad reset, pending-change bypass, full workspace docking, persistent history or new Slice.",
+  "mouseHelpReference": {
+    "file": "production/evidence/coordinator/s06/legacy-live-observation-01/newer-shortcuts-01.txt",
+    "bytes": 1367,
+    "sha256": "798bea8da49d48d80f9065b3a6d16bd2365ffc8222f3d28a6b2f66e8731963df"
+  },
+  "mouseHelpLimits": "Visible help documents middle-button dolly on empty Canvas and text/dialog guards. Numeric tooltips separately document per-field left/middle/right/modifier behavior. No claim that a full physical mouse/wheel matrix was executed, and no implicit implementation of every reference gesture.",
+  "routing": "Send to same running original writer as ongoing steering. Keep repairRound1 and all old counters."
+}

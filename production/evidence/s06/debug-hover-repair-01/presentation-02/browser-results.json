@@ -1,0 +1,627 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\user\\source\\Grape\\production\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+      "s06-socket-bottom.spec.ts",
+      "s06-floating.spec.ts",
+      "--output",
+      "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results"
+    ],
+    "configFile": "C:\\Users\\user\\source\\Grape\\production\\tools\\s06-playwright.config.ts",
+    "rootDir": "C:/Users/user/source/Grape/production/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/source/Grape/production/evidence/s06/debug-hover-repair-01/presentation-02/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/source/Grape/production/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "s06-floating.spec.ts",
+      "file": "s06-floating.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 shared floating consumers bound alignments focus semantics and disposal independently",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 545,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:33:51.350Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9a58ca68391d0e581fd7-473183e691fa63e52f08",
+          "file": "s06-floating.spec.ts",
+          "line": 5,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "s06-socket-bottom.spec.ts",
+      "file": "s06-socket-bottom.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S06 circle-only type-colored socket states preserve geometry at 0.65",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30163,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts",
+                        "column": 6,
+                        "line": 17
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Multiply', exact: true })\u001b[22m\n\n\n   at create-node.ts:17\n\n  15 |   await browser\n  16 |     .getByRole(\"button\", { name: \"Add \" + label, exact: true })\n> 17 |     .click();\n     |      ^\n  18 |   const point = await canvas.evaluate((el, n) => {\n  19 |     const r = el.getBoundingClientRect(),\n  20 |       v = el.querySelector<HTMLElement>(\".viewport\")!,\n    at createNode (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts:17:6)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:16:86"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:33:52.151Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-circ-65b08-s-preserve-geometry-at-0-65-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-circ-65b08-s-preserve-geometry-at-0-65-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-circ-65b08-s-preserve-geometry-at-0-65-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c966e79978f139dcd927-e0998c2bd0bedecd1523",
+          "file": "s06-socket-bottom.spec.ts",
+          "line": 14,
+          "column": 35
+        },
+        {
+          "title": "S06 circle-only type-colored socket states preserve geometry at 1",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30141,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts",
+                        "column": 6,
+                        "line": 17
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Multiply', exact: true })\u001b[22m\n\n\n   at create-node.ts:17\n\n  15 |   await browser\n  16 |     .getByRole(\"button\", { name: \"Add \" + label, exact: true })\n> 17 |     .click();\n     |      ^\n  18 |   const point = await canvas.evaluate((el, n) => {\n  19 |     const r = el.getBoundingClientRect(),\n  20 |       v = el.querySelector<HTMLElement>(\".viewport\")!,\n    at createNode (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts:17:6)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:16:86"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:34:22.760Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-circ-7be5b-ates-preserve-geometry-at-1-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-circ-7be5b-ates-preserve-geometry-at-1-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-circ-7be5b-ates-preserve-geometry-at-1-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c966e79978f139dcd927-75f73c00c8bfdf40575c",
+          "file": "s06-socket-bottom.spec.ts",
+          "line": 14,
+          "column": 35
+        },
+        {
+          "title": "S06 circle-only type-colored socket states preserve geometry at 1.25",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30155,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts",
+                        "column": 6,
+                        "line": 17
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Multiply', exact: true })\u001b[22m\n\n\n   at create-node.ts:17\n\n  15 |       .selectOption(fixed ? \"grape.nodes.fixed-values\" : \"grape.nodes.basic\");\n  16 |   await browser\n> 17 |     .getByRole(\"button\", { name: \"Add \" + label, exact: true })\n     |      ^\n  18 |     .click();\n  19 |   const point = await canvas.evaluate((el, n) => {\n  20 |     const r = el.getBoundingClientRect(),\n    at createNode (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\create-node.ts:17:6)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:16:86"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:34:53.612Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-circ-19f04-s-preserve-geometry-at-1-25-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-circ-19f04-s-preserve-geometry-at-1-25-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-circ-19f04-s-preserve-geometry-at-1-25-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c966e79978f139dcd927-e909df7281df8ff3e9a4",
+          "file": "s06-socket-bottom.spec.ts",
+          "line": 14,
+          "column": 35
+        },
+        {
+          "title": "S06 compact bottom actions and complete output are reachable 1920x1000",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30066,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts",
+                        "column": 40,
+                        "line": 8
+                      },
+                      "message": "Error: page.waitForEvent: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n\n   6 | const out = process.env.GRAPE_EVIDENCE_DIR!;\n   7 | const save = (n:string,v:unknown) => fs.writeFileSync(path.join(out,n+\".json\"),JSON.stringify(v,null,2));\n>  8 | async function doc(p:Page) { const w=p.waitForEvent(\"download\"); await clickAction(p,\"Export JSON\"); return JSON.parse(fs.readFileSync((await (await w).path())!,\"utf8\")); }\n     |                                        ^\n   9 | async function center(l:Locator) { const b=(await l.boundingBox())!;return {x:b.x+b.width/2,y:b.y+b.height/2}; }\n  10 | async function geometry(c:Locator) { return c.evaluate(el => {\n  11 |   const r=el.getBoundingClientRect();\n    at doc (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:8:40)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:48:22"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\fixtures\\public-actions.ts",
+                        "column": 16,
+                        "line": 16
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Export JSON', exact: true })\u001b[22m\n\n\n   at ..\\fixtures\\public-actions.ts:16\n\n  14 |       await menu.locator(\"summary\").click();\n  15 |   }\n> 16 |   await button.click();\n     |                ^\n  17 | }\n  18 |\n    at clickAction (C:\\Users\\user\\source\\Grape\\production\\tests\\fixtures\\public-actions.ts:16:16)\n    at doc (C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:8:66)\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:48:16"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:35:24.452Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-comp-92e11-put-are-reachable-1920x1000-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-comp-92e11-put-are-reachable-1920x1000-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-comp-92e11-put-are-reachable-1920x1000-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c966e79978f139dcd927-74a58f6045c8ba14f640",
+          "file": "s06-socket-bottom.spec.ts",
+          "line": 45,
+          "column": 76
+        },
+        {
+          "title": "S06 compact bottom actions and complete output are reachable 1440x1000",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5460,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.floating-surface[open]').last()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.floating-surface[open]').last()\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.floating-surface[open]').last()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.floating-surface[open]').last()\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:51:84",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts",
+                      "column": 84,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   for(const name of [\"Project actions\",\"Shader output\",\"Hints\",\"Experimental features\"]) {\n  50 |     const trigger=page.getByRole(\"button\",{name,exact:true});await trigger.click();\n> 51 |     const popup=page.locator(\".floating-surface[open]\").last();await expect(popup).toBeVisible();\n     |                                                                                    ^\n  52 |     const b=(await popup.boundingBox())!;expect(b.x).toBeGreaterThanOrEqual(0);expect(b.y).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width!);expect(b.y+b.height).toBeLessThanOrEqual(height!);\n  53 |     await page.screenshot({path:path.join(out,`bottom-${width}-${height}-${name.replaceAll(\" \",\"-\")}.png`)});\n  54 |     await page.keyboard.press(\"Escape\");await expect(trigger).toBeFocused();records.push({name,b});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts",
+                        "column": 84,
+                        "line": 51
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.floating-surface[open]').last()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.floating-surface[open]').last()\u001b[22m\n\n\n  49 |   for(const name of [\"Project actions\",\"Shader output\",\"Hints\",\"Experimental features\"]) {\n  50 |     const trigger=page.getByRole(\"button\",{name,exact:true});await trigger.click();\n> 51 |     const popup=page.locator(\".floating-surface[open]\").last();await expect(popup).toBeVisible();\n     |                                                                                    ^\n  52 |     const b=(await popup.boundingBox())!;expect(b.x).toBeGreaterThanOrEqual(0);expect(b.y).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width!);expect(b.y+b.height).toBeLessThanOrEqual(height!);\n  53 |     await page.screenshot({path:path.join(out,`bottom-${width}-${height}-${name.replaceAll(\" \",\"-\")}.png`)});\n  54 |     await page.keyboard.press(\"Escape\");await expect(trigger).toBeFocused();records.push({name,b});\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:51:84"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:35:55.092Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-comp-a86ec-put-are-reachable-1440x1000-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-comp-a86ec-put-are-reachable-1440x1000-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-comp-a86ec-put-are-reachable-1440x1000-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts",
+                    "column": 84,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c966e79978f139dcd927-1982085bfc0969d9e33a",
+          "file": "s06-socket-bottom.spec.ts",
+          "line": 45,
+          "column": 76
+        },
+        {
+          "title": "S06 compact bottom actions and complete output are reachable 620x800",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5477,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.floating-surface[open]').last()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.floating-surface[open]').last()\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.floating-surface[open]').last()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.floating-surface[open]').last()\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:51:84",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts",
+                      "column": 84,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   for(const name of [\"Project actions\",\"Shader output\",\"Hints\",\"Experimental features\"]) {\n  50 |     const trigger=page.getByRole(\"button\",{name,exact:true});await trigger.click();\n> 51 |     const popup=page.locator(\".floating-surface[open]\").last();await expect(popup).toBeVisible();\n     |                                                                                    ^\n  52 |     const b=(await popup.boundingBox())!;expect(b.x).toBeGreaterThanOrEqual(0);expect(b.y).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width!);expect(b.y+b.height).toBeLessThanOrEqual(height!);\n  53 |     await page.screenshot({path:path.join(out,`bottom-${width}-${height}-${name.replaceAll(\" \",\"-\")}.png`)});\n  54 |     await page.keyboard.press(\"Escape\");await expect(trigger).toBeFocused();records.push({name,b});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts",
+                        "column": 84,
+                        "line": 51
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.floating-surface[open]').last()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.floating-surface[open]').last()\u001b[22m\n\n\n  49 |   for(const name of [\"Project actions\",\"Shader output\",\"Hints\",\"Experimental features\"]) {\n  50 |     const trigger=page.getByRole(\"button\",{name,exact:true});await trigger.click();\n> 51 |     const popup=page.locator(\".floating-surface[open]\").last();await expect(popup).toBeVisible();\n     |                                                                                    ^\n  52 |     const b=(await popup.boundingBox())!;expect(b.x).toBeGreaterThanOrEqual(0);expect(b.y).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width!);expect(b.y+b.height).toBeLessThanOrEqual(height!);\n  53 |     await page.screenshot({path:path.join(out,`bottom-${width}-${height}-${name.replaceAll(\" \",\"-\")}.png`)});\n  54 |     await page.keyboard.press(\"Escape\");await expect(trigger).toBeFocused();records.push({name,b});\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:51:84"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:01.201Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-comp-1a1a6-utput-are-reachable-620x800-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-comp-1a1a6-utput-are-reachable-620x800-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-comp-1a1a6-utput-are-reachable-620x800-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts",
+                    "column": 84,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c966e79978f139dcd927-520293a3eef4e6b86447",
+          "file": "s06-socket-bottom.spec.ts",
+          "line": 45,
+          "column": 76
+        },
+        {
+          "title": "S06 compact bottom actions and complete output are reachable 620x380",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5491,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.floating-surface[open]').last()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.floating-surface[open]').last()\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.floating-surface[open]').last()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.floating-surface[open]').last()\u001b[22m\n\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:51:84",
+                    "location": {
+                      "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts",
+                      "column": 84,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   for(const name of [\"Project actions\",\"Shader output\",\"Hints\",\"Experimental features\"]) {\n  50 |     const trigger=page.getByRole(\"button\",{name,exact:true});await trigger.click();\n> 51 |     const popup=page.locator(\".floating-surface[open]\").last();await expect(popup).toBeVisible();\n     |                                                                                    ^\n  52 |     const b=(await popup.boundingBox())!;expect(b.x).toBeGreaterThanOrEqual(0);expect(b.y).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width!);expect(b.y+b.height).toBeLessThanOrEqual(height!);\n  53 |     await page.screenshot({path:path.join(out,`bottom-${width}-${height}-${name.replaceAll(\" \",\"-\")}.png`)});\n  54 |     await page.keyboard.press(\"Escape\");await expect(trigger).toBeFocused();records.push({name,b});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts",
+                        "column": 84,
+                        "line": 51
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.floating-surface[open]').last()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.floating-surface[open]').last()\u001b[22m\n\n\n  49 |   for(const name of [\"Project actions\",\"Shader output\",\"Hints\",\"Experimental features\"]) {\n  50 |     const trigger=page.getByRole(\"button\",{name,exact:true});await trigger.click();\n> 51 |     const popup=page.locator(\".floating-surface[open]\").last();await expect(popup).toBeVisible();\n     |                                                                                    ^\n  52 |     const b=(await popup.boundingBox())!;expect(b.x).toBeGreaterThanOrEqual(0);expect(b.y).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width!);expect(b.y+b.height).toBeLessThanOrEqual(height!);\n  53 |     await page.screenshot({path:path.join(out,`bottom-${width}-${height}-${name.replaceAll(\" \",\"-\")}.png`)});\n  54 |     await page.keyboard.press(\"Escape\");await expect(trigger).toBeFocused();records.push({name,b});\n    at C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts:51:84"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T14:36:07.488Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-comp-79a28-utput-are-reachable-620x380-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-comp-79a28-utput-are-reachable-620x380-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\user\\source\\Grape\\production\\evidence\\s06\\debug-hover-repair-01\\presentation-02\\test-results\\s06-socket-bottom-S06-comp-79a28-utput-are-reachable-620x380-chromium\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\user\\source\\Grape\\production\\tests\\browser\\s06-socket-bottom.spec.ts",
+                    "column": 84,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c966e79978f139dcd927-b10438866f756a38a57c",
+          "file": "s06-socket-bottom.spec.ts",
+          "line": 45,
+          "column": 76
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T14:33:51.020Z",
+    "duration": 142352.12,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 7,
+    "flaky": 0
+  }
+}

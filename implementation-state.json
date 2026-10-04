@@ -10,7 +10,7 @@
   },
   "implementationBaseline": {
     "id": "S06-IH005-WORKSPACE-ENTRY",
-    "revision": "5df6eaa8a009926c897d6a3542231aa729666a15",
+    "revision": "528c4f76149fad6da53c3c4da701cf1e8e121750",
     "decisionReferenceIds": [
       "DEC-GRAPE-002",
       "AC-GRAPE-001",
@@ -20,10 +20,10 @@
     ]
   },
   "build": {
-    "id": "S06-debug-5df6eaa",
-    "revision": "5df6eaa8a009926c897d6a3542231aa729666a15",
+    "id": "S06-debug-528c4f7",
+    "revision": "528c4f76149fad6da53c3c4da701cf1e8e121750",
     "profile": "static-web/win32-x64/chromium-151.0.7922.34/GLSL-ES300-WebGL2-workspace",
-    "artifact": "production/evidence/s06/debug-hover-01/build-01/candidate-web.tar.gz"
+    "artifact": "production/evidence/s06/debug-hover-repair-01/build-01/candidate-web.tar.gz"
   },
   "activeSlices": [
     "S06"
@@ -248,7 +248,7 @@
     }
   ],
   "latestAcceptedEvidenceId": "S05-PRODUCT-aa4c86e",
-  "updatedAt": "2026-10-04T13:50:00.064Z",
+  "updatedAt": "2026-10-04T14:56:13.467Z",
   "decisionReferences": [
     {
       "id": "DEC-GRAPE-002",
@@ -353,7 +353,7 @@
       "id": "OWNER-S06-DEBUG-HOVER-20261004",
       "kind": "product-decision",
       "status": "accepted",
-      "scope": "Bounded S06 read-only debug-hover requirement accepted. Candidate implemented at I 5df6eaa8a009926c897d6a3542231aa729666a15, build S06-debug-5df6eaa; independent review and Human implementation acceptance pending. Existing built-in public projections only; no whole S06 acceptance.",
+      "scope": "Bounded requirement accepted. Initial candidate5df6eaa/ba0683b received independent FAIL S06-DH-001/002. Repair candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750, build S06-debug-528c4f7 awaits targeted independent re-review; no implementation acceptance or wholeS06 completion.",
       "reason": "Direct Human acceptance in Grape PM preserved in exact Coordinator receipt. acceptedAt is receipt registration time, not an invented Human timestamp.",
       "file": "production/evidence/coordinator/s06/debug-hover-01/human-decision-01.json",
       "sha256": "4894e66f777b81f7a6aba479504b52bdb727bca77d491639eabe3ad4de2168a4",
@@ -364,6 +364,166 @@
       "evidenceIds": [],
       "acceptedBy": "Human Owner (requirements only; no implementation acceptance)",
       "acceptedAt": "2026-10-04T13:18:19.522Z"
+    },
+    {
+      "id": "OWNER-S06-DHR-FEEDBACK-01",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "Bounded S06 presentation requirement only: Useful kind/name/identity/current state first; precise circular socket hit controls and independent labels. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+      "reason": "Direct Human instruction normalized in exact original Coordinator receipt. Existing semantics/authority remain; no new Slice or global Gate.",
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-feedback-01.json",
+      "sha256": "d0e16600b45d3f439a12533f19a2632f3bf022bc63e505b25b590b8d67aeab0f",
+      "sliceIds": [
+        "S06"
+      ],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (requirements only; no implementation acceptance)",
+      "acceptedAt": "2026-10-04T14:06:21.329Z"
+    },
+    {
+      "id": "OWNER-S06-DHR-SOLID-SOCKET-01",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "Bounded S06 presentation requirement only: Solid type-preserving hover/pressed/focus/origin/target socket fills; unchanged endpoints. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+      "reason": "Direct Human instruction normalized in exact original Coordinator receipt. Existing semantics/authority remain; no new Slice or global Gate.",
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-solid-socket-01.json",
+      "sha256": "c676c126dc1d7483a06c66b9f062bd7a01abb5538bf0cfe4249de15945323027",
+      "sliceIds": [
+        "S06"
+      ],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (requirements only; no implementation acceptance)",
+      "acceptedAt": "2026-10-04T14:06:54.837Z"
+    },
+    {
+      "id": "OWNER-S06-DHR-TYPE-COLOR-01",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "Bounded S06 presentation requirement only: Existing scalar/vector type colors retained instead of uniform color. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+      "reason": "Direct Human instruction normalized in exact original Coordinator receipt. Existing semantics/authority remain; no new Slice or global Gate.",
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-type-color-01.json",
+      "sha256": "16eaf5e2c50f892efdbd4d91a5cf6cf71727cc0ab965b4175f6d1a6713308742",
+      "sliceIds": [
+        "S06"
+      ],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (requirements only; no implementation acceptance)",
+      "acceptedAt": "2026-10-04T14:08:10.103Z"
+    },
+    {
+      "id": "OWNER-S06-DHR-REFERENCE-UNITS-01",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "Bounded S06 presentation requirement only: Shared nodePortRow for real/catalog sockets; current button/input primitives reused; no new numeric gestures. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+      "reason": "Direct Human instruction normalized in exact original Coordinator receipt. Existing semantics/authority remain; no new Slice or global Gate.",
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-reference-units-01.json",
+      "sha256": "5a7b2335ccf48453fa5d8a367deb7a5a30d27c56077398d9c9813cac6bfa2768",
+      "sliceIds": [
+        "S06"
+      ],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (requirements only; no implementation acceptance)",
+      "acceptedAt": "2026-10-04T14:14:37.091Z"
+    },
+    {
+      "id": "OWNER-S06-DHR-MOUSE-REFERENCE-01",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "Bounded S06 presentation requirement only: Context-sensitive reference inspection only, no blanket Legacy interaction parity or copied UI. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+      "reason": "Direct Human instruction normalized in exact original Coordinator receipt. Existing semantics/authority remain; no new Slice or global Gate.",
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-mouse-reference-01.json",
+      "sha256": "e798715bf314bda9f6a39ca75eb9b157fed91e35eac6135d173fa780c9f64b5e",
+      "sliceIds": [
+        "S06"
+      ],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (requirements only; no implementation acceptance)",
+      "acceptedAt": "2026-10-04T14:16:04.021Z"
+    },
+    {
+      "id": "OWNER-S06-DHR-BOTTOM-BAR-01",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "Bounded S06 presentation requirement only: Compact footer, default collapsed output, complete current status, accessible disclosures. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+      "reason": "Direct Human instruction normalized in exact original Coordinator receipt. Existing semantics/authority remain; no new Slice or global Gate.",
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-bottom-bar-01.json",
+      "sha256": "7ffe01d7c5db27971ef0b3746364de392c338e085ece44d013d3ab19cb86f123",
+      "sliceIds": [
+        "S06"
+      ],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (requirements only; no implementation acceptance)",
+      "acceptedAt": "2026-10-04T14:16:59.871Z"
+    },
+    {
+      "id": "OWNER-S06-DHR-NEWER-STATUS-REFERENCE-01",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "Bounded S06 presentation requirement only: Anchored full current status; meaningful diagnostics Locate via existing output owner; stale node callbacks fenced. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+      "reason": "Direct Human instruction normalized in exact original Coordinator receipt. Existing semantics/authority remain; no new Slice or global Gate.",
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-newer-status-reference-01.json",
+      "sha256": "c1504009160fc8d30e7b5cd9f12457f6e994cd5d3cb3b65c6e817c937e4599a1",
+      "sliceIds": [
+        "S06"
+      ],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (requirements only; no implementation acceptance)",
+      "acceptedAt": "2026-10-04T14:18:12.217Z"
+    },
+    {
+      "id": "OWNER-S06-DHR-BOTTOM-ACTIONS-01",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "Bounded S06 presentation requirement only: Bottom-left grouped existing commands with menu keyboard, visible labels and readonly toggle state. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+      "reason": "Direct Human instruction normalized in exact original Coordinator receipt. Existing semantics/authority remain; no new Slice or global Gate.",
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-bottom-actions-01.json",
+      "sha256": "47279cda3734f95ae6dd997cfc4dc3fb1fec5f2657b9867347ffcb63e7de1239",
+      "sliceIds": [
+        "S06"
+      ],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (requirements only; no implementation acceptance)",
+      "acceptedAt": "2026-10-04T14:19:48.393Z"
+    },
+    {
+      "id": "OWNER-S06-DHR-UNIFIED-FLOATING-ENTRY-01",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "Bounded S06 presentation requirement only: One bounded caller-configured floating mechanism; owner content and semantic differences preserved. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+      "reason": "Direct Human instruction normalized in exact original Coordinator receipt. Existing semantics/authority remain; no new Slice or global Gate.",
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-unified-floating-entry-01.json",
+      "sha256": "c65f15fb85f50b0465f391d04493b2c531c9947d3993222549af317f0af7add1",
+      "sliceIds": [
+        "S06"
+      ],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (requirements only; no implementation acceptance)",
+      "acceptedAt": "2026-10-04T14:20:27.872Z"
+    },
+    {
+      "id": "OWNER-S06-DHR-CALLER-VARIANTS-01",
+      "kind": "product-decision",
+      "status": "accepted",
+      "scope": "Bounded S06 presentation requirement only: Caller supplies content/title/dimensions/anchor/alignment; no feature-name branches. Candidate I 528c4f76149fad6da53c3c4da701cf1e8e121750 awaits independent review/Human implementation acceptance.",
+      "reason": "Direct Human instruction normalized in exact original Coordinator receipt. Existing semantics/authority remain; no new Slice or global Gate.",
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-caller-variants-01.json",
+      "sha256": "dd5f5bb6b932fef152959ab8d57e20888429ce5688a20623f6c24fb7f2eb2921",
+      "sliceIds": [
+        "S06"
+      ],
+      "gateIds": [],
+      "evidenceIds": [],
+      "acceptedBy": "Human Owner (requirements only; no implementation acceptance)",
+      "acceptedAt": "2026-10-04T14:21:02.328Z"
     }
   ]
 }

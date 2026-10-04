@@ -1,0 +1,52 @@
+{
+  "copied": [
+    "handoff/tools/check-boundaries.mjs",
+    "handoff/tools/check-production-boundaries.mjs",
+    "production/evidence/s05/repair-02/samples/legacy-owner.grape.json",
+    "production/evidence/s05/drag-performance-01/fixture-14-Multiply.json"
+  ],
+  "reason": "Independent disposable runtime originally omitted read-only boundary helper and historical input fixtures. No product or test changes.",
+  "originalFailuresRetained": true,
+  "results": [
+    {
+      "name": "boundaries-corrected",
+      "args": [
+        "tools/boundaries.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "unit-conformance-corrected",
+      "args": [
+        "--experimental-transform-types",
+        "--test",
+        "--test-isolation=none",
+        "tests/unit/hover-preferences.test.ts",
+        "tests/unit/model.test.ts",
+        "tests/unit/numeric-literals.test.ts",
+        "tests/unit/persistence.test.ts",
+        "tests/unit/png.test.ts",
+        "tests/unit/s02.test.ts",
+        "tests/unit/s03-limits.test.ts",
+        "tests/unit/s03-repair.test.ts",
+        "tests/unit/s03-repair2.test.ts",
+        "tests/unit/s03-transfer.test.ts",
+        "tests/unit/s03.test.ts",
+        "tests/unit/s04-closure.test.ts",
+        "tests/unit/s04.test.ts",
+        "tests/unit/s05-drag-capture.test.ts",
+        "tests/unit/s05-replacement.test.ts",
+        "tests/unit/s05-uniforms.test.ts",
+        "tests/unit/s05-values.test.ts",
+        "tests/unit/s05.test.ts",
+        "tests/unit/s06-workspace.test.ts",
+        "tests/unit/save-limits.test.ts",
+        "tests/conformance/boundaries.test.ts",
+        "tests/conformance/import.test.ts",
+        "tests/conformance/localization.test.ts",
+        "tests/conformance/ui.test.ts"
+      ],
+      "exitCode": 0
+    }
+  ]
+}

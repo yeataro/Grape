@@ -1,0 +1,99 @@
+{
+  "packetVersion": 1,
+  "packetType": "COORDINATOR_ENGINEERING_REFERENCE",
+  "packetId": "S06-UI-CLEAN-STRUCTURE-REFERENCE-01",
+  "actionKey": "yeataro/Grape:S06:repair:debug-hover:ba0683b:01",
+  "recordedAt": "2026-10-04T14:22:40.411Z",
+  "sourceRequest": {
+    "role": "Human Owner",
+    "threadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "messageIds": null,
+    "quotes": [
+      "我不知道你要怎麼寫，反正我希望它是乾淨的。",
+      "你最好上網找一下這種 UI 的乾淨程式碼的守則，還是我們現在其實已經有框架了，所以不太用擔心這件事。"
+    ]
+  },
+  "inspection": {
+    "revision": "ba0683b742de6c28f6f0b425564292c6603bd551",
+    "method": "Read immutable Git objects, not the running writer uncommitted implementation; this is recovery/reference analysis, not substitute Fresh Review.",
+    "files": [
+      {
+        "file": "production/package.json",
+        "revision": "ba0683b742de6c28f6f0b425564292c6603bd551",
+        "bytes": 891,
+        "sha256": "b7653baca8900675dc70303d89061070927d9cfb5c3441fdb1e5a4e1793f4110"
+      },
+      {
+        "file": "production/src/ui/mount.ts",
+        "revision": "ba0683b742de6c28f6f0b425564292c6603bd551",
+        "bytes": 13053,
+        "sha256": "8f96ee2270732a3f9bc322f00bee2fee0435da87f322be0cea0b82615618b6e5"
+      },
+      {
+        "file": "production/src/ui/widgets.ts",
+        "revision": "ba0683b742de6c28f6f0b425564292c6603bd551",
+        "bytes": 5206,
+        "sha256": "6dd2db5807190becc72d51bde05ebfe2d524445b19d2937e5e465293dd570ce6"
+      },
+      {
+        "file": "production/tools/boundaries.mjs",
+        "revision": "ba0683b742de6c28f6f0b425564292c6603bd551",
+        "bytes": 2345,
+        "sha256": "dea8d8ed7a5fbdaf4533ad885b061c868b714a5c5e06ae84b85b24b29c072010"
+      }
+    ],
+    "facts": [
+      "Declared UI/build stack is TypeScript5.9.3 and Vite7.3.1; no React/Vue/UI component framework dependency in production/package.json.",
+      "Existing custom UI foundation includes PresentationSession/PanelRenderer, WidgetRegistry/WidgetSlot, MountScope event/own/accept lifetime and command guards.",
+      "Production boundary checker enforces declared ownership via frozen checker byte copies in disposable directories; passing this alone does not prove maintainable UI structure."
+    ]
+  },
+  "sources": [
+    {
+      "title": "Thinking in React",
+      "url": "https://react.dev/learn/thinking-in-react",
+      "primary": true,
+      "usedPrinciple": "Separate cohesive components, pass customization as inputs, keep minimal nonduplicated state and identify its owner. Applying these principles here is Coordinator engineering judgment, not a request to adopt React."
+    },
+    {
+      "title": "MDN EventTarget.addEventListener",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener",
+      "primary": true,
+      "usedPrinciple": "Listeners can be explicitly removed or scoped with AbortSignal; abort removes associated listeners. Existing MountScope cleanup remains the local ownership boundary, not automatically replaced."
+    },
+    {
+      "title": "WAI-ARIA APG Menu Button",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/",
+      "primary": true,
+      "usedPrinciple": "Button opens command menu with deliberate keyboard focus and expanded state. Reusable implementation must preserve menu semantics."
+    },
+    {
+      "title": "WAI-ARIA APG Modal Dialog",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "primary": true,
+      "usedPrinciple": "Modal focus containment, Escape and logical focus return are explicit behaviors; do not make every floating surface modal merely to share code."
+    }
+  ],
+  "engineeringConclusion": "Reuse existing owned presentation/mount/widget seams and introduce only the small shared UI entry required by actual callers. A framework cannot substitute for boundaries, shared mechanism, clear state ownership or source-level review. No dependency installation or framework migration requested/authorized by this note.",
+  "reviewChecks": [
+    "One clear owner for shared positioning/open/close/cleanup and bounded primitive styles; current callers supply content/size/anchor/alignment. No caller-name special cases or hidden reach into feature state.",
+    "At least multiple real current consumers exercise the shared entry. Preserve necessary semantic variants; avoid giant catch-all helper, unused option matrix or location-only duplication.",
+    "Single authoritative model state through existing projections; no mirrored Graph copies or private reflection. Diagnostic snapshots remain correctly bounded/lifetime-invalidated.",
+    "Listeners/subscriptions/observers/async callbacks cleaned on close, unmount and dispose as appropriate; multiple instances independent, stale work fenced.",
+    "Source-level review inspects ownership and reuse alongside continuous pointer, focus/keyboard, geometry, narrow/wide and noGraph/History mutation behavior. Test pass and screenshots alone cannot close structure requirement."
+  ],
+  "authority": "References support implementation choices within already accepted Human constraints and repository contracts; external docs grant no product/architecture/Slice authority. Coordinator does not implement or issue independent technical PASS.",
+  "related": [
+    {
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-unified-floating-entry-01.json",
+      "bytes": 3371,
+      "sha256": "c65f15fb85f50b0465f391d04493b2c531c9947d3993222549af317f0af7add1"
+    },
+    {
+      "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-caller-variants-01.json",
+      "bytes": 2402,
+      "sha256": "dd5f5bb6b932fef152959ab8d57e20888429ce5688a20623f6c24fb7f2eb2921"
+    }
+  ],
+  "next": "Original writer includes its concrete common-interface/consumer/lifecycle mapping in delivery; fresh isolated reviewer evaluates it independently."
+}

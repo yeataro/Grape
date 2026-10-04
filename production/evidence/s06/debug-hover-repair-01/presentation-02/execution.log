@@ -1,0 +1,302 @@
+
+Running 8 tests using 1 worker
+
+(node:61176) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › ..\..\..\production\tests\browser\s06-floating.spec.ts:5:1 › S06 shared floating consumers bound alignments focus semantics and disposal independently (545ms)
+  x  2 [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 0.65 (30.2s)
+(node:61080) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  3 [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 1 (30.1s)
+(node:43612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  4 [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 1.25 (30.2s)
+(node:10008) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  5 [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 1920x1000 (30.1s)
+(node:24696) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  6 [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 1440x1000 (5.5s)
+(node:58404) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  7 [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 620x800 (5.5s)
+(node:35772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  8 [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 620x380 (5.5s)
+
+
+  1) [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 0.65 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Multiply', exact: true })
+
+
+       at create-node.ts:17
+
+      15 |   await browser
+      16 |     .getByRole("button", { name: "Add " + label, exact: true })
+    > 17 |     .click();
+         |      ^
+      18 |   const point = await canvas.evaluate((el, n) => {
+      19 |     const r = el.getBoundingClientRect(),
+      20 |       v = el.querySelector<HTMLElement>(".viewport")!,
+        at createNode (C:\Users\user\source\Grape\production\tests\browser\create-node.ts:17:6)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-socket-bottom.spec.ts:16:86
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-circ-65b08-s-preserve-geometry-at-0-65-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-circ-65b08-s-preserve-geometry-at-0-65-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-circ-65b08-s-preserve-geometry-at-0-65-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-circ-65b08-s-preserve-geometry-at-0-65-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 1 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Multiply', exact: true })
+
+
+       at create-node.ts:17
+
+      15 |   await browser
+      16 |     .getByRole("button", { name: "Add " + label, exact: true })
+    > 17 |     .click();
+         |      ^
+      18 |   const point = await canvas.evaluate((el, n) => {
+      19 |     const r = el.getBoundingClientRect(),
+      20 |       v = el.querySelector<HTMLElement>(".viewport")!,
+        at createNode (C:\Users\user\source\Grape\production\tests\browser\create-node.ts:17:6)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-socket-bottom.spec.ts:16:86
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-circ-7be5b-ates-preserve-geometry-at-1-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-circ-7be5b-ates-preserve-geometry-at-1-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-circ-7be5b-ates-preserve-geometry-at-1-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-circ-7be5b-ates-preserve-geometry-at-1-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 1.25 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('.canvas').last().getByRole('dialog', { name: 'Node catalog' }).getByRole('button', { name: 'Add Multiply', exact: true })
+
+
+       at create-node.ts:17
+
+      15 |       .selectOption(fixed ? "grape.nodes.fixed-values" : "grape.nodes.basic");
+      16 |   await browser
+    > 17 |     .getByRole("button", { name: "Add " + label, exact: true })
+         |      ^
+      18 |     .click();
+      19 |   const point = await canvas.evaluate((el, n) => {
+      20 |     const r = el.getBoundingClientRect(),
+        at createNode (C:\Users\user\source\Grape\production\tests\browser\create-node.ts:17:6)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-socket-bottom.spec.ts:16:86
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-circ-19f04-s-preserve-geometry-at-1-25-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-circ-19f04-s-preserve-geometry-at-1-25-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-circ-19f04-s-preserve-geometry-at-1-25-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-circ-19f04-s-preserve-geometry-at-1-25-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 1920x1000 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.waitForEvent: Test timeout of 30000ms exceeded.
+    =========================== logs ===========================
+    waiting for event "download"
+    ============================================================
+
+       6 | const out = process.env.GRAPE_EVIDENCE_DIR!;
+       7 | const save = (n:string,v:unknown) => fs.writeFileSync(path.join(out,n+".json"),JSON.stringify(v,null,2));
+    >  8 | async function doc(p:Page) { const w=p.waitForEvent("download"); await clickAction(p,"Export JSON"); return JSON.parse(fs.readFileSync((await (await w).path())!,"utf8")); }
+         |                                        ^
+       9 | async function center(l:Locator) { const b=(await l.boundingBox())!;return {x:b.x+b.width/2,y:b.y+b.height/2}; }
+      10 | async function geometry(c:Locator) { return c.evaluate(el => {
+      11 |   const r=el.getBoundingClientRect();
+        at doc (C:\Users\user\source\Grape\production\tests\browser\s06-socket-bottom.spec.ts:8:40)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-socket-bottom.spec.ts:48:22
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Export JSON', exact: true })
+
+
+       at ..\fixtures\public-actions.ts:16
+
+      14 |       await menu.locator("summary").click();
+      15 |   }
+    > 16 |   await button.click();
+         |                ^
+      17 | }
+      18 |
+        at clickAction (C:\Users\user\source\Grape\production\tests\fixtures\public-actions.ts:16:16)
+        at doc (C:\Users\user\source\Grape\production\tests\browser\s06-socket-bottom.spec.ts:8:66)
+        at C:\Users\user\source\Grape\production\tests\browser\s06-socket-bottom.spec.ts:48:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-92e11-put-are-reachable-1920x1000-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-92e11-put-are-reachable-1920x1000-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-92e11-put-are-reachable-1920x1000-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-92e11-put-are-reachable-1920x1000-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 1440x1000 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.floating-surface[open]').last()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('.floating-surface[open]').last()
+
+
+      49 |   for(const name of ["Project actions","Shader output","Hints","Experimental features"]) {
+      50 |     const trigger=page.getByRole("button",{name,exact:true});await trigger.click();
+    > 51 |     const popup=page.locator(".floating-surface[open]").last();await expect(popup).toBeVisible();
+         |                                                                                    ^
+      52 |     const b=(await popup.boundingBox())!;expect(b.x).toBeGreaterThanOrEqual(0);expect(b.y).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width!);expect(b.y+b.height).toBeLessThanOrEqual(height!);
+      53 |     await page.screenshot({path:path.join(out,`bottom-${width}-${height}-${name.replaceAll(" ","-")}.png`)});
+      54 |     await page.keyboard.press("Escape");await expect(trigger).toBeFocused();records.push({name,b});
+        at C:\Users\user\source\Grape\production\tests\browser\s06-socket-bottom.spec.ts:51:84
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-a86ec-put-are-reachable-1440x1000-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-a86ec-put-are-reachable-1440x1000-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-a86ec-put-are-reachable-1440x1000-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-a86ec-put-are-reachable-1440x1000-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 620x800 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.floating-surface[open]').last()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('.floating-surface[open]').last()
+
+
+      49 |   for(const name of ["Project actions","Shader output","Hints","Experimental features"]) {
+      50 |     const trigger=page.getByRole("button",{name,exact:true});await trigger.click();
+    > 51 |     const popup=page.locator(".floating-surface[open]").last();await expect(popup).toBeVisible();
+         |                                                                                    ^
+      52 |     const b=(await popup.boundingBox())!;expect(b.x).toBeGreaterThanOrEqual(0);expect(b.y).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width!);expect(b.y+b.height).toBeLessThanOrEqual(height!);
+      53 |     await page.screenshot({path:path.join(out,`bottom-${width}-${height}-${name.replaceAll(" ","-")}.png`)});
+      54 |     await page.keyboard.press("Escape");await expect(trigger).toBeFocused();records.push({name,b});
+        at C:\Users\user\source\Grape\production\tests\browser\s06-socket-bottom.spec.ts:51:84
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-1a1a6-utput-are-reachable-620x800-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-1a1a6-utput-are-reachable-620x800-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-1a1a6-utput-are-reachable-620x800-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-1a1a6-utput-are-reachable-620x800-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 620x380 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.floating-surface[open]').last()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('.floating-surface[open]').last()
+
+
+      49 |   for(const name of ["Project actions","Shader output","Hints","Experimental features"]) {
+      50 |     const trigger=page.getByRole("button",{name,exact:true});await trigger.click();
+    > 51 |     const popup=page.locator(".floating-surface[open]").last();await expect(popup).toBeVisible();
+         |                                                                                    ^
+      52 |     const b=(await popup.boundingBox())!;expect(b.x).toBeGreaterThanOrEqual(0);expect(b.y).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width!);expect(b.y+b.height).toBeLessThanOrEqual(height!);
+      53 |     await page.screenshot({path:path.join(out,`bottom-${width}-${height}-${name.replaceAll(" ","-")}.png`)});
+      54 |     await page.keyboard.press("Escape");await expect(trigger).toBeFocused();records.push({name,b});
+        at C:\Users\user\source\Grape\production\tests\browser\s06-socket-bottom.spec.ts:51:84
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-79a28-utput-are-reachable-620x380-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-79a28-utput-are-reachable-620x380-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-79a28-utput-are-reachable-620x380-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\..\production\evidence\s06\debug-hover-repair-01\presentation-02\test-results\s06-socket-bottom-S06-comp-79a28-utput-are-reachable-620x380-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7 failed
+    [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 0.65 
+    [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 1 
+    [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:14:35 › S06 circle-only type-colored socket states preserve geometry at 1.25 
+    [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 1920x1000 
+    [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 1440x1000 
+    [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 620x800 
+    [chromium] › ..\..\..\production\tests\browser\s06-socket-bottom.spec.ts:45:76 › S06 compact bottom actions and complete output are reachable 620x380 
+  1 passed (2.4m)

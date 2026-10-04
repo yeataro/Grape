@@ -1,0 +1,183 @@
+{
+  "implementationI": "528c4f76149fad6da53c3c4da701cf1e8e121750",
+  "priorI": "5df6eaa8a009926c897d6a3542231aa729666a15",
+  "priorR": "ba0683b742de6c28f6f0b425564292c6603bd551",
+  "review": {
+    "file": "C:/Users/user/.codex/worktrees/s06-debug-hover-review-01/Grape/.verification/s06-debug-hover-review-01/INDEPENDENT_REVIEW_RESULT.json",
+    "bytes": 29462,
+    "sha256": "25271865ef5c7421f7b06c1cb971d21c7a3fa40cc6db37299c821a830dace513"
+  },
+  "group": "S06-FG-DEBUG-HOVER-01",
+  "findings": [
+    {
+      "id": "S06-DH-001",
+      "change": "Valid inspected object survives continuous travel to explicit reader; new settled object takes over after short dwell; footer traversal no longer clears the target. Actual invalidation still revokes it.",
+      "files": [
+        "production/src/ui/hover.ts"
+      ],
+      "source": "final-source-01:6 trusted continuous80-step Node/Port/Widget cases1440/1920",
+      "archive": "archive-public-01: same6 plus delivery-03 direct/wrapped12 routes",
+      "negative": "delete/reload/sameID/selection/stage/occurrence, unmount/hide/move/dispose and late callback tests; no Graph/export/History edits",
+      "status": "IMPLEMENTER_FIXED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "S06-DH-002",
+      "change": "F2 resolves actual current keyboard focus independently of pointer hover. Pointer details continue using intended hovered object.",
+      "files": [
+        "production/src/ui/hover.ts"
+      ],
+      "source": "final-source-01: focused control/Node/Port crossed with different hovered Node/Panel/control,9 cases",
+      "archive": "archive-public-01 same9",
+      "negative": "IME/draft/gesture/busy and readonly inspection preserved; Escape returns correct focused object",
+      "status": "IMPLEMENTER_FIXED_PENDING_INDEPENDENT_REVIEW"
+    }
+  ],
+  "humanPresentationRequirements": [
+    {
+      "authority": {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-feedback-01.json",
+        "bytes": 5733,
+        "sha256": "d0e16600b45d3f439a12533f19a2632f3bf022bc63e505b25b590b8d67aeab0f"
+      },
+      "requirement": "Useful kind/name/identity/current state first; precise circular socket hit controls and independent labels",
+      "source": "s06-hover-repair.spec.ts; s06-socket-bottom.spec.ts",
+      "evidence": "production/evidence/s06/debug-hover-repair-01/archive-public-01/built-in-objects.json",
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "authority": {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-solid-socket-01.json",
+        "bytes": 2798,
+        "sha256": "c676c126dc1d7483a06c66b9f062bd7a01abb5538bf0cfe4249de15945323027"
+      },
+      "requirement": "Solid type-preserving hover/pressed/focus/origin/target socket fills; unchanged endpoints",
+      "source": "s06-socket-bottom.spec.ts",
+      "evidence": "production/evidence/s06/debug-hover-repair-01/archive-public-01/socket-1.json",
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "authority": {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-type-color-01.json",
+        "bytes": 1852,
+        "sha256": "16eaf5e2c50f892efdbd4d91a5cf6cf71727cc0ab965b4175f6d1a6713308742"
+      },
+      "requirement": "Existing scalar/vector type colors retained instead of uniform color",
+      "source": "s06-socket-bottom.spec.ts",
+      "evidence": "production/evidence/s06/debug-hover-repair-01/archive-public-01/socket-0.65.json",
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "authority": {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-reference-units-01.json",
+        "bytes": 4250,
+        "sha256": "5a7b2335ccf48453fa5d8a367deb7a5a30d27c56077398d9c9813cac6bfa2768"
+      },
+      "requirement": "Shared nodePortRow for real/catalog sockets; current button/input primitives reused; no new numeric gestures",
+      "source": "src/features/node-browser.ts; apps/web/style.css",
+      "evidence": "production/evidence/s06/debug-hover-repair-01/source-structure-01.json",
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "authority": {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-mouse-reference-01.json",
+        "bytes": 1437,
+        "sha256": "e798715bf314bda9f6a39ca75eb9b157fed91e35eac6135d173fa780c9f64b5e"
+      },
+      "requirement": "Context-sensitive reference inspection only, no blanket Legacy interaction parity or copied UI",
+      "source": "s06-creation.spec.ts; s06-guards.spec.ts",
+      "evidence": "production/evidence/s06/debug-hover-repair-01/asset-manifest-01.json",
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "authority": {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-bottom-bar-01.json",
+        "bytes": 3055,
+        "sha256": "7ffe01d7c5db27971ef0b3746364de392c338e085ece44d013d3ab19cb86f123"
+      },
+      "requirement": "Compact footer, default collapsed output, complete current status, accessible disclosures",
+      "source": "s06-socket-bottom.spec.ts; s06-status-pointer.spec.ts",
+      "evidence": "production/evidence/s06/debug-hover-repair-01/delivery-03/result.json",
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "authority": {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-newer-status-reference-01.json",
+        "bytes": 3326,
+        "sha256": "c1504009160fc8d30e7b5cd9f12457f6e994cd5d3cb3b65c6e817c937e4599a1"
+      },
+      "requirement": "Anchored full current status; meaningful diagnostics Locate via existing output owner; stale node callbacks fenced",
+      "source": "s06-hover-repair.spec.ts; src/features/code.ts",
+      "evidence": "production/evidence/s06/debug-hover-repair-01/archive-public-01/current-diagnostic-locate.json",
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "authority": {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-bottom-actions-01.json",
+        "bytes": 3615,
+        "sha256": "47279cda3734f95ae6dd997cfc4dc3fb1fec5f2657b9867347ffcb63e7de1239"
+      },
+      "requirement": "Bottom-left grouped existing commands with menu keyboard, visible labels and readonly toggle state",
+      "source": "s06-hover-repair.spec.ts; s06-workspace.spec.ts",
+      "evidence": "production/evidence/s06/debug-hover-repair-01/delivery-03/result.json",
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "authority": {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-unified-floating-entry-01.json",
+        "bytes": 3371,
+        "sha256": "c65f15fb85f50b0465f391d04493b2c531c9947d3993222549af317f0af7add1"
+      },
+      "requirement": "One bounded caller-configured floating mechanism; owner content and semantic differences preserved",
+      "source": "src/ui/floating.ts; src/ui/mount.ts",
+      "evidence": "production/evidence/s06/debug-hover-repair-01/source-structure-01.json",
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "authority": {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/human-caller-variants-01.json",
+        "bytes": 2402,
+        "sha256": "dd5f5bb6b932fef152959ab8d57e20888429ce5688a20623f6c24fb7f2eb2921"
+      },
+      "requirement": "Caller supplies content/title/dimensions/anchor/alignment; no feature-name branches",
+      "source": "src/ui/floating.ts; apps/web/main.ts; src/ui/hover.ts",
+      "evidence": "production/evidence/s06/debug-hover-repair-01/final-lifetime-01/floating-lifetime.json",
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "authority": {
+        "file": "production/evidence/coordinator/s06/debug-hover-repair-01/engineering-reference-01.json",
+        "bytes": 6006,
+        "sha256": "6c8d1bb9633ee1c204480e142294083bd5ca7c2545878822a3f34fa2e22e6d14"
+      },
+      "requirement": "Existing seams, truthful module registration, multi-instance cleanup and no model mirror; reference analysis by Coordinator, not author PASS",
+      "source": "src/sdk/view-mount.ts; conformance/ownership.json",
+      "evidence": "production/evidence/s06/debug-hover-repair-01/final-lifetime-01/floating-mount-lifetime.json",
+      "status": "IMPLEMENTER_VERIFIED_PENDING_INDEPENDENT_REVIEW"
+    }
+  ],
+  "originalVerdict": "Original FAIL remains unchanged. Earlier workspace review4 PASS belongs only40af655/95a9260; not transferred to this candidate.",
+  "counters": {
+    "implementationAttempt": 1,
+    "transientRetries": 0,
+    "unsuccessfulRepairReReviewRounds": 0,
+    "distinctIdentityBasis": "New Human-authorized debug-hover feature after all three workspace-entry review3 findings closed at I4/R4. This does not rename or reset the old group.",
+    "retainedPriorGroup": {
+      "id": "S06-FG-WORKSPACE-ENTRY-01",
+      "reviewAttempt": 4,
+      "repairRound": 3,
+      "unsuccessfulRepairReReviewRounds": 2,
+      "currentScopedVerdict": "PASS"
+    },
+    "retainedEscape": {
+      "id": "S05-FG-ESCAPE-FOCUS-01",
+      "repairAttempt": 1,
+      "unsuccessfulRepairReReviewRounds": 0
+    },
+    "policy": "Two transient retries maximum; third unsuccessful repair/re-review routes technical diagnosis, no restart reset.",
+    "reviewAttempt": 1,
+    "repairRound": 1,
+    "automaticBrowserRetries": 0,
+    "explanation": "This is the first independent review of the new debug-hover feature. Initial technical FAIL does not count as an unsuccessful repair/re-review. Diagnosed reviewer runtime/launcher corrections above are explicitly retained, not resets of product repair counters.",
+    "nextReviewAttempt": 2
+  }
+}

@@ -124,7 +124,7 @@ export function mountNodeBrowser(
   services: PanelServices,
   lease: () => PanelUpdate,
   camera: () => { x: number; y: number; zoom: number },
-  report: (error: unknown) => void,
+  report: (error: unknown, connected?: boolean) => void,
 ) {
   const panel = document.createElement("section"),
     title = document.createElement("header"),
@@ -286,7 +286,7 @@ export function mountNodeBrowser(
       const r = root.getBoundingClientRect(),
         a = socket.querySelector(".socket")!.getBoundingClientRect(),
         b = match.querySelector(".socket")!.getBoundingClientRect();
-      const p = document.createElementNS(previewWire.namespaceURI, "path"),
+      const p = document.createElementNS("http://www.w3.org/2000/svg", "path"),
         x1 = a.left + a.width / 2 - r.left,
         y1 = a.top + a.height / 2 - r.top,
         x2 = b.left + b.width / 2 - r.left,
@@ -296,7 +296,15 @@ export function mountNodeBrowser(
         "d",
         `M${x1} ${y1} C${x1 + 70 * dir} ${y1},${x2 - 70 * dir} ${y2},${x2} ${y2}`,
       );
-      previewWire.append(p);
+      p.style.stroke =
+        getComputedStyle(socket.parentElement!)
+          .getPropertyValue("--port-color")
+          .trim() || "#c4c1bc";
+      const ring = document.createElementNS(previewWire.namespaceURI, "circle");
+      ring.setAttribute("cx", String(x1));
+      ring.setAttribute("cy", String(y1));
+      ring.setAttribute("r", "8");
+      previewWire.append(p, ring);
       previewWire.style.display = "";
     }
   };
@@ -320,7 +328,7 @@ export function mountNodeBrowser(
           : {}),
       } as Json,
     });
-    report(undefined);
+    report(undefined, !!wire);
     cancel();
   };
   const choose = (item: CatalogEntry) => {
@@ -439,6 +447,17 @@ export function mountNodeBrowser(
       row.className = "catalog-row";
       row.dataset.key = item.key;
       row.classList.toggle("current", index === selected);
+      row.addEventListener(
+        "pointermove",
+        mount.scope.event((e: PointerEvent) => {
+          if (e.pointerType === "touch" || moving || rowDrag?.started) return;
+          selected = index;
+          for (const sibling of list.querySelectorAll<HTMLElement>(
+            ".catalog-row",
+          ))
+            sibling.classList.toggle("current", sibling === row);
+        }),
+      );
       label.textContent = item.presentation.label.fallback;
       label.ariaLabel = "Inspect " + label.textContent;
       badge.textContent =

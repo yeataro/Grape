@@ -146,8 +146,16 @@ function mountCanvas(
   root.append(viewport, breadcrumb, notice);
   const toolbar = document.createElement("div");
   const noticeErrors = new Map<string, string>();
+  let connectionNotice = "",
+    detailNotice = "";
   const showNoticeErrors = () => {
-    notice.textContent = [...noticeErrors.values()].join(" · ");
+    notice.textContent = [
+      ...noticeErrors.values(),
+      detailNotice,
+      connectionNotice,
+    ]
+      .filter(Boolean)
+      .join(" · ");
   };
   toolbar.className = "network-toolbar";
   root.append(toolbar);
@@ -164,9 +172,11 @@ function mountCanvas(
     services,
     lease,
     camera,
-    (error) => {
+    (error, connected) => {
       if (error === undefined) noticeErrors.delete("creation");
       else noticeErrors.set("creation", String(error));
+      if (error === undefined && connected)
+        noticeErrors.delete("grape.edge.connect");
       showNoticeErrors();
     },
   );
@@ -186,6 +196,7 @@ function mountCanvas(
     return b;
   };
   const openCreator = (mode: "create" | "browse" = "create") => {
+    clearConnection();
     const r = root.getBoundingClientRect();
     browser.open(r.left + r.width / 2, r.top + r.height / 3, mode);
   };
@@ -255,6 +266,7 @@ function mountCanvas(
     });
   };
   const showHelp = () => {
+    clearConnection();
     browser.cancel(false);
     backdropPointer = null;
     helpOpener = document.activeElement as HTMLElement;
@@ -321,6 +333,7 @@ function mountCanvas(
       return;
     browser.cancel(false);
     services.activate();
+    clearConnection();
     const c = services.context(lease().lease),
       node = target.closest<HTMLElement>("[data-node]"),
       edge = target.closest<SVGElement>("[data-edge]");
@@ -484,18 +497,16 @@ function mountCanvas(
           !c.graph.document.graph.losses.some((old) => old.id === l.id),
       );
       if (losses.length)
-        notice.textContent =
-          [...noticeErrors.values()].join(" · ") +
-          (noticeErrors.size ? " · " : "") +
-          losses
-            .map(
-              (l) =>
-                l.reason +
-                (l.payload.kind === "edge"
-                  ? ` Receiver ${l.payload.edge.to.nodeId}/${l.payload.edge.to.portKey}; edge ${l.payload.edge.id}.`
-                  : ""),
-            )
-            .join(" ");
+        detailNotice = losses
+          .map(
+            (l) =>
+              l.reason +
+              (l.payload.kind === "edge"
+                ? ` Receiver ${l.payload.edge.to.nodeId}/${l.payload.edge.to.portKey}; edge ${l.payload.edge.id}.`
+                : ""),
+          )
+          .join(" ");
+      showNoticeErrors();
     }),
   );
   addDirection.ariaLabel = "New port direction";
@@ -973,6 +984,8 @@ function mountCanvas(
       nodeId: string;
       portKey: string;
       direction: string;
+      scope: string;
+      revision: number;
     } | null = null,
     drag: {
       id: number;
@@ -983,10 +996,66 @@ function mountCanvas(
       pan: boolean;
       camera: ReturnType<typeof camera>;
     } | null = null;
-  const run = (fn: () => void, action?: string) => {
+  const connectionPreview = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg",
+  );
+  connectionPreview.classList.add("connection-preview");
+  root.append(connectionPreview);
+  let pointerPoint: { x: number; y: number } | null = null;
+  const drawConnection = () => {
+    connectionPreview.replaceChildren();
+    const pending = portDrag ?? selectedPort;
+    if (!pending || !pointerPoint || browser.isOpen()) return;
+    const socket = Array.from(
+      nodes.querySelectorAll<HTMLElement>("[data-port]"),
+    ).find(
+      (e) =>
+        e.dataset.nodeId === pending.nodeId &&
+        e.dataset.port === pending.portKey &&
+        e.dataset.direction === pending.direction,
+    );
+    if (!socket) return;
+    const s = socket.querySelector(".socket")!.getBoundingClientRect(),
+      r = root.getBoundingClientRect();
+    const x = s.left + s.width / 2 - r.left,
+      y = s.top + s.height / 2 - r.top,
+      toX = pointerPoint.x - r.left,
+      toY = pointerPoint.y - r.top,
+      direction = pending.direction === "output" ? 1 : -1;
+    const p = document.createElementNS(connectionPreview.namespaceURI, "path"),
+      ring = document.createElementNS(connectionPreview.namespaceURI, "circle");
+    p.setAttribute(
+      "d",
+      `M${x} ${y} C${x + 70 * direction} ${y},${toX - 70 * direction} ${toY},${toX} ${toY}`,
+    );
+    p.setAttribute(
+      "stroke",
+      getComputedStyle(socket.parentElement!)
+        .getPropertyValue("--port-color")
+        .trim() || "#c4c1bc",
+    );
+    ring.setAttribute("cx", String(x));
+    ring.setAttribute("cy", String(y));
+    ring.setAttribute("r", "8");
+    connectionPreview.append(p, ring);
+  };
+  const clearConnection = () => {
+    if (portDrag) suppressPortClick = true;
+    if (portDrag && root.hasPointerCapture(portDrag.id))
+      root.releasePointerCapture(portDrag.id);
+    portDrag = null;
+    selectedPort = null;
+    pointerPoint = null;
+    connectionNotice = "";
+    drawConnection();
+    showNoticeErrors();
+  };
+  const run = (fn: () => void | boolean, action?: string) => {
     try {
-      fn();
-      if (action && noticeErrors.delete(action)) showNoticeErrors();
+      const recovered = fn();
+      if (action && recovered !== false && noticeErrors.delete(action))
+        showNoticeErrors();
       return true;
     } catch (error) {
       noticeErrors.set(action ?? "interaction", String(error));
@@ -1039,6 +1108,7 @@ function mountCanvas(
   });
   listen(window, "blur", () => {
     backdropPointer = null;
+    clearConnection();
     clearHold();
     closeMenu();
     end(true);
@@ -1046,6 +1116,7 @@ function mountCanvas(
   listen(document, "visibilitychange", () => {
     if (document.hidden) {
       backdropPointer = null;
+      clearConnection();
       clearHold();
       closeMenu();
       end(true);
@@ -1115,17 +1186,17 @@ function mountCanvas(
       const e = event as PointerEvent;
       if (browser.isOpen() || !menu.hidden || helpDialog.open) return;
       if (!e.isPrimary) {
-        if (portDrag && root.hasPointerCapture(portDrag.id))
-          root.releasePointerCapture(portDrag.id);
-        portDrag = null;
+        clearConnection();
         end(true);
         return;
       }
       if (e.button !== 0) return;
+      suppressPortClick = false;
       const socket = (e.target as HTMLElement).closest<HTMLElement>(
         "[data-port]",
       );
       if (socket) {
+        if (services.editing?.(lease().lease) === false) return;
         const c = services.context(lease().lease).capture();
         portDrag = {
           id: e.pointerId,
@@ -1137,6 +1208,7 @@ function mountCanvas(
           scope: JSON.stringify(c.scope),
           revision: c.graph.revision,
         };
+        pointerPoint = { x: e.clientX, y: e.clientY };
         return;
       }
       if (
@@ -1147,6 +1219,7 @@ function mountCanvas(
         return;
       // Keep native mousedown from removing Canvas focus after selection redraw.
       e.preventDefault();
+      clearConnection();
       services.activate();
       root.focus();
       const context = services.context(lease().lease),
@@ -1197,6 +1270,10 @@ function mountCanvas(
   listen(root, "pointermove", (event) =>
     run(() => {
       const e = event as PointerEvent;
+      if (portDrag || selectedPort) {
+        pointerPoint = { x: e.clientX, y: e.clientY };
+        drawConnection();
+      }
       if (
         portDrag?.id === e.pointerId &&
         Math.hypot(e.clientX - portDrag.x, e.clientY - portDrag.y) > 4
@@ -1259,11 +1336,13 @@ function mountCanvas(
       menu.hidden &&
       !browser.isOpen();
     portDrag = null;
+    drawConnection();
     if (pending) {
       if (root.hasPointerCapture(pending.id))
         root.releasePointerCapture(pending.id);
       if (Math.hypot(e.clientX - pending.x, e.clientY - pending.y) > 4) {
         suppressPortClick = true;
+        clearConnection();
         run(() => {
           const c = services.context(lease().lease).capture();
           demand(
@@ -1286,13 +1365,17 @@ function mountCanvas(
               portKey: pending.portKey,
               direction: pending.direction as "input" | "output",
             });
-            return;
+            return false;
           }
           demand(target && root.contains(target), "PORT_TARGET");
+          demand(mount.commands, "COMMAND_DENIED");
           if (target.dataset.spare) {
-            execute("grape.network.spare", {
-              boundary: target.dataset.spare,
-              endpoint: { nodeId: pending.nodeId, portKey: pending.portKey },
+            mount.commands.execute(lease().lease, {
+              commandId: "grape.network.spare",
+              args: {
+                boundary: target.dataset.spare,
+                endpoint: { nodeId: pending.nodeId, portKey: pending.portKey },
+              },
             });
           } else {
             demand(
@@ -1304,13 +1387,17 @@ function mountCanvas(
                 nodeId: target.dataset.nodeId!,
                 portKey: target.dataset.port!,
               };
-            execute("grape.edge.connect", {
-              from: pending.direction === "output" ? a : b,
-              to: pending.direction === "input" ? a : b,
+            mount.commands.execute(lease().lease, {
+              commandId: "grape.edge.connect",
+              args: {
+                from: pending.direction === "output" ? a : b,
+                to: pending.direction === "input" ? a : b,
+                replace: e.shiftKey,
+              },
             });
           }
           selectedPort = null;
-        });
+        }, "grape.edge.connect");
       }
     }
     if (!pending) end(false);
@@ -1327,8 +1414,14 @@ function mountCanvas(
     } else lastBlankTap = null;
   });
   listen(root, "pointercancel", () => {
-    portDrag = null;
+    clearConnection();
     end(true);
+  });
+  listen(root, "pointerleave", () => {
+    if (!portDrag) {
+      pointerPoint = null;
+      drawConnection();
+    }
   });
   listen(root, "click", (event) =>
     run(() => {
@@ -1340,21 +1433,40 @@ function mountCanvas(
         return;
       }
       if (!button) return;
+      if (services.editing?.(lease().lease) === false) {
+        clearConnection();
+        return;
+      }
       services.activate();
+      const captured = services.context(lease().lease).capture();
       const port = {
         nodeId: button.dataset.nodeId!,
         portKey: button.dataset.port!,
         direction: button.dataset.direction!,
+        scope: JSON.stringify(captured.scope),
+        revision: captured.graph.revision,
       };
       if (!selectedPort) {
         selectedPort = port;
-        if (!noticeErrors.size) notice.textContent = connectionHint;
+        pointerPoint = {
+          x: (event as MouseEvent).clientX,
+          y: (event as MouseEvent).clientY,
+        };
+        connectionNotice = connectionHint;
+        showNoticeErrors();
+        drawConnection();
         return;
       }
       const source = selectedPort.direction === "output" ? selectedPort : port,
         target = selectedPort.direction === "output" ? port : selectedPort;
-      selectedPort = null;
+      const pending = selectedPort;
+      clearConnection();
       run(() => {
+        demand(
+          pending.scope === JSON.stringify(captured.scope) &&
+            pending.revision === captured.graph.revision,
+          "STALE_SCOPE",
+        );
         demand(
           source.direction === "output" && target.direction === "input",
           "PORT_DIRECTION",
@@ -1420,8 +1532,7 @@ function mountCanvas(
       if (e.altKey || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() !== "z"))
         return;
       if (e.key === "Escape") {
-        selectedPort = null;
-        portDrag = null;
+        clearConnection();
         end(true);
         return;
       }
@@ -1560,6 +1671,7 @@ function mountCanvas(
       });
       const c = projection.context;
       if (!c) {
+        clearConnection();
         nodes.replaceChildren();
         wires.replaceChildren();
         return;
@@ -1572,13 +1684,14 @@ function mountCanvas(
       )
         clearHold();
       if (renderedScope && renderedScope !== scopeKey) {
-        selectedPort = null;
+        clearConnection();
         suppressPortClick = false;
         interfaceDraft = null;
         structureDraft = null;
         editor.open = false;
         structs.open = false;
         noticeErrors.clear();
+        detailNotice = "";
         notice.textContent = "";
         if (drag && root.hasPointerCapture(drag.id))
           root.releasePointerCapture(drag.id);
@@ -1587,13 +1700,19 @@ function mountCanvas(
       renderedScope = scopeKey;
       const network = c.network;
       if (
+        selectedPort &&
+        (selectedPort.scope !== scopeKey ||
+          selectedPort.revision !== c.graph.revision ||
+          services.editing?.(lease().lease) === false)
+      )
+        clearConnection();
+      if (
         portDrag &&
         (portDrag.scope !== JSON.stringify(c.scope) ||
-          portDrag.revision !== c.graph.revision)
+          portDrag.revision !== c.graph.revision ||
+          services.editing?.(lease().lease) === false)
       ) {
-        if (root.hasPointerCapture(portDrag.id))
-          root.releasePointerCapture(portDrag.id);
-        portDrag = null;
+        clearConnection();
       }
       frameLayer.replaceChildren(
         ...c.frames.map((f) => {
@@ -1716,15 +1835,20 @@ function mountCanvas(
             spare.onclick = mount.scope.event(() =>
               run(() => {
                 demand(selectedPort, "SELECT_PORT");
-                execute("grape.network.spare", {
-                  boundary: n.id,
-                  endpoint: {
-                    nodeId: selectedPort.nodeId,
-                    portKey: selectedPort.portKey,
+                demand(mount.commands, "COMMAND_DENIED");
+                mount.commands.execute(lease().lease, {
+                  commandId: "grape.network.spare",
+                  args: {
+                    boundary: n.id,
+                    endpoint: {
+                      nodeId: selectedPort.nodeId,
+                      portKey: selectedPort.portKey,
+                    },
                   },
                 });
                 selectedPort = null;
-              }),
+                clearConnection();
+              }, "grape.edge.connect"),
             );
             card.append(spare);
           }
@@ -1799,6 +1923,7 @@ function mountCanvas(
           return path;
         }),
       );
+      drawConnection();
     },
   };
 }

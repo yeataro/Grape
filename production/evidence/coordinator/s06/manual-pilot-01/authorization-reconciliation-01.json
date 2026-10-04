@@ -1,0 +1,28 @@
+{
+  "recordType": "AUTHORIZATION_RECONCILIATION_AFTER_AUTO_REVIEW_REJECTION",
+  "recordedAt": "2026-10-04T17:34:05.755Z",
+  "actionKey": "yeataro/Grape:S06:documentation:manual-pilot:a4a6e72:01",
+  "rejectionReceipt": "dispatch-result-01.json",
+  "priorTransportOutcome": "REJECTED_NOT_DISPATCHED",
+  "evidenceSource": "mcp__codex_app__read_thread of current Coordinator thread, actual userMessage/agentMessage roles and IDs",
+  "earlierHuman": {
+    "id": "01a107c6-0afe-7a62-9f95-a97897416980",
+    "role": "user",
+    "text": "這邊是人類修改意見，到我說以上為止之前，都不要做總結。"
+  },
+  "assistantExpansion": [
+    {
+      "id": "msg_0edd7fb30dc639c1016ac28089fc2c87d0b6a2cd7a95d8b8d3",
+      "role": "assistant",
+      "text": "收到。你逐條說，我先接收；等你說「以上」後再整理，不提前總結或派工。"
+    }
+  ],
+  "currentHuman": {
+    "id": "01a107f7-07d6-7bd3-aa42-2ad66106ac98",
+    "role": "user",
+    "text": "我們來做一... 我們來做幾份看看，我們先做五份好了。然後可能 UI 或者是哪裡，或某個接點，你先做做看，然後放在對的地方。"
+  },
+  "finding": "Earlier Human prohibited summarizing the feedback before saying 以上. The extra 'no dispatch' wording was added by Assistant, not a Human ban on separate later tasks. Latest direct Human explicitly requests doing five documentation samples now and placing them correctly. Only this documentation pilot is authorized; other product feedback remains unassigned.",
+  "plannedAction": "Retry the same original-parent documentation-only dispatch once, with verified evidence of direct authorization. No alternative channel, replacement writer, product work, bulk feedback summary or hidden execution.",
+  "scopeUnchanged": true
+}

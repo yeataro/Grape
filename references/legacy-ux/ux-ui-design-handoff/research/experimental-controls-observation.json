@@ -1,0 +1,328 @@
+{
+  "schema": "grape-ux-experimental-observation/1",
+  "evidenceId": "LIVE-002-EXPERIMENTAL",
+  "date": "2026-10-02",
+  "productVersion": "0.8.272 DEV",
+  "source": "Actual Experimental features dialog, read-only DOM current controls and visible help; no toggle changed.",
+  "defaultEvidence": {
+    "resetDefaultsDisabled": true,
+    "interpretation": "UI indicates current settings match its default condition; not independently confirmed in fresh browser storage.",
+    "confidence": "medium",
+    "freshProfileVerified": false
+  },
+  "ownerRule": "Default-enabled experimental capability is required. Default-disabled experiment is optional candidate. A disabled entry/presentation variant does not make its underlying capability optional.",
+  "persistenceAdvertised": "Applies immediately; saved only in this browser.",
+  "persistenceRoundtripVerified": false,
+  "durations": [
+    {
+      "setting": "canvas.damping",
+      "valueMs": 150,
+      "declaredDefaultMs": 150,
+      "declaredRangeMs": [
+        10,
+        1000
+      ]
+    },
+    {
+      "setting": "canvas.frameAnimation",
+      "valueMs": 333,
+      "declaredDefaultMs": 333,
+      "declaredRangeMs": [
+        10,
+        1000
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "id": "toolbar.background",
+      "label": "Show toolbar background",
+      "facet": "presentation",
+      "observedValue": false,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "optional-variant-if-default-confirmed",
+      "advertisedEffect": "Off leaves buttons over canvas; empty toolbar areas permit canvas interaction.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "toolbar.edit",
+      "label": "Show edit toolbar",
+      "facet": "entry",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Copy/Paste/Delete placement is conditional on selection-toolbar mode, not separate capability ownership.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "connection.quickActions",
+      "label": "Connection quick actions",
+      "facet": "entry",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Wire/Link style, source/destination selection+frame, disconnect.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "selection.toolbar",
+      "label": "Selection toolbar",
+      "facet": "entry",
+      "observedValue": "all",
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "preserve-capability; selected-policy-reference",
+      "advertisedEffect": "Single and multiple; alternatives off or multiple only.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "selection.collapseExpand",
+      "label": "Show selection collapse/expand buttons",
+      "facet": "entry",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Underlying context-menu actions remain when buttons hidden.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "selection.outline",
+      "label": "Always show multiple-selection outline",
+      "facet": "feedback",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Outline persists for multi-selection independent of toolbar visibility.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "selection.hideCompleteGroupOutline",
+      "label": "Hide selection outline for a group",
+      "facet": "feedback-variant",
+      "observedValue": false,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "optional-variant-if-default-confirmed",
+      "advertisedEffect": "Only exact single complete group; not partial/multiple/extra nodes.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "canvas.trash",
+      "label": "Canvas trash",
+      "facet": "interaction-variant",
+      "observedValue": false,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "optional-variant-if-default-confirmed",
+      "advertisedEffect": "Drag-delete and input-wire-to-blank Add Node; delete capability remains separate.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "inspector.floatingInputSockets",
+      "label": "Floating Parameter input sockets",
+      "facet": "entry",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Connect original node through Inspector sockets, no extra persistent wires.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "node.bodyDrag",
+      "label": "Drag nodes by their body",
+      "facet": "interaction",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Off uses title only; numeric-field gestures retain precedence.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "node.dragCursor",
+      "label": "Node drag cursor",
+      "facet": "presentation",
+      "observedValue": "default",
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "preserve-capability; selected-policy-reference",
+      "advertisedEffect": "Arrow selected; alternative Move.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "node.resizeHint",
+      "label": "Node resize hint",
+      "facet": "entry",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Hint may hide while resizing remains available.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "group.cornerSelect",
+      "label": "Group corner selection handle",
+      "facet": "entry",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Lower-right handle selects members like title.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "node.expandedTriangle",
+      "label": "Triangle on expanded nodes",
+      "facet": "entry-variant",
+      "observedValue": false,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "optional-variant-if-default-confirmed",
+      "advertisedEffect": "Hiding this entry does not remove collapse ability.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "node.collapsedTriangle",
+      "label": "Triangle on collapsed nodes",
+      "facet": "entry",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Context-menu expansion remains when hidden.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "edge.disconnectIncompatible",
+      "label": "Disconnect newly incompatible wires",
+      "facet": "behavior",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Later type change removes incompatible wire in same Undo step; toggle alone does not rewrite existing wires.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "canvas.zoomOverview",
+      "label": "Zoomed-out overview",
+      "facet": "presentation-variant",
+      "observedValue": false,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "optional-variant-if-default-confirmed",
+      "advertisedEffect": "Allows 20% zoom; below30% family cards/names at least10screenpx, preserving sockets/wires/sizes.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "component.rgbaColors",
+      "label": "RGBA component colors",
+      "facet": "style",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Tint numeric text, component sockets/wires by R/G/B/A.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "component.vectorColors",
+      "label": "All vector component colors",
+      "facet": "style",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Tint labels/values/component sockets/wires by component order.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "shell.clock",
+      "label": "Show system clock",
+      "facet": "optional-capability",
+      "observedValue": false,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "optional-variant-if-default-confirmed",
+      "advertisedEffect": "Minute updates; fullscreen auto-displays and exit restores preference.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "shell.fps",
+      "label": "Show FPS",
+      "facet": "optional-capability",
+      "observedValue": false,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "optional-variant-if-default-confirmed",
+      "advertisedEffect": "UI FPS not TD/video FPS;1Hz numbers,10Hz trail,10s window; background pauses and resets on return.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "canvas.damping",
+      "label": "Pan/zoom damping",
+      "facet": "interaction",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Displayed time150ms; range10–1000ms, tooltip explicitly says default150ms.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "canvas.frameAnimation",
+      "label": "Frame transition (F)",
+      "facet": "interaction",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Displayed time333ms; range10–1000ms, tooltip explicitly says default333ms.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "connection.frameSelectedEndpoint",
+      "label": "Frame when selecting wire source / destination",
+      "facet": "interaction",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Uses general Frame transition; separate from Link arrow navigation.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "link.visibleArrows",
+      "label": "Arrows with visible Link lines",
+      "facet": "entry",
+      "observedValue": "always",
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "preserve-capability; selected-policy-reference",
+      "advertisedEffect": "Alternatives hover/focus or hidden; hiding Link lines keeps navigation arrows.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "link.reverseInputArrowHover",
+      "label": "Reverse Input Link arrow on hover",
+      "facet": "presentation",
+      "observedValue": true,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "required-if-default-confirmed",
+      "advertisedEffect": "Visual direction only; does not change connection or action.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "navigation.arrowMode",
+      "label": "Arrow navigation mode (trial)",
+      "facet": "interaction",
+      "observedValue": "spatial",
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "preserve-capability; selected-policy-reference",
+      "advertisedEffect": "Single-selection plain arrows: spatial neighbors selected, original/bidirectional alternatives.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "navigation.growSelection",
+      "label": "Ctrl + Left/Right: grow selection one step",
+      "facet": "interaction-variant",
+      "observedValue": false,
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "optional-variant-if-default-confirmed",
+      "advertisedEffect": "Off selects all ancestors/descendants; on grows one layer. CtrlUp/Down remains connected/unconnected.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    },
+    {
+      "id": "navigation.viewAction",
+      "label": "View on arrow navigation",
+      "facet": "interaction",
+      "observedValue": "none",
+      "defaultEvidence": "UI-reset-disabled",
+      "ownerDisposition": "preserve-capability; selected-policy-reference",
+      "advertisedEffect": "Keep view selected; frame/center animated/instant alternatives; tooltip says keep default.",
+      "interactionValidation": "Not tested by opening this dialog; see LIVE-002 for specific previously exercised behaviors."
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Coordinator v1 operational runbook
 
+**Workflow mode:** first check [CONTINUOUS_DELIVERY](CONTINUOUS_DELIVERY.md). For an activated continuous run, use its checkpoint, branch, technical-readiness and state rules instead of the per-Slice start/acceptance/PR/merge stops below. All unchanged recovery, review, retry and publication guards still apply. Without its recorded checkpoint and execution authority, use the existing bounded route.
+
 Apply [COORDINATOR](COORDINATOR.md) and [PACKETS](PACKETS.md). Procedures describe already-authorized work; they grant no new authority. Phase names are derived, not a new state database.
 
 ## Fresh restart without chat history

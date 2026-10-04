@@ -1,0 +1,46 @@
+{
+  "recordedAt": "2026-10-04T17:44:36.926Z",
+  "scope": "Documentation self-check only; no product/browser/runtime suite or independent review.",
+  "operations": [
+    {
+      "command": "node .verification/manual-pilot-check.mjs",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "7d5fd8",
+          "wall_time_seconds": 1.6415517,
+          "exit_code": 0,
+          "original_token_count": 52,
+          "output": "warning: unable to access 'C:\\Users\\user/.config/git/ignore': Permission denied\n{\"pages\":6,\"entries\":5,\"links\":75,\"sourceFiles\":12,\"symbols\":26,\"directCalls\":3,\"status\":\"PASS_DOCUMENTATION_SELF_CHECK_ONLY\"}\n"
+        }
+      }
+    },
+    {
+      "command": "node tools/verify-bootstrap.mjs",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "cb4e60",
+          "wall_time_seconds": 0.9151945,
+          "exit_code": 0,
+          "original_token_count": 391,
+          "output": "{\n  \"status\": \"PASS\",\n  \"scope\": \"Read-only bootstrap/integrity/navigation and state checks, not full qualification or S01 authorization\",\n  \"checks\": 480,\n  \"errors\": [],\n  \"indexedFiles\": 411,\n  \"frozenFiles\": 412,\n  \"acceptedRevision\": \"IH-005\",\n  \"canonicalFormat\": \"grape.document 2.0\",\n  \"currentState\": \"active\",\n  \"activeSlices\": [\n    \"S06\"\n  ],\n  \"currentRecordValidation\": \"CURRENT_RECORD_VALID\",\n  \"commands\": [\n    {\n      \"command\": \"node handoff/tools/check-handoff.mjs\",\n      \"exitCode\": 0,\n      \"status\": \"PASS\",\n      \"checks\": 9361,\n      \"errors\": []\n    },\n    {\n      \"command\": \"node handoff/tools/check-ih005.mjs --verify-index\",\n      \"exitCode\": 0,\n      \"status\": \"PASS\",\n      \"checks\": 469,\n      \"errors\": []\n    },\n    {\n      \"command\": \"node handoff/tools/check-repair.mjs\",\n      \"exitCode\": 0,\n      \"status\": \"PASS\",\n      \"checks\": 103,\n      \"errors\": []\n    },\n    {\n      \"command\": \"node handoff/tools/check-second-review.mjs\",\n      \"exitCode\": 0,\n      \"status\": \"PASS\",\n      \"checks\": 266,\n      \"errors\": []\n    },\n    {\n      \"command\": \"node handoff/tools/check-final-review-repair.mjs\",\n      \"exitCode\": 0,\n      \"status\": \"PASS\",\n      \"checks\": 36,\n      \"errors\": []\n    },\n    {\n      \"command\": \"node handoff/tools/check-implementation-state.mjs\",\n      \"exitCode\": 0,\n      \"status\": \"TEMPLATE_VALID\",\n      \"errors\": []\n    },\n    {\n      \"command\": \"node handoff/tools/check-implementation-state.mjs --current\",\n      \"exitCode\": 0,\n      \"status\": \"CURRENT_RECORD_VALID\",\n      \"errors\": []\n    }\n  ]\n}\n"
+        }
+      }
+    },
+    {
+      "command": "git diff --check",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "603134",
+          "wall_time_seconds": 0.1143669,
+          "exit_code": 0,
+          "original_token_count": 0,
+          "output": ""
+        }
+      }
+    }
+  ],
+  "warningDisposition": "Git emitted a user-global ignore permission warning on read-only inspection; commands exited 0. No configuration or permission was changed."
+}

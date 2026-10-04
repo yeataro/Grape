@@ -1,0 +1,126 @@
+{
+  "packetVersion": 1,
+  "packetType": "COORDINATOR_LOCAL_PREVIEW_DELIVERY",
+  "recordedAt": "2026-10-04T11:47:25.469Z",
+  "buildId": "S06-workspace-cc92048",
+  "implementationI": "cc920485e005825fea007863f0815cf7c0a5437b",
+  "submittedR": "276a427c1e70db05d652488700c361f86e72d3e7",
+  "service": {
+    "address": "127.0.0.1",
+    "port": 4197,
+    "pid": 49672,
+    "execSession": 59928,
+    "startedAt": "2026-10-04T10:35:45.135Z",
+    "source": "Server startup response plus live exact HTTP checks",
+    "osSocketInventory": "Get-NetTCPConnection read denied by local environment; no broadening/retry required; server listen address and live endpoint verified",
+    "lifetime": "Temporary user-requested localhost preview, not permanent service"
+  },
+  "urls": {
+    "application": "http://127.0.0.1:4197/review.html",
+    "guide": "http://127.0.0.1:4197/START-HERE.html",
+    "samples": "http://127.0.0.1:4197/s06-workspace-cc92048-samples.zip"
+  },
+  "httpChecks": [
+    {
+      "file": "assets/index-CNQ2_A5K.js",
+      "status": 200,
+      "bytes": 261342,
+      "sha256": "1cb4c760cffbdc657cb5df997a761a14852a6c50fd8a66e72865b22534d9506b",
+      "matches": true
+    },
+    {
+      "file": "assets/index-DyD0rYIG.css",
+      "status": 200,
+      "bytes": 12634,
+      "sha256": "09e172d29a17f8236a425ecd1ca1f69f5148f0d84dedbab75115fa99a85bf830",
+      "matches": true
+    },
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes": 404,
+      "sha256": "4679bb18b326bde38250693664fa2b55d423114c87a89081c0910e8cde873ef5",
+      "matches": true
+    },
+    {
+      "file": "START-HERE.html",
+      "status": 200,
+      "bytes": 3654,
+      "sha256": "69f297aa035811dcfcc2677f89865c6ede7fa7da5c45fe38fb4b06756885d341",
+      "matches": true
+    },
+    {
+      "file": "START-HERE.txt",
+      "status": 200,
+      "bytes": 1014,
+      "sha256": "66b95b5d5d04d023baf9fba4ea44de9a6a52dfacac8bc546872ec4a6cb596bce",
+      "matches": true
+    },
+    {
+      "file": "s06-workspace-cc92048-samples.zip",
+      "status": 200,
+      "bytes": 6751,
+      "sha256": "383eb2ab5714573a65648ff48450fbf23e6b35856c529c098d3d906653f452d7",
+      "matches": true
+    },
+    {
+      "file": "samples/workspace-color.grape.json",
+      "status": 200,
+      "bytes": 5810,
+      "sha256": "9dfea7734f1529af689799d0bb9a73c903cb223645e2e646c9cfe4d874f32b70",
+      "matches": true
+    },
+    {
+      "file": "samples/vec2-destination.grape.json",
+      "status": 200,
+      "bytes": 10594,
+      "sha256": "7199f65e4642bfc95e91b35bfcc06b4a76529ae495fe50f0e9d12ee6259918ff",
+      "matches": true
+    },
+    {
+      "file": "samples/vec2-connected.grape.json",
+      "status": 200,
+      "bytes": 12676,
+      "sha256": "e743b10e2ec1254c4c23863f61e705bbb319a9b4759a99e4ecbef275b05ca3a2",
+      "matches": true
+    }
+  ],
+  "wrapper": {
+    "status": 200,
+    "bytes": 775,
+    "sha256": "88223ba1788b3811c9b6ef9484ab54b20d885e1096bc155426b8088cf5496fec"
+  },
+  "unlistedSourceRouteStatus": 404,
+  "browserQA": {
+    "browser": "Codex in-app browser",
+    "tab": "1",
+    "actions": [
+      "Opened actual deployed wrapper",
+      "Opened workspace-color.grape.json through real file picker",
+      "Review document displayed DOCUMENT_VALID",
+      "Opened in new session; two nodes and edge visible, Undo empty",
+      "Generate GLSL displayed Generated successfully and vec4(0.25, 0.5, 0.75, 1.0)"
+    ],
+    "screenshot": {
+      "file": "production/evidence/coordinator/s06/preview-01/local-preview-01.jpg",
+      "bytes": 53109,
+      "sha256": "3e0282a2755efdc5797c9e7d3a52b42b30b4455a2ada419a3fa70e93ecd05c2b"
+    },
+    "claim": "Coordinator delivery smoke only, not independent review or acceptance"
+  },
+  "independentReview": {
+    "status": "FAIL",
+    "reviewId": "S06-WORKSPACE-ENTRY-FRESH-REVIEW-01",
+    "reviewedI": "cc920485e005825fea007863f0815cf7c0a5437b",
+    "reviewedR": "276a427c1e70db05d652488700c361f86e72d3e7",
+    "findings": [
+      "S06-FR-EVIDENCE-AVAILABILITY-001",
+      "S06-FR-HELP-BACKDROP-001"
+    ],
+    "route": "Original writer bounded repair and targeted re-review; this exact candidate preview remains available"
+  },
+  "networkScope": "Owner removed LAN/Tailscale requirements; localhost delivery continues independently",
+  "productAcceptance": "NOT_GRANTED",
+  "sourceChange": "No product/source/config changes by Coordinator",
+  "retainedSetupFailure": "First verification command stopped before checks or writes due to require with ES module syntax; corrected to imports. No HTTP mismatch occurred."
+}

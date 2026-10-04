@@ -1,0 +1,204 @@
+{
+  "actionKey": "yeataro/Grape:S06:documentation:manual-identity:a4a6e72:01",
+  "packetId": "S06-MANUAL-IDENTITY-SAMPLE-01",
+  "recordedAt": "2026-10-04T18:33:14.777Z",
+  "status": "READY_FOR_HUMAN_DOCUMENTATION_PREVIEW_NOT_INDEPENDENTLY_REVIEWED",
+  "documentation": "UNCOMMITTED_REVIEWABLE_SAMPLE",
+  "packet": {
+    "file": "production/evidence/coordinator/s06/manual-identity-sample-01/implementer-packet-01.json",
+    "bytes": 4270,
+    "sha256": "0962c3729e42b35250a09da74da74aae5eda94fb8c3ea60e812d3ddefa55fb6e"
+  },
+  "parentIntent": {
+    "file": "production/evidence/coordinator/s06/manual-identity-sample-01/parent-intent-01.json",
+    "bytes": 4273,
+    "sha256": "a8ebe04ad37b16695df18a58cf8ab808a42f1a7be04c438658742570b4714901"
+  },
+  "parentResult": {
+    "file": "production/evidence/coordinator/s06/manual-identity-sample-01/parent-result-01.json",
+    "bytes": 3362,
+    "sha256": "d4a8de51244d29c8fc052063497320c9fe3fc98f9f2fed26b18a3e91070cfad0"
+  },
+  "attempt": 1,
+  "sourceI": "30c867945c992d25956a2a32825de34571f7749e",
+  "baseHead": "a4a6e72b1a7ade9ee3c4b2f782c1da4358faa3e3",
+  "headAfter": "a4a6e72b1a7ade9ee3c4b2f782c1da4358faa3e3",
+  "before": {
+    "file": "docs/reference/ui/port-row.md",
+    "bytes": 3679,
+    "sha256": "52bc933409de83d5e175389b5f8e0dfc0abb3faa05a5e6cc2a70e8b87b461be4"
+  },
+  "after": {
+    "file": "docs/reference/ui/port-row.md",
+    "bytes": 4329,
+    "sha256": "e8d548630f591a943004da1279f2e4222294f25c935eecf58c32ceba34d96efc"
+  },
+  "change": "Identity-first title/page opening: exported function, HTMLElement return, module/source, PortSnapshot data and actual Canvas/mountNodeBrowser.choose callers. Precise parameter table and shared input/output direction; accurate behavior/references/id/source revision/limitations retained.",
+  "checks": {
+    "scope": "Documentation source and syntax checks only",
+    "sourceFilesMatchedToI": [
+      {
+        "file": "production/src/features/node-browser.ts",
+        "bytes": 27453,
+        "sha256": "f14f0b6bb78962a5e9cc5af036574671ce6c4d5dfaae3a37c76a29b6ec0df1e3"
+      },
+      {
+        "file": "production/src/features/canvas.ts",
+        "bytes": 71365,
+        "sha256": "f59e61a9c522e16ee2d5f13b647dce0c27b1686a4307f58e2a211e46adbc5670"
+      },
+      {
+        "file": "production/src/sdk/document.ts",
+        "bytes": 5077,
+        "sha256": "f23ba336ef39abf4bbd5580f5f8c19fbb663e2697db675032955932151caf1da"
+      }
+    ],
+    "signature": {
+      "exportedSymbol": "nodePortRow",
+      "kind": "function",
+      "returnType": "HTMLElement",
+      "parameters": [
+        "port: import(\"../sdk/document.ts\").PortSnapshot",
+        "label: string",
+        "node?: { id: string; name: string }",
+        "connected = false",
+        "value: Json | undefined = port.defaultValue"
+      ]
+    },
+    "callers": [
+      {
+        "file": "production/src/features/node-browser.ts",
+        "line": 348,
+        "arguments": [
+          "p",
+          "item.presentation.ports?.[p.key]?.label.fallback ?? p.key"
+        ],
+        "ancestors": [
+          "choose",
+          "mountNodeBrowser"
+        ]
+      },
+      {
+        "file": "production/src/features/canvas.ts",
+        "line": 2004,
+        "arguments": [
+          "p",
+          "c.portLabels[n.id]?.[p.key] ?? p.key",
+          "{ id: n.id, name: n.name }",
+          "connected",
+          "n.inputValues[p.key]"
+        ],
+        "ancestors": [
+          "row",
+          "mountCanvas"
+        ]
+      }
+    ],
+    "frontmatter": {
+      "id": "grape-ui-port-row",
+      "title": "nodePortRow — 接口行 UI",
+      "category": "ui",
+      "source_revision": "30c867945c992d25956a2a32825de34571f7749e"
+    },
+    "links": [
+      "../../../production/src/features/node-browser.ts",
+      "../../../production/src/sdk/document.ts",
+      "../model/port.md",
+      "../../../production/src/features/canvas.ts",
+      "../../../production/src/features/node-browser.ts",
+      "../nodes/multiply.md",
+      "../model/port.md",
+      "../../../production/src/features/canvas.ts",
+      "node-browser.md",
+      "../nodes/multiply.md",
+      "../../../production/src/features/node-browser.ts",
+      "../../../production/apps/web/style.css",
+      "../../../production/src/features/inspector.ts",
+      "../../../handoff/16_VIEW_MOUNT_CONTRACT.md",
+      "../../../handoff/17_PANEL_COMMAND_CONTRACT.md",
+      "../index.md"
+    ],
+    "markdownAndYaml": "Parsed with installed Prettier parsers; no formatter writes or site build.",
+    "whitespace": {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "newPage": "UTF-8 no BOM; LF; no trailing whitespace"
+    },
+    "guardReconciliation": {
+      "firstResult": "Preservation check exited 1 on untracked count 329 versus captured 328. No receipt was written.",
+      "reason": "Parent result receipt arrived after preimage capture.",
+      "newAttributableFile": {
+        "file": "production/evidence/coordinator/s06/manual-identity-sample-01/parent-result-01.json",
+        "bytes": 3362,
+        "sha256": "d4a8de51244d29c8fc052063497320c9fe3fc98f9f2fed26b18a3e91070cfad0"
+      },
+      "resolution": "Removing exactly this newly arrived record reproduces the original ordered 328-file digest; no original untracked file changed. New parent receipt hash checked separately.",
+      "productOrPermissionFailure": false
+    }
+  },
+  "preservation": {
+    "tracked": {
+      "count": 11685,
+      "sha256OfOrderedRecords": "9eb5a3c1502003533d0651e79ac7d5d643270fb95f65824973bde26b269b761e",
+      "allByteIdentical": true
+    },
+    "originalUntrackedExcludingEditedPage": {
+      "count": 328,
+      "sha256OfOrderedRecords": "b10402ebf13b170bb5b1954df2c71ecff713ffd553493e17377de97a113e3db9",
+      "allByteIdentical": true
+    },
+    "otherManualFilesReadmeStateAndPriorSubmission": [
+      {
+        "file": "docs/reference/index.md",
+        "bytes": 3131,
+        "sha256": "c0753062f0be5649ee80c3c3360420eca4fbcd0c634ebcbb97458a1ca87426f0"
+      },
+      {
+        "file": "docs/reference/nodes/multiply.md",
+        "bytes": 3680,
+        "sha256": "43293170b72ca3ee5448854250939bda9e36aae8c76d8ff76feebd524071a299"
+      },
+      {
+        "file": "docs/reference/model/port.md",
+        "bytes": 3828,
+        "sha256": "1e7949315228782b1ca9522a616e75e45a6c316697b957e189f46451e244b145"
+      },
+      {
+        "file": "docs/reference/model/edge.md",
+        "bytes": 4352,
+        "sha256": "8964030e8164d6f4fb625c5088ae3ffaa27cfa14ece6a9771d2de99d8980c541"
+      },
+      {
+        "file": "docs/reference/ui/node-browser.md",
+        "bytes": 5231,
+        "sha256": "00c3e5431af1418518e224d6e9a1f2ed0c70dcb3ab264520685d97eb1ce37b50"
+      },
+      {
+        "file": "README.md",
+        "bytes": 13363,
+        "sha256": "ea8b1066b8637e791764b51bc4957bfcf90318ba476d1c379c7f0b24b8d6a91e"
+      },
+      {
+        "file": "implementation-state.json",
+        "bytes": 43288,
+        "sha256": "fb0c11e0e75bbb6b4f220704cd89caf73fb8b485e873d535acca9e7f2f2372d2"
+      },
+      {
+        "file": "production/evidence/s06/manual-pilot-01/submission-01.json",
+        "bytes": 8268,
+        "sha256": "9b7998579524690466de223f3048dd834570d47c8f167bed51b2449081c29765"
+      }
+    ],
+    "indexEmpty": true,
+    "trackedDiff": "README.md only, unchanged pre-existing pilot entry",
+    "historicalPilot": "Prior pilot receipts and old page hash remain unchanged; this receipt records the superseding page bytes.",
+    "services": "No service/browser/profile/network operations performed."
+  },
+  "limitations": [
+    "Documentation source verification only; no product runtime qualification or independent review.",
+    "No product/UI feedback implementation, S06 acceptance, staging, commit or publication."
+  ],
+  "writerState": "STOP_WRITING"
+}

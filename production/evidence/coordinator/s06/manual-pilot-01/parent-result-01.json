@@ -1,0 +1,106 @@
+{
+  "recordType": "PARENT_S06_MANUAL_PILOT_DELIVERY_RESULT",
+  "recordedAt": "2026-10-04T17:36:45.849Z",
+  "status": "DISPATCHED_RUNNING_PACKET_READ",
+  "actionKey": "yeataro/Grape:S06:documentation:manual-pilot:a4a6e72:01",
+  "packetId": "S06-MANUAL-PILOT-01",
+  "packet": {
+    "file": "production/evidence/coordinator/s06/manual-pilot-01/implementer-packet-01.json",
+    "bytes": 12347,
+    "sha256": "a535f39c3833be4776de8a618d982ff6dc7a82d61c73ed89556167d55018fe76"
+  },
+  "intent": {
+    "file": "production/evidence/coordinator/s06/manual-pilot-01/parent-intent-01.json",
+    "bytes": 8489,
+    "sha256": "6c19bef13a361728002bd6c5b5090de5429d9326e19e0f33a8235af28a91a719"
+  },
+  "authorization": {
+    "reconciliation": {
+      "file": "production/evidence/coordinator/s06/manual-pilot-01/authorization-reconciliation-01.json",
+      "bytes": 1798,
+      "sha256": "9501c3cb8267bb90c291853c800894ce01a91732512e42af6fc87d14db2be8ef"
+    },
+    "directLatestHumanMessageVerified": "01a107f7-07d6-7bd3-aa42-2ad66106ac98",
+    "sourceThreadId": "01a10301-6199-7533-af8d-cf3d348c0990",
+    "tool": "mcp__codex_app__read_thread",
+    "scope": "Five documentation pages plus index/README only; unrelated UI feedback remains unassigned until 以上"
+  },
+  "transport": {
+    "tool": "collaboration.followup_task",
+    "parentTurnId": "01a107fb-5864-7cb3-a727-9c9bcfdd85a9",
+    "observedActivityId": "call_ziuPuXfS09DoITWjLMxv3jsB",
+    "toolReturnedWithoutError": true,
+    "returnPayload": "No text payload",
+    "actualParentToChildDispatches": 1,
+    "duplicateDispatch": false,
+    "newWriter": false,
+    "newScout": false,
+    "newReviewer": false,
+    "coordinatorTransportAttempts": 2,
+    "coordinatorRetryCount": 1,
+    "priorRejectionPreserved": {
+      "file": "production/evidence/coordinator/s06/manual-pilot-01/dispatch-result-01.json",
+      "bytes": 1178,
+      "sha256": "aeb6284c13f617e27eb25ac1c151d9619d65c44e0d8d1f993db15a2fc77b765e"
+    },
+    "successfulSameChannelRetry": {
+      "file": "production/evidence/coordinator/s06/manual-pilot-01/dispatch-retry-result-01.json",
+      "bytes": 466,
+      "sha256": "316126d703fb9d62615ae01701c179a3a39236d6d5a2224516ebf42768d803a4"
+    },
+    "bypass": false
+  },
+  "child": {
+    "canonicalAgent": "/root/s03_implementer_resume",
+    "threadId": "01a0fd8c-081e-7492-8f59-55159462e301",
+    "priorCompletedTurn": "01a107a7-683a-7851-9a25-6713c822c43c",
+    "newTurnId": "01a107fc-e1ea-7923-81e7-864cd9c61213",
+    "observedThreadStatus": "active",
+    "observedTurnStatus": "inProgress",
+    "observationTool": "mcp__codex_app__read_thread",
+    "acknowledgment": {
+      "id": "msg_0f7ea6f2d846c6d3016ac28e94272487d08e9fa488a35e3472",
+      "text": "我會先核對五頁文件試作的正式工作包，再對照目前實作撰寫繁中說明與索引。本輪只做未提交的文件，不修改產品或目前預覽。"
+    },
+    "packetRead": {
+      "id": "exec-cc2bddbf-f213-4b2d-8eb0-cf5a2fd1cb43",
+      "status": "completed",
+      "exitCode": 0,
+      "operations": [
+        "Read README",
+        "Get-FileHash manual-pilot packet SHA256",
+        "Read complete manual-pilot packet"
+      ],
+      "confirmed": true
+    }
+  },
+  "verifiedInputs": {
+    "packetInputRefs": 22,
+    "priorSubmission": true,
+    "headBeforeDispatch": "a4a6e72b1a7ade9ee3c4b2f782c1da4358faa3e3",
+    "trackedAndIndexCleanBeforeDispatch": true
+  },
+  "attempt": {
+    "documentationAttempt": 1,
+    "transientRetries": 0,
+    "existingRepairAndReviewCounters": "Unchanged; no new review or repair finding group"
+  },
+  "limits": {
+    "documentationComplete": false,
+    "selfChecksComplete": false,
+    "sourceBehaviorIndependentlyReviewed": false,
+    "productAcceptance": false,
+    "docsRemainUncommitted": true,
+    "preserveProductStateHeadAndServices": true,
+    "noOtherFeedbackSummaryOrImplementation": true,
+    "noCommitPushPRMerge": true,
+    "noDependenciesHostingServices": true
+  },
+  "parentProductWrites": false,
+  "parentStateWrites": false,
+  "parentDocumentationWrites": false,
+  "parentGitMutations": [],
+  "parentRemoteActions": [],
+  "parentServiceActions": [],
+  "next": "Same original writer completes five-page docs/reference pilot, small index/README link and compact self-check/hash submission, then STOP_WRITING. Coordinator collects and opens local reading entry for Human."
+}

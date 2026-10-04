@@ -1,0 +1,63 @@
+<section id="fields" class="fd-section" aria-labelledby="fd-fields-title">
+  <header class="section-head">
+    <p class="kicker">05 / PARAMETER &amp; FIELD</p>
+    <h2 id="fd-fields-title">數值相同，狀態不能混在一起。</h2>
+    <p class="lede">保留產品既有的行內數值欄位、分量與連線來源。下方是實機局部參考與狀態對照，不另造大型數字框、獨立 Slider 或 Apply／Cancel 數值面板。</p>
+  </header>
+
+  <div class="fd-evidence-key" aria-label="圖稿證據分類">
+    <span class="fd-tag fd-tag-reference">REFERENCE · 實機參考重繪</span>
+    <span class="fd-tag fd-tag-proposed">PROPOSED · 狀態呈現候選</span>
+    <span class="fd-tag fd-tag-gap">UNVERIFIED · 待驗證行為</span>
+  </div>
+
+  <div class="fd-board-grid">
+    <article id="fd-fields-reference" class="fd-artboard" aria-labelledby="fd-reference-title">
+      <div class="fd-artboard-label"><span class="fd-tag fd-tag-reference">REFERENCE</span><span>LIVE-002 / 003 · 局部樣本</span></div>
+      <h3 id="fd-reference-title">浮動 Inspector 的值與分量</h3>
+      <div class="fd-inspector fd-static-sample">
+        <div class="fd-panel-bar"><span>Parameter</span><span class="fd-subtle">read-only specimen</span></div>
+        <div class="fd-node-bar"><strong>Voronoi</strong><span>Voronoi</span></div>
+        <div class="fd-tabs"><span class="fd-tab-active">Parameters</span><span>Settings</span><span>Notes</span></div>
+        <div class="fd-inspector-body">
+          <div class="fd-reference-row"><span>Dimensions</span><span class="fd-select-face">3D <svg class="fd-chevron" viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1h8L5 5Z" fill="currentColor" /></svg></span></div>
+          <div class="fd-reference-row"><span>Feature</span><span class="fd-select-face">F1 <svg class="fd-chevron" viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1h8L5 5Z" fill="currentColor" /></svg></span></div>
+          <div class="fd-reference-row"><span>Distance Metric</span><span class="fd-select-face">Euclidean <svg class="fd-chevron" viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1h8L5 5Z" fill="currentColor" /></svg></span></div>
+          <div class="fd-reference-divider"></div>
+          <div class="fd-reference-row fd-reference-port"><span><i class="fd-socket fd-socket-vec3 fd-socket-connected"></i> Vector <small>vec3</small></span><span class="fd-linked-text">Vertex Inputs · world</span></div>
+          <div class="fd-reference-row fd-reference-port"><span><i class="fd-socket"></i> Scale <small>float</small></span><span class="fd-value-face">5</span></div>
+          <div class="fd-reference-row fd-reference-port"><span><i class="fd-socket"></i> Detail <small>float</small></span><span class="fd-value-face">0</span></div>
+          <div class="fd-reference-row fd-reference-port"><span><i class="fd-socket"></i> Roughness <small>float</small></span><span class="fd-value-face fd-fill-half">0.5</span></div>
+        </div>
+      </div>
+      <div class="fd-component-sample">
+        <div class="fd-row-label">Base Color <small>RGBA · 分量配置示意</small></div>
+        <div class="fd-component-grid"><span class="fd-value-face"><b class="fd-r">R</b> 1</span><span class="fd-value-face"><b class="fd-g">G</b> 1</span><span class="fd-value-face"><b class="fd-b">B</b> 1</span><span class="fd-value-face"><b>A</b> 1</span></div>
+        <div class="fd-reference-swatch" aria-label="白色樣本"></div>
+      </div>
+      <div class="fd-socket-study"><span class="fd-tag fd-tag-proposed">OWNER-PROPOSED · 待 REVIEW</span><p><i class="fd-legend-socket"></i> Unconnected <i class="fd-legend-socket fd-legend-solid"></i> Connected <small>Input / Output 共用狀態規則</small></p><p class="fd-legacy-legend">Legacy 對照：<i class="fd-legend-socket"></i> Input hollow <i class="fd-legend-socket fd-legend-solid"></i> Output solid</p></div>
+      <p class="fd-caption">此處採浮動 Parameter 的內容底色 #2E2C3A；側欄容器底色 #1B1B23 是另一種配置。保留 dark / Cool 的欄位底色、24 graph-space px 高度語彙、型別與 source label。已連接 Vector socket 依 owner-proposed 方向畫實心，local socket 空心；此差異不是 Legacy 觀察。局部重繪與分量配置示意非 screenshot，也不是全部 spacing 的像素規格。來源跳轉與 Disconnect 是不同動作。</p>
+    </article>
+
+    <article id="fd-field-states" class="fd-artboard" aria-labelledby="fd-states-title">
+      <div class="fd-artboard-label"><span class="fd-tag fd-tag-proposed">STATE STUDY</span><span>Required distinctions · 候選呈現</span></div>
+      <h3 id="fd-states-title">五種狀態，一眼分清楚</h3>
+      <div class="fd-state-list">
+        <div class="fd-state-row"><div><strong>Local</strong><small>可編輯的本地／預設值</small></div><div class="fd-state-field"><span class="fd-value-face">5</span><span class="fd-state-caption">committed</span></div></div>
+        <div class="fd-state-row"><div><strong>Linked</strong><small>有效輸入來自接線</small></div><div class="fd-state-field"><span class="fd-linked-text">↗ Voronoi · Distance</span><span class="fd-state-caption">來源導航與斷線分開</span></div></div>
+        <div class="fd-state-row"><div><strong>Read-only</strong><small>目前沒有寫入權限</small></div><div class="fd-state-field"><span class="fd-value-face fd-readonly-face">5 <span>read only</span></span><span class="fd-state-caption">不能只靠顏色表示</span></div></div>
+        <div class="fd-state-row"><div><strong>Draft</strong><small>文字尚未提交</small></div><div class="fd-state-field"><span class="fd-value-face fd-draft-face">7.25<span class="fd-caret"></span></span><span class="fd-state-caption">committed 仍為 5</span></div></div>
+        <div class="fd-state-row"><div><strong>Invalid draft</strong><small>保留輸入，清楚拒絕</small></div><div class="fd-state-field"><span class="fd-value-face fd-invalid-face">5..2</span><span class="fd-error-text">Enter a valid number.</span></div></div>
+      </div>
+      <p class="fd-caption">Local 與 linked 的區別是產品語義；這組並列的 badge、錯誤色與文字配置是提案。Invalid 不應悄悄覆蓋 committed value，Host actual 也不能被偽裝成另一份 Graph truth。</p>
+    </article>
+  </div>
+
+  <article id="fd-range-reference" class="fd-artboard fd-host-reference" aria-labelledby="fd-range-title">
+    <div class="fd-artboard-label"><span class="fd-tag fd-tag-reference">EXISTING HOST SURFACE</span><span>LIVE-003 · O03-04 · 僅觀察，未寫入</span></div>
+    <h3 id="fd-range-title">Range、Limit、Clamp 原本就不是一件事。</h3>
+    <div class="fd-host-grid"><div><strong>Roughness</strong><p class="fd-caption">Uroughness · Float / 1<br />Host 的 Customize Parameters 樣本。不是 generic Node Widget 已有同一套配置的證明。</p></div><div class="fd-host-fields"><span>Default</span><span class="fd-value-face">1</span><span>Range Min / Max</span><span class="fd-pair"><span class="fd-value-face">0</span><span class="fd-value-face">1</span></span><span>Minimum / Maximum</span><span class="fd-pair"><span class="fd-value-face">0</span><span class="fd-value-face">1</span></span><span>Clamp Min / Max</span><span class="fd-pair"><span class="fd-checkbox-face"><svg class="fd-checkbox-icon" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><rect x="1" y="1" width="12" height="12" rx="2" fill="none" stroke="currentColor" /></svg> Off</span><span class="fd-checkbox-face"><svg class="fd-checkbox-icon" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><rect x="1" y="1" width="12" height="12" rx="2" fill="none" stroke="currentColor" /></svg> Off</span></span></div></div>
+  </article>
+
+  <dl class="fd-metadata"><div><dt>能力／保留</dt><dd>精確值、分量身份、linked source、draft／commit／cancel、不可寫原因。</dd></div><div><dt>可配置</dt><dd>既有行內欄位的分量行列與面板配置；不另訂數值編輯流程、target spec 或資料 authority。</dd></div><div><dt>證據</dt><dd>O02-01 Enter、O02-04 Escape；O03-03 drag 未建立成功證據；O03-04 Host range/clamp 只看見。</dd></div><div><dt>未驗</dt><dd>產品 gesture batching／Undo、IME、touch、stale target、Host conflict、通用 clamp 行為。</dd></div></dl>
+</section>

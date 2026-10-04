@@ -1,5 +1,7 @@
 # Coordinator v1 packet contracts
 
+**Workflow mode:** for an activated [continuous contract run](CONTINUOUS_DELIVERY.md), bind the run authorization and checkpoint plus each Slice/batch; an absent PR is `not required`. Its minimal bindings supplement the common envelope below. A valid batch PASS routes to the next eligible authorized batch, with Human acceptance reserved for final delivery. Checkpoint preservation uses an explicit checkpoint control, not a fabricated product-acceptance receipt. These exceptions do not apply without the mode's activation conditions.
+
 These are stable, transport-neutral templates, not live authorizations. Fill placeholders from verified facts. Missing required facts block the dependent action; use explicit `unknown`/`not executed` for honest limits, never invented values. [COORDINATOR](COORDINATOR.md) defines authority; [RUNBOOK](RUNBOOK.md) defines recovery.
 
 ## Common envelope and normalization

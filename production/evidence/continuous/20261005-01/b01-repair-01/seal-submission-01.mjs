@@ -1,0 +1,31 @@
+import fs from 'node:fs';
+import cp from 'node:child_process';
+import crypto from 'node:crypto';
+const e='production/evidence/continuous/20261005-01/b01-repair-01', I='0f4ea44d5bdb69866f271ebfbadea2ceac2523ec';
+const read=f=>JSON.parse(fs.readFileSync(f,'utf8'));
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const row=file=>{const b=fs.readFileSync(file);return {file,bytes:b.length,sha256:hash(b)}};
+const put=(f,v)=>fs.writeFileSync(e+'/'+f,JSON.stringify(v,null,2)+'\n',{flag:'wx'});
+const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(x=>x.isDirectory()?walk(d+'/'+x.name):[d+'/'+x.name]);
+if(cp.execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()!==I)throw Error('HEAD');
+const packet=read('production/evidence/coordinator/continuous/20261005-01/b01-repair-packet-01.json');
+const build=read(e+'/build-01/build-manifest-01.json');
+for(const r of build.files){const a=row('.verification/b01-repair-rebuild-01/'+r.file);if(a.sha256!==r.sha256||a.bytes!==r.bytes)throw Error('rebuild mismatch '+r.file);}
+put('build-replay-01.json',{implementationI:I,exactMetadata:row(e+'/build-01/metadata.json'),freshOutput:'.verification/b01-repair-rebuild-01',files:build.files,allBytesEqual:true,log:'build-replay-01.log'});
+const checks=read(e+'/checks-01.json'), root=read(e+'/bootstrap-final-02.log');
+if(root.status!=='PASS')throw Error('root failed');
+checks.root={...checks.root,status:root.status,checks:root.checks,indexedFiles:root.indexedFiles};
+checks.sampleReplay={file:'samples-replayed-01.json',operations:1,meaning:'Public paired sample import and layout replay, not additional browser case count'};
+checks.failuresRetained.push('samples-replay-disposition-01.json');
+fs.writeFileSync(e+'/checks-01.json',JSON.stringify(checks,null,2)+'\n');
+for(const [folder,count] of [['b01-workspace-s06-source-final-01',29],['b01-workspace-s06-archive-final-01',24]]){const stats=read(e+'/'+folder+'/browser-results.json').stats;if(stats.expected!==count||stats.unexpected||stats.skipped||stats.flaky)throw Error('browser stats '+folder);}
+if(read(e+'/archive-visual-01/result-01.json').rows.length!==4||read(e+'/samples-replayed-01.json').status!=='PASS')throw Error('public replay');
+put('raw-whitespace-disposition-01.json',{exit:2,evidence:row(e+'/raw-whitespace-01.log'),reason:'Original raw logs/Playwright error-context snapshots preserve CRLF/trailing whitespace; no normalization.',newMetadataAndGuideCheckExit:0});
+const excluded=new Set(['evidence-manifest-01.json','submission-01.json','submission-allowlist-01.json']);
+const files=walk(e).filter(f=>!excluded.has(f.slice(e.length+1))).map(row);
+put('evidence-manifest-01.json',{implementationI:I,root:e,scope:'All repair evidence, original failed self-checks, scripts, samples and archived candidate. This manifest/submission/allowlist are separately bound to avoid recursive hashes.',files});
+const submission={packetId:packet.packetId,actionKey:packet.actionKey,workflowMode:'continuous-contract',runId:packet.runId,sliceId:'S06',batch:'B01 targeted repair01',status:'READY_FOR_TARGETED_REVIEW',implementationI:I,submittedR:{binding:'Exact Git commit containing this immutable submission; resolved in append-only postcommit-result-01.json',notImplementationI:true},baseWork:packet.currentExpectedHead,maintenanceCommit:'f72d8262c6b7d79766c39fa1911fce7fa8187c39',priorI:packet.priorI,priorR:packet.priorR,authorization:packet.authorizationRef,build:{id:build.buildId,implementationI:I,archive:row(e+'/build-01/candidate-web.tar.gz'),manifest:row(e+'/build-01/build-manifest-01.json'),metadata:row(e+'/build-01/metadata.json'),reproduced:row(e+'/build-replay-01.json')},manifests:{sourceConfig:row(e+'/source-config-manifest-01.json'),evidence:row(e+'/evidence-manifest-01.json'),originalInputs:row(e+'/input-preservation-01.json'),preservation:row(e+'/preservation-01.json')},findings:row(e+'/finding-mapping-01.json'),impact:row(e+'/impact-01.json'),checks:row(e+'/checks-01.json'),environment:row(e+'/environment-01.json'),guide:row(e+'/START-HERE.md'),state:row('implementation-state.json'),selfChecks:{unitConformance:269,rootChecks:488,rootFixtures:10,uniqueSourceBrowser:29,archiveRepeatedCases:24,archiveVisualWalkthroughs:4,pairedSampleReplay:1},priorReview:{report:packet.originalReview,manifest:packet.originalManifest,rawObjects:404,relocation:row(e+'/input-preservation-01.json'),verdictPreserved:'FAIL'},inheritedCounters:packet.inheritedCounters,budgetApplication:packet.budgetApplication,limitations:packet.exclusions,publication:{authorizedTarget:packet.publication.target,expectedMain:packet.publication.expectedRemoteMain,expectedWork:packet.publication.expectedRemoteWork,result:'publication-result-01.json appended after guard-checked push/readback',noMainMergeReleaseOrAcceptance:true},reviewRequested:'Coordinator fresh context and separate exact-R checkout. Implementer does not supply independent verdict.',productFrozen:true,S06Active:true,HumanAccepted:false};
+put('submission-01.json',submission);
+const paths=['README.md','implementation-state.json',...files.map(r=>r.file),e+'/evidence-manifest-01.json',e+'/submission-01.json',e+'/submission-allowlist-01.json'];
+put('submission-allowlist-01.json',{expectedHead:I,paths:[...new Set(paths)].sort()});
+console.log(JSON.stringify({files:files.length,submission:row(e+'/submission-01.json'),archive:submission.build.archive,sourceManifest:submission.manifests.sourceConfig}));

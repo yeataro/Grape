@@ -1,0 +1,106 @@
+{
+  "implementationI": "0f4ea44d5bdb69866f271ebfbadea2ceac2523ec",
+  "status": "SELF_CHECKS_COMPLETE_NOT_INDEPENDENT_PASS",
+  "root": {
+    "command": "node tools/verify-bootstrap.mjs",
+    "file": "bootstrap-final-02.log",
+    "status": "PASS",
+    "checks": 488,
+    "indexedFiles": 411
+  },
+  "state": {
+    "command": "node handoff/tools/check-implementation-state.mjs --current",
+    "file": "state-final-01.log",
+    "status": "CURRENT_RECORD_VALID"
+  },
+  "fixtures": {
+    "command": "node --test tools/verify-bootstrap.test.mjs",
+    "file": "fixtures-01.log",
+    "pass": 10,
+    "failed": 0
+  },
+  "typecheck": {
+    "command": "npm --prefix production run typecheck",
+    "file": "typecheck-final-01.log",
+    "exit": 0
+  },
+  "conformance": {
+    "command": "npm --prefix production run conformance",
+    "file": "conformance-final-01.log",
+    "checkedFiles": 63,
+    "exit": 0
+  },
+  "unit": {
+    "command": "npm --prefix production test",
+    "file": "unit-final-01.log",
+    "pass": 269,
+    "failed": 0
+  },
+  "build": {
+    "command": "npm --prefix production run build -- --outDir <fresh absolute directory>",
+    "file": "build-standard-01.log",
+    "exit": 0,
+    "exactCandidateCommand": "node production/tools/build-candidate.mjs <absolute web> <absolute metadata.json>",
+    "exactCandidateLog": "build-candidate-01.log",
+    "archive": "build-01/candidate-web.tar.gz"
+  },
+  "browser": {
+    "command": "GRAPE_EVIDENCE_DIR=<fresh absolute>; GRAPE_BASE_URL=<owned loopback>; node production/node_modules/@playwright/test/cli.js test --config production/tools/b01-playwright.config.ts --output <fresh absolute output> <explicit test files>",
+    "source": {
+      "file": "b01-workspace-s06-source-final-01/browser-results.json",
+      "pass": 29,
+      "failed": 0,
+      "files": [
+        "b01-workspace.spec.ts",
+        "s06-workspace.spec.ts",
+        "s06-f2-isolation.spec.ts",
+        "s05-escape-focus.spec.ts"
+      ]
+    },
+    "archive": {
+      "file": "b01-workspace-s06-archive-final-01/browser-results.json",
+      "pass": 24,
+      "failed": 0,
+      "files": [
+        "b01-workspace.spec.ts",
+        "s06-workspace.spec.ts",
+        "s05-escape-focus.spec.ts"
+      ]
+    },
+    "countsMeaning": "29 unique final source cases; archive24 repeats a subset on compiled bytes. Synthetic composition/lifecycle and source-only optional-helper fault injection are explicitly labelled.",
+    "visual": {
+      "file": "archive-visual-01/result-01.json",
+      "walkthroughs": 4,
+      "viewports": [
+        "1440x1000",
+        "620x1000"
+      ],
+      "routes": [
+        "direct",
+        "headerless wrapper"
+      ]
+    }
+  },
+  "servedIdentity": "environment-01.json",
+  "sourceIdentity": "source-config-manifest-01.json",
+  "diff": {
+    "file": "diff-check-final-01.log",
+    "exit": 0
+  },
+  "failuresRetained": [
+    "self-check-dispositions-01.json",
+    "metadata-check-disposition-01.json",
+    "samples-replay-disposition-01.json"
+  ],
+  "notClaimed": [
+    "Independent PASS",
+    "Human acceptance",
+    "Whole S06 or Gate closure",
+    "Physical device/native Host qualification"
+  ],
+  "sampleReplay": {
+    "file": "samples-replayed-01.json",
+    "operations": 1,
+    "meaning": "Public paired sample import and layout replay, not additional browser case count"
+  }
+}

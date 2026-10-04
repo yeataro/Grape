@@ -1,0 +1,10 @@
+{
+  "originalHarness": "replay-samples-01.mjs",
+  "result": "FAIL: expect(locator('#recovery')).toBeHidden(), visible after Open in new session",
+  "cause": "No native confirm handler was installed; Playwright dismissed the unsaved-changes confirmation. The valid source remained recoverable. This was a cancelled harness route, not import admission failure.",
+  "resolution": "Separately named replay-samples-02.mjs accepts and records the real confirmation through the public dialog. It then completes sample import, matching layout import, explicit Canvas activation, Save ACK, generation and layout roundtrip.",
+  "verifiedResult": "samples-replayed-01.json",
+  "originalRuntimeError": "ExpectError at replay-samples-01.mjs:15:39; Expected hidden, Received visible, Timeout 5000ms. Tool output retained in conversation; no original screenshot was produced or invented.",
+  "productChange": false,
+  "independentReviewRoundAdded": false
+}

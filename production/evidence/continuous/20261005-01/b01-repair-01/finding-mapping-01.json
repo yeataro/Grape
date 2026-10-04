@@ -1,0 +1,60 @@
+{
+  "implementationI": "0f4ea44d5bdb69866f271ebfbadea2ceac2523ec",
+  "priorI": "dc653519515e167c75d967930defafcf19422197",
+  "priorR": "270e50e77634b3a5665daf8f471a71371140533c",
+  "status": "SELF_CHECKS_READY_FOR_TARGETED_REVIEW_NOT_INDEPENDENT_PASS",
+  "originalReport": "../b01-review-01/INDEPENDENT_REVIEW_RESULT.json",
+  "findings": [
+    {
+      "id": "B01-FR01",
+      "files": [
+        "production/src/ui/workspace-view.ts"
+      ],
+      "change": "Only reposition an existing group separator when its physical successor differs. Refresh actual accessible values after insertion/resize; no forced refocus or controller replacement.",
+      "evidence": [
+        "b01-workspace-s06-source-final-01/fr01-keyboard.json",
+        "b01-workspace-s06-source-final-01/fr01-pointer.json",
+        "b01-workspace-s06-source-final-01/fr01-reordered.json",
+        "b01-workspace-s06-archive-final-01/fr01-keyboard.json",
+        "b01-workspace-s06-archive-final-01/fr01-pointer.json",
+        "b01-workspace-s06-archive-final-01/fr01-reordered.json"
+      ],
+      "tests": "Three new trusted browser tests + existing side/float/group/placement and four natural Escape cases",
+      "lineage": "Same underlying DOM reinsert/focus mechanism; inherited unsuccessful workspace rounds2 retained. Initial self-check discovered stale pre-insertion ARIA pixel extent; final source/archive corrected and verified."
+    },
+    {
+      "id": "B01-FR02",
+      "files": [
+        "production/src/ui/workspace.ts"
+      ],
+      "change": "Existing publishing guard spans construct, beforePanelDispose, unsubscribe, owned Context transfer and record replacement; route/drain follows. Old record and Tab remain published until guarded install. Throwing observers remain isolated by existing Signal.",
+      "tests": [
+        "B01 FR02 retry guards every lifecycle mutation and isolates observer exceptions",
+        "B01 FR02 failed and successful retry retain owned Context and revoke old services",
+        "B01 FR02 retry replaces same-ID mount once, rejects stale events and keeps fresh command authority",
+        "B01 FR02 FR03 retry and private-state save preserve saved ACK and existing Redo"
+      ],
+      "evidence": [
+        "unit-final-01.log"
+      ],
+      "qualification": "Registered conforming fixture Panel/public lifecycle injection. No physical-input or arbitrary external Panel qualification. Existing veto, readonly/busy, Context/mount lifecycle regressions retained."
+    },
+    {
+      "id": "B01-FR03",
+      "files": [
+        "production/src/ui/workspace.ts"
+      ],
+      "change": "Select opaque fallback only when the live instance is absent. null/false/0/empty string/arrays/objects remain exact finite JSON; undefined/NaN/Infinity/function/undefined-member/Date or throw rejects whole save.",
+      "tests": [
+        "B01 FR03 every valid JSON export including null survives layout roundtrip",
+        "B01 FR03 opaque fallback retains null and invalid live exports refuse the complete save",
+        "B01 FR02 FR03 retry and private-state save preserve saved ACK and existing Redo"
+      ],
+      "evidence": [
+        "unit-final-01.log",
+        "b01-workspace-s06-archive-final-01/restored-layout.json"
+      ],
+      "qualification": "Live null case is a shared registered Panel contract fixture. Built-in public compiled layout cases repeat actual built-in exporters, not an invented claim they currently return null."
+    }
+  ]
+}

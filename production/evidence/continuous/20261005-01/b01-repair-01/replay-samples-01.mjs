@@ -1,0 +1,31 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {chromium} from '../../../../node_modules/playwright-core/index.mjs';
+import {expect} from '../../../../node_modules/@playwright/test/index.mjs';
+const e=path.dirname(fileURLToPath(import.meta.url)), browser=await chromium.launch({headless:true});
+try{
+ const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true}), p=await context.newPage();
+ const errors=[];p.on('pageerror',x=>errors.push(x.message));await p.goto('http://127.0.0.1:4214/');
+ const action=async name=>{const b=p.getByRole('button',{name,exact:true}).or(p.getByRole('menuitem',{name,exact:true}));if(!await b.isVisible())await p.getByRole('button',{name:'Project actions',exact:true}).click();await b.click();};
+ const choose=async(name,file)=>{const pending=p.waitForEvent('filechooser');await action(name);await(await pending).setFiles(path.join(e,file));};
+ const download=async name=>{const d=p.waitForEvent('download');await action(name);return JSON.parse(fs.readFileSync(await(await d).path(),'utf8'));};
+ await choose('Open file','samples/workspace.grape.json');
+ await p.getByRole('button',{name:'Open in new session',exact:true}).click();
+ await expect(p.locator('#recovery')).toBeHidden();
+ const before=await download('Export JSON');
+ await choose('Import current layout','samples/current-layout.json');
+ await expect(p.locator('.canvas')).toHaveCount(2);
+ await p.getByRole('tab',{name:'Canvas · canvas-1',exact:true}).click();
+ await expect(p.locator('#panel-inspector').getByRole('textbox',{name:'Value',exact:true})).toBeVisible();
+ await action('Save');await expect(p.locator('#save-state')).toHaveText('Saved');
+ await action('Generate GLSL');await p.getByRole('button',{name:'Shader output',exact:true}).click();
+ await expect(p.getByLabel('Generated GLSL')).toContainText('void main');
+ await p.getByRole('button',{name:'Close shader output',exact:true}).click();
+ await action('Save current layout');await action('Restore current layout');
+ await expect(p.locator('#save-state')).toHaveText('Saved');
+ expect(await download('Export JSON')).toEqual(before);expect(errors).toEqual([]);
+ await p.screenshot({path:path.join(e,'samples-replayed-01.png')});
+ fs.writeFileSync(path.join(e,'samples-replayed-01.json'),JSON.stringify({implementationI:'0f4ea44d5bdb69866f271ebfbadea2ceac2523ec',status:'PASS',route:'Actual public Open file → review → new session → Import current layout → Canvas activate → Save → Generate → layout Save/Restore → document equality',savedACKPreserved:true,canvasCount:2,errors},null,2)+'\n',{flag:'wx'});
+ await context.close();
+}finally{await browser.close();}

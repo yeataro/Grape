@@ -1,0 +1,24 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+const e='production/evidence/continuous/20261005-01/b01-repair-01', I='0f4ea44d5bdb69866f271ebfbadea2ceac2523ec', buildId='S06-debug-0f4ea44';
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const row=f=>{const b=fs.readFileSync(f);return {file:f,bytes:b.length,sha256:hash(b)}};
+const put=(f,v)=>fs.writeFileSync(e+'/'+f,JSON.stringify(v,null,2)+'\n',{flag:'wx'});
+const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(x=>x.isDirectory()?walk(d+'/'+x.name):[d+'/'+x.name]);
+const web=e+'/build-01/web';
+const files=walk(web).map(f=>({...row(f),file:f.slice(web.length+1)}));
+put('build-01/build-manifest-01.json',{implementationI:I,buildId,files,metadata:row(e+'/build-01/metadata.json'),command:'node production/tools/build-candidate.mjs <absolute web> <absolute metadata.json>'});
+const archive=e+'/build-01/candidate-web.tar.gz';
+execFileSync('tar',['-czf',archive,'-C',web,'.']);
+const extract='.verification/b01-repair-archive-01';
+if(fs.existsSync(extract))throw Error('fresh extraction required');fs.mkdirSync(extract);
+execFileSync('tar',['-xzf',archive,'-C',extract]);
+for(const r of files){const actual=row(extract+'/'+r.file);if(actual.sha256!==r.sha256||actual.bytes!==r.bytes)throw Error('archive mismatch')}
+const guide='<!doctype html><meta charset="utf-8"><title>B01 targeted repair</title><h1>S06 B01 targeted repair · '+buildId+'</h1><p>Engineering candidate, awaiting independent targeted review.</p><p><a href="/review.html">Open editor</a>. Project actions → Second Canvas. Drag the separator continuously; use Arrow keys, Shift, Home, End, then Escape to restore the starting value. Save/export current layout keeps document History separate.</p>';
+fs.writeFileSync(extract+'/START-HERE.html',guide);fs.writeFileSync(e+'/START-HERE.html',guide);
+const helper='production/evidence/coordinator/s06/preview-05/serve-local-preview.mjs';
+put('archive-extraction-01.json',{implementationI:I,archive:row(archive),extractedTo:extract,filesVerified:files.length,allEqual:true,helper:row(helper)});
+put('archive-smoke-config-01.json',{address:'127.0.0.1',port:4214,previewRoot:path.resolve(extract),implementationI:I,submittedR:I,submittedRMeaning:'Provisional self-check identity before evidence R exists; not a reviewed or deployed revision.',buildId,buildManifest:{...row(e+'/build-01/build-manifest-01.json'),file:path.resolve(e+'/build-01/build-manifest-01.json')},extraFiles:[{...row(extract+'/START-HERE.html'),file:'START-HERE.html'}]});
+console.log(JSON.stringify({archive:row(archive),files}));

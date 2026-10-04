@@ -17,6 +17,7 @@ import { compile } from "../src/generation/compiler.ts";
 import { asNetwork } from "../src/sdk/networks.ts";
 import { buildPersonal, readPersonal } from "../src/application/personal.ts";
 import { probeDefinitions } from "../src/modules/package-probe.ts";
+import { linkedUniformFixture } from "../tests/fixtures/s05-uniforms.ts";
 
 const destination = process.argv[2];
 if (!destination || fs.existsSync(destination))
@@ -170,6 +171,15 @@ document(
   old,
   "Use explicit Upgrade subgraph owners; no silent old owner migration.",
 );
+for (const kind of ["distinct", "shared-reversed"] as const) {
+  document(
+    "cross-stage-uniform-" + kind,
+    linkedUniformFixture(kind, "function") as ReturnType<
+      typeof functionFixture
+    >,
+    "Program-wide Uniform identity regression. Actual vertex transform feedback and active Uniform readback are in repair browser evidence; UI generation alone is not a numeric oracle.",
+  );
+}
 fs.writeFileSync(
   path.join(destination, "manifest.json"),
   JSON.stringify(

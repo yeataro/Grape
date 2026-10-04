@@ -21,7 +21,7 @@ import type {
   GLSLStageProgram,
 } from "../sdk/public-surface.ts";
 import type { EdgeAdaptationDocument } from "../sdk/document.ts";
-import { detached, demand, issue } from "../sdk/kernel.ts";
+import { detached, demand, issue, equal } from "../sdk/kernel.ts";
 import { glslType, width } from "../definitions/types.ts";
 import { glslFloatLiteral } from "../sdk/glsl.ts";
 import { analyzeConstants } from "../definitions/constant-analysis.ts";
@@ -202,13 +202,19 @@ export function compile(
       "PROFILE_CAPABILITY",
     );
     if (diagnostics.some((x) => x.severity === "error")) return result([]);
+    // Uniform names are linked across stages: identity belongs to this complete
+    // program, while each consuming shader still owns its declaration.
+    const uniforms = new Map<
+      string,
+      { symbol: string; type: string; defaultValue: Json }
+    >();
     const programs: GLSLStageProgram[] = doc.graph.stages.map((stage) => {
       const outputs: Record<string, GLSLExpression> = {},
         body: string[] = [],
         stageGlobals = [...globals],
         helpers = new Map<string, string>(),
         helperBodies: string[] = [],
-        uniforms = new Map<string, string>(),
+        declaredUniforms = new Set<string>(),
         depthCounts = new Map<string[], number>(),
         helperDepth = new Map<string, number>();
       let ordinal = 0;
@@ -299,36 +305,32 @@ export function compile(
                       .some((i) => i.severity === "error"),
                   "UNIFORM_TYPE",
                 );
-                let symbol = uniforms.get(resourceId);
-                if (symbol)
+                let binding = uniforms.get(resourceId);
+                if (binding)
                   demand(
-                    bindingSchema.some(
-                      (b) =>
-                        (
-                          b as {
-                            symbol?: string;
-                            stageId?: string;
-                            type?: string;
-                          }
-                        ).symbol === symbol &&
-                        (b as { stageId?: string }).stageId === stage.id &&
-                        (b as { type?: string }).type === type,
-                    ),
+                    binding.type === type && equal(binding.defaultValue, value),
                     "UNIFORM_CONFLICT",
                   );
-                if (!symbol) {
-                  symbol = "u_grape_" + uniforms.size;
-                  uniforms.set(resourceId, symbol);
-                  stageGlobals.push(`uniform ${typeName(type)} ${symbol};`);
+                if (!binding) {
+                  binding = {
+                    symbol: "u_grape_" + uniforms.size,
+                    type,
+                    defaultValue: detached(value),
+                  };
+                  uniforms.set(resourceId, binding);
+                }
+                if (!declaredUniforms.has(resourceId)) {
+                  declaredUniforms.add(resourceId);
+                  stageGlobals.push(
+                    `uniform ${typeName(type)} ${binding.symbol};`,
+                  );
                   bindingSchema.push({
                     stageId: stage.id,
                     resourceId,
-                    symbol,
-                    type,
-                    defaultValue: value,
+                    ...binding,
                   });
                 }
-                return { type, code: symbol, constant: false };
+                return { type, code: binding.symbol, constant: false };
               },
               emitNetwork: (
                 resourceId: string,

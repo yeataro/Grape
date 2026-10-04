@@ -76,6 +76,8 @@ function harness() {
       },
     }),
   };
+  workspace.addPane("a");
+  workspace.addPane("b");
   workspace.register(type);
   workspace.open({
     id: "edit",
@@ -298,6 +300,7 @@ test("two independently registered Panels and two Widget view shapes share lifec
     locale = new Localization(),
     seen: string[] = [];
   for (const name of ["summary", "help"]) {
+    workspace.addPane(name);
     workspace.register({
       typeId: name,
       viewStateVersion: 1,
@@ -525,4 +528,76 @@ test("PC application denies every editing command while readonly or history busy
   field.dispose();
   h.renderer.dispose();
   h.workspace.dispose();
+});
+
+test("B01 same-pane movement revokes old scope before placement publication and retains contribution", () => {
+  const h = harness(),
+    old = h.mount(),
+    counts = h.counts();
+  let seen = false;
+  h.workspace.subscribe(() => {
+    seen = true;
+    assert.equal(
+      old.scope.accept(old.scope.ticket(), () => assert.fail("old mount")),
+      false,
+    );
+  });
+  h.workspace.move("edit", "a", 0);
+  assert(seen);
+  assert.equal(h.counts().creates, counts.creates);
+  assert.equal(h.counts().disposed, 0);
+  assert(h.counts().cleanup > counts.cleanup);
+  h.renderer.dispose();
+  h.workspace.dispose();
+});
+test("B01 PanelRenderer subscription failure rebuilds contribution on explicit retry", () => {
+  const s = application(),
+    w = new Workspace(s.app);
+  w.addPane("a");
+  let broken = true,
+    views = 0;
+  w.register({
+    typeId: "retry",
+    viewStateVersion: 1,
+    presentation: { label: { owner, key: "retry", fallback: "Retry" } },
+    create: () => ({
+      restoreViewState: () => {},
+      exportViewState: () => ({}),
+      receive: () => {},
+      canClose: () => true,
+      dispose: () => {},
+      createView: () => {
+        views++;
+        return {
+          kind: "panel",
+          capture: () => ({}),
+          subscribe: () => {
+            if (broken) throw Error("SUBSCRIBE_FAILURE");
+            return () => {};
+          },
+          dispose: () => {},
+          mount: () => ({ update: () => {} }),
+        };
+      },
+    }),
+  });
+  w.open({
+    id: "P",
+    typeId: "retry",
+    viewStateVersion: 1,
+    state: {},
+    paneId: "a",
+    hidden: false,
+  });
+  const renderer = new PanelRenderer(w, new Localization(), () => ({
+    protocol: "test",
+    target: {},
+  }));
+  assert.match(renderer.issue("P"), /subscribe/);
+  broken = false;
+  renderer.retry("P");
+  assert.equal(renderer.session("P")!.status, "mounted");
+  assert.equal(views, 2);
+  renderer.dispose();
+  w.dispose();
 });

@@ -54,7 +54,11 @@ import { upgradeDocument } from "./document-upgrade.ts";
 import { buildPersonal, readPersonal, packagePacket } from "./personal.ts";
 import type { PersonalPackage, PackageProbe } from "../sdk/library.ts";
 import type { DocumentInspection } from "./inspection.ts";
-import type { CatalogEntry, CatalogWire } from "../sdk/ui.ts";
+import type {
+  CatalogEntry,
+  CatalogWire,
+  ContextRestoreHint,
+} from "../sdk/ui.ts";
 
 export class EditorContext {
   #selection: string[] = [];
@@ -72,6 +76,7 @@ export class EditorContext {
     readonly id: string,
     private readonly graph: Graph,
     stageId: string,
+    private readonly canDispose: () => boolean = () => true,
   ) {
     this.#stage = stageId;
     this.#stageKey = graph
@@ -320,6 +325,7 @@ export class EditorContext {
   dispose(): void {
     demand(!this.#signal.notifying && !this.graph.busy, "CONTEXT_BUSY");
     if (!this.#live) return;
+    demand(this.canDispose(), "CONTEXT_IN_USE");
     this.#live = false;
     this.#unsubscribe();
     this.#signal.emit();
@@ -423,6 +429,7 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     context.select(ids);
   }
   #contexts = new Map<string, EditorContext>();
+  #contextBorrowers = new Map<string, number>();
   #signal = new Signal<void>();
   #saved: CanonicalGraphDocument | null = null;
   #saving = false;
@@ -756,6 +763,8 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     );
   }
   private install(graph: Graph, saved: CanonicalGraphDocument | null): void {
+    // A document replacement ends every old lifetime, including borrowed views.
+    this.#contextBorrowers.clear();
     demand(!this.busy, "HISTORY_BUSY");
     for (const c of this.#contexts.values()) c.dispose();
     this.#contexts.clear();
@@ -960,10 +969,12 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
         (s) => s.implementation === "network",
       ) ?? this.snapshot.document.graph.stages[0];
     demand(stage, "STAGE_MISSING");
+    const newId = this.identity.next();
     const context = new EditorContext(
-      this.identity.next(),
+      newId,
       this.#graph,
       stage.id,
+      () => !this.#contextBorrowers.get(newId),
     );
     this.#contexts.set(context.id, context);
     return context;
@@ -973,6 +984,66 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
     const c = this.#contexts.get(id);
     c?.dispose();
     this.#contexts.delete(id);
+  }
+  /** Borrowing a provider never transfers ownership of its Context to a Panel. */
+  borrowContext(id: string): () => void {
+    const context = this.context(id);
+    context.capture();
+    this.#contextBorrowers.set(id, (this.#contextBorrowers.get(id) ?? 0) + 1);
+    let live = true;
+    return () => {
+      if (!live) return;
+      live = false;
+      if (this.#contexts.get(id) !== context) return;
+      const count = (this.#contextBorrowers.get(id) ?? 1) - 1;
+      if (count) this.#contextBorrowers.set(id, count);
+      else this.#contextBorrowers.delete(id);
+    };
+  }
+  contextHint(id: string): ContextRestoreHint {
+    const current = this.context(id).capture();
+    return detached({
+      graphId: current.scope.graphId,
+      stageId: current.scope.stageId,
+      networkPath: current.scope.networkPath,
+      selection: current.selection,
+      primary: current.primary,
+    });
+  }
+  /** Explicit application mapping: exact document/stage/occurrence, no names or fallback. */
+  restoreContext(hint: ContextRestoreHint): EditorContext | null {
+    demand(!this.busy, "HISTORY_BUSY");
+    const graph = this.#graph;
+    if (!graph || graph.capture().document.graph.id !== hint.graphId)
+      return null;
+    try {
+      const resolved = resolveOccurrence(
+        graph.capture().document,
+        graph.definitionSet,
+        hint.stageId,
+        hint.networkPath,
+      );
+      if (
+        !hint.selection.every((id) =>
+          resolved.network.nodes.some((n) => n.id === id),
+        ) ||
+        (hint.primary !== null && !hint.selection.includes(hint.primary))
+      )
+        return null;
+      const id = this.identity.next();
+      const context = new EditorContext(
+        id,
+        graph,
+        hint.stageId,
+        () => !this.#contextBorrowers.get(id),
+      );
+      context.navigate(hint.stageId, hint.networkPath);
+      context.select(hint.selection, hint.primary);
+      this.#contexts.set(id, context);
+      return context;
+    } catch {
+      return null;
+    }
   }
   generate(): Compilation {
     demand(!this.busy, "HISTORY_BUSY");

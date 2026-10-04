@@ -1,4 +1,5 @@
 import { expect, type Page } from "@playwright/test";
+import { clickAction } from "../fixtures/public-actions.ts";
 /** Re-execute inherited UI contracts against their unchanged exact definitions.
  * The S04 suite separately exercises the new GraphKind and output policy. */
 export async function openLegacyDocument(page: Page) {
@@ -12,7 +13,7 @@ export async function openLegacyDocument(page: Page) {
       JSON.stringify(document),
     );
   });
-  await page.getByRole("button", { name: "Open saved", exact: true }).click();
+  await clickAction(page, "Open saved");
   page.once("dialog", (dialog) => dialog.accept());
   await page.locator("#saved-list button").click();
   await expect(page.locator("#open-dialog")).not.toBeVisible();

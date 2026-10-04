@@ -303,7 +303,7 @@ test("S04 actual IndexedDB collision concurrency relist quotas and failure isola
 
 async function exported(page: any) {
   const event = page.waitForEvent("download");
-  await page.getByRole("button", { name: "Export JSON", exact: true }).click();
+  await clickAction(page, "Export JSON");
   return JSON.parse(await fs.readFile((await (await event).path())!, "utf8"));
 }
 test("S04 DEC002 actual Canvas four shapes to current ImageOutput and edge identity Undo Redo", async ({
@@ -387,7 +387,11 @@ test("S04 actual Personal UI saves relists imports downloads and inserts indepen
   await page
     .getByRole("button", { name: "Insert Subgraph", exact: true })
     .click();
-  await expect(page.locator("dialog[open]")).toHaveCount(0);
+  await expect(
+    page
+      .locator("dialog[open]")
+      .filter({ has: page.getByLabel("Search Personal Library") }),
+  ).toHaveCount(0);
   const once = await exported(page);
   await clickAction(page, "Personal Library");
   await page

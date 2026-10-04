@@ -54,6 +54,8 @@ import {
 import { browserFeedback } from "../../src/adapters/browser/presentation.ts";
 import { Localization } from "../../src/localization/service.ts";
 import { Workspace } from "../../src/ui/workspace.ts";
+import { WorkspaceView } from "../../src/ui/workspace-view.ts";
+import type { WorkspaceLayout } from "../../src/sdk/ui.ts";
 import { PanelRenderer } from "../../src/ui/mount.ts";
 import { WidgetRegistry } from "../../src/ui/widgets.ts";
 import {
@@ -246,6 +248,7 @@ const action = (
 let workspace: Workspace | null = null,
   renderer: PanelRenderer | null = null,
   canvasCount = 0;
+let workspaceView: WorkspaceView | null = null;
 const footer = app.querySelector<HTMLElement>("footer")!;
 const outputTrigger = document.createElement("button"),
   output = app.querySelector<HTMLElement>("#code")!;
@@ -267,12 +270,14 @@ const outputView = floatingSurface({
 });
 outputTrigger.onclick = () => outputView.toggle();
 const hover = mountHover(app, () => application.busy || application.saving);
-function buildWorkspace() {
+function buildWorkspace(layout?: WorkspaceLayout) {
+  if (layout) Workspace.validate(layout);
+  workspace?.preflightClose();
   hover.invalidate();
   renderer?.dispose();
+  renderer = null;
+  workspaceView?.dispose();
   workspace?.dispose();
-  document.querySelector("#canvases")!.replaceChildren();
-  document.querySelector("#inspector")!.replaceChildren();
   document.querySelector("#code")!.replaceChildren();
   document.querySelector("#actions")!.replaceChildren();
   workspace = new Workspace(application);
@@ -310,52 +315,68 @@ function buildWorkspace() {
     })),
   );
   canvasCount = 0;
-  workspace.open({
-    id: "actions",
-    typeId: "grape.panel.actions",
-    viewStateVersion: 1,
-    state: {},
-    paneId: "actions",
-    hidden: false,
-  });
-  workspace.open({
-    id: "inspector",
-    typeId: "grape.panel.inspector",
-    viewStateVersion: 1,
-    state: {},
-    paneId: "inspector",
-    hidden: false,
-  });
-  workspace.open({
-    id: "code",
-    typeId: "grape.panel.code",
-    viewStateVersion: 1,
-    state: {},
-    paneId: "code",
-    hidden: false,
-  });
-  addCanvas();
+  if (layout) workspace.restore(layout);
+  else {
+    workspace.addPane("actions", "utility");
+    workspace.addPane("inspector", "right");
+    workspace.addPane("code", "utility");
+    workspace.open({
+      id: "actions",
+      typeId: "grape.panel.actions",
+      viewStateVersion: 1,
+      state: {},
+      paneId: "actions",
+      hidden: false,
+    });
+    workspace.open({
+      id: "inspector",
+      typeId: "grape.panel.inspector",
+      viewStateVersion: 1,
+      state: {},
+      paneId: "inspector",
+      hidden: false,
+    });
+    workspace.open({
+      id: "code",
+      typeId: "grape.panel.code",
+      viewStateVersion: 1,
+      state: {},
+      paneId: "code",
+      hidden: false,
+    });
+    addCanvas();
+  }
+  workspaceView = new WorkspaceView(
+    workspace,
+    app.querySelector("main")!,
+    locale,
+    (error) => report(error, "workspace"),
+    ["actions", "code"],
+    () => renderer?.refresh(),
+  );
   renderer = new PanelRenderer(
     workspace,
     locale,
     (pane, id) => ({
       protocol: "grape.dom.v1",
-      target: document.getElementById(pane)!,
+      target: ["actions", "code"].includes(pane)
+        ? document.getElementById(pane)!
+        : workspaceView!.surface(pane, id),
     }),
     feedback,
+    (id, pane) => workspaceView!.presented(id, pane),
   );
 }
 function addCanvas() {
-  const context = application.context(),
+  const context = application.context();
+  let id: string;
+  do {
     id = "canvas-" + ++canvasCount;
-  const container = document.createElement("section");
-  container.id = id;
-  container.className = "canvas-pane";
-  const label = document.createElement("div");
-  label.className = "pane-title";
-  label.textContent = text("canvas", { number: canvasCount });
-  container.append(label);
-  document.querySelector("#canvases")!.append(container);
+  } while (
+    workspace!.records().some((r) => r.saved.id === id) ||
+    workspace!.panes().some((p) => p.id === id)
+  );
+  workspace!.addPane(id, "center");
   workspace!.open({
     id,
     typeId: canvasType.typeId,
@@ -366,6 +387,24 @@ function addCanvas() {
     contextId: context.id,
   });
   workspace!.activate(id);
+}
+function addParameters() {
+  let n = 1;
+  while (
+    workspace!.records().some((r) => r.saved.id === "parameters-" + n) ||
+    workspace!.panes().some((p) => p.id === "parameters-" + n)
+  )
+    n++;
+  const id = "parameters-" + n;
+  workspace!.addPane(id, "right");
+  workspace!.open({
+    id,
+    typeId: "grape.panel.inspector",
+    viewStateVersion: 1,
+    state: {},
+    paneId: id,
+    hidden: false,
+  });
 }
 application.grant(canvasType.typeId, canvasCommands);
 application.grant("grape.panel.actions", [
@@ -388,6 +427,8 @@ const replacing = () => {
 function prepareReplace() {
   renderer?.dispose();
   renderer = null;
+  workspaceView?.dispose();
+  workspaceView = null;
   workspace?.dispose();
   workspace = null;
 }
@@ -500,7 +541,15 @@ action("png", async () => {
   cancelPNG();
   const ticket = pngTicket,
     snapshot = application.snapshot;
-  const pane = document.querySelector(".canvas-pane");
+  const activeCanvas = workspace?.activeCanvas();
+  const pane = activeCanvas
+    ? document.getElementById(activeCanvas.saved.id)
+    : null;
+  if (
+    !activeCanvas?.update.target ||
+    activeCanvas.update.target.scope.networkPath.length
+  )
+    throw Error("PNG_LAYOUT_MISSING");
   const layout = new Map<string, { width: number; height: number }>();
   pane?.querySelectorAll<HTMLElement>(".node[data-node]").forEach((node) =>
     layout.set(node.dataset.node!, {
@@ -746,8 +795,7 @@ mountPersonal(
   nav,
   application,
   () => {
-    const id = workspace?.records().find((r) => r.saved.id === "inspector")
-      ?.update.target?.scope.contextId;
+    const id = workspace?.activeCanvas()?.update.target?.scope.contextId;
     if (!id) throw Error("Select a Canvas first.");
     return application.context(id);
   },
@@ -800,6 +848,136 @@ for (const child of Array.from(nav.children)) {
     ).append(child);
   }
 }
+const workspaceControl = (label: string, fn: () => void | Promise<void>) => {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.textContent = label;
+  button.setAttribute("role", "menuitem");
+  button.onclick = () => {
+    try {
+      Promise.resolve(fn())
+        .then(() => {
+          projectMenu.close(false);
+          if (errors.delete("workspace")) renderErrors();
+        })
+        .catch((error) => report(error, "workspace"));
+    } catch (error) {
+      report(error, "workspace");
+    }
+  };
+  workspaceGroup.append(button);
+  return button;
+};
+workspaceControl("Add Parameters", addParameters);
+const layoutKey = "grape.workspace.current.v1";
+workspaceControl("Save current layout", () => {
+  const layout = workspace!.save();
+  localStorage.setItem(layoutKey, JSON.stringify(layout));
+  success("Current layout saved.");
+});
+workspaceControl("Restore current layout", () => {
+  const text = localStorage.getItem(layoutKey);
+  if (!text) throw Error("LAYOUT_NOT_SAVED");
+  if (new TextEncoder().encode(text).length > 262144)
+    throw Error("LAYOUT_SIZE");
+  const layout: unknown = JSON.parse(text);
+  Workspace.validate(layout);
+  buildWorkspace(layout);
+  success("Current layout restored. Activate a Canvas to choose its source.");
+});
+workspaceControl("Export current layout", async () => {
+  const layout = workspace!.save();
+  await downloadBytes(
+    "grape-current-layout.json",
+    new TextEncoder().encode(JSON.stringify(layout)).buffer,
+  );
+  success("Current layout exported.");
+});
+const layoutFile = document.createElement("input");
+layoutFile.type = "file";
+layoutFile.accept = ".json,application/json";
+layoutFile.hidden = true;
+app.append(layoutFile);
+layoutFile.onchange = async () => {
+  try {
+    const capturedWorkspace = workspace,
+      capturedLoad = application.snapshot.loadId;
+    const file = layoutFile.files?.[0];
+    if (!file) return;
+    if (file.size > 262144) throw Error("LAYOUT_SIZE");
+    const layout: unknown = JSON.parse(await file.text());
+    if (
+      workspace !== capturedWorkspace ||
+      application.snapshot.loadId !== capturedLoad
+    )
+      throw Error("LAYOUT_STALE");
+    Workspace.validate(layout);
+    buildWorkspace(layout);
+    success("Current layout imported. Activate a Canvas to choose its source.");
+  } catch (error) {
+    report(error, "workspace");
+  } finally {
+    layoutFile.value = "";
+  }
+};
+workspaceControl("Import current layout", () => layoutFile.click());
+const showPanels = workspaceControl("Show hidden panels", () => {
+  for (const r of workspace!.records())
+    if (r.saved.hidden) workspaceView!.show(r.saved.id);
+});
+const panelsTrigger = document.createElement("button"),
+  panelsList = document.createElement("div");
+panelsTrigger.type = "button";
+panelsTrigger.textContent = "Panels";
+panelsList.className = "workspace-panel-options";
+footer.append(panelsTrigger);
+const panelsView = floatingSurface({
+  host: app,
+  trigger: panelsTrigger,
+  content: panelsList,
+  title: "Workspace panels",
+  closeLabel: "Close workspace panels",
+  kind: "anchored",
+  width: 360,
+  maxHeight: 520,
+});
+panelsTrigger.onclick = () => {
+  panelsList.replaceChildren();
+  for (const r of workspace!
+    .records()
+    .filter((r) => !["actions", "code"].includes(r.saved.id))) {
+    const row = document.createElement("div"),
+      show = document.createElement("button"),
+      settings = document.createElement("button");
+    show.type = settings.type = "button";
+    show.textContent = "Show " + r.saved.id;
+    settings.textContent = "Settings " + r.saved.id;
+    const guard = () => {
+      if (workspace!.record(r.saved.id).incarnation !== r.incarnation)
+        throw Error("PANEL_EXPIRED");
+    };
+    show.onclick = () => {
+      try {
+        guard();
+        workspaceView!.show(r.saved.id);
+        panelsView.close();
+      } catch (error) {
+        report(error, "workspace");
+      }
+    };
+    settings.onclick = () => {
+      try {
+        guard();
+        workspaceView!.panelOptions(r.saved.id, settings);
+      } catch (error) {
+        report(error, "workspace");
+      }
+    };
+    row.append(show, settings);
+    panelsList.append(row);
+  }
+  panelsView.toggle();
+};
 footer.prepend(menuTrigger);
 const projectMenu = floatingSurface({
   host: app,

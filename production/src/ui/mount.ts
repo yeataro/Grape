@@ -296,6 +296,7 @@ type Attachment = {
   session: PresentationSession | null;
   pane: string;
   incarnation: number;
+  placement: number;
   issue: string;
   clear: (() => void) | null;
   surface: MountSurface | null;
@@ -304,13 +305,25 @@ export class PanelRenderer {
   #sessions = new Map<string, Attachment>();
   #unsubscribe: () => void;
   #before: () => void;
+  #placement: () => void;
   constructor(
     private readonly workspace: Workspace,
     private readonly locale: LocalizationService,
     private readonly surface: (pane: string, id: string) => MountSurface,
     private readonly feedback?: PresentationFeedback,
+    private readonly presented: (id: string, pane: string) => boolean = () =>
+      true,
   ) {
     this.#unsubscribe = workspace.subscribe(() => this.sync());
+    this.#placement = workspace.beforePanelPlacement((id) => {
+      const item = this.#sessions.get(id);
+      item?.session?.unmount();
+      item?.clear?.();
+      if (item) {
+        item.clear = null;
+        item.surface = null;
+      }
+    });
     this.#before = workspace.beforePanelDispose((id) => this.detach(id));
     this.sync();
   }
@@ -320,6 +333,9 @@ export class PanelRenderer {
   issue(id: string): string {
     return this.#sessions.get(id)?.issue ?? "";
   }
+  refresh(): void {
+    this.sync();
+  }
   private detach(id: string): void {
     const item = this.#sessions.get(id);
     this.#sessions.delete(id);
@@ -327,9 +343,20 @@ export class PanelRenderer {
     item?.clear?.();
   }
   retry(id: string): void {
-    this.detach(id);
+    const item = this.#sessions.get(id);
     if (!this.workspace.record(id).instance) this.workspace.retry(id);
-    else this.sync();
+    else if (
+      item?.session?.status === "placeholder" &&
+      !item.session.issues.some((x) => x.phase === "subscribe")
+    ) {
+      item.clear?.();
+      item.clear = null;
+      item.issue = "";
+      item.session.retry();
+    } else {
+      this.detach(id);
+      this.sync();
+    }
   }
   private placeholder(id: string, item: Attachment, issue: string): void {
     item.issue = issue;
@@ -353,26 +380,29 @@ export class PanelRenderer {
         this.detach(id);
         item = {
           session: null,
-          pane: r.saved.paneId,
+          pane: r.saved.floating ? `float:${id}` : r.saved.paneId,
           incarnation: r.incarnation,
+          placement: r.placement,
           issue: "",
           clear: null,
           surface: null,
         };
         this.#sessions.set(id, item);
       }
-      if (!this.workspace.visible(id)) {
+      if (!this.workspace.visible(id) || !this.presented(id, r.saved.paneId)) {
         item.session?.unmount();
         item.clear?.();
         item.clear = null;
         continue;
       }
-      if (item.pane !== r.saved.paneId) {
+      const placement = r.saved.floating ? `float:${id}` : r.saved.paneId;
+      if (item.pane !== placement || item.placement !== r.placement) {
+        item.placement = r.placement;
         item.session?.unmount();
         item.clear?.();
         item.clear = null;
         item.surface = null;
-        item.pane = r.saved.paneId;
+        item.pane = placement;
       }
       try {
         item.surface ??= this.surface(item.pane, id);
@@ -452,6 +482,7 @@ export class PanelRenderer {
   dispose(): void {
     this.#unsubscribe();
     this.#before();
+    this.#placement();
     for (const id of [...this.#sessions.keys()]) this.detach(id);
   }
 }

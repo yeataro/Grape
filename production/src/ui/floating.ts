@@ -6,7 +6,7 @@ export interface FloatingOptions {
   content: HTMLElement;
   title: string;
   closeLabel: string;
-  kind: "anchored" | "modal" | "menu";
+  kind: "anchored" | "modal" | "menu" | "upper-slot";
   width: number;
   maxHeight: number;
   align?: "start" | "end";
@@ -17,7 +17,7 @@ export interface FloatingOptions {
 }
 export function floatingSurface(options: FloatingOptions) {
   const { host, trigger, content } = options;
-  if (!trigger && options.kind !== "modal")
+  if (!trigger && options.kind !== "modal" && options.kind !== "upper-slot")
     throw Error("FLOATING_ANCHOR_REQUIRED");
   const surface = document.createElement("dialog"),
     heading = document.createElement("h2"),
@@ -53,12 +53,17 @@ export function floatingSurface(options: FloatingOptions) {
     e.isConnected && e.getClientRects().length > 0;
   const position = () => {
     if (!surface.open) return;
-    const margin = 8,
+    const margin = options.kind === "upper-slot" ? 12 : 8,
       width = Math.min(options.width, innerWidth - margin * 2),
       height = Math.min(options.maxHeight, innerHeight - margin * 2);
     surface.style.width = width + "px";
     surface.style.maxHeight = height + "px";
     if (options.kind === "modal") return;
+    if (options.kind === "upper-slot") {
+      surface.style.left = Math.max(margin, innerWidth - width - margin) + "px";
+      surface.style.top = margin + "px";
+      return;
+    }
     const a = trigger!.getBoundingClientRect();
     const left = options.align === "end" ? a.right - width : a.left;
     surface.style.left =

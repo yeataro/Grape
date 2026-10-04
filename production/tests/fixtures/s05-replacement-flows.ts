@@ -44,9 +44,7 @@ export async function replacementFlow(
     if (mode === "upgraded") await clickAction(page, "Upgrade subgraph owners");
     else await createNode(page, "Float");
   }
-  await page
-    .getByRole("button", { name: "Second Canvas", exact: true })
-    .click();
+  await clickAction(page, "Second Canvas");
   const before = await exportDocument(page),
     beforeUI = await replacementUIState(page);
   const review = await reviewFile(page, "legacy-owner.grape.json", bytes);
@@ -82,6 +80,14 @@ export async function replacementFlow(
     await page
       .getByRole("button", { name: "Generate GLSL", exact: true })
       .click();
+    if (
+      !(await page
+        .getByRole("button", { name: "Close shader output", exact: true })
+        .isVisible())
+    )
+      await page
+        .getByRole("button", { name: "Shader output", exact: true })
+        .click();
     await expect(
       page.getByText("Generated successfully · Host-free GLSL"),
     ).toBeVisible();

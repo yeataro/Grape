@@ -22,7 +22,7 @@ export const deliveredNames = [
 ] as const;
 export async function exportDocument(page: Page) {
   const download = page.waitForEvent("download");
-  await page.getByRole("button", { name: "Export JSON", exact: true }).click();
+  await clickAction(page, "Export JSON");
   return JSON.parse(
     await fs.readFile((await (await download).path())!, "utf8"),
   );
@@ -74,7 +74,7 @@ export async function saveReopen(page: Page) {
   await page.getByRole("button", { name: "Save", exact: true }).click();
   await expect(page.locator("#save-state")).toHaveText("Saved");
   await page.reload();
-  await page.getByRole("button", { name: "Open saved", exact: true }).click();
+  await clickAction(page, "Open saved");
   await page.locator("#saved-list button").first().click();
   const after = await exportDocument(page);
   assert.deepEqual(after, before);
@@ -237,6 +237,14 @@ export async function deliveredFlow(
   await page
     .getByRole("button", { name: "Generate GLSL", exact: true })
     .click();
+  if (
+    !(await page
+      .getByRole("button", { name: "Close shader output", exact: true })
+      .isVisible())
+  )
+    await page
+      .getByRole("button", { name: "Shader output", exact: true })
+      .click();
   const expectedError = name === "constant-detach.grape.json";
   if (expectedError)
     await expect(page.getByRole("list", { name: "Diagnostics" })).toContainText(

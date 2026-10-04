@@ -155,6 +155,14 @@ test("S05-OWNER-001 exact owner and malformed admission stay strict; original er
   await page
     .getByRole("button", { name: "Generate GLSL", exact: true })
     .click();
+  if (
+    !(await page
+      .getByRole("button", { name: "Close shader output", exact: true })
+      .isVisible())
+  )
+    await page
+      .getByRole("button", { name: "Shader output", exact: true })
+      .click();
   await expect(page.getByRole("list", { name: "Diagnostics" })).toContainText(
     "INPUT_REQUIRED",
   );

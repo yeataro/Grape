@@ -31,6 +31,9 @@ export function mountBuildInfo(brand: HTMLElement): void {
     identity
       ? `Implementation: ${identity.implementationI}`
       : "Development source: no archived candidate identity declared.",
+    "B01：可新增兩個 Canvas 與 Parameters；共享圖與編輯歷史，各自保留選取、Stage、導覽與視角。",
+    "Panel 分頁可移動、分組、拆分、隱藏或關閉；Parameters 支援右上浮動、收合與返回原停靠位置。",
+    "Project actions 可儲存、還原或匯入／匯出目前版面；只保存惰性目標提示，不保存任何執行中權限。",
     "底部功能列貼底佔满可用寬度；輸出預設收合，GLSL、診斷與 Locate 仍可取得。",
     "新版 Image Output 未接線時輸出零 RGBA；舊文件保留原版本，可由 Project actions 明確 Upgrade Image Output。",
     "Output 拉線到空白後，單點相容節點原地新增並接線；已接線 Input 拉到空白則斷線，均可一次 Undo。",

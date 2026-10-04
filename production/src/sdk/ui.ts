@@ -79,6 +79,8 @@ export interface PanelType {
   readonly viewStateVersion: number;
   readonly presentation: PanelPresentation;
   readonly providesContext?: boolean;
+  /** Placement capability; the workspace never branches on a feature's type ID. */
+  readonly upperSlotFloat?: boolean;
   readonly commandIds?: readonly string[];
   create(id: string, services: PanelServices): Panel;
 }
@@ -90,7 +92,42 @@ export interface SavedPanel {
   paneId: string;
   hidden: boolean;
   contextId?: string;
-  route?: { mode: "follow" | "context"; contextId?: string };
+  contextHint?: ContextRestoreHint;
+  linkGroup?: number;
+  collapsed?: boolean;
+  floatWidth?: number;
+  route?: PanelRoute;
+  floating?: {
+    dockPaneId: string;
+    dockIndex: number;
+    width: number;
+    collapsed: boolean;
+  };
+}
+/** Inert document identities only. Restoration always mints a new Context. */
+export interface ContextRestoreHint {
+  graphId: string;
+  stageId: string;
+  networkPath: readonly string[];
+  selection: readonly string[];
+  primary: string | null;
+}
+export type PanelRoute =
+  | { mode: "follow" }
+  | { mode: "followCanvas"; panelId: string }
+  | { mode: "context"; contextId?: string; hint?: ContextRestoreHint };
+export interface WorkspacePane {
+  id: string;
+  zone: "left" | "center" | "right" | "utility";
+  weight: number;
+  tabs: string[];
+  active: string | null;
+}
+export interface WorkspaceLayout {
+  version: 1;
+  panes: WorkspacePane[];
+  panels: SavedPanel[];
+  widths: { left: number; right: number };
 }
 
 export interface WidgetFieldSlot {

@@ -1180,3 +1180,193 @@ main {
     min-width: 0;
   }
 }
+
+/* Shared workspace placement. Side preferences are clamped only for display. */
+main.workspace {
+  position: relative;
+  display: grid;
+  grid-template-areas: "left left-divider center right-divider right";
+  grid-template-columns: var(--left-visible, 0px) var(
+      --left-handle,
+      0px
+    ) minmax(0, 1fr) var(--right-handle, 0px) var(--right-visible, 0px);
+  gap: 0;
+  isolation: isolate;
+}
+.workspace [hidden] {
+  display: none !important;
+}
+.workspace-zone {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+.workspace-left {
+  grid-area: left;
+}
+.workspace-center {
+  grid-area: center;
+}
+.workspace-right {
+  grid-area: right;
+}
+.workspace-side-divider {
+  background: rgb(255 255 255 / 7%);
+  cursor: col-resize;
+  touch-action: none;
+  z-index: 2;
+}
+.workspace-side-divider[data-side="left"] {
+  grid-area: left-divider;
+}
+.workspace-side-divider[data-side="right"] {
+  grid-area: right-divider;
+}
+.workspace-pane {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 9%);
+}
+.workspace-tabs {
+  display: flex;
+  align-items: center;
+  flex: none;
+  min-width: 0;
+  overflow: auto;
+  gap: 2px;
+  padding: 2px;
+  background: #222129;
+}
+.workspace-tabs [role="tab"] {
+  padding: 5px 7px;
+  font-size: 11px;
+  white-space: nowrap;
+  border-color: transparent;
+  color: rgb(255 255 255 / 58%);
+  background: transparent;
+}
+.workspace-tabs [aria-selected="true"] {
+  background: rgb(255 255 255 / 8%);
+  color: rgb(255 255 255 / 90%);
+}
+.workspace-tab-controls {
+  display: flex;
+  margin-left: auto;
+  gap: 2px;
+}
+.workspace-tab-controls button {
+  padding: 2px 6px;
+  font-size: 14px;
+}
+.workspace-pane-content,
+.workspace-panel-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+}
+.workspace-panel-body {
+  height: 100%;
+}
+.workspace-panel-body:has(> .canvas) {
+  overflow: hidden;
+}
+.workspace-pane-content {
+  display: flex;
+}
+.workspace-group-divider {
+  height: 6px;
+  flex: 0 0 6px;
+  cursor: row-resize;
+  touch-action: none;
+  background: rgb(255 255 255 / 7%);
+}
+.workspace-panel-options {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.workspace-panel-options label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: rgb(255 255 255 / 70%);
+}
+.workspace-panel-options input,
+.workspace-panel-options select {
+  min-width: 0;
+  width: 100%;
+}
+.workspace-float-body {
+  position: relative;
+  overflow: auto;
+  min-height: 0;
+  max-height: calc(100dvh - 150px);
+}
+.workspace-float-divider {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: col-resize;
+  touch-action: none;
+}
+.workspace-float {
+  padding-left: 12px;
+}
+.workspace-float .floating-content {
+  overflow: visible;
+}
+.workspace-overlay-close {
+  display: none;
+}
+@media (max-width: 800px) {
+  main.workspace {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "center";
+    overflow: visible;
+  }
+  .workspace-left,
+  .workspace-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 12;
+    background: #201f27;
+    box-shadow: 0 5px 25px #0009;
+  }
+  .workspace-left {
+    left: 0;
+    width: var(--workspace-left);
+  }
+  .workspace-right {
+    right: 0;
+    width: var(--workspace-right);
+  }
+  .workspace-side-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    z-index: 13;
+  }
+  .workspace-side-divider[data-side="left"] {
+    left: var(--workspace-left);
+  }
+  .workspace-side-divider[data-side="right"] {
+    right: var(--workspace-right);
+  }
+  .workspace-overlay-close {
+    display: block;
+    flex: none;
+    font-size: 11px;
+    padding: 4px;
+  }
+}

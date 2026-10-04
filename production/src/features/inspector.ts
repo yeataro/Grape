@@ -17,6 +17,7 @@ export function inspectorType(
   return {
     typeId: "grape.panel.inspector",
     viewStateVersion: 1,
+    upperSlotFloat: true,
     presentation: { label: { owner, key: "title", fallback: "Inspector" } },
     commandIds: ["grape.edge.disconnect", "grape.node.rename"],
     create: (_id, services) => {

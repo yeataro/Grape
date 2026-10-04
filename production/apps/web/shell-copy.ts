@@ -27,6 +27,18 @@ const messages = {
   originalPreview: "Original text (first 12000 characters)",
   loadExplanation:
     "Opening in a new session preserves model errors for re-save and starts empty History. Import acceptance requires a valid candidate and the current exact modules.",
+  replaceReady:
+    "Replace is available for the current document. It keeps this session and replaces its contents in one Undo step.",
+  replaceDefinitions:
+    "This file is valid, but Replace is unavailable because it uses different module versions or output profile. Choose Open in new session to open the file, or Close to keep working here. You can still export the original source.",
+  replaceStale:
+    "The current document changed or this review ended ({code}). Close this review and choose Open file again. You can still export the original source.",
+  replaceReadonly:
+    "Editing is locked. Close this review, unlock editing, and open the file again.",
+  replaceBusy:
+    "Finish or cancel the current edit before replacing this document.",
+  replaceUnavailable:
+    "Replace is unavailable ({code}). Close this review to keep working; the original source remains available to export.",
   file: "Open file",
   generate: "Generate GLSL",
   second: "Second Canvas",

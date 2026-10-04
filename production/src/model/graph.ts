@@ -64,6 +64,17 @@ type Entry = {
   after: CanonicalGraphDocument;
   label: string;
 };
+function checkReplacement(
+  current: CanonicalGraphDocument,
+  candidate: CanonicalGraphDocument,
+): void {
+  validateDocumentStructure(candidate);
+  demand(
+    equal(candidate.graph.modules, current.graph.modules) &&
+      equal(candidate.graph.kind, current.graph.kind),
+    "IMPORT_DEFINITIONS",
+  );
+}
 function findNetwork(
   doc: CanonicalGraphDocument,
   id: string,
@@ -269,6 +280,11 @@ export class Graph {
       revision: this.#revision,
       diagnostics: this.#diagnostics,
     });
+  }
+  /** Read-only admission check; Draft repeats the same guard at publication. */
+  checkReplacement(candidate: CanonicalGraphDocument): void {
+    demand(this.#live, "GRAPH_DISPOSED");
+    checkReplacement(this.#document, candidate);
   }
   get busy(): boolean {
     return this.#operation !== null;
@@ -1145,12 +1161,7 @@ export class Draft {
   }
   replaceDocument(candidate: CanonicalGraphDocument): void {
     this.run(() => {
-      validateDocumentStructure(candidate);
-      demand(
-        equal(candidate.graph.modules, this.document.graph.modules) &&
-          equal(candidate.graph.kind, this.document.graph.kind),
-        "IMPORT_DEFINITIONS",
-      );
+      checkReplacement(this.document, candidate);
       const replacement = structuredClone(candidate);
       replacement.graph.id = this.document.graph.id;
       this.document.graph = replacement.graph;

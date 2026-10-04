@@ -91,10 +91,12 @@ test("AT-S02-01 browser: readonly and intervening edit fence publication", async
   await page
     .getByRole("button", { name: "Add Float", exact: true })
     .evaluate((button: HTMLButtonElement) => button.click());
-  await page
-    .getByRole("button", { name: "Accept replacement (one Undo)" })
-    .click();
-  await expect(page.locator("#recovery-message")).toContainText("IMPORT_STALE");
+  await expect(
+    page.getByRole("button", { name: "Accept replacement (one Undo)" }),
+  ).toBeDisabled();
+  await expect(page.locator("#replacement-message")).toContainText(
+    "IMPORT_STALE",
+  );
   await expect(page.locator(".node")).toHaveCount(2);
 });
 test("AT-S02-01 browser: duplicate IDs, unknown structure and future input never expose acceptance", async ({

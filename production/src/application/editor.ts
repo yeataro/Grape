@@ -44,6 +44,7 @@ import {
   demand,
   plain,
   exact,
+  Fault,
 } from "../sdk/kernel.ts";
 import type { IdentitySource } from "../sdk/kernel.ts";
 import { compile } from "../generation/compiler.ts";
@@ -602,6 +603,21 @@ export class EditorApplication implements ApplicationPanelCommandAuthority {
       draft.replaceDocument(review.candidate!),
     );
     this.#reviews.delete(review);
+  }
+  /** Source validity is separate from the captured destination's eligibility.
+   * This projection grants no authority; acceptance repeats all live guards. */
+  replacementEligibility(
+    review: DocumentInspection,
+  ): { available: true } | { available: false; code: string } {
+    try {
+      this.checkReview(review);
+      demand(review.candidate, "IMPORT_ERRORS");
+      this.#graph!.checkReplacement(review.candidate);
+      return { available: true };
+    } catch (error) {
+      if (!(error instanceof Fault)) throw error;
+      return { available: false, code: error.code };
+    }
   }
   /** Explicit load is a new lifetime. Unlike import acceptance, it can preserve
    * representable model errors, including missing definitions, for later re-save. */

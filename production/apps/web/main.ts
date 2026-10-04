@@ -438,13 +438,11 @@ input.addEventListener("change", () => {
       2,
     );
     rawPreview.textContent = raw.slice(0, 12000);
-    acceptButton.hidden = !currentReview.candidate;
-    acceptButton.disabled = application.readonly;
     loadButton.hidden =
       currentReview.read.status !== "editable" ||
       !currentReview.document ||
       currentReview.reason === "NETWORK_SIZE";
-    loadButton.disabled = application.readonly;
+    refreshReplacement();
     input.value = "";
   })().catch(report);
 });
@@ -466,6 +464,7 @@ reviewDialog.style.width = "min(900px, 90vw)";
 const reviewDetails = document.createElement("pre"),
   rawPreview = document.createElement("pre"),
   explanation = document.createElement("p"),
+  replacementMessage = document.createElement("p"),
   acceptButton = document.createElement("button"),
   loadButton = document.createElement("button");
 reviewDetails.setAttribute("aria-label", text("reviewDetails"));
@@ -474,6 +473,8 @@ reviewDetails.style.maxHeight = "30vh";
 rawPreview.style.maxHeight = "15vh";
 reviewDetails.style.overflow = rawPreview.style.overflow = "auto";
 explanation.textContent = text("loadExplanation");
+replacementMessage.id = "replacement-message";
+replacementMessage.setAttribute("role", "status");
 acceptButton.textContent = text("acceptImport");
 loadButton.textContent = text("openPreserved");
 acceptButton.hidden = loadButton.hidden = true;
@@ -481,14 +482,44 @@ reviewDialog.append(
   explanation,
   reviewDetails,
   rawPreview,
+  replacementMessage,
   acceptButton,
   loadButton,
 );
+function refreshReplacement() {
+  if (!currentReview) {
+    replacementMessage.textContent = "";
+    return;
+  }
+  const eligibility = application.replacementEligibility(currentReview);
+  acceptButton.hidden = !currentReview.candidate;
+  acceptButton.disabled = !eligibility.available;
+  const code = eligibility.available ? null : eligibility.code;
+  replacementMessage.textContent = !currentReview.candidate
+    ? ""
+    : code === null
+      ? text("replaceReady")
+      : code === "IMPORT_DEFINITIONS"
+        ? text("replaceDefinitions")
+        : code === "IMPORT_STALE" || code === "REVIEW_CLOSED"
+          ? text("replaceStale", { code })
+          : code === "IMPORT_READONLY"
+            ? text("replaceReadonly")
+            : code === "HISTORY_BUSY"
+              ? text("replaceBusy")
+              : text("replaceUnavailable", { code });
+  loadButton.disabled =
+    application.readonly ||
+    application.busy ||
+    code === "IMPORT_STALE" ||
+    code === "REVIEW_CLOSED";
+}
 function closeReview() {
   reviewTicket++;
   if (currentReview) application.cancelReview(currentReview);
   currentReview = null;
   reviewDetails.textContent = rawPreview.textContent = "";
+  replacementMessage.textContent = "";
   acceptButton.hidden = loadButton.hidden = true;
   reviewDialog.close();
   input.value = "";
@@ -506,6 +537,7 @@ acceptButton.onclick = () => {
   } catch (error) {
     document.querySelector("#recovery-message")!.textContent =
       error instanceof Error ? error.message : String(error);
+    refreshReplacement();
   }
 };
 loadButton.onclick = () => {
@@ -541,6 +573,7 @@ document
     (document.querySelector("#open-dialog") as HTMLDialogElement).close(),
   );
 application.subscribe(() => {
+  refreshReplacement();
   saveState.textContent = application.saving
     ? text("saving")
     : application.dirty

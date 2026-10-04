@@ -1,0 +1,6 @@
+@'
+{"provenance":"Fresh Reviewer directly called mcp__codex_app__read_thread; filtered only exact Human userMessage, not Coordinator summary.","threadId":"01a1010f-2b35-7861-bb35-0e7e9b0b42a9","turnId":"01a1040c-57d5-74c0-808c-0d4b53b0bd5c","messageId":"01a1040c-582a-72d3-9bcd-ed689c6c0458","role":"userMessage","exactQuote":"然後實際測試還有八步實際測試的時候還有個規矩，那就是本機 IP、 LAN IP 跟 TrailScale 的 IP，三個連結都給我。","scope":"Two same-machine explicit-IP temporary static-only candidate-archive equivalents on 192.168.1.105 and 100.83.88.97; only three hash-verified files; all other routes 404; listeners closed after test; no source/repository/Vite exposure or firewall/Tailscale changes.","activationReceipt":"production/evidence/coordinator/s05/activation-20261004-01/human-authorization-01.json","existingServices":"4193/4194/4195 unchanged; no Human storage/context access"}
+'@ | Set-Content -LiteralPath .verification/s05-drag-performance-review-01/direct-human-network-authority-01.json -Encoding utf8
+$reviewBase=(Resolve-Path .verification/s05-drag-performance-review-01).Path.Replace('\','/')
+$env:GRAPE_EVIDENCE_DIR="$reviewBase/archive-origin-01"
+node "$reviewBase/run-check.cjs" archive-origin "$reviewBase" --experimental-transform-types "$reviewBase/archive-origin-replay-01.ts" --output "$reviewBase/archive-origin-01/result.json"

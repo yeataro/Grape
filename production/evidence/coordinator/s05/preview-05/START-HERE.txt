@@ -1,0 +1,35 @@
+Grape S05 — 拖曳修正與四種固定值節點
+版本：S05-drag-aa4c86e；受審版本：6c3a734
+完整圖文說明：同一測試網址的 /START-HERE.html
+測試畫面：同一測試網址的 /review.html
+
+先保存目前有修改的文件。下列範例使用 Open file → DOCUMENT_VALID → Open in new session。
+
+一、拖曳
+開 performance/fixture-14-Multiply.json，選 Multiply，讓 Inspector 顯示 A、B。
+連續拖曳，確認節點跟隨游標、數字不變。
+放開後 Undo 回到該次拖曳前；Redo 恢復。拖曳中 Escape 應取消。
+再開 performance/fixture-14-Image-output.json，拖 Image output 對照。
+14 節點中有 10 個未連線節點在畫面外，圖資料量相同。
+
+二、固定值
+可開 samples 下四個 pixel-root 範例，或新建文件後按：
+Add Float (fixed)：0.5
+Add Vector 2：0.5、0.5
+Add Vector 3：1、1、1
+Add Color RGBA：0.55、0.28、0.9、1
+修改各欄位並按 Enter，試 Undo/Redo、Save/Open saved。
+範例已接 Image output，Generate GLSL 應成功。
+舊 Add Float 保留原有行為；新 Float 使用 Add Float (fixed)。
+
+三、需要時補測
+samples/vec2-pixel-function.grape.json：進 Subgraph，改值、Undo/Redo、保存與生成。
+samples/vertex-workspace.grape.json：新增本批固定值，out 接 Position 子圖的 Value，再生成。
+其他節點依既有 Stage 設定限制。
+legacy-samples 保留之前的 S05 範例；先前通過的 Replace 不需整套重測。
+不同模組或輸出設定停用 Replace 是正常限制，使用 Open in new session。
+
+自動量測只代表已測本機情境，請以你的實際拖曳感受確認。
+這是目前 S05 的有界批次，完整 S05 仍在進行，產品接受另行記錄。
+I=aa4c86e20b0b4b54218b9992921578e7f24a28a2
+R=6c3a734325d0db2d924356a9614e971d80a966c8

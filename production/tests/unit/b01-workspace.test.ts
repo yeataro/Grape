@@ -10,6 +10,8 @@ const owner = {
   namespace: "test.panels",
   catalogVersion: 1,
 };
+// Contract-seam fixtures exercise registered Panels without claiming arbitrary
+// external modules or physical-device qualification.
 function fixture() {
   const s = application(),
     w = new Workspace(s.app),
@@ -403,4 +405,302 @@ test("B01 restored owned Context survives same-target retarget and receive retry
   assert.equal(w.record("P").update.target!.scope.contextId, c);
   w.close("P");
   assert.throws(() => f.app.context(c), /CONTEXT/);
+});
+
+test("B01 FR02 retry guards every lifecycle mutation and isolates observer exceptions", () => {
+  const f = fixture();
+  let failing = true,
+    disposed = 0;
+  const base = f.type("retry");
+  f.w.register({
+    ...base,
+    create: (id, api) => {
+      const panel = base.create(id, api);
+      return {
+        ...panel,
+        restoreViewState: (v) => {
+          if (failing) throw Error("RESTORE_FAILURE");
+          panel.restoreViewState(v);
+        },
+        dispose: () => {
+          disposed++;
+          panel.dispose();
+        },
+      };
+    },
+  });
+  f.w.open({
+    id: "P",
+    typeId: "retry",
+    viewStateVersion: 1,
+    paneId: "a",
+    hidden: false,
+    state: { remember: "original" },
+    linkGroup: 2,
+  });
+  const before = f.w.save(),
+    graph = f.app.snapshot,
+    incarnation = f.w.record("P").incarnation;
+  const attempted: [string, () => void][] = [
+    ["close", () => f.w.close("P")],
+    ["move", () => f.w.move("P", "b")],
+    ["dispose", () => f.w.dispose()],
+    ["retarget", () => f.w.retarget("P", f.context.id)],
+    ["route", () => f.w.setRoute("P", { mode: "active" })],
+    ["retry", () => f.w.retry("P")],
+  ];
+  const results: string[] = [],
+    observed: unknown[] = [];
+  f.w.beforePanelDispose(() => {
+    throw Error("OBSERVER_FAILURE");
+  });
+  const off = f.w.beforePanelDispose(() => {
+    observed.push({
+      incarnation: f.w.record("P").incarnation,
+      panes: f.w.panes(),
+      instance: f.w.record("P").instance,
+    });
+    for (const [name, run] of attempted) {
+      try {
+        run();
+        results.push(name + ":accepted");
+      } catch (e) {
+        results.push(name + ":" + String(e));
+      }
+    }
+  });
+  f.w.retry("P");
+  assert.equal(f.w.record("P").instance, null);
+  assert.equal(disposed, 2);
+  assert.deepEqual(f.w.save(), before);
+  const failedIncarnation = f.w.record("P").incarnation;
+  failing = false;
+  f.w.retry("P");
+  assert(f.w.record("P").instance);
+  assert.equal(disposed, 2);
+  assert.equal(results.length, 12);
+  for (const result of results) assert.match(result, /WORKSPACE_BUSY/);
+  assert.deepEqual(
+    observed,
+    [incarnation, failedIncarnation].map((i) => ({
+      incarnation: i,
+      panes: before.panes,
+      instance: null,
+    })),
+  );
+  assert(f.w.record("P").incarnation > failedIncarnation);
+  assert.deepEqual(f.w.save(), before);
+  assert.deepEqual(f.app.snapshot, graph);
+  off();
+  f.w.move("P", "b"); // guard was released; placement remains usable
+  assert.deepEqual(f.w.panes().find((p) => p.id === "b")!.tabs, ["P"]);
+  f.w.dispose();
+});
+
+test("B01 FR02 failed and successful retry retain owned Context and revoke old services", () => {
+  const f = fixture();
+  f.open("P", "c");
+  f.w.retarget("P", f.context.id);
+  const layout = f.w.save(),
+    w = new Workspace(f.app),
+    type = f.type("parameters");
+  let failReceive = false,
+    failRestore = false;
+  const apis: PanelServices[] = [];
+  w.register({
+    ...type,
+    create: (id, api) => {
+      apis.push(api);
+      const p = type.create(id, api);
+      return {
+        ...p,
+        restoreViewState: (v) => {
+          if (failRestore) throw Error("RESTORE_FAILED");
+          p.restoreViewState(v);
+        },
+        receive: (u) => {
+          if (failReceive) throw Error("RECEIVE_FAILED");
+          p.receive(u);
+        },
+      };
+    },
+  });
+  w.restore(layout);
+  const oldLease = w.record("P").update.lease,
+    c = w.record("P").update.target!.scope.contextId;
+  failReceive = true;
+  f.app.setReadonly(true);
+  failReceive = false;
+  failRestore = true;
+  w.retry("P");
+  assert.equal(w.record("P").instance, null);
+  assert.equal(f.app.context(c).capture().scope.contextId, c);
+  failRestore = false;
+  w.retry("P");
+  const lease = w.record("P").update.lease;
+  assert.equal(w.record("P").update.target!.scope.contextId, c);
+  for (const api of apis.slice(0, -1)) {
+    assert.equal(
+      api.accept(oldLease, () => assert.fail("old authority")),
+      false,
+    );
+    assert.equal(
+      api.accept(lease, () => assert.fail("fresh lease on stale services")),
+      false,
+    );
+  }
+  assert.equal(
+    apis.at(-1)!.accept(lease, () => {}),
+    true,
+  );
+  w.close("P");
+  assert.throws(() => f.app.context(c), /CONTEXT/);
+  assert.equal(f.app.context(f.context.id), f.context);
+});
+
+test("B01 FR03 every valid JSON export including null survives layout roundtrip", () => {
+  const f = fixture(),
+    base = f.type("json");
+  let value: any = { remember: "original" };
+  f.w.register({
+    ...base,
+    create: (id, api) => ({
+      ...base.create(id, api),
+      exportViewState: () => value,
+    }),
+  });
+  f.w.open({
+    id: "P",
+    typeId: "json",
+    viewStateVersion: 1,
+    state: value,
+    paneId: "a",
+    hidden: false,
+  });
+  const graph = f.app.snapshot;
+  for (const next of [
+    null,
+    false,
+    0,
+    "",
+    "text",
+    [],
+    [1, null],
+    { a: null, b: true },
+  ]) {
+    value = next;
+    const layout = f.w.save();
+    assert.deepEqual(layout.panels[0].state, next);
+    const restored = new Workspace(f.app);
+    restored.register(f.type("json"));
+    restored.restore(layout);
+    assert.deepEqual(restored.save(), layout);
+    restored.dispose();
+  }
+  assert.deepEqual(f.app.snapshot, graph);
+});
+
+test("B01 FR03 opaque fallback retains null and invalid live exports refuse the complete save", () => {
+  const f = fixture(),
+    base = f.type("json");
+  let value: any = null,
+    throwing = false;
+  f.w.register({
+    ...base,
+    create: (id, api) => ({
+      ...base.create(id, api),
+      exportViewState: () => {
+        if (throwing) throw Error("EXPORT_FAILURE");
+        return value;
+      },
+    }),
+  });
+  f.open("Q", "b");
+  f.w.open({
+    id: "P",
+    typeId: "json",
+    viewStateVersion: 1,
+    state: { old: true },
+    paneId: "a",
+    hidden: false,
+  });
+  const graph = f.app.snapshot,
+    before = f.w.save();
+  for (const bad of [
+    undefined,
+    NaN,
+    Infinity,
+    () => {},
+    { x: undefined },
+    new Date(),
+  ]) {
+    value = bad;
+    assert.throws(() => f.w.save());
+    assert.deepEqual(f.app.snapshot, graph);
+  }
+  throwing = true;
+  assert.throws(() => f.w.save(), /EXPORT_FAILURE/);
+  throwing = false;
+  value = null;
+  assert.deepEqual(f.w.save(), before);
+  const missing = new Workspace(f.app);
+  missing.restore(before);
+  assert.equal(missing.record("P").instance, null);
+  assert.deepEqual(missing.save(), before);
+  missing.dispose();
+});
+
+test("B01 FR02 FR03 retry and private-state save preserve saved ACK and existing Redo", async () => {
+  const f = fixture();
+  f.add("float");
+  f.app.execute({ panelId: "test", typeId: "test" }, f.target(), {
+    commandId: "grape.undo",
+    args: {},
+  });
+  await f.app.save();
+  assert(f.app.canRedo);
+  assert.equal(f.app.dirty, false);
+  let fail = true;
+  const type = f.type("saved");
+  f.w.register({
+    ...type,
+    create: (id, api) => ({
+      ...type.create(id, api),
+      restoreViewState: () => {
+        if (fail) throw Error("RESTORE_FAILED");
+      },
+      exportViewState: () => null,
+    }),
+  });
+  f.w.open({
+    id: "P",
+    typeId: "saved",
+    viewStateVersion: 1,
+    paneId: "a",
+    hidden: false,
+    state: { original: true },
+  });
+  const before = f.app.snapshot;
+  let publications = 0;
+  const off = f.app.subscribe(() => publications++);
+  fail = false;
+  f.w.retry("P");
+  assert.equal(f.w.save().panels[0].state, null);
+  assert.deepEqual(f.app.snapshot, before);
+  assert.equal(publications, 0);
+  assert.equal(f.app.dirty, false);
+  assert.equal(f.app.canUndo, false);
+  assert(f.app.canRedo);
+  off();
+  f.app.execute({ panelId: "test", typeId: "test" }, f.target(), {
+    commandId: "grape.redo",
+    args: {},
+  });
+  assert(f.app.dirty);
+  assert.notDeepEqual(f.app.snapshot.document, before.document);
+  f.app.execute({ panelId: "test", typeId: "test" }, f.target(), {
+    commandId: "grape.undo",
+    args: {},
+  });
+  assert.equal(f.app.dirty, false);
 });

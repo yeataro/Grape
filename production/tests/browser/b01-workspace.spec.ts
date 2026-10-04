@@ -471,3 +471,161 @@ test("B01 float resize superseded by keyboard dock cleans old controls and narro
   expect(await download(p, "Export JSON")).toEqual(before);
   expect(errors).toEqual([]);
 });
+
+test("B01 FR01 group separator retains native focus through repeated keys and Escape rollback", async ({
+  page: p,
+}) => {
+  await setup(p);
+  await clickAction(p, "Second Canvas");
+  const document = await download(p, "Export JSON"),
+    layout = await download(p, "Export current layout");
+  const divider = p.getByRole("separator", {
+    name: "Resize canvas-1 and canvas-2",
+    exact: true,
+  });
+  const original = await divider.elementHandle();
+  const observations: unknown[] = [];
+  await divider.click();
+  const start = Number(await divider.getAttribute("aria-valuenow"));
+  for (const [key, delta] of [
+    ["ArrowDown", 8],
+    ["ArrowDown", 16],
+    ["Shift+ArrowDown", 48],
+    ["ArrowUp", 40],
+  ] as const) {
+    await p.keyboard.press(key);
+    await expect(divider).toBeFocused();
+    expect(Number(await divider.getAttribute("aria-valuenow"))).toBeCloseTo(
+      start + delta,
+      4,
+    );
+    expect(
+      await original!.evaluate(
+        (e) => e.isConnected && e === document.activeElement,
+      ),
+    ).toBe(true);
+    observations.push({
+      key,
+      value: await divider.getAttribute("aria-valuenow"),
+      focused: true,
+    });
+  }
+  for (const key of ["Home", "End"]) {
+    await p.keyboard.press(key);
+    await expect(divider).toBeFocused();
+    expect(Number(await divider.getAttribute("aria-valuenow"))).toBeCloseTo(
+      Number(
+        await divider.getAttribute(
+          key === "Home" ? "aria-valuemin" : "aria-valuemax",
+        ),
+      ),
+      4,
+    );
+    observations.push({
+      key,
+      value: await divider.getAttribute("aria-valuenow"),
+      focused: true,
+    });
+  }
+  await p.keyboard.press("Escape");
+  await expect(divider).toBeFocused();
+  expect(Number(await divider.getAttribute("aria-valuenow"))).toBeCloseTo(
+    start,
+    4,
+  );
+  expect(await download(p, "Export current layout")).toEqual(layout);
+  expect(await download(p, "Export JSON")).toEqual(document);
+  save("fr01-keyboard", {
+    observations,
+    start,
+    rollback: true,
+    syntheticFocus: false,
+  });
+  await p.screenshot({ path: path.join(evidence, "fr01-keyboard.png") });
+});
+
+test("B01 FR01 group separator trusted drag commits and Escape cancels without losing capture", async ({
+  page: p,
+}) => {
+  await setup(p);
+  await clickAction(p, "Second Canvas");
+  const before = await download(p, "Export JSON"),
+    initial = await download(p, "Export current layout");
+  const divider = p.getByRole("separator", {
+    name: "Resize canvas-1 and canvas-2",
+    exact: true,
+  });
+  const trace: unknown[] = [];
+  const start = Number(await divider.getAttribute("aria-valuenow"));
+  let box = (await divider.boundingBox())!;
+  await p.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await p.mouse.down();
+  for (const dy of [10, 30, 50, 70]) {
+    await p.mouse.move(box.x + box.width / 2, box.y + box.height / 2 + dy, {
+      steps: 5,
+    });
+    expect(Number(await divider.getAttribute("aria-valuenow"))).toBeCloseTo(
+      start + dy,
+      2,
+    );
+    await expect(divider).toBeFocused();
+    trace.push({ dy, value: await divider.getAttribute("aria-valuenow") });
+  }
+  await p.mouse.up();
+  const committed = await download(p, "Export current layout");
+  expect(
+    committed.panes.find((x: any) => x.id === "canvas-1").weight,
+  ).toBeGreaterThan(1);
+  box = (await divider.boundingBox())!;
+  await p.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await p.mouse.down();
+  await p.mouse.move(box.x + box.width / 2, box.y + box.height / 2 - 45, {
+    steps: 12,
+  });
+  await p.keyboard.press("Escape");
+  await p.mouse.up();
+  expect(await download(p, "Export current layout")).toEqual(committed);
+  await divider.dblclick();
+  expect(await download(p, "Export current layout")).toEqual(initial);
+  expect(await download(p, "Export JSON")).toEqual(before);
+  save("fr01-pointer", {
+    trace,
+    initial,
+    committed,
+    cancelled: true,
+    trustedPlaywrightMouse: true,
+  });
+});
+
+test("B01 FR01 real pane reorder retains usable divider and natural Node Escape", async ({
+  page: p,
+}) => {
+  await setup(p);
+  await clickAction(p, "Second Canvas");
+  const before = await download(p, "Export JSON");
+  await option(p, "canvas-1", "Move group later");
+  const divider = p.getByRole("separator", {
+    name: "Resize canvas-2 and canvas-1",
+    exact: true,
+  });
+  await expect(divider).toBeVisible();
+  await divider.click();
+  const start = Number(await divider.getAttribute("aria-valuenow"));
+  await p.keyboard.press("ArrowDown");
+  await p.keyboard.press("ArrowDown");
+  expect(Number(await divider.getAttribute("aria-valuenow"))).toBeCloseTo(
+    start + 16,
+    4,
+  );
+  await p.keyboard.press("Escape");
+  const node = p.locator("#canvas-1 .node.selected h3"),
+    b = (await node.boundingBox())!;
+  await p.mouse.move(b.x + 20, b.y + 10);
+  await p.mouse.down();
+  await p.mouse.move(b.x + 85, b.y + 40, { steps: 15 });
+  await p.keyboard.press("Escape");
+  await p.mouse.up();
+  expect(await download(p, "Export JSON")).toEqual(before);
+  save("fr01-reordered", await download(p, "Export current layout"));
+  await p.screenshot({ path: path.join(evidence, "fr01-reordered.png") });
+});

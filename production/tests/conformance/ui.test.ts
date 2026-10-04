@@ -30,7 +30,8 @@ function harness() {
     locale = new Localization();
   let mounted: PanelMountContext | null = null,
     update: PanelUpdate | null = null,
-    failRender = false;
+    failRender = false,
+    failReceive = false;
   let cleanup = 0,
     disposed = 0,
     received = 0,
@@ -46,6 +47,7 @@ function harness() {
       restoreViewState: () => {},
       exportViewState: () => ({ expanded: true }),
       receive: (value) => {
+        if (failReceive) throw Error("RECEIVE_FAILURE");
         update = value;
         received++;
         changed.emit();
@@ -104,6 +106,9 @@ function harness() {
     lease: () => update!.lease,
     fail: () => {
       failRender = true;
+    },
+    failReceive: (value: boolean) => {
+      failReceive = value;
     },
     counts: () => ({ cleanup, disposed, received, creates }),
   };
@@ -600,4 +605,58 @@ test("B01 PanelRenderer subscription failure rebuilds contribution on explicit r
   assert.equal(views, 2);
   renderer.dispose();
   w.dispose();
+});
+
+test("B01 FR02 retry replaces same-ID mount once, rejects stale events and keeps fresh command authority", () => {
+  const h = harness(),
+    old = h.mount(),
+    oldLease = h.lease();
+  const before = h.app.snapshot.document;
+  h.failReceive(true);
+  h.app.setReadonly(true);
+  h.failReceive(false);
+  assert.equal(h.workspace.record("edit").instance, null);
+  const panes = h.workspace.panes();
+  let reentry = "",
+    later = false;
+  const off1 = h.workspace.beforePanelDispose(() => {
+    try {
+      h.workspace.move("edit", "b");
+    } catch (e) {
+      reentry = String(e);
+    }
+    throw Error("OBSERVER_FAILURE");
+  });
+  const off2 = h.workspace.beforePanelDispose(() => {
+    later = true;
+  });
+  h.workspace.retry("edit");
+  assert.match(reentry, /WORKSPACE_BUSY/);
+  assert(later);
+  assert.deepEqual(h.workspace.panes(), panes);
+  assert.equal(h.renderer.session("edit")!.status, "mounted");
+  const fresh = h.mount();
+  assert.notEqual(fresh, old);
+  let ran = false;
+  old.scope.event(() => {
+    ran = true;
+  })();
+  assert.equal(ran, false);
+  fresh.scope.event(() =>
+    assert.throws(
+      () =>
+        old.commands!.execute(oldLease, { commandId: "grape.undo", args: {} }),
+      /MOUNT_REVOKED/,
+    ),
+  )();
+  assert.deepEqual(h.app.snapshot.document, before);
+  h.app.setReadonly(false);
+  fresh.scope.event(() =>
+    fresh.commands!.execute(h.lease(), { commandId: "grape.undo", args: {} }),
+  )();
+  assert.notDeepEqual(h.app.snapshot.document, before);
+  off1();
+  off2();
+  h.renderer.dispose();
+  h.workspace.dispose();
 });

@@ -417,11 +417,18 @@ export class Workspace {
     this.mutable();
     const old = this.#records.get(id);
     demand(old && !old.instance, "PANEL_RETRY");
-    const next = this.construct(old.saved);
-    if (old.ownedContext) next.ownedContext = old.ownedContext;
-    this.#beforeDispose.emit(id);
-    old.unsubscribe();
-    this.#records.set(id, next);
+    this.#publishing = true;
+    try {
+      const next = this.construct(old.saved);
+      // Keep the original record and Tab published throughout teardown. All
+      // lifecycle callbacks, including cleanup, share the mutation guard.
+      this.#beforeDispose.emit(id);
+      old.unsubscribe();
+      if (old.ownedContext) next.ownedContext = old.ownedContext;
+      this.#records.set(id, next);
+    } finally {
+      this.#publishing = false;
+    }
     this.route();
   }
   activate(id: string): void {
@@ -719,7 +726,7 @@ export class Workspace {
   }
   exportState(): readonly SavedPanel[] {
     return this.records().map((r) => {
-      const state = r.instance?.exportViewState() ?? r.saved.state;
+      const state = r.instance ? r.instance.exportViewState() : r.saved.state;
       plain(state);
       return { ...r.saved, state: structuredClone(state) };
     });

@@ -597,7 +597,10 @@ export class WorkspaceView {
           key = a.id + "/" + b.id;
         wanted.add(key);
         if (this.#pairs.has(key)) {
-          this.#panes.get(b.id)!.root.before(this.#pairs.get(key)!.element);
+          const divider = this.#pairs.get(key)!.element;
+          const nextPane = this.#panes.get(b.id)!.root;
+          // Value publications must not detach the focused/captured separator.
+          if (divider.nextSibling !== nextPane) nextPane.before(divider);
           continue;
         }
         const element = document.createElement("div");
@@ -698,6 +701,9 @@ export class WorkspaceView {
       this.#float.options.maxHeight = Math.max(100, innerHeight - 24);
       this.#float.view.position();
     }
+    // Initial insertion and viewport changes alter the pair's pixel extent.
+    // Publish its actual accessible value after layout, without moving it.
+    for (const pair of this.#pairs.values()) pair.control.refresh();
     const visibility = JSON.stringify([
       this.#zones.get("left")!.hidden,
       this.#zones.get("right")!.hidden,

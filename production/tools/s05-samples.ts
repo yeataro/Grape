@@ -18,6 +18,7 @@ import { asNetwork } from "../src/sdk/networks.ts";
 import { buildPersonal, readPersonal } from "../src/application/personal.ts";
 import { probeDefinitions } from "../src/modules/package-probe.ts";
 import { linkedUniformFixture } from "../tests/fixtures/s05-uniforms.ts";
+import { inspectDocument } from "../src/application/inspection.ts";
 
 const destination = process.argv[2];
 if (!destination || fs.existsSync(destination))
@@ -41,12 +42,16 @@ function document(
   const doc = s.graph.capture().document;
   const bytes = writeDocument(doc);
   if (readDocument(bytes).status !== "editable") throw Error("SAMPLE_READBACK");
+  const review = inspectDocument(bytes, s.definitions);
+  if (review.status !== "valid" || !review.candidate)
+    throw Error("SAMPLE_PUBLIC_REVIEW: " + JSON.stringify(review.diagnostics));
   const result = compile(s.graph.capture(), s.fixed, functionProfile);
   save(name + ".grape.json", bytes, {
     kind: "document",
     purpose,
     generation: result.status,
     diagnostics: result.diagnostics,
+    publicReview: review.reason,
   });
 }
 for (const kind of [
@@ -165,7 +170,17 @@ document(
   "Same function definition in independent vertex and pixel shaders.",
 );
 const old = currentSetup();
-old.graph.change("Legacy", (d) => d.createSubgraph(old.network));
+old.graph.change("Legacy walkthrough", (d) => {
+  const output = old.graph.resolveNetwork(old.network).nodes[0].id;
+  const call = d.createSubgraph(old.network);
+  d.move(old.network, call, [30, 30]);
+  d.move(old.network, output, [550, 30]);
+  d.connect(
+    old.network,
+    { nodeId: call, portKey: "value" },
+    { nodeId: output, portKey: "color" },
+  );
+});
 document(
   "legacy-owner",
   old,
